@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/BreezeOS/static/css/main.fc28628c.css",
+    "main.js": "/BreezeOS/static/js/main.ff883d95.js",
+    "index.html": "/BreezeOS/index.html",
+    "main.fc28628c.css.map": "/BreezeOS/static/css/main.fc28628c.css.map",
+    "main.ff883d95.js.map": "/BreezeOS/static/js/main.ff883d95.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fc28628c.css",
+    "static/js/main.ff883d95.js"
+  ]
+}
