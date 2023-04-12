@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/BreezeOS/static/css/main.a70c5a32.css",
-    "main.js": "/BreezeOS/static/js/main.fc9a4c76.js",
+    "main.css": "/BreezeOS/static/css/main.ab0e8370.css",
+    "main.js": "/BreezeOS/static/js/main.3e9fbfe8.js",
     "static/media/Windows-11-4k-Wallpaper-scaled.jpg": "/BreezeOS/static/media/Windows-11-4k-Wallpaper-scaled.557ec81467de22ddd91a.jpg",
     "index.html": "/BreezeOS/index.html",
-    "main.a70c5a32.css.map": "/BreezeOS/static/css/main.a70c5a32.css.map",
-    "main.fc9a4c76.js.map": "/BreezeOS/static/js/main.fc9a4c76.js.map"
+    "main.ab0e8370.css.map": "/BreezeOS/static/css/main.ab0e8370.css.map",
+    "main.3e9fbfe8.js.map": "/BreezeOS/static/js/main.3e9fbfe8.js.map"
   },
   "entrypoints": [
-    "static/css/main.a70c5a32.css",
-    "static/js/main.fc9a4c76.js"
+    "static/css/main.ab0e8370.css",
+    "static/js/main.3e9fbfe8.js"
   ]
 }
