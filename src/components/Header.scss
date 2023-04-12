@@ -1,0 +1,84 @@
+.Header{
+    position: relative;
+    top: -50px;
+    z-index:999999;
+    background: #20202388;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    display: flex;
+    justify-content: space-between;
+    font-size: 11.5px;
+    padding: 3px 4px;
+    transition: all .3s;
+    width: 900px;
+    margin: 3px auto;
+    border-radius: 999px;
+
+    &.active {
+        top: 0;
+    }
+
+    * {
+        margin: 0;
+    }
+
+    .Header-left {
+      display: flex;
+    }
+
+    .Header-item {
+        padding: 3px 10px;
+        color: #fff;
+        background:transparent;
+        width: fit-content;
+        border-radius:999px;
+        transition: ease .05s;
+        display: flex;
+        align-items: center;
+    }
+
+    .Header-item:hover{
+        background: #ffffff1d;
+    }
+
+    .Task {
+        display: flex;
+        align-items: center;
+        i {
+            margin: 0 5px;
+        }
+
+        &.disableWifi {
+            .fa-wifi::before {
+                content: '\f6ac';
+            }
+        }
+    }
+
+    .BatteryStatus {
+        background: #3795ff;
+        border-radius: 9999px;
+        padding: 4px 16px;
+        margin: 0 5px;
+        margin-left: 0;
+        display: flex;
+        align-items: center;
+
+        &.low-battery {
+            background: #e46a6a;
+        }
+
+        .BatteryStatusLevel {
+            color: #202020;
+            font-size: 14px;
+
+            &.in-charge::before {
+                content: '\f0e7';
+                font-family: "Font Awesome 6 Pro";
+                color: #000;
+                font-size: 12px;
+                margin-right: 5px;
+            }
+        }
+    }
+}

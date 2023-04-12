@@ -1,0 +1,112 @@
+.Window {
+    position: absolute;
+    top: 0;
+    border-radius: 10px;
+    opacity: 0;
+    pointer-events: none;
+    border-radius: 5px;
+    overflow: hidden;
+
+    &.active {
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    .TopBar {
+        background: #202023da;
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        padding: 7px;
+        display: flex;
+        align-items: center;
+
+        .TopBarInteractionContainer {
+            display: flex;
+
+            .TopBarInteraction {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-left: 7px;
+                border-radius: 9999px;
+                width: 20px;
+                height: 20px;
+                font-size: 11px;
+                color: #d9d9d9;
+
+                &:hover {
+                    background: #3b3b3f;
+                }
+
+                &.close:hover{
+                    background: #ff5252;
+                }
+            }
+        }
+
+        .TopBarTitle {
+            color:#d9d9d9;
+            font-size: 12px;
+            margin: 0;
+            width: 100%;
+        }
+    }
+
+
+      .WindowBodyDefault {
+        background: #202023da;
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        padding: 10px 15px;
+        color: #fff;
+
+        * {
+          margin: 0;
+        }
+
+        .critical {
+          height: 25px;
+          width: 25px;
+          background-color: #ff6161;
+          border-radius: 999px;
+          font-size: 18px;
+
+          &::before {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 25px;
+          }
+        }
+
+        .WindowBodyTitle {
+          font-size: 17px;
+          margin-bottom: 10px;
+          font-weight: 700;
+        }
+
+        .WindowBodyContent {
+          font-size: 12px;
+        }
+
+        .WindowBodyButton {
+          display: flex;
+          flex-direction: row-reverse;
+          margin: 15px 0;
+          margin-bottom: 0;
+
+          .Button {
+            border: none;
+            outline: none;
+            background-color: #ffffff10;
+            color: #fff;
+            font-size: 12px;
+            padding: 7px 20px;
+            border-radius: 5px;
+            margin-left: 5px;
+
+            &:hover { background-color: #ffffff20; }
+          }
+        }
+      }
+}

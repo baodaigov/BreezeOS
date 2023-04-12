@@ -1,0 +1,58 @@
+.Dock {
+    position: fixed;
+    bottom: -50px;
+    z-index:999999;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px 0;
+    transition: all .3s;
+
+    &.active {
+        bottom: 0;
+    }
+
+    .DockItemContainer {
+
+        .DockItem {
+            margin-right: 11px;
+            display: flex;
+            justify-content: center;
+
+            img {
+                cursor: pointer!important;
+            }
+
+            &.clicked::after{
+                content: '';
+                display: block;
+                position: absolute;
+                top: 40px;
+                border-radius: 999px;
+                width: 20px;
+                height: 3px;
+                background: #4000ff;
+            }
+
+            .DockItemTitle{
+                color:#fff;
+                position: absolute;
+                top: -45px;
+                font-size: 11px;
+                background:#262626;
+                padding: 5px 10px;
+                border-radius: 30px;
+                opacity: 0;
+                text-align: center;
+                transition: all .15s;
+            }
+
+            &:hover{
+                .DockItemTitle{
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,138 @@
+.Panel {
+    position: fixed;
+    z-index:999999;
+    background: #222222;
+    color:#fff;
+    padding: 8px;
+    border-radius: 10px;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    transition: all ease .15s;
+    opacity: 0;
+    pointer-events: none;
+
+    &.active {
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    .PanelItem {
+        background: transparent;
+        padding: 10px 15px;
+        font-size: 12px;
+        border-radius: 999px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:hover {
+            background: #353535;
+        }
+        i {
+            margin: 0 5px;
+            margin-left: 0;
+        }
+
+        .PanelBatteryLevel {
+            margin: 0;
+            padding: 0;
+        }
+    }
+
+    .PanelItemInteraction {
+        padding: 10px 11px;
+
+        i{
+            margin: 0;
+        }
+    }
+
+    .PanelTop {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+
+    .PanelBottom {
+        .PanelItemLarge{
+            background: #353535;
+            padding: 10px 15px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            border-radius: 999px;
+            display: inline-block;
+            width: 157px;
+            transition: all ease .1s;
+
+            &:hover {
+                background: #444444;
+            }
+
+            i {
+                margin: 0 5px;
+                margin-left: 0;
+            }
+
+            &.focused{
+                background: #83aaff;
+                color:#000;
+
+                &:hover {
+                    background: #97b8ff
+                }
+            }
+        }
+    }
+
+    .PanelRangeContainer {
+        margin: 0 10px;
+        margin-bottom: 12px;
+
+        .PanelRangeTitle {
+            font-size: 12px;
+            color: #fff;
+            margin: 0;
+            margin-bottom: 5px;
+        }
+    }
+}
+
+.lightMode {
+    .Panel {
+        background: #fff;
+        color: #222222;
+
+        .PanelItem {
+            &:hover {
+                background: #f0f0f0;
+            }
+        }
+
+        .PanelRangeContainer {
+            .PanelRangeTitle {
+                color: #000;
+            }
+        }
+
+        .PanelBottom {
+            .PanelItemLarge{
+                background: #f0f0f0;
+
+                &:hover {
+                    background: #dfdfdf;
+                }
+
+                &.focused{
+                    background: #83aaff;
+                    color:#000;
+
+                    &:hover {
+                        background: #97b8ff
+                    }
+                }
+            }
+        }
+    }
+}

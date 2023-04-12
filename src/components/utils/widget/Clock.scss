@@ -1,0 +1,95 @@
+.Clock {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 9999;
+  margin: 45px 30px;
+  width: 200px;
+  height: 200px;
+  padding: 10px;
+  border-radius:999px;
+  background-color: #d5e3ff;
+  opacity: 0;
+  pointer-events: none;
+
+  .Close {
+    width: 31px;
+    height: 31px;
+    background:#f7f7f7;
+    border-radius: 999px;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: -5px;
+    right: 0;
+    opacity: 0;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    i {
+      color: #ababab;
+    }
+  }
+
+  &.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .Hour {
+    position: absolute;
+    width: 10px;
+    height: 70px;
+    background: #222;
+    border-radius: 999px;
+    top: 30px;
+    left: 93px;
+    transform-origin: bottom;
+    z-index: 10000;
+  }
+
+  .Min {
+    position: absolute;
+    width: 10px;
+    height: 90px;
+    background: #222;
+    border-radius: 999px;
+    top: 10px;
+    left: 47%;
+    transform-origin: bottom;
+    z-index: 10000;
+  }
+
+}
+
+.Number {
+  font-weight:950;
+  letter-spacing: -3px;
+  position: absolute;
+  color: #97b8ff;
+  font-size: 50px;
+
+  &.twelve {
+    top: 10px;
+    left: 36%;
+  }
+
+  &.three {
+    right: 13px;
+    top: 35%;
+  }
+
+  &.six {
+    bottom: 10px;
+    left: 42%;
+  }
+
+  &.nine {
+    left: 10px;
+    top: 35%;
+  }
+}

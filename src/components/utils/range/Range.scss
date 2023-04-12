@@ -1,0 +1,33 @@
+.Range {
+    appearance: none;
+    -webkit-appearance: none;
+    height: 27px;
+    background-color: #353535;
+    border-radius: 999px;
+    width: 100%;
+    overflow: hidden;
+    transition: all ease .15s;
+
+    &::-webkit-slider-thumb{
+        appearance: none;
+        -webkit-appearance: none;
+        width: 30px;
+        height: 27px;
+        background: #83aaff;
+        box-shadow: 0 0 0 0 #83aaff;
+        border-radius: 999px;
+        border: 0;
+        box-shadow: -210px 0 0 195px #83aaff;
+
+        &:hover {
+            background: #97b8ff;
+            box-shadow: -210px 0 0 195px #97b8ff;
+        }
+    }
+}
+
+.lightMode {
+    .Range {
+        background-color: #f0f0f0;
+    }
+}
