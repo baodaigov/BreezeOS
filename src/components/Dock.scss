@@ -1,6 +1,6 @@
 .Dock {
     position: fixed;
-    bottom: -50px;
+    bottom: -100px;
     z-index:999999;
     width: 100%;
     display: flex;
@@ -24,15 +24,39 @@
                 cursor: pointer!important;
             }
 
-            &.clicked::after{
+            &::after{
                 content: '';
                 display: block;
                 position: absolute;
                 top: 40px;
                 border-radius: 999px;
-                width: 20px;
+                width: 0;
                 height: 3px;
                 background: #4000ff;
+                transition: width .2s;
+            }
+
+            &.clicked {
+              img {
+                position: relative;
+                animation: focused ease 1s;
+              }
+
+              @keyframes focused {
+                0% {
+                  bottom: 0;
+                }
+                50% {
+                  bottom: 10px;
+                }
+                100% {
+                  bottom: 0;
+                }
+              }
+
+              &::after {
+                width: 20px;
+              }
             }
 
             .DockItemTitle{

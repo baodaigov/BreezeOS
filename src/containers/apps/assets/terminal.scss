@@ -1,0 +1,16 @@
+.terminal {
+  width: 600px;
+  height: 500px;
+}
+
+.Terminal {
+    background: #000;
+    font-family: monospace!important;
+    color: #fff;
+    font-size: 14px;
+    padding: 15px 5px;
+
+    * {
+      margin:0;
+    }
+}

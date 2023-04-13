@@ -11,7 +11,7 @@
     padding: 3px 4px;
     transition: all .3s;
     width: 900px;
-    margin: 3px auto;
+    margin: 5px auto;
     border-radius: 999px;
 
     &.active {
@@ -75,7 +75,7 @@
             &.in-charge::before {
                 content: '\f0e7';
                 font-family: "Font Awesome 6 Pro";
-                color: #000;
+                color: #202020;
                 font-size: 12px;
                 margin-right: 5px;
             }

@@ -1,70 +1,71 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import './Panel.scss';
-import '../../Desktop.scss'
+import { TaskIcon } from '../Header.js';
 
-class PanelItemLarge extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            active: false
-        }
-    }
+const PanelItemLarge = ({ type }) => {
+	const [isActive, setActive] = useState('false');
+	const [data, setData] = useState(TaskIcon);
 
-    toggle(e){
-        this.setState({active: !this.state.active});
-    }
+	const toggle = () => {
+		setActive(!isActive);
+	};
 
-    toggleWifi(e){
-        this.setState({active: !this.state.active});
-        document.getElementsByClassName('Task')[0].classList.toggle('disableWifi');
-    }
+	const toggleWifi = () => {
+		setActive(!isActive);
+		const newState = data.map(i => {
+        	if (i.id == 'wifi') {
+        		return {...i, icon: 'fa-solid fa-wifi-slash'};
+      		}
 
-    nightShift(e){
-        this.setState({active: !this.state.active})
-        document.getElementsByClassName('Desktop')[0].classList.toggle('NightShiftEnabled');
-    }
-    
-    toggleDarkMode(e){
-        this.setState({active: !this.state.active});
-        document.getElementsByClassName('Desktop')[0].classList.toggle('lightMode');
-    }
+        	return i;
+    	});
 
-    render(){
-        var props = this.props.type;
+    	setData(newState);
+  	};
 
-        switch (props) {
+	const nightShift = () => {
+		setActive(!isActive);
+		document.getElementsByClassName('Desktop')[0].classList.toggle('NightShiftEnabled');
+    	}
+
+    	const toggleDarkMode = () => {
+		setActive(!isActive);
+		document.getElementsByClassName('Desktop')[0].classList.toggle('lightMode');
+    	}
+
+	switch (type) {
             case "wifi":
                 return (
-                    <div className={`PanelItemLarge font-bold ${this.state.active ? "" : "focused"}`} onClick={e => this.toggleWifi(e)}>
-                        <i className={`fa-solid ${this.state.active ? "fa-wifi-slash" : "fa-wifi"}`}></i>
-                        {this.state.active ? "Wi-Fi" : "BreezeOS"}
+                    <div className={`PanelItemLarge font-bold ${isActive ? "focused" : ""}`} onClick={toggleWifi}>
+                        <i className={`fa-solid ${isActive ? "fa-wifi" : "fa-wifi-slash"}`}></i>
+                        {isActive ? "BreezeOS" : "Wi-Fi"}
                     </div>
                 )
             case "bluetooth":
                 return (
-                    <div className={`PanelItemLarge font-bold ${this.state.active ? "focused" : ""}`} onClick={e => this.toggle(e)}>
+                    <div className={`PanelItemLarge font-bold ${isActive ? "" : "focused"}`} onClick={toggle}>
                         <i className="fa-solid fa-bluetooth"></i>
                         Bluetooth
                     </div>
                 )
             case "dark-mode":
                 return (
-                    <div className={`PanelItemLarge font-bold ${this.state.active ? "" : "focused"}`} onClick={e => this.toggleDarkMode(e)}>
+                    <div className={`PanelItemLarge font-bold ${isActive ? "focused" : ""}`} onClick={toggleDarkMode}>
                         <i className="fa-solid fa-circle-half-stroke"></i>
                         Dark Mode
-                    </div>
+		    </div>
                 )
             case "airplane-mode":
                 return (
-                    <div className={`PanelItemLarge font-bold ${this.state.active ? "focused" : ""}`} onClick={e => this.toggle(e)}>
+                    <div className={`PanelItemLarge font-bold ${isActive ? "" : "focused"}`} onClick={toggle}>
                         <i className="fa-solid fa-plane"></i>
                         Airplane Mode
                     </div>
                 )
             case "night-light":
                 return (
-                    <div className={`PanelItemLarge font-bold ${this.state.active ? "focused" : ""}`} onClick={e => this.nightShift(e)}>
+                    <div className={`PanelItemLarge font-bold ${isActive ? "" : "focused"}`} onClick={nightShift}>
                         <i className="fa-regular fa-brightness"></i>
                         Night Light
                     </div>
@@ -74,9 +75,8 @@ class PanelItemLarge extends Component {
                     <div className='PanelItemLarge font-bold'>
                         Please define a specific type.
                     </div>
-                )
-        }
-    }
+		)
+	}
 }
 
 export default PanelItemLarge;

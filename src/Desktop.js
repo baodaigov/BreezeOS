@@ -4,8 +4,9 @@ import Dock from './components/Dock'
 import Header from './components/Header'
 import './Desktop.scss';
 import Panel from './components/panel/Panel';
-import BatteryLow from './components/utils/window/BatteryLow';
-import Clock from './components/utils/widget/Clock.js'
+import Clock from './components/utils/widget/Clock';
+import Window from './components/utils/window/Window';
+import WindowDefault from './components/utils/window/WindowDefault';
 
 const Desktop = () => {
     function isMobile() {
@@ -20,11 +21,13 @@ const Desktop = () => {
     return (
         <div className='Desktop'>
             <Header/>
-            {isMobile ? <h1 className='error'>Sorry, in order to use the operating system, please switch to the desktop.</h1> : ''}
             <Panel style={{ top: "0", right: "0", margin: "45px 15px" }}/>
             <Wallpaper/>
-            <Clock/>
-            <BatteryLow/>
+            <div className='DesktopBody'>
+                <Clock/>
+                <Window/>
+                <WindowDefault/>
+            </div>
             <Dock/>
         </div>
     )

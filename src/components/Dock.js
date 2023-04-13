@@ -57,10 +57,16 @@ const Dock = () => {
         },1000);
     }, []);
 
+    function openTerminal(){
+      setTimeout(() => {
+          document.getElementsByClassName('terminal')[0].classList.add('active');
+      },1000);
+    }
+
     return (
         <div className='Dock'>
-            {items.map(item => 
-                <DockItem id={item.id} title={item.name} icon={item.icon}/>
+            {items.map(item =>
+                <DockItem id={item.id} title={item.name} icon={item.icon} onClick={openTerminal}/>
             )}
             <a href='https://github.com/baodaigov'>
                 <DockItem id="github" title="GitHub" icon="https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/github-desktop.svg"/>

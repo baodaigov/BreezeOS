@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import WindowBodyButton from './WindowBodyButton';
 import './Window.scss';
 
-export default function WindowBodyDefault({ type, title, content }) {
+export default function WindowBodyDefault({ type, title, content, children }) {
   switch(type){
     case "critical":
       return (
@@ -14,7 +13,7 @@ export default function WindowBodyDefault({ type, title, content }) {
               <p className='WindowBodyContent'>{content}</p>
             </div>
           </div>
-          <WindowBodyButton code='0'/>
+          {children}
         </div>
       )
   }

@@ -4,21 +4,21 @@ import Task from '../header/Task';
 import Home from '../header/Home';
 import { useBattery } from 'react-use';
 
+export const TaskIcon = [
+    {
+        "id": "wifi", "icon": "fa-solid fa-wifi"
+    },
+    {
+        "id": "volume", "icon": "fa-solid fa-volume"
+    }
+]
+
 const Header = () => {
     useEffect(() => {
         setTimeout(() => {
             document.getElementsByClassName('Header')[0].classList.add('active');
         },1000);
     }, []);
-
-    const classes = [
-        {
-            "icon": "fa-solid fa-wifi"
-        },
-        {
-            "icon": "fa-solid fa-volume"
-        }
-    ]
 
     const batteryState = useBattery();
 
@@ -34,7 +34,7 @@ const Header = () => {
                 <div className={`BatteryStatus ${batteryPercent <= 10 ? "low-battery" : ""}`}>
                     <p className={`BatteryStatusLevel font-bold ${batteryState.charging ? "in-charge" : ""}`}>{batteryPercent}%</p>
                 </div>
-                {classes.map(i => <i className={i.icon}></i>)}
+                {TaskIcon.map(i => <i key={i.id} className={i.icon}></i>)}
             </Task>
         </div>
     )

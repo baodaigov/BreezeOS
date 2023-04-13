@@ -52,6 +52,13 @@
         }
     }
 
+    .WindowBody {
+      & > * {
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+      }
+    }
+
 
       .WindowBodyDefault {
         background: #202023da;
@@ -88,25 +95,25 @@
         .WindowBodyContent {
           font-size: 12px;
         }
+      }
 
-        .WindowBodyButton {
-          display: flex;
-          flex-direction: row-reverse;
-          margin: 15px 0;
-          margin-bottom: 0;
+      .WindowBodyButton {
+        display: flex;
+        flex-direction: row-reverse;
+        margin: 15px 0;
+        margin-bottom: 0;
 
-          .Button {
-            border: none;
-            outline: none;
-            background-color: #ffffff10;
-            color: #fff;
-            font-size: 12px;
-            padding: 7px 20px;
-            border-radius: 5px;
-            margin-left: 5px;
+        .Button {
+          border: none;
+          outline: none;
+          background-color: #ffffff10;
+          color: #fff;
+          font-size: 12px;
+          padding: 7px 20px;
+          border-radius: 5px;
+          margin-left: 5px;
 
-            &:hover { background-color: #ffffff20; }
-          }
+          &:hover { background-color: #ffffff20; }
         }
       }
 }
