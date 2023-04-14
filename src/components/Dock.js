@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import './Dock.scss';
-import DockItem from './DockItem'
+import DockItem from './DockItem';
+import { TerminalApp } from '../containers/apps/terminal';
 
 const items = [
     {
@@ -39,11 +40,6 @@ const items = [
         "id": "texteditor"
     },
     {
-        "name": "Terminal",
-        "icon": "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/utilities-x-terminal.svg",
-        "id": "terminal"
-    },
-    {
         "name": "Software Store",
         "icon": "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/software-store.svg",
         "id": "softwarestore"
@@ -57,18 +53,13 @@ const Dock = () => {
         },1000);
     }, []);
 
-    function openTerminal(){
-      setTimeout(() => {
-          document.getElementsByClassName('terminal')[0].classList.add('active');
-      },1000);
-    }
-
     return (
         <div className='Dock'>
-            {items.map(item =>
-                <DockItem id={item.id} title={item.name} icon={item.icon} onClick={openTerminal}/>
+	    {items.map(item =>
+                <DockItem id={item.id} title={item.name} icon={item.icon}/>
             )}
-            <a href='https://github.com/baodaigov'>
+	    <TerminalApp/>
+	    <a href='https://github.com/baodaigov'>
                 <DockItem id="github" title="GitHub" icon="https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/github-desktop.svg"/>
             </a>
             <a href='https://github.dev/baodaigov/BreezeOS'>

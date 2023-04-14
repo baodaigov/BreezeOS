@@ -6,6 +6,7 @@
     pointer-events: none;
     border-radius: 5px;
     overflow: hidden;
+    z-index: 10000;
 
     &.active {
         opacity: 1;

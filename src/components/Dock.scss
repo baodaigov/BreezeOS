@@ -22,6 +22,12 @@
 
             img {
                 cursor: pointer!important;
+		transition: all ease .2s;
+		
+		&:active {
+			width: 28px;
+			height: 28px;
+		}
             }
 
             &::after{
@@ -32,7 +38,7 @@
                 border-radius: 999px;
                 width: 0;
                 height: 3px;
-                background: #4000ff;
+                background: #160059;
                 transition: width .2s;
             }
 
@@ -56,6 +62,7 @@
 
               &::after {
                 width: 20px;
+		background-color: #4000ff;
               }
             }
 
