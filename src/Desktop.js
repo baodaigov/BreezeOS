@@ -7,6 +7,7 @@ import Panel from './components/panel/Panel';
 import Clock from './components/utils/widget/Clock';
 import Window from './components/utils/window/Window';
 import WindowDefault from './components/utils/window/WindowDefault';
+import Menu from './components/menu/Menu';
 
 const Desktop = () => {
     function isMobile() {
@@ -20,6 +21,7 @@ const Desktop = () => {
 
     return (
         <div className='Desktop'>
+            {/* <Menu/> */}
             <Header/>
             <Panel style={{ top: "0", right: "0", margin: "45px 15px" }}/>
             <Wallpaper/>

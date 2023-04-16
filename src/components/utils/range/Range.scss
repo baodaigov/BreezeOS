@@ -1,8 +1,11 @@
+$rbgcolor: #353535;
+$rtbgcolor: #83aaff;
+
 .Range {
     appearance: none;
     -webkit-appearance: none;
     height: 27px;
-    background-color: #353535;
+    background-color: $rbgcolor;
     border-radius: 999px;
     width: 100%;
     overflow: hidden;
@@ -13,21 +16,21 @@
         -webkit-appearance: none;
         width: 30px;
         height: 27px;
-        background: #83aaff;
-        box-shadow: 0 0 0 0 #83aaff;
+        background: $rtbgcolor;
+        box-shadow: 0 0 0 0 $rtbgcolor;
         border-radius: 999px;
         border: 0;
-        box-shadow: -210px 0 0 195px #83aaff;
+        box-shadow: -210px 0 0 195px $rtbgcolor;
 
         &:hover {
             background: #97b8ff;
-            box-shadow: -210px 0 0 195px #97b8ff;
+            box-shadow: -210px 0 0 195px lighten($rtbgcolor,5%);
         }
     }
 }
 
 .lightMode {
     .Range {
-        background-color: #f0f0f0;
+        background-color: lighten($rbgcolor,72%);
     }
 }

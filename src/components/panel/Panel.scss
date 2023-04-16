@@ -1,8 +1,12 @@
+$bgcolor: #222222;
+$fgcolor: #fff;
+$fbgcolor: #83aaff;
+
 .Panel {
     position: fixed;
     z-index:999999;
-    background: #222222;
-    color:#fff;
+    background: $bgcolor;
+    color:$fgcolor;
     padding: 8px;
     border-radius: 10px;
     width: 350px;
@@ -27,8 +31,9 @@
         align-items: center;
 
         &:hover {
-            background: #353535;
+            background: lighten($bgcolor, 5%);
         }
+
         i {
             margin: 0 5px;
             margin-left: 0;
@@ -56,7 +61,7 @@
 
     .PanelBottom {
         .PanelItemLarge{
-            background: #353535;
+            background: lighten($bgcolor,5%);
             padding: 10px 15px;
             margin-right: 10px;
             margin-bottom: 10px;
@@ -67,7 +72,7 @@
             transition: all ease .1s;
 
             &:hover {
-                background: #444444;
+                background: lighten($bgcolor,12%);
             }
 
             i {
@@ -76,11 +81,11 @@
             }
 
             &.focused{
-                background: #83aaff;
+                background: $fbgcolor;
                 color:#000;
 
                 &:hover {
-                    background: #97b8ff
+                    background: lighten($fbgcolor,5%)
                 }
             }
         }
@@ -100,36 +105,39 @@
 }
 
 .lightMode {
+    $bgcolor: #fff;
+    $fgcolor: #222222;
+    
     .Panel {
-        background: #fff;
-        color: #222222;
+        background: $bgcolor;
+        color: $fgcolor;
 
         .PanelItem {
             &:hover {
-                background: #f0f0f0;
+                background: darken($bgcolor,5%);
             }
         }
 
         .PanelRangeContainer {
             .PanelRangeTitle {
-                color: #000;
+                color: $fgcolor;
             }
         }
 
         .PanelBottom {
             .PanelItemLarge{
-                background: #f0f0f0;
+                background: darken($bgcolor,5%);
 
                 &:hover {
-                    background: #dfdfdf;
+                    background: darken($bgcolor,12%);
                 }
 
                 &.focused{
-                    background: #83aaff;
-                    color:#000;
+                    background: $fbgcolor;
+                    color:$fgcolor;
 
                     &:hover {
-                        background: #97b8ff
+                        background: lighten($fbgcolor,5%)
                     }
                 }
             }

@@ -32,7 +32,7 @@ const Header = () => {
             </div>
             <Task>
                 <div className={`BatteryStatus ${batteryPercent <= 10 ? "low-battery" : ""}`}>
-                    <p className={`BatteryStatusLevel font-bold ${batteryState.charging ? "in-charge" : ""}`}>{batteryPercent}%</p>
+                    <p className={`BatteryStatusLevel font-bold ${batteryState.charging ? "in-charge" : ""}`}>{isNaN(batteryPercent) ? '-' : batteryPercent + '%'}</p>
                 </div>
                 {TaskIcon.map(i => <i key={i.id} className={i.icon}></i>)}
             </Task>

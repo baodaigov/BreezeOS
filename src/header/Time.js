@@ -1,14 +1,30 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-function Time() {
-  return (
-    <div className='Time Header-item'>
-        <p>{(new Date()).toLocaleString('en-US', {
+class Time extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      curTime: null,
+    }
+  }
+  componentDidMount() {
+    setInterval(() => {
+      this.setState({
+        curTime: new Date().toLocaleString('en-US', {
           hour: "2-digit",
           minute: "2-digit"
-        })}</p>
-    </div>
-  )
+        })
+      })
+    }, 1000)
+  }
+
+  render(){
+    return (
+      <div className='Time Header-item'>
+          <p>{this.state.curTime}</p>
+      </div>
+    )
+  }
 }
 
 export default Time;

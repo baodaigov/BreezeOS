@@ -1,8 +1,11 @@
+$bgcolor: #20202388;
+$fgcolor: #fff;
+
 .Header{
     position: relative;
     top: -50px;
     z-index:999999;
-    background: #20202388;
+    background: $bgcolor;
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     display: flex;
@@ -28,7 +31,7 @@
 
     .Header-item {
         padding: 3px 10px;
-        color: #fff;
+        color: $fgcolor;
         background:transparent;
         width: fit-content;
         border-radius:999px;
@@ -38,7 +41,7 @@
     }
 
     .Header-item:hover{
-        background: #ffffff1d;
+        background: #ffffff10;
     }
 
     .Task {
@@ -46,12 +49,6 @@
         align-items: center;
         i {
             margin: 0 5px;
-        }
-
-        &.disableWifi {
-            .fa-wifi::before {
-                content: '\f6ac';
-            }
         }
     }
 

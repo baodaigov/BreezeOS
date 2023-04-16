@@ -13,14 +13,12 @@ export default function Battery(){
 
     let batteryStatusCharge = batteryState.charging
     ? batteryIcon.icon = 'fa-regular fa-battery-bolt'
-    : batteryState.level * 100 > 20
-    ? batteryIcon.icon = 'fa-regular fa-battery-full'
-    : batteryIcon.icon = 'fa-regular fa-battery-empty';
+    : batteryIcon.icon = 'fa-regular fa-battery-full'
 
     return (
         <div className='PanelItem font-bold'>
             <i className={batteryIcon.icon}></i>
-            <p className='PanelBatteryLevel'>{batteryPercent}%</p>
+            <p className='PanelBatteryLevel'>{isNaN(batteryPercent) ? '-' : batteryPercent + '%'}</p>
         </div>
     )
 }

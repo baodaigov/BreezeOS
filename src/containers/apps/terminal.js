@@ -15,7 +15,7 @@ export const TerminalApp = () => {
 export const openTerminal = () => {
       setTimeout(() => {
           document.getElementsByClassName('terminal')[0].classList.add('active');
-      },1000);	
+      },1000);
 };
 
 export default function Terminal() {
