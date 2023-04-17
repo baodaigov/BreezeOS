@@ -142,18 +142,16 @@ a {
     height: 100vh;
 
     &.poweroff * { display:none; cursor: none!important; }
-
-    &.disableItem {
-
-        .DesktopBody{
-            display: none;
-        }
-    }
+    &.poweron * { display: none; cursor: default!important; }
+    &.cursorLoad * { display: none; cursor: wait!important; }
 
     .DesktopBody {
+        display: none;
         position: absolute;
         height: calc(100vh - 110px);
         width: 100vw;
+
+        &.active { display: block; }
     }
 
     &::before {

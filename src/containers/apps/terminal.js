@@ -5,6 +5,7 @@ import TopBar from '../../components/utils/window/TopBar';
 import WindowBody from '../../components/utils/window/WindowBody';
 import DockItem from '../../components/DockItem';
 import './assets/terminal.scss';
+import TopBarInteraction from '../../components/utils/window/TopBarInteraction';
 
 export const TerminalApp = () => {
 
@@ -23,6 +24,15 @@ export const TerminalApp = () => {
 };
 
 export default function Terminal() {
+    function close(){
+        document.getElementsByClassName('terminal')[0].classList.remove('active');
+    }
+
+    function minimize(){
+        document.getElementsByClassName('terminal')[0].classList.toggle('minimize');
+
+        return <i className="fa-regular fa-window-maximize"></i>
+    }
 
     return (
         <div>   
@@ -30,7 +40,11 @@ export default function Terminal() {
                     className='Window terminal'
                     key={Math.random()}
                 >
-                    <TopBar title='Terminal'/>
+                    <TopBar title='Terminal'>
+                        <TopBarInteraction action='hide'/>
+                        <TopBarInteraction action='minMax' onMinMax={minimize}/>
+                        <TopBarInteraction action='close' onClose={close}/>
+                    </TopBar>
                     <WindowBody>
                         <div className='Terminal'>
                             <pre id='input'>Welcome to BreezeOS (GNU/Linux 6.2.1 x86_64)</pre>

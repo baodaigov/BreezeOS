@@ -5,6 +5,7 @@ import TopBar from '../../components/utils/window/TopBar';
 import WindowBodyDefault from '../../components/utils/window/WindowBodyDefault';
 import WindowBodyButton from '../../components/utils/window/WindowBodyButton';
 import Draggable from 'react-draggable';
+import TopBarInteraction from '../../components/utils/window/TopBarInteraction';
 
 export default function BatteryLow() {
 
@@ -23,7 +24,9 @@ export default function BatteryLow() {
                     className={`Window BatteryLow ${batteryPercent <= 5 ? 'active' : ''}`}
                     key={Math.random()}
                 >
-                    <TopBar type='closeOnly'/>
+                    <TopBar>
+                      <TopBarInteraction action='close' onClose={close}/>
+                    </TopBar>
                     <WindowBodyDefault type='critical' title={`Battery critically low: ${batteryPercent}%`} content='The battery is below the critical level and needs to charge right now.'>
                       <WindowBodyButton>
                         <button className='Button' key={Math.random()} onClick={close}>OK</button>

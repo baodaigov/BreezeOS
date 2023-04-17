@@ -20,6 +20,10 @@ const Desktop = () => {
         })(navigator.userAgent||navigator.vendor||window.opera);
         return check;
     };
+    
+    setTimeout(() => {
+        document.getElementsByClassName('DesktopBody')[0].classList.add('active');
+    },2000);
 
     return (
         <div className='Desktop'>
