@@ -7,18 +7,23 @@ import DockItem from '../../components/DockItem';
 import './assets/terminal.scss';
 
 export const TerminalApp = () => {
+
+    const [isActive, setActive] = useState('false');
+    
+    const toggle = () => {
+        setActive(!isActive);
+        setTimeout(() => {
+            document.getElementsByClassName('terminal')[0].classList.add('active');
+        },1000);
+    };
+    
 	return (
-		<DockItem id='terminal' title='Terminal' icon='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/utilities-x-terminal.svg' onClick={openTerminal}/>
+		<DockItem id='terminal' class={`${isActive ? "" : "clicked"}`} title='Terminal' icon='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/utilities-x-terminal.svg' onClick={toggle}/>
 	)
 };
 
-export const openTerminal = () => {
-      setTimeout(() => {
-          document.getElementsByClassName('terminal')[0].classList.add('active');
-      },1000);
-};
-
 export default function Terminal() {
+
     return (
         <div>   
                 <div

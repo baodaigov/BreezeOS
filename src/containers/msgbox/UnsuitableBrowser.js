@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import { useBattery } from 'react-use';
 import '../../components/utils/window/Window.scss';
 import TopBar from '../../components/utils/window/TopBar';
@@ -6,26 +6,26 @@ import WindowBodyDefault from '../../components/utils/window/WindowBodyDefault';
 import WindowBodyButton from '../../components/utils/window/WindowBodyButton';
 import Draggable from 'react-draggable';
 
-export default function BatteryNotFound() {
+export default function UnsuitableBrowser() {
 
   const batteryState = useBattery();
 
   let batteryPercent = Math.round(batteryState.level * 100);
 
   function close(){
-    document.getElementsByClassName('BatteryNotFound')[0].classList.remove('active');
+    document.getElementsByClassName('UnsuitableBrowser')[0].classList.remove('active');
   }
 
     return (
         <div>
-            <Draggable>
+            <Draggable positionOffset={{ x: '-50%', y: '-50%' }}>
                 <div
-                    className={`Window BatteryNotFound ${isNaN(batteryPercent) ? 'active' : ''}`}
-                    style={{ width: '470px'}}
+                    className={`Window UnsuitableBrowser ${isNaN(batteryPercent) ? 'active' : ''}`}
+                    style={{ width: '690px'}}
                     key={Math.random()}
                 >
                     <TopBar type='closeOnly'/>
-                    <WindowBodyDefault type='critical' title={`Battery not found.`} content='Please switch to another browser that allows to use the battery level.'>
+                    <WindowBodyDefault type='critical' title={`Unsuitable web browser`} content='Some features may not be supported in this browser, we recommend you to use a different one for full experience.'>
                       <WindowBodyButton>
                         <button className='Button' key={Math.random()} onClick={close}>OK</button>
                       </WindowBodyButton>

@@ -1,0 +1,99 @@
+$fgcolor: #e2e2e2;
+
+.LockScreen {
+    width: 100%;
+    height: 100%;
+    background-image: url('../Windows-11-4k-Wallpaper-scaled.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    bottom: 810px;
+    z-index: 1000000;
+    transition: all ease .3s;
+
+    &.active { bottom: 0 }
+    
+    .LockScreenWrapper {
+        position: absolute;
+        background-color: #00000095;
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        width: 100%;
+        height: 100%;
+        color: $fgcolor;
+        display: flex;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: all .7s;
+
+        &.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        * {margin: 0;}
+
+        .SplashScreen {
+            margin: 120px 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+
+            .SplashScreenTitle {
+                font-size: 55px;
+                font-weight: 800;
+                margin-bottom: 15px;
+            }
+
+            .SplashScreenDesc {
+                font-size: 12px;
+                display: flex;
+                justify-content: center;
+
+                .SplashScreenItem {
+                    margin-left: 15px;
+                    display: flex;
+                    align-items: center;
+
+                    &::after {
+                        content: '';
+                        display: block;
+                        width: 1px;
+                        height: 15px;
+                        background-color: $fgcolor;
+                        margin-left: 15px;
+                    }
+
+                    &:last-child:after {
+                        content: '';
+                        display: none;
+                    }
+
+                    .SplashScreenIcon {
+                        margin-right: 7px;
+                    }
+                }
+            }
+
+            .LoginButton {
+                width: 30px;
+                height: 30px;
+                color: $fgcolor;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 999px;
+                font-size: 14px;
+                transition: all ease .1s;
+
+                &:hover {
+                    background-color: $fgcolor;
+                    color: darken($fgcolor, 100%);
+                }
+            }
+        }
+    }
+}

@@ -141,6 +141,15 @@ a {
     width: 100%;
     height: 100vh;
 
+    &.poweroff * { display:none; cursor: none!important; }
+
+    &.disableItem {
+
+        .DesktopBody{
+            display: none;
+        }
+    }
+
     .DesktopBody {
         position: absolute;
         height: calc(100vh - 110px);
@@ -175,4 +184,6 @@ a {
     margin: 0;
     width: 100%;
     height: 100vh;
+    position: absolute;
+    z-index:1000000000000
 }

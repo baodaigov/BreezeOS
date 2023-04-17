@@ -1,3 +1,6 @@
+$bgcolor: #202023da;
+$fgcolor: #e2e2e2;
+
 .Window {
     position: absolute;
     top: 0;
@@ -14,7 +17,7 @@
     }
 
     .TopBar {
-        background: #202023da;
+        background: $bgcolor;
         backdrop-filter: blur(15px);
         -webkit-backdrop-filter: blur(15px);
         padding: 7px;
@@ -33,7 +36,7 @@
                 width: 20px;
                 height: 20px;
                 font-size: 11px;
-                color: #d9d9d9;
+                color: $fgcolor;
 
                 &:hover {
                     background: #3b3b3f;
@@ -46,7 +49,7 @@
         }
 
         .TopBarTitle {
-            color:#d9d9d9;
+            color:$fgcolor;
             font-size: 12px;
             margin: 0;
             width: 100%;
@@ -62,11 +65,11 @@
 
 
       .WindowBodyDefault {
-        background: #202023da;
+        background: $bgcolor;
         backdrop-filter: blur(15px);
         -webkit-backdrop-filter: blur(15px);
         padding: 10px 15px;
-        color: #fff;
+        color: $fgcolor;
 
         * {
           margin: 0;
@@ -78,13 +81,9 @@
           background-color: #ff6161;
           border-radius: 999px;
           font-size: 18px;
-
-          &::before {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 25px;
-          }
+          display: flex;
+          justify-content: center;
+          align-items: center;
         }
 
         .WindowBodyTitle {
@@ -108,7 +107,7 @@
           border: none;
           outline: none;
           background-color: #ffffff10;
-          color: #fff;
+          color: $fgcolor;
           font-size: 12px;
           padding: 7px 20px;
           border-radius: 5px;

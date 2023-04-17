@@ -8,6 +8,8 @@ import Clock from './components/utils/widget/Clock';
 import Window from './components/utils/window/Window';
 import WindowDefault from './components/utils/window/WindowDefault';
 import Menu from './components/menu/Menu';
+import TerminalWindow from './components/utils/window/TerminalDesktop';
+import LockScreen from './components/lockScreen/LockScreen';
 
 const Desktop = () => {
     function isMobile() {
@@ -21,7 +23,10 @@ const Desktop = () => {
 
     return (
         <div className='Desktop'>
-            {/* <Menu/> */}
+            <TerminalWindow/>
+            <LockScreen/>
+            <Menu/>
+            {isMobile() ? <h1 className='error'>Sorry, in order to use the operating system, please switch to the desktop.</h1> : ''}
             <Header/>
             <Panel style={{ top: "0", right: "0", margin: "45px 15px" }}/>
             <Wallpaper/>

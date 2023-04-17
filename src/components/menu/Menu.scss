@@ -7,4 +7,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: ease .1s;
+
+    &.active {
+        opacity: 1;
+        pointer-events: all;
+    }
 }

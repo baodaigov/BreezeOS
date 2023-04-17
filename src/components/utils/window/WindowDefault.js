@@ -1,13 +1,13 @@
 import React from 'react';
 import './Window.scss';
 import BatteryLow from '../../../containers/msgbox/BatteryLow'
-import BatteryNotFound from '../../../containers/msgbox/BatteryNotFound'
+import UnsuitableBrowser from '../../../containers/msgbox/UnsuitableBrowser'
 
 export default function WindowDefault(){
   return (
     <div className='WindowDefaultContainer'>
       <BatteryLow/>
-      <BatteryNotFound/>
+      <UnsuitableBrowser/>
     </div>
   )
 }

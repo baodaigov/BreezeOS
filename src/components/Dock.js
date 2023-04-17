@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './Dock.scss';
 import DockItem from './DockItem';
 import { TerminalApp } from '../containers/apps/terminal';
@@ -53,10 +53,16 @@ const Dock = () => {
         },1000);
     }, []);
 
+    const [isActive, setActive] = useState('false');
+
+    const toggle = () => {
+  		setActive(!isActive);
+  	};
+
     return (
         <div className='Dock'>
 	    {items.map(item =>
-                <DockItem id={item.id} title={item.name} icon={item.icon}/>
+                <DockItem id={item.id} class={`${isActive ? "" : "clicked"}`} title={item.name} icon={item.icon} onClick={toggle}/>
             )}
 	    <TerminalApp/>
 	    <a href='https://github.com/baodaigov'>
