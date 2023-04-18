@@ -1,0 +1,92 @@
+$fgcolor: #e8e8e8;
+
+.StartMenuWrapper {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    display: flex;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: all ease .3s;
+    z-index: 99999;
+
+    &.active {
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    .StartMenu {
+        width: 80%;
+        height: calc(100vh - 65px);
+        padding: 8px 0;
+
+        .StartApps {
+            margin-top: 50px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+
+            .StartApp {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                margin: 0 30px;
+                margin-bottom: 30px;
+
+                &:active {
+                    .StartIcon { filter: brightness(60%) }
+                }
+
+                .StartAppTitle {
+                    color: $fgcolor;
+                }
+            }
+        }
+    }
+
+    .SearchMenu {
+        padding: 5px 25px;
+        display: flex;
+        justify-content: center;
+        .SearchInput {
+            appearance: none;
+            -webkit-appearance: none;
+            outline: none;
+            border: none;
+            background: #a5a5a512;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 10px 20px;
+            width: 200px;
+            border-radius: 999px;
+            color: $fgcolor;
+            font-size: 12px;
+            transition: all ease .3s;
+
+            &:active {background: darken(#a5a5a512, 11%);}
+
+            &:empty::before {
+                content: 'Search...';
+                display: block;
+                color: #ffffff50;
+                transition: all ease .3s;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%);
+            }
+
+            &:focus {
+                width: 260px;
+
+                &:empty::before {
+                    left: 17.5%;
+                }
+            }
+        }
+    }
+}

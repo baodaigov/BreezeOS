@@ -31,7 +31,7 @@ function ShutDown(){
     }, 9500);
 }
 
-function lock(){
+function Lock(){
     document.getElementsByClassName('Menu')[0].classList.remove('active');
     document.getElementsByClassName('PowerMenu')[0].classList.remove('active');
 
@@ -45,8 +45,8 @@ function lock(){
 }
 
 document.addEventListener('keydown', e => {
-    if(e.altKey && e.keyCode === 76) {
-        lock();
+    if(e.altKey && e.keyCode === 76){
+        Lock()
     }
 })
 
@@ -109,19 +109,34 @@ function Restart(){
     }, 23000);
 }
 
+function Sleep(){
+    document.getElementsByClassName('Menu')[0].classList.remove('active');
+    document.getElementsByClassName('PowerMenu')[0].classList.remove('active');
+
+    setTimeout(() => {
+        document.getElementsByClassName('Desktop')[0].classList.add('sleep');
+    }, 500);
+}
+
+document.addEventListener('mousemove', e => {
+    setTimeout(() => {
+        document.getElementsByClassName('Desktop')[0].classList.remove('sleep');
+    }, 500);
+})
+
 export default function PowerMenuInteraction(props){
     var type = props.type;
     switch(type){
         case 'sleep':
             return (
-                <div className="PowerMenuInteraction">
+                <div className="PowerMenuInteraction" onClick={Sleep}>
                     <i className="fa-solid fa-moon"></i>
                     <p className="PowerMenuInteractionTitle">Sleep</p>
                 </div>
             )
         case 'lock':
             return (
-                <div className="PowerMenuInteraction" onClick={lock}>
+                <div className="PowerMenuInteraction" onClick={Lock}>
                     <i className="fa-solid fa-lock"></i>
                     <p className="PowerMenuInteractionTitle">Lock</p>
                 </div>

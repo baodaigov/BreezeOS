@@ -142,7 +142,11 @@ a {
     height: 100vh;
 
     &.poweroff * { display:none; cursor: none!important; }
-    &.poweron * { display: none; cursor: default!important; }
+    &.blackscr * { display: none; cursor: default!important; }
+    &.sleep {
+        background-color: #000;
+        * { display: none; cursor: none!important; }
+    }
     &.cursorLoad * { display: none; cursor: wait!important; }
 
     .DesktopBody {
