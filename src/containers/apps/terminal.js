@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from "react-redux";
 import '../../components/utils/window/Window.scss';
 import TopBar from '../../components/utils/window/TopBar';
 import WindowBody from '../../components/utils/window/WindowBody';
@@ -56,12 +55,12 @@ export default function Terminal() {
     }
 
     return (
-        <div>   
+        <div className='terminalWindow'>   
                 <div
-                    className='Window terminal'
+                    className='Window terminal minimize'
                     key={Math.random()}
                 >
-                    <TopBar title='Terminal'>
+                    <TopBar title='Terminal' onDblClick={minimize}>
                         <TopBarInteraction action='hide'/>
                         <TopBarInteraction action='minMax' onMinMax={minimize}/>
                         <TopBarInteraction action='close' onClose={close}/>

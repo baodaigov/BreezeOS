@@ -2,13 +2,9 @@ import { useEffect, useState } from 'react';
 import './Dock.scss';
 import DockItem from './DockItem';
 import { TerminalApp } from '../containers/apps/terminal';
+import { FirefoxApp } from '../containers/apps/firefox';
 
 const items = [
-    {
-        "name": "Firefox",
-        "icon": "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/firefox.svg",
-        "id": "firefox"
-    },
     {
         "name": "Calendar",
         "icon": "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/calendar.svg",
@@ -61,7 +57,8 @@ const Dock = () => {
 
     return (
         <div className='Dock'>
-	    {items.map(item =>
+        <FirefoxApp/>
+	        {items.map(item =>
                 <DockItem id={item.id} class={`${isActive ? "" : "clicked"}`} title={item.name} icon={item.icon} onClick={toggle}/>
             )}
 	    <TerminalApp/>

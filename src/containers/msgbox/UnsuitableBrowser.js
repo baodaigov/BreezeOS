@@ -6,6 +6,7 @@ import WindowBodyDefault from '../../components/utils/window/WindowBodyDefault';
 import WindowBodyButton from '../../components/utils/window/WindowBodyButton';
 import Draggable from 'react-draggable';
 import TopBarInteraction from '../../components/utils/window/TopBarInteraction';
+import './assets/index.scss';
 
 export default function UnsuitableBrowser() {
 

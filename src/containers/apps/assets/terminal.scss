@@ -1,51 +1,56 @@
-.terminal {
-	width: 93vw;
-	height: 93%;
-	transition: all ease .3s;
-
-	&.active {
-		width: 100vw;
-		height: 100%;
+.terminalWindow {
+	.terminal {
+		width: 93vw;
+		height: 93%;
+		opacity: 0;
+		pointer-events: none;
+		transition: all ease .3s;
+	
+		&.active {
+			width: 100vw;
+			height: 100%;
+			opacity: 1;
+			pointer-events: all;
+		}
+		
+		&.minimize {
+			width: 1000px;
+			height: 600px;
+		}
 	}
 	
-	&.minimize {
-		width: 1000px;
-		height: 600px;
-	}
-}
-.WindowBody * { height: auto }
-
-.Terminal {
-    background: #000;
-    color: #fff;
-    font-size: 14px;
-    padding: 15px 5px;
-    height: 100vh;
-
-    * {
-      margin:0;
-    }
-
-    pre {
-    font-family:monospace;
-	display: -webkit-box;
-
-	&#input::after {
-		content:'';
-		display:block;
-		height:15.5px;
-		width:7px;
-		background-color:#fff;
-		animation: 1s blink step-end infinite;
-	}
-
-	@keyframes blink {
-	from, to {
-		background-color: transparent;
-  	}
-	50% {
-    		background-color: #fff;
-  	}
-	}
-    }
+	.Terminal {
+		background: #000;
+		color: #fff;
+		font-size: 14px;
+		padding: 15px 5px;
+		height: 100vh;
+	
+		* {
+		  margin:0;
+		}
+	
+		pre {
+		font-family:monospace;
+		display: -webkit-box;
+	
+		&#input::after {
+			content:'';
+			display:block;
+			height:15.5px;
+			width:7px;
+			background-color:#fff;
+			animation: 1s blink step-end infinite;
+		}
+	
+		@keyframes blink {
+		from, to {
+			background-color: transparent;
+		  }
+		50% {
+				background-color: #fff;
+		  }
+		}
+		}
+	}	
 }

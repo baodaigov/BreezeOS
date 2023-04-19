@@ -6,12 +6,12 @@ import TopBarInteraction from './TopBarInteraction';
 export default class TopBar extends Component {
     render(){
       return (
-        <div className='TopBar'>
+        <div className='TopBar' onDoubleClick={this.props.onDblClick}>
             <p className='TopBarTitle'>{this.props.title}</p>
             <div className='TopBarInteractionContainer'>
               {this.props.children}
             </div>
         </div>
-    )
+      )
     }
 }

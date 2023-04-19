@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import './Wallpaper.css'
 
-class Wallpaper extends Component {
-    render(){
-        return (
-            <div className='Wallpaper'></div>
-        )
-    }
+export default function Wallpaper(){
+    setTimeout(() => {
+        document.getElementsByClassName('Wallpaper')[0].classList.remove('activeAnimation');
+        document.getElementsByClassName('Wallpaper')[0].classList.add('active');
+    }, 300);
+    return (
+        <div className='Wallpaper activeAnimation'></div>
+    )
 }
-
-export default Wallpaper;

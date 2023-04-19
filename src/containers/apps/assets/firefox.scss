@@ -1,0 +1,107 @@
+.FirefoxWindow {
+    .Window .TopBar {
+        padding: 4px 8px;
+        .TopBarInteractionContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .TopBarTitle {width: auto;}
+    }
+
+    .firefox {
+        width: 93vw;
+        height: 93%;
+        opacity: 0;
+        pointer-events: none;
+        transition: all ease .3s;
+
+        &.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+    
+        .TabBarWrapper {
+            margin: 0 10px;
+    
+            .TabBar {
+                width: 89.4vw;
+                display: flex;
+    
+                .TabBarItem {
+                    padding: 4px 9px;
+                    border-radius: 5px;
+                    color: #fff;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    font-size: 11px;
+                    background-color: #ffffff0a;
+                    width: 180px;
+                    margin-right: 5px;
+    
+                    * { margin: 0 }
+    
+                    .CloseButton {
+                        width: 18px;
+                        height: 18px;
+                        border-radius: 999px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+    
+                        i { display:none; font-size: 10px; }
+                    }
+    
+                    &:hover {
+                        .CloseButton {
+                            i {
+                                display: block;
+                            }
+                            
+                            &:hover {
+                                background-color: #ffffff10;
+                            }
+                        }
+                    }
+                }
+
+                .TabSearch {
+                    appearance: none;
+                    -webkit-appearance: none;
+                    border: none;
+                    outline: none;
+
+                    &:empty::before {
+                        content: 'Search with Google or enter address';
+                        display: block;
+                        color: #ffffff36;
+                    }
+                }
+            }
+        }
+    
+        &.active {
+            width: 100vw;
+            height: 100%;
+        }
+        
+        &.minimize {
+            width: 1000px;
+            height: 600px;
+    
+            .TabBarWrapper .TabBar {
+                width:57.4vw;
+                
+                .TabBarItem {
+                    width: 250px;
+                }
+            }
+        }
+    }
+    
+    .Firefox {
+		background: #fff;
+        height: 100vh;
+    }    
+}

@@ -1,130 +1,110 @@
 import React, {useState} from "react";
 import './PowerMenu.scss';
 import TerminalWindow from "../utils/window/TerminalDesktop";
-import { TerminalLine } from "../utils/window/TerminalDesktop";
-
-function ShutDown(){
-    document.getElementsByClassName('Menu')[0].classList.remove('active');
-    document.getElementsByClassName('PowerMenu')[0].classList.remove('active');
-
-    setTimeout(() => {
-        document.getElementsByClassName('DesktopBody')[0].classList.remove('active');
-    }, 500);
-
-    setTimeout(() => {
-        document.getElementsByClassName('Header')[0].classList.remove('active');
-        document.getElementsByClassName('Dock')[0].classList.remove('active');
-    }, 1000);
-
-    setTimeout(() => {
-        document.getElementsByClassName('TerminalWindow')[0].classList.add('active');
-        TerminalLine.push('Initiating shutdown...')
-    }, 2500);
-
-    setTimeout(() => {
-        document.getElementsByClassName('TerminalWindow')[0].classList.add('cursorLoad');
-    }, 3500);
-
-    setTimeout(() => {
-        document.getElementsByClassName('Desktop')[0].classList.add('poweroff');
-        TerminalLine.length = 0
-    }, 9500);
-}
-
-function Lock(){
-    document.getElementsByClassName('Menu')[0].classList.remove('active');
-    document.getElementsByClassName('PowerMenu')[0].classList.remove('active');
-
-    setTimeout(() => {
-        document.getElementsByClassName('LockScreen')[0].classList.add('active');
-    }, 200);
-
-    setTimeout(() => {
-        document.getElementsByClassName('LockScreenWrapper')[0].classList.add('active');
-    }, 250);
-}
-
-document.addEventListener('keydown', e => {
-    if(e.altKey && e.keyCode === 76){
-        Lock()
-    }
-})
-
-function Restart(){
-    document.getElementsByClassName('Menu')[0].classList.remove('active');
-    document.getElementsByClassName('PowerMenu')[0].classList.remove('active');
-
-    setTimeout(() => {
-        document.getElementsByClassName('DesktopBody')[0].classList.remove('active');
-    }, 500);
-
-    setTimeout(() => {
-        document.getElementsByClassName('Header')[0].classList.remove('active');
-        document.getElementsByClassName('Dock')[0].classList.remove('active');
-    }, 1000);
-
-    setTimeout(() => {
-        document.getElementsByClassName('TerminalWindow')[0].classList.add('active');
-        TerminalLine.push('Initiating shutdown...')
-    }, 2500);
-
-    setTimeout(() => {
-        document.getElementsByClassName('TerminalWindow')[0].classList.add('cursorLoad');
-    }, 3500);
-
-    setTimeout(() => {
-        document.getElementsByClassName('Desktop')[0].classList.add('poweroff');
-        document.getElementsByClassName('TerminalWindow')[0].classList.remove('cursorLoad');
-        TerminalLine.length = 0
-    }, 9500);
-
-    setTimeout(() => {
-        document.getElementsByClassName('Desktop')[0].classList.remove('poweroff');
-        document.getElementsByClassName('Desktop')[0].classList.add('poweron');
-    }, 13500)
-
-    setTimeout(() => {
-        document.getElementsByClassName('Desktop')[0].classList.add('cursorLoad');
-    }, 15000)
-
-    setTimeout(() => {
-        document.getElementsByClassName('Desktop')[0].classList.remove('poweron');
-        document.getElementsByClassName('Desktop')[0].classList.remove('cursorLoad');
-        document.getElementsByClassName('TerminalWindow')[0].classList.add('cursorLoad');
-        TerminalLine.push('Initiating startup...')
-    },17000)
-
-    setTimeout(() => {
-        document.getElementsByClassName('TerminalWindow')[0].classList.remove('active');
-        document.getElementsByClassName('TerminalWindow')[0].classList.remove('cursorLoad');
-    }, 20000);
-
-    setTimeout(() => {
-        document.getElementsByClassName('Header')[0].classList.add('active');
-        document.getElementsByClassName('Dock')[0].classList.add('active');
-    }, 21000);
-
-    setTimeout(() => {
-        document.getElementsByClassName('DesktopBody')[0].classList.add('active');
-    }, 23000);
-}
-
-function Sleep(){
-    document.getElementsByClassName('Menu')[0].classList.remove('active');
-    document.getElementsByClassName('PowerMenu')[0].classList.remove('active');
-
-    setTimeout(() => {
-        document.getElementsByClassName('Desktop')[0].classList.add('sleep');
-    }, 500);
-}
-
-document.addEventListener('mousemove', e => {
-    setTimeout(() => {
-        document.getElementsByClassName('Desktop')[0].classList.remove('sleep');
-    }, 500);
-})
 
 export default function PowerMenuInteraction(props){
+
+    function ShutDown(){
+    
+        document.getElementsByClassName('Menu')[0].classList.remove('active');
+        document.getElementsByClassName('PowerMenu')[0].classList.remove('active');
+    
+        setTimeout(() => {
+            document.getElementsByClassName('DesktopBody')[0].classList.remove('active');
+        }, 500);
+    
+        setTimeout(() => {
+            document.getElementsByClassName('Header')[0].classList.remove('active');
+            document.getElementsByClassName('Dock')[0].classList.remove('active');
+        }, 1000);
+    
+        setTimeout(() => {
+            document.getElementsByClassName('TerminalWindow')[0].classList.add('active');
+        }, 2500);
+    
+        setTimeout(() => {
+            document.getElementsByClassName('TerminalWindow')[0].classList.add('cursorLoad');
+        }, 3500);
+    
+        setTimeout(() => {
+            document.getElementsByClassName('Desktop')[0].classList.add('poweroff');
+            document.getElementsByClassName('Wallpaper')[0].classList.remove('active');
+        }, 9500);
+    }
+
+    function Lock(){
+        document.getElementsByClassName('Menu')[0].classList.remove('active');
+        document.getElementsByClassName('PowerMenu')[0].classList.remove('active');
+    
+        setTimeout(() => {
+            document.getElementsByClassName('LockScreen')[0].classList.add('active');
+        }, 200);
+    
+        setTimeout(() => {
+            document.getElementsByClassName('LockScreenWrapper')[0].classList.add('active');
+        }, 250);
+    }
+    
+    document.addEventListener('keydown', e => {
+        if(e.altKey && e.keyCode === 76){
+            Lock()
+        }
+    })
+    
+    function Restart(){
+        ShutDown();
+    
+        setTimeout(() => {
+            document.getElementsByClassName('Desktop')[0].classList.remove('poweroff');
+            document.getElementsByClassName('Desktop')[0].classList.add('blackscr');
+        }, 13500)
+    
+        setTimeout(() => {
+            document.getElementsByClassName('Desktop')[0].classList.add('cursorLoad');
+        }, 15000)
+    
+        setTimeout(() => {
+            document.getElementsByClassName('Desktop')[0].classList.remove('blackscr');
+            document.getElementsByClassName('Desktop')[0].classList.remove('cursorLoad');
+            document.getElementsByClassName('TerminalWindow')[0].classList.add('cursorLoad');
+        },17000)
+    
+        setTimeout(() => {
+            document.getElementsByClassName('TerminalWindow')[0].classList.remove('active');
+            document.getElementsByClassName('TerminalWindow')[0].classList.remove('cursorLoad');
+            document.getElementsByClassName('Wallpaper')[0].classList.add('activeAnimation');
+        }, 23500);
+
+        setTimeout(() => {
+            document.getElementsByClassName('Wallpaper')[0].classList.remove('activeAnimation');
+            document.getElementsByClassName('Wallpaper')[0].classList.add('active');
+        }, 23800);
+    
+        setTimeout(() => {
+            document.getElementsByClassName('Header')[0].classList.add('active');
+            document.getElementsByClassName('Dock')[0].classList.add('active');
+        }, 24500);
+    
+        setTimeout(() => {
+            document.getElementsByClassName('DesktopBody')[0].classList.add('active');
+        }, 26500);
+    }
+    
+    function Sleep(){
+        document.getElementsByClassName('Menu')[0].classList.remove('active');
+        document.getElementsByClassName('PowerMenu')[0].classList.remove('active');
+    
+        setTimeout(() => {
+            document.getElementsByClassName('Desktop')[0].classList.add('sleep');
+        }, 500);
+    }
+    
+    document.addEventListener('mousemove', e => {
+        setTimeout(() => {
+            document.getElementsByClassName('Desktop')[0].classList.remove('sleep');
+        }, 100);
+    })
+
     var type = props.type;
     switch(type){
         case 'sleep':

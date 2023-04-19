@@ -105,6 +105,7 @@
 
 body {
   overflow: hidden;
+  background: #2b2b2b;
 }
 
 a {
@@ -144,7 +145,7 @@ a {
     &.poweroff * { display:none; cursor: none!important; }
     &.blackscr * { display: none; cursor: default!important; }
     &.sleep {
-        background-color: #000;
+        background-color: #000!important;
         * { display: none; cursor: none!important; }
     }
     &.cursorLoad * { display: none; cursor: wait!important; }

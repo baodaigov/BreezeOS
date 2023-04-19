@@ -3,13 +3,9 @@ import './StartMenu.scss';
 import SearchMenu from './SearchMenu';
 import StartApp from './StartApp';
 import { TerminalStartApp } from '../../containers/apps/terminal';
+import { FirefoxStartApp } from '../../containers/apps/firefox';
 
 const items = [
-    {
-        "name": "Firefox",
-        "icon": "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/firefox.svg",
-        "id": "firefox"
-    },
     {
         "name": "Calendar",
         "icon": "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/calendar.svg",
@@ -89,13 +85,22 @@ export default function StartMenu(){
         console.log(matches)
     }
 
+    document.addEventListener('keydown', e => {
+        if(e.keyCode === 13){
+            e.preventDefault();
+        }
+    })
+
     return (
         <div className='StartMenuWrapper'>
-            <div className='StartMenu' ref={startRef}>
-                <SearchMenu onSearch={search} value={name} onChange={e => setName(e.target.innerText)}/>
-                <div className='StartApps'>
-                    {items.map(i => <StartApp key={i.id} icon={i.icon} name={i.name} onClick={openApp}/>)}
-                    <TerminalStartApp/>
+            <div className='StartMenu'>
+                <div ref={startRef}>
+                    <SearchMenu onSearch={search} value={name} onChange={e => setName(e.target.innerText)}/>
+                    <div className='StartApps'>
+                        <FirefoxStartApp/>
+                        {items.map(i => <StartApp key={i.id} icon={i.icon} name={i.name} onClick={openApp}/>)}
+                        <TerminalStartApp/>
+                    </div>
                 </div>
             </div>
         </div>
