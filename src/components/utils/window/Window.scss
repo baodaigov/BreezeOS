@@ -53,6 +53,7 @@ $fgcolor: #e2e2e2;
     }
 
     .WindowBody {
+      height: calc(100vh - 145px);
       & > * {
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;

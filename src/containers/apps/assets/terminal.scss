@@ -21,26 +21,27 @@
 	
 	.Terminal {
 		background: #000;
-		color: #fff;
-		font-size: 14px;
 		padding: 15px 5px;
 		height: 100vh;
 	
 		* {
 		  margin:0;
+		  font-family:monospace;
+		  color: #fff;
+		  font-size: 14px;
 		}
 	
 		pre {
-		font-family:monospace;
 		display: -webkit-box;
-	
-		&#input::after {
-			content:'';
-			display:block;
-			height:15.5px;
-			width:7px;
-			background-color:#fff;
-			animation: 1s blink step-end infinite;
+
+		&#input input {
+			appearance: none;
+			-webkit-appearance: none;
+			border: none;
+			outline: none;
+			background-color: transparent;
+			margin-left: 5px;
+			width: 100%;
 		}
 	
 		@keyframes blink {

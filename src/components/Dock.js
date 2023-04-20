@@ -3,17 +3,13 @@ import './Dock.scss';
 import DockItem from './DockItem';
 import { TerminalApp } from '../containers/apps/terminal';
 import { FirefoxApp } from '../containers/apps/firefox';
+import { ClockApp } from '../containers/apps/clock';
 
 const items = [
     {
         "name": "Calendar",
         "icon": "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/calendar.svg",
         "id": "calendar"
-    },
-    {
-        "name": "Clock",
-        "icon": "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/preferences-system-time.svg",
-        "id": "clock"
     },
     {
         "name": "Camera",
@@ -58,6 +54,7 @@ const Dock = () => {
     return (
         <div className='Dock'>
         <FirefoxApp/>
+        <ClockApp/>
 	        {items.map(item =>
                 <DockItem id={item.id} class={`${isActive ? "" : "clicked"}`} title={item.name} icon={item.icon} onClick={toggle}/>
             )}

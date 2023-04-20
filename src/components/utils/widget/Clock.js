@@ -29,7 +29,7 @@ export default class Clock extends Component {
   render() {
     return (
       <Draggable>
-        <div className="Clock active">
+        <div className="ClockWidget active">
           <div className="Close" onClick={e=>this.close(e)}>
             <i class="fa-solid fa-xmark"></i>
           </div>

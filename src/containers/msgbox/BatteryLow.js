@@ -22,7 +22,7 @@ export default function BatteryLow() {
         <div>
             <Draggable positionOffset={{ x: '-50%', y: '-50%' }}>
                 <div
-                    className={`Window BatteryLow ${batteryPercent <= 5 ? 'active' : ''}`}
+                    className={`Window BatteryLow ${batteryPercent == 5 ? 'active' ? batteryState.charging ? '' : 'active' : '' : ''}`}
                     key={Math.random()}
                 >
                     <TopBar>

@@ -112,6 +112,11 @@ a {
     text-decoration: none;
 }
 
+*[contenteditable], input{
+    user-select: text;
+    -webkit-user-select: text;
+}
+
 * {
     box-sizing: border-box;
     font-family: Optimistic Text, -apple-system, ui-sans-serif, system-ui, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;

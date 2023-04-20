@@ -1,9 +1,13 @@
 .FirefoxWindow {
+    * {
+        transition: all ease .3s;
+    }
     .Window .TopBar {
         padding: 4px 8px;
         .TopBarInteractionContainer {
             display: flex;
-            justify-content: center;
+            width: 100vw;
+            justify-content: space-between;
             align-items: center;
         }
         .TopBarTitle {width: auto;}
@@ -19,6 +23,8 @@
         &.active {
             opacity: 1;
             pointer-events: all;
+            width: 100vw;
+            height: 100%;
         }
     
         .TabBarWrapper {
@@ -33,7 +39,6 @@
                     border-radius: 5px;
                     color: #fff;
                     display: flex;
-                    justify-content: space-between;
                     align-items: center;
                     font-size: 11px;
                     background-color: #ffffff0a;
@@ -64,26 +69,42 @@
                             }
                         }
                     }
-                }
 
-                .TabSearch {
-                    appearance: none;
-                    -webkit-appearance: none;
-                    border: none;
-                    outline: none;
+                    .TabBarInteraction {
+                        display: flex;
+                        margin-right: 5px;
 
-                    &:empty::before {
-                        content: 'Search with Google or enter address';
-                        display: block;
-                        color: #ffffff36;
+                        i {
+                            margin-right: 3px;
+                            font-size: 12px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            border-radius: 999px;
+                            height: 20px;
+                            width: 20px;
+
+                            &:hover {
+                                background-color: #ffffff1e;
+                            }
+                        }
+                    }
+
+                    .TabSearch {
+                        appearance: none;
+                        -webkit-appearance: none;
+                        border: none;
+                        outline: none;
+                        background-color: transparent;
+                        color: #fff;
+                        width: 100%;
+    
+                        &::placeholder {
+                            color: #ffffff36;
+                        }
                     }
                 }
             }
-        }
-    
-        &.active {
-            width: 100vw;
-            height: 100%;
         }
         
         &.minimize {
@@ -102,6 +123,23 @@
     
     .Firefox {
 		background: #fff;
-        height: 100vh;
+        height: 100%;
+
+        & > * {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+
+        .welcomepage {
+            background-image: url('../../../components/VP5eTn.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
     }    
 }

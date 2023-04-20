@@ -4,17 +4,13 @@ import SearchMenu from './SearchMenu';
 import StartApp from './StartApp';
 import { TerminalStartApp } from '../../containers/apps/terminal';
 import { FirefoxStartApp } from '../../containers/apps/firefox';
+import { ClockStartApp } from '../../containers/apps/clock';
 
 const items = [
     {
         "name": "Calendar",
         "icon": "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/calendar.svg",
         "id": "calendar"
-    },
-    {
-        "name": "Clock",
-        "icon": "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/preferences-system-time.svg",
-        "id": "clock"
     },
     {
         "name": "Camera",
@@ -77,7 +73,6 @@ export default function StartMenu(){
     useOutsideAlerter(startRef);
 
     const [name, setName] = useState('');
-    const [item, setItem] = useState([]);
 
     function search(e){
         let val = e.target.innerText.toLowerCase();
@@ -98,6 +93,7 @@ export default function StartMenu(){
                     <SearchMenu onSearch={search} value={name} onChange={e => setName(e.target.innerText)}/>
                     <div className='StartApps'>
                         <FirefoxStartApp/>
+                        <ClockStartApp/>
                         {items.map(i => <StartApp key={i.id} icon={i.icon} name={i.name} onClick={openApp}/>)}
                         <TerminalStartApp/>
                     </div>
