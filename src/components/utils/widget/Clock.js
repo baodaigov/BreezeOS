@@ -22,15 +22,15 @@ export default class Clock extends Component {
     clearInterval(this.timerId);
   }
 
-  close(e){
-      document.getElementsByClassName('Clock')[0].classList.remove('active');
+  close(){
+    document.getElementsByClassName('ClockWidget')[0].classList.remove('active');
   }
 
   render() {
     return (
       <Draggable>
         <div className="ClockWidget active">
-          <div className="Close" onClick={e=>this.close(e)}>
+          <div className="Close" onClick={this.close}>
             <i class="fa-solid fa-xmark"></i>
           </div>
           <div

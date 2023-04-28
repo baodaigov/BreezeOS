@@ -8,7 +8,7 @@ class PanelRangeContainer extends Component {
         return (
             <div className='PanelRangeContainer'>
                 <p className='PanelRangeTitle'>{this.props.title}</p>
-                <RangeSlider/>
+                {this.props.children}
             </div>
         )
     }

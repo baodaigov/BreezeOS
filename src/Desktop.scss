@@ -158,6 +158,7 @@ a {
     .DesktopBody {
         display: none;
         position: absolute;
+        overflow: hidden;
         height: calc(100vh - 110px);
         width: 100vw;
 

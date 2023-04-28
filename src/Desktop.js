@@ -1,7 +1,5 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import Wallpaper from './components/Wallpaper'
-import Dock from './components/Dock'
-import Header from './components/Header'
 import './Desktop.scss';
 import Panel from './components/panel/Panel';
 import Clock from './components/utils/widget/Clock';
@@ -11,6 +9,9 @@ import Menu from './components/menu/Menu';
 import TerminalWindow from './components/utils/window/TerminalDesktop';
 import LockScreen from './components/lockScreen/LockScreen';
 import StartMenu from './components/startMenu/StartMenu';
+const Header = lazy(() => import('./components/Header'))
+const Dock = lazy(() => import('./components/Dock'))
+const DesktopBody = lazy(() => import('./DesktopBody'))
 
 const Desktop = () => {
     function isMobile() {
@@ -33,15 +34,11 @@ const Desktop = () => {
             <LockScreen/>
             <Menu/>
             <StartMenu/>
-            <Header/>
+            <Suspense><Header/></Suspense>
             <Panel style={{ top: "0", right: "0", margin: "45px 15px" }}/>
             <Wallpaper/>
-            <div className='DesktopBody'>
-                <Clock/>
-                <Window/>
-                <WindowDefault/>
-            </div>
-            <Dock/>
+            <Suspense><DesktopBody/></Suspense>
+            <Suspense><Dock/></Suspense>
         </div>
     )
 }

@@ -4,13 +4,18 @@ import './Panel.scss';
 import PanelItemLarge from './PanelItemLarge';
 import PanelContainer from './PanelItemContainer';
 import PanelRangeContainer from './PanelRangeContainer';
+import RangeSlider from '../utils/range/Range';
 
 class PanelBottom extends Component {
     render(){
         return (
             <div className='PanelBottom'>
-                <PanelRangeContainer title='Volume' value='100'/>
-                <PanelRangeContainer title='Brightness' value='100'/>
+                <PanelRangeContainer title='Volume'>
+                    <RangeSlider min='0' max='100'/>
+                </PanelRangeContainer>
+                <PanelRangeContainer title='Brightness'>
+                    <RangeSlider min='0' max='100'/>
+                </PanelRangeContainer>
                 <PanelContainer>
                     <PanelItemLarge type='night-light'/>
                     <PanelItemLarge type='wifi'/>

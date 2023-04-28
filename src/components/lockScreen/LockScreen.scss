@@ -8,11 +8,12 @@ $fgcolor: #e2e2e2;
     background-size: cover;
     background-position: center;
     position: absolute;
-    bottom: 2000px;
+    bottom: 1000px;
+    opacity: 0;
     z-index: 1000000;
     transition: all ease .5s;
 
-    &.active { bottom: 0 }
+    &.active { bottom: 0; opacity: 1; }
     
     .LockScreenWrapper {
         position: absolute;

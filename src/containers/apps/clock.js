@@ -40,11 +40,18 @@ export const ClockStartApp = () => {
 
 export const ClockItem = (props) => {
     const [curTime, setCurTime] = useState(null);
+    const [curDate, setCurDate] = useState(null);
     setInterval(() => {
         setCurTime(new Date().toLocaleString('vi-VN', {
+            timeZone: `${props.timeZone}`,
             hour: "2-digit",
             minute: "2-digit",
             second: "2-digit"
+        }));
+
+        setCurDate(new Date().toLocaleDateString('en-US', {
+            timeZone: `${props.timeZone}`,
+            dateStyle: "full"
         }));
     }, 1000);
 
@@ -52,7 +59,7 @@ export const ClockItem = (props) => {
         <div className='ClockItem'>
             <div className='ClockInfo'>
                 <p className='ClockTitle font-semibold'>{props.title}</p>
-                <p className='ClockDesc'>{props.description}</p>
+                <p className='ClockDesc'>{curDate}</p>
             </div>
             <div>
                 <div className='ClockTime font-bold'>
@@ -87,7 +94,31 @@ export default function Clock() {
                     <WindowBody>
                         <div className='Clock'>
                             <div className='ClockItems'>
-                                <ClockItem title='Indochina Time (GMT+7)' description='Current timezone'/>
+                                <ClockItem title='Ho Chi Minh City, Vietnam' timeZone='Asia/Ho_Chi_Minh'/>
+                                <ClockItem title='New York, USA' timeZone='America/New_York'/>
+                                <ClockItem title='London, United Kingdom' timeZone='Europe/London'/>
+                                <ClockItem title='Tokyo, Japan' timeZone='Asia/Tokyo'/>
+                                <ClockItem title='Moscow, Russia' timeZone='Europe/Moscow'/>
+                            </div>
+                            <div className='ClockMenu'>
+                                <div className='ClockMenuInside'>
+                                    <div className='ClockMenuItem active'>
+                                        <i className="fa-regular fa-globe"></i>
+                                        <p>World Clock</p>
+                                    </div>
+                                    <div className='ClockMenuItem'>
+                                        <i className="fa-regular fa-alarm-clock"></i>
+                                        <p>Alarm</p>
+                                    </div>
+                                    <div className='ClockMenuItem'>
+                                        <i className="fa-regular fa-stopwatch"></i>
+                                        <p>Stopwatch</p>
+                                    </div>
+                                    <div className='ClockMenuItem'>
+                                        <i className="fa-regular fa-timer"></i>
+                                        <p>Timer</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </WindowBody>

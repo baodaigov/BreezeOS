@@ -45,7 +45,7 @@
             &.clicked {
               img {
                 position: relative;
-                animation: focused ease 1s;
+                animation: focused ease-in-out 1s;
               }
 
               @keyframes focused {
