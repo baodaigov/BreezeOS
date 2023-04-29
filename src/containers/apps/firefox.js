@@ -38,8 +38,9 @@ export const FirefoxStartApp = () => {
     )
 }
 
-export default function Firefox() {
-    const [url, setUrl] = useState('');
+export const SearchBar = () => {
+    const [url, setUrl] = useState('https://www.bing.com');
+    const [isTyping, setTyping] = useState(false);
 
     const isValidURL = (string) => {
         var res = string.match(
@@ -57,26 +58,53 @@ export default function Firefox() {
                 qry = "https://" + qry;
               }
             } else {
-              qry = "https://www.google.com/search?q=" + qry + '&igu=1';
+              qry = "https://www.bing.com/search?q=" + encodeURIComponent(qry);
             }
     
             e.target.value = qry;
-            setTimeout(() => {setUrl(qry)}, 500)
+            setUrl(qry);
+            setTyping(false);
+            setTimeout(() => {
+                document.getElementById('iFrameFF').src = qry;
+            }, 500);
         }
+    }
+
+    const typing = (e) => {
+        if (!isTyping) {
+          setTyping(true);
+          console.log([url, url]);
+        }
+        setUrl(e.target.value);
+    };
+
+    return <input className='TabSearch' type='text' spellCheck='false' placeholder='Search with Google or enter address' onKeyDown={action} onChange={typing}/>
+}
+
+export default function Firefox() {
+
+    const FirefoxInteraction = () => {
+
+        function reload(){
+            document.getElementById('iFrameFF').src = document.getElementById('iFrameFF').src;
+        }
+
+        return (
+            <div className='TabBarInteraction'>
+                <i className="fa-regular fa-chevron-left"></i>
+                <i className="fa-regular fa-chevron-right"></i>
+                <i className="fa-regular fa-rotate-right" onClick={reload}></i>
+            </div>
+        )
     }
 
     function close(){
         document.getElementsByClassName('firefox')[0].classList.remove('active');
         document.getElementById('firefox').classList.remove('clicked');
-        setTimeout(() => {setUrl('')}, 200);
     }
 
     function minimize(){
         document.getElementsByClassName('firefox')[0].classList.toggle('minimize');
-    }
-
-    function reload(){
-        document.getElementById('iFrameFF').src = document.getElementById('iFrameFF').src;
     }
 
     return (
@@ -95,12 +123,8 @@ export default function Firefox() {
                                     </div>
                                 </div>
                                 <div className='TabBarItem' style={{ width: "100vw" }}>
-                                    <div className='TabBarInteraction'>
-                                        <i className="fa-regular fa-chevron-left"></i>
-                                        <i className="fa-regular fa-chevron-right"></i>
-                                        <i className="fa-regular fa-rotate-right" onClick={reload}></i>
-                                    </div>
-                                    <input className='TabSearch' type='text' spellCheck='false' placeholder='Search with Google or enter address' onKeyDown={action}/>
+                                    <FirefoxInteraction/>
+                                    <SearchBar/>
                                 </div>
                             </div>
                         </div>
@@ -112,15 +136,10 @@ export default function Firefox() {
                     </TopBar>
                     <WindowBody>
                         <div className='Firefox'>
-                            {url == '' ? <div className='welcomepage'>
-                                <img src='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/firefox.svg' width='90px' height='90px'/>
-                                <h1>Welcome to Firefox on BreezeOS</h1>
-                                <p>Click the search bar on top to Google search or input URL address.</p>
-                            </div> : ''}
-                            <iframe id='iFrameFF' className='iFrameFF' src={url} title='New Tab' frameBorder='0'/>
+                            <iframe id='iFrameFF' className='iFrameFF' title='New Tab' frameBorder='0'/>
                         </div>
                     </WindowBody>
-                </div> 
+                </div>
         </div>
     )
 }

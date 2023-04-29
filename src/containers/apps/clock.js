@@ -95,10 +95,7 @@ export default function Clock() {
                         <div className='Clock'>
                             <div className='ClockItems'>
                                 <ClockItem title='Ho Chi Minh City, Vietnam' timeZone='Asia/Ho_Chi_Minh'/>
-                                <ClockItem title='New York, USA' timeZone='America/New_York'/>
                                 <ClockItem title='London, United Kingdom' timeZone='Europe/London'/>
-                                <ClockItem title='Tokyo, Japan' timeZone='Asia/Tokyo'/>
-                                <ClockItem title='Moscow, Russia' timeZone='Europe/Moscow'/>
                             </div>
                             <div className='ClockMenu'>
                                 <div className='ClockMenuInside'>
