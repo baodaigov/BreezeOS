@@ -18,5 +18,20 @@ export default function WindowBodyDefault({ type, title, content, children }) {
           {children}
         </div>
       )
+    case "exclamation":
+      return (
+        <div className='WindowBodyDefault'>
+          <div style={{ display: "flex" }}>
+            <div className='WindowBodyIcon exclamation'>
+              <i class="fa-solid fa-exclamation"></i>
+            </div>
+            <div className='WindowBodyRight' style={{ marginLeft: "10px" }}>
+              <p className='WindowBodyTitle'>{title}</p>
+              <p className='WindowBodyContent'>{content}</p>
+            </div>
+          </div>
+          {children}
+        </div>
+      )
   }
 }

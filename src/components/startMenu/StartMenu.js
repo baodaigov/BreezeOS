@@ -5,17 +5,13 @@ import StartApp from './StartApp';
 import { TerminalStartApp } from '../../containers/apps/terminal';
 import { FirefoxStartApp } from '../../containers/apps/firefox';
 import { ClockStartApp } from '../../containers/apps/clock';
+import { CameraStartApp } from '../../containers/apps/camera';
 
 const items = [
     {
         "name": "Calendar",
         "icon": "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/calendar.svg",
         "id": "calendar"
-    },
-    {
-        "name": "Camera",
-        "icon": "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/accessories-camera.svg",
-        "id": "camera"
     },
     {
         "name": "Files",
@@ -94,6 +90,7 @@ export default function StartMenu(){
                     <div className='StartApps'>
                         <FirefoxStartApp/>
                         <ClockStartApp/>
+                        <CameraStartApp/>
                         {items.map(i => <StartApp key={i.id} icon={i.icon} name={i.name} onClick={openApp}/>)}
                         <TerminalStartApp/>
                     </div>

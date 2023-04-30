@@ -39,7 +39,6 @@ export const FirefoxStartApp = () => {
 }
 
 export const SearchBar = () => {
-    const [url, setUrl] = useState('https://www.bing.com');
     const [isTyping, setTyping] = useState(false);
 
     const isValidURL = (string) => {
@@ -62,7 +61,6 @@ export const SearchBar = () => {
             }
     
             e.target.value = qry;
-            setUrl(qry);
             setTyping(false);
             setTimeout(() => {
                 document.getElementById('iFrameFF').src = qry;
@@ -73,9 +71,7 @@ export const SearchBar = () => {
     const typing = (e) => {
         if (!isTyping) {
           setTyping(true);
-          console.log([url, url]);
         }
-        setUrl(e.target.value);
     };
 
     return <input className='TabSearch' type='text' spellCheck='false' placeholder='Search with Google or enter address' onKeyDown={action} onChange={typing}/>
@@ -136,7 +132,7 @@ export default function Firefox() {
                     </TopBar>
                     <WindowBody>
                         <div className='Firefox'>
-                            <iframe id='iFrameFF' className='iFrameFF' title='New Tab' frameBorder='0'/>
+                            <iframe id='iFrameFF' className='iFrameFF' src='https://www.bing.com' title='New Tab' frameBorder='0'/>
                         </div>
                     </WindowBody>
                 </div>

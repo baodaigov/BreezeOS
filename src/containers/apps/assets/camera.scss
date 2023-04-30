@@ -1,0 +1,47 @@
+$bgcolor: #202023da;
+$fgcolor: #e2e2e2;
+
+.CameraWindow {
+    * {
+        transition: all ease .3s;
+    }
+
+    .camera {
+        width: 93vw;
+        height: 93%;
+        opacity: 0;
+        pointer-events: none;
+        transition: all ease .3s;
+
+        &.active {
+            opacity: 1;
+            pointer-events: all;
+            width: 100vw;
+            height: 100%;
+        }
+        
+        &.minimize {
+            width: 1000px;
+            height: 600px;
+        }
+    }
+    
+    .Camera {
+        background: $bgcolor;
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        height: 100%;
+        color: $fgcolor;
+
+        * {
+            margin: 0;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            -webkit-transform: scaleX(-1);
+            transform: scaleX(-1);
+        }
+    }    
+}

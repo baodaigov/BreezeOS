@@ -29,7 +29,7 @@ export default function UnsuitableBrowser() {
                     <TopBar>
                       <TopBarInteraction action='close' onClose={close}/>
                     </TopBar>
-                    <WindowBodyDefault type='critical' title={`Unsuitable web browser`} content='Some features may not be supported in this browser, we recommend you to use a different one for full experience.'>
+                    <WindowBodyDefault type='exclamation' title='Unsuitable web browser' content='Some features may not be supported in this browser, we recommend you to use a different one for full experience.'>
                       <WindowBodyButton>
                         <button className='Button' key={Math.random()} onClick={close}>OK</button>
                       </WindowBodyButton>

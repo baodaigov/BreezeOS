@@ -70,6 +70,60 @@ export const ClockItem = (props) => {
     )
 }
 
+export const ClockMenu = () => {
+    const [translateX, setTranslateX] = useState('');
+    const [width, setWidth] = useState('103px');
+    const [value, setValue] = useState('1');
+
+    function worldClockTab(){
+        setTranslateX('translate(0)');
+        setWidth('103px');
+        setValue('1');
+    }
+
+    function alarmTab(){
+        setTranslateX('translate(108px)');
+        setWidth('69px');
+        setValue('2');
+    }
+
+    function stopwatchTab(){
+        setTranslateX('translate(182px)');
+        setWidth('97px');
+        setValue('3');
+    }
+
+    function timerTab(){
+        setTranslateX('translate(283px)');
+        setWidth('69px');
+        setValue('4');
+    }
+
+    return (
+        <div className='ClockMenu' value={value}>
+            <div className='ClockMenuInside'>
+                <div className='ClockMenuItem world-clock' onClick={worldClockTab}>
+                    <i className="fa-regular fa-globe"></i>
+                    <p>World Clock</p>
+                </div>
+                <div className='ClockMenuItem alarm-clock' onClick={alarmTab}>
+                    <i className="fa-regular fa-alarm-clock"></i>
+                    <p>Alarm</p>
+                </div>
+                <div className='ClockMenuItem stopwatch' onClick={stopwatchTab}>
+                    <i className="fa-regular fa-stopwatch"></i>
+                    <p>Stopwatch</p>
+                </div>
+                <div className='ClockMenuItem timer' onClick={timerTab}>
+                    <i className="fa-regular fa-timer"></i>
+                    <p>Timer</p>
+                </div>
+                <div className='ClockSlider' style={{ width: width, transform: translateX }}></div>
+            </div>
+        </div>
+    )
+}
+
 export default function Clock() {
     function close(){
         document.getElementsByClassName('clock')[0].classList.remove('active');
@@ -97,26 +151,7 @@ export default function Clock() {
                                 <ClockItem title='Ho Chi Minh City, Vietnam' timeZone='Asia/Ho_Chi_Minh'/>
                                 <ClockItem title='London, United Kingdom' timeZone='Europe/London'/>
                             </div>
-                            <div className='ClockMenu'>
-                                <div className='ClockMenuInside'>
-                                    <div className='ClockMenuItem active'>
-                                        <i className="fa-regular fa-globe"></i>
-                                        <p>World Clock</p>
-                                    </div>
-                                    <div className='ClockMenuItem'>
-                                        <i className="fa-regular fa-alarm-clock"></i>
-                                        <p>Alarm</p>
-                                    </div>
-                                    <div className='ClockMenuItem'>
-                                        <i className="fa-regular fa-stopwatch"></i>
-                                        <p>Stopwatch</p>
-                                    </div>
-                                    <div className='ClockMenuItem'>
-                                        <i className="fa-regular fa-timer"></i>
-                                        <p>Timer</p>
-                                    </div>
-                                </div>
-                            </div>
+                            <ClockMenu/>
                         </div>
                     </WindowBody>
                 </div> 

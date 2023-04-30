@@ -83,6 +83,18 @@ $fgcolor: #e2e2e2;
           align-items: center;
         }
 
+        .exclamation {
+          height: 25px;
+          width: 25px;
+          background-color: #fcff61;
+          color: #212121;
+          border-radius: 999px;
+          font-size: 15px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
         .WindowBodyTitle {
           font-size: 17px;
           margin-bottom: 10px;
