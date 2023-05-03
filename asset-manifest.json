@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.js": "/BreezeOS/static/js/main.ef38f883.js",
-    "static/css/950.040773d5.chunk.css": "/BreezeOS/static/css/950.040773d5.chunk.css",
-    "static/js/950.622eac76.chunk.js": "/BreezeOS/static/js/950.622eac76.chunk.js",
+    "main.js": "/BreezeOS/static/js/main.8bf34776.js",
+    "static/css/950.af764c2f.chunk.css": "/BreezeOS/static/css/950.af764c2f.chunk.css",
+    "static/js/950.7fb1cc50.chunk.js": "/BreezeOS/static/js/950.7fb1cc50.chunk.js",
     "static/js/771.cdaad3f4.chunk.js": "/BreezeOS/static/js/771.cdaad3f4.chunk.js",
-    "static/js/248.c7a351ae.chunk.js": "/BreezeOS/static/js/248.c7a351ae.chunk.js",
-    "static/js/460.19f813b5.chunk.js": "/BreezeOS/static/js/460.19f813b5.chunk.js",
+    "static/js/248.a1a409e8.chunk.js": "/BreezeOS/static/js/248.a1a409e8.chunk.js",
+    "static/js/99.2a24ae29.chunk.js": "/BreezeOS/static/js/99.2a24ae29.chunk.js",
     "static/media/Windows-11-4k-Wallpaper-scaled.jpg": "/BreezeOS/static/media/Windows-11-4k-Wallpaper-scaled.557ec81467de22ddd91a.jpg",
     "index.html": "/BreezeOS/index.html",
-    "main.ef38f883.js.map": "/BreezeOS/static/js/main.ef38f883.js.map",
-    "950.040773d5.chunk.css.map": "/BreezeOS/static/css/950.040773d5.chunk.css.map",
-    "950.622eac76.chunk.js.map": "/BreezeOS/static/js/950.622eac76.chunk.js.map",
+    "main.8bf34776.js.map": "/BreezeOS/static/js/main.8bf34776.js.map",
+    "950.af764c2f.chunk.css.map": "/BreezeOS/static/css/950.af764c2f.chunk.css.map",
+    "950.7fb1cc50.chunk.js.map": "/BreezeOS/static/js/950.7fb1cc50.chunk.js.map",
     "771.cdaad3f4.chunk.js.map": "/BreezeOS/static/js/771.cdaad3f4.chunk.js.map",
-    "248.c7a351ae.chunk.js.map": "/BreezeOS/static/js/248.c7a351ae.chunk.js.map",
-    "460.19f813b5.chunk.js.map": "/BreezeOS/static/js/460.19f813b5.chunk.js.map"
+    "248.a1a409e8.chunk.js.map": "/BreezeOS/static/js/248.a1a409e8.chunk.js.map",
+    "99.2a24ae29.chunk.js.map": "/BreezeOS/static/js/99.2a24ae29.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.ef38f883.js"
+    "static/js/main.8bf34776.js"
   ]
 }
