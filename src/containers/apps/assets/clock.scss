@@ -37,40 +37,46 @@ $fgcolor: #e2e2e2;
             margin: 0;
         }
 
-        .ClockItem {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: all ease .2s;
-            padding: 10px;
+        .ClockItems {
+            height: 100%;
 
-            &:hover {
-                background: transparentize($fgcolor, 0.95);
-            }
+            .world-clock {
+                .ClockItem {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    transition: all ease .2s;
+                    padding: 10px;
 
-            .ClockInfo {
-                margin: 15px;
-                margin-right: 50px;
-                border-radius: 10px;
-                width: 280px;
+                    &:hover {
+                        background: transparentize($fgcolor, 0.95);
+                    }
 
-                .ClockTitle {
-                    color: $fgcolor;
-                    font-size: 16px;
+                    .ClockInfo {
+                        margin: 15px;
+                        margin-right: 50px;
+                        border-radius: 10px;
+                        width: 280px;
+
+                        .ClockTitle {
+                            color: $fgcolor;
+                            font-size: 16px;
+                        }
+            
+                        .ClockDesc {
+                            color: transparentize($fgcolor, 0.8);
+                            font-size: 12px;
+                        }
+                    }
+
+                    .ClockTime {
+                        background-color: #8fb6ff53;
+                        color: #8fb6ff;
+                        border-radius: 999px;
+                        padding: 7px 13px;
+                        font-size: 18px;
+                    }
                 }
-    
-                .ClockDesc {
-                    color: transparentize($fgcolor, 0.8);
-                    font-size: 12px;
-                }
-            }
-
-            .ClockTime {
-                background-color: #8fb6ff53;
-                color: #8fb6ff;
-                border-radius: 999px;
-                padding: 7px 13px;
-                font-size: 18px;
             }
         }
 
@@ -98,8 +104,8 @@ $fgcolor: #e2e2e2;
 
                     i { margin-right: 5px }
 
-                    &:last-child {
-                        margin: 0;
+                    &:nth-child(4) {
+                        margin-right: 5px;
                     }
                 }
 

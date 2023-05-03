@@ -126,6 +126,10 @@ a {
     user-select: none; /* Standard syntax */
 }
 
+.font-extrabold {
+    font-weight:800
+}
+
 .font-bold {
     font-weight:700
 }
@@ -182,6 +186,21 @@ a {
 
     &.NightShiftEnabled::before {
         opacity: .8;
+    }
+
+    &.capture::before {
+        animation: capture ease 2s;
+    }
+    
+    @keyframes capture {
+        0% {
+            background-color: #fff;
+            opacity: 1;
+        }
+        100% {
+            background-color: transparent;
+            opacity: 0;
+        }
     }
 }
 

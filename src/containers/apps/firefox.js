@@ -132,7 +132,7 @@ export default function Firefox() {
                     </TopBar>
                     <WindowBody>
                         <div className='Firefox'>
-                            <iframe id='iFrameFF' className='iFrameFF' src='https://www.bing.com' title='New Tab' frameBorder='0'/>
+                            <iframe id='iFrameFF' className='iFrameFF' src='https://baodaigov.github.io/BreezeOS/start.html' title='New Tab' frameBorder='0'/>
                         </div>
                     </WindowBody>
                 </div>

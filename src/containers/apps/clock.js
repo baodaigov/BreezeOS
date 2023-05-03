@@ -74,6 +74,7 @@ export const ClockMenu = () => {
     const [translateX, setTranslateX] = useState('');
     const [width, setWidth] = useState('103px');
     const [value, setValue] = useState('1');
+    const ClockItems = document.getElementsByClassName('ClockItems')[0];
 
     function worldClockTab(){
         setTranslateX('translate(0)');
@@ -82,8 +83,8 @@ export const ClockMenu = () => {
     }
 
     function alarmTab(){
-        setTranslateX('translate(108px)');
-        setWidth('69px');
+        setTranslateX('translate(107.5px)');
+        setWidth('70px');
         setValue('2');
     }
 
@@ -95,7 +96,7 @@ export const ClockMenu = () => {
 
     function timerTab(){
         setTranslateX('translate(283px)');
-        setWidth('69px');
+        setWidth('72px');
         setValue('4');
     }
 
@@ -148,8 +149,10 @@ export default function Clock() {
                     <WindowBody>
                         <div className='Clock'>
                             <div className='ClockItems'>
-                                <ClockItem title='Ho Chi Minh City, Vietnam' timeZone='Asia/Ho_Chi_Minh'/>
-                                <ClockItem title='London, United Kingdom' timeZone='Europe/London'/>
+                                <div className='world-clock'>
+                                    <ClockItem title='Ho Chi Minh City, Vietnam' timeZone='Asia/Ho_Chi_Minh'/>
+                                    <ClockItem title='London, United Kingdom' timeZone='Europe/London'/>
+                                </div>
                             </div>
                             <ClockMenu/>
                         </div>

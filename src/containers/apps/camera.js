@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../components/utils/window/Window.scss';
 import TopBar from '../../components/utils/window/TopBar';
 import WindowBody from '../../components/utils/window/WindowBody';
@@ -6,9 +6,9 @@ import DockItem from '../../components/DockItem';
 import './assets/camera.scss';
 import TopBarInteraction from '../../components/utils/window/TopBarInteraction';
 import StartApp from '../../components/startMenu/StartApp';
+import Webcam from 'react-webcam';
 
 export const CameraApp = () => {
-
     const toggle = () => {
         document.getElementsByClassName('CameraApp')[0].classList.add('clicked');
         setTimeout(() => {
@@ -39,6 +39,63 @@ export const CameraStartApp = () => {
 }
 
 export default function Camera() {
+    window.onload = () => {
+        navigator.permissions.query({ name: "camera" }).then(res => {
+            if(res.state != "granted"){
+                document.getElementsByClassName('MissingPermissionCamera')[0].classList.add('active');
+            }
+        });
+    }
+
+    const [captureClick, setCaptureClick] = useState(false);
+
+    const Timer = () => {
+        const [timeLeft, setTimeLeft] = useState(null);
+    
+        useEffect(() => {
+            if(timeLeft == 0){
+                document.getElementsByClassName('Desktop')[0].classList.add('capture');
+                setTimeout(() => {
+                    document.getElementsByClassName('Desktop')[0].classList.remove('capture');
+                }, 1000);
+                setTimeLeft(null)
+            }
+        
+            // exit early when we reach 0
+            if (!timeLeft) return;
+        
+            // save intervalId to clear the interval when the
+            // component re-renders
+            const intervalId = setInterval(() => {
+        
+              setTimeLeft(timeLeft - 1);
+            }, 1000);
+        
+            // clear interval on re-render to avoid memory leaks
+            return () => clearInterval(intervalId);
+            // add timeLeft as a dependency to re-rerun the effect
+            // when we update it
+        }, [timeLeft])
+
+        useEffect(() => {
+            if(captureClick == true){
+                setTimeLeft(3);
+            }
+        }, [captureClick])
+
+        return <p>{timeLeft}</p>;
+    }
+    const WebcamComponent = () => <Webcam/>
+    const videoConstraints = {
+        facingMode: 'user'
+    }
+    const [picture, setPicture] = useState('')
+    const webcamRef = React.useRef(null)
+    const capture = React.useCallback(() => {
+      const pictureSrc = webcamRef.current.getScreenshot()
+      setPicture(pictureSrc)
+    })
+
     function close(){
         document.getElementsByClassName('camera')[0].classList.remove('active');
         document.getElementById('camera').classList.remove('clicked');
@@ -46,24 +103,6 @@ export default function Camera() {
 
     function minimize(){
         document.getElementsByClassName('camera')[0].classList.toggle('minimize');
-    }
-
-    window.onload = () => {
-        var video = document.getElementById("camvideo");
-
-        video.setAttribute("playsinline", "");
-        video.setAttribute("autoplay", "");
-        video.setAttribute("muted", "");
-
-        var constraints = {
-        audio: false,
-        video: true
-        };
-
-        navigator.mediaDevices.getUserMedia(constraints).then((dstream) => {
-        video.srcObject = dstream;
-        console.log(dstream);
-        });
     }
 
     return (
@@ -80,7 +119,24 @@ export default function Camera() {
                     <WindowBody>
                         <div className='Camera'>
                             <div className='CameraVideo'>
-                                <video id='camvideo'></video>
+                                <div className='CameraTimer'>
+                                    <Timer/>
+                                </div>
+                                {picture == '' ? (
+                                <Webcam
+                                    audio={false}
+                                    ref={webcamRef}
+                                    screenshotFormat="image/jpeg"
+                                    videoConstraints={videoConstraints}
+                                />
+                                ) : (
+                                <img src={picture} />
+                                )}
+                            </div>
+                            <div className='CameraInteraction'>
+                                <div className='CameraCapture' onClick={() => {setCaptureClick(!captureClick)}}>
+                                    <i className="fa-regular fa-camera"></i>
+                                </div>
                             </div>
                         </div>
                     </WindowBody>
