@@ -81,6 +81,8 @@ export default function Camera() {
             useEffect(() => {
                 if(timeLeft == 0){
                     document.getElementsByClassName('Desktop')[0].classList.add('capture');
+                    const imageSrc = webcamRef.current.getScreenshot();
+                    setImg(imageSrc);
                     disableInteraction('');
                     setTimeout(() => {
                         document.getElementsByClassName('Desktop')[0].classList.remove('capture');
@@ -107,7 +109,7 @@ export default function Camera() {
         }
 
         return (
-            <>
+            <div className='Camera blackscr'>
                 <div className='CameraVideo'>
                     <div className='CameraTimer'>
                         <Timer/>
@@ -124,11 +126,14 @@ export default function Camera() {
                     ) : ''}
                 </div>
                 <div className={`CameraInteraction ${interaction}`}>
-                    <div className='CameraCapture' onClick={capture}>
-                        <i className="fa-regular fa-camera"></i>
+                    <div className='CameraCapture' id='cameracapture' onClick={capture}>
+                        <i className="fa-light fa-camera"></i>
+                    </div>
+                    <div className='CameraCapturedImg'>
+                        {img != null ? <img src={img} alt="screenshot"/> : ''}
                     </div>
                 </div>
-            </>
+            </div>
         )
     }
 
@@ -153,9 +158,7 @@ export default function Camera() {
                         <TopBarInteraction action='close' onClose={close}/>
                     </TopBar>
                     <WindowBody>
-                        <div className='Camera'>
-                            <Camera/>
-                        </div>
+                        <Camera/>
                     </WindowBody>
                 </div> 
         </div>

@@ -71,7 +71,9 @@
                 position: absolute;
                 top: -45px;
                 font-size: 11px;
-                background:#262626;
+                background:#20202383;
+                backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(15px);
                 padding: 5px 10px;
                 border-radius: 30px;
                 opacity: 0;
