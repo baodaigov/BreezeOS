@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.js": "/BreezeOS/static/js/main.f1c90de5.js",
-    "static/css/950.b055b951.chunk.css": "/BreezeOS/static/css/950.b055b951.chunk.css",
-    "static/js/950.9b511d32.chunk.js": "/BreezeOS/static/js/950.9b511d32.chunk.js",
+    "main.js": "/BreezeOS/static/js/main.d112769e.js",
+    "static/css/950.8cf63402.chunk.css": "/BreezeOS/static/css/950.8cf63402.chunk.css",
+    "static/js/950.87e0d88a.chunk.js": "/BreezeOS/static/js/950.87e0d88a.chunk.js",
     "static/js/771.cdaad3f4.chunk.js": "/BreezeOS/static/js/771.cdaad3f4.chunk.js",
     "static/js/248.a1a409e8.chunk.js": "/BreezeOS/static/js/248.a1a409e8.chunk.js",
     "static/js/99.2a24ae29.chunk.js": "/BreezeOS/static/js/99.2a24ae29.chunk.js",
     "static/media/Windows-11-4k-Wallpaper-scaled.jpg": "/BreezeOS/static/media/Windows-11-4k-Wallpaper-scaled.557ec81467de22ddd91a.jpg",
     "index.html": "/BreezeOS/index.html",
-    "main.f1c90de5.js.map": "/BreezeOS/static/js/main.f1c90de5.js.map",
-    "950.b055b951.chunk.css.map": "/BreezeOS/static/css/950.b055b951.chunk.css.map",
-    "950.9b511d32.chunk.js.map": "/BreezeOS/static/js/950.9b511d32.chunk.js.map",
+    "main.d112769e.js.map": "/BreezeOS/static/js/main.d112769e.js.map",
+    "950.8cf63402.chunk.css.map": "/BreezeOS/static/css/950.8cf63402.chunk.css.map",
+    "950.87e0d88a.chunk.js.map": "/BreezeOS/static/js/950.87e0d88a.chunk.js.map",
     "771.cdaad3f4.chunk.js.map": "/BreezeOS/static/js/771.cdaad3f4.chunk.js.map",
     "248.a1a409e8.chunk.js.map": "/BreezeOS/static/js/248.a1a409e8.chunk.js.map",
     "99.2a24ae29.chunk.js.map": "/BreezeOS/static/js/99.2a24ae29.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.f1c90de5.js"
+    "static/js/main.d112769e.js"
   ]
 }
