@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../components/utils/window/Window.scss';
 import TopBar from '../../components/utils/window/TopBar';
 import WindowBody from '../../components/utils/window/WindowBody';
@@ -38,69 +38,101 @@ export const FirefoxStartApp = () => {
     )
 }
 
-export const SearchBar = () => {
-    const [isTyping, setTyping] = useState(false);
-
-    const isValidURL = (string) => {
-        var res = string.match(
-          /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
-        );
-        return res !== null;
-    };
-
-    const action = (e) => {
-        if (e.key === 'Enter') {
-            var qry = e.target.value;
-    
-            if (isValidURL(qry)) {
-              if (!qry.startsWith("http")) {
-                qry = "https://" + qry;
-              }
-            } else {
-              qry = "https://www.bing.com/search?q=" + encodeURIComponent(qry);
-            }
-    
-            e.target.value = qry;
-            setTyping(false);
-            setTimeout(() => {
-                document.getElementById('iFrameFF').src = qry;
-            }, 500);
-        }
-    }
-
-    const typing = (e) => {
-        if (!isTyping) {
-          setTyping(true);
-        }
-    };
-
-    return <input className='TabSearch' type='text' spellCheck='false' placeholder='Search with Google or enter address' onKeyDown={action} onChange={typing}/>
-}
-
 export default function Firefox() {
 
-    const FirefoxInteraction = () => {
+    const FirefoxWindow = () => {
+        const [url, setUrl] = useState('')
+        const [isTyping, setTyping] = useState(false);
 
+        useEffect(() => {
+
+            document.getElementById('firefox').onclick = () => {
+                setUrl('https://cyplucastero.github.io/khangteo1000.github.io')
+            }
+
+        }, []);
+        
+        const isValidURL = (string) => {
+            var res = string.match(
+              /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
+            );
+            return res !== null;
+        };
+    
+        const action = (e) => {
+            if (e.key === 'Enter') {
+                var qry = e.target.value;
+        
+                if (isValidURL(qry)) {
+                  if (!qry.startsWith("http")) {
+                    qry = "https://" + qry;
+                  }
+                } else {
+                  qry = "https://www.bing.com/search?q=" + encodeURIComponent(qry);
+                }
+        
+                e.target.value = qry;
+                setTyping(false);
+                setUrl(qry);
+            }
+        }
+    
+        const typing = (e) => {
+            if (!isTyping) {
+              setTyping(true);
+            }
+        };
+    
         function reload(){
             document.getElementById('iFrameFF').src = document.getElementById('iFrameFF').src;
         }
+    
+        function close(){
+            document.getElementsByClassName('firefox')[0].classList.remove('active');
+            document.getElementById('firefox').classList.remove('clicked');
+            setTimeout(() => {
+                setUrl('');
+            }, 300);
+        }
+    
+        function minimize(){
+            document.getElementsByClassName('firefox')[0].classList.toggle('minimize');
+        }
 
         return (
-            <div className='TabBarInteraction'>
-                <i className="fa-regular fa-chevron-left"></i>
-                <i className="fa-regular fa-chevron-right"></i>
-                <i className="fa-regular fa-rotate-right" onClick={reload}></i>
-            </div>
+            <>
+                <TopBar title='Firefox' onDblClick={minimize}>
+                    <div className='TabBarWrapper'>
+                        <div className='TabBar'>
+                            <div className='TabBarItem' style={{ justifyContent: 'space-between' }}>
+                                <p>New Tab</p>
+                                <div className='CloseButton' onClick={close}>
+                                    <i class="fa-regular fa-xmark"></i>
+                                </div>
+                            </div>
+                            <div className='TabBarItem' style={{ width: "1000px" }}>
+                                <div className='TabBarInteraction'>
+                                    <i className="fa-regular fa-chevron-left"></i>
+                                    <i className="fa-regular fa-chevron-right"></i>
+                                    <i className="fa-regular fa-rotate-right" onClick={reload}></i>
+                                </div>
+                                <input className='TabSearch' type='text' spellCheck='false' placeholder='Search with Google or enter address' onKeyDown={action} onChange={typing}/>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='TopBarInteractionWrapper' style={{ display: 'flex' }}>
+                        <TopBarInteraction action='hide'/>
+                        <TopBarInteraction action='minMax' onMinMax={minimize}/>
+                        <TopBarInteraction action='close' onClose={close}/>
+                    </div>
+                </TopBar>
+                <WindowBody>
+                    <div className='Firefox'>
+                        <iframe id='iFrameFF' className='iFrameFF' src={url} title='New Tab' frameBorder='0'/>
+                    </div>
+                </WindowBody>
+            </>
         )
-    }
-
-    function close(){
-        document.getElementsByClassName('firefox')[0].classList.remove('active');
-        document.getElementById('firefox').classList.remove('clicked');
-    }
-
-    function minimize(){
-        document.getElementsByClassName('firefox')[0].classList.toggle('minimize');
     }
 
     return (
@@ -109,32 +141,7 @@ export default function Firefox() {
                     className='Window firefox'
                     key={Math.random()}
                 >
-                    <TopBar title='Firefox' onDblClick={minimize}>
-                        <div className='TabBarWrapper'>
-                            <div className='TabBar'>
-                                <div className='TabBarItem' style={{ justifyContent: 'space-between' }}>
-                                    <p>New Tab</p>
-                                    <div className='CloseButton' onClick={close}>
-                                        <i class="fa-regular fa-xmark"></i>
-                                    </div>
-                                </div>
-                                <div className='TabBarItem' style={{ width: "100vw" }}>
-                                    <FirefoxInteraction/>
-                                    <SearchBar/>
-                                </div>
-                            </div>
-                        </div>
-                        <div className='TopBarInteractionWrapper' style={{ display: 'flex' }}>
-                            <TopBarInteraction action='hide'/>
-                            <TopBarInteraction action='minMax' onMinMax={minimize}/>
-                            <TopBarInteraction action='close' onClose={close}/>
-                        </div>
-                    </TopBar>
-                    <WindowBody>
-                        <div className='Firefox'>
-                            <iframe id='iFrameFF' className='iFrameFF' src='https://baodaigov.github.io/BreezeOS/start.html' title='New Tab' frameBorder='0'/>
-                        </div>
-                    </WindowBody>
+                    <FirefoxWindow/>
                 </div>
         </div>
     )

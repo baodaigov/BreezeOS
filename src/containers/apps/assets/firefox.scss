@@ -31,7 +31,6 @@
             margin: 0 10px;
     
             .TabBar {
-                width: 89.4vw;
                 display: flex;
     
                 .TabBarItem {
@@ -42,7 +41,7 @@
                     align-items: center;
                     font-size: 11px;
                     background-color: #ffffff0a;
-                    width: 180px;
+                    width: 150px;
                     margin-right: 5px;
     
                     * { margin: 0 }
@@ -110,13 +109,9 @@
         &.minimize {
             width: 1000px;
             height: 600px;
-    
-            .TabBarWrapper .TabBar {
-                width:57.4vw;
-                
-                .TabBarItem {
-                    width: 250px;
-                }
+
+            .TabBar .TabBarItem:last-child {
+                width: 650px!important;
             }
         }
     }
