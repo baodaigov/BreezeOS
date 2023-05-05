@@ -179,7 +179,7 @@ export default function Camera() {
                                 <i className={`fa-light ${item ? 'fa-camera' : 'fa-video'}`}></i>
                             </div>
                             {item ? (
-                                <div className={`CameraCapture ${recording ? 'isRecording' : ''}`} onClick={record}>
+                                <div className={`CameraCapture ${recording ? 'isRecording' : ''}`} onClick={recording ? stopRecord : record}>
                                     {recording ? <i className="fa-solid fa-square"></i>: <i className='fa-light fa-video'></i>}
                                 </div>
                             ) : (
