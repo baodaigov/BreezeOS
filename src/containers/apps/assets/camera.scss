@@ -162,7 +162,7 @@ $fgcolor: #e2e2e2;
 
                     * {
                         opacity: 1;
-			pointer-events: all;
+			            pointer-events: all;
                     }
                 }
             }
@@ -181,4 +181,38 @@ $fgcolor: #e2e2e2;
             }
         }
     }    
+}
+
+.lightMode {
+    .Camera {
+        background: $fgcolor;
+        .CameraVideo {
+            .CameraRecordTime {
+                background: $fgcolor;
+                color: $bgcolor;
+            }
+        }
+
+        .CameraInteraction {
+            background: $fgcolor;
+    
+            .CameraAct {
+                color: $bgcolor;
+            }
+            
+            .CameraCapture {
+                background-color: darken($fgcolor, 5%);
+                color: #000;
+    
+                &:active {
+                    background-color: darken($fgcolor, 25%);
+                }
+    
+                &.isRecording {
+                    background-color: darken($fgcolor, 5%);
+                    color: #ff4b4b;
+                }
+            }
+        }
+    }
 }

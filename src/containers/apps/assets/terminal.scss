@@ -32,26 +32,27 @@
 		}
 	
 		pre {
-		display: -webkit-box;
+			display: -webkit-box;
 
-		&#input input {
-			appearance: none;
-			-webkit-appearance: none;
-			border: none;
-			outline: none;
-			background-color: transparent;
-			margin-left: 5px;
-			width: 100%;
-		}
-	
-		@keyframes blink {
-		from, to {
-			background-color: transparent;
-		  }
-		50% {
-				background-color: #fff;
-		  }
-		}
+			&#input input {
+				appearance: none;
+				-webkit-appearance: none;
+				border: none;
+				outline: none;
+				background-color: transparent;
+				margin-left: 5px;
+				width: 100%;
+			}
 		}
 	}	
+}
+
+.lightMode {
+	.Terminal {
+		background: #fff;
+		
+		* {
+			color: #000;
+		}
+	}
 }

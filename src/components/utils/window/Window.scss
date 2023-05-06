@@ -3,6 +3,8 @@ $fgcolor: #e2e2e2;
 
 .Window {
     position: absolute;
+    display: flex;
+    flex-direction: column;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
@@ -50,15 +52,15 @@ $fgcolor: #e2e2e2;
             margin: 0;
             width: 100%;
         }
-    }
-
-    .WindowBody {
-      height: calc(100vh - 145px);
-      & > * {
-        border-bottom-left-radius: 5px;
-        border-bottom-right-radius: 5px;
       }
-    }
+
+      .WindowBody {
+        height: calc(100vh - 145px);
+        & > * {
+          border-bottom-left-radius: 5px;
+          border-bottom-right-radius: 5px;
+        }
+      }
 
 
       .WindowBodyDefault {
@@ -133,5 +135,38 @@ $fgcolor: #e2e2e2;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
+  }
+}
+
+.lightMode {
+  .TopBar {
+    background: $fgcolor;
+    .TopBarInteractionContainer .TopBarInteraction {
+      color: $bgcolor;
+      &:hover {
+        background: #c9c9d3;
+      }
+    }
+    .TopBarTitle {
+      color: $bgcolor;
+    }
+  }
+
+  .WindowBodyDefault {
+    background: $fgcolor;
+    color: $bgcolor;
+    
+    .critical {
+      color: #212121;
+    }
+
+    .WindowBodyButton .Button {
+      background-color: #00000010;
+      color: $bgcolor;
+
+      &:hover {
+        background-color: #00000020;
+      }
+    }
   }
 }

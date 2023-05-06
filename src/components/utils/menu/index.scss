@@ -1,0 +1,38 @@
+$bgcolor: #202023da;
+$fgcolor: #e2e2e2;
+
+.ActMenu {
+    background: $bgcolor;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    padding: 5px;
+    border-radius: 7px;
+    position: absolute;
+    .ActMenuSelector {
+        padding: 5px 8px;
+        border-radius: 7px;
+        background: transparent;
+        color: $fgcolor;
+        font-size: 13px;
+
+        * {margin: 0;}
+
+        &:hover {
+            background: #ffffff12;
+        }
+    }
+}
+
+.lightMode {
+    .ActMenu {
+        background: $fgcolor;
+
+        .ActMenuSelector {
+            color: $bgcolor;
+
+            &:hover {
+                background: #00000012;
+            }
+        }
+    }
+}

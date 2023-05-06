@@ -105,36 +105,33 @@ $fbgcolor: #83aaff;
 }
 
 .lightMode {
-    $bgcolor: #fff;
-    $fgcolor: #222222;
-    
     .Panel {
-        background: $bgcolor;
-        color: $fgcolor;
+        background: $fgcolor;
+        color: $bgcolor;
 
         .PanelItem {
             &:hover {
-                background: darken($bgcolor,5%);
+                background: darken($fgcolor,5%);
             }
         }
 
         .PanelRangeContainer {
             .PanelRangeTitle {
-                color: $fgcolor;
+                color: $bgcolor;
             }
         }
 
         .PanelBottom {
             .PanelItemLarge{
-                background: darken($bgcolor,5%);
+                background: darken($fgcolor,5%);
 
                 &:hover {
-                    background: darken($bgcolor,12%);
+                    background: darken($fgcolor,12%);
                 }
 
                 &.focused{
                     background: $fbgcolor;
-                    color:$fgcolor;
+                    color:$bgcolor;
 
                     &:hover {
                         background: lighten($fbgcolor,5%)

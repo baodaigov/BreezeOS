@@ -127,3 +127,32 @@
         }
     }    
 }
+
+.lightMode {
+    .firefox {
+        .TabBarWrapper .TabBar .TabBarItem {
+            background-color: #0000000a;
+            color: #000;
+    
+            &:hover {
+                .CloseButton {
+                    &:hover {
+                        background-color: #00000010;
+                    }
+                }
+            }
+
+            .TabBarInteraction i:hover {
+                background-color: #0000001e;
+            }
+
+            .TabSearch {
+                color: #000;
+
+                &::placeholder {
+                    color: #00000036;
+                }
+            }
+        }
+    }
+}

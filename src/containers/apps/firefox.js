@@ -41,8 +41,8 @@ export const FirefoxStartApp = () => {
 export default function Firefox() {
 
     const FirefoxWindow = () => {
-        const [url, setUrl] = useState('')
-        const [isTyping, setTyping] = useState(false);
+        const [url, setUrl] = useState('');
+        const [hist, setHist] = useState(["https://cyplucastero.github.io/khangteo1000.github.io", "https://cyplucastero.github.io/khangteo1000.github.io"]);
 
         useEffect(() => {
 
@@ -72,16 +72,20 @@ export default function Firefox() {
                 }
         
                 e.target.value = qry;
-                setTyping(false);
+                setHist([hist[0], qry]);
                 setUrl(qry);
             }
         }
-    
-        const typing = (e) => {
-            if (!isTyping) {
-              setTyping(true);
-            }
-        };
+
+        const back = (e) => {
+            setUrl(hist[0]);
+            e.target.value = url;
+        }
+
+        const forward = (e) => {
+            setUrl(hist[1]);
+            e.target.value = url;
+        }
     
         function reload(){
             document.getElementById('iFrameFF').src = document.getElementById('iFrameFF').src;
@@ -92,6 +96,7 @@ export default function Firefox() {
             document.getElementById('firefox').classList.remove('clicked');
             setTimeout(() => {
                 setUrl('');
+                document.getElementById('ffsearch').value = '';
             }, 300);
         }
     
@@ -112,11 +117,11 @@ export default function Firefox() {
                             </div>
                             <div className='TabBarItem' style={{ width: "1000px" }}>
                                 <div className='TabBarInteraction'>
-                                    <i className="fa-regular fa-chevron-left"></i>
-                                    <i className="fa-regular fa-chevron-right"></i>
+                                    <i className="fa-regular fa-chevron-left" onClick={back}></i>
+                                    <i className="fa-regular fa-chevron-right" onClick={forward}></i>
                                     <i className="fa-regular fa-rotate-right" onClick={reload}></i>
                                 </div>
-                                <input className='TabSearch' type='text' spellCheck='false' placeholder='Search with Google or enter address' onKeyDown={action} onChange={typing}/>
+                                <input className='TabSearch' id='ffsearch' type='text' spellCheck='false' placeholder='Search with Google or enter address' onKeyDown={action}/>
                             </div>
                         </div>
                     </div>

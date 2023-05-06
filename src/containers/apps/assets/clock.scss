@@ -144,3 +144,30 @@ $fgcolor: #e2e2e2;
         }
     }    
 }
+
+.lightMode {
+    .Clock {
+        background: $fgcolor;
+        color: $bgcolor;
+
+        .ClockItems .world-clock .ClockItem {
+            &:hover {
+                background: transparentize($bgcolor, 0.82);
+            }
+
+            .ClockInfo {
+                .ClockTitle {
+                    color: $bgcolor;
+                }
+    
+                .ClockDesc {
+                    color: transparentize($bgcolor, 0.6);
+                }
+            }
+        }
+
+        .ClockMenu .ClockMenuInside {
+            background-color: darken($fgcolor,3.5%);
+        }
+    }
+}

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import './Clock.scss';
 import Draggable from 'react-draggable';
+import ActMenu, { ActMenuSelector } from "../menu";
 
 export default class Clock extends Component {
   constructor(props) {
@@ -30,6 +31,10 @@ export default class Clock extends Component {
     return (
       <Draggable>
         <div className="ClockWidget active">
+          {/* <ActMenu style={{ zIndex: '1', top: '120px', left: '-30px' }}>
+            <ActMenuSelector title='Change style'></ActMenuSelector>
+            <ActMenuSelector title='Display seconds'></ActMenuSelector>
+          </ActMenu> */}
           <div className="Close" onClick={this.close}>
             <i class="fa-solid fa-xmark"></i>
           </div>
