@@ -172,7 +172,7 @@ export default function Camera() {
                                     imageSmoothing={true}
                                     mirrored={true}
                                 />
-                            ) : ''}
+                            ) : <i className="fa-regular fa-camera-slash disableWebcam"></i>}
                         </div>
                         <div className={`CameraInteraction ${interaction}`}>
                             <div className='CameraAct' onClick={() => swapItem(!item)}>

@@ -44,6 +44,11 @@ $fgcolor: #e2e2e2;
             justify-content: center;
             align-items: center;
 
+            .disableWebcam {
+                font-size: 100px;
+                color: transparentize($fgcolor, 0.95);
+            }
+
             .CameraRecordTime {
                 position: absolute;
                 z-index: 1;
@@ -187,6 +192,9 @@ $fgcolor: #e2e2e2;
     .Camera {
         background: $fgcolor;
         .CameraVideo {
+            .disableWebcam {
+                color: transparentize($bgcolor, 0.75);
+            }
             .CameraRecordTime {
                 background: $fgcolor;
                 color: $bgcolor;

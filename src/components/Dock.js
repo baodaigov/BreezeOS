@@ -5,22 +5,14 @@ import { TerminalApp } from '../containers/apps/terminal';
 import { FirefoxApp } from '../containers/apps/firefox';
 import { ClockApp } from '../containers/apps/clock';
 import { CameraApp } from '../containers/apps/camera';
+import { FilesApp } from '../containers/apps/files';
+import { CalculatorApp } from '../containers/apps/calculator';
 
 const items = [
     {
         "name": "Calendar",
         "icon": "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/calendar.svg",
         "id": "calendar"
-    },
-    {
-        "name": "Files",
-        "icon": "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/file-roller.svg",
-        "id": "files"
-    },
-    {
-        "name": "Calculator",
-        "icon": "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/accessories-calculator.svg",
-        "id": "calculator"
     },
     {
         "name": "Text Editor",
@@ -52,6 +44,8 @@ const Dock = () => {
         <FirefoxApp/>
         <ClockApp/>
         <CameraApp/>
+        <FilesApp/>
+        <CalculatorApp/>
 	        {items.map(item =>
                 <DockItem id={item.id} class={`${isActive ? "" : "clicked"}`} title={item.name} icon={item.icon} onClick={toggle}/>
             )}

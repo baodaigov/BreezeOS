@@ -115,7 +115,7 @@ export default function Firefox() {
                                     <i class="fa-regular fa-xmark"></i>
                                 </div>
                             </div>
-                            <div className='TabBarItem' style={{ width: "1000px" }}>
+                            <div className='TabBarItem' style={{ width: "800px" }}>
                                 <div className='TabBarInteraction'>
                                     <i className="fa-regular fa-chevron-left" onClick={back}></i>
                                     <i className="fa-regular fa-chevron-right" onClick={forward}></i>
@@ -133,7 +133,7 @@ export default function Firefox() {
                 </TopBar>
                 <WindowBody>
                     <div className='Firefox'>
-                        <iframe id='iFrameFF' className='iFrameFF' src={url} title='New Tab' frameBorder='0'/>
+                        <iframe id='iFrameFF' className='iFrameFF' src={url} title='New Tab' frameBorder='0' allowFullScreen={true}/>
                     </div>
                 </WindowBody>
             </>

@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { useBattery } from 'react-use';
 import '../../components/utils/window/Window.scss';
 import TopBar from '../../components/utils/window/TopBar';
 import WindowBodyDefault from '../../components/utils/window/WindowBodyDefault';
@@ -10,10 +9,6 @@ import './assets/index.scss';
 
 export default function MissingPermissionCamera() {
 
-  const batteryState = useBattery();
-
-  let batteryPercent = Math.round(batteryState.level * 100);
-
   function close(){
     document.getElementsByClassName('MissingPermissionCamera')[0].classList.remove('active');
   }
@@ -22,7 +17,7 @@ export default function MissingPermissionCamera() {
         <div>
             <Draggable positionOffset={{ x: '-50%', y: '-50%' }}>
                 <div
-                    className={`Window MissingPermissionCamera ${batteryPercent == 5 ? 'active' ? batteryState.charging ? '' : 'active' : '' : ''}`}
+                    className={'Window MissingPermissionCamera'}
                     key={Math.random()}
                 >
                     <TopBar>
