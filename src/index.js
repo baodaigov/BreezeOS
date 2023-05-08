@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Ui from './Ui';
+import Desktop from './Desktop';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Ui/>
+    <Desktop/>
   </React.StrictMode>
 );

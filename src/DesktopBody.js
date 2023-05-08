@@ -1,4 +1,3 @@
-import React, { lazy } from 'react';
 import Wallpaper from './components/Wallpaper'
 import './Desktop.scss';
 import Clock from './components/utils/widget/Clock';

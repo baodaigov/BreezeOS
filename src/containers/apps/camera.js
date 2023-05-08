@@ -7,6 +7,7 @@ import './assets/camera.scss';
 import TopBarInteraction from '../../components/utils/window/TopBarInteraction';
 import StartApp from '../../components/startMenu/StartApp';
 import Webcam from 'react-webcam';
+import ActMenu, { ActMenuSelector } from "../../components/utils/menu/index";
 
 export const CameraApp = () => {
     const toggle = () => {
@@ -44,13 +45,15 @@ export default function Camera() {
         const [webcam, setWebcam] = useState(false);
         const [interaction, disableInteraction] = useState('capturing');
         const [img, setImg] = useState(null);
+        const [audio, setAudio] = useState(false);
+        var countdownSound = new Audio('https://raw.githubusercontent.com/baodaigov/BreezeOS/master/src/sounds/mixkit-clock-countdown-bleeps-916_Bq9La32i.wav');
+        var cameraShutter = new Audio('https://raw.githubusercontent.com/baodaigov/BreezeOS/master/src/sounds/camera_shutter.mp3');
 
         useEffect(() => {
 
             document.getElementById('camera').onclick = () => {
                 setTimeout(() => {
-                    setWebcam(!webcam);
-                    console.log(webcam);
+                    setWebcam(!webcam); 
                     disableInteraction('');
                 }, 1000);
             }
@@ -60,44 +63,94 @@ export default function Camera() {
         const videoConstraints = {
             facingMode: 'user'
         }
-
-        const webcamRef = useRef(null);
-        
-        const capture = useCallback(() => {
-            disableInteraction('capturing');
-            setTimeLeft(3);
-            setTimeout(() => {
-                document.getElementsByClassName('Desktop')[0].classList.add('capture');
-                const imageSrc = webcamRef.current.getScreenshot();
-                setImg(imageSrc);
-                disableInteraction('');
-                setTimeout(() => {
-                    document.getElementsByClassName('Desktop')[0].classList.remove('capture');
-                }, 1000);
-            }, 3000)
-        }, [webcamRef]);
         
         const [item, swapItem] = useState(false);
 
         const [timeLeft, setTimeLeft] = useState(null);
     
         useEffect(() => {
-            if(timeLeft == 0) setTimeLeft(null);
+            if(audio){
+                countdownSound.play();
 
-            if (!timeLeft) return;
-
-            const intervalId = setInterval(() => {
-              setTimeLeft(timeLeft - 1);
-            }, 1000);
-        
-            return () => clearInterval(intervalId);
-        }, [timeLeft])
+                if(timeLeft < 1) {
+                    setTimeLeft(null);
+                    countdownSound.pause();
+                }
+    
+                if (!timeLeft) return;
+    
+                const intervalId = setInterval(() => {
+                    countdownSound.play();
+                    setTimeLeft(timeLeft - 1);
+                }, 1000);
+            
+                return () => clearInterval(intervalId);
+            } else {
+                if(timeLeft < 1) setTimeLeft(null);
+    
+                if (!timeLeft) return;
+    
+                const intervalId = setInterval(() => {
+                    setTimeLeft(timeLeft - 1);
+                }, 1000);
+            
+                return () => clearInterval(intervalId);
+            }
+        }, [timeLeft, audio])
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         
         const [time, setTime] = useState(0);
         const [running, setRunning] = useState(false);
-        const [recording, isRecording] = useState(false);
+        const [settingsMenu, showSettingsMenu] = useState(false);
+        const [countdown, setCountdown] = useState(false);
+        const webcamRef = useRef(null);
+
+        const capture = useCallback(() => {
+            if(countdown){
+                if(audio){
+                    disableInteraction('capturing');
+                    setTimeLeft(3);
+                    setTimeout(() => {
+                        document.getElementsByClassName('Desktop')[0].classList.add('capture');
+                        cameraShutter.play();
+                        const imageSrc = webcamRef.current.getScreenshot();
+                        setImg(imageSrc);
+                        disableInteraction('');
+                        setTimeout(() => {
+                            document.getElementsByClassName('Desktop')[0].classList.remove('capture');
+                        }, 1000);
+                    }, 3000);
+                } else {
+                    disableInteraction('capturing');
+                    setTimeLeft(3);
+                    setTimeout(() => {
+                        document.getElementsByClassName('Desktop')[0].classList.add('capture');
+                        const imageSrc = webcamRef.current.getScreenshot();
+                        setImg(imageSrc);
+                        disableInteraction('');
+                        setTimeout(() => {
+                            document.getElementsByClassName('Desktop')[0].classList.remove('capture');
+                        }, 1000);
+                    }, 3000);
+                }
+            } else if(audio){
+                document.getElementsByClassName('Desktop')[0].classList.add('capture');
+                cameraShutter.play();
+                setTimeout(() => {
+                    document.getElementsByClassName('Desktop')[0].classList.remove('capture');
+                }, 1000);
+                const imageSrc = webcamRef.current.getScreenshot();
+                setImg(imageSrc);
+            } else {
+                document.getElementsByClassName('Desktop')[0].classList.add('capture');
+                setTimeout(() => {
+                    document.getElementsByClassName('Desktop')[0].classList.remove('capture');
+                }, 1000);
+                const imageSrc = webcamRef.current.getScreenshot();
+                setImg(imageSrc);
+            }
+        }, [webcamRef, countdown, audio]);
         
         useEffect(() => {
             let interval;
@@ -112,22 +165,73 @@ export default function Camera() {
             return () => clearInterval(interval);
         }, [running]);
 
+        const [recording, isRecording] = useState(false);
+        const mediaRecorderRef = useRef(null);
+        const [capturing, setCapturing] = useState(false);
+        const [recordedChunks, setRecordedChunks] = useState([]);
+
+        const handleDataAvailable = useCallback(
+            ({ data }) => {
+                if (data.size > 0) {
+                setRecordedChunks((prev) => prev.concat(data));
+                }
+            },
+            [setRecordedChunks]
+        );
+      
         const record = useCallback(() => {
-            disableInteraction('capturing');
-            setTimeLeft(3);
-            setTimeout(() => {
+            if(countdown){
+                disableInteraction('capturing');
+                setTimeLeft(3);
+                setTimeout(() => {
+                    // setCapturing(true);
+                    // mediaRecorderRef.current = new MediaRecorder(webcamRef.current.stream, {
+                    //     mimeType: "video/webm",
+                    // });
+                    // mediaRecorderRef.current.addEventListener(
+                    //     "dataavailable",
+                    //     handleDataAvailable
+                    // );
+                    // mediaRecorderRef.current.start();
+                    document.getElementsByClassName('CameraRecordTime')[0].classList.add('active');
+                    isRecording(true);
+                    setRunning(true)
+                }, 3000);
+            } else {
+                disableInteraction('capturing');
+                // setCapturing(true);
+                // mediaRecorderRef.current = new MediaRecorder(webcamRef.current.stream, {
+                //     mimeType: "video/webm",
+                // });
+                // mediaRecorderRef.current.addEventListener(
+                //     "dataavailable",
+                //     handleDataAvailable
+                // );
+                // mediaRecorderRef.current.start();
                 document.getElementsByClassName('CameraRecordTime')[0].classList.add('active');
                 isRecording(true);
                 setRunning(true)
-            }, 3000)
-        }, [webcamRef]);
-
-        const stopRecord = () => {
+            }
+        }, [webcamRef, setCapturing, mediaRecorderRef, handleDataAvailable, countdown]);
+      
+        const stopRecord = useCallback(() => {
+            // mediaRecorderRef.current.stop();
+            // setCapturing(false);
             disableInteraction('');
             document.getElementsByClassName('CameraRecordTime')[0].classList.remove('active');
             isRecording(false);
             setRunning(false);
-        };
+        }, [mediaRecorderRef, setCapturing]);
+
+        function displayCountdown(){
+            showSettingsMenu(!settingsMenu);
+            setCountdown(!countdown);
+        }
+
+        function toggleSounds(){
+            showSettingsMenu(!settingsMenu);
+            setAudio(!audio);
+        }
 
         function close(){
             document.getElementsByClassName('camera')[0].classList.remove('active');
@@ -135,7 +239,10 @@ export default function Camera() {
             setTimeout(() => {
                 setWebcam(!webcam);
                 disableInteraction('capturing');
-                stopRecord();
+                document.getElementsByClassName('CameraRecordTime')[0].classList.remove('active');
+                isRecording(false);
+                setRunning(false);
+                showSettingsMenu(false);
             }, 300);
         }
     
@@ -145,7 +252,20 @@ export default function Camera() {
         
         return (
             <>
+                <ActMenu style={{ zIndex: '1', top: '30px', right: '100px' }} className={settingsMenu ? 'active' : ''}>
+                    {countdown ? <ActMenuSelector title='Camera countdown' active onClick={displayCountdown}></ActMenuSelector> : <ActMenuSelector title='Camera countdown' onClick={displayCountdown}></ActMenuSelector>}
+                    {audio ? <ActMenuSelector title='Enable sounds' active onClick={toggleSounds}></ActMenuSelector> : <ActMenuSelector title='Enable sounds' onClick={toggleSounds}></ActMenuSelector>}
+                </ActMenu>
                 <TopBar title='Camera' onDblClick={minimize}>
+                    <div className='TabBarWrapper' style={{ width: '100%' }}>
+                        <div className='TabBar' style={{ display: 'block' }}>
+                            <div className='TabBarItem' style={{ float: 'right' }}>
+                                <div className='TabBarInteraction'>
+                                    <i className="fa-regular fa-gear" onClick={() => showSettingsMenu(!settingsMenu)}></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <TopBarInteraction action='hide'/>
                     <TopBarInteraction action='minMax' onMinMax={minimize}/>
                     <TopBarInteraction action='close' onClose={close}/>

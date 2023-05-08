@@ -5,6 +5,16 @@ $fgcolor: #e2e2e2;
     * {
         transition: all ease .3s;
     }
+    .Window .TopBar {
+        padding: 4px 8px;
+        .TopBarInteractionContainer {
+            display: flex;
+            width: 100vw;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .TopBarTitle {width: auto;}
+    }
 
     .camera {
         width: 93vw;
@@ -18,6 +28,54 @@ $fgcolor: #e2e2e2;
             pointer-events: all;
             width: 100vw;
             height: 100%;
+        }
+        
+        .TabBarWrapper {
+            margin: 0 10px;
+            margin-right: 0;
+    
+            .TabBar {
+                display: flex;
+    
+                .TabBarItem {
+                    padding: 4px 9px;
+                    color: #fff;
+                    display: flex;
+                    align-items: center;
+                    font-size: 11px;
+                    margin-right: 5px;
+    
+                    * { margin: 0 }
+                    
+                    .TabSeparator {
+                        background-color: #ffffff1e;
+                        width: 1px;
+                    }
+
+                    .TabBarInteraction {
+                        display: flex;
+
+                        i {
+                            margin-right: 3px;
+                            font-size: 12px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            border-radius: 999px;
+                            height: 20px;
+                            width: 20px;
+
+                            &:hover {
+                                background-color: #ffffff1e;
+                            }
+
+                            &:last-child {
+                                margin: 0;
+                            }
+                        }
+                    }
+                }
+            }
         }
         
         &.minimize {
@@ -52,9 +110,8 @@ $fgcolor: #e2e2e2;
             .CameraRecordTime {
                 position: absolute;
                 z-index: 1;
-                top: 0;
+                top: 20px;
                 background-color: $bgcolor;
-                margin: 40px 0;
                 padding: 7px 12px;
                 border-radius: 999px;
                 color: $fgcolor;
@@ -189,6 +246,30 @@ $fgcolor: #e2e2e2;
 }
 
 .lightMode {
+    .camera {
+        .TabBarWrapper .TabBar {
+            .TabBarItem {
+                color: #000;
+                        
+                .TabSeparator {
+                    background-color: #0000001e;
+                }
+        
+                &:hover {
+                    .CloseButton {
+                        &:hover {
+                            background-color: #00000010;
+                        }
+                    }
+                }
+
+                .TabBarInteraction i:hover {
+                    background-color: #0000001e;
+                }
+            }
+        }
+    }
+
     .Camera {
         background: $fgcolor;
         .CameraVideo {

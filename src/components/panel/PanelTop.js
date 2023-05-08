@@ -1,9 +1,7 @@
-import React, { Component, lazy } from 'react';
-import ReactDOM, { render } from 'react-dom';
+import React, { Component } from 'react';
 import './Panel.scss';
 import Battery from './Battery';
 import PanelItem from './PanelItem';
-const Menu = lazy(() => import('../menu/Menu'));
 
 class PanelTop extends Component {
 	showShutdownMenu(){

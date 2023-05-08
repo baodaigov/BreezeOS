@@ -2,11 +2,8 @@ import React, { useRef, useEffect } from "react";
 import PowerMenuInteraction from './PowerMenuInteraction';
 import './PowerMenu.scss';
 
-function useOutsideAlerter(ref) {
+function useOutside(ref) {
   useEffect(() => {
-    /**
-     * Alert if clicked on outside of element
-     */
     function handleClickOutside(event) {
       if (ref.current && !ref.current.contains(event.target)) {
         document.getElementsByClassName('Menu')[0].classList.remove('active');
@@ -24,7 +21,7 @@ function useOutsideAlerter(ref) {
 
 export default function PowerMenu(){
     const powerRef = useRef(null);
-    useOutsideAlerter(powerRef);
+    useOutside(powerRef);
     return (
         <div className='PowerMenu' ref={powerRef}>
             <PowerMenuInteraction type='sleep' key={Math.random()}/>
