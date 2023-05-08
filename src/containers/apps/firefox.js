@@ -115,14 +115,16 @@ export default function Firefox() {
                                     <i class="fa-regular fa-xmark"></i>
                                 </div>
                             </div>
-                            <div className='TabBarItem' style={{ width: "800px" }}>
-                                <div className='TabBarInteraction'>
-                                    <i className="fa-regular fa-chevron-left" onClick={back}></i>
-                                    <i className="fa-regular fa-chevron-right" onClick={forward}></i>
-                                    <i className="fa-regular fa-rotate-right" onClick={reload}></i>
-                                </div>
-                                <input className='TabSearch' id='ffsearch' type='text' spellCheck='false' placeholder='Search with Google or enter address' onKeyDown={action}/>
+                        </div>
+                    </div>
+                    <div className='TabBar'>
+                        <div className='TabBarItem TabSearchItem' style={{ width: '800px' }}>
+                            <div className='TabBarInteraction'>
+                                <i className="fa-regular fa-chevron-left" onClick={back}></i>
+                                <i className="fa-regular fa-chevron-right" onClick={forward}></i>
+                                <i className="fa-regular fa-rotate-right" onClick={reload}></i>
                             </div>
+                            <input className='TabSearch' id='ffsearch' type='text' spellCheck='false' placeholder='Search with Google or enter address' onKeyDown={action}/>
                         </div>
                     </div>
                     <div className='TopBarInteractionWrapper' style={{ display: 'flex' }}>

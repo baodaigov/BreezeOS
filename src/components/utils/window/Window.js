@@ -6,6 +6,7 @@ import Clock from '../../../containers/apps/clock';
 import Camera from '../../../containers/apps/camera';
 import Files from '../../../containers/apps/files';
 import Calculator from '../../../containers/apps/calculator';
+import TextEditor from '../../../containers/apps/texteditor';
 
 export default function Window(){
   return (
@@ -15,6 +16,7 @@ export default function Window(){
       <Camera/>
       <Files/>
       <Calculator/>
+      <TextEditor/>
       <Terminal/>
     </div>
   )

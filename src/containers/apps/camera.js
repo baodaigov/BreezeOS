@@ -245,14 +245,14 @@ export default function Camera() {
                 showSettingsMenu(false);
             }, 300);
         }
-    
+
         function minimize(){
             document.getElementsByClassName('camera')[0].classList.toggle('minimize');
         }
         
         return (
             <>
-                <ActMenu style={{ zIndex: '1', top: '30px', right: '100px' }} className={settingsMenu ? 'active' : ''}>
+                <ActMenu style={{ zIndex: '1', top: '30px', right: '80px' }} className={settingsMenu ? 'active' : ''}>
                     {countdown ? <ActMenuSelector title='Camera countdown' active onClick={displayCountdown}></ActMenuSelector> : <ActMenuSelector title='Camera countdown' onClick={displayCountdown}></ActMenuSelector>}
                     {audio ? <ActMenuSelector title='Enable sounds' active onClick={toggleSounds}></ActMenuSelector> : <ActMenuSelector title='Enable sounds' onClick={toggleSounds}></ActMenuSelector>}
                 </ActMenu>
@@ -292,23 +292,27 @@ export default function Camera() {
                                     imageSmoothing={true}
                                     mirrored={true}
                                 />
-                            ) : <i className="fa-regular fa-camera-slash disableWebcam"></i>}
-                        </div>
-                        <div className={`CameraInteraction ${interaction}`}>
-                            <div className='CameraAct' onClick={() => swapItem(!item)}>
-                                <i className={`fa-light ${item ? 'fa-camera' : 'fa-video'}`}></i>
-                            </div>
-                            {item ? (
-                                <div className={`CameraCapture ${recording ? 'isRecording' : ''}`} onClick={recording ? stopRecord : record}>
-                                    {recording ? <i className="fa-solid fa-square"></i>: <i className='fa-light fa-video'></i>}
-                                </div>
                             ) : (
-                                <div className='CameraCapture' onClick={capture}>
-                                    <i className='fa-light fa-camera'></i>
+                                <div className='WebcamDisabled'>
+                                    <i className="fa-regular fa-camera-slash disableWebcam"></i>
                                 </div>
                             )}
-                            <div className='CameraCapturedImg'>
-                                {img != null ? <img src={img} alt="screenshot"/> : ''}
+                            <div className={`CameraInteraction ${interaction}`}>
+                                <div className='CameraAct' onClick={() => swapItem(!item)}>
+                                    <i className={`fa-light ${item ? 'fa-camera' : 'fa-video'}`}></i>
+                                </div>
+                                {item ? (
+                                    <div className={`CameraCapture ${recording ? 'isRecording' : ''}`} onClick={recording ? stopRecord : record}>
+                                        {recording ? <i className="fa-solid fa-square"></i>: <i className='fa-light fa-video'></i>}
+                                    </div>
+                                ) : (
+                                    <div className='CameraCapture' onClick={capture}>
+                                        <i className='fa-light fa-camera'></i>
+                                    </div>
+                                )}
+                                <div className='CameraCapturedImg'>
+                                    {img != null ? <img src={img} alt="screenshot"/> : ''}
+                                </div>
                             </div>
                         </div>
                     </div>

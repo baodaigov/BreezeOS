@@ -71,7 +71,7 @@ export default function Files() {
             },
             {
                 icons: 'download',
-                title: 'Download',
+                title: 'Downloads',
                 clickEvent: download
             },
             {

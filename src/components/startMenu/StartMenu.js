@@ -8,17 +8,13 @@ import { ClockStartApp } from '../../containers/apps/clock';
 import { CameraStartApp } from '../../containers/apps/camera';
 import { FilesStartApp } from '../../containers/apps/files';
 import { CalculatorStartApp } from '../../containers/apps/calculator';
+import { TextEditorStartApp } from '../../containers/apps/texteditor';
 
 const items = [
     {
         "name": "Calendar",
         "icon": "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/calendar.svg",
         "id": "calendar"
-    },
-    {
-        "name": "Text Editor",
-        "icon": "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/accessories-text-editor.svg",
-        "id": "texteditor"
     },
     {
         "name": "Software Store",
@@ -85,6 +81,7 @@ export default function StartMenu(){
                         <CameraStartApp/>
                         <FilesStartApp/>
                         <CalculatorStartApp/>
+                        <TextEditorStartApp/>
                         {items.map(i => <StartApp key={i.id} icon={i.icon} name={i.name} onClick={openApp}/>)}
                         <TerminalStartApp/>
                     </div>

@@ -1,0 +1,160 @@
+$bgcolor: #202023da;
+$fgcolor: #e2e2e2;
+
+.TextEditorWindow {
+    * {
+        transition: all ease .3s;
+    }
+    .Window .TopBar {
+        padding: 4px 8px;
+        .TopBarInteractionContainer {
+            display: flex;
+            width: 100vw;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .TopBarTitle {width: 130px;}
+    }
+
+    .texteditor {
+        width: 93vw;
+        height: 93%;
+        opacity: 0;
+        pointer-events: none;
+        transition: all ease .3s;
+
+        &.active {
+            opacity: 1;
+            pointer-events: all;
+            width: 100vw;
+            height: 100%;
+        }
+        
+        &.minimize {
+            width: 1000px;
+            height: 600px;
+
+            .TopBarTitle {width: 200px;}
+        }
+    
+        .TabBarWrapper {
+            margin: 0 10px;
+            margin-right: 0;
+    
+            .TabBar {
+                display: flex;
+    
+                .TabBarItem {
+                    padding: 4px 9px;
+                    color: #fff;
+                    display: flex;
+                    align-items: center;
+                    font-size: 11px;
+                    margin-right: 5px;
+    
+                    * { margin: 0 }
+                    
+                    .TabSeparator {
+                        background-color: #ffffff1e;
+                        width: 1px;
+                    }
+
+                    .TabBarInteraction {
+                        display: flex;
+
+                        i {
+                            margin-right: 3px;
+                            font-size: 12px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            border-radius: 999px;
+                            height: 20px;
+                            width: 20px;
+
+                            &:hover {
+                                background-color: #ffffff1e;
+                            }
+
+                            &:last-child {
+                                margin: 0;
+                            }
+                        }
+                    }
+                }
+
+                .TabBarOpenFile {
+                    display: flex;
+                    justify-content: space-between;
+                    background-color: #ffffff0a;
+                    border-radius: 5px;
+                    transition: none;
+
+                    i {
+                        margin-left: 5px;
+                    }
+                }
+            }
+        }
+    }
+    
+    .TextEditor {
+        background: $bgcolor;
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        height: 100%;
+        color: $fgcolor;
+
+        * {
+            margin: 0;
+        }
+
+        .TextareaEditor {
+            appearance: none;
+            padding: 10px 15px;
+            width: 100%;
+            height: 100%;
+            border: none;
+            outline: none;
+            background: transparent;
+            color: inherit;
+            font-size: 15px;
+            overflow-y: auto;
+            transition: none;
+        }
+    }    
+}
+
+.lightMode {
+    .texteditor {
+        .TabBarWrapper .TabBar {
+            .TabBarItem {
+                color: #000;
+                        
+                .TabSeparator {
+                    background-color: #0000001e;
+                }
+        
+                &:hover {
+                    .CloseButton {
+                        &:hover {
+                            background-color: #00000010;
+                        }
+                    }
+                }
+
+                .TabBarInteraction i:hover {
+                    background-color: #0000001e;
+                }
+            }
+            .TabBarOpenFile {
+                background-color: #0000000a;
+            }
+        }
+    }
+    
+    .TextEditor {
+        background: $fgcolor;
+        color: $bgcolor;
+    }
+}

@@ -17,7 +17,7 @@ $fgcolor: #e2e2e2;
     }
 
     .camera {
-        width: 93vw;
+        width: 60vw;
         height: 93%;
         opacity: 0;
         pointer-events: none;
@@ -26,8 +26,13 @@ $fgcolor: #e2e2e2;
         &.active {
             opacity: 1;
             pointer-events: all;
-            width: 100vw;
+            width: 80vw;
             height: 100%;
+        }
+
+        &.minimize {
+            width: 60vw;
+            height: 90%;
         }
         
         .TabBarWrapper {
@@ -77,11 +82,6 @@ $fgcolor: #e2e2e2;
                 }
             }
         }
-        
-        &.minimize {
-            width: 1000px;
-            height: 600px;
-        }
     }
     
     .Camera {
@@ -99,7 +99,8 @@ $fgcolor: #e2e2e2;
             width: 100%;
             height: 100%;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
 
             .disableWebcam {
@@ -110,7 +111,7 @@ $fgcolor: #e2e2e2;
             .CameraRecordTime {
                 position: absolute;
                 z-index: 1;
-                top: 20px;
+                top: 10px;
                 background-color: $bgcolor;
                 padding: 7px 12px;
                 border-radius: 999px;
@@ -169,76 +170,84 @@ $fgcolor: #e2e2e2;
                 }
             }
 
+            .WebcamDisabled {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 100%;
+            }
+
             video {
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
             }
-        }
 
-        .CameraInteraction {
-            padding: 0 10px;
-            width: 100%;
-            position: absolute;
-            bottom: 0;
-            background: $bgcolor;
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            &.capturing {
-                * {
-                    opacity: 0.3;
-                    pointer-events: none;
-                }
-            }
-
-            .CameraAct {
-                color: $fgcolor;
-                font-size: 25px;
-                margin: 0 20px;
-            }
-
-            .CameraCapture {
-                width: 50px;
-                height: 50px;
-                border-radius: 999px;
-                background-color: lighten($fgcolor, 5%);
-                color: #000;
-                font-size: 23px;
+            .CameraInteraction {
+                padding: 0 10px;
+                width: 100%;
+                position: sticky;
+                bottom: 0;
+                background: $bgcolor;
+                backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(15px);
                 display: flex;
-                justify-content: center;
+                justify-content: space-between;
                 align-items: center;
-                transition: none;
-
-                &:active {
-                    background-color: darken($fgcolor, 25%);
-                }
-                
-                &.isRecording {
-                    background: #ff4b4b;
-                    color: $fgcolor;
-                    opacity: 1;
-
+    
+                &.capturing {
                     * {
-                        opacity: 1;
-			            pointer-events: all;
+                        opacity: 0.3;
+                        pointer-events: none;
                     }
                 }
-            }
-
-            .CameraCapturedImg {
-                width: 95px;
-                height: 70px;
-                position: relative;
-                z-index: 1;
-
-                img {
+    
+                .CameraAct {
+                    color: $fgcolor;
+                    font-size: 25px;
+                    margin: 0 20px;
+                }
+    
+                .CameraCapture {
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 999px;
+                    background-color: lighten($fgcolor, 5%);
+                    color: #000;
+                    font-size: 23px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    transition: none;
+    
+                    &:active {
+                        background-color: darken($fgcolor, 25%);
+                    }
+                    
+                    &.isRecording {
+                        background: #ff4b4b;
+                        color: $fgcolor;
+                        opacity: 1;
+    
+                        * {
+                            opacity: 1;
+                            pointer-events: all;
+                        }
+                    }
+                }
+    
+                .CameraCapturedImg {
                     width: 95px;
                     height: 70px;
-                    display: block;
+                    position: relative;
+                    z-index: 1;
+    
+                    img {
+                        width: 95px;
+                        height: 70px;
+                        display: block;
+                    }
                 }
             }
         }
@@ -276,30 +285,31 @@ $fgcolor: #e2e2e2;
             .disableWebcam {
                 color: transparentize($bgcolor, 0.75);
             }
+            
             .CameraRecordTime {
                 background: $fgcolor;
                 color: $bgcolor;
             }
-        }
 
-        .CameraInteraction {
-            background: $fgcolor;
-    
-            .CameraAct {
-                color: $bgcolor;
-            }
-            
-            .CameraCapture {
-                background-color: darken($fgcolor, 5%);
-                color: #000;
-    
-                &:active {
-                    background-color: darken($fgcolor, 25%);
+            .CameraInteraction {
+                background: $fgcolor;
+        
+                .CameraAct {
+                    color: $bgcolor;
                 }
-    
-                &.isRecording {
+                
+                .CameraCapture {
                     background-color: darken($fgcolor, 5%);
-                    color: #ff4b4b;
+                    color: #000;
+        
+                    &:active {
+                        background-color: darken($fgcolor, 25%);
+                    }
+        
+                    &.isRecording {
+                        background-color: darken($fgcolor, 5%);
+                        color: #ff4b4b;
+                    }
                 }
             }
         }
