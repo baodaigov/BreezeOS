@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkbreezeos=self.webpackChunkbreezeos||[]).push([[248],{5248:function(e,s,n){n.r(s);n(2791),n(1657),n(8270);var r=n(6038),u=n(3755),c=n(8746),t=n(184);s.default=function(){return(0,t.jsxs)("div",{className:"DesktopBody",children:[(0,t.jsx)(r.Z,{}),(0,t.jsx)(u.Z,{}),(0,t.jsx)(c.Z,{})]})}}}]);
-//# sourceMappingURL=248.91ae83e4.chunk.js.map
