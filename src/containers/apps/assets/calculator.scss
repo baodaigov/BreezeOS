@@ -14,7 +14,7 @@ $fgcolor: #e2e2e2;
 
     .calculator {
         width: 220px;
-        height: 440px;
+        height: 400px;
         opacity: 0;
         pointer-events: none;
         transition: all ease .3s;
@@ -23,7 +23,7 @@ $fgcolor: #e2e2e2;
             opacity: 1;
             pointer-events: all;
             width: 270px;
-            height: 490px;
+            height: 450px;
         }
         
         &.minimize {
@@ -62,7 +62,7 @@ $fgcolor: #e2e2e2;
         .CalculatorSection {
             width: 100%;
             height: 100%;
-            padding: 15px;
+            padding: 0 15px;
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;

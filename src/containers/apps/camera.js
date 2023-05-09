@@ -38,6 +38,7 @@ export const CameraStartApp = () => {
         <StartApp key='camera' icon='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/accessories-camera.svg' name='Camera' onClick={toggle}/>
     )
 }
+  
 
 export default function Camera() {
 
@@ -223,6 +224,8 @@ export default function Camera() {
             setRunning(false);
         }, [mediaRecorderRef, setCapturing]);
 
+        const [viewMedia, setViewMedia] = useState(false);
+
         function displayCountdown(){
             showSettingsMenu(!settingsMenu);
             setCountdown(!countdown);
@@ -231,6 +234,17 @@ export default function Camera() {
         function toggleSounds(){
             showSettingsMenu(!settingsMenu);
             setAudio(!audio);
+        }
+
+        const [msgboxDelete, displayMsgboxDelete] = useState(false);
+
+        function closeMsgBoxDelete(){
+            displayMsgboxDelete(false);
+        }
+
+        function deleteImage(){
+            displayMsgboxDelete(false);
+            setImg(null);
         }
 
         function close(){
@@ -252,6 +266,23 @@ export default function Camera() {
         
         return (
             <>
+                <div className={`PermanentlyDeleteMedia ${msgboxDelete ? 'active' : ''}`}>
+                    <div className='WindowTopBar'>
+                        <p className='WindowTopBarTitle'>Delete this image?</p>
+                        <div class="WindowTopBarInteractionContainer">
+                            <div class="WindowTopBarInteraction close" onClick={closeMsgBoxDelete}>
+                                <i class="fa-solid fa-xmark fa-lg"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="WindowBodyDefault">
+                        <p class="WindowBodyContent">This action is irreversible!</p>
+                        <div class="WindowBodyButton">
+                            <button class="Button" onClick={closeMsgBoxDelete}>No</button>
+                            <button class="Button" onClick={deleteImage}>Yes</button>
+                        </div>
+                    </div>
+                </div>
                 <ActMenu style={{ zIndex: '1', top: '30px', right: '80px' }} className={settingsMenu ? 'active' : ''}>
                     {countdown ? <ActMenuSelector title='Camera countdown' active onClick={displayCountdown}></ActMenuSelector> : <ActMenuSelector title='Camera countdown' onClick={displayCountdown}></ActMenuSelector>}
                     {audio ? <ActMenuSelector title='Enable sounds' active onClick={toggleSounds}></ActMenuSelector> : <ActMenuSelector title='Enable sounds' onClick={toggleSounds}></ActMenuSelector>}
@@ -271,7 +302,37 @@ export default function Camera() {
                     <TopBarInteraction action='close' onClose={close}/>
                 </TopBar>
                 <WindowBody>
-                    <div className='Camera blackscr'>
+                    <div className={`Camera ${viewMedia ? 'blankscr' : ''}`}>
+                        {viewMedia ? (
+                            <div className='CameraViewMedia'>
+                                {img != null ? (
+                                    <>
+                                        <div className='CameraMediaImg'>
+                                            <img src={img} alt="screenshot"/>
+                                        </div>
+                                    </>
+                                ) : (
+                                    <div className='NoMedia'>
+                                        <p className='NoMedia'>Nothing to show</p>
+                                    </div>
+                                )}
+                                <div className='CameraViewInteraction'>
+                                    <div className='GoBackBtn' onClick={() => setViewMedia(!viewMedia)}>
+                                        <i class="fa-regular fa-arrow-left"></i>
+                                    </div>
+                                    {img != null ? (
+                                        <div style={{ display: 'flex' }}>
+                                            <div className='CameraButton'>
+                                                <p>Save image</p>
+                                            </div>
+                                            <div className='CameraButton' onClick={() => displayMsgboxDelete(true)} onDoubleClick={deleteImage}>
+                                                <p>Delete</p>
+                                            </div>
+                                        </div>
+                                    ) : ''}
+                                </div>
+                            </div>
+                        ) : ''}
                         <div className='CameraVideo'>
                             <div className='CameraRecordTime'>
                                 <p>
@@ -310,7 +371,7 @@ export default function Camera() {
                                         <i className='fa-light fa-camera'></i>
                                     </div>
                                 )}
-                                <div className='CameraCapturedImg'>
+                                <div className='CameraCapturedImg' onClick={() => setViewMedia(!viewMedia)}>
                                     {img != null ? <img src={img} alt="screenshot"/> : ''}
                                 </div>
                             </div>
