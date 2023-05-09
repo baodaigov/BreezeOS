@@ -40,12 +40,14 @@ export const TextEditorStartApp = () => {
 
 export default function TextEditor() {
     const TextEditorWindow = () => {
-        const [changes, saveChanges] = useState(true);
+        const [changes, saveChanges] = useState(false);
 
         function close(){
             document.getElementsByClassName('texteditor')[0].classList.remove('active');
             document.getElementById('texteditor').classList.remove('clicked');
-            setTimeout(saveChanges(true), 300);
+            setTimeout(() => {
+                saveChanges(false);
+            }, 300);
         }
 
         function minimize(){
@@ -54,7 +56,7 @@ export default function TextEditor() {
 
         useEffect(() => {
             document.getElementById('textEditor').addEventListener('keydown', e => {
-                if(e.ctrlKey && e.keyCode === 115 || e.ctrlKey && e.keyCode === 83){
+                if(e.ctrlKey && e.altKey && e.keyCode === 115 || e.ctrlKey && e.altKey && e.keyCode === 83){
                     saveChanges(!changes);
                     console.log('ok')
                 }
@@ -63,13 +65,9 @@ export default function TextEditor() {
 
         return (
             <>
-                <TopBar title={`${changes ? '*' : ''}Untitled Document`} onDblClick={minimize}>
-                    <div className='TabBarWrapper' style={{ width: '100%' }}>
-                        <div className='TabBar' style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <div className='TabBarItem TabBarOpenFile'>
-                                <p>Open</p>
-                                <i className="fa-regular fa-chevron-down"></i>
-                            </div>
+                <TopBar title={`${changes ? '' : '*'}hello.cpp – Text Editor`} onDblClick={minimize}>
+                    <div className='TabBarWrapper'>
+                        <div className='TabBar' style={{ display: 'flex', flexDirection: 'row-reverse', justifyContent: 'space-between' }}>
                             <div className='TabBarItem'>
                                 <div className='TabBarInteraction'>
                                     <i className="fa-regular fa-bars"></i>
@@ -88,7 +86,24 @@ export default function TextEditor() {
                 </TopBar>
                 <WindowBody>
                     <div className='TextEditor'>
-                        <textarea className='TextareaEditor' spellCheck={false}></textarea>
+                        <div className='TextLineNumber'>
+                            <p>1</p>
+                            <p>2</p>
+                            <p>3</p>
+                            <p>4</p>
+                            <p>5</p>
+                            <p>6</p>
+                            <p>7</p>
+                        </div>
+                        <div className='Textarea' id='textarea'>
+                            <div className='TextArea' contentEditable={true} spellCheck={false}><span className='col1'>#include</span>&nbsp;<span className='col2'>&lt;iostream&gt;</span></div>
+                            <div className='TextArea' contentEditable={true} spellCheck={false}></div>
+                            <div className='TextArea' contentEditable={true} spellCheck={false}><span className='col1 col1a'>int</span>&nbsp;<span className='col2a'>main</span><span className='col3'>&#40;&#41;&#123;</span></div>
+                            <div className='TextArea' contentEditable={true} spellCheck={false}>&nbsp;&nbsp;&nbsp;&nbsp;<span className='col4'>// This is a comment</span></div>
+                            <div className='TextArea' contentEditable={true} spellCheck={false}>&nbsp;&nbsp;&nbsp;&nbsp;<span className='col4a'>std</span>::cout&nbsp;<span className='col4b'>&lt;&lt;</span>&nbsp;<span className='col2'>"Welcome to BreezeOS!"</span>&nbsp;<span className='col4b'>&lt;&lt;</span>&nbsp;<span className='col4a'>std</span>::endl;</div>
+                            <div className='TextArea' contentEditable={true} spellCheck={false}>&nbsp;&nbsp;&nbsp;&nbsp;<span className='col1'>return</span>&nbsp;<span className='col5'>0</span>;</div>
+                            <div className='TextArea' contentEditable={true} spellCheck={false} style={{ height: '100%' }}><span className='col3'>&#125;</span></div>
+                        </div>
                     </div>
                 </WindowBody>
             </>
