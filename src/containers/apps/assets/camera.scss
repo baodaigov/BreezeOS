@@ -49,6 +49,7 @@ $fgcolor: #e2e2e2;
             pointer-events: none;
             transition: none;
             width: 400px;
+            box-shadow: 0px 0 20px #00000089;
 
             &.active {
                 opacity: 1;
@@ -109,29 +110,6 @@ $fgcolor: #e2e2e2;
         
                 * {
                     margin: 0;
-                }
-        
-                .critical {
-                    height: 25px;
-                    width: 25px;
-                    background-color: #ff6161;
-                    border-radius: 999px;
-                    font-size: 18px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                }
-        
-                .exclamation {
-                    height: 25px;
-                    width: 25px;
-                    background-color: #fcff61;
-                    color: #212121;
-                    border-radius: 999px;
-                    font-size: 15px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
                 }
         
                 .WindowBodyTitle {
@@ -477,6 +455,41 @@ $fgcolor: #e2e2e2;
 
 .lightMode {
     .camera {
+        .PermanentlyDeleteMedia {
+            .WindowTopBar {
+                background: $fgcolor;
+
+                .WindowTopBarTitle {
+                    color: $bgcolor;
+                }
+
+                .WindowTopBarInteractionContainer .WindowTopBarInteraction {
+                        color: $bgcolor;
+
+                        &:hover {
+                            background: #3b3b3f;
+                        }
+        
+                        &.close:hover{
+                            background: #ff5252;
+                        }
+                    }
+            }
+
+            .WindowBodyDefault {
+                background: $fgcolor;
+                color: $bgcolor;
+            }
+      
+            .WindowBodyButton {
+                .Button {
+                    background-color: #00000010;
+                    color: $bgcolor;
+                    &:hover { background-color: #00000020; }
+                }
+            }
+        }
+
         .TabBarWrapper .TabBar {
             .TabBarItem {
                 color: #000;
@@ -508,13 +521,23 @@ $fgcolor: #e2e2e2;
                 color: transparentize($bgcolor, 0.7);
             }
 
-            .CameraViewInteraction .GoBackBtn {
+            .CameraViewInteraction {
+                .GoBackBtn {
                     color: $bgcolor;
     
                     &:hover {
                         background-color: $bgcolor;
                         color: $fgcolor;
                     }
+                }
+                
+                .CameraButton {
+                    color: $bgcolor;
+                    &:hover {
+                        background: $bgcolor;
+                        color: $fgcolor;
+                    }
+                }
             }
         }
         .CameraVideo {
