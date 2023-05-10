@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './Wallpaper.css'
+import './Wallpaper.scss'
 
 export default function Wallpaper(){
     setTimeout(() => {

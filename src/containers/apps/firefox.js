@@ -90,6 +90,8 @@ export default function Firefox() {
         function reload(){
             document.getElementById('iFrameFF').src = document.getElementById('iFrameFF').src;
         }
+
+        const [min, isMin] = useState(false);
     
         function close(){
             document.getElementsByClassName('firefox')[0].classList.remove('active');
@@ -102,6 +104,7 @@ export default function Firefox() {
     
         function minimize(){
             document.getElementsByClassName('firefox')[0].classList.toggle('minimize');
+            isMin(!min);
         }
 
         return (
@@ -129,7 +132,7 @@ export default function Firefox() {
                     </div>
                     <div className='TopBarInteractionWrapper' style={{ display: 'flex' }}>
                         <TopBarInteraction action='hide'/>
-                        <TopBarInteraction action='minMax' onMinMax={minimize}/>
+                        <TopBarInteraction action={min ? 'max' : 'min'} onMinMax={minimize}/>
                         <TopBarInteraction action='close' onClose={close}/>
                     </div>
                 </TopBar>

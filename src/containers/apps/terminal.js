@@ -38,15 +38,35 @@ export const TerminalStartApp = () => {
 }
 
 export default function Terminal() {
-    function close(){
-        document.getElementsByClassName('terminal')[0].classList.remove('active');
-        document.getElementById('terminal').classList.remove('clicked');
-    }
+    const TerminalWindow = () => {
+        const [min, isMin] = useState(false);
+        function close(){
+            document.getElementsByClassName('terminal')[0].classList.remove('active');
+            document.getElementById('terminal').classList.remove('clicked');
+        }
+    
+        function minimize(){
+            document.getElementsByClassName('terminal')[0].classList.toggle('minimize');
+            isMin(!min)
+        }
 
-    function minimize(){
-        document.getElementsByClassName('terminal')[0].classList.toggle('minimize');
-
-        return <i className="fa-regular fa-window-maximize"></i>
+        return (
+            <>
+                <TopBar title='Terminal' onDblClick={minimize}>
+                    <TopBarInteraction action='hide'/>
+                    <TopBarInteraction action={min ? 'max' : 'min'} onMinMax={minimize}/>
+                    <TopBarInteraction action='close' onClose={close}/>
+                </TopBar>
+                <WindowBody>
+                    <div className='Terminal'>
+                        <pre>Welcome to BreezeOS (GNU/Linux 6.2.1 x86_64)</pre>
+                        <pre id='input'>[localhost@BreezeOS]$ 
+                        <input type='text' spellCheck='false'/>
+                        </pre>
+                    </div>
+                </WindowBody>
+            </>
+        )
     }
 
     return (
@@ -55,19 +75,7 @@ export default function Terminal() {
                     className='Window terminal minimize'
                     key={Math.random()}
                 >
-                    <TopBar title='Terminal' onDblClick={minimize}>
-                        <TopBarInteraction action='hide'/>
-                        <TopBarInteraction action='minMax' onMinMax={minimize}/>
-                        <TopBarInteraction action='close' onClose={close}/>
-                    </TopBar>
-                    <WindowBody>
-                        <div className='Terminal'>
-                            <pre>Welcome to BreezeOS (GNU/Linux 6.2.1 x86_64)</pre>
-                            <pre id='input'>[localhost@BreezeOS]$ 
-                            <input type='text' spellCheck='false'/>
-                            </pre>
-                        </div>
-                    </WindowBody>
+                    
                 </div> 
         </div>
     )

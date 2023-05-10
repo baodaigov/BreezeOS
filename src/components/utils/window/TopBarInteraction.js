@@ -23,10 +23,17 @@ export default class TopBarInteraction extends Component {
                     </div>
                 )
 
-            case "minMax":
+            case "min":
                 return (
                     <div className={`TopBarInteraction ${props}`} key={props} onClick={this.props.onMinMax}>
                         <i className="fa-regular fa-window-restore fa-sm"></i>
+                    </div>
+                )
+
+            case "max":
+                return (
+                    <div className={`TopBarInteraction ${props}`} key={props} onClick={this.props.onMinMax}>
+                        <i className="fa-regular fa-window-maximize fa-sm"></i>
                     </div>
                 )
         }

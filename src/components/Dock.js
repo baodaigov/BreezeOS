@@ -47,7 +47,7 @@ const Dock = () => {
                 <DockItem id={item.id} class={`${isActive ? "" : "clicked"}`} title={item.name} icon={item.icon} onClick={toggle}/>
             )}
 	    <TerminalApp/>
-	    <a href='https://github.com/baodaigov'>
+	    <a href='https://github.com/baodaigov/BreezeOS'>
                 <DockItem id="github" title="GitHub" icon="https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/github-desktop.svg"/>
             </a>
             <a href='https://github.dev/baodaigov/BreezeOS'>

@@ -4,7 +4,7 @@ import './Panel.scss';
 import { TaskIcon } from '../Header.js';
 
 const PanelItemLarge = ({ type }) => {
-	const [isActive, setActive] = useState('false');
+	const [isActive, setActive] = useState(true);
 	const [data, setData] = useState(TaskIcon);
 
 	const toggle = () => {

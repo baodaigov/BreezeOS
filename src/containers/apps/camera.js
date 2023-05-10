@@ -247,6 +247,8 @@ export default function Camera() {
             setImg(null);
         }
 
+        const [min, isMin] = useState(false);
+
         function close(){
             document.getElementsByClassName('camera')[0].classList.remove('active');
             document.getElementById('camera').classList.remove('clicked');
@@ -262,6 +264,7 @@ export default function Camera() {
 
         function minimize(){
             document.getElementsByClassName('camera')[0].classList.toggle('minimize');
+            isMin(!min);
         }
         
         return (
@@ -298,7 +301,7 @@ export default function Camera() {
                         </div>
                     </div>
                     <TopBarInteraction action='hide'/>
-                    <TopBarInteraction action='minMax' onMinMax={minimize}/>
+                    <TopBarInteraction action={min ? 'max' : 'min'} onMinMax={minimize}/>
                     <TopBarInteraction action='close' onClose={close}/>
                 </TopBar>
                 <WindowBody>

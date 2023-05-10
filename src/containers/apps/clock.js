@@ -126,13 +126,39 @@ export const ClockMenu = () => {
 }
 
 export default function Clock() {
-    function close(){
-        document.getElementsByClassName('clock')[0].classList.remove('active');
-        document.getElementById('clock').classList.remove('clicked');
-    }
+    const ClockWindow = () => {
+        const [min, isMin] = useState(false);
+    
+        function close(){
+            document.getElementsByClassName('clock')[0].classList.remove('active');
+            document.getElementById('clock').classList.remove('clicked');
+        }
+    
+        function minimize(){
+            document.getElementsByClassName('clock')[0].classList.toggle('minimize');
+            isMin(!min)
+        }
 
-    function minimize(){
-        document.getElementsByClassName('clock')[0].classList.toggle('minimize');
+        return (
+            <>
+                <TopBar title='Clock' onDblClick={minimize}>
+                    <TopBarInteraction action='hide'/>
+                    <TopBarInteraction action={min ? 'max' : 'min'} onMinMax={minimize}/>
+                    <TopBarInteraction action='close' onClose={close}/>
+                </TopBar>
+                <WindowBody>
+                    <div className='Clock'>
+                        <div className='ClockItems'>
+                            <div className='world-clock'>
+                                <ClockItem title='Ho Chi Minh City, Vietnam' timeZone='Asia/Ho_Chi_Minh'/>
+                                <ClockItem title='London, United Kingdom' timeZone='Europe/London'/>
+                            </div>
+                        </div>
+                        <ClockMenu/>
+                    </div>
+                </WindowBody>
+            </>
+        )
     }
 
     return (
@@ -141,22 +167,7 @@ export default function Clock() {
                     className='Window clock'
                     key={Math.random()}
                 >
-                    <TopBar title='Clock' onDblClick={minimize}>
-                        <TopBarInteraction action='hide'/>
-                        <TopBarInteraction action='minMax' onMinMax={minimize}/>
-                        <TopBarInteraction action='close' onClose={close}/>
-                    </TopBar>
-                    <WindowBody>
-                        <div className='Clock'>
-                            <div className='ClockItems'>
-                                <div className='world-clock'>
-                                    <ClockItem title='Ho Chi Minh City, Vietnam' timeZone='Asia/Ho_Chi_Minh'/>
-                                    <ClockItem title='London, United Kingdom' timeZone='Europe/London'/>
-                                </div>
-                            </div>
-                            <ClockMenu/>
-                        </div>
-                    </WindowBody>
+                    <ClockWindow/>
                 </div> 
         </div>
     )

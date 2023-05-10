@@ -32,6 +32,8 @@ $fgcolor: #e2e2e2;
         -webkit-backdrop-filter: blur(15px);
         height: 100%;
         color: $fgcolor;
+        display: flex;
+        flex-direction: column;
 
         * {
             margin: 0;
@@ -81,8 +83,7 @@ $fgcolor: #e2e2e2;
         }
 
         .ClockMenu {
-            position: absolute;
-            bottom: 0;
+            position: relative;
             display: flex;
             justify-content: center;
             width: 100%;

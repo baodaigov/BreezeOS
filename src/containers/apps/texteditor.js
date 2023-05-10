@@ -41,6 +41,7 @@ export const TextEditorStartApp = () => {
 export default function TextEditor() {
     const TextEditorWindow = () => {
         const [changes, saveChanges] = useState(false);
+        const [min, isMin] = useState(false);
 
         function close(){
             document.getElementsByClassName('texteditor')[0].classList.remove('active');
@@ -52,6 +53,7 @@ export default function TextEditor() {
 
         function minimize(){
             document.getElementsByClassName('texteditor')[0].classList.toggle('minimize');
+            isMin(!min)
         }
 
         useEffect(() => {
@@ -80,7 +82,7 @@ export default function TextEditor() {
                     </div>
                     <div className='TopBarInteractionWrapper' style={{ display: 'flex' }}>
                         <TopBarInteraction action='hide'/>
-                        <TopBarInteraction action='minMax' onMinMax={minimize}/>
+                        <TopBarInteraction action={min ? 'max' : 'min'} onMinMax={minimize}/>
                         <TopBarInteraction action='close' onClose={close}/>
                     </div>
                 </TopBar>

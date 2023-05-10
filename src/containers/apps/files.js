@@ -174,6 +174,8 @@ export default function Files() {
                 name: 'Videos'
             },
         ]
+
+        const [min, isMin] = useState(false);
     
         function close(){
             document.getElementsByClassName('files')[0].classList.remove('active');
@@ -182,6 +184,7 @@ export default function Files() {
     
         function minimize(){
             document.getElementsByClassName('files')[0].classList.toggle('minimize');
+            isMin(!min);
         }
 
         return (
@@ -225,7 +228,7 @@ export default function Files() {
                     </div>
                     <div className='TopBarInteractionWrapper' style={{ display: 'flex' }}>
                         <TopBarInteraction action='hide'/>
-                        <TopBarInteraction action='minMax' onMinMax={minimize}/>
+                        <TopBarInteraction action={min ? 'max' : 'min'} onMinMax={minimize}/>
                         <TopBarInteraction action='close' onClose={close}/>
                     </div>
                 </TopBar>
