@@ -1,5 +1,5 @@
 $bgcolor: #202023da;
-$fgcolor: #e2e2e2;
+$fgcolor: #e2e2e2e0;
 
 .CameraWindow {
     * {
@@ -303,17 +303,26 @@ $fgcolor: #e2e2e2;
             .CameraRecordTime {
                 position: absolute;
                 z-index: 1;
-                top: 10px;
-                background-color: $bgcolor;
-                padding: 7px 12px;
-                border-radius: 999px;
-                color: $fgcolor;
-                font-size: 15px;
-                font-weight: 700;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 100%;
                 opacity: 0;
 
                 &.active {
                     opacity: 1;
+                }
+
+                p {
+                    position: absolute;
+                    top: 10px;
+                    background-color: $bgcolor;
+                    padding: 7px 12px;
+                    border-radius: 999px;
+                    color: $fgcolor;
+                    font-size: 15px;
+                    font-weight: 700;
                 }
 
                 p::before {

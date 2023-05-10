@@ -1,5 +1,5 @@
 $bgcolor: #202023da;
-$fgcolor: #e2e2e2;
+$fgcolor: #e2e2e2e0;
 
 .ClockWindow {
     * {
@@ -40,9 +40,21 @@ $fgcolor: #e2e2e2;
         }
 
         .ClockItems {
+            width: 100%;
             height: 100%;
+            position: relative;
 
             .world-clock {
+                position: absolute;
+                width: 100%;
+                opacity: 0;
+                pointer-events: none;
+
+                &.active {
+                    opacity: 1;
+                    pointer-events: all;
+                }
+
                 .ClockItem {
                     display: flex;
                     justify-content: center;
@@ -77,6 +89,123 @@ $fgcolor: #e2e2e2;
                         border-radius: 999px;
                         padding: 7px 13px;
                         font-size: 18px;
+                    }
+                }
+            }
+
+            .alarm {
+                position: absolute;
+                opacity: 0;
+                pointer-events: none;
+                width: 100%;
+                height: 100%;
+
+                &.active {
+                    opacity: 1;
+                    pointer-events: all;
+                }
+
+                .AlarmClock {
+                    width: 100%;
+                    height: 100%;
+
+                    .NoAlarm {
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        color: transparentize($fgcolor, 0.8);
+                    }
+
+                    .AlarmContainer {
+                        width: 100%;
+                        height: 100%;
+                        overflow-x: hidden;
+                        overflow-y: auto;
+                        padding: 10px 30px;
+                        
+                        &::-webkit-scrollbar { width: 3px; border-radius: 3px; }
+                        &::-webkit-scrollbar-thumb { background: $fgcolor; border-radius: 10px; }
+
+                        .AlarmContainerItem {
+                            position: relative;
+                            top: 0px;
+                            background: #202023;
+                            color: $fgcolor;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            padding: 5px;
+                            transition: all .3s;
+                            width: 750px;
+                            margin: 15px auto;
+                            margin-top: 0;
+                            border-radius: 999px;
+                            animation: showUp ease .2s;
+
+                            @keyframes showUp {
+                                0% {
+                                    top: -10px;
+                                }
+
+                                100% {
+                                    top: 0;
+                                }
+                            }
+
+                            .AlarmContainerTitle {
+                                font-weight: 700;
+                                font-size: 15px;
+                                margin-left: 12px;
+                                height: 20px;
+                                width: 85%;
+
+                                &.edit {
+                                    appearance: none;
+                                    display: block;
+                                    border: none;
+                                    outline: none;
+                                    background: transparent;
+                                    color: inherit;
+                                    padding: 0;
+                                    height: 20px;
+                                    width: 85%;
+                                    color: #8fb6ff;
+                                }
+                            }
+
+                            .AlarmContainerTime {
+                                background-color: #8fb6ff53;
+                                color: #8fb6ff;
+                                font-weight: 700;
+                                border-radius: 999px;
+                                padding: 7px 13px;
+                                font-size: 14px;
+                            }
+                        }
+                    }
+                }
+
+                .AlarmItem {
+                    position: absolute;
+                    right: 0;
+                    bottom: 0;
+                    background: #8fb6ff;
+                    width: 45px;
+                    height: 45px;
+                    color: $bgcolor;
+                    font-size: 25px;
+                    border-radius: 999px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin: 20px 30px;
+                    transition: none;
+
+                    &:active {
+                        background: #7696d2;
                     }
                 }
             }
