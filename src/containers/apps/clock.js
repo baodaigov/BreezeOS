@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../components/utils/window/Window.scss';
 import TopBar from '../../components/utils/window/TopBar';
 import WindowBody from '../../components/utils/window/WindowBody';
@@ -78,19 +78,35 @@ export default function Clock() {
         const ClockItem = (props) => {
             const [curTime, setCurTime] = useState(null);
             const [curDate, setCurDate] = useState(null);
-            setInterval(() => {
-                setCurTime(new Date().toLocaleString('vi-VN', {
-                    timeZone: `${props.timeZone}`,
-                    hour: "2-digit",
-                    minute: "2-digit",
-                    second: "2-digit"
-                }));
-        
-                setCurDate(new Date().toLocaleDateString('en-US', {
-                    timeZone: `${props.timeZone}`,
-                    dateStyle: "full"
-                }));
-            }, 1000);
+            useEffect(() => {
+                if(curTime == null && curDate == null){
+                    setCurTime(new Date().toLocaleString('vi-VN', {
+                        timeZone: `${props.timeZone}`,
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        second: "2-digit"
+                    }));
+            
+                    setCurDate(new Date().toLocaleDateString('en-US', {
+                        timeZone: `${props.timeZone}`,
+                        dateStyle: "full"
+                    }));
+                } else {
+                    setInterval(() => {
+                        setCurTime(new Date().toLocaleString('vi-VN', {
+                            timeZone: `${props.timeZone}`,
+                            hour: "2-digit",
+                            minute: "2-digit",
+                            second: "2-digit"
+                        }));
+                
+                        setCurDate(new Date().toLocaleDateString('en-US', {
+                            timeZone: `${props.timeZone}`,
+                            dateStyle: "full"
+                        }));
+                    }, 1000);
+                }
+            }, [curTime, curDate])
         
             return (
                 <div className='ClockItem'>
@@ -120,10 +136,27 @@ export default function Clock() {
             const deleteAlarm = alarm && alarm.filter((element , i) => i !== index);
             setAlarm(deleteAlarm);
         }
+
+        const [time, setTime] = useState(0);
+        const [running, setRunning] = useState(false);
+        
+        useEffect(() => {
+            let interval;
+            if(running == true) {
+                interval = setInterval(() => {
+                    setTime((prevTime) => prevTime + 10);
+                }, 10);
+            } else if (running == false) {
+                clearInterval(interval);
+                setTime(0);
+            }
+            return () => clearInterval(interval);
+        }, [running]);
     
         function close(){
             document.getElementsByClassName('clock')[0].classList.remove('active');
             document.getElementById('clock').classList.remove('clicked');
+            setRunning(false)
         }
     
         function minimize(){
@@ -166,6 +199,14 @@ export default function Clock() {
                                         <i className="fa-regular fa-plus"></i>
                                     </div>
                                 </div>
+                            </div>
+                            <div className={`stopwatch ${tab == 'stopwatch' ? 'active' : ''}`}>
+                                <p>
+                                    <span>{("0" + Math.floor((time / 60000) % 60)).slice(-2)}:</span>
+                                    <span>{("0" + Math.floor((time / 1000) % 60)).slice(-2)}.</span>
+                                    <span>{("0" + Math.floor((time / 10) % 100)).slice(-2)}</span>
+                                </p>
+                                <div onClick={() => setRunning(true)}>start</div>
                             </div>
                         </div>
                         <div className='ClockMenu' value={value}>
