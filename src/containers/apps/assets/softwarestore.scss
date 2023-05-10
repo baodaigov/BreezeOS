@@ -1,7 +1,7 @@
 $bgcolor: #202023da;
 $fgcolor: #e2e2e2;
 
-.TextEditorWindow {
+.SoftwareStoreWindow {
     * {
         transition: all ease .3s;
     }
@@ -16,7 +16,7 @@ $fgcolor: #e2e2e2;
         .TopBarTitle {width: auto;}
     }
 
-    .texteditor {
+    .softwarestore {
         width: 93vw;
         height: 93%;
         opacity: 0;
@@ -86,7 +86,7 @@ $fgcolor: #e2e2e2;
         }
     }
     
-    .TextEditor {
+    .SoftwareStore {
         background: $bgcolor;
         backdrop-filter: blur(15px);
         -webkit-backdrop-filter: blur(15px);
@@ -98,94 +98,11 @@ $fgcolor: #e2e2e2;
         * {
             margin: 0;
         }
-
-        .TextLineNumber {
-            padding: 15px 30px;
-            text-align: center;
-            color: transparentize($fgcolor, 0.65);
-            border-right: 1px solid #ffffff12;
-
-            p {
-                font-family: Cascadia Code;
-                padding-bottom: 9px;
-            }
-        }
-
-        .Textarea {
-            padding: 17px 25px;
-            width: 100%;
-            height: 100%;
-            transition: none;
-            overflow-y: auto;
-            resize: none;
-            display: flex;
-            flex-direction: column;
-
-            .TextArea {
-                border: none;
-                outline: none;
-                background: transparent;
-                color: inherit;
-                font-size: 15px;
-                padding-bottom: 10px;
-                font-family: Cascadia Code;
-                transition: none;
-
-                * {
-                    font-family: Cascadia Code;
-                    transition: none;
-                }
-
-                &::selection {
-                    background-color: #8fb6ff76;
-                    color: inherit;
-                }
-
-                .col1 {
-                    color: #f92672;
-                }
-
-                .col1a {
-                    color: #66d9ef;
-                    font-style: italic;
-                }
-
-                .col2 {
-                    color: #e6db74;
-                }
-
-                .col2a {
-                    color: #a6e22e;
-                }
-
-                .col3 {
-                    color: #ffd700;
-                }
-
-                .col4 {
-                    color: #3c3b37;
-                }
-
-                .col4a {
-                    color: #a6e22e;
-                    text-decoration: underline;
-                    text-underline-position: under;
-                }
-
-                .col4b {
-                    color: #f92672;
-                }
-
-                .col5 {
-                    color: #ae81ff;
-                }
-            }
-        }
     }    
 }
 
 .lightMode {
-    .texteditor {
+    .softwarestore {
         .TabBarWrapper .TabBar {
             .TabBarItem {
                 color: #000;
@@ -209,49 +126,8 @@ $fgcolor: #e2e2e2;
         }
     }
     
-    .TextEditor {
+    .SoftwareStore {
         background: $fgcolor;
         color: $bgcolor;
-
-        .TextLineNumber {
-            color: transparentize($bgcolor, 0.65);
-            border-right: 1px solid #00000012;
-        }
-
-        .Textarea .TextArea {
-            .col1 {
-                color: #0000ff;
-                font-style: normal;
-            }
-
-            .col2 {
-                color: #a31515;
-            }
-
-            .col2a {
-                color: inherit;
-            }
-
-            .col3 {
-                color: #0431fa;
-            }
-
-            .col4 {
-                color: #008000;
-            }
-
-            .col4a {
-                color: inherit;
-                text-decoration: none;
-            }
-
-            .col4b {
-                color: inherit;
-            }
-
-            .col5 {
-                color: #098658;
-            }
-        }
     }
 }

@@ -46,9 +46,6 @@ export default function TextEditor() {
         function close(){
             document.getElementsByClassName('texteditor')[0].classList.remove('active');
             document.getElementById('texteditor').classList.remove('clicked');
-            setTimeout(() => {
-                saveChanges(false);
-            }, 300);
         }
 
         function minimize(){
@@ -58,7 +55,8 @@ export default function TextEditor() {
 
         useEffect(() => {
             document.getElementById('textEditor').addEventListener('keydown', e => {
-                if(e.ctrlKey && e.altKey && e.keyCode === 115 || e.ctrlKey && e.altKey && e.keyCode === 83){
+                if(e.ctrlKey && e.keyCode === 115 || e.ctrlKey && e.keyCode === 83){
+                    e.preventDefault();
                     saveChanges(!changes);
                     console.log('ok')
                 }

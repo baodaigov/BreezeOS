@@ -259,6 +259,7 @@ export default function Camera() {
                 isRecording(false);
                 setRunning(false);
                 showSettingsMenu(false);
+                setViewMedia(false);
             }, 300);
         }
 

@@ -107,16 +107,18 @@ export default function Clock() {
             )
         }
 
-        const [alarm, addAlarm] = useState([]);
-        const [editTitle, setEditTitle] = useState(false);
-
-        console.log(alarm);
+        const [alarm, setAlarm] = useState([]);
 
         function addNewAlarm(){
             let newAlarm = [...alarm];
             let newTitle = `Alarm ${alarm.length + 1}`;
             newAlarm = [...newAlarm, {id: newTitle, time: '07:00 AM'}];
-            addAlarm(newAlarm);
+            setAlarm(newAlarm);
+        }
+        
+        function removeAlarm(index){
+            const deleteAlarm = alarm && alarm.filter((element , i) => i !== index);
+            setAlarm(deleteAlarm);
         }
     
         function close(){
@@ -147,10 +149,10 @@ export default function Clock() {
                                 <div className='AlarmClock'>
                                     {alarm.length != 0 ? (
                                         <div className='AlarmContainer'>
-                                            {alarm.map(i => 
-                                                <div className='AlarmContainerItem'>
-                                                    {editTitle ? <div className='AlarmContainerTitle edit' contentEditable={true} onDoubleClick={() => setEditTitle(!editTitle)} key={Math.random()}>{i.id}</div> : <p className='AlarmContainerTitle' onDoubleClick={() => setEditTitle(!editTitle)} key={Math.random()}>{i.id}</p>}
-                                                    <p className='AlarmContainerTime'>{i.time}</p>
+                                            {alarm.map((e, index) => 
+                                                <div className='AlarmContainerItem' onDoubleClick={() => removeAlarm(index)}>
+                                                    <p className='AlarmContainerTitle'>{e.id}</p>
+                                                    <p className='AlarmContainerTime'>{e.time}</p>
                                                 </div>
                                             )}
                                         </div>

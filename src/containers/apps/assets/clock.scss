@@ -1,5 +1,5 @@
 $bgcolor: #202023da;
-$fgcolor: #e2e2e2e0;
+$fgcolor: #e2e2e2;
 
 .ClockWindow {
     * {
@@ -116,7 +116,8 @@ $fgcolor: #e2e2e2e0;
                         flex-direction: column;
                         justify-content: center;
                         align-items: center;
-                        color: transparentize($fgcolor, 0.8);
+                        color: transparentize($fgcolor, 0.85);
+                        transition: none;
                     }
 
                     .AlarmContainer {
@@ -159,21 +160,21 @@ $fgcolor: #e2e2e2e0;
                                 font-weight: 700;
                                 font-size: 15px;
                                 margin-left: 12px;
-                                height: 20px;
-                                width: 85%;
+                                // height: 20px;
+                                // width: 85%;
 
-                                &.edit {
-                                    appearance: none;
-                                    display: block;
-                                    border: none;
-                                    outline: none;
-                                    background: transparent;
-                                    color: inherit;
-                                    padding: 0;
-                                    height: 20px;
-                                    width: 85%;
-                                    color: #8fb6ff;
-                                }
+                                // &.edit {
+                                //     appearance: none;
+                                //     display: block;
+                                //     border: none;
+                                //     outline: none;
+                                //     background: transparent;
+                                //     color: inherit;
+                                //     padding: 0;
+                                //     height: 20px;
+                                //     width: 85%;
+                                //     color: #8fb6ff;
+                                // }
                             }
 
                             .AlarmContainerTime {
@@ -280,18 +281,42 @@ $fgcolor: #e2e2e2e0;
         background: $fgcolor;
         color: $bgcolor;
 
-        .ClockItems .world-clock .ClockItem {
-            &:hover {
-                background: transparentize($bgcolor, 0.82);
+        .ClockItems {
+            .world-clock .ClockItem {
+                &:hover {
+                    background: transparentize($bgcolor, 0.82);
+                }
+
+                .ClockInfo {
+                    .ClockTitle {
+                        color: $bgcolor;
+                    }
+        
+                    .ClockDesc {
+                        color: transparentize($bgcolor, 0.6);
+                    }
+                }
             }
 
-            .ClockInfo {
-                .ClockTitle {
-                    color: $bgcolor;
+            .alarm {
+                .AlarmClock {
+                    .NoAlarm {
+                        color: transparentize($bgcolor, 0.75);
+                    }
+
+                    .AlarmContainer {
+                        &::-webkit-scrollbar { width: 3px; border-radius: 3px; }
+                        &::-webkit-scrollbar-thumb { background: $bgcolor; border-radius: 10px; }
+
+                        .AlarmContainerItem {
+                            background: darken($fgcolor, 3%);
+                            color: $bgcolor;
+                        }
+                    }
                 }
-    
-                .ClockDesc {
-                    color: transparentize($bgcolor, 0.6);
+
+                .AlarmItem {
+                    color: $fgcolor;
                 }
             }
         }

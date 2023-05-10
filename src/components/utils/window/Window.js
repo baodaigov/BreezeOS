@@ -7,6 +7,7 @@ import Camera from '../../../containers/apps/camera';
 import Files from '../../../containers/apps/files';
 import Calculator from '../../../containers/apps/calculator';
 import TextEditor from '../../../containers/apps/texteditor';
+import SoftwareStore from '../../../containers/apps/softwarestore';
 
 export default function Window(){
   return (
@@ -18,6 +19,7 @@ export default function Window(){
       <Calculator/>
       <TextEditor/>
       <Terminal/>
+      <SoftwareStore/>
     </div>
   )
 }
