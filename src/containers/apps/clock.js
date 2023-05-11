@@ -55,21 +55,21 @@ export default function Clock() {
         }
     
         function alarmTab(){
-            setTranslateX('translate(107.5px)');
+            setTranslateX('translate(106px)');
             setWidth('70px');
             setValue('2');
             setTab('alarm');
         }
     
         function stopwatchTab(){
-            setTranslateX('translate(182px)');
+            setTranslateX('translate(180.4px)');
             setWidth('97px');
             setValue('3');
             setTab('stopwatch');
         }
     
         function timerTab(){
-            setTranslateX('translate(283px)');
+            setTranslateX('translate(280px)');
             setWidth('72px');
             setValue('4');
             setTab('timer');
@@ -111,12 +111,12 @@ export default function Clock() {
             return (
                 <div className='ClockItem'>
                     <div className='ClockInfo'>
-                        <p className='ClockTitle font-semibold'>{props.title}</p>
+                        <p className='ClockTitle'>{props.title}</p>
                         <p className='ClockDesc'>{curDate}</p>
                     </div>
                     <div>
-                        <div className='ClockTime font-bold'>
-                            <p>{curTime}</p>
+                        <div className='ClockTime'>
+                            <p className='font-bold'>{curTime}</p>
                         </div>
                     </div>
                 </div>
@@ -156,12 +156,70 @@ export default function Clock() {
         function close(){
             document.getElementsByClassName('clock')[0].classList.remove('active');
             document.getElementById('clock').classList.remove('clicked');
-            setRunning(false)
+            setTimeout(() => {
+                setRunning(false)
+            }, 300);
         }
     
         function minimize(){
             document.getElementsByClassName('clock')[0].classList.toggle('minimize');
             isMin(!min)
+        }
+
+        function switchTab(){
+            switch(tab) {
+                case 'worldclock':
+                    return (
+                        <div className='world-clock'>
+                            <ClockItem title='Ho Chi Minh City, Vietnam' timeZone='Asia/Ho_Chi_Minh'/>
+                            <ClockItem title='London, United Kingdom' timeZone='Europe/London'/>
+                        </div>
+                    )
+                case 'alarm':
+                    return (
+                        <div className='alarm'>
+                            <div className='AlarmClock'>
+                                {alarm.length != 0 ? (
+                                    <div className='AlarmContainer'>
+                                        {alarm.map((e, index) => 
+                                            <div className='AlarmContainerItem' onDoubleClick={() => removeAlarm(index)}>
+                                                <p className='AlarmContainerTitle'>{e.id}</p>
+                                                <p className='AlarmContainerTime'>{e.time}</p>
+                                            </div>
+                                        )}
+                                    </div>
+                                ) : (
+                                    <div className='NoAlarm'>
+                                        <i className="fa-regular fa-alarm-clock" style={{ fontSize: '80px', margin: '20px' }}></i>
+                                        <p style={{ fontWeight: '700', fontSize: '20px' }}>No Alarm</p>
+                                    </div>
+                                )}
+                                <div className='AlarmItem' onClick={addNewAlarm}>
+                                    <i className="fa-regular fa-plus"></i>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                case 'stopwatch':
+                    return (
+                        <div className='stopwatch'>
+                            <div className='StopwatchTimer'>
+                                <div style={{ textAlign: 'center', width: '90px' }}>
+                                    <span className='active'>{("0" + Math.floor((time / 60000) % 60)).slice(-2)}</span>
+                                </div>
+                                <span className={running ? 'blinking' : ''}>:</span>
+                                <div style={{ textAlign: 'center', width: '180px', display: 'flex' }}>
+                                    <span className='active'>{("0" + Math.floor((time / 1000) % 60)).slice(-2)}</span>
+                                    <div>
+                                        .
+                                        <span className='StopwatchMs'>{("0" + Math.floor((time / 10) % 100)).slice(-2)}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            {running ? <div className='StopwatchButton stop' onClick={() => setRunning(false)}>Stop</div> : <div className='StopwatchButton start' onClick={() => setRunning(true)}>Start</div>}
+                        </div>
+                    )
+            }
         }
 
         return (
@@ -174,40 +232,7 @@ export default function Clock() {
                 <WindowBody>
                     <div className='Clock'>
                         <div className='ClockItems'>
-                            <div className={`world-clock ${tab == 'worldclock' ? 'active' : ''}`}>
-                                <ClockItem title='Ho Chi Minh City, Vietnam' timeZone='Asia/Ho_Chi_Minh'/>
-                                <ClockItem title='London, United Kingdom' timeZone='Europe/London'/>
-                            </div>
-                            <div className={`alarm ${tab == 'alarm' ? 'active' : ''}`}>
-                                <div className='AlarmClock'>
-                                    {alarm.length != 0 ? (
-                                        <div className='AlarmContainer'>
-                                            {alarm.map((e, index) => 
-                                                <div className='AlarmContainerItem' onDoubleClick={() => removeAlarm(index)}>
-                                                    <p className='AlarmContainerTitle'>{e.id}</p>
-                                                    <p className='AlarmContainerTime'>{e.time}</p>
-                                                </div>
-                                            )}
-                                        </div>
-                                    ) : (
-                                        <div className='NoAlarm'>
-                                            <i className="fa-regular fa-alarm-clock" style={{ fontSize: '80px', margin: '20px' }}></i>
-                                            <p style={{ fontWeight: '700', fontSize: '20px' }}>No Alarm</p>
-                                        </div>
-                                    )}
-                                    <div className='AlarmItem' onClick={addNewAlarm}>
-                                        <i className="fa-regular fa-plus"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className={`stopwatch ${tab == 'stopwatch' ? 'active' : ''}`}>
-                                <p>
-                                    <span>{("0" + Math.floor((time / 60000) % 60)).slice(-2)}:</span>
-                                    <span>{("0" + Math.floor((time / 1000) % 60)).slice(-2)}.</span>
-                                    <span>{("0" + Math.floor((time / 10) % 100)).slice(-2)}</span>
-                                </p>
-                                <div onClick={() => setRunning(true)}>start</div>
-                            </div>
+                            {switchTab()}
                         </div>
                         <div className='ClockMenu' value={value}>
                             <div className='ClockMenuInside'>

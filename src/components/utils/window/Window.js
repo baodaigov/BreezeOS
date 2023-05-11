@@ -12,8 +12,8 @@ import SoftwareStore from '../../../containers/apps/softwarestore';
 export default function Window(){
   return (
     <div className='WindowContainer'>
-      <Clock/>
       <Firefox/>
+      <Clock/>
       <Camera/>
       <Files/>
       <Calculator/>

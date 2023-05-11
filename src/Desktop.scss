@@ -1,57 +1,43 @@
 @import url(https://baodaigov.github.io/ttdv/assets/css/fontawesome.css);
+
 @font-face {
-    font-family: Optimistic Text;
-    src: url(https://react.dev/fonts/Optimistic_Text_W_Rg.woff2) format("woff2");
-    font-weight: 400;
+    font-display: swap;
+    font-family: 'Optimistic Display';
     font-style: normal;
-    font-display:swap
+    font-weight: 200;
+    src: url(https://static.xx.fbcdn.net/rsrc.php/yu/r/UwoTM2u9U6b.woff2) format('woff2'), url(https://static.xx.fbcdn.net/rsrc.php/yU/r/gPbYr2isoMn.woff) format('woff'), url(https://static.xx.fbcdn.net/rsrc.php/yk/r/ujL96beZ5NX.eot) format('embedded-opentype')
 }
 
 @font-face {
-    font-family: Optimistic Text;
-    src: url(https://react.dev/fonts/Optimistic_Text_W_It.woff2) format("woff2");
-    font-weight: 400;
-    font-style: italic;
-    font-display:swap
+    font-display: swap;
+    font-family: 'Optimistic Display';
+    font-style: normal;
+    font-weight: 300;
+    src: url(https://static.xx.fbcdn.net/rsrc.php/yJ/r/gJ8wmjmQhMa.woff2) format('woff2'), url(https://static.xx.fbcdn.net/rsrc.php/yG/r/6EsmO4OOkIi.woff) format('woff'), url(https://static.xx.fbcdn.net/rsrc.php/y4/r/d8NpUU2wnvQ.eot) format('embedded-opentype')
 }
 
 @font-face {
-    font-family: Optimistic Text;
-    src: url(https://react.dev/fonts/Optimistic_Text_W_Md.woff2) format("woff2");
+    font-display: swap;
+    font-family: 'Optimistic Display';
+    font-style: normal;
     font-weight: 500;
+    src: url(https://static.xx.fbcdn.net/rsrc.php/yL/r/jfwoHaS3i0K.woff2) format('woff2'), url(https://static.xx.fbcdn.net/rsrc.php/yx/r/fTvKFwGz9bf.woff) format('woff'), url(https://static.xx.fbcdn.net/rsrc.php/yV/r/J1XKtFquvMN.eot) format('embedded-opentype')
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Optimistic Display';
     font-style: normal;
-    font-display:swap
-}
-
-@font-face {
-    font-family: Optimistic Text;
-    src: url(https://react.dev/fonts/Optimistic_Text_W_MdIt.woff2) format("woff2");
-    font-weight: 500;
-    font-style: italic;
-    font-display:swap
-}
-
-@font-face {
-    font-family: Optimistic Text;
-    src: url(https://react.dev/fonts/Optimistic_Text_W_Bd.woff2) format("woff2");
     font-weight: 700;
-    font-style: normal;
-    font-display:swap
+    src: url(https://static.xx.fbcdn.net/rsrc.php/yU/r/WXBYOaYZuYu.woff2) format('woff2'), url(https://static.xx.fbcdn.net/rsrc.php/yY/r/uFQSckMfvjy.woff) format('woff'), url(https://static.xx.fbcdn.net/rsrc.php/ye/r/EvBN2KAyST_.eot) format('embedded-opentype')
 }
 
 @font-face {
-    font-family: Optimistic Text;
-    src: url(https://react.dev/fonts/Optimistic_Text_W_BdIt.woff2) format("woff2");
-    font-weight: 700;
-    font-style: italic;
-    font-display:swap
-}
-
-@font-face {
-    font-family: Cascadia Code;
-    src: url(./fonts/CascadiaCode-Regular-VTT.woff2) format("woff2");
+    font-display: swap;
+    font-family: 'Optimistic Display';
     font-style: normal;
-    font-display: swap
+    font-weight: 800;
+    src: url(https://static.xx.fbcdn.net/rsrc.php/yR/r/0wcuDYQ2laN.woff2) format('woff2'), url(https://static.xx.fbcdn.net/rsrc.php/yq/r/R-4r2OtBGX6.woff) format('woff'), url(https://static.xx.fbcdn.net/rsrc.php/yF/r/mrQd_YHOZRF.eot) format('embedded-opentype')
 }
 
 * ::-webkit-scrollbar {
@@ -78,7 +64,8 @@ a {
 
 * {
     box-sizing: border-box;
-    font-family: Optimistic Text, -apple-system, ui-sans-serif, system-ui, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    font-family: Optimistic Display, -apple-system, ui-sans-serif, system-ui, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    font-weight: 500;
     cursor: default;
     -webkit-user-select: none; /* Safari */
     -ms-user-select: none; /* IE 10 and IE 11 */
@@ -93,16 +80,16 @@ a {
     font-weight:700
 }
 
-.font-semibold {
-    font-weight:600
+.font-medium {
+    font-weight:500
 }
 
 .font-normal {
-    font-weight:400
+    font-weight:300
 }
 
-.font-medium {
-    font-weight:500
+.font-light {
+    font-weight:200
 }
 
 .Desktop {

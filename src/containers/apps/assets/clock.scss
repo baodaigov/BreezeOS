@@ -47,13 +47,6 @@ $fgcolor: #e2e2e2;
             .world-clock {
                 position: absolute;
                 width: 100%;
-                opacity: 0;
-                pointer-events: none;
-
-                &.active {
-                    opacity: 1;
-                    pointer-events: all;
-                }
 
                 .ClockItem {
                     display: flex;
@@ -95,15 +88,8 @@ $fgcolor: #e2e2e2;
 
             .alarm {
                 position: absolute;
-                opacity: 0;
-                pointer-events: none;
                 width: 100%;
                 height: 100%;
-
-                &.active {
-                    opacity: 1;
-                    pointer-events: all;
-                }
 
                 .AlarmClock {
                     width: 100%;
@@ -213,14 +199,68 @@ $fgcolor: #e2e2e2;
 
             .stopwatch {
                 position: absolute;
-                opacity: 0;
-                pointer-events: none;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
                 width: 100%;
                 height: 100%;
 
-                &.active {
-                    opacity: 1;
-                    pointer-events: all;
+                .StopwatchTimer {
+                    color: $fgcolor;
+                    font-size: 65px;
+                    display: flex;
+                    justify-content: center;
+                    color: transparentize($fgcolor, 0.75);
+                    transition: all ease .3s;
+                    margin-bottom: 20px;
+
+                    * {
+                        font-weight: 700;
+                    }
+
+                    .active {
+                        color: $fgcolor;
+                    }
+
+                    .blinking {
+                        animation: blinking ease-in-out 1s infinite;
+
+                        @keyframes blinking {
+                            0% {
+                                color: transparentize($fgcolor, 0.75);
+                            }
+                            50% {
+                                color: transparentize($fgcolor, 0.85);
+                            }
+                            100% {
+                                color: transparentize($fgcolor, 0.75);
+                            }
+                        }
+                    }
+
+                    .StopwatchMs {
+                        color: #8fb6ff;
+                    }
+                }
+
+                .StopwatchButton {
+                    padding: 9px 25px;
+                    font-size: 15px;
+                    border-radius: 999px;
+                    transition: all ease .3s;
+
+                    * {transition: none;}
+
+                    &.start {
+                        color: #8fb6ff;
+                        background: transparentize(#8fb6ff, 0.7)
+                    }
+
+                    &.stop {
+                        color: #ff8f8f;
+                        background: transparentize(#ff8f8f, 0.7)
+                    }
                 }
             }
         }
@@ -330,6 +370,36 @@ $fgcolor: #e2e2e2;
 
                 .AlarmItem {
                     color: $fgcolor;
+                }
+            }
+
+            .stopwatch {
+                .StopwatchTimer {
+                    color: transparentize($bgcolor, 0.75);
+
+                    .active {
+                        color: $bgcolor;
+                    }
+
+                    .blinking {
+                        animation: blinkingLight ease-in-out 1s infinite;
+
+                        @keyframes blinkingLight {
+                            0% {
+                                color: transparentize($bgcolor, 0.75);
+                            }
+                            50% {
+                                color: transparentize($bgcolor, 0.8);
+                            }
+                            100% {
+                                color: transparentize($bgcolor, 0.75);
+                            }
+                        }
+                    }
+
+                    .StopwatchMs {
+                        color: #8fb6ff;
+                    }
                 }
             }
         }
