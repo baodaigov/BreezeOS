@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import './Panel.scss';
-import { TaskIcon } from '../Header.js';
 
 const PanelItemLarge = ({ type }) => {
 	const [isActive, setActive] = useState(true);
-	const [data, setData] = useState(TaskIcon);
 
 	const toggle = () => {
 		setActive(!isActive);
@@ -13,26 +11,21 @@ const PanelItemLarge = ({ type }) => {
 
 	const toggleWifi = () => {
 		setActive(!isActive);
-		const newState = data.map(i => {
-        	if (i.id == 'wifi') {
-        		return {...i, icon: 'fa-solid fa-wifi-slash'};
-      		}
-
-        	return i;
-    	});
-
-    	setData(newState);
   	};
 
 	const nightShift = () => {
 		setActive(!isActive);
 		document.getElementsByClassName('Desktop')[0].classList.toggle('NightShiftEnabled');
-    	}
+    }
 
     	const toggleDarkMode = () => {
-		setActive(!isActive);
-		document.getElementsByClassName('Desktop')[0].classList.toggle('lightMode');
+            setActive(!isActive);
+            document.getElementsByClassName('Desktop')[0].classList.toggle('lightMode');
     	}
+
+    const toggleAirplaneMode = () => {
+        setActive(!isActive);
+    }
 
 	switch (type) {
             case "wifi":
@@ -58,7 +51,7 @@ const PanelItemLarge = ({ type }) => {
                 )
             case "airplane-mode":
                 return (
-                    <div className={`PanelItemLarge font-bold ${isActive ? "" : "focused"}`} onClick={toggle}>
+                    <div className={`PanelItemLarge font-bold ${isActive ? "" : "focused"}`} onClick={toggleAirplaneMode}>
                         <i className="fa-solid fa-plane"></i>
                         Airplane Mode
                     </div>

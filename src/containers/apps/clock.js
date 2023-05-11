@@ -219,6 +219,12 @@ export default function Clock() {
                             {running ? <div className='StopwatchButton stop' onClick={() => setRunning(false)}>Stop</div> : <div className='StopwatchButton start' onClick={() => setRunning(true)}>Start</div>}
                         </div>
                     )
+                case 'timer':
+                    return (
+                        <div className='timer'>
+                            <p>Nothing in this section.</p>
+                        </div>
+                    )
             }
         }
 

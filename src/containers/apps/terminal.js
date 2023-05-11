@@ -75,7 +75,7 @@ export default function Terminal() {
                     className='Window terminal minimize'
                     key={Math.random()}
                 >
-                    
+                    <TerminalWindow/>
                 </div> 
         </div>
     )

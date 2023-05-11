@@ -40,6 +40,13 @@
     src: url(https://static.xx.fbcdn.net/rsrc.php/yR/r/0wcuDYQ2laN.woff2) format('woff2'), url(https://static.xx.fbcdn.net/rsrc.php/yq/r/R-4r2OtBGX6.woff) format('woff'), url(https://static.xx.fbcdn.net/rsrc.php/yF/r/mrQd_YHOZRF.eot) format('embedded-opentype')
 }
 
+@font-face {
+    font-family: Cascadia Code;
+    src: url(./fonts/CascadiaCode-Regular-VTT.woff2) format("woff2");
+    font-style: normal;
+    font-display: swap
+}
+
 * ::-webkit-scrollbar {
     width: 0;
 }

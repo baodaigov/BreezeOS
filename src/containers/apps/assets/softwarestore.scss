@@ -2,11 +2,7 @@ $bgcolor: #202023da;
 $fgcolor: #e2e2e2;
 
 .SoftwareStoreWindow {
-    * {
-        transition: all ease .3s;
-    }
     .Window .TopBar {
-        padding: 4px 8px;
         justify-content: space-between;
         .TopBarInteractionContainer {
             display: flex;
@@ -98,20 +94,51 @@ $fgcolor: #e2e2e2;
         * {
             margin: 0;
         }
+            
+        .SoftwareTableLayout {
+            position: absolute;
+            font-size: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 999px;
+            margin: 5px 10px;
+            transition: all ease .2s;
+            z-index: 1;
+
+            &:hover {
+                background: transparentize($fgcolor, 0.95);
+            }
+        }
 
         .NavPanel {
-            margin: 10px 15px;
+            padding: 20px 18px;
             height: 100%;
-            width: 230px;
+            width: 310px;
             transition: none;
+            background: transparentize($fgcolor, 0.97);
+            position: relative;
+            left: 0;
+            transition: all ease .3s;
+
+            &.inactive {
+                position: relative;
+                left: -310px;
+                width: 0;
+                padding: 0;
+            }
 
             * {
-                transition: none;
+                transition: all ease .1s;
             }
 
             .Category {
-                height: 100%;
+                max-height: 100%;
                 width: 100%;
+                position: relative;
+                top: 40px;
 
                 .CategoryTitle {
                     font-weight: 700;
@@ -150,6 +177,138 @@ $fgcolor: #e2e2e2;
                 }
             }
         }
+
+        .SoftwareContainer {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            transition: all ease .3s;
+
+            .SoftwareTab {
+                max-width: 100%;
+                display: flex;
+                justify-content: space-between;
+                background: $bgcolor;
+
+                .SoftwareNav {
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 12px;
+                    padding: 5px;
+
+                    .SoftwareNavItem {
+                        display: flex;
+                        align-items: center;
+                        padding: 7px 13px;
+                        border-radius: 999px;
+                        height: fit-content;
+                        margin-right: 5px;
+                        transition: all ease .05s;
+
+                        &:last-child {margin: 0;}
+                    }
+
+                    &[value='1']{
+                        .SoftwareNavItem.explorer{background: transparentize($fgcolor, 0.85)}
+                    }
+
+                    &[value='2']{
+                        .SoftwareNavItem.installed{background: transparentize($fgcolor, 0.85)}
+                    }
+
+                    &[value='3']{
+                        .SoftwareNavItem.updates{background: transparentize($fgcolor, 0.85)}
+                    }
+
+                    .SoftwareSearchbar {
+                        appearance: none;
+                        background: #a5a5a512;
+                        padding: 9px 15px;
+                        outline: none;
+                        border: none;
+                        width: 500px;
+                        border-radius: 999px;
+                        color: $fgcolor;
+                        font-size: 12px;
+                        transition: width ease .3s;
+                        animation: searchbar .3s;
+
+                        &:focus {
+                            border: 1px solid #8fb6ff;
+                            width: 600px;
+                        }
+
+                        @keyframes searchbar {
+                            0% {
+                                width: 450px;
+                            }
+
+                            100% {
+                                width: 500px;
+                            }
+                        }
+                    }
+
+                    .CloseSearchbar {
+                        font-size: 15px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 25px;
+                        height: 25px;
+                        border-radius: 999px;
+                        margin-left: 10px;
+                        transition: all ease .2s;
+                        z-index: 1;
+                        margin: 5px;
+            
+                        &:hover {
+                            background: transparentize($fgcolor, 0.95);
+                        }
+                    }
+                }
+
+                .SoftwareSearch {
+                    font-size: 15px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 999px;
+                    margin-left: 10px;
+                    padding: 0 20px;
+                    transition: all ease .2s;
+                    z-index: 1;
+                    margin: 5px;
+        
+                    &:hover {
+                        background: transparentize($fgcolor, 0.95);
+                    }
+                }
+            }
+
+            .Software {
+                padding: 10px;
+                width: 100%;
+                height: 100%;
+
+                .updates {
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    color: transparentize($fgcolor, 0.85);
+
+                    h1 {font-weight: 700;}
+                }
+            }
+        }
     }    
 }
 
@@ -181,13 +340,63 @@ $fgcolor: #e2e2e2;
     .SoftwareStore {
         background: $fgcolor;
         color: $bgcolor;
+            
+        .SoftwareTableLayout {
+            &:hover {
+                background: transparentize($bgcolor, 0.8);
+            }
+        }
         
         .NavPanel {
+            background: transparentize($bgcolor, 0.82);
             .Category {
                 .Categories {
                     .CategoryItem {
                         background: darken($fgcolor, 5%);
                     }
+                }
+            }
+        }
+
+        .SoftwareContainer {
+            .SoftwareTab {
+                background: transparentize($bgcolor, 0.82);
+
+                .SoftwareNav {
+                    &[value='1']{
+                        .SoftwareNavItem.explorer{background: transparentize($bgcolor, 0.75)}
+                    }
+
+                    &[value='2']{
+                        .SoftwareNavItem.installed{background: transparentize($bgcolor, 0.75)}
+                    }
+
+                    &[value='3']{
+                        .SoftwareNavItem.updates{background: transparentize($bgcolor, 0.75)}
+                    }
+
+                    .SoftwareSearchbar {
+                        color: $bgcolor;
+                        background: darken(#a5a5a512, 100%);
+                    }
+
+                    .CloseSearchbar {
+                        &:hover {
+                            background: transparentize($bgcolor, 0.78);
+                        }
+                    }
+                }
+
+                .SoftwareSearch {
+                    &:hover {
+                        background: transparentize($bgcolor, 0.75);
+                    }
+                }
+            }
+
+            .Software {
+                .updates {
+                    color: transparentize($bgcolor, 0.7);
                 }
             }
         }

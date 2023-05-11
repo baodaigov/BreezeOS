@@ -4,7 +4,7 @@ import Task from '../header/Task';
 import Home from '../header/Home';
 import { useBattery } from 'react-use';
 
-export const TaskIcon = [
+const TaskIcon = [
     {
         "id": "wifi", "icon": "fa-solid fa-wifi"
     },
