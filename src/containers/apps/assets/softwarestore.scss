@@ -98,6 +98,58 @@ $fgcolor: #e2e2e2;
         * {
             margin: 0;
         }
+
+        .NavPanel {
+            margin: 10px 15px;
+            height: 100%;
+            width: 230px;
+            transition: none;
+
+            * {
+                transition: none;
+            }
+
+            .Category {
+                height: 100%;
+                width: 100%;
+
+                .CategoryTitle {
+                    font-weight: 700;
+                    margin-bottom: 15px;
+                }
+
+                .Categories {
+                    display: flex;
+                    flex-direction: column;
+                    overflow-y: auto;
+                    overflow-x: hidden;
+
+                    .CategoryItem {
+                        border-radius: 5px;
+                        margin-bottom: 10px;
+                        width: 100%;
+                        overflow: hidden;
+                        display: flex;
+                        align-items: center;
+                        font-size: 14px;
+                        padding: 6px 10px;
+                        background: lighten($bgcolor, 3%);
+
+                        &.red {
+                            border-left: 4px solid #932e2e;
+                        }
+
+                        &.green {
+                            border-left: 4px solid #2e9362;
+                        }
+
+                        &.yellow {
+                            border-left: 4px solid #93912e;
+                        }
+                    }
+                }
+            }
+        }
     }    
 }
 
@@ -129,5 +181,15 @@ $fgcolor: #e2e2e2;
     .SoftwareStore {
         background: $fgcolor;
         color: $bgcolor;
+        
+        .NavPanel {
+            .Category {
+                .Categories {
+                    .CategoryItem {
+                        background: darken($fgcolor, 5%);
+                    }
+                }
+            }
+        }
     }
 }

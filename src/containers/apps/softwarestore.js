@@ -55,27 +55,31 @@ export default function SoftwareStore() {
         return (
             <>
                 <TopBar title='Software Store' onDblClick={minimize}>
-                    <div className='TabBarWrapper'>
-                        <div className='TabBar' style={{ display: 'flex', flexDirection: 'row-reverse', justifyContent: 'space-between' }}>
-                            <div className='TabBarItem'>
-                                <div className='TabBarInteraction'>
-                                    <i className="fa-regular fa-bars"></i>
-                                </div>
-                                <div className='TabBarInteraction' style={{ marginLeft: '10px' }}>
-                                    <i className="fa-regular fa-magnifying-glass"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='TopBarInteractionWrapper' style={{ display: 'flex' }}>
-                        <TopBarInteraction action='hide'/>
-                        <TopBarInteraction action={min ? 'max' : 'min'} onMinMax={minimize}/>
-                        <TopBarInteraction action='close' onClose={close}/>
-                    </div>
+                    <TopBarInteraction action='hide'/>
+                    <TopBarInteraction action={min ? 'max' : 'min'} onMinMax={minimize}/>
+                    <TopBarInteraction action='close' onClose={close}/>
                 </TopBar>
                 <WindowBody>
                     <div className='SoftwareStore'>
-                        <p>aaa</p>
+                        <div className='NavPanel'>
+                            <div className='Category'>
+                                <h2 className='CategoryTitle'>Categories</h2>
+                                <div className='Categories'>
+                                    <div className='CategoryItem red'>
+                                        <i class="fa-regular fa-music fa-sm" style={{ marginRight: '7px' }}></i>
+                                        <p className='font-bold'>Audio & Video</p>
+                                    </div>
+                                    <div className='CategoryItem green'>
+                                        <i class="fa-regular fa-message fa-sm" style={{ marginRight: '7px' }}></i>
+                                        <p className='font-bold'>Communication & News</p>
+                                    </div>
+                                    <div className='CategoryItem yellow'>
+                                        <i class="fa-regular fa-pen-to-square fa-sm" style={{ marginRight: '7px' }}></i>
+                                        <p className='font-bold'>Productivity</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </WindowBody>
             </>
