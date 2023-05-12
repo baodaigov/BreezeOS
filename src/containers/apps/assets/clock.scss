@@ -112,9 +112,23 @@ $fgcolor: #e2e2e2;
                         overflow-x: hidden;
                         overflow-y: auto;
                         padding: 10px 30px;
+
+                        &::-webkit-scrollbar {
+                            width: 0;
+                            border-radius: 3px;
+                            position: absolute;
+                        }
                         
-                        &::-webkit-scrollbar { width: 3px; border-radius: 3px; }
-                        &::-webkit-scrollbar-thumb { background: $fgcolor; border-radius: 10px; }
+                        &::-webkit-scrollbar-thumb {
+                            background: $fgcolor;
+                            border-radius: 10px;
+                        }
+
+                        &:hover {
+                            &::-webkit-scrollbar {
+                                width: 3px;
+                            }
+                        }
 
                         .AlarmContainerItem {
                             position: relative;
