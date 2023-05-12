@@ -114,9 +114,8 @@ $fgcolor: #e2e2e2;
         }
 
         .NavPanel {
-            padding: 20px 18px;
             height: 100%;
-            width: 310px;
+            width: 330px;
             transition: none;
             background: transparentize($fgcolor, 0.97);
             position: relative;
@@ -124,10 +123,8 @@ $fgcolor: #e2e2e2;
             transition: all ease .3s;
 
             &.inactive {
-                position: relative;
-                left: -310px;
                 width: 0;
-                padding: 0;
+                left: -125px;
             }
 
             * {
@@ -136,9 +133,10 @@ $fgcolor: #e2e2e2;
 
             .Category {
                 max-height: 100%;
-                width: 100%;
+                width: 87%;
+                margin: 0 auto;
                 position: relative;
-                top: 40px;
+                top: 50px;
 
                 .CategoryTitle {
                     font-weight: 700;
@@ -158,20 +156,37 @@ $fgcolor: #e2e2e2;
                         overflow: hidden;
                         display: flex;
                         align-items: center;
-                        font-size: 14px;
-                        padding: 6px 10px;
-                        background: lighten($bgcolor, 3%);
+                        font-size: 15.5px;
+                        padding: 15px 20px;
 
-                        &.red {
-                            border-left: 4px solid #932e2e;
+                        &.create {
+                            background: linear-gradient(180deg, #3f2e93, #2662b1);
+                            color: $fgcolor;
                         }
 
-                        &.green {
-                            border-left: 4px solid #2e9362;
+                        &.work {
+                            background: #fffeb5;
+                            color: #2662b1;
                         }
 
-                        &.yellow {
-                            border-left: 4px solid #93912e;
+                        &.play {
+                            background: linear-gradient(90deg, #ffe69a, #b28cff);
+                            color: #003479;
+                        }
+
+                        &.socialize {
+                            background: linear-gradient(90deg, #ff77a2, #ff9e77);
+                            color: #202023;
+                        }
+
+                        &.learn {
+                            background: linear-gradient(180deg, #80d184, darken(#80d184, 10%));
+                            color: $fgcolor;
+                        }
+
+                        &.develop {
+                            background: linear-gradient(180deg, #140f2f, #20184b);
+                            color: $fgcolor;
                         }
                     }
                 }
@@ -180,10 +195,9 @@ $fgcolor: #e2e2e2;
 
         .SoftwareContainer {
             width: 100%;
-            height: 100%;
+            max-height: 100%;
             display: flex;
             flex-direction: column;
-            transition: all ease .3s;
 
             .SoftwareTab {
                 max-width: 100%;
@@ -292,9 +306,187 @@ $fgcolor: #e2e2e2;
             }
 
             .Software {
-                padding: 10px;
+                padding: 15px 20px;
                 width: 100%;
                 height: 100%;
+                position: absolute;
+                overflow-y: auto;
+
+                .explorer {
+                    .Application {
+                        display: flex;
+                        border-radius: 10px;
+                        background: transparentize($fgcolor, 0.96);
+                        color: $fgcolor;
+                        padding: 18px;
+                        margin-left: 10px;
+                        margin-bottom: 10px;
+                        width: 400px;
+                        font-size: 13px;
+
+                        .ApplicationTitle {
+                            font-weight: 700;
+                            font-size: 17px;
+                        }
+
+                        .ApplicationRating {
+                            margin-left: 7px;
+                            display: flex;
+                            font-size: 10px;
+                        }
+
+                        .ApplicationDesc {
+                            font-size: 12px;
+                            font-weight: 300;
+                        }
+
+                        .ApplicationInstallButton {
+                            border-radius: 999px;
+                            background-color: #8fb6ff53;
+                            color: #8fb6ff;
+                            margin-top: 10px;
+                            font-size: 11px;
+                            font-weight: 700;
+                            padding: 5px 10px;
+                            text-transform: uppercase;
+                            float: right;
+
+                            &:hover {background: #8fb6ff6b}
+
+                            &.installed {
+                                background: transparentize($fgcolor, 0.97);
+                                color: lighten($bgcolor, 15%);
+                            }
+                        }
+                    }
+
+                    .FeaturedApplication {
+                        display: flex;
+                        flex-direction: column;
+                        margin-bottom: 30px;
+
+                        .FeaturedApplicationContainer {
+                            margin-top: 7px;
+                            animation: showUp ease .3s;
+                            position: relative;
+                            top: 0;
+                            opacity: 1;
+                        }
+
+                        @keyframes showUp {
+                            0% {
+                                top: 20px;
+                                opacity: 0;
+                            }
+
+                            100% {
+                                top: 0;
+                                opacity: 1;
+                            }
+                        }
+
+                        .FeaturedApplicationWrapper {
+                            max-width: 80%;
+                            margin: 0 auto;
+                                
+                            .FeaturedApplicationInfo {
+                                margin-left: 30px;
+                            }
+                        }
+    
+                        .Blender {
+                            border-radius: 10px;
+                            overflow: hidden;
+                            background: linear-gradient(180deg, #ffcf5f, #ffc53c);
+                            box-shadow: 0px 0 20px #ffc43c93;
+                            padding: 50px;
+                            width: 100%;
+
+                            .FeaturedApplicationInfo {
+                                color: $bgcolor;
+                            }
+                        }
+    
+                        .Spotify {
+                            border-radius: 10px;
+                            overflow: hidden;
+                            background: linear-gradient(180deg, #5fff94, #3cffce);
+                            box-shadow: 0px 0 20px #3cff7d93;
+                            padding: 50px;
+                            width: 100%;
+
+                            .FeaturedApplicationInfo {
+                                color: $bgcolor;
+                            }
+                        }
+                    }
+
+                    .EditorChoice {
+                        margin-bottom: 50px;
+
+                        .EditorChoiceContainer {
+                            margin-top: 7px;
+                            display: flex;
+                            flex-wrap: wrap;
+                            justify-content: center;
+                            align-items: center;
+                        }
+                    }
+
+                    .RecentReleases {
+                        margin-bottom: 50px;
+
+                        .RecentReleasesContainer {
+                            margin-top: 7px;
+                            display: flex;
+                            flex-wrap: wrap;
+                            justify-content: center;
+                            align-items: center;
+                        }
+                    }
+                }
+
+                .installed {
+                    .InstalledAppContainer {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+
+                        .Application {
+                            display: flex;
+                            border-radius: 10px;
+                            background: transparentize($fgcolor, 0.96);
+                            color: $fgcolor;
+                            padding: 18px;
+                            margin-left: 10px;
+                            margin-bottom: 10px;
+                            width: 550px;
+                            font-size: 13px;
+    
+                            .ApplicationTitle {
+                                font-weight: 700;
+                                font-size: 17px;
+                                margin-bottom: 5px;
+                            }
+    
+                            .ApplicationInstallButton {
+                                border-radius: 999px;
+                                background-color: #ff8f8f1a;
+                                color: #ff8f8f;
+                                font-size: 14px;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                width: 35px;
+                                height: 35px;
+                                float: right;
+    
+                                &:hover {background: #ff8f8f2a}
+                            }
+                        }
+                    }
+                }
 
                 .updates {
                     width: 100%;
@@ -349,13 +541,6 @@ $fgcolor: #e2e2e2;
         
         .NavPanel {
             background: transparentize($bgcolor, 0.82);
-            .Category {
-                .Categories {
-                    .CategoryItem {
-                        background: darken($fgcolor, 5%);
-                    }
-                }
-            }
         }
 
         .SoftwareContainer {
@@ -395,6 +580,28 @@ $fgcolor: #e2e2e2;
             }
 
             .Software {
+                .explorer {
+                    .Application {
+                        background: transparentize($bgcolor, 0.82);
+                        color: $bgcolor;
+
+                        .ApplicationInstallButton.installed {
+                            background: transparentize($bgcolor, 0.82);
+                            color: darken($fgcolor, 12%);
+                        }
+                    }
+
+                    .FeaturedApplication .FeaturedApplicationContainer {
+                            .Blender, .Spotify {
+                                box-shadow: 0px 0 20px transparentize($bgcolor, 0.65);
+                            }
+
+                            .FeaturedApplicationInfo {
+                                color: $bgcolor;
+                            }
+                        }
+                }
+
                 .updates {
                     color: transparentize($bgcolor, 0.7);
                 }
