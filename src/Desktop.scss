@@ -111,6 +111,7 @@ a {
         * { display: none; cursor: none!important; }
     }
     &.cursorLoad * { display: none; cursor: wait!important; }
+    &.isBold * {font-weight: 700;}
 
     .DesktopBody {
         display: none;

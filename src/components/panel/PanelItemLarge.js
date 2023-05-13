@@ -27,6 +27,11 @@ const PanelItemLarge = ({ type }) => {
         setActive(!isActive);
     }
 
+    const boldText = () => {
+        setActive(!isActive);
+		document.getElementsByClassName('Desktop')[0].classList.toggle('isBold');
+    }
+
 	switch (type) {
             case "wifi":
                 return (
@@ -61,6 +66,13 @@ const PanelItemLarge = ({ type }) => {
                     <div className={`PanelItemLarge font-bold ${isActive ? "" : "focused"}`} onClick={nightShift}>
                         <i className="fa-regular fa-brightness"></i>
                         Night Light
+                    </div>
+                )
+            case "bold-text":
+                return (
+                    <div className={`PanelItemLarge font-bold ${isActive ? "" : "focused"}`} onClick={boldText}>
+                        <i className="fa-solid fa-b"></i>
+                        Bold Text
                     </div>
                 )
             default:

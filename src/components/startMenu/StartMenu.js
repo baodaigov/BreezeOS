@@ -10,6 +10,7 @@ import { FilesStartApp } from '../../containers/apps/files';
 import { CalculatorStartApp } from '../../containers/apps/calculator';
 import { TextEditorStartApp } from '../../containers/apps/texteditor';
 import { SoftwareStoreStartApp } from '../../containers/apps/softwarestore';
+import { CalendarStartApp } from '../../containers/apps/calendar';
 
 const items = [
     {
@@ -49,6 +50,29 @@ function openApp(){
 }
 
 export default function StartMenu(){
+    const items = [
+        {
+            "name": "Thunderbird",
+            "icon": "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/internet-mail.svg",
+            "id": "thunderbird"
+        },
+        {
+            "name": "GitHub Desktop",
+            "icon": "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/github-desktop.svg",
+            "id": "githubdesktop"
+        },
+        {
+            "name": "Visual Studio Code",
+            "icon": "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/visual-studio-code.svg",
+            "id": "vscode"
+        },
+        {
+            "name": "Vim",
+            "icon": "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/vim.svg",
+            "id": "vim"
+        },
+    ]
+    
     const startRef = useRef(null);
     useOutsideAlerter(startRef);
 
@@ -73,14 +97,15 @@ export default function StartMenu(){
                     <SearchMenu onSearch={search} value={name} onChange={e => setName(e.target.innerText)}/>
                     <div className='StartApps'>
                         <FirefoxStartApp/>
+                        <CalendarStartApp/>
                         <ClockStartApp/>
                         <CameraStartApp/>
                         <FilesStartApp/>
                         <CalculatorStartApp/>
                         <TextEditorStartApp/>
+                        <TerminalStartApp/>
                         <SoftwareStoreStartApp/>
                         {items.map(i => <StartApp key={i.id} icon={i.icon} name={i.name} onClick={openApp}/>)}
-                        <TerminalStartApp/>
                     </div>
                 </div>
             </div>

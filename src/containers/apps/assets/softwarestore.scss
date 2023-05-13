@@ -210,7 +210,7 @@ $fgcolor: #e2e2e2;
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    font-size: 12px;
+                    font-size: 13px;
                     padding: 5px;
 
                     .SoftwareNavItem {
@@ -419,6 +419,19 @@ $fgcolor: #e2e2e2;
                                 color: $bgcolor;
                             }
                         }
+    
+                        .Caprine {
+                            border-radius: 10px;
+                            overflow: hidden;
+                            background: linear-gradient(180deg, #5faaff, #3c6dff);
+                            box-shadow: 0px 0 20px #2e4da8b1;
+                            padding: 50px;
+                            width: 100%;
+
+                            .FeaturedApplicationInfo {
+                                color: $fgcolor;
+                            }
+                        }
                     }
 
                     .EditorChoice {
@@ -592,14 +605,21 @@ $fgcolor: #e2e2e2;
                     }
 
                     .FeaturedApplication .FeaturedApplicationContainer {
-                            .Blender, .Spotify {
+                            .Blender, .Spotify, .Caprine {
                                 box-shadow: 0px 0 20px transparentize($bgcolor, 0.65);
                             }
-
-                            .FeaturedApplicationInfo {
-                                color: $bgcolor;
-                            }
                         }
+                }
+
+                .installed {
+                    .InstalledAppContainer {
+                        .Application {
+                            background: transparentize($bgcolor, 0.82);
+                            color: $bgcolor;
+                            
+                            .ApplicationInstallButton :hover {background: #ff8f8f0a}
+                        }
+                    }
                 }
 
                 .updates {

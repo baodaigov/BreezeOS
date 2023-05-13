@@ -28,7 +28,7 @@ const Desktop = () => {
     },2000);
 
     return (
-        <div className='Desktop activeBold'>
+        <div className='Desktop'>
             <TerminalWindow/>
             {isMobile() ? <h1 className='error'>Sorry, in order to use the operating system, please switch to the desktop.</h1> : ''}
             <LockScreen/>

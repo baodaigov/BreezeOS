@@ -8,11 +8,13 @@ import Files from '../../../containers/apps/files';
 import Calculator from '../../../containers/apps/calculator';
 import TextEditor from '../../../containers/apps/texteditor';
 import SoftwareStore from '../../../containers/apps/softwarestore';
+import Calendar from '../../../containers/apps/calendar';
 
 export default function Window(){
   return (
     <div className='WindowContainer'>
       <Firefox/>
+      <Calendar/>
       <Clock/>
       <Camera/>
       <Files/>

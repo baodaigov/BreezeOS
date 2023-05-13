@@ -9,14 +9,7 @@ import { FilesApp } from '../containers/apps/files';
 import { CalculatorApp } from '../containers/apps/calculator';
 import { TextEditorApp } from '../containers/apps/texteditor';
 import { SoftwareStoreApp } from '../containers/apps/softwarestore';
-
-const items = [
-    {
-        "name": "Calendar",
-        "icon": "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/calendar.svg",
-        "id": "calendar"
-    },
-]
+import { CalendarApp } from '../containers/apps/calendar';
 
 const Dock = () => {
     useEffect(() => {
@@ -34,16 +27,14 @@ const Dock = () => {
     return (
         <div className='Dock'>
         <FirefoxApp/>
+        <CalendarApp/>
         <ClockApp/>
         <CameraApp/>
         <FilesApp/>
         <CalculatorApp/>
         <TextEditorApp/>
-        <SoftwareStoreApp/>
-	        {items.map(item =>
-                <DockItem id={item.id} class={`${isActive ? "" : "clicked"}`} title={item.name} icon={item.icon} onClick={toggle}/>
-            )}
 	    <TerminalApp/>
+        <SoftwareStoreApp/>
 	    <a href='https://github.com/baodaigov/BreezeOS'>
                 <DockItem id="github" title="GitHub" icon="https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/github-desktop.svg"/>
             </a>

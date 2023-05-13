@@ -26,6 +26,7 @@ class PanelBottom extends Component {
                 </PanelContainer>
                 <PanelContainer>
                     <PanelItemLarge type='bluetooth'/>
+                    <PanelItemLarge type='bold-text'/>
                 </PanelContainer>
             </div>
         )

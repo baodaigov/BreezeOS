@@ -148,7 +148,6 @@ $actcolor: #8fb6ff;
                 &[value='b']{
                     .DropdownMenu.clock-rotate-left {
                         color: $actcolor;
-                        font-weight: 700;
                         margin-left: 10px;
 
                         i {
@@ -156,7 +155,7 @@ $actcolor: #8fb6ff;
                         }
 
                         p {
-                            // background: $fgcolor;
+                            font-weight: 700;
                             background: transparentize($actcolor, 0.87);
                         }
                     }
@@ -165,7 +164,6 @@ $actcolor: #8fb6ff;
                 &[value='a']{
                     .DropdownMenu.star {
                         color: $actcolor;
-                        font-weight: 700;
                         margin-left: 10px;
 
                         i {
@@ -173,7 +171,7 @@ $actcolor: #8fb6ff;
                         }
 
                         p {
-                            // background: $fgcolor;
+                            font-weight: 700;
                             background: transparentize($actcolor, 0.87);
                         }
                     }
@@ -182,7 +180,6 @@ $actcolor: #8fb6ff;
                 &[value='1']{
                     .DropdownMenu.house {
                         color: $actcolor;
-                        font-weight: 700;
                         margin-left: 10px;
 
                         i {
@@ -190,7 +187,7 @@ $actcolor: #8fb6ff;
                         }
 
                         p {
-                            // background: $fgcolor;
+                            font-weight: 700;
                             background: transparentize($actcolor, 0.87);
                         }
                     }
@@ -199,7 +196,6 @@ $actcolor: #8fb6ff;
                 &[value='2']{
                     .DropdownMenu.desktop {
                         color: $actcolor;
-                        font-weight: 700;
                         margin-left: 10px;
 
                         i {
@@ -207,7 +203,7 @@ $actcolor: #8fb6ff;
                         }
 
                         p {
-                            // background: $fgcolor;
+                            font-weight: 700;
                             background: transparentize($actcolor, 0.87);
                         }
                     }
@@ -216,7 +212,6 @@ $actcolor: #8fb6ff;
                 &[value='3']{
                     .DropdownMenu.file {
                         color: $actcolor;
-                        font-weight: 700;
                         margin-left: 10px;
 
                         i {
@@ -224,7 +219,7 @@ $actcolor: #8fb6ff;
                         }
 
                         p {
-                            // background: $fgcolor;
+                            font-weight: 700;
                             background: transparentize($actcolor, 0.87);
                         }
                     }
@@ -233,7 +228,6 @@ $actcolor: #8fb6ff;
                 &[value='4']{
                     .DropdownMenu.download {
                         color: $actcolor;
-                        font-weight: 700;
                         margin-left: 10px;
 
                         i {
@@ -241,7 +235,7 @@ $actcolor: #8fb6ff;
                         }
 
                         p {
-                            // background: $fgcolor;
+                            font-weight: 700;
                             background: transparentize($actcolor, 0.87);
                         }
                     }
@@ -250,7 +244,6 @@ $actcolor: #8fb6ff;
                 &[value='5']{
                     .DropdownMenu.music {
                         color: $actcolor;
-                        font-weight: 700;
                         margin-left: 10px;
 
                         i {
@@ -258,7 +251,7 @@ $actcolor: #8fb6ff;
                         }
 
                         p {
-                            // background: $fgcolor;
+                            font-weight: 700;
                             background: transparentize($actcolor, 0.87);
                         }
                     }
@@ -267,7 +260,6 @@ $actcolor: #8fb6ff;
                 &[value='6']{
                     .DropdownMenu.image {
                         color: $actcolor;
-                        font-weight: 700;
                         margin-left: 10px;
 
                         i {
@@ -275,7 +267,7 @@ $actcolor: #8fb6ff;
                         }
 
                         p {
-                            // background: $fgcolor;
+                            font-weight: 700;
                             background: transparentize($actcolor, 0.87);
                         }
                     }
@@ -284,7 +276,6 @@ $actcolor: #8fb6ff;
                 &[value='7']{
                     .DropdownMenu.film {
                         color: $actcolor;
-                        font-weight: 700;
                         margin-left: 10px;
 
                         i {
@@ -292,7 +283,7 @@ $actcolor: #8fb6ff;
                         }
 
                         p {
-                            // background: $fgcolor;
+                            font-weight: 700;
                             background: transparentize($actcolor, 0.87);
                         }
                     }
@@ -301,7 +292,6 @@ $actcolor: #8fb6ff;
                 &[value='8']{
                     .DropdownMenu.trash {
                         color: $actcolor;
-                        font-weight: 700;
                         margin-left: 10px;
 
                         i {
@@ -309,7 +299,7 @@ $actcolor: #8fb6ff;
                         }
 
                         p {
-                            // background: $fgcolor;
+                            font-weight: 700;
                             background: transparentize($actcolor, 0.87);
                         }
                     }
@@ -318,7 +308,6 @@ $actcolor: #8fb6ff;
                 &[value='9']{
                     .DropdownMenu.otherLocation {
                         color: $actcolor;
-                        font-weight: 700;
                         margin-left: 10px;
 
                         i {
@@ -326,7 +315,7 @@ $actcolor: #8fb6ff;
                         }
 
                         p {
-                            // background: $fgcolor;
+                            font-weight: 700;
                             background: transparentize($actcolor, 0.87);
                         }
                     }

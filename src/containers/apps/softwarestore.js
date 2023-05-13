@@ -76,7 +76,7 @@ export default function SoftwareStore() {
         }
 
         useEffect(() => {
-            const list = ['Blender', 'Spotify'];
+            const list = ['Blender', 'Spotify', 'Caprine'];
             const randomIndex = Math.floor(Math.random() * list.length);
             setFeaturedApplication(list[randomIndex]);
         }, [])
@@ -106,6 +106,20 @@ export default function SoftwareStore() {
                                     <div className='FeaturedApplicationInfo'>
                                         <h1 className='font-bold' style={{ marginBottom: '10px' }}>Spotify</h1>
                                         <p className='font-normal'>Music for everyone.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                case 'Caprine':
+                    return (
+                        <div className='Caprine'>
+                            <div className='FeaturedApplicationWrapper'>
+                                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                    <img src='https://www.callmebot.com/wp-content/uploads/Logo_Messenger_NewBlurple-399x399-1.png' width={120} height={120}/>
+                                    <div className='FeaturedApplicationInfo'>
+                                        <h1 className='font-bold' style={{ marginBottom: '10px' }}>Caprine</h1>
+                                        <p className='font-normal'>The best Facebook Messenger client for Linux.</p>
                                     </div>
                                 </div>
                             </div>
@@ -262,6 +276,23 @@ export default function SoftwareStore() {
                                                         <i className="fa-solid fa-star-sharp"></i>
                                                         <i className="fa-solid fa-star-sharp"></i>
                                                         <i className="fa-regular fa-star-sharp"></i>
+                                                        <i className="fa-regular fa-star-sharp"></i>
+                                                    </div>
+                                                </div>
+                                                <p className='ApplicationDesc'>Social Media</p>
+                                                <div className='ApplicationInstallButton'>Install</div>
+                                            </div>
+                                        </div>
+                                        <div className='Application'>
+                                            <img src='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/discord.svg' alt="Application" width={45} height={45}/>
+                                            <div style={{ marginLeft: '15px', width: '100%' }}>
+                                                <div style={{ display: 'flex', alignItems: 'center', marginBottom: '5px' }}>
+                                                    <p className='ApplicationTitle'>Discord</p>
+                                                    <div className='ApplicationRating'>
+                                                        <i className="fa-solid fa-star-sharp"></i>
+                                                        <i className="fa-solid fa-star-sharp"></i>
+                                                        <i className="fa-solid fa-star-sharp"></i>
+                                                        <i className="fa-solid fa-star-sharp"></i>
                                                         <i className="fa-regular fa-star-sharp"></i>
                                                     </div>
                                                 </div>
@@ -453,7 +484,7 @@ export default function SoftwareStore() {
                                                     </div>
                                                 </div>
                                                 <p className='ApplicationDesc'>Efficient</p>
-                                                <div className='ApplicationInstallButton'>Install</div>
+                                                <div className='ApplicationInstallButton installed'>Installed</div>
                                             </div>
                                         </div>
                                         <div className='Application'>
@@ -607,6 +638,15 @@ export default function SoftwareStore() {
                                     <img src='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/utilities-x-terminal.svg' alt="Application" width={45} height={45}/>
                                     <div style={{ marginLeft: '15px', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                         <p className='ApplicationTitle'>Terminal</p>
+                                        <div className='ApplicationInstallButton'>
+                                            <i class="fa-regular fa-trash"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className='Application'>
+                                    <img src='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/internet-mail.svg' alt="Application" width={45} height={45}/>
+                                    <div style={{ marginLeft: '15px', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                        <p className='ApplicationTitle'>Thunderbird</p>
                                         <div className='ApplicationInstallButton'>
                                             <i class="fa-regular fa-trash"></i>
                                         </div>
