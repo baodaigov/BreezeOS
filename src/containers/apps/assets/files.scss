@@ -27,6 +27,29 @@ $actcolor: #8fb6ff;
             width: 100vw;
             height: 100%;
         }
+        
+        .ActMenu .iconSize .ActMenuSelector {
+        	&:hover {background: transparent}
+        	
+        	.ActMenuInteraction {
+        		width: 20px;
+        		height: 20px;
+        		border-radius: 999px;
+        		font-size: 13px;
+        		display: flex;
+        		justify-content: center;
+        		align-items: center;
+        		transition: all ease .2s;
+        		
+        		&:hover {background:#ffffff12}
+        		
+        		&.disabled {
+        			color:#ffffff32;
+        			pointer-events: none;
+        			&:hover {background: transparent}
+        		}
+        	}
+        }
     
         .TabBarWrapper {
             margin: 0 10px;
@@ -408,6 +431,15 @@ $actcolor: #8fb6ff;
 
 .lightMode {
     .files {
+        	.ActMenu .iconSize .ActMenuSelector .ActMenuInteraction {
+        		
+        		&:hover {background:#00000012}
+        		
+        		&.disabled {
+        			color:#00000032;
+        		}
+        	}
+        	
         .TabBarWrapper .TabBar {
             .TabBarItem {
                 color: #000;

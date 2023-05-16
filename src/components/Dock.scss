@@ -35,11 +35,10 @@
                 display: block;
                 position: absolute;
                 top: 40px;
-                border-radius: 999px;
+                border-radius: 9999px;
                 width: 0;
                 height: 3px;
-                background: #160059;
-                transition: width .2s;
+                transition: all ease .3s;
             }
 
             &.clicked {
@@ -63,6 +62,7 @@
               &::after {
                 width: 20px;
 		background-color: #4000ff;
+                transition: all ease .3s;
               }
             }
 

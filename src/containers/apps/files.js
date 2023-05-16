@@ -6,6 +6,7 @@ import DockItem from '../../components/DockItem';
 import './assets/files.scss';
 import TopBarInteraction from '../../components/utils/window/TopBarInteraction';
 import StartApp from '../../components/startMenu/StartApp';
+import ActMenu, { ActMenuSelector } from "../../components/utils/menu/index";
 import Image1 from './assets/Screenshot from 2022-09-10 20-41-45.png';
 import Image2 from './assets/favicon.ico';
 
@@ -18,8 +19,18 @@ export const FilesApp = () => {
         }, 500);
     };
     
+    useEffect(() => {
+	    document.addEventListener('keydown', (e) => {
+	    	if(e.ctrlKey && e.keyCode === 53){
+	    		toggle();
+	    	}
+	    })
+    }, []);
+    
 	return (
-		<DockItem id='files' class="FilesApp" title='Files' icon='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' onClick={toggle}/>
+		<>
+			<DockItem id='files' class="FilesApp" title='Files' icon='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' onClick={toggle}/>
+		</>
 	)
 };
 
@@ -44,7 +55,9 @@ export default function Files(){
 
     const FilesWindow = () => {
     	const [value, setValue] = useState('1');
-	const [directory, setDirectory] = useState('/home');
+	const [directory, setDirectory] = useState('/home/localhost');
+	const [iconSize, setIconSize] = useState(70);
+	const [settingsMenu, showSettingsMenu] = useState(false);
 
         const Dropdown = [
             {
@@ -111,42 +124,42 @@ export default function Files(){
 
         function house(){
             setValue('1');
-	    setDirectory('/home');
+	    setDirectory('/home/localhost');
         }
 
         function desktop(){
             setValue('2');
-	    setDirectory('/home/Desktop');
+	    setDirectory('/home/localhost/Desktop');
         }
 
         function file(){
             setValue('3');
-	    setDirectory('/home/Documents');
+	    setDirectory('/home/localhost/Documents');
         }
 
         function download(){
             setValue('4');
-	    setDirectory('/home/Downloads');
+	    setDirectory('/home/localhost/Downloads');
         }
 
         function music(){
             setValue('5');
-	    setDirectory('/home/Music');
+	    setDirectory('/home/localhost/Music');
         }
 
         function image(){
             setValue('6');
-	    setDirectory('/home/Pictures');
+	    setDirectory('/home/localhost/Pictures');
         }
 
         function film(){
             setValue('7');
-	    setDirectory('/home/Videos');
+	    setDirectory('/home/localhost/Videos');
         }
 
         function trash(){
             setValue('8');
-	    setDirectory('/home/Trash');
+	    setDirectory('/home/localhost/Trash');
         }
 
         function otherLocation(){
@@ -161,7 +174,7 @@ export default function Files(){
             document.getElementById('files').classList.remove('clicked');
             setTimeout(() => {
             	setValue('1');
-            	setDirectory('Home');
+            	house();
             }, 300);
         }
     
@@ -176,75 +189,83 @@ export default function Files(){
 				return (
 					<div className='FilesSection2'>
 		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/bin')}>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>bin</p>
 		                                </div>
 		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/boot')}>
-		                                    <img className='FilesIcon ln' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon ln' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>boot</p>
 		                                </div>
 		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/build')}>
-		                                    <img className='FilesIcon ln' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon ln' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>build</p>
 		                                </div>
 		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/dev')}>
-		                                    <img className='FilesIcon ln' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon ln' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>dev</p>
 		                                </div>
 		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/etc')}>
-		                                    <img className='FilesIcon ln' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon ln' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>etc</p>
 		                                </div>
-		                                <div className='FilesItem' onDoubleClick={house}>
-		                                    <img className='FilesIcon ln' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home')}>
+		                                    <img className='FilesIcon ln' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>home</p>
 		                                </div>
 		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/lib')}>
-		                                    <img className='FilesIcon ln' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon ln' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>lib</p>
 		                                </div>
 		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/lib64')}>
-		                                    <img className='FilesIcon ln' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon ln' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>lib64</p>
 		                                </div>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/lost+found')}>
+		                                    <img className='FilesIcon ln' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>lost+found</p>
+		                                </div>
 		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/mnt')}>
-		                                    <img className='FilesIcon ln' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon ln' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>mnt</p>
 		                                </div>
 		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/opt')}>
-		                                    <img className='FilesIcon ln' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon ln' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>opt</p>
 		                                </div>
 		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/proc')}>
-		                                    <img className='FilesIcon ln' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon ln' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>proc</p>
 		                                </div>
 		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/root')}>
-		                                    <img className='FilesIcon ln' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon ln' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>root</p>
 		                                </div>
 		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/run')}>
-		                                    <img className='FilesIcon ln' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon ln' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>run</p>
 		                                </div>
 		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/sbin')}>
-		                                    <img className='FilesIcon ln' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon ln' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>sbin</p>
 		                                </div>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/srv')}>
+		                                    <img className='FilesIcon ln' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>srv</p>
+		                                </div>
 		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/sys')}>
-		                                    <img className='FilesIcon ln' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon ln' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>sys</p>
 		                                </div>
 		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/tmp')}>
-		                                    <img className='FilesIcon ln' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon ln' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>tmp</p>
 		                                </div>
 		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/usr')}>
-		                                    <img className='FilesIcon ln' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon ln' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>usr</p>
 		                                </div>
 		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/var')}>
-		                                    <img className='FilesIcon ln' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon ln' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>var</p>
 		                                </div>
 		                        </div>
@@ -253,83 +274,83 @@ export default function Files(){
 				return (
 					<div className='FilesSection2'>
 		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/etc/ld.so.conf.d')}>
-		                                    	<img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                    	<img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>ld.so.conf.d</p>
 		                                </div>
 		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/etc/profile.d')}>
-		                                    	<img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                    	<img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>profile.d</p>
 		                                </div>
 		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/etc/skel')}>
-		                                    	<img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                    	<img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>skel</p>
 		                                </div>
 		                                <div className='FilesItem'>
-				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={80} height={80}/>
+				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>arch-release</p>
 		                                </div>
 		                                <div className='FilesItem'>
-				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={80} height={80}/>
+				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>crypttab</p>
 		                                </div>
 		                                <div className='FilesItem'>
-				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={80} height={80}/>
+				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>fstab</p>
 		                                </div>
 		                                <div className='FilesItem'>
-				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={80} height={80}/>
+				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>group</p>
 		                                </div>
 		                                <div className='FilesItem'>
-				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={80} height={80}/>
+				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>gshadow</p>
 		                                </div>
 		                                <div className='FilesItem'>
-				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={80} height={80}/>
+				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>host.conf</p>
 		                                </div>
 		                                <div className='FilesItem'>
-				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={80} height={80}/>
+				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>hosts</p>
 		                                </div>
 		                                <div className='FilesItem'>
-				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={80} height={80}/>
+				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>issue</p>
 		                                </div>
 		                                <div className='FilesItem'>
-				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={80} height={80}/>
+				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>ld.so.conf</p>
 		                                </div>
 		                                <div className='FilesItem'>
-				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/inode-symlink.svg' width={80} height={80}/>
+				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/inode-symlink.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>mtab</p>
 		                                </div>
 		                                <div className='FilesItem'>
-				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={80} height={80}/>
+				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>nsswitch.conf</p>
 		                                </div>
 		                                <div className='FilesItem'>
-				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={80} height={80}/>
+				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>passwd</p>
 		                                </div>
 		                                <div className='FilesItem'>
-				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={80} height={80}/>
+				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>profile</p>
 		                                </div>
 		                                <div className='FilesItem'>
-				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={80} height={80}/>
+				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>resolve.conf</p>
 		                                </div>
 		                                <div className='FilesItem'>
-				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={80} height={80}/>
+				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>securetty</p>
 		                                </div>
 		                                <div className='FilesItem'>
-				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={80} height={80}/>
+				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>shadows</p>
 		                                </div>
 		                                <div className='FilesItem'>
-				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={80} height={80}/>
+				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>shells</p>
 		                                </div>
 		                        </div>
@@ -338,7 +359,7 @@ export default function Files(){
 				return (
 					<div className='FilesSection2'>
 		                                <div className='FilesItem'>
-				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/application-x-shellscript.svg' width={80} height={80}/>
+				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/application-x-shellscript.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>locale.sh</p>
 		                                </div>
 		                        </div>
@@ -347,23 +368,23 @@ export default function Files(){
 				return (
 					<div className='FilesSection2'>
 		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/lib/sysctl.d')}>
-		                                    	<img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                    	<img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>sysctl.d</p>
 		                                </div>
 		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/lib/systemd')}>
-		                                    	<img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                    	<img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>systemd</p>
 		                                </div>
 		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/lib/sysusers.d')}>
-		                                    	<img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                    	<img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>sysusers.d</p>
 		                                </div>
 		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/lib/tmpfiles.d')}>
-		                                    	<img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                    	<img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>tmpfiles.d</p>
 		                                </div>
 		                                <div className='FilesItem'>
-				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={80} height={80}/>
+				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>os-release</p>
 		                                </div>
 		                        </div>
@@ -372,7 +393,7 @@ export default function Files(){
 				return (
 					<div className='FilesSection2'>
 		                                <div className='FilesItem'>
-				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={80} height={80}/>
+				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>10-arch.conf</p>
 		                                </div>
 		                        </div>
@@ -381,7 +402,7 @@ export default function Files(){
 				return (
 					<div className='FilesSection2'>
 		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/lib/systemd/system-environment-generators')}>
-		                                    	<img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                    	<img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>system-environment- generators</p>
 		                                </div>
 		                        </div>
@@ -390,7 +411,7 @@ export default function Files(){
 				return (
 					<div className='FilesSection2'>
 		                                <div className='FilesItem'>
-				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/application-x-shellscript.svg' width={80} height={80}/>
+				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/application-x-shellscript.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>10-arch</p>
 		                                </div>
 		                        </div>
@@ -399,7 +420,7 @@ export default function Files(){
 				return (
 					<div className='FilesSection2'>
 		                                <div className='FilesItem'>
-				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={80} height={80}/>
+				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>arch.conf</p>
 		                                </div>
 		                        </div>
@@ -408,7 +429,7 @@ export default function Files(){
 				return (
 					<div className='FilesSection2'>
 		                                <div className='FilesItem'>
-				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={80} height={80}/>
+				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>arch.conf</p>
 		                                </div>
 		                        </div>
@@ -417,23 +438,23 @@ export default function Files(){
 				return (
 					<div className='FilesSection2'>
 		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/lib64/sysctl.d')}>
-		                                    	<img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                    	<img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>sysctl.d</p>
 		                                </div>
 		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/lib64/systemd')}>
-		                                    	<img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                    	<img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>systemd</p>
 		                                </div>
 		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/lib64/sysusers.d')}>
-		                                    	<img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                    	<img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>sysusers.d</p>
 		                                </div>
 		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/lib64/tmpfiles.d')}>
-		                                    	<img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                    	<img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>tmpfiles.d</p>
 		                                </div>
 		                                <div className='FilesItem'>
-				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={80} height={80}/>
+				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>os-release</p>
 		                                </div>
 		                        </div>
@@ -442,7 +463,7 @@ export default function Files(){
 				return (
 					<div className='FilesSection2'>
 		                                <div className='FilesItem'>
-				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={80} height={80}/>
+				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>10-arch.conf</p>
 		                                </div>
 		                        </div>
@@ -451,7 +472,7 @@ export default function Files(){
 				return (
 					<div className='FilesSection2'>
 		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/lib64/systemd/system-environment-generators')}>
-		                                    	<img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                    	<img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>system-environment- generators</p>
 		                                </div>
 		                        </div>
@@ -460,7 +481,7 @@ export default function Files(){
 				return (
 					<div className='FilesSection2'>
 		                                <div className='FilesItem'>
-				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/application-x-shellscript.svg' width={80} height={80}/>
+				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/application-x-shellscript.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>10-arch</p>
 		                                </div>
 		                        </div>
@@ -469,7 +490,7 @@ export default function Files(){
 				return (
 					<div className='FilesSection2'>
 		                                <div className='FilesItem'>
-				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={80} height={80}/>
+				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>arch.conf</p>
 		                                </div>
 		                        </div>
@@ -478,7 +499,7 @@ export default function Files(){
 				return (
 					<div className='FilesSection2'>
 		                                <div className='FilesItem'>
-				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={80} height={80}/>
+				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>arch.conf</p>
 		                                </div>
 		                        </div>
@@ -487,402 +508,718 @@ export default function Files(){
 				return (
 					<div className='FilesSection2'>
 		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/srv/ftp')}>
-		                                    	<img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                    	<img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>ftp</p>
 		                                </div>
 		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/srv/http')}>
-		                                    	<img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                    	<img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>http</p>
+		                                </div>
+		                        </div>
+				)
+			case '/usr':
+				return (
+					<div className='FilesSection2'>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/usr/bin')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>bin</p>
+		                                </div>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/usr/include')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>include</p>
+		                                </div>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/usr/lib')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>lib</p>
+		                                </div>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/usr/lib64')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>lib64</p>
+		                                </div>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/usr/local')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>local</p>
+		                                </div>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/usr/sbin')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>sbin</p>
+		                                </div>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/usr/share')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>share</p>
+		                                </div>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/usr/src')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>src</p>
+		                                </div>
+		                        </div>
+				)
+			case '/usr/lib':
+				return (
+					<div className='FilesSection2'>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/usr/lib/sysctl.d')}>
+		                                    	<img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>sysctl.d</p>
+		                                </div>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/usr/lib/systemd')}>
+		                                    	<img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>systemd</p>
+		                                </div>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/usr/lib/sysusers.d')}>
+		                                    	<img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>sysusers.d</p>
+		                                </div>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/usr/lib/tmpfiles.d')}>
+		                                    	<img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>tmpfiles.d</p>
+		                                </div>
+		                                <div className='FilesItem'>
+				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>os-release</p>
+		                                </div>
+		                        </div>
+				)
+			case '/usr/lib/sysctl.d':
+				return (
+					<div className='FilesSection2'>
+		                                <div className='FilesItem'>
+				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>10-arch.conf</p>
+		                                </div>
+		                        </div>
+				)
+			case '/usr/lib/systemd':
+				return (
+					<div className='FilesSection2'>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/usr/lib/systemd/system-environment-generators')}>
+		                                    	<img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>system-environment- generators</p>
+		                                </div>
+		                        </div>
+				)
+			case '/usr/lib/systemd/system-environment-generators':
+				return (
+					<div className='FilesSection2'>
+		                                <div className='FilesItem'>
+				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/application-x-shellscript.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>10-arch</p>
+		                                </div>
+		                        </div>
+				)
+			case '/usr/lib/sysusers.d':
+				return (
+					<div className='FilesSection2'>
+		                                <div className='FilesItem'>
+				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>arch.conf</p>
+		                                </div>
+		                        </div>
+				)
+			case '/usr/lib/tmpfiles.d':
+				return (
+					<div className='FilesSection2'>
+		                                <div className='FilesItem'>
+				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>arch.conf</p>
+		                                </div>
+		                        </div>
+				)
+			case '/usr/lib64':
+				return (
+					<div className='FilesSection2'>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/usr/lib64/sysctl.d')}>
+		                                    	<img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>sysctl.d</p>
+		                                </div>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/usr/lib64/systemd')}>
+		                                    	<img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>systemd</p>
+		                                </div>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/usr/lib64/sysusers.d')}>
+		                                    	<img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>sysusers.d</p>
+		                                </div>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/usr/lib64/tmpfiles.d')}>
+		                                    	<img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>tmpfiles.d</p>
+		                                </div>
+		                                <div className='FilesItem'>
+				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>os-release</p>
+		                                </div>
+		                        </div>
+				)
+			case '/usr/lib64/sysctl.d':
+				return (
+					<div className='FilesSection2'>
+		                                <div className='FilesItem'>
+				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>10-arch.conf</p>
+		                                </div>
+		                        </div>
+				)
+			case '/usr/lib64/systemd':
+				return (
+					<div className='FilesSection2'>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/usr/lib64/systemd/system-environment-generators')}>
+		                                    	<img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>system-environment- generators</p>
+		                                </div>
+		                        </div>
+				)
+			case '/usr/lib64/systemd/system-environment-generators':
+				return (
+					<div className='FilesSection2'>
+		                                <div className='FilesItem'>
+				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/application-x-shellscript.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>10-arch</p>
+		                                </div>
+		                        </div>
+				)
+			case '/usr/lib64/sysusers.d':
+				return (
+					<div className='FilesSection2'>
+		                                <div className='FilesItem'>
+				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>arch.conf</p>
+		                                </div>
+		                        </div>
+				)
+			case '/usr/lib64/tmpfiles.d':
+				return (
+					<div className='FilesSection2'>
+		                                <div className='FilesItem'>
+				                        <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>arch.conf</p>
+		                                </div>
+		                        </div>
+				)
+			case '/usr/local':
+				return (
+					<div className='FilesSection2'>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/usr/local/bin')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>bin</p>
+		                                </div>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/usr/local/etc')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>etc</p>
+		                                </div>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/usr/local/games')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>games</p>
+		                                </div>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/usr/local/include')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>include</p>
+		                                </div>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/usr/local/lib')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>lib</p>
+		                                </div>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/usr/local/man')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>man</p>
+		                                </div>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/usr/local/sbin')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>sbin</p>
+		                                </div>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/usr/local/share')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>share</p>
+		                                </div>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/usr/local/src')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>src</p>
+		                                </div>
+		                        </div>
+				)
+			case '/usr/local/share':
+				return (
+					<div className='FilesSection2'>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/usr/local/share/man')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>man</p>
+		                                </div>
+		                        </div>
+				)
+			case '/var':
+				return (
+					<div className='FilesSection2'>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/var/cache')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>cache</p>
+		                                </div>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/var/empty')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>empty</p>
+		                                </div>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/var/games')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>games</p>
+		                                </div>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/var/lib')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>lib</p>
+		                                </div>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/var/local')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>local</p>
+		                                </div>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/var/log')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>log</p>
+		                                </div>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/var/mail')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>mail</p>
+		                                </div>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/var/opt')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>opt</p>
+		                                </div>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/var/run')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>run</p>
+		                                </div>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/var/spool')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>spool</p>
+		                                </div>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/var/tmp')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>tmp</p>
+		                                </div>
+		                                <div className='FilesItem'>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/inode-symlink.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>lock</p>
+		                                </div>
+		                        </div>
+				)
+			case '/var/lib':
+				return (
+					<div className='FilesSection2'>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/var/lib/misc')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>misc</p>
+		                                </div>
+		                        </div>
+				)
+			case '/var/log':
+				return (
+					<div className='FilesSection2'>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/var/log/old')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>old</p>
+		                                </div>
+		                        </div>
+				)
+			case '/var/spool':
+				return (
+					<div className='FilesSection2'>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/var/spool/mail')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>mail</p>
 		                                </div>
 		                        </div>
 				)
 			case '/home':
 				return (
 					<div className='FilesSection2'>
+		                                <div className='FilesItem' onDoubleClick={house}>
+		                                    	<img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        <p className='FilesName'>localhost</p>
+		                                </div>
+		                        </div>
+				)
+			case '/home/localhost':
+				return (
+					<div className='FilesSection2'>
 		                                <div className='FilesItem' onDoubleClick={desktop}>
-		                                    	<img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-user-desktop.svg' width={80} height={80}/>
+		                                    	<img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-user-desktop.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>Desktop</p>
 		                                </div>
 		                                <div className='FilesItem' onDoubleClick={file}>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder-documents.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder-documents.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>Documents</p>
 		                                </div>
 		                                <div className='FilesItem' onDoubleClick={download}>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder-download.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder-download.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>Downloads</p>
 		                                </div>
 		                                <div className='FilesItem' onDoubleClick={music}>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder-music.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder-music.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>Music</p>
 		                                </div>
 		                                <div className='FilesItem' onDoubleClick={image}>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder-pictures.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder-pictures.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>Pictures</p>
 		                                </div>
-		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/Public')}>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder-publicshare.svg' width={80} height={80}/>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/localhost/Public')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder-publicshare.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>Public</p>
 		                                </div>
-		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/Templates')}>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder-templates.svg' width={80} height={80}/>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/localhost/Templates')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder-templates.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>Templates</p>
 		                                </div>
 		                                <div className='FilesItem' onDoubleClick={film}>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder-video.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder-video.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>Videos</p>
 		                                </div>
 		                        </div>
 				)
-			case '/home/Documents':
+			case '/home/localhost/Documents':
 				return (
 					<div className='FilesSection2'>
 		                                <div className='FilesItem'>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>Untitled-1.txt</p>
 		                                </div>
 		                        </div>
 				)
-			case '/home/Downloads':
+			case '/home/localhost/Downloads':
 				return (
 					<div className='FilesSection2'>
-		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/Downloads/code-stable-x64-1675893708')}>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/localhost/Downloads/code-stable-x64-1675893708')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>code-stable-x64-1675893708</p>
 		                                </div>
-		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/Downloads/dotfiles-public')}>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/localhost/Downloads/dotfiles-public')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>dotfiles-public</p>
 		                                </div>
-		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/Downloads/Palatino')}>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/localhost/Downloads/Palatino')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>Palatino</p>
 		                                </div>
-		                                <div className='FilesItem' style={{ height: '135px' }}>
-		                                    <img className='FilesIcon' src='https:\/\/github.com/feross/TheAnnoyingSite.com/blob/master/static/cat-cute.jpg?raw=true' width='auto' height={80}/>
+		                                <div className='FilesItem'>
+		                                    <img className='FilesIcon' src='https:\/\/github.com/feross/TheAnnoyingSite.com/blob/master/static/cat-cute.jpg?raw=true' width='auto' height={iconSize}/>
 		                                    <p className='FilesName'>cat-cute.jpg</p>
 		                                </div>
-		                                <div className='FilesItem' style={{ height: '135px' }}>
-		                                    <img className='FilesIcon' src='https:\/\/github.com/feross/TheAnnoyingSite.com/blob/master/static/cat-blue-eyes.jpg?raw=true' width='auto' height={80}/>
+		                                <div className='FilesItem'>
+		                                    <img className='FilesIcon' src='https:\/\/github.com/feross/TheAnnoyingSite.com/blob/master/static/cat-blue-eyes.jpg?raw=true' width='auto' height={iconSize}/>
 		                                    <p className='FilesName'>cat-blue-eyes.jpg</p>
 		                                </div>
 		                                <div className='FilesItem'>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/x-office-presentation.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/x-office-presentation.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>Simple Green.pptx</p>
 		                                </div>
 		                                <div className='FilesItem' onDoubleClick={() => window.location.href='https:\/\/www.youtube.com/watch?v=dQw4w9WgXcQ'}>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/video-x-generic.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/video-x-generic.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>double-click this.mp4</p>
 		                                </div>
 		                        </div>
 				)
-			case '/home/Downloads/code-stable-x64-1675893708':
+			case '/home/localhost/Downloads/code-stable-x64-1675893708':
 				return (
 					<div className='FilesSection2'>
-		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/Downloads/code-stable-x64-1675893708/VSCode-linux-x64')}>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/localhost/Downloads/code-stable-x64-1675893708/VSCode-linux-x64')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>VSCode-linux-x64</p>
 		                                </div>
 		                        </div>
 				)
-			case '/home/Pictures':
+			case '/home/localhost/Pictures':
 				return (
 					<div className='FilesSection2'>
-		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/Pictures/Screenshots')}>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/localhost/Pictures/Screenshots')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>Screenshots</p>
 		                                </div>
-		                                <div className='FilesItem' style={{ height: '135px' }}>
-		                                    <img className='FilesIcon' src='https:\/\/github.com/feross/TheAnnoyingSite.com/blob/master/static/cat-ceiling.jpg?raw=true' width='auto' height={80}/>
+		                                <div className='FilesItem'>
+		                                    <img className='FilesIcon' src='https:\/\/github.com/feross/TheAnnoyingSite.com/blob/master/static/cat-ceiling.jpg?raw=true' width='auto' height={iconSize}/>
 		                                    <p className='FilesName'>cat-ceiling.jpg</p>
 		                                </div>
 		                        </div>
 				)
-			case '/home/Pictures/Screenshots':
+			case '/home/localhost/Pictures/Screenshots':
 				return (
 					<div className='FilesSection2'>
 		                                <div className='FilesItem'>
-		                                    <img className='FilesIcon' src={Image1} width='auto' height={80}/>
+		                                    <img className='FilesIcon' src={Image1} width='auto' height={iconSize}/>
 		                                    <p className='FilesName'>Screenshot from 2022-09-10 20-41-45.png</p>
 		                                </div>
 				                <div className='FilesItem'>
-				                	<img className='FilesIcon' src='https:\/\/github.com/baodaigov/BreezeOS/blob/master/public/screenshot.png?raw=true' width='auto' height={80}/>
+				                	<img className='FilesIcon' src='https:\/\/github.com/baodaigov/BreezeOS/blob/master/public/screenshot.png?raw=true' width='auto' height={iconSize}/>
 				                        <p className='FilesName'>Screenshot from 2023-05-11 22-59-38.png</p>
 				                </div>
 		                        </div>
 				)
-			case '/home/Trash':
+			case '/home/localhost/Trash':
 				return (
 					<div className='FilesSection2'>
-		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/Trash/thanhhafmcvn')}>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/localhost/Trash/thanhhafmcvn')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>thanhhafmcvn</p>
 		                                </div>
 		                        </div>
 				)
-			case '/home/Trash/thanhhafmcvn':
+			case '/home/localhost/Trash/thanhhafmcvn':
 				return (
 					<div className='FilesSection2'>
-		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/Trash/thanhhafmcvn/thanhhafmcvn.github.io')}>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
-		                                    <p className='FilesName'>thanhhafmcvn.github.io</p>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/localhost/Trash/thanhhafmcvn/thanhhafmcvn.github.io')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+		                                    <p className='FilesName'>thanhhafmcvn. github.io</p>
 		                                </div>
 		                        </div>
 				)
-			case '/home/Trash/thanhhafmcvn/thanhhafmcvn.github.io':
+			case '/home/localhost/Trash/thanhhafmcvn/thanhhafmcvn.github.io':
 				return (
 					<div className='FilesSection2'>
-		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git')}>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/localhost/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>.git</p>
 		                                </div>
 		                                <div className='FilesItem'>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>.gitignore</p>
 		                                </div>
 		                                <div className='FilesItem'>
-		                                    <img className='FilesIcon' src={Image2} width='auto' height={80}/>
+		                                    <img className='FilesIcon' src={Image2} width='auto' height={iconSize}/>
 		                                    <p className='FilesName'>favicon.ico</p>
 		                                </div>
 		                                <div className='FilesItem'>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-html.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-html.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>index.html</p>
 		                                </div>
 		                        </div>
 				)
-			case '/home/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git':
+			case '/home/localhost/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git':
 				return (
 					<div className='FilesSection2'>
-		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/branches')}>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/localhost/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/branches')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>branches</p>
 		                                </div>
-		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/hooks')}>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/localhost/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/hooks')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>hooks</p>
 		                                </div>
-		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/info')}>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/localhost/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/info')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>info</p>
 		                                </div>
-		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/logs')}>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/localhost/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/logs')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>logs</p>
 		                                </div>
-		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/objects')}>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/localhost/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/objects')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>objects</p>
 		                                </div>
-		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/refs')}>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/localhost/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/refs')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>refs</p>
 		                                </div>
 		                                <div className='FilesItem'>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>config</p>
 		                                </div>
 		                                <div className='FilesItem'>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>description</p>
 		                                </div>
 		                                <div className='FilesItem'>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>HEAD</p>
 		                                </div>
 		                                <div className='FilesItem'>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/application-octet-stream.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/application-octet-stream.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>index</p>
 		                                </div>
 		                                <div className='FilesItem'>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>packed-refs</p>
 		                                </div>
 		                        </div>
 				)
-			case '/home/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/hooks':
+			case '/home/localhost/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/hooks':
 				return (
 					<div className='FilesSection2'>
 		                                <div className='FilesItem'>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/application-x-shellscript.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/application-x-shellscript.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>applypatch-msg.sample</p>
 		                                </div>
 		                                <div className='FilesItem'>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/application-x-shellscript.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/application-x-shellscript.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>commit-msg.sample</p>
 		                                </div>
 		                                <div className='FilesItem'>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/application-x-perl.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/application-x-perl.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>fsmonitor-watchman.sample</p>
 		                                </div>
 		                                <div className='FilesItem'>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/application-x-shellscript.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/application-x-shellscript.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>post-update.sample</p>
 		                                </div>
 		                                <div className='FilesItem'>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/application-x-shellscript.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/application-x-shellscript.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>pre-applypatch.sample</p>
 		                                </div>
 		                                <div className='FilesItem'>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/application-x-shellscript.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/application-x-shellscript.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>pre-commit.sample</p>
 		                                </div>
 		                                <div className='FilesItem'>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/application-x-shellscript.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/application-x-shellscript.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>pre-merge-commit.sample</p>
 		                                </div>
 		                                <div className='FilesItem'>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/application-x-shellscript.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/application-x-shellscript.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>prepare-commit-msg.sample</p>
 		                                </div>
 		                                <div className='FilesItem'>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/application-x-shellscript.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/application-x-shellscript.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>pre-push.sample</p>
 		                                </div>
 		                                <div className='FilesItem'>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/application-x-shellscript.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/application-x-shellscript.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>pre-rebase.sample</p>
 		                                </div>
 		                                <div className='FilesItem'>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/application-x-shellscript.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/application-x-shellscript.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>pre-receive.sample</p>
 		                                </div>
 		                                <div className='FilesItem'>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/application-x-shellscript.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/application-x-shellscript.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>push-to-checkout.sample</p>
 		                                </div>
 		                                <div className='FilesItem'>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/application-x-shellscript.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/application-x-shellscript.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>update.sample</p>
 		                                </div>
 		                        </div>
 				)
-			case '/home/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/info':
+			case '/home/localhost/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/info':
 				return (
 					<div className='FilesSection2'>
 		                                <div className='FilesItem'>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>exclude</p>
 		                                </div>
 		                        </div>
 				)
-			case '/home/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/logs':
+			case '/home/localhost/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/logs':
 				return (
 					<div className='FilesSection2'>
-		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/logs/refs')}>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/localhost/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/logs/refs')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>refs</p>
 		                                </div>
 		                                <div className='FilesItem'>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>HEAD</p>
 		                                </div>
 		                        </div>
 				)
-			case '/home/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/logs/refs':
+			case '/home/localhost/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/logs/refs':
 				return (
 					<div className='FilesSection2'>
-		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/logs/refs/heads')}>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/localhost/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/logs/refs/heads')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>heads</p>
 		                                </div>
-		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/logs/refs/remotes')}>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/localhost/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/logs/refs/remotes')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>remotes</p>
 		                                </div>
 		                        </div>
 				)
-			case '/home/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/logs/refs/heads':
+			case '/home/localhost/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/logs/refs/heads':
 				return (
 					<div className='FilesSection2'>
 		                                <div className='FilesItem'>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>main</p>
 		                                </div>
 		                        </div>
 				)
-			case '/home/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/logs/refs/remotes':
+			case '/home/localhost/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/logs/refs/remotes':
 				return (
 					<div className='FilesSection2'>
-		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/logs/refs/remotes/origin')}>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/localhost/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/logs/refs/remotes/origin')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>origin</p>
 		                                </div>
 		                        </div>
 				)
-			case '/home/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/logs/refs/remotes/origin':
+			case '/home/localhost/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/logs/refs/remotes/origin':
 				return (
 					<div className='FilesSection2'>
 		                                <div className='FilesItem'>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>HEAD</p>
 		                                </div>
 		                        </div>
 				)
-			case '/home/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/objects':
+			case '/home/localhost/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/objects':
 				return (
 					<div className='FilesSection2'>
-		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/objects/info')}>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/localhost/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/objects/info')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>info</p>
 		                                </div>
-		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/objects/pack')}>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/localhost/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/objects/pack')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>pack</p>
 		                                </div>
 		                        </div>
 				)
-			case '/home/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/objects/pack':
+			case '/home/localhost/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/objects/pack':
 				return (
 					<div className='FilesSection2'>
 		                                <div className='FilesItem'>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/application-octet-stream.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/application-octet-stream.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>pack-d96a69752d638... 2b4c.idx</p>
 		                                </div>
 		                                <div className='FilesItem'>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/package-x-generic.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/package-x-generic.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>pack-d96a69752d638... b4c.pack</p>
 		                                </div>
 		                        </div>
 				)
-			case '/home/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/refs':
+			case '/home/localhost/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/refs':
 				return (
 					<div className='FilesSection2'>
-		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/refs/heads')}>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/localhost/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/refs/heads')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>heads</p>
 		                                </div>
-		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/refs/remotes')}>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/localhost/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/refs/remotes')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>remotes</p>
 		                                </div>
-		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/refs/tags')}>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/localhost/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/refs/tags')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>tags</p>
 		                                </div>
 		                        </div>
 				)
-			case '/home/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/refs/heads':
+			case '/home/localhost/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/refs/heads':
 				return (
 					<div className='FilesSection2'>
 		                                <div className='FilesItem'>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>main</p>
 		                                </div>
 		                        </div>
 				)
-			case '/home/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/refs/remotes':
+			case '/home/localhost/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/refs/remotes':
 				return (
 					<div className='FilesSection2'>
-		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/refs/remotes/origin')}>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/localhost/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/refs/remotes/origin')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>origin</p>
 		                                </div>
 		                        </div>
 				)
-			case '/home/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/refs/remotes/origin':
+			case '/home/localhost/Trash/thanhhafmcvn/thanhhafmcvn.github.io/.git/refs/remotes/origin':
 				return (
 					<div className='FilesSection2'>
 		                                <div className='FilesItem'>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>HEAD</p>
 		                                </div>
 		                        </div>
@@ -932,7 +1269,7 @@ export default function Files(){
 				return (
 					<div className='FilesSection2'>
 		                                <div className='FilesItem' onDoubleClick={() => setDirectory('500MB Partition/EFI')}>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>EFI</p>
 		                                </div>
 		                        </div>
@@ -941,7 +1278,7 @@ export default function Files(){
 				return (
 					<div className='FilesSection2'>
 		                                <div className='FilesItem' onDoubleClick={() => setDirectory('500MB Partition/EFI/GRUB')}>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>GRUB</p>
 		                                </div>
 		                        </div>
@@ -950,7 +1287,7 @@ export default function Files(){
 				return (
 					<div className='FilesSection2'>
 		                                <div className='FilesItem'>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/application-x-ms-dos-executable.svg' width={80} height={80}/>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/application-x-ms-dos-executable.svg' width={iconSize} height={iconSize}/>
 				                        <p className='FilesName'>grubx64.efi</p>
 		                                </div>
 		                        </div>
@@ -968,6 +1305,16 @@ export default function Files(){
 
         return (
             <>
+                <ActMenu style={{ zIndex: '1', top: '30px', right: '100px' }} className={settingsMenu ? 'active' : ''}>
+                	<div className='iconSize'>
+		        	<ActMenuSelector title='Icon size'>
+		        		<div style={{ marginLeft: '15px', display: 'flex' }}>
+		        			<i className={`fa-regular fa-plus ActMenuInteraction ${iconSize == 145 ? 'disabled' : ''}`} onClick={() => setIconSize(iconSize + 25)}></i>
+		        			<i className={`fa-regular fa-minus ActMenuInteraction ${iconSize == 20 ? 'disabled' : ''}`} onClick={() => setIconSize(iconSize - 25)}></i>
+		        		</div>
+		        	</ActMenuSelector>
+                	</div>
+                </ActMenu>
                 <TopBar title='Files' onDblClick={minimize}>
                     <div className='TabBarWrapper' style={{ width: '100%' }}>
                         <div className='TabBar' style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -999,7 +1346,7 @@ export default function Files(){
                                     <div className='TabSeparator'></div>
                                     <i className="fa-regular fa-chevron-down" style={{ marginLeft: '3px' }}></i>
                                 </div>
-                                <div className='TabBarInteraction'>
+                                <div className='TabBarInteraction' onClick={() => showSettingsMenu(!settingsMenu)}>
                                     <i className="fa-regular fa-bars"></i>
                                 </div>
                             </div>

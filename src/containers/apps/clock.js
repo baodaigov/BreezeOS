@@ -16,6 +16,14 @@ export const ClockApp = () => {
         }, 500);
     };
     
+    useEffect(() => {
+	    document.addEventListener('keydown', (e) => {
+	    	if(e.ctrlKey && e.keyCode === 51){
+	    		toggle();
+	    	}
+	    })
+    }, []);
+    
 	return (
 		<DockItem id='clock' class="ClockApp" title='Clock' icon='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/preferences-system-time.svg' onClick={toggle}/>
 	)

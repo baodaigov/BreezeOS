@@ -16,6 +16,14 @@ export const SoftwareStoreApp = () => {
         }, 500);
     };
     
+    useEffect(() => {
+	    document.addEventListener('keydown', (e) => {
+	    	if(e.ctrlKey && e.keyCode === 57){
+	    		toggle();
+	    	}
+	    })
+    }, []);
+    
 	return (
 		<DockItem id='softwarestore' class="SoftwareStoreApp" title='Software Store' icon='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/software-store.svg' onClick={toggle}/>
 	)

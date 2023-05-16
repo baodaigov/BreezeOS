@@ -5,6 +5,7 @@ export const ActMenuSelector = (props) => {
         <div className='ActMenuSelector' onClick={props.onClick}>
             {props.active ? <i className="fa-regular fa-check"></i> : ''}
             <p>{props.title}</p>
+            {props.children}
         </div>
     )
 }

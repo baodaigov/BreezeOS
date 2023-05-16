@@ -18,6 +18,14 @@ export const CalendarApp = () => {
         }, 500);
     };
     
+    useEffect(() => {
+	    document.addEventListener('keydown', (e) => {
+	    	if(e.ctrlKey && e.keyCode === 50){
+	    		toggle();
+	    	}
+	    })
+    }, []);
+    
 	return (
 		<DockItem id='calendar' class="CalendarApp" title='Calendar' icon='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/calendar.svg' onClick={toggle}/>
 	)

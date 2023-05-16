@@ -22,8 +22,8 @@ const Dock = () => {
 
     const toggle = () => {
   		setActive(!isActive);
-  	};
-
+    };
+    
     return (
         <div className='Dock'>
         <FirefoxApp/>

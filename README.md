@@ -4,4 +4,5 @@ Welcome to BreezeOS, this is an open-source project generated using ReactJS and 
 
 ![Screenshot](./public/screenshot.png)
 
-**This project is still in development. Feel free to fork if you'd like to improve things in this project**.
+**This project is still in development. Feel free to fork if you'd like to improve things in this project**
+### Live Demo: [https://baodaigov.github.io/BreezeOS](https://baodaigov.github.io/BreezeOS) (fullscreen for full experience).

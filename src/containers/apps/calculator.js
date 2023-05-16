@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../components/utils/window/Window.scss';
 import TopBar from '../../components/utils/window/TopBar';
 import WindowBody from '../../components/utils/window/WindowBody';
@@ -15,6 +15,14 @@ export const CalculatorApp = () => {
             document.getElementsByClassName('calculator')[0].classList.add('active');
         }, 500);
     };
+    
+    useEffect(() => {
+	    document.addEventListener('keydown', (e) => {
+	    	if(e.ctrlKey && e.keyCode === 54){
+	    		toggle();
+	    	}
+	    })
+    }, []);
     
 	return (
 		<DockItem id='calculator' class="CalculatorApp" title='Calculator' icon='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/accessories-calculator.svg' onClick={toggle}/>

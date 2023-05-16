@@ -16,8 +16,16 @@ export const FirefoxApp = () => {
         }, 500);
     };
     
+    useEffect(() => {
+	    document.addEventListener('keydown', (e) => {
+	    	if(e.ctrlKey && e.keyCode === 49){
+	    		toggle();
+	    	}
+	    })
+    }, []);
+    
 	return (
-		<DockItem id='firefox' class="FirefoxApp" title='Firefox' icon='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/firefox.svg' onClick={toggle}/>
+		<DockItem id='firefox' class="FirefoxApp" title='Firefox' number='1' icon='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/firefox.svg' onClick={toggle}/>
 	)
 };
 
