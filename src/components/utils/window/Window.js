@@ -3,6 +3,7 @@ import './Window.scss';
 import Terminal from '../../../containers/apps/terminal'
 import Firefox from '../../../containers/apps/firefox';
 import Clock from '../../../containers/apps/clock';
+import Settings from '../../../containers/apps/settings';
 import Camera from '../../../containers/apps/camera';
 import Files from '../../../containers/apps/files';
 import Calculator from '../../../containers/apps/calculator';
@@ -15,6 +16,7 @@ export default function Window(){
     <div className='WindowContainer'>
       <Firefox/>
       <Calendar/>
+      <Settings/>
       <Clock/>
       <Camera/>
       <Files/>

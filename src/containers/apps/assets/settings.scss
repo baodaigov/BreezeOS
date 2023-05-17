@@ -1,0 +1,524 @@
+$bgcolor: #202023da;
+$fgcolor: #e2e2e2;
+$actcolor: #8fb6ff;
+
+.SettingsWindow {
+    .Window .TopBar {
+        padding: 4px 8px;
+        .TopBarInteractionContainer {
+            display: flex;
+            width: 100vw;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .TopBarTitle {width: auto;}
+    }
+
+    .settings {
+        width: 93vw;
+        height: 93%;
+        opacity: 0;
+        pointer-events: none;
+        transition: all ease .3s;
+
+        &.active {
+            opacity: 1;
+            pointer-events: all;
+            width: 100vw;
+            height: 100%;
+        }
+        
+        .TabBarWrapper {
+            margin: 0 10px;
+            margin-right: 0;
+    
+            .TabBar {
+                display: flex;
+    
+                .TabBarItem {
+                    padding: 4px 9px;
+                    color: #fff;
+                    display: flex;
+                    align-items: center;
+                    font-size: 11px;
+                    margin-right: 5px;
+    
+                    * { margin: 0 }
+                    
+                    .TabSeparator {
+                        background-color: #ffffff1e;
+                        width: 1px;
+                    }
+
+                    .TabBarInteraction {
+                        display: flex;
+
+                        i {
+                            margin-right: 3px;
+                            font-size: 12px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            border-radius: 999px;
+                            height: 20px;
+                            width: 20px;
+                    	    transition: all ease .3s;
+
+                            &:hover {
+                                background-color: #ffffff1e;
+                            }
+
+                            &:last-child {
+                                margin: 0;
+                            }
+                        }
+                    }
+                }
+
+                .TabBarFileSystem {
+                    display: flex;
+                    justify-content: space-between;
+                    width: 600px;
+                    background-color: #ffffff0a;
+                    border-radius: 5px;
+                }
+            }
+        }
+        
+        &.minimize {
+            width: 1000px;
+            height: 600px;
+        }
+    }
+    
+    .Settings {
+        background: $bgcolor;
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        height: 100%;
+        color: $fgcolor;
+
+        .SettingsSection {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            
+            div {
+		    .NavPanel {
+		        background: transparentize($actcolor, 0.95);
+		        display: flex;
+		        justify-content: space-between;
+		        flex-direction: column;
+		        padding: 10px 0;
+		        margin: 7px;
+		        border-radius: 13px;
+
+		        .DropdownMenu {
+		            display: flex;
+		            align-items: center;
+		            color: darken($fgcolor, 10%);
+		            margin: 6px 0;
+		            margin-left: 20px;
+		            font-size: 13px;
+		            transition: all ease .3s;
+
+		            i {
+		                width: 10px;
+		                display: flex;
+		                justify-content: center;
+		            }
+
+		            p {
+		                margin: 0;
+		                padding: 8px 0 8px 12px;
+		                border-radius: 999px;
+		                border-top-right-radius: 0;
+		                border-bottom-right-radius: 0;
+		                width: 100%;
+		            }
+
+		            &:hover {
+		                color: $actcolor;
+		            }
+		        }
+		    }
+		    
+		    &[value='1']{
+		            .NavPanel .DropdownMenu.wifi {
+		                color: $actcolor;
+		                margin-left: 10px;
+
+		                i {
+		                    width: 30px;
+		                }
+
+		                p {
+		                    font-weight: 700;
+		                    background: transparentize($actcolor, 0.87);
+		                }
+		            }
+                    }
+		    
+		    &[value='2']{
+		            .NavPanel .DropdownMenu.bluetooth {
+		                color: $actcolor;
+		                margin-left: 10px;
+
+		                i {
+		                    width: 30px;
+		                }
+
+		                p {
+		                    font-weight: 700;
+		                    background: transparentize($actcolor, 0.87);
+		                }
+		            }
+                    }
+		    
+		    &[value='3']{
+		            .NavPanel .DropdownMenu.network {
+		                color: $actcolor;
+		                margin-left: 10px;
+
+		                i {
+		                    width: 30px;
+		                }
+
+		                p {
+		                    font-weight: 700;
+		                    background: transparentize($actcolor, 0.87);
+		                }
+		            }
+                    }
+		    
+		    &[value='4']{
+		            .NavPanel .DropdownMenu.appearance {
+		                color: $actcolor;
+		                margin-left: 10px;
+
+		                i {
+		                    width: 30px;
+		                }
+
+		                p {
+		                    font-weight: 700;
+		                    background: transparentize($actcolor, 0.87);
+		                }
+		            }
+                    }
+		    
+		    &[value='5']{
+		            .NavPanel .DropdownMenu.notifications {
+		                color: $actcolor;
+		                margin-left: 10px;
+
+		                i {
+		                    width: 30px;
+		                }
+
+		                p {
+		                    font-weight: 700;
+		                    background: transparentize($actcolor, 0.87);
+		                }
+		            }
+                    }
+		    
+		    &[value='6']{
+		            .NavPanel .DropdownMenu.onlineAccounts {
+		                color: $actcolor;
+		                margin-left: 10px;
+
+		                i {
+		                    width: 30px;
+		                }
+
+		                p {
+		                    font-weight: 700;
+		                    background: transparentize($actcolor, 0.87);
+		                }
+		            }
+                    }
+		    
+		    &[value='7']{
+		            .NavPanel .DropdownMenu.updates {
+		                color: $actcolor;
+		                margin-left: 10px;
+
+		                i {
+		                    width: 30px;
+		                }
+
+		                p {
+		                    font-weight: 700;
+		                    background: transparentize($actcolor, 0.87);
+		                }
+		            }
+                    }
+		    
+		    &[value='8']{
+		            .NavPanel .DropdownMenu.search {
+		                color: $actcolor;
+		                margin-left: 10px;
+
+		                i {
+		                    width: 30px;
+		                }
+
+		                p {
+		                    font-weight: 700;
+		                    background: transparentize($actcolor, 0.87);
+		                }
+		            }
+                    }
+		    
+		    &[value='9']{
+		            .NavPanel .DropdownMenu.battery {
+		                color: $actcolor;
+		                margin-left: 10px;
+
+		                i {
+		                    width: 30px;
+		                }
+
+		                p {
+		                    font-weight: 700;
+		                    background: transparentize($actcolor, 0.87);
+		                }
+		            }
+                    }
+		    
+		    &[value='10']{
+		            .NavPanel .DropdownMenu.apps {
+		                color: $actcolor;
+		                margin-left: 10px;
+
+		                i {
+		                    width: 30px;
+		                }
+
+		                p {
+		                    font-weight: 700;
+		                    background: transparentize($actcolor, 0.87);
+		                }
+		            }
+                    }
+		    
+		    &[value='11']{
+		            .NavPanel .DropdownMenu.privacy {
+		                color: $actcolor;
+		                margin-left: 10px;
+
+		                i {
+		                    width: 30px;
+		                }
+
+		                p {
+		                    font-weight: 700;
+		                    background: transparentize($actcolor, 0.87);
+		                }
+		            }
+                    }
+		    
+		    &[value='12']{
+		            .NavPanel .DropdownMenu.security {
+		                color: $actcolor;
+		                margin-left: 10px;
+
+		                i {
+		                    width: 30px;
+		                }
+
+		                p {
+		                    font-weight: 700;
+		                    background: transparentize($actcolor, 0.87);
+		                }
+		            }
+                    }
+		    
+		    &[value='13']{
+		            .NavPanel .DropdownMenu.share {
+		                color: $actcolor;
+		                margin-left: 10px;
+
+		                i {
+		                    width: 30px;
+		                }
+
+		                p {
+		                    font-weight: 700;
+		                    background: transparentize($actcolor, 0.87);
+		                }
+		            }
+                    }
+		    
+		    &[value='14']{
+		            .NavPanel .DropdownMenu.sound {
+		                color: $actcolor;
+		                margin-left: 10px;
+
+		                i {
+		                    width: 30px;
+		                }
+
+		                p {
+		                    font-weight: 700;
+		                    background: transparentize($actcolor, 0.87);
+		                }
+		            }
+                    }
+	    }
+
+            .SettingsContainer {
+                padding: 30px;
+                padding-top: 0;
+                width: 100%;
+                height: 100%;
+                overflow-y: auto;
+            }
+        }
+    }
+}
+
+.lightMode {
+    .settings {
+        	
+        .TabBarWrapper .TabBar {
+            .TabBarItem {
+                color: #000;
+                        
+                .TabSeparator {
+                    background-color: #0000001e;
+                }
+        
+                &:hover {
+                    .CloseButton {
+                        &:hover {
+                            background-color: #00000010;
+                        }
+                    }
+                }
+
+                .TabBarInteraction i:hover {
+                    background-color: #0000001e;
+                }
+            }
+            .TabBarFileSystem {
+                background-color: #0000000a;
+            }
+        }
+    }
+
+    .Settings {
+        background: $fgcolor;
+        color: $bgcolor;
+
+        .SettingsSection {
+            
+            div {
+		    .NavPanel {
+			    background: transparentize($actcolor, 0.85);
+
+			    .DropdownMenu {
+				color: lighten($bgcolor, 10%);
+
+				&:hover {
+				    color: $actcolor;
+				}
+			    }
+		    }
+		    
+		    &[value='1']{
+		        .NavPanel .DropdownMenu.wifi p {
+		            background: $fgcolor;
+		        }
+		    }
+		    
+		    &[value='2']{
+		        .NavPanel .DropdownMenu.bluetooth p {
+		            background: $fgcolor;
+		        }
+		    }
+		    
+		    &[value='3']{
+		        .NavPanel .DropdownMenu.network p {
+		            background: $fgcolor;
+		        }
+		    }
+		    
+		    &[value='4']{
+		        .NavPanel .DropdownMenu.appearance p {
+		            background: $fgcolor;
+		        }
+		    }
+		    
+		    &[value='5']{
+		        .NavPanel .DropdownMenu.notifications p {
+		            background: $fgcolor;
+		        }
+		    }
+		    
+		    &[value='6']{
+		        .NavPanel .DropdownMenu.onlineAccounts p {
+		            background: $fgcolor;
+		        }
+		    }
+		    
+		    &[value='7']{
+		        .NavPanel .DropdownMenu.updates p {
+		            background: $fgcolor;
+		        }
+		    }
+		    
+		    &[value='8']{
+		        .NavPanel .DropdownMenu.search p {
+		            background: $fgcolor;
+		        }
+		    }
+		    
+		    &[value='9']{
+		        .NavPanel .DropdownMenu.battery p {
+		            background: $fgcolor;
+		        }
+		    }
+		    
+		    &[value='10']{
+		        .NavPanel .DropdownMenu.apps p {
+		            background: $fgcolor;
+		        }
+		    }
+		    
+		    &[value='11']{
+		        .NavPanel .DropdownMenu.privacy p {
+		            background: $fgcolor;
+		        }
+		    }
+		    
+		    &[value='12']{
+		        .NavPanel .DropdownMenu.security p {
+		            background: $fgcolor;
+		        }
+		    }
+		    
+		    &[value='13']{
+		        .NavPanel .DropdownMenu.share p {
+		            background: $fgcolor;
+		        }
+		    }
+		    
+		    &[value='14']{
+		        .NavPanel .DropdownMenu.sound p {
+		            background: $fgcolor;
+		        }
+		    }
+	    }
+        }
+
+        .SettingsContainer {
+                padding: 30px;
+                padding-top: 0;
+                width: 100%;
+                height: 100%;
+                overflow-y: auto;
+	}
+    }
+}

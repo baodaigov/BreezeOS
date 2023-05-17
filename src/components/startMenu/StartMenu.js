@@ -5,6 +5,7 @@ import StartApp from './StartApp';
 import { TerminalStartApp } from '../../containers/apps/terminal';
 import { FirefoxStartApp } from '../../containers/apps/firefox';
 import { ClockStartApp } from '../../containers/apps/clock';
+import { SettingsStartApp } from '../../containers/apps/settings';
 import { CameraStartApp } from '../../containers/apps/camera';
 import { FilesStartApp } from '../../containers/apps/files';
 import { CalculatorStartApp } from '../../containers/apps/calculator';
@@ -98,6 +99,7 @@ export default function StartMenu(){
                     <div className='StartApps'>
                         <FirefoxStartApp/>
                         <CalendarStartApp/>
+                        <SettingsStartApp/>
                         <ClockStartApp/>
                         <CameraStartApp/>
                         <FilesStartApp/>

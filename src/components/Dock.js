@@ -4,6 +4,7 @@ import DockItem from './DockItem';
 import { TerminalApp } from '../containers/apps/terminal';
 import { FirefoxApp } from '../containers/apps/firefox';
 import { ClockApp } from '../containers/apps/clock';
+import { SettingsApp } from '../containers/apps/settings';
 import { CameraApp } from '../containers/apps/camera';
 import { FilesApp } from '../containers/apps/files';
 import { CalculatorApp } from '../containers/apps/calculator';
@@ -28,6 +29,7 @@ const Dock = () => {
         <div className='Dock'>
         <FirefoxApp/>
         <CalendarApp/>
+        <SettingsApp/>
         <ClockApp/>
         <CameraApp/>
         <FilesApp/>
