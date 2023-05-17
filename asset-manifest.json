@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/BreezeOS/static/css/main.aa915c16.css",
-    "main.js": "/BreezeOS/static/js/main.770ae195.js",
+    "main.js": "/BreezeOS/static/js/main.4ba6233e.js",
     "static/media/Screenshot from 2022-09-10 20-41-45.png": "/BreezeOS/static/media/Screenshot from 2022-09-10 20-41-45.a9dd0dd0adcef52a8203.png",
     "static/media/CascadiaCode-Regular-VTT.woff2": "/BreezeOS/static/media/CascadiaCode-Regular-VTT.823f7943de13dee39b78.woff2",
     "static/media/Windows-11-4k-Wallpaper-scaled.jpg": "/BreezeOS/static/media/Windows-11-4k-Wallpaper-scaled.557ec81467de22ddd91a.jpg",
     "static/media/favicon.ico": "/BreezeOS/static/media/favicon.d7d92c5cee20556182aa.ico",
     "index.html": "/BreezeOS/index.html",
     "main.aa915c16.css.map": "/BreezeOS/static/css/main.aa915c16.css.map",
-    "main.770ae195.js.map": "/BreezeOS/static/js/main.770ae195.js.map"
+    "main.4ba6233e.js.map": "/BreezeOS/static/js/main.4ba6233e.js.map"
   },
   "entrypoints": [
     "static/css/main.aa915c16.css",
-    "static/js/main.770ae195.js"
+    "static/js/main.4ba6233e.js"
   ]
 }
