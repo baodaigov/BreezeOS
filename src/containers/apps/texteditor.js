@@ -18,7 +18,7 @@ export const TextEditorApp = () => {
     
     useEffect(() => {
 	    document.addEventListener('keydown', (e) => {
-	    	if(e.ctrlKey && e.keyCode === 55){
+	    	if(e.ctrlKey && e.keyCode === 56){
 	    		toggle();
 	    	}
 	    })

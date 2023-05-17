@@ -19,7 +19,7 @@ export const CameraApp = () => {
     
     useEffect(() => {
 	    document.addEventListener('keydown', (e) => {
-	    	if(e.ctrlKey && e.keyCode === 52){
+	    	if(e.ctrlKey && e.keyCode === 53){
 	    		toggle();
 	    	}
 	    })

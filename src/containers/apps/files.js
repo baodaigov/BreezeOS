@@ -21,7 +21,7 @@ export const FilesApp = () => {
     
     useEffect(() => {
 	    document.addEventListener('keydown', (e) => {
-	    	if(e.ctrlKey && e.keyCode === 53){
+	    	if(e.ctrlKey && e.keyCode === 54){
 	    		toggle();
 	    	}
 	    })

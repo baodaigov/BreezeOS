@@ -18,7 +18,7 @@ export const SoftwareStoreApp = () => {
     
     useEffect(() => {
 	    document.addEventListener('keydown', (e) => {
-	    	if(e.ctrlKey && e.keyCode === 57){
+	    	if(e.ctrlKey && e.keyCode === 48){
 	    		toggle();
 	    	}
 	    })

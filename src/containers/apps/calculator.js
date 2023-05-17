@@ -18,7 +18,7 @@ export const CalculatorApp = () => {
     
     useEffect(() => {
 	    document.addEventListener('keydown', (e) => {
-	    	if(e.ctrlKey && e.keyCode === 54){
+	    	if(e.ctrlKey && e.keyCode === 55){
 	    		toggle();
 	    	}
 	    })

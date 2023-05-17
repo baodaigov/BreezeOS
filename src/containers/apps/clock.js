@@ -18,7 +18,7 @@ export const ClockApp = () => {
     
     useEffect(() => {
 	    document.addEventListener('keydown', (e) => {
-	    	if(e.ctrlKey && e.keyCode === 51){
+	    	if(e.ctrlKey && e.keyCode === 52){
 	    		toggle();
 	    	}
 	    })

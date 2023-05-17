@@ -17,7 +17,7 @@ export const TerminalApp = () => {
     
     useEffect(() => {
 	    document.addEventListener('keydown', (e) => {
-	    	if(e.ctrlKey && e.keyCode === 56){
+	    	if(e.ctrlKey && e.keyCode === 57){
 	    		toggle();
 	    	}
 	    })
