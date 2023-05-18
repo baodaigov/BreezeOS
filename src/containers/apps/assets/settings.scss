@@ -3,6 +3,9 @@ $fgcolor: #e2e2e2;
 $actcolor: #8fb6ff;
 
 .SettingsWindow {
+
+	img {display:block}
+
     .Window .TopBar {
         padding: 4px 8px;
         .TopBarInteractionContainer {
@@ -75,13 +78,41 @@ $actcolor: #8fb6ff;
                     }
                 }
 
-                .TabBarFileSystem {
+                .TabBarSettingsName {
                     display: flex;
-                    justify-content: space-between;
-                    width: 600px;
-                    background-color: #ffffff0a;
+					align-items: center;
+					width: 100%;
                     border-radius: 5px;
                 }
+
+				.Toggle {
+					border-radius: 999px;
+					width: 43px;
+					height: 20px;
+					background: transparentize($fgcolor, 0.9);
+					display: flex;
+					padding: 0 3px;
+					align-items: center;
+					transition: all ease .3s;
+
+					&::before {
+						content: '';
+						display: block;
+						background: $fgcolor;
+						height: 15px;
+						width: 15px;
+						border-radius: 999px;
+						transition: all ease .1s;
+					}
+
+					&.active {
+						background: $actcolor;
+
+						&::before {
+							transform: translateX(20px);
+						}
+					}
+				}
             }
         }
         
@@ -117,7 +148,7 @@ $actcolor: #8fb6ff;
 		            display: flex;
 		            align-items: center;
 		            color: darken($fgcolor, 10%);
-		            margin: 6px 0;
+		            margin: 7px 0;
 		            margin-left: 20px;
 		            font-size: 13px;
 		            transition: all ease .3s;
@@ -366,14 +397,222 @@ $actcolor: #8fb6ff;
 		                }
 		            }
                     }
+		    &[value='15']{
+		            .NavPanel .DropdownMenu.displays {
+		                color: $actcolor;
+		                margin-left: 10px;
+
+		                i {
+		                    width: 30px;
+		                }
+
+		                p {
+		                    font-weight: 700;
+		                    background: transparentize($actcolor, 0.87);
+		                }
+		            }
+                    }
+		    &[value='16']{
+		            .NavPanel .DropdownMenu.mouseTouchpad {
+		                color: $actcolor;
+		                margin-left: 10px;
+
+		                i {
+		                    width: 30px;
+		                }
+
+		                p {
+		                    font-weight: 700;
+		                    background: transparentize($actcolor, 0.87);
+		                }
+		            }
+                    }
+		    &[value='17']{
+		            .NavPanel .DropdownMenu.keyboard {
+		                color: $actcolor;
+		                margin-left: 10px;
+
+		                i {
+		                    width: 30px;
+		                }
+
+		                p {
+		                    font-weight: 700;
+		                    background: transparentize($actcolor, 0.87);
+		                }
+		            }
+                    }
+		    &[value='18']{
+		            .NavPanel .DropdownMenu.printer {
+		                color: $actcolor;
+		                margin-left: 10px;
+
+		                i {
+		                    width: 30px;
+		                }
+
+		                p {
+		                    font-weight: 700;
+		                    background: transparentize($actcolor, 0.87);
+		                }
+		            }
+            }
+		    &[value='19']{
+		            .NavPanel .DropdownMenu.regionLanguage {
+		                color: $actcolor;
+		                margin-left: 10px;
+
+		                i {
+		                    width: 30px;
+		                }
+
+		                p {
+		                    font-weight: 700;
+		                    background: transparentize($actcolor, 0.87);
+		                }
+		            }
+            }
+		    &[value='20']{
+		            .NavPanel .DropdownMenu.accessibility {
+		                color: $actcolor;
+		                margin-left: 10px;
+
+		                i {
+		                    width: 30px;
+		                }
+
+		                p {
+		                    font-weight: 700;
+		                    background: transparentize($actcolor, 0.87);
+		                }
+		            }
+            }
+		    &[value='21']{
+		            .NavPanel .DropdownMenu.dateTime {
+		                color: $actcolor;
+		                margin-left: 10px;
+
+		                i {
+		                    width: 30px;
+		                }
+
+		                p {
+		                    font-weight: 700;
+		                    background: transparentize($actcolor, 0.87);
+		                }
+		            }
+            }
+		    &[value='22']{
+		            .NavPanel .DropdownMenu.about {
+		                color: $actcolor;
+		                margin-left: 10px;
+
+		                i {
+		                    width: 30px;
+		                }
+
+		                p {
+		                    font-weight: 700;
+		                    background: transparentize($actcolor, 0.87);
+		                }
+		            }
+            }
 	    }
 
             .SettingsContainer {
-                padding: 30px;
-                padding-top: 0;
-                width: 100%;
-                height: 100%;
-                overflow-y: auto;
+				position: relative;
+				width: 100%;
+				height: 100%;
+
+				.SettingsContainerInside {
+					position: absolute;
+					width: 100%;
+					height: 100%;
+					overflow-y: auto;
+					padding: 20px;
+					*{margin: 0}
+
+					.WiFi {
+						margin: 0 auto;
+						max-width: 70%;
+						font-size: 13px;
+	
+						.StatusWifiFalse {
+							color: transparentize($fgcolor, 0.85);
+						}
+
+						.VisibleNetworks {
+							display: flex;
+							flex-direction: column;
+							height: 100%;
+
+							.VisibleNetworksItem {
+								width: 100%;
+								padding: 15px 25px;
+								display: flex;
+								justify-content: space-between;
+								border-bottom: 1px solid transparentize($fgcolor, 0.95);
+
+								&:hover {
+									background: transparentize($fgcolor, 0.97);
+								}
+
+								&:first-child {
+									border-top-left-radius: 7px;
+									border-top-right-radius: 7px;
+								}
+
+								&:last-child {
+									border: 0;
+									border-bottom-left-radius: 7px;
+									border-bottom-right-radius: 7px;
+								}
+
+								.VisibleNetworksIcon {
+									i {
+										margin-right: 13px;
+
+										&:last-child {margin:0}
+
+										&.fa-duotone {--fa-secondary-color: #e2e2e296}
+									}
+								}
+							}
+						}
+					}
+
+					.Appearance {
+						padding: 0 50px;
+						font-size: 13px;
+
+						.WindowColors {
+							.ImageContainer {
+								img {
+									border-radius: 8px;
+									width: auto;
+									height: 200px;
+								}
+							}
+
+							.Cursor {
+								margin-top: 15px;
+								width: 40px;
+								height: 5px;
+								border-radius: 999px;
+								background: $actcolor;
+								transition: transform ease .3s;
+							}
+
+							&[value='1']{
+								.Cursor {transform: translateX(143px)}
+							}
+
+							&[value='2']{
+								.Cursor {transform: translateX(483px)}
+							}
+						}
+					}
+				}
             }
         }
     }
@@ -402,9 +641,10 @@ $actcolor: #8fb6ff;
                     background-color: #0000001e;
                 }
             }
-            .TabBarFileSystem {
-                background-color: #0000000a;
-            }
+
+			.Toggle {
+				background: transparentize($bgcolor, 0.75);
+			}
         }
     }
 
@@ -415,110 +655,173 @@ $actcolor: #8fb6ff;
         .SettingsSection {
             
             div {
-		    .NavPanel {
-			    background: transparentize($actcolor, 0.85);
+				.NavPanel {
+					background: transparentize($actcolor, 0.85);
 
-			    .DropdownMenu {
-				color: lighten($bgcolor, 10%);
+					.DropdownMenu {
+					color: lighten($bgcolor, 10%);
 
-				&:hover {
-				    color: $actcolor;
+					&:hover {
+						color: $actcolor;
+					}
+					}
 				}
-			    }
-		    }
-		    
-		    &[value='1']{
-		        .NavPanel .DropdownMenu.wifi p {
-		            background: $fgcolor;
-		        }
-		    }
-		    
-		    &[value='2']{
-		        .NavPanel .DropdownMenu.bluetooth p {
-		            background: $fgcolor;
-		        }
-		    }
-		    
-		    &[value='3']{
-		        .NavPanel .DropdownMenu.network p {
-		            background: $fgcolor;
-		        }
-		    }
-		    
-		    &[value='4']{
-		        .NavPanel .DropdownMenu.appearance p {
-		            background: $fgcolor;
-		        }
-		    }
-		    
-		    &[value='5']{
-		        .NavPanel .DropdownMenu.notifications p {
-		            background: $fgcolor;
-		        }
-		    }
-		    
-		    &[value='6']{
-		        .NavPanel .DropdownMenu.onlineAccounts p {
-		            background: $fgcolor;
-		        }
-		    }
-		    
-		    &[value='7']{
-		        .NavPanel .DropdownMenu.updates p {
-		            background: $fgcolor;
-		        }
-		    }
-		    
-		    &[value='8']{
-		        .NavPanel .DropdownMenu.search p {
-		            background: $fgcolor;
-		        }
-		    }
-		    
-		    &[value='9']{
-		        .NavPanel .DropdownMenu.battery p {
-		            background: $fgcolor;
-		        }
-		    }
-		    
-		    &[value='10']{
-		        .NavPanel .DropdownMenu.apps p {
-		            background: $fgcolor;
-		        }
-		    }
-		    
-		    &[value='11']{
-		        .NavPanel .DropdownMenu.privacy p {
-		            background: $fgcolor;
-		        }
-		    }
-		    
-		    &[value='12']{
-		        .NavPanel .DropdownMenu.security p {
-		            background: $fgcolor;
-		        }
-		    }
-		    
-		    &[value='13']{
-		        .NavPanel .DropdownMenu.share p {
-		            background: $fgcolor;
-		        }
-		    }
-		    
-		    &[value='14']{
-		        .NavPanel .DropdownMenu.sound p {
-		            background: $fgcolor;
-		        }
-		    }
-	    }
+				
+				&[value='1']{
+					.NavPanel .DropdownMenu.wifi p {
+						background: $fgcolor;
+					}
+				}
+				
+				&[value='2']{
+					.NavPanel .DropdownMenu.bluetooth p {
+						background: $fgcolor;
+					}
+				}
+				
+				&[value='3']{
+					.NavPanel .DropdownMenu.network p {
+						background: $fgcolor;
+					}
+				}
+				
+				&[value='4']{
+					.NavPanel .DropdownMenu.appearance p {
+						background: $fgcolor;
+					}
+				}
+				
+				&[value='5']{
+					.NavPanel .DropdownMenu.notifications p {
+						background: $fgcolor;
+					}
+				}
+				
+				&[value='6']{
+					.NavPanel .DropdownMenu.onlineAccounts p {
+						background: $fgcolor;
+					}
+				}
+				
+				&[value='7']{
+					.NavPanel .DropdownMenu.updates p {
+						background: $fgcolor;
+					}
+				}
+				
+				&[value='8']{
+					.NavPanel .DropdownMenu.search p {
+						background: $fgcolor;
+					}
+				}
+				
+				&[value='9']{
+					.NavPanel .DropdownMenu.battery p {
+						background: $fgcolor;
+					}
+				}
+				
+				&[value='10']{
+					.NavPanel .DropdownMenu.apps p {
+						background: $fgcolor;
+					}
+				}
+				
+				&[value='11']{
+					.NavPanel .DropdownMenu.privacy p {
+						background: $fgcolor;
+					}
+				}
+				
+				&[value='12']{
+					.NavPanel .DropdownMenu.security p {
+						background: $fgcolor;
+					}
+				}
+				
+				&[value='13']{
+					.NavPanel .DropdownMenu.share p {
+						background: $fgcolor;
+					}
+				}
+				
+				&[value='14']{
+					.NavPanel .DropdownMenu.sound p {
+						background: $fgcolor;
+					}
+				}
+				
+				&[value='15']{
+					.NavPanel .DropdownMenu.displays p {
+						background: $fgcolor;
+					}
+				}
+				
+				&[value='16']{
+					.NavPanel .DropdownMenu.mouseTouchpad p {
+						background: $fgcolor;
+					}
+				}
+				
+				&[value='17']{
+					.NavPanel .DropdownMenu.keyboard p {
+						background: $fgcolor;
+					}
+				}
+				
+				&[value='18']{
+					.NavPanel .DropdownMenu.printer p {
+						background: $fgcolor;
+					}
+				}
+				
+				&[value='19']{
+					.NavPanel .DropdownMenu.regionLanguage p {
+						background: $fgcolor;
+					}
+				}
+				
+				&[value='20']{
+					.NavPanel .DropdownMenu.accessibility p {
+						background: $fgcolor;
+					}
+				}
+				
+				&[value='21']{
+					.NavPanel .DropdownMenu.dateTime p {
+						background: $fgcolor;
+					}
+				}
+				
+				&[value='22']{
+					.NavPanel .DropdownMenu.about p {
+						background: $fgcolor;
+					}
+				}
+			}
         }
 
-        .SettingsContainer {
-                padding: 30px;
-                padding-top: 0;
-                width: 100%;
-                height: 100%;
-                overflow-y: auto;
-	}
+		.SettingsContainer .SettingsContainerInside {
+
+			.WiFi {
+				.StatusWifiFalse {
+					color: transparentize($bgcolor, 0.75)!important;
+				}
+
+				.VisibleNetworks {
+					.VisibleNetworksItem {
+						border-bottom: 1px solid transparentize($bgcolor, 0.8)!important;
+
+						&:hover {
+							background: transparentize($bgcolor, 0.82)!important;
+						}
+						
+						.VisibleNetworksIcon {
+							i.fa-duotone {--fa-secondary-color: #20202396!important}
+						}
+					}
+				}
+			}
+		}
     }
 }

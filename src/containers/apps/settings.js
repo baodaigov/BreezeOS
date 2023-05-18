@@ -7,8 +7,8 @@ import './assets/settings.scss';
 import TopBarInteraction from '../../components/utils/window/TopBarInteraction';
 import StartApp from '../../components/startMenu/StartApp';
 import ActMenu, { ActMenuSelector } from "../../components/utils/menu/index";
-import Image1 from './assets/Screenshot from 2022-09-10 20-41-45.png';
-import Image2 from './assets/favicon.ico';
+import Image1 from './assets/dark.png';
+import Image2 from './assets/light.png';
 
 export const SettingsApp = () => {
 
@@ -56,7 +56,7 @@ export default function Settings(){
     const SettingsWindow = () => {
     	const [value, setValue] = useState('1');
 	const [settings, setSettings] = useState('Wi-Fi');
-	const [iconSize, setIconSize] = useState(70);
+    const [statusWifi, setStatusWifi] = useState(true);
 
         function wifi(){
             setValue('1');
@@ -128,42 +128,196 @@ export default function Settings(){
 	    setSettings('Sound');
         }
         
-        const [min, isMin] = useState(false);
-    
-        function close(){
-            document.getElementsByClassName('settings')[0].classList.remove('active');
-            document.getElementById('settings').classList.remove('clicked');
+        function displays(){
+            setValue('15');
+	    setSettings('Displays');
         }
-    
-        function minimize(){
-            document.getElementsByClassName('settings')[0].classList.toggle('minimize');
-            isMin(!min);
+        
+        function mouseTouchpad(){
+            setValue('16');
+	    setSettings('Mouse & Touchpad');
         }
+        
+        function keyboard(){
+            setValue('17');
+	    setSettings('Keyboard');
+        }
+        
+        function printer(){
+            setValue('18');
+	    setSettings('Printer');
+        }
+        
+        function regionLanguage(){
+            setValue('19');
+	    setSettings('Region & Language');
+        }
+        
+        function accessibility(){
+            setValue('20');
+	    setSettings('Accessibility');
+        }
+        
+        function dateTime(){
+            setValue('21');
+	    setSettings('Date & Time');
+        }
+        
+        function about(){
+            setValue('22');
+	    setSettings('About');
+        }
+
+    const wifis = [
+        {
+            name: 'BreezeOS',
+            private: true,
+            status: 'good',
+            connected: true
+        },
+        {
+            name: 'Nokia Lumia',
+            private: true,
+            status: 'fair'
+        },
+        {
+            name: 'APTEK',
+            private: false,
+            status: 'weak'
+        },
+        {
+            name: 'daothanhminh\'s iPhone',
+            private: true,
+            status: 'fair'
+        },
+        {
+            name: 'FPT Telecom',
+            private: true,
+            status: 'good'
+        },
+        {
+            name: 'Coffee Shop',
+            private: true,
+            status: 'fair'
+        },
+        {
+            name: 'Samsung Galaxy S20',
+            private: true,
+            status: 'weak'
+        },
+        {
+            name: 'KING COFFEE',
+            private: true,
+            status: 'weak'
+        },
+        {
+            name: 'VIETTEL',
+            private: true,
+            status: 'fair'
+        },
+        {
+            name: 'Nguyet Thanh',
+            private: true,
+            status: 'weak'
+        }
+    ]
+
+    const [valueWindowColors, setValueWindowColors] = useState('1');
+
+    function switchDark(){
+        setValueWindowColors('1');
+        document.getElementsByClassName('Desktop')[0].classList.remove('lightMode');
+    }
+
+    function switchLight(){
+        setValueWindowColors('2');
+        document.getElementsByClassName('Desktop')[0].classList.add('lightMode');
+    }
 
 	function switchTab(){
 		switch(settings){
-			case '/':
+			case 'Wi-Fi':
 				return (
-					<div>
-						<p>a</p>
-		                        </div>
-				)
+                    <div className='WiFi'>
+                        {statusWifi ? (
+                            <>
+                                <p className='font-bold' style={{ marginBottom: '30px' }}>Visible Networks</p>
+                                <div className='VisibleNetworks'>
+                                    {wifis.map((i) => 
+                                        <div className='VisibleNetworksItem'>
+                                            <p>{i.name}</p>
+                                            <div className='VisibleNetworksIcon'>
+                                                {i.connected ? <i className='fa-solid fa-check'></i> : ''}
+                                                {i.private ? <i className='fa-solid fa-lock'></i> : ''}
+                                                {i.status == 'good' ? <i className='fa-solid fa-wifi'></i> : i.status == 'fair' ? <i className='fa-duotone fa-wifi-fair'></i> : i.status == 'weak' ? <i className='fa-duotone fa-wifi-weak'></i> : ''}
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            </>
+                        ) : (
+                            <div className='StatusWifiFalse'>
+                                <p>To get access to Internet connection, please turn on the Wi-Fi.</p>
+                            </div>
+                        )}
+                    </div>
+                )
+			case 'Appearance':
+				return (
+                    <div className='Appearance'>
+                        <>
+                            <p className='font-bold' style={{ marginBottom: '30px' }}>Window colors</p>
+                            <div className='WindowColors' value={valueWindowColors}>
+                                <div style={{ display: 'flex' }}>
+                                    <div className='ImageContainer' style={{ marginRight: '20px', display: 'flex', justifyContent: 'center' }} onClick={switchDark}>
+                                        <img src={Image1}/>
+                                    </div>
+                                    <div className='ImageContainer' onClick={switchLight}>
+                                        <img src={Image2}/>
+                                    </div>
+                                </div>
+                                <div className='Cursor'></div>
+                            </div>
+                        </>
+                    </div>
+                )
 			default:
-				return <div></div>
+				return <p>Nothing in this section.</p>
         }
     }
 
 
+    const [min, isMin] = useState(false);
+    
+    function close(){
+        document.getElementsByClassName('settings')[0].classList.remove('active');
+        document.getElementById('settings').classList.remove('clicked');
+    }
+    
+    function minimize(){
+        document.getElementsByClassName('settings')[0].classList.toggle('minimize');
+        isMin(!min);
+    }
 
         return (
             <>
                 <TopBar title='Settings' onDblClick={minimize}>
                     <div className='TabBarWrapper' style={{ width: '100%' }}>
                         <div className='TabBar' style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <div className='TabBarItem' style={{ width: '155px', flexDirection: 'row-reverse' }}>
+                            <div className='TabBarItem' style={{ width: '207px', flexDirection: 'row-reverse' }}>
                                 <div className='TabBarInteraction'>
                                 	<i className="fa-regular fa-magnifying-glass"></i>
                                 </div>
+                            </div>
+                            <div className='TabBarItem TabBarSettingsName' style={settings == 'Wi-Fi' ? { justifyContent: 'space-between' } : { justifyContent: 'center' }}>
+                                {settings == 'Wi-Fi' ? (
+                                    <>
+                                        <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                                            <p>{settings}</p>
+                                        </div>
+                                        <div className={`Toggle ${statusWifi ? 'active' : ''}`} onClick={() => setStatusWifi(!statusWifi)}></div>
+                                    </>
+                                ) : <p>{settings}</p>}
                             </div>
                         </div>
                     </div>
@@ -176,75 +330,115 @@ export default function Settings(){
                 <WindowBody>
                     <div className='Settings'>
                         <div className='SettingsSection'>
-                            <div style={{ width: '260px', maxHeight: '100%', overflowY: 'auto' }} value={value}>
-                            	<div className='NavPanel'>
-                                        <div className='DropdownMenu wifi' onMouseDown={wifi}>
-                                            <i className='fa-regular fa-wifi'></i>
-                                            <p className='DropdownTitle'>Wi-Fi</p>
+                            <div style={{ width: '295px', height: '100%' }}>
+                                <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                                    <div style={{ position: 'absolute', width: '100%', maxHeight: '100%', overflowY: 'auto' }} value={value}>
+                                        <div className='NavPanel'>
+                                                <div className='DropdownMenu wifi' onMouseDown={wifi}>
+                                                    <i className='fa-regular fa-wifi'></i>
+                                                    <p className='DropdownTitle'>Wi-Fi</p>
+                                                </div>
+                                                <div className='DropdownMenu bluetooth' onMouseDown={bluetooth}>
+                                                    <i className='fa-regular fa-bluetooth'></i>
+                                                    <p className='DropdownTitle'>Bluetooth</p>
+                                                </div>
+                                                <div className='DropdownMenu network' onMouseDown={network}>
+                                                    <i className='fa-regular fa-globe'></i>
+                                                    <p className='DropdownTitle'>Network</p>
+                                                </div>
                                         </div>
-                                        <div className='DropdownMenu bluetooth' onMouseDown={bluetooth}>
-                                            <i className='fa-regular fa-bluetooth'></i>
-                                            <p className='DropdownTitle'>Bluetooth</p>
+                                        <div className='NavPanel'>
+                                                <div className='DropdownMenu appearance' onMouseDown={appearance}>
+                                                    <i className='fa-regular fa-paintbrush'></i>
+                                                    <p className='DropdownTitle'>Appearance</p>
+                                                </div>
+                                                <div className='DropdownMenu notifications' onMouseDown={notifications}>
+                                                    <i className='fa-regular fa-bell'></i>
+                                                    <p className='DropdownTitle'>Notifications</p>
+                                                </div>
+                                                <div className='DropdownMenu search' onMouseDown={search}>
+                                                    <i className='fa-regular fa-magnifying-glass'></i>
+                                                    <p className='DropdownTitle'>Search</p>
+                                                </div>
                                         </div>
-                                        <div className='DropdownMenu network' onMouseDown={network}>
-                                            <i className='fa-regular fa-globe'></i>
-                                            <p className='DropdownTitle'>Network</p>
+                                        <div className='NavPanel'>
+                                                <div className='DropdownMenu apps' onMouseDown={apps}>
+                                                    <i className='fa-regular fa-grid-2'></i>
+                                                    <p className='DropdownTitle'>Apps</p>
+                                                </div>
+                                                <div className='DropdownMenu privacy' onMouseDown={privacy}>
+                                                    <i className='fa-regular fa-lock'></i>
+                                                    <p className='DropdownTitle'>Privacy</p>
+                                                </div>
+                                                <div className='DropdownMenu security' onMouseDown={security}>
+                                                    <i className='fa-solid fa-shield-halved'></i>
+                                                    <p className='DropdownTitle'>Security</p>
+                                                </div>
+                                                <div className='DropdownMenu onlineAccounts' onMouseDown={onlineAccounts}>
+                                                    <i className='fa-regular fa-at'></i>
+                                                    <p className='DropdownTitle'>Online Accounts</p>
+                                                </div>
+                                                <div className='DropdownMenu share' onMouseDown={share}>
+                                                    <i className='fa-regular fa-share-nodes'></i>
+                                                    <p className='DropdownTitle'>Share</p>
+                                                </div>
                                         </div>
-                            	</div>
-                            	<div className='NavPanel'>
-                                        <div className='DropdownMenu appearance' onMouseDown={appearance}>
-                                            <i className='fa-regular fa-paintbrush'></i>
-                                            <p className='DropdownTitle'>Appearance</p>
+                                        <div className='NavPanel'>
+                                                <div className='DropdownMenu updates' onMouseDown={updates}>
+                                                    <i className='fa-regular fa-rotate'></i>
+                                                    <p className='DropdownTitle'>Updates</p>
+                                                </div>
+                                                <div className='DropdownMenu sound' onMouseDown={sound}>
+                                                    <i className='fa-regular fa-volume'></i>
+                                                    <p className='DropdownTitle'>Sound</p>
+                                                </div>
+                                                <div className='DropdownMenu battery' onMouseDown={battery}>
+                                                    <i className='fa-regular fa-battery-full'></i>
+                                                    <p className='DropdownTitle'>Battery</p>
+                                                </div>
+                                                <div className='DropdownMenu displays' onMouseDown={displays}>
+                                                    <i className='fa-regular fa-desktop'></i>
+                                                    <p className='DropdownTitle'>Displays</p>
+                                                </div>
+                                                <div className='DropdownMenu mouseTouchpad' onMouseDown={mouseTouchpad}>
+                                                    <i className='fa-regular fa-computer-mouse'></i>
+                                                    <p className='DropdownTitle'>Mouse & Touchpad</p>
+                                                </div>
+                                                <div className='DropdownMenu keyboard' onMouseDown={keyboard}>
+                                                    <i className='fa-regular fa-keyboard'></i>
+                                                    <p className='DropdownTitle'>Keyboard</p>
+                                                </div>
+                                                <div className='DropdownMenu printer' onMouseDown={printer}>
+                                                    <i className='fa-regular fa-print'></i>
+                                                    <p className='DropdownTitle'>Printer</p>
+                                                </div>
                                         </div>
-                                        <div className='DropdownMenu notifications' onMouseDown={notifications}>
-                                            <i className='fa-regular fa-bell'></i>
-                                            <p className='DropdownTitle'>Notifications</p>
+                                        <div className='NavPanel'>
+                                                <div className='DropdownMenu regionLanguage' onMouseDown={regionLanguage}>
+                                                    <i className='fa-light fa-language'></i>
+                                                    <p className='DropdownTitle'>Region & Language</p>
+                                                </div>
+                                                <div className='DropdownMenu accessibility' onMouseDown={accessibility}>
+                                                    <i className='fa-regular fa-universal-access'></i>
+                                                    <p className='DropdownTitle'>Accessibility</p>
+                                                </div>
+                                                <div className='DropdownMenu dateTime' onMouseDown={dateTime}>
+                                                    <i className='fa-regular fa-clock'></i>
+                                                    <p className='DropdownTitle'>Date & Time</p>
+                                                </div>
+                                                <div className='DropdownMenu about' onMouseDown={about}>
+                                                    <i className='fa-regular fa-circle-info'></i>
+                                                    <p className='DropdownTitle'>About</p>
+                                                </div>
                                         </div>
-                                        <div className='DropdownMenu search' onMouseDown={search}>
-                                            <i className='fa-regular fa-magnifying-glass'></i>
-                                            <p className='DropdownTitle'>Search</p>
-                                        </div>
-                            	</div>
-                            	<div className='NavPanel'>
-                                        <div className='DropdownMenu apps' onMouseDown={apps}>
-                                            <i className='fa-regular fa-grid-2'></i>
-                                            <p className='DropdownTitle'>Apps</p>
-                                        </div>
-                                        <div className='DropdownMenu privacy' onMouseDown={privacy}>
-                                            <i className='fa-regular fa-lock'></i>
-                                            <p className='DropdownTitle'>Privacy</p>
-                                        </div>
-                                        <div className='DropdownMenu security' onMouseDown={security}>
-                                            <i className='fa-solid fa-shield-halved'></i>
-                                            <p className='DropdownTitle'>Security</p>
-                                        </div>
-                                        <div className='DropdownMenu onlineAccounts' onMouseDown={onlineAccounts}>
-                                            <i className='fa-regular fa-at'></i>
-                                            <p className='DropdownTitle'>Online Accounts</p>
-                                        </div>
-                                        <div className='DropdownMenu share' onMouseDown={share}>
-                                            <i className='fa-regular fa-share-nodes'></i>
-                                            <p className='DropdownTitle'>Share</p>
-                                        </div>
-                            	</div>
-                            	<div className='NavPanel'>
-                                        <div className='DropdownMenu updates' onMouseDown={updates}>
-                                            <i className='fa-regular fa-rotate'></i>
-                                            <p className='DropdownTitle'>Updates</p>
-                                        </div>
-                                        <div className='DropdownMenu sound' onMouseDown={sound}>
-                                            <i className='fa-regular fa-volume'></i>
-                                            <p className='DropdownTitle'>Sound</p>
-                                        </div>
-                                        <div className='DropdownMenu battery' onMouseDown={battery}>
-                                            <i className='fa-regular fa-battery-full'></i>
-                                            <p className='DropdownTitle'>Battery</p>
-                                        </div>
-                            	</div>
+                                    </div>
+                                </div>
                             </div>
-		            <div className='SettingsContainer'>
-		                {switchTab()}	
-			    </div>
+                            <div className='SettingsContainer'>
+                                <div className='SettingsContainerInside'>
+                                    {switchTab()}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </WindowBody>

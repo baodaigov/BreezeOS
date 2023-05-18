@@ -5,14 +5,6 @@ import './Panel.scss';
 const PanelItemLarge = ({ type }) => {
 	const [isActive, setActive] = useState(true);
 
-	const toggle = () => {
-		setActive(!isActive);
-	};
-
-	const toggleWifi = () => {
-		setActive(!isActive);
-  	};
-
 	const nightShift = () => {
 		setActive(!isActive);
 		document.getElementsByClassName('Desktop')[0].classList.toggle('NightShiftEnabled');
@@ -23,10 +15,6 @@ const PanelItemLarge = ({ type }) => {
             document.getElementsByClassName('Desktop')[0].classList.toggle('lightMode');
     	}
 
-    const toggleAirplaneMode = () => {
-        setActive(!isActive);
-    }
-
     const boldText = () => {
         setActive(!isActive);
 		document.getElementsByClassName('Desktop')[0].classList.toggle('isBold');
@@ -35,14 +23,14 @@ const PanelItemLarge = ({ type }) => {
 	switch (type) {
             case "wifi":
                 return (
-                    <div className={`PanelItemLarge font-bold ${isActive ? "focused" : ""}`} onClick={toggleWifi}>
+                    <div className={`PanelItemLarge font-bold ${isActive ? "focused" : ""}`} onClick={() => setActive(!isActive)}>
                         <i className={`fa-solid ${isActive ? "fa-wifi" : "fa-wifi-slash"}`}></i>
                         {isActive ? "BreezeOS" : "Wi-Fi"}
                     </div>
                 )
             case "bluetooth":
                 return (
-                    <div className={`PanelItemLarge font-bold ${isActive ? "" : "focused"}`} onClick={toggle}>
+                    <div className={`PanelItemLarge font-bold ${isActive ? "" : "focused"}`} onClick={() => setActive(!isActive)}>
                         <i className="fa-solid fa-bluetooth"></i>
                         Bluetooth
                     </div>
@@ -56,7 +44,7 @@ const PanelItemLarge = ({ type }) => {
                 )
             case "airplane-mode":
                 return (
-                    <div className={`PanelItemLarge font-bold ${isActive ? "" : "focused"}`} onClick={toggleAirplaneMode}>
+                    <div className={`PanelItemLarge font-bold ${isActive ? "" : "focused"}`} onClick={() => setActive(!isActive)}>
                         <i className="fa-solid fa-plane"></i>
                         Airplane Mode
                     </div>
