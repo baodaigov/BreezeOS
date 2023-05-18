@@ -1,17 +1,19 @@
 {
   "files": {
-    "main.css": "/BreezeOS/static/css/main.aa915c16.css",
-    "main.js": "/BreezeOS/static/js/main.4ba6233e.js",
+    "main.css": "/BreezeOS/static/css/main.ca895cfb.css",
+    "main.js": "/BreezeOS/static/js/main.a817505b.js",
+    "static/media/dark.png": "/BreezeOS/static/media/dark.6234c8ee9fb7421f25c8.png",
+    "static/media/light.png": "/BreezeOS/static/media/light.9267ff87ed7c30c67aaf.png",
     "static/media/Screenshot from 2022-09-10 20-41-45.png": "/BreezeOS/static/media/Screenshot from 2022-09-10 20-41-45.a9dd0dd0adcef52a8203.png",
     "static/media/CascadiaCode-Regular-VTT.woff2": "/BreezeOS/static/media/CascadiaCode-Regular-VTT.823f7943de13dee39b78.woff2",
     "static/media/Windows-11-4k-Wallpaper-scaled.jpg": "/BreezeOS/static/media/Windows-11-4k-Wallpaper-scaled.557ec81467de22ddd91a.jpg",
     "static/media/favicon.ico": "/BreezeOS/static/media/favicon.d7d92c5cee20556182aa.ico",
     "index.html": "/BreezeOS/index.html",
-    "main.aa915c16.css.map": "/BreezeOS/static/css/main.aa915c16.css.map",
-    "main.4ba6233e.js.map": "/BreezeOS/static/js/main.4ba6233e.js.map"
+    "main.ca895cfb.css.map": "/BreezeOS/static/css/main.ca895cfb.css.map",
+    "main.a817505b.js.map": "/BreezeOS/static/js/main.a817505b.js.map"
   },
   "entrypoints": [
-    "static/css/main.aa915c16.css",
-    "static/js/main.4ba6233e.js"
+    "static/css/main.ca895cfb.css",
+    "static/js/main.a817505b.js"
   ]
 }
