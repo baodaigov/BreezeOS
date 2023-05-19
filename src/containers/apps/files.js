@@ -1305,16 +1305,16 @@ export default function Files(){
 
         return (
             <>
-                <ActMenu style={{ zIndex: '1', top: '30px', right: '100px' }} className={settingsMenu ? 'active' : ''}>
-                	<div className='iconSize'>
-		        	<ActMenuSelector title='Icon size'>
-		        		<div style={{ marginLeft: '15px', display: 'flex' }}>
-		        			<i className={`fa-regular fa-plus ActMenuInteraction ${iconSize == 145 ? 'disabled' : ''}`} onClick={() => setIconSize(iconSize + 25)}></i>
-		        			<i className={`fa-regular fa-minus ActMenuInteraction ${iconSize == 20 ? 'disabled' : ''}`} onClick={() => setIconSize(iconSize - 25)}></i>
-		        		</div>
-		        	</ActMenuSelector>
-                	</div>
-                </ActMenu>
+				<ActMenu style={{ zIndex: '1', top: '30px', right: '100px' }} className={settingsMenu ? 'active' : ''}>
+					<div className='iconSize'>
+					<ActMenuSelector title='Icon size'>
+						<div style={{ marginLeft: '15px', display: 'flex' }}>
+							<i className={`fa-regular fa-plus ActMenuInteraction ${iconSize == 145 ? 'disabled' : ''}`} onClick={() => setIconSize(iconSize + 25)}></i>
+							<i className={`fa-regular fa-minus ActMenuInteraction ${iconSize == 20 ? 'disabled' : ''}`} onClick={() => setIconSize(iconSize - 25)}></i>
+						</div>
+					</ActMenuSelector>
+					</div>
+				</ActMenu>
                 <TopBar title='Files' onDblClick={minimize}>
                     <div className='TabBarWrapper' style={{ width: '100%' }}>
                         <div className='TabBar' style={{ display: 'flex', justifyContent: 'space-between' }}>

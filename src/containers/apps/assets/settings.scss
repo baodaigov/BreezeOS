@@ -530,7 +530,8 @@ $actcolor: #8fb6ff;
 					height: 100%;
 					overflow-y: auto;
 					padding: 20px;
-					*{margin: 0}
+					
+					p{margin: 0}
 
 					.WiFi {
 						margin: 0 auto;
@@ -581,34 +582,101 @@ $actcolor: #8fb6ff;
 						}
 					}
 
-					.Appearance {
-						padding: 0 50px;
+					.AppearanceWrapper {
 						font-size: 13px;
 
-						.WindowColors {
-							.ImageContainer {
-								img {
-									border-radius: 8px;
-									width: auto;
-									height: 200px;
+						.Appearance {
+							display: flex;
+							justify-content: center;
+							margin: 0 auto;
+							margin-bottom: 30px;
+							max-width: 70%;
+							.WindowColors {
+								display: flex;
+								flex-direction: column;
+								
+								.ImageContainer {
+									transition: border ease .3s;
+									border-radius: 9px;
+									img {
+										border-radius: 8px;
+										width: auto;
+										height: 200px;
+									}
+								}
+	
+								&[value='1']{
+									.ImageContainer.dark {
+										border: 2px solid #8fb6ff;
+									}
+								}
+	
+								&[value='2']{
+									.ImageContainer.light {
+										border: 2px solid #8fb6ff;
+									}
 								}
 							}
+	
+							.Themes {
+								display: flex;
+								flex-direction: column;
 
-							.Cursor {
-								margin-top: 15px;
-								width: 40px;
-								height: 5px;
-								border-radius: 999px;
-								background: $actcolor;
-								transition: transform ease .3s;
-							}
+								.ThemesMenu {
+									display: flex;
+									justify-content: space-between;
+									padding: 0 20px;
+									margin-bottom: 10px;
 
-							&[value='1']{
-								.Cursor {transform: translateX(143px)}
-							}
+									&:last-child {margin: 0}
 
-							&[value='2']{
-								.Cursor {transform: translateX(483px)}
+									.ThemesMenuSection {
+										font-size: 12px;
+										padding: 7px 12px;
+										background: transparentize($fgcolor, 0.93);
+										display: flex;
+										justify-content: space-between;
+										width: 190px;
+										align-items: center;
+										border-radius: 7px;
+									}
+								}
+
+								.ActMenu {
+									background: $bgcolor;
+									backdrop-filter: blur(15px);
+									-webkit-backdrop-filter: blur(15px);
+									padding: 5px;
+									border-radius: 7px;
+									position: absolute;
+									box-shadow: 0px 0 20px #0000004e;
+									transition: all ease .15s !important;
+									opacity: 0;
+									pointer-events: none;
+								
+									&.active {
+										opacity: 1;
+										pointer-events: all;
+									}
+									
+									.ActMenuSelector {
+										padding: 5px 8px;
+										border-radius: 7px;
+										background: transparent;
+										color: $fgcolor;
+										font-size: 13px;
+										display: flex;
+										align-items: center;
+								
+										* {margin: 0;}
+								
+										i {margin-right: 7px}
+								
+										&:hover {
+											background: #ffffff12;
+										}
+									}
+								}
 							}
 						}
 					}
@@ -820,6 +888,24 @@ $actcolor: #8fb6ff;
 							i.fa-duotone {--fa-secondary-color: #20202396!important}
 						}
 					}
+				}
+			}
+
+			.AppearanceWrapper .Appearance {
+				.Themes {
+					.ActMenu {
+						background: $fgcolor;
+				
+						.ActMenuSelector {
+							color: $bgcolor;
+				
+							&:hover {
+								background: #00000012;
+							}
+						}
+					}
+					
+					.ThemesMenu .ThemesMenuSection {background: transparentize($bgcolor, 0.82)!important}
 				}
 			}
 		}

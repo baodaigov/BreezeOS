@@ -295,10 +295,10 @@ export default function Camera() {
                         </div>
                     </div>
                 </div>
-                <ActMenu style={{ zIndex: '1', top: '30px', right: '80px' }} className={settingsMenu ? 'active' : ''}>
-                    {countdown ? <ActMenuSelector title='Camera countdown' active onClick={displayCountdown}></ActMenuSelector> : <ActMenuSelector title='Camera countdown' onClick={displayCountdown}></ActMenuSelector>}
-                    {audio ? <ActMenuSelector title='Enable sounds' active onClick={toggleSounds}></ActMenuSelector> : <ActMenuSelector title='Enable sounds' onClick={toggleSounds}></ActMenuSelector>}
-                </ActMenu>
+                    <ActMenu style={{ zIndex: '1', top: '30px', right: '80px' }} className={settingsMenu ? 'active' : ''}>
+                        {countdown ? <ActMenuSelector title='Camera countdown' active onClick={displayCountdown}></ActMenuSelector> : <ActMenuSelector title='Camera countdown' onClick={displayCountdown}></ActMenuSelector>}
+                        {audio ? <ActMenuSelector title='Enable sounds' active onClick={toggleSounds}></ActMenuSelector> : <ActMenuSelector title='Enable sounds' onClick={toggleSounds}></ActMenuSelector>}
+                    </ActMenu>
                 <TopBar title='Camera' onDblClick={minimize}>
                     <div className='TabBarWrapper' style={{ width: '100%' }}>
                         <div className='TabBar' style={{ display: 'block' }}>

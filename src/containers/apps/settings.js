@@ -223,6 +223,11 @@ export default function Settings(){
     ]
 
     const [valueWindowColors, setValueWindowColors] = useState('1');
+    const [cursorMenu, showCursorMenu] = useState(false);
+    const [iconsMenu, showIconsMenu] = useState(false);
+    const [shellMenu, showShellMenu] = useState(false);
+    const [soundMenu, showSoundMenu] = useState(false);
+    const [legacyApplicationsMenu, showLegacyApplicationsMenu] = useState(false);
 
     function switchDark(){
         setValueWindowColors('1');
@@ -264,21 +269,55 @@ export default function Settings(){
                 )
 			case 'Appearance':
 				return (
-                    <div className='Appearance'>
-                        <>
-                            <p className='font-bold' style={{ marginBottom: '30px' }}>Window colors</p>
+                    <div className='AppearanceWrapper'>
+                        <div className='Appearance'>
                             <div className='WindowColors' value={valueWindowColors}>
-                                <div style={{ display: 'flex' }}>
-                                    <div className='ImageContainer' style={{ marginRight: '20px', display: 'flex', justifyContent: 'center' }} onClick={switchDark}>
+                                <p className='font-bold' style={{ marginBottom: '30px' }}>Window colors</p>
+                                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                                    <div className='ImageContainer dark' style={{ marginRight: '20px' }} onClick={switchDark}>
                                         <img src={Image1}/>
                                     </div>
-                                    <div className='ImageContainer' onClick={switchLight}>
+                                    <div className='ImageContainer light' onClick={switchLight}>
                                         <img src={Image2}/>
                                     </div>
                                 </div>
-                                <div className='Cursor'></div>
                             </div>
-                        </>
+                        </div>
+                        <div className='Appearance'>
+                            <div className='Themes'>
+                                <p className='font-bold' style={{ marginBottom: '30px' }}>Themes</p>
+                                <div style={{ width: '649.516px' }}>
+                                    <div className='ThemesMenu'>
+                                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                                            <i className='fa-regular fa-arrow-pointer' style={{marginRight: '7px'}}></i>
+                                            <p>Cursor</p>
+                                        </div>
+                                        <div className='ThemesMenuSection' onClick={() => showCursorMenu(!cursorMenu)}>
+                                            <p style={{ marginRight: '7px' }}>Default</p>
+                                            <i className='fa-regular fa-chevron-down'></i>
+                                        </div>
+                                        <ActMenu style={{ zIndex: '1', width: '200px', transform: 'translate(415px, 30px)' }} className={cursorMenu ? 'active' : ''}>
+                                            <ActMenuSelector title='Default' active></ActMenuSelector>
+                                        </ActMenu>
+                                    </div>
+                                    <div className='ThemesMenu'>
+                                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                                            <i className='fa-regular fa-icons' style={{marginRight: '7px'}}></i>
+                                            <p>Icons</p>
+                                        </div>
+                                        <div className='ThemesMenuSection' onClick={() => showIconsMenu(!iconsMenu)}>
+                                            <p style={{ marginRight: '7px' }}>Default</p>
+                                            <i className='fa-regular fa-chevron-down'></i>
+                                        </div>
+                                        <ActMenu style={{ zIndex: '1', width: '200px', transform: 'translate(415px, 30px)' }} className={iconsMenu ? 'active' : ''}>
+                                            <ActMenuSelector title='Default' active></ActMenuSelector>
+                                            <ActMenuSelector title='Citrus-icon-theme'></ActMenuSelector>
+                                            <ActMenuSelector title='Font Awesome'></ActMenuSelector>
+                                        </ActMenu>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 )
 			default:
