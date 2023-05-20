@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import '../../components/utils/window/Window.scss';
 import TopBar from '../../components/utils/window/TopBar';
 import WindowBody from '../../components/utils/window/WindowBody';
@@ -9,6 +9,9 @@ import StartApp from '../../components/startMenu/StartApp';
 import ActMenu, { ActMenuSelector } from "../../components/utils/menu/index";
 import Image1 from './assets/dark.png';
 import Image2 from './assets/light.png';
+import LogoD from './assets/logo-d.png';
+import LogoL from './assets/logo-l.png';
+import os from 'os-browserify'
 
 export const SettingsApp = () => {
 
@@ -239,32 +242,145 @@ export default function Settings(){
         document.getElementsByClassName('Desktop')[0].classList.add('lightMode');
     }
 
+    function useOutsideCursorMenu(ref) {
+      useEffect(() => {
+        /**
+         * Alert if clicked on outside of element
+         */
+        function handleClickOutside(event) {
+          if (ref.current && !ref.current.contains(event.target)) {
+            showCursorMenu(false);
+          }
+        }
+        // Bind the event listener
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+          // Unbind the event listener on clean up
+          document.removeEventListener("mousedown", handleClickOutside);
+        };
+      }, [ref]);
+    }
+
+    const cursorMenuRef = useRef(null);
+    useOutsideCursorMenu(cursorMenuRef);
+
+    function useOutsideIconsMenu(ref) {
+      useEffect(() => {
+        /**
+         * Alert if clicked on outside of element
+         */
+        function handleClickOutside(event) {
+          if (ref.current && !ref.current.contains(event.target)) {
+            showIconsMenu(false);
+          }
+        }
+        // Bind the event listener
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+          // Unbind the event listener on clean up
+          document.removeEventListener("mousedown", handleClickOutside);
+        };
+      }, [ref]);
+    }
+
+    const iconsMenuRef = useRef(null);
+    useOutsideIconsMenu(iconsMenuRef);
+
+    function useOutsideShellMenu(ref) {
+      useEffect(() => {
+        /**
+         * Alert if clicked on outside of element
+         */
+        function handleClickOutside(event) {
+          if (ref.current && !ref.current.contains(event.target)) {
+            showShellMenu(false);
+          }
+        }
+        // Bind the event listener
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+          // Unbind the event listener on clean up
+          document.removeEventListener("mousedown", handleClickOutside);
+        };
+      }, [ref]);
+    }
+
+    const shellMenuRef = useRef(null);
+    useOutsideShellMenu(shellMenuRef);
+
+    function useOutsideSoundMenu(ref) {
+      useEffect(() => {
+        /**
+         * Alert if clicked on outside of element
+         */
+        function handleClickOutside(event) {
+          if (ref.current && !ref.current.contains(event.target)) {
+            showSoundMenu(false);
+          }
+        }
+        // Bind the event listener
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+          // Unbind the event listener on clean up
+          document.removeEventListener("mousedown", handleClickOutside);
+        };
+      }, [ref]);
+    }
+
+    const soundMenuRef = useRef(null);
+    useOutsideSoundMenu(soundMenuRef);
+
+    function useOutsideLegacyAppsMenu(ref) {
+      useEffect(() => {
+        /**
+         * Alert if clicked on outside of element
+         */
+        function handleClickOutside(event) {
+          if (ref.current && !ref.current.contains(event.target)) {
+            showLegacyApplicationsMenu(false);
+          }
+        }
+        // Bind the event listener
+        document.addEventListener("mousedown", handleClickOutside);
+
+        return () => {
+          // Unbind the event listener on clean up
+          document.removeEventListener("mousedown", handleClickOutside);
+        };
+      }, [ref]);
+    }
+
+    const legacyAppsMenuRef = useRef(null);
+    useOutsideLegacyAppsMenu(legacyAppsMenuRef);
+
 	function switchTab(){
 		switch(settings){
 			case 'Wi-Fi':
 				return (
-                    <div className='WiFi'>
-                        {statusWifi ? (
-                            <>
-                                <p className='font-bold' style={{ marginBottom: '30px' }}>Visible Networks</p>
-                                <div className='VisibleNetworks'>
-                                    {wifis.map((i) => 
-                                        <div className='VisibleNetworksItem'>
-                                            <p>{i.name}</p>
-                                            <div className='VisibleNetworksIcon'>
-                                                {i.connected ? <i className='fa-solid fa-check'></i> : ''}
-                                                {i.private ? <i className='fa-solid fa-lock'></i> : ''}
-                                                {i.status == 'good' ? <i className='fa-solid fa-wifi'></i> : i.status == 'fair' ? <i className='fa-duotone fa-wifi-fair'></i> : i.status == 'weak' ? <i className='fa-duotone fa-wifi-weak'></i> : ''}
+                    <div className='WiFiWrapper'>
+                        <div className='WiFi'>
+                            {statusWifi ? (
+                                <div style={{ display: 'flex', flexDirection: 'column', width: '75%' }}>
+                                    <p className='font-bold' style={{ marginBottom: '30px' }}>Visible Networks</p>
+                                    <div className='VisibleNetworks'>
+                                        {wifis.map((i) => 
+                                            <div className='VisibleNetworksItem'>
+                                                <p>{i.name}</p>
+                                                <div className='VisibleNetworksIcon'>
+                                                    {i.connected ? <i className='fa-solid fa-check'></i> : ''}
+                                                    {i.private ? <i className='fa-solid fa-lock'></i> : ''}
+                                                    {i.status == 'good' ? <i className='fa-solid fa-wifi'></i> : i.status == 'fair' ? <i className='fa-duotone fa-wifi-fair'></i> : i.status == 'weak' ? <i className='fa-duotone fa-wifi-weak'></i> : ''}
+                                                </div>
                                             </div>
-                                        </div>
-                                    )}
+                                        )}
+                                    </div>
                                 </div>
-                            </>
-                        ) : (
-                            <div className='StatusWifiFalse'>
-                                <p>To get access to Internet connection, please turn on the Wi-Fi.</p>
-                            </div>
-                        )}
+                            ) : (
+                                <div className='StatusWifiFalse'>
+                                    <p>To get access to Internet connection, please turn on the Wi-Fi.</p>
+                                </div>
+                            )}
+                        </div>
                     </div>
                 )
 			case 'Appearance':
@@ -296,7 +412,7 @@ export default function Settings(){
                                             <p style={{ marginRight: '7px' }}>Default</p>
                                             <i className='fa-regular fa-chevron-down'></i>
                                         </div>
-                                        <ActMenu style={{ zIndex: '1', width: '200px', transform: 'translate(415px, 30px)' }} className={cursorMenu ? 'active' : ''}>
+                                        <ActMenu style={{ zIndex: '1', width: '200px', transform: 'translate(415px, 30px)' }} className={cursorMenu ? 'active' : ''} ref={cursorMenuRef}>
                                             <ActMenuSelector title='Default' active></ActMenuSelector>
                                         </ActMenu>
                                     </div>
@@ -309,11 +425,77 @@ export default function Settings(){
                                             <p style={{ marginRight: '7px' }}>Default</p>
                                             <i className='fa-regular fa-chevron-down'></i>
                                         </div>
-                                        <ActMenu style={{ zIndex: '1', width: '200px', transform: 'translate(415px, 30px)' }} className={iconsMenu ? 'active' : ''}>
+                                        <ActMenu style={{ zIndex: '1', width: '200px', transform: 'translate(415px, 30px)' }} className={iconsMenu ? 'active' : ''} ref={iconsMenuRef}>
                                             <ActMenuSelector title='Default' active></ActMenuSelector>
                                             <ActMenuSelector title='Citrus-icon-theme'></ActMenuSelector>
                                             <ActMenuSelector title='Font Awesome'></ActMenuSelector>
                                         </ActMenu>
+                                    </div>
+                                    <div className='ThemesMenu'>
+                                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                                            <i className='fa-solid fa-browser' style={{marginRight: '7px'}}></i>
+                                            <p>Shell</p>
+                                        </div>
+                                        <div className='ThemesMenuSection' onClick={() => showShellMenu(!shellMenu)}>
+                                            <p style={{ marginRight: '7px' }}>Breeze</p>
+                                            <i className='fa-regular fa-chevron-down'></i>
+                                        </div>
+                                        <ActMenu style={{ zIndex: '1', width: '200px', transform: 'translate(415px, 30px)' }} className={shellMenu ? 'active' : ''} ref={shellMenuRef}>
+                                            <ActMenuSelector title='Breeze' active></ActMenuSelector>
+                                        </ActMenu>
+                                    </div>
+                                    <div className='ThemesMenu'>
+                                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                                            <i className='fa-regular fa-volume' style={{marginRight: '7px'}}></i>
+                                            <p>Sound</p>
+                                        </div>
+                                        <div className='ThemesMenuSection' onClick={() => showSoundMenu(!soundMenu)}>
+                                            <p style={{ marginRight: '7px' }}>Oxygen</p>
+                                            <i className='fa-regular fa-chevron-down'></i>
+                                        </div>
+                                        <ActMenu style={{ zIndex: '1', width: '200px', transform: 'translate(415px, 30px)' }} className={soundMenu ? 'active' : ''} ref={soundMenuRef}>
+                                            <ActMenuSelector title='Oxygen' active></ActMenuSelector>
+                                        </ActMenu>
+                                    </div>
+                                    <div className='ThemesMenu'>
+                                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                                            <i className='fa-solid fa-browser' style={{marginRight: '7px'}}></i>
+                                            <p>Legacy Applications</p>
+                                        </div>
+                                        <div className='ThemesMenuSection' onClick={() => showLegacyApplicationsMenu(!legacyApplicationsMenu)}>
+                                            <p style={{ marginRight: '7px' }}>Default</p>
+                                            <i className='fa-regular fa-chevron-down'></i>
+                                        </div>
+                                        <ActMenu style={{ zIndex: '1', width: '200px', transform: 'translate(415px, 30px)' }} className={legacyApplicationsMenu ? 'active' : ''} ref={legacyAppsMenuRef}>
+                                            <ActMenuSelector title='Default' active></ActMenuSelector>
+                                        </ActMenu>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )
+			case 'About':
+				return (
+                    <div className='AboutWrapper'>
+                        <div className='About'>
+                            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                                <img src={LogoD} width={'331.133'} height={140} className='AboutLogo'/>
+                                <div style={{ display: 'flex', flexDirection: 'column', marginTop: '10px' }}>
+                                    <div className='AboutMenu'>
+                                        <p>Device Name</p>
+                                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                                            <p className='BlurText' style={{ marginRight: '10px' }}>BreezeOS</p>
+                                            <i className='fa-regular fa-chevron-right'></i>
+                                        </div>
+                                    </div>
+                                    <div className='AboutMenu'>
+                                        <p>OS Version</p>
+                                        <p className='BlurText'>2.0.0</p>
+                                    </div>
+                                    <div className='AboutMenu'>
+                                        <p>Memory</p>
+                                        <p className='BlurText'>{navigator.hardwareConcurrency} GiB</p>
                                     </div>
                                 </div>
                             </div>

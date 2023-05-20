@@ -87,7 +87,7 @@ $actcolor: #8fb6ff;
 
 				.Toggle {
 					border-radius: 999px;
-					width: 43px;
+					width: 42px;
 					height: 20px;
 					background: transparentize($fgcolor, 0.9);
 					display: flex;
@@ -109,7 +109,7 @@ $actcolor: #8fb6ff;
 						background: $actcolor;
 
 						&::before {
-							transform: translateX(20px);
+							transform: translateX(19px);
 						}
 					}
 				}
@@ -530,52 +530,55 @@ $actcolor: #8fb6ff;
 					height: 100%;
 					overflow-y: auto;
 					padding: 20px;
+					font-size: 13px;
 					
 					p{margin: 0}
 
-					.WiFi {
-						margin: 0 auto;
-						max-width: 70%;
-						font-size: 13px;
-	
-						.StatusWifiFalse {
-							color: transparentize($fgcolor, 0.85);
-						}
-
-						.VisibleNetworks {
+					.WiFiWrapper {
+						.WiFi {
 							display: flex;
-							flex-direction: column;
-							height: 100%;
-
-							.VisibleNetworksItem {
-								width: 100%;
-								padding: 15px 25px;
+							justify-content: center;
+							margin: 0 auto;
+		
+							.StatusWifiFalse {
+								color: transparentize($fgcolor, 0.85);
+							}
+	
+							.VisibleNetworks {
 								display: flex;
-								justify-content: space-between;
-								border-bottom: 1px solid transparentize($fgcolor, 0.95);
-
-								&:hover {
-									background: transparentize($fgcolor, 0.97);
-								}
-
-								&:first-child {
-									border-top-left-radius: 7px;
-									border-top-right-radius: 7px;
-								}
-
-								&:last-child {
-									border: 0;
-									border-bottom-left-radius: 7px;
-									border-bottom-right-radius: 7px;
-								}
-
-								.VisibleNetworksIcon {
-									i {
-										margin-right: 13px;
-
-										&:last-child {margin:0}
-
-										&.fa-duotone {--fa-secondary-color: #e2e2e296}
+								flex-direction: column;
+								height: 100%;
+	
+								.VisibleNetworksItem {
+									width: 100%;
+									padding: 15px 25px;
+									display: flex;
+									justify-content: space-between;
+									border-bottom: 1px solid transparentize($fgcolor, 0.95);
+	
+									&:hover {
+										background: transparentize($fgcolor, 0.97);
+									}
+	
+									&:first-child {
+										border-top-left-radius: 7px;
+										border-top-right-radius: 7px;
+									}
+	
+									&:last-child {
+										border: 0;
+										border-bottom-left-radius: 7px;
+										border-bottom-right-radius: 7px;
+									}
+	
+									.VisibleNetworksIcon {
+										i {
+											margin-right: 13px;
+	
+											&:last-child {margin:0}
+	
+											&.fa-duotone {--fa-secondary-color: #e2e2e296}
+										}
 									}
 								}
 							}
@@ -583,8 +586,6 @@ $actcolor: #8fb6ff;
 					}
 
 					.AppearanceWrapper {
-						font-size: 13px;
-
 						.Appearance {
 							display: flex;
 							justify-content: center;
@@ -677,6 +678,44 @@ $actcolor: #8fb6ff;
 										}
 									}
 								}
+							}
+						}
+					}
+
+					.AboutWrapper {
+						.About {
+							display: flex;
+							justify-content: center;
+							margin: 0 auto;
+							width: 70%;
+
+							.AboutLogo {margin: 0 auto}
+
+							.AboutMenu {
+								width: 500px;
+								display: flex;
+								justify-content: space-between;
+								align-items: center;
+								padding: 15px 25px;
+								background: transparentize($fgcolor, 0.93);
+								border-bottom: 0.5px solid darken($fgcolor, 73%);
+	
+								&:hover {
+									background: transparentize($fgcolor, 0.9);
+								}
+	
+								&:first-child {
+									border-top-left-radius: 7px;
+									border-top-right-radius: 7px;
+								}
+
+								&:last-child {
+									border: 0;
+									border-bottom-left-radius: 7px;
+									border-bottom-right-radius: 7px;
+								}
+
+								.BlurText {color: transparentize($fgcolor, 0.8);}
 							}
 						}
 					}
@@ -905,7 +944,20 @@ $actcolor: #8fb6ff;
 						}
 					}
 					
-					.ThemesMenu .ThemesMenuSection {background: transparentize($bgcolor, 0.82)!important}
+					.ThemesMenu {
+						.ThemesMenuSection {background: transparentize($bgcolor, 0.82)!important}
+						.ActMenu {
+							background: $fgcolor;
+					
+							.ActMenuSelector {
+								color: $bgcolor;
+					
+								&:hover {
+									background: #00000012;
+								}
+							}
+						}
+					}
 				}
 			}
 		}

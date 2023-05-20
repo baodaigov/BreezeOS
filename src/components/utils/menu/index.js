@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { forwardRef } from 'react';
 import './index.scss';
 
 export const ActMenuSelector = (props) => {
@@ -11,31 +11,10 @@ export const ActMenuSelector = (props) => {
     )
 }
 
-export default function ActMenu(props){
-
-    function useOutsideAlerter(ref) {
-      useEffect(() => {
-        /**
-         * Alert if clicked on outside of element
-         */
-        function handleClickOutside(event) {
-          if (ref.current && !ref.current.contains(event.target)) {
-            document.getElementsByClassName('ActMenu')[0].classList.remove('active');
-          }
-        }
-        // Bind the event listener
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-          // Unbind the event listener on clean up
-          document.removeEventListener("mousedown", handleClickOutside);
-        };
-      }, [ref]);
-    }
-
-    const actMenuRef = useRef(null);
-    useOutsideAlerter(actMenuRef);
-
+function ActMenu(props, ref){
     return (
-        <div className={`ActMenu ${props.className}`} style={props.style} ref={actMenuRef}>{props.children}</div>
+        <div className={`ActMenu ${props.className}`} style={props.style} ref={ref}>{props.children}</div>
     )
 }
+
+export default forwardRef(ActMenu);

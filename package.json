@@ -10,12 +10,14 @@
     "dayjs": "^1.11.7",
     "lodash-es": "^4.17.21",
     "node-sass": "^7.0.3",
+    "os-browserify": "^0.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-draggable": "^4.4.5",
     "react-scripts": "5.0.1",
     "react-use": "^17.4.0",
     "react-webcam": "^7.0.1",
+    "systeminformation": "^5.17.12",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
