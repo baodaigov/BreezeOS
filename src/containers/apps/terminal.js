@@ -68,7 +68,7 @@ export default function Terminal() {
                 <WindowBody>
                     <div className='Terminal'>
                         <pre>Welcome to BreezeOS (GNU/Linux 6.2.1 x86_64)</pre>
-                        <pre id='input'>[localhost@BreezeOS]$ 
+                        <pre id='input'>[localhost@breezeos]$ 
                         <input type='text' spellCheck='false'/>
                         </pre>
                     </div>

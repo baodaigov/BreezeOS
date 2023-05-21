@@ -255,6 +255,29 @@ export default function Camera() {
             setImg(null);
         }
 
+		function useOutsideSettingsMenu(ref) {
+		  useEffect(() => {
+			/**
+			 * Alert if clicked on outside of element
+			 */
+			function handleClickOutside(event) {
+			  if (ref.current && !ref.current.contains(event.target)) {
+				showSettingsMenu(false);
+			  }
+			}
+			// Bind the event listener
+			document.addEventListener("mousedown", handleClickOutside);
+	
+			return () => {
+			  // Unbind the event listener on clean up
+			  document.removeEventListener("mousedown", handleClickOutside);
+			};
+		  }, [ref]);
+		}
+	
+		const settingsMenuRef = useRef(null);
+		useOutsideSettingsMenu(settingsMenuRef);
+
         const [min, isMin] = useState(false);
 
         function close(){
@@ -295,7 +318,7 @@ export default function Camera() {
                         </div>
                     </div>
                 </div>
-                    <ActMenu style={{ zIndex: '1', top: '30px', right: '80px' }} className={settingsMenu ? 'active' : ''}>
+                    <ActMenu style={{ zIndex: '1', top: '30px', right: '80px' }} className={settingsMenu ? 'active' : ''} ref={settingsMenuRef}>
                         {countdown ? <ActMenuSelector title='Camera countdown' active onClick={displayCountdown}></ActMenuSelector> : <ActMenuSelector title='Camera countdown' onClick={displayCountdown}></ActMenuSelector>}
                         {audio ? <ActMenuSelector title='Enable sounds' active onClick={toggleSounds}></ActMenuSelector> : <ActMenuSelector title='Enable sounds' onClick={toggleSounds}></ActMenuSelector>}
                     </ActMenu>

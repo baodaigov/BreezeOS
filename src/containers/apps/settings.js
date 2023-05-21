@@ -231,6 +231,10 @@ export default function Settings(){
     const [shellMenu, showShellMenu] = useState(false);
     const [soundMenu, showSoundMenu] = useState(false);
     const [legacyApplicationsMenu, showLegacyApplicationsMenu] = useState(false);
+    const [orientationMenu, showOrientationMenu] = useState(false);
+    const [resolutionMenu, showResolutionMenu] = useState(false);
+    const [editDeviceName, allowEditDeviceName] = useState(false);
+    const [deviceName, setDeviceName] = useState('breezeos');
 
     function switchDark(){
         setValueWindowColors('1');
@@ -353,6 +357,66 @@ export default function Settings(){
     const legacyAppsMenuRef = useRef(null);
     useOutsideLegacyAppsMenu(legacyAppsMenuRef);
 
+    function useOutsideOrientationMenu(ref) {
+      useEffect(() => {
+        /**
+         * Alert if clicked on outside of element
+         */
+        function handleClickOutside(event) {
+          if (ref.current && !ref.current.contains(event.target)) {
+            showOrientationMenu(false);
+          }
+        }
+        // Bind the event listener
+        document.addEventListener("mousedown", handleClickOutside);
+
+        return () => {
+          // Unbind the event listener on clean up
+          document.removeEventListener("mousedown", handleClickOutside);
+        };
+      }, [ref]);
+    }
+
+    const orientationMenuRef = useRef(null);
+    useOutsideOrientationMenu(orientationMenuRef);
+
+    function useOutsideResolutionMenu(ref) {
+      useEffect(() => {
+        /**
+         * Alert if clicked on outside of element
+         */
+        function handleClickOutside(event) {
+          if (ref.current && !ref.current.contains(event.target)) {
+            showResolutionMenu(false);
+          }
+        }
+        // Bind the event listener
+        document.addEventListener("mousedown", handleClickOutside);
+
+        return () => {
+          // Unbind the event listener on clean up
+          document.removeEventListener("mousedown", handleClickOutside);
+        };
+      }, [ref]);
+    }
+
+    const resolutionMenuRef = useRef(null);
+    useOutsideResolutionMenu(resolutionMenuRef);
+
+    const [maximumExceeded, displayMaximumExceeded] = useState(false);
+
+    function submitDeviceName(e){
+        if(e.key == 'Enter'){
+            if(e.target.value.length > 43){
+                displayMaximumExceeded(true);
+                setDeviceName(deviceName);
+            } else {
+                allowEditDeviceName(false);
+                setDeviceName(e.target.value);
+            }
+        }
+    }
+
 	function switchTab(){
 		switch(settings){
 			case 'Wi-Fi':
@@ -408,7 +472,7 @@ export default function Settings(){
                                             <i className='fa-regular fa-arrow-pointer' style={{marginRight: '7px'}}></i>
                                             <p>Cursor</p>
                                         </div>
-                                        <div className='ThemesMenuSection' onClick={() => showCursorMenu(!cursorMenu)}>
+                                        <div className='ThemesMenuSection' onClick={() => showCursorMenu(true)}>
                                             <p style={{ marginRight: '7px' }}>Default</p>
                                             <i className='fa-regular fa-chevron-down'></i>
                                         </div>
@@ -421,7 +485,7 @@ export default function Settings(){
                                             <i className='fa-regular fa-icons' style={{marginRight: '7px'}}></i>
                                             <p>Icons</p>
                                         </div>
-                                        <div className='ThemesMenuSection' onClick={() => showIconsMenu(!iconsMenu)}>
+                                        <div className='ThemesMenuSection' onClick={() => showIconsMenu(true)}>
                                             <p style={{ marginRight: '7px' }}>Default</p>
                                             <i className='fa-regular fa-chevron-down'></i>
                                         </div>
@@ -436,7 +500,7 @@ export default function Settings(){
                                             <i className='fa-solid fa-browser' style={{marginRight: '7px'}}></i>
                                             <p>Shell</p>
                                         </div>
-                                        <div className='ThemesMenuSection' onClick={() => showShellMenu(!shellMenu)}>
+                                        <div className='ThemesMenuSection' onClick={() => showShellMenu(true)}>
                                             <p style={{ marginRight: '7px' }}>Breeze</p>
                                             <i className='fa-regular fa-chevron-down'></i>
                                         </div>
@@ -449,7 +513,7 @@ export default function Settings(){
                                             <i className='fa-regular fa-volume' style={{marginRight: '7px'}}></i>
                                             <p>Sound</p>
                                         </div>
-                                        <div className='ThemesMenuSection' onClick={() => showSoundMenu(!soundMenu)}>
+                                        <div className='ThemesMenuSection' onClick={() => showSoundMenu(true)}>
                                             <p style={{ marginRight: '7px' }}>Oxygen</p>
                                             <i className='fa-regular fa-chevron-down'></i>
                                         </div>
@@ -462,12 +526,51 @@ export default function Settings(){
                                             <i className='fa-solid fa-browser' style={{marginRight: '7px'}}></i>
                                             <p>Legacy Applications</p>
                                         </div>
-                                        <div className='ThemesMenuSection' onClick={() => showLegacyApplicationsMenu(!legacyApplicationsMenu)}>
+                                        <div className='ThemesMenuSection' onClick={() => showLegacyApplicationsMenu(true)}>
                                             <p style={{ marginRight: '7px' }}>Default</p>
                                             <i className='fa-regular fa-chevron-down'></i>
                                         </div>
                                         <ActMenu style={{ zIndex: '1', width: '200px', transform: 'translate(415px, 30px)' }} className={legacyApplicationsMenu ? 'active' : ''} ref={legacyAppsMenuRef}>
                                             <ActMenuSelector title='Default' active></ActMenuSelector>
+                                        </ActMenu>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )
+			case 'Displays':
+				return (
+                    <div className='DisplaysWrapper'>
+                        <div className='Displays'>
+                            <div className='BuiltInDisplay'>
+                                <p className='font-bold' style={{ marginBottom: '30px' }}>Built-in display</p>
+                                <div style={{ width: '649.516px', display: 'flex', flexDirection: 'column' }}>
+                                    <div className='BiDMenu'>
+                                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                                            <i className='fa-regular fa-image-landscape' style={{marginRight: '7px'}}></i>
+                                            <p>Orientation</p>
+                                        </div>
+                                        <div className='BiDMenuSection' onClick={() => showOrientationMenu(true)}>
+                                            <p style={{ marginRight: '7px' }}>Landscape</p>
+                                            <i className='fa-regular fa-chevron-down'></i>
+                                        </div>
+                                        <ActMenu style={{ zIndex: '1', width: '200px', transform: 'translate(415px, 30px)' }} className={orientationMenu ? 'active' : ''} ref={orientationMenuRef}>
+                                            <ActMenuSelector title='Landscape' active></ActMenuSelector>
+                                            <ActMenuSelector title='Portrait'></ActMenuSelector>
+                                        </ActMenu>
+                                    </div>
+                                    <div className='BiDMenu'>
+                                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                                            <i className='fa-regular fa-expand-wide' style={{marginRight: '7px'}}></i>
+                                            <p>Resolution</p>
+                                        </div>
+                                        <div className='BiDMenuSection' onClick={() => showResolutionMenu(true)}>
+                                            <p style={{ marginRight: '7px' }}>{window.screen.width} &times; {window.screen.height} &#40;16:9&#41;</p>
+                                            <i className='fa-regular fa-chevron-down'></i>
+                                        </div>
+                                        <ActMenu style={{ zIndex: '1', width: '200px', transform: 'translate(415px, 30px)' }} className={resolutionMenu ? 'active' : ''} ref={resolutionMenuRef}>
+                                            <ActMenuSelector title={`${window.screen.width} \u00D7 ${window.screen.height} (16:9)`}active></ActMenuSelector>
                                         </ActMenu>
                                     </div>
                                 </div>
@@ -482,20 +585,43 @@ export default function Settings(){
                             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                                 <img src={LogoD} width={'331.133'} height={140} className='AboutLogo'/>
                                 <div style={{ display: 'flex', flexDirection: 'column', marginTop: '10px' }}>
-                                    <div className='AboutMenu'>
+                                    <div className='AboutMenu' onClick={() => allowEditDeviceName(!editDeviceName)}>
                                         <p>Device Name</p>
                                         <div style={{ display: 'flex', alignItems: 'center' }}>
-                                            <p className='BlurText' style={{ marginRight: '10px' }}>BreezeOS</p>
-                                            <i className='fa-regular fa-chevron-right'></i>
+                                            <p className='BlurText' style={{ marginRight: '15px' }}>{deviceName}</p>
+                                            <i className={`fa-regular fa-chevron-right ${editDeviceName ? 'rotated' : ''}`}></i>
                                         </div>
                                     </div>
+                                    <div className={`AboutMenu EditName ${editDeviceName ? 'active' : ''}`}>
+                                        <input className='EditNameInput' type='text' placeholder={deviceName} onKeyUp={submitDeviceName}/>
+                                    </div>
                                     <div className='AboutMenu'>
-                                        <p>OS Version</p>
+                                        <p>System Name</p>
+                                        <p className='BlurText'>BreezeOS</p>
+                                    </div>
+                                    <div className='AboutMenu'>
+                                        <p>System Version</p>
                                         <p className='BlurText'>2.0.0</p>
                                     </div>
                                     <div className='AboutMenu'>
+                                        <p>Kernel</p>
+                                        <p className='BlurText'>GNU/Linux 6.2.1 x86_64</p>
+                                    </div>
+                                    <div className='AboutMenu'>
                                         <p>Memory</p>
-                                        <p className='BlurText'>{navigator.hardwareConcurrency} GiB</p>
+                                        <p className='BlurText'>{navigator.hardwareConcurrency} GB</p>
+                                    </div>
+                                    <div className='AboutMenu'>
+                                        <p>Processor</p>
+                                        <p className='BlurText'>Intel&reg; Core&trade; i3-6100 CPU @ 3.70GHz &times; 4</p>
+                                    </div>
+                                    <div className='AboutMenu'>
+                                        <p>Graphics</p>
+                                        <p className='BlurText'>Mesa Intel&reg; HD Graphics 530 &#40;SKL GT2&#41;</p>
+                                    </div>
+                                    <div className='AboutMenu'>
+                                        <p>Disk Capacity</p>
+                                        <p className='BlurText'>128.0 GB</p>
                                     </div>
                                 </div>
                             </div>
@@ -522,6 +648,24 @@ export default function Settings(){
 
         return (
             <>
+                {maximumExceeded ? (
+                    <div className='MaximumExceededBox'>
+                        <div className='WindowTopBar'>
+                            <p className='WindowTopBarTitle'>Error!</p>
+                            <div class="WindowTopBarInteractionContainer">
+                                <div class="WindowTopBarInteraction close" onClick={() => displayMaximumExceeded(false)}>
+                                    <i class="fa-solid fa-xmark fa-lg"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="WindowBodyDefault">
+                            <p class="WindowBodyContent">Maximum characters exceeded</p>
+                            <div class="WindowBodyButton">
+                                <button class="Button" onClick={() => displayMaximumExceeded(false)}>OK</button>
+                            </div>
+                        </div>
+                    </div>
+                ) : ''}
                 <TopBar title='Settings' onDblClick={minimize}>
                     <div className='TabBarWrapper' style={{ width: '100%' }}>
                         <div className='TabBar' style={{ display: 'flex', justifyContent: 'space-between' }}>

@@ -4,8 +4,8 @@ import './index.scss';
 export const ActMenuSelector = (props) => {
     return (
         <div className='ActMenuSelector' style={props.style} onClick={props.onClick}>
-            {props.active ? <i className="fa-regular fa-check"></i> : ''}
             <p>{props.title}</p>
+            <i className={`fa-regular fa-check ${props.active ? 'active' : ''}`}></i>
             {props.children}
         </div>
     )

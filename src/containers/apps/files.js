@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import '../../components/utils/window/Window.scss';
 import TopBar from '../../components/utils/window/TopBar';
 import WindowBody from '../../components/utils/window/WindowBody';
@@ -166,6 +166,29 @@ export default function Files(){
             setValue('9');
 	    setDirectory('Other Locations');
         }
+
+		function useOutsideSettingsMenu(ref) {
+		  useEffect(() => {
+			/**
+			 * Alert if clicked on outside of element
+			 */
+			function handleClickOutside(event) {
+			  if (ref.current && !ref.current.contains(event.target)) {
+				showSettingsMenu(false);
+			  }
+			}
+			// Bind the event listener
+			document.addEventListener("mousedown", handleClickOutside);
+	
+			return () => {
+			  // Unbind the event listener on clean up
+			  document.removeEventListener("mousedown", handleClickOutside);
+			};
+		  }, [ref]);
+		}
+	
+		const settingsMenuRef = useRef(null);
+		useOutsideSettingsMenu(settingsMenuRef);
 
         const [min, isMin] = useState(false);
     
@@ -1305,7 +1328,7 @@ export default function Files(){
 
         return (
             <>
-				<ActMenu style={{ zIndex: '1', top: '30px', right: '100px' }} className={settingsMenu ? 'active' : ''}>
+				<ActMenu style={{ zIndex: '1', top: '30px', right: '100px' }} className={settingsMenu ? 'active' : ''} ref={settingsMenuRef}>
 					<div className='iconSize'>
 					<ActMenuSelector title='Icon size'>
 						<div style={{ marginLeft: '15px', display: 'flex' }}>
