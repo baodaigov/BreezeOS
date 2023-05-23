@@ -53,6 +53,7 @@ export default function Clock() {
         const [translateX, setTranslateX] = useState('');
         const [width, setWidth] = useState('103px');
         const [value, setValue] = useState('1');
+
         const ClockItems = document.getElementsByClassName('ClockItems')[0];
         
         function worldClockTab(){
@@ -86,6 +87,7 @@ export default function Clock() {
         const ClockItem = (props) => {
             const [curTime, setCurTime] = useState(null);
             const [curDate, setCurDate] = useState(null);
+
             useEffect(() => {
                 if(curTime == null && curDate == null){
                     setCurTime(new Date().toLocaleString('vi-VN', {
@@ -132,17 +134,39 @@ export default function Clock() {
         }
 
         const [alarm, setAlarm] = useState([]);
+        const [alarmSettings, showAlarmSettings] = useState(false);
+        const [settings, allowSettings] = useState(false);
 
         function addNewAlarm(){
             let newAlarm = [...alarm];
             let newTitle = `Alarm ${alarm.length + 1}`;
             newAlarm = [...newAlarm, {id: newTitle, time: '07:00 AM'}];
             setAlarm(newAlarm);
+            showAlarmSettings(false);
         }
         
         function removeAlarm(index){
             const deleteAlarm = alarm && alarm.filter((element , i) => i !== index);
             setAlarm(deleteAlarm);
+        }
+
+        var mouseHold;
+
+        function mouseUp(){
+            if(mouseHold) window.clearTimeout(mouseHold);
+            addNewAlarm();
+        }
+
+        function mouseDown(){
+            mouseHold = window.setTimeout(() => {
+                navigator.vibrate(200);
+                showAlarmSettings(true);
+            }, 800);
+        }
+
+        function editAlarm(){
+            allowSettings(!settings);
+            showAlarmSettings(false);
         }
 
         const [time, setTime] = useState(0);
@@ -190,9 +214,17 @@ export default function Clock() {
                                 {alarm.length != 0 ? (
                                     <div className='AlarmContainer'>
                                         {alarm.map((e, index) => 
-                                            <div className='AlarmContainerItem' onDoubleClick={() => removeAlarm(index)}>
-                                                <p className='AlarmContainerTitle'>{e.id}</p>
-                                                <p className='AlarmContainerTime'>{e.time}</p>
+                                            <div className='AlarmContainerItem'>
+                                                {settings ? (
+                                                    <div className='AlarmSettings'>
+                                                        <i className="fa-regular fa-bars reorder"></i>
+                                                        <i class="fa-regular fa-dash delete" onClick={() => removeAlarm(index)}></i>
+                                                    </div>
+                                                ) : ''}
+                                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+                                                    <p className='AlarmContainerTitle'>{e.id}</p>
+                                                    <p className='AlarmContainerTime'>{e.time}</p>
+                                                </div>
                                             </div>
                                         )}
                                     </div>
@@ -202,9 +234,29 @@ export default function Clock() {
                                         <p style={{ fontWeight: '700', fontSize: '20px' }}>No Alarm</p>
                                     </div>
                                 )}
-                                <div className='AlarmItem' onClick={addNewAlarm}>
-                                    <i className="fa-regular fa-plus"></i>
-                                </div>
+                                {alarmSettings ? (
+                                    <>
+                                        <div className='AlarmItem showSettings' onMouseUp={() => showAlarmSettings(false)}>
+                                            <i className="fa-regular fa-xmark"></i>
+                                        </div>
+                                        <div className={`AlarmItem ${alarm.length == 0 ? 'disable' : ''} edit`} onMouseUp={editAlarm}>
+                                            <p className='AlarmItemTitle'>Edit</p>
+                                            <i className="fa-regular fa-pen"></i>
+                                        </div>
+                                        <div className='AlarmItem settings' onMouseUp={() => showAlarmSettings(false)}>
+                                            <p className='AlarmItemTitle'>Settings</p>
+                                            <i className="fa-regular fa-gear"></i>
+                                        </div>
+                                    </>
+                                ) : settings ? (
+                                    <div className='AlarmItem done' onMouseUp={() => allowSettings(false)}>
+                                        <i className="fa-regular fa-check"></i>
+                                    </div>
+                                ) : (
+                                    <div className='AlarmItem' onMouseDown={mouseDown} onMouseUp={mouseUp}>
+                                        <i className="fa-regular fa-plus"></i>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     )
@@ -244,7 +296,7 @@ export default function Clock() {
                     <TopBarInteraction action='close' onClose={close}/>
                 </TopBar>
                 <WindowBody>
-                    <div className='Clock'>
+                    <div className={`Clock ${alarmSettings ? 'blackscr' : ''}`}>
                         <div className='ClockItems'>
                             {switchTab()}
                         </div>

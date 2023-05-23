@@ -35,6 +35,27 @@ $fgcolor: #e2e2e2;
         display: flex;
         flex-direction: column;
 
+        &.blackscr {
+            &::after {
+                content: '';
+                display: block;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background: transparentize(#000, 0.5);
+                animation: showUpBlackscr .3s;
+            }
+
+            @keyframes showUpBlackscr {
+                0% {
+                    background: transparent;
+                }
+                100% {
+                    background: transparentize(#000, 0.5);
+                }
+            }
+        }
+
         * {
             margin: 0;
         }
@@ -114,45 +135,71 @@ $fgcolor: #e2e2e2;
                         padding: 10px 30px;
 
                         &::-webkit-scrollbar {
-                            width: 0;
+                            width: 3px;
                             border-radius: 3px;
                             position: absolute;
                         }
                         
                         &::-webkit-scrollbar-thumb {
-                            background: $fgcolor;
+                            background: transparent;
                             border-radius: 10px;
                         }
 
                         &:hover {
-                            &::-webkit-scrollbar {
-                                width: 3px;
+                            &::-webkit-scrollbar-thumb {
+                                background: $fgcolor;
                             }
                         }
 
                         .AlarmContainerItem {
                             position: relative;
-                            top: 0px;
+                            top: 0;
                             background: #202023;
                             color: $fgcolor;
                             display: flex;
-                            justify-content: space-between;
-                            align-items: center;
                             padding: 5px;
-                            transition: all .3s;
                             width: 750px;
                             margin: 15px auto;
                             margin-top: 0;
                             border-radius: 999px;
-                            animation: showUp ease .2s;
+                            opacity: 1;
+                            animation: showUpItem ease .5s;
 
-                            @keyframes showUp {
+                            @keyframes showUpItem {
                                 0% {
+                                    top: 20px;
+                                    opacity: 0;
+                                }
+
+                                50% {
                                     top: -10px;
                                 }
 
                                 100% {
                                     top: 0;
+                                    opacity: 1;
+                                }
+                            }
+
+                            .AlarmSettings {
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                font-size: 15px;
+
+                                i {
+                                    margin-left: 10px;
+
+                                    &.delete {
+                                        background: #ff5d5d;
+                                        color: $fgcolor;
+                                        display: flex;
+                                        justify-content: center;
+                                        align-items: center;
+                                        width: 23px;
+                                        height: 23px;
+                                        border-radius: 999px;
+                                    }
                                 }
                             }
 
@@ -193,20 +240,111 @@ $fgcolor: #e2e2e2;
                     position: absolute;
                     right: 0;
                     bottom: 0;
+                    z-index: 1;
                     background: #8fb6ff;
+                    box-shadow: 0px 0px 15px transparentize($bgcolor, 0.5);
                     width: 45px;
                     height: 45px;
                     color: $bgcolor;
-                    font-size: 25px;
+                    font-size: 20px;
                     border-radius: 999px;
                     display: flex;
                     justify-content: center;
                     align-items: center;
                     margin: 20px 30px;
-                    transition: none;
+                    transition: all ease .2s;
 
-                    &:active {
+                    .AlarmItemTitle{
+                        color:$fgcolor;
+                        position: absolute;
+                        bottom: 55px;
+                        font-size: 11px;
+                        background:$bgcolor;
+                        padding: 5px 10px;
+                        border-radius: 30px;
+                        text-align: center;
+                        opacity: 0;
+                        transition: all .15s;
+                    }
+
+                    &:hover {
                         background: #7696d2;
+                        .AlarmItemTitle {
+                            opacity: 1;
+                        }
+                    }
+
+                    &.disable {
+                        background: #617bac;
+                        pointer-events: none;
+                    }
+
+                    &.showSettings {
+                        z-index: 2;
+                        background-color: $fgcolor;
+                        animation: changeColor .3s;
+
+                        &:hover {
+                            background: darken($fgcolor, 17%);
+                        }
+
+                        &:active {
+                            background:$fgcolor;
+                        }
+
+                        @keyframes changeColor {
+                            0% {
+                                background: #8fb6ff;
+                            }
+                            100% {
+                                background: $fgcolor;
+                            }
+                        }
+                    }
+
+                    &.done {
+                        z-index: 2;
+                        background-color: $fgcolor;
+
+                        &:hover {
+                            background: darken($fgcolor, 17%);
+                        }
+                    }
+
+                    &.edit {
+                        position: absolute;
+                        transform: translate(-55px, 0px);
+                        animation: showUpItemEdit .4s
+                    }
+
+                    &.settings {
+                        position: absolute;
+                        transform: translate(0px, -55px);
+                        animation: showUpItemSettings .4s
+                    }
+
+                    @keyframes showUpItemEdit {
+                        0% {
+                            transform: translate(0, 0);
+                        }
+                        50% {
+                            transform: translate(-62px, 0px);
+                        }
+                        100% {
+                            transform: translate(-55px, 0px);
+                        }
+                    }
+
+                    @keyframes showUpItemSettings {
+                        0% {
+                            transform: translate(0, 0);
+                        }
+                        50% {
+                            transform: translate(0px, -62px);
+                        }
+                        100% {
+                            transform: translate(0px, -55px);
+                        }
                     }
                 }
             }
@@ -382,9 +520,10 @@ $fgcolor: #e2e2e2;
                     }
                 }
 
-                .AlarmItem {
-                    color: $fgcolor;
-                }
+                .AlarmItem .AlarmItemTitle{
+                        color:$bgcolor;
+                        background:$fgcolor;
+                    }
             }
 
             .stopwatch {

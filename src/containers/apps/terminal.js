@@ -47,7 +47,21 @@ export const TerminalStartApp = () => {
 
 export default function Terminal() {
     const TerminalWindow = () => {
+
+        const onInput = (e) => {
+            const lt = [...lineTerminal, lineTerminal.push(<pre>{e}</pre>,)];
+            setLineTerminal(lt);
+        }
+
+        const [lineTerminal, setLineTerminal] = useState([
+            <pre>Welcome to BreezeOS (GNU/Linux 6.2.1 x86_64)</pre>,
+            <pre id='input'>[localhost@breezeos]$ 
+                <input type='text' spellCheck='false' onInput={onInput}/>
+            </pre>,
+        ]);
+
         const [min, isMin] = useState(false);
+
         function close(){
             document.getElementsByClassName('terminal')[0].classList.remove('active');
             document.getElementById('terminal').classList.remove('clicked');
@@ -67,10 +81,7 @@ export default function Terminal() {
                 </TopBar>
                 <WindowBody>
                     <div className='Terminal'>
-                        <pre>Welcome to BreezeOS (GNU/Linux 6.2.1 x86_64)</pre>
-                        <pre id='input'>[localhost@breezeos]$ 
-                        <input type='text' spellCheck='false'/>
-                        </pre>
+                        {lineTerminal}
                     </div>
                 </WindowBody>
             </>

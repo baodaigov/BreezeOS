@@ -700,7 +700,8 @@ $actcolor: #8fb6ff;
 								
 								.ImageContainer {
 									transition: border ease .3s;
-									border-radius: 9px;
+									border: 3px solid transparent;
+									border-radius: 10px;
 									img {
 										border-radius: 8px;
 										width: auto;
@@ -710,13 +711,13 @@ $actcolor: #8fb6ff;
 	
 								&[value='1']{
 									.ImageContainer.dark {
-										border: 2px solid #8fb6ff;
+										border: 3px solid #8fb6ff;
 									}
 								}
 	
 								&[value='2']{
 									.ImageContainer.light {
-										border: 2px solid #8fb6ff;
+										border: 3px solid #8fb6ff;
 									}
 								}
 							}
