@@ -1,9 +1,14 @@
 {
   "files": {
-    "main.css": "/BreezeOS/static/css/main.f0112f87.css",
-    "main.js": "/BreezeOS/static/js/main.dc8a1561.js",
+    "main.css": "/BreezeOS/static/css/main.8f79c917.css",
+    "main.js": "/BreezeOS/static/js/main.b761c476.js",
     "static/media/dark.png": "/BreezeOS/static/media/dark.6234c8ee9fb7421f25c8.png",
+    "static/media/52496.jpg": "/BreezeOS/static/media/52496.d0aca8ed79fb92a3f932.jpg",
+    "static/media/52791.jpg": "/BreezeOS/static/media/52791.2a35203ad57d4fa40bb5.jpg",
     "static/media/light.png": "/BreezeOS/static/media/light.9267ff87ed7c30c67aaf.png",
+    "static/media/52532.jpg": "/BreezeOS/static/media/52532.342ead5b429443e0d7c8.jpg",
+    "static/media/52697.jpg": "/BreezeOS/static/media/52697.41d9f5d033e8e0b0e5c8.jpg",
+    "static/media/52544.jpg": "/BreezeOS/static/media/52544.6d2fe04c10abd791ddb4.jpg",
     "static/media/Screenshot from 2022-09-10 20-41-45.png": "/BreezeOS/static/media/Screenshot from 2022-09-10 20-41-45.a9dd0dd0adcef52a8203.png",
     "static/media/logo-d.png": "/BreezeOS/static/media/logo-d.99175ccae1cd34a7c319.png",
     "static/media/logo-l.png": "/BreezeOS/static/media/logo-l.ac02b99fc4a555d75f8b.png",
@@ -11,11 +16,11 @@
     "static/media/Windows-11-4k-Wallpaper-scaled.jpg": "/BreezeOS/static/media/Windows-11-4k-Wallpaper-scaled.557ec81467de22ddd91a.jpg",
     "static/media/favicon.ico": "/BreezeOS/static/media/favicon.d7d92c5cee20556182aa.ico",
     "index.html": "/BreezeOS/index.html",
-    "main.f0112f87.css.map": "/BreezeOS/static/css/main.f0112f87.css.map",
-    "main.dc8a1561.js.map": "/BreezeOS/static/js/main.dc8a1561.js.map"
+    "main.8f79c917.css.map": "/BreezeOS/static/css/main.8f79c917.css.map",
+    "main.b761c476.js.map": "/BreezeOS/static/js/main.b761c476.js.map"
   },
   "entrypoints": [
-    "static/css/main.f0112f87.css",
-    "static/js/main.dc8a1561.js"
+    "static/css/main.8f79c917.css",
+    "static/js/main.b761c476.js"
   ]
 }
