@@ -129,7 +129,7 @@ export default function Firefox() {
                         </div>
                     </div>
                     <div className='TabBar'>
-                        <div className='TabBarItem TabSearchItem' style={{ width: '800px' }}>
+                        <div className='TabBarItem TabSearchItem' style={{ width: '700px' }}>
                             <div className='TabBarInteraction'>
                                 <i className="fa-regular fa-chevron-left" onClick={back}></i>
                                 <i className="fa-regular fa-chevron-right" onClick={forward}></i>

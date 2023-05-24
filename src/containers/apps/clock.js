@@ -189,7 +189,7 @@ export default function Clock() {
             document.getElementsByClassName('clock')[0].classList.remove('active');
             document.getElementById('clock').classList.remove('clicked');
             setTimeout(() => {
-                setRunning(false)
+                setRunning(false);
             }, 300);
         }
     

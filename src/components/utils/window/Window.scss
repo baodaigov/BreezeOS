@@ -1,4 +1,4 @@
-$bgcolor: #202023da;
+$bgcolor: #202023e5;
 $fgcolor: #e2e2e2;
 
 .Window {
@@ -55,7 +55,7 @@ $fgcolor: #e2e2e2;
       }
 
       .WindowBody {
-        height: calc(100vh - 145px);
+        height: calc(100vh - 140px);
         & > * {
           border-bottom-left-radius: 5px;
           border-bottom-right-radius: 5px;

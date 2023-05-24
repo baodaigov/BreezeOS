@@ -3,7 +3,6 @@ $fgcolor: #e2e2e2;
 .LockScreen {
     width: 100%;
     height: 100%;
-    background-image: url('../Windows-11-4k-Wallpaper-scaled.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -49,13 +48,13 @@ $fgcolor: #e2e2e2;
             align-items: center;
 
             .SplashScreenTitle {
-                font-size: 55px;
+                font-size: 60px;
                 font-weight: 700;
                 margin-bottom: 15px;
             }
 
             .SplashScreenDesc {
-                font-size: 12px;
+                font-size: 13px;
                 display: flex;
                 justify-content: center;
 
@@ -102,4 +101,11 @@ $fgcolor: #e2e2e2;
             }
         }
     }
+
+    &.w1 {background-image: url('../Windows-11-4k-Wallpaper-scaled.jpg')}
+    &.w2 {background-image: url('../52697.jpg')}
+    &.w3 {background-image: url('../52496.jpg')}
+    &.w4 {background-image: url('../52791.jpg')}
+    &.w5 {background-image: url('../52532.jpg')}
+    &.w6 {background-image: url('../52544.jpg')}
 }

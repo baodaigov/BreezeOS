@@ -1,4 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { toggleAppSettings, toggleMinSettings, setValue, setSettings, setValueWallpaper } from '../../reducers/apps';
+import { toggleLightMode, toggleDarkMode } from '../../reducers/settings';
+import wallpaper, { changeWallpaper } from '../../reducers/wallpaper';
 import '../../components/utils/window/Window.scss';
 import TopBar from '../../components/utils/window/TopBar';
 import WindowBody from '../../components/utils/window/WindowBody';
@@ -11,15 +15,20 @@ import Image1 from './assets/dark.png';
 import Image2 from './assets/light.png';
 import LogoD from './assets/logo-d.png';
 import LogoL from './assets/logo-l.png';
-import os from 'os-browserify'
+import W1 from '../../components/Windows-11-4k-Wallpaper-scaled.jpg';
+import W2 from '../../components/52697.jpg';
+import W3 from '../../components/52496.jpg';
+import W4 from '../../components/52791.jpg';
+import W5 from '../../components/52532.jpg';
+import W6 from '../../components/52544.jpg';
 
 export const SettingsApp = () => {
+    const dispatch = useDispatch();
 
     const toggle = () => {
-        document.getElementsByClassName('SettingsApp')[0].classList.add('clicked')
-        setTimeout(() => {
-            document.getElementsByClassName('settings')[0].classList.add('active');
-        }, 500);
+        document.getElementsByClassName('SettingsApp')[0].classList.add('clicked');
+        setTimeout(() => document.getElementsByClassName('settings')[0].classList.add('active'), 500);
+        setTimeout(() => dispatch(toggleAppSettings(true)), 800);
     };
     
     useEffect(() => {
@@ -38,15 +47,15 @@ export const SettingsApp = () => {
 };
 
 export const SettingsStartApp = () => {
+    const dispatch = useDispatch();
     
     const toggle = () => {
         document.getElementsByClassName('StartMenuWrapper')[0].classList.remove('active');
         document.getElementsByClassName('Header')[0].classList.add('active');
         document.getElementsByClassName('DesktopBody')[0].classList.add('active');
-        document.getElementsByClassName('SettingsApp')[0].classList.add('clicked')
-        setTimeout(() => {
-            document.getElementsByClassName('settings')[0].classList.add('active');
-        }, 500);
+        document.getElementsByClassName('SettingsApp')[0].classList.add('clicked');
+        setTimeout(() => document.getElementsByClassName('settings')[0].classList.add('active'), 500);
+        setTimeout(() => dispatch(toggleAppSettings(true)), 800);
     };
 
     return (
@@ -55,120 +64,126 @@ export const SettingsStartApp = () => {
 }
 
 export default function Settings(){
+    const appsReducer = useSelector(state => state.apps.settings);
+    const min = useSelector(state => state.apps.settings.min);
 
     const SettingsWindow = () => {
-    	const [value, setValue] = useState('1');
-	const [settings, setSettings] = useState('Wi-Fi');
-    const [statusWifi, setStatusWifi] = useState(true);
+        const settingsReducer = useSelector(state => state.settings);
+        const tabsReducer = useSelector(state => state.apps.settings.settings);
+        const value = useSelector(state => state.apps.settings.value);
+        const wallpaperValue = useSelector(state => state.apps.settings.wallpaperValue);
+        const wallpaperId = useSelector(state => state.wallpaper.id);
+        const dispatch = useDispatch();
+        const [statusWifi, setStatusWifi] = useState(true);
 
         function wifi(){
-            setValue('1');
-	    setSettings('Wi-Fi');
+            dispatch(setValue('1'));
+	        dispatch(setSettings('Wi-Fi'));
         }
         
         function bluetooth(){
-            setValue('2');
-	    setSettings('Bluetooth');
+            dispatch(setValue('2'));
+	    dispatch(setSettings('Bluetooth'));
         }
         
         function network(){
-            setValue('3');
-	    setSettings('Network');
+            dispatch(setValue('3'));
+	    dispatch(setSettings('Network'));
         }
         
         function appearance(){
-            setValue('4');
-	    setSettings('Appearance');
+            dispatch(setValue('4'));
+	    dispatch(setSettings('Appearance'));
         }
         
         function notifications(){
-            setValue('5');
-	    setSettings('Notifications');
+            dispatch(setValue('5'));
+	    dispatch(setSettings('Notifications'));
         }
         
         function onlineAccounts(){
-            setValue('6');
-	    setSettings('Online Accounts');
+            dispatch(setValue('6'));
+	    dispatch(setSettings('Online Accounts'));
         }
         
         function updates(){
-            setValue('7');
-	    setSettings('Updates');
+            dispatch(setValue('7'));
+	    dispatch(setSettings('Updates'));
         }
         
         function search(){
-            setValue('8');
-	    setSettings('Search');
+            dispatch(setValue('8'));
+	    dispatch(setSettings('Search'));
         }
         
         function battery(){
-            setValue('9');
-	    setSettings('Battery');
+            dispatch(setValue('9'));
+	    dispatch(setSettings('Battery'));
         }
         
         function apps(){
-            setValue('10');
-	    setSettings('Apps');
+            dispatch(setValue('10'));
+	    dispatch(setSettings('Apps'));
         }
         
         function privacy(){
-            setValue('11');
-	    setSettings('Privacy');
+            dispatch(setValue('11'));
+	    dispatch(setSettings('Privacy'));
         }
         
         function security(){
-            setValue('12');
-	    setSettings('Security');
+            dispatch(setValue('12'));
+	    dispatch(setSettings('Security'));
         }
         
         function share(){
-            setValue('13');
-	    setSettings('Share');
+            dispatch(setValue('13'));
+	    dispatch(setSettings('Share'));
         }
         
         function sound(){
-            setValue('14');
-	    setSettings('Sound');
+            dispatch(setValue('14'));
+	    dispatch(setSettings('Sound'));
         }
         
         function displays(){
-            setValue('15');
-	    setSettings('Displays');
+            dispatch(setValue('15'));
+	    dispatch(setSettings('Displays'));
         }
         
         function mouseTouchpad(){
-            setValue('16');
-	    setSettings('Mouse & Touchpad');
+            dispatch(setValue('16'));
+	    dispatch(setSettings('Mouse & Touchpad'));
         }
         
         function keyboard(){
-            setValue('17');
-	    setSettings('Keyboard');
+            dispatch(setValue('17'));
+	    dispatch(setSettings('Keyboard'));
         }
         
         function printer(){
-            setValue('18');
-	    setSettings('Printer');
+            dispatch(setValue('18'));
+	    dispatch(setSettings('Printer'));
         }
         
         function regionLanguage(){
-            setValue('19');
-	    setSettings('Region & Language');
+            dispatch(setValue('19'));
+	    dispatch(setSettings('Region & Language'));
         }
         
         function accessibility(){
-            setValue('20');
-	    setSettings('Accessibility');
+            dispatch(setValue('20'));
+	    dispatch(setSettings('Accessibility'));
         }
         
         function dateTime(){
-            setValue('21');
-	    setSettings('Date & Time');
+            dispatch(setValue('21'));
+	    dispatch(setSettings('Date & Time'));
         }
         
         function about(){
-            setValue('22');
-	    setSettings('About');
+            dispatch(setValue('22'));
+	    dispatch(setSettings('About'));
         }
 
     const wifis = [
@@ -224,8 +239,7 @@ export default function Settings(){
             status: 'weak'
         }
     ]
-
-    const [valueWindowColors, setValueWindowColors] = useState('1');
+    
     const [cursorMenu, showCursorMenu] = useState(false);
     const [iconsMenu, showIconsMenu] = useState(false);
     const [shellMenu, showShellMenu] = useState(false);
@@ -233,18 +247,9 @@ export default function Settings(){
     const [legacyApplicationsMenu, showLegacyApplicationsMenu] = useState(false);
     const [orientationMenu, showOrientationMenu] = useState(false);
     const [resolutionMenu, showResolutionMenu] = useState(false);
+    const [refreshRateMenu, showRefreshRateMenu] = useState(false);
     const [editDeviceName, allowEditDeviceName] = useState(false);
     const [deviceName, setDeviceName] = useState('breezeos');
-
-    function switchDark(){
-        setValueWindowColors('1');
-        document.getElementsByClassName('Desktop')[0].classList.remove('lightMode');
-    }
-
-    function switchLight(){
-        setValueWindowColors('2');
-        document.getElementsByClassName('Desktop')[0].classList.add('lightMode');
-    }
 
     function useOutsideCursorMenu(ref) {
       useEffect(() => {
@@ -403,6 +408,29 @@ export default function Settings(){
     const resolutionMenuRef = useRef(null);
     useOutsideResolutionMenu(resolutionMenuRef);
 
+    function useOutsideRRMenu(ref) {
+      useEffect(() => {
+        /**
+         * Alert if clicked on outside of element
+         */
+        function handleClickOutside(event) {
+          if (ref.current && !ref.current.contains(event.target)) {
+            showRefreshRateMenu(false);
+          }
+        }
+        // Bind the event listener
+        document.addEventListener("mousedown", handleClickOutside);
+
+        return () => {
+          // Unbind the event listener on clean up
+          document.removeEventListener("mousedown", handleClickOutside);
+        };
+      }, [ref]);
+    }
+
+    const refreshRateMenuRef = useRef(null);
+    useOutsideRRMenu(refreshRateMenuRef);
+
     const [maximumExceeded, displayMaximumExceeded] = useState(false);
 
     function submitDeviceName(e){
@@ -417,8 +445,38 @@ export default function Settings(){
         }
     }
 
+    function w1(){
+        dispatch(changeWallpaper('w1'));
+        dispatch(setValueWallpaper('1'));
+    }
+
+    function w2(){
+        dispatch(changeWallpaper('w2'));
+        dispatch(setValueWallpaper('2'));
+    }
+
+    function w3(){
+        dispatch(changeWallpaper('w3'));
+        dispatch(setValueWallpaper('3'));
+    }
+
+    function w4(){
+        dispatch(changeWallpaper('w4'));
+        dispatch(setValueWallpaper('4'));
+    }
+
+    function w5(){
+        dispatch(changeWallpaper('w5'));
+        dispatch(setValueWallpaper('5'));
+    }
+
+    function w6(){
+        dispatch(changeWallpaper('w6'));
+        dispatch(setValueWallpaper('6'));
+    }
+
 	function switchTab(){
-		switch(settings){
+		switch(tabsReducer){
 			case 'Wi-Fi':
 				return (
                     <div className='WiFiWrapper'>
@@ -451,14 +509,45 @@ export default function Settings(){
 				return (
                     <div className='AppearanceWrapper'>
                         <div className='Appearance'>
-                            <div className='WindowColors' value={valueWindowColors}>
+                            <div className='WindowColors' value={settingsReducer.themeLight ? '2' : '1'}>
                                 <p className='font-bold' style={{ marginBottom: '30px' }}>Window colors</p>
                                 <div style={{ display: 'flex', justifyContent: 'center' }}>
-                                    <div className='ImageContainer dark' style={{ marginRight: '20px' }} onClick={switchDark}>
+                                    <div className='ImageContainer dark' style={{ marginRight: '20px' }} onClick={() => dispatch(toggleDarkMode())}>
                                         <img src={Image1}/>
                                     </div>
-                                    <div className='ImageContainer light' onClick={switchLight}>
+                                    <div className='ImageContainer light' onClick={() => dispatch(toggleLightMode())}>
                                         <img src={Image2}/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='Appearance'>
+                            <div className='Wallpapers' value={wallpaperValue}>
+                                <p className='font-bold' style={{ marginBottom: '30px' }}>Wallpaper</p>
+                                <div style={{ width: '649.516px', display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+                                    <div className='WImageContainer w1' onClick={w1}>
+                                        <img src={W1}/>
+                                    </div>
+                                    <div className='WImageContainer w2' onClick={w2}>
+                                        <img src={W2}/>
+                                    </div>
+                                    <div className='WImageContainer w3' onClick={w3}>
+                                        <img src={W3}/>
+                                    </div>
+                                    <div className='WImageContainer w4' onClick={w4}>
+                                        <img src={W4}/>
+                                    </div>
+                                    <div className='WImageContainer w5' onClick={w5}>
+                                        <img src={W5}/>
+                                    </div>
+                                    <div className='WImageContainer w6' onClick={w6}>
+                                        <img src={W6}/>
+                                    </div>
+                                </div>
+                                <div style={{ marginTop: '20px', marginLeft: 'auto' }}>
+                                    <div className='WallpaperMenuSection'>
+                                        <p style={{ marginRight: '7px' }}>Select image...</p>
+                                        <i className='fa-regular fa-image'></i>
                                     </div>
                                 </div>
                             </div>
@@ -570,7 +659,23 @@ export default function Settings(){
                                             <i className='fa-regular fa-chevron-down'></i>
                                         </div>
                                         <ActMenu style={{ zIndex: '1', width: '200px', transform: 'translate(415px, 30px)' }} className={resolutionMenu ? 'active' : ''} ref={resolutionMenuRef}>
-                                            <ActMenuSelector title={`${window.screen.width} \u00D7 ${window.screen.height} (16:9)`}active></ActMenuSelector>
+                                            <ActMenuSelector title={`${window.screen.width} \u00D7 ${window.screen.height} (16:9)`} active></ActMenuSelector>
+                                        </ActMenu>
+                                    </div>
+                                    <div className='BiDMenu'>
+                                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                                            <i className='fa-regular fa-arrows-rotate' style={{marginRight: '7px'}}></i>
+                                            <p>Refresh Rate</p>
+                                        </div>
+                                        <div className='BiDMenuSection' onClick={() => showRefreshRateMenu(true)}>
+                                            <p style={{ marginRight: '7px' }}>60.00 Hz</p>
+                                            <i className='fa-regular fa-chevron-down'></i>
+                                        </div>
+                                        <ActMenu style={{ zIndex: '1', width: '200px', transform: 'translate(415px, 30px)' }} className={refreshRateMenu ? 'active' : ''} ref={refreshRateMenuRef}>
+                                            <ActMenuSelector title='60.00 Hz' active></ActMenuSelector>
+                                            <ActMenuSelector title='50.00 Hz'></ActMenuSelector>
+                                            <ActMenuSelector title='40.00 Hz'></ActMenuSelector>
+                                            <ActMenuSelector title='30.00 Hz'></ActMenuSelector>
                                         </ActMenu>
                                     </div>
                                 </div>
@@ -583,7 +688,7 @@ export default function Settings(){
                     <div className='AboutWrapper'>
                         <div className='About'>
                             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                                <img src={LogoD} width={'331.133'} height={140} className='AboutLogo'/>
+                                {settingsReducer.themeLight ? <img src={LogoL} width={'331.133'} height={140} className='AboutLogo'/> : <img src={LogoD} width={'331.133'} height={140} className='AboutLogo'/>}
                                 <div style={{ display: 'flex', flexDirection: 'column', marginTop: '10px' }}>
                                     <div className='AboutMenu' onClick={() => allowEditDeviceName(!editDeviceName)}>
                                         <p>Device Name</p>
@@ -632,18 +737,16 @@ export default function Settings(){
 				return <p>Nothing in this section.</p>
         }
     }
-
-
-    const [min, isMin] = useState(false);
     
     function close(){
-        document.getElementsByClassName('settings')[0].classList.remove('active');
         document.getElementById('settings').classList.remove('clicked');
+        document.getElementsByClassName('settings')[0].classList.remove('active');
+        setTimeout(() => {dispatch(toggleAppSettings(false))}, 300);
     }
     
     function minimize(){
         document.getElementsByClassName('settings')[0].classList.toggle('minimize');
-        isMin(!min);
+        setTimeout(() => dispatch(toggleMinSettings(!min)), 300);
     }
 
         return (
@@ -674,15 +777,15 @@ export default function Settings(){
                                 	<i className="fa-regular fa-magnifying-glass"></i>
                                 </div>
                             </div>
-                            <div className='TabBarItem TabBarSettingsName' style={settings == 'Wi-Fi' ? { justifyContent: 'space-between' } : { justifyContent: 'center' }}>
-                                {settings == 'Wi-Fi' ? (
+                            <div className='TabBarItem TabBarSettingsName' style={tabsReducer == 'Wi-Fi' ? { justifyContent: 'space-between' } : { justifyContent: 'center' }}>
+                                {tabsReducer == 'Wi-Fi' ? (
                                     <>
                                         <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                                            <p>{settings}</p>
+                                            <p>{tabsReducer}</p>
                                         </div>
                                         <div className={`Toggle ${statusWifi ? 'active' : ''}`} onClick={() => setStatusWifi(!statusWifi)}></div>
                                     </>
-                                ) : <p>{settings}</p>}
+                                ) : <p>{tabsReducer}</p>}
                             </div>
                         </div>
                     </div>
@@ -814,7 +917,7 @@ export default function Settings(){
     return (
         <div className='SettingsWindow'>   
                 <div
-                    className='Window settings'
+                    className={`Window settings ${appsReducer.active ? 'active' : ''} ${min ? 'minimize' : ''}`}
                     key={Math.random()}
                 >
                     <SettingsWindow/>

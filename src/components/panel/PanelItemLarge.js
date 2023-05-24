@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleLightMode, toggleDarkMode } from '../../reducers/settings';
 import './Panel.scss';
 
 const PanelItemLarge = ({ type }) => {
+    const settingsReducer = useSelector(state => state.settings);
+    const dispatch = useDispatch();
+
 	const [isActive, setActive] = useState(true);
 
 	const nightShift = () => {
 		setActive(!isActive);
 		document.getElementsByClassName('Desktop')[0].classList.toggle('NightShiftEnabled');
     }
-
-    	const toggleDarkMode = () => {
-            setActive(!isActive);
-            document.getElementsByClassName('Desktop')[0].classList.toggle('lightMode');
-    	}
 
     const boldText = () => {
         setActive(!isActive);
@@ -37,10 +36,19 @@ const PanelItemLarge = ({ type }) => {
                 )
             case "dark-mode":
                 return (
-                    <div className={`PanelItemLarge font-bold ${isActive ? "focused" : ""}`} onClick={toggleDarkMode}>
-                        <i className="fa-solid fa-circle-half-stroke"></i>
-                        Dark Mode
-		    </div>
+                    <>
+                        {settingsReducer.themeLight ? (
+                            <div className='PanelItemLarge font-bold' onClick={() => dispatch(toggleDarkMode())}>
+                                <i className="fa-solid fa-circle-half-stroke"></i>
+                                Dark Mode
+                            </div>
+                        ) : (
+                            <div className='PanelItemLarge font-bold focused' onClick={() => dispatch(toggleLightMode())}>
+                                <i className="fa-solid fa-circle-half-stroke"></i>
+                                Dark Mode
+                            </div>
+                        )}
+                    </>
                 )
             case "airplane-mode":
                 return (
