@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { toggleAppSoftware, toggleMinSoftware } from '../../reducers/apps';
 import '../../components/utils/window/Window.scss';
 import TopBar from '../../components/utils/window/TopBar';
 import WindowBody from '../../components/utils/window/WindowBody';
@@ -8,12 +10,12 @@ import TopBarInteraction from '../../components/utils/window/TopBarInteraction';
 import StartApp from '../../components/startMenu/StartApp';
 
 export const SoftwareStoreApp = () => {
-
+    const dispatch = useDispatch();
+    
     const toggle = () => {
         document.getElementsByClassName('SoftwareStoreApp')[0].classList.add('clicked')
-        setTimeout(() => {
-            document.getElementsByClassName('softwarestore')[0].classList.add('active');
-        }, 500);
+        setTimeout(() => document.getElementsByClassName('softwarestore')[0].classList.add('active'), 500);
+        setTimeout(() => dispatch(toggleAppSoftware(true)), 800);
     };
     
     useEffect(() => {
@@ -30,15 +32,15 @@ export const SoftwareStoreApp = () => {
 };
 
 export const SoftwareStoreStartApp = () => {
-    
+    const dispatch = useDispatch();
+
     const toggle = () => {
         document.getElementsByClassName('StartMenuWrapper')[0].classList.remove('active');
         document.getElementsByClassName('Header')[0].classList.add('active');
         document.getElementsByClassName('DesktopBody')[0].classList.add('active');
-        document.getElementsByClassName('SoftwareStoreApp')[0].classList.add('clicked')
-        setTimeout(() => {
-            document.getElementsByClassName('softwarestore')[0].classList.add('active');
-        }, 500);
+        document.getElementsByClassName('SoftwareStoreApp')[0].classList.add('clicked');
+        setTimeout(() => document.getElementsByClassName('softwarestore')[0].classList.add('active'), 500);
+        setTimeout(() => dispatch(toggleAppSoftware(true)), 800);
     };
 
     return (
@@ -47,8 +49,11 @@ export const SoftwareStoreStartApp = () => {
 }
 
 export default function SoftwareStore() {
+    const appsReducer = useSelector(state => state.apps.software);
+    const min = useSelector(state => state.apps.software.min);
+    const dispatch = useDispatch();
+
     const SoftwareStoreWindow = () => {
-        const [min, isMin] = useState(false);
         const [tabLayout, setTabLayout] = useState(true);
         const [value, setValue] = useState('1');
         const [tab, setTab] = useState('explorer');
@@ -71,16 +76,14 @@ export default function SoftwareStore() {
         }
 
         function close(){
-            document.getElementsByClassName('softwarestore')[0].classList.remove('active');
             document.getElementById('softwarestore').classList.remove('clicked');
-            setTimeout(() => {
-                explorerTab();
-            }, 300);
+            document.getElementsByClassName('softwarestore')[0].classList.remove('active');
+            setTimeout(() => {dispatch(toggleAppSoftware(false))}, 300);
         }
 
         function minimize(){
             document.getElementsByClassName('softwarestore')[0].classList.toggle('minimize');
-            isMin(!min)
+            setTimeout(() => dispatch(toggleMinSoftware(!min)), 300);
         }
 
         useEffect(() => {
@@ -784,7 +787,7 @@ export default function SoftwareStore() {
     return (
         <div className='SoftwareStoreWindow'>   
                 <div
-                    className='Window softwarestore'
+                    className={`Window softwarestore ${appsReducer.active ? 'active' : ''} ${min ? 'minimize' : ''}`}
                     key={Math.random()}
                 >
                     <SoftwareStoreWindow/>

@@ -5,13 +5,14 @@ import PanelItemLarge from './PanelItemLarge';
 import PanelContainer from './PanelItemContainer';
 import PanelRangeContainer from './PanelRangeContainer';
 import RangeSlider from '../utils/range/Range';
+import VolumeAdjustSound from '../../sounds/Oxygen-Sys-Special.mp3';
 
 class PanelBottom extends Component {
     render(){
         return (
             <div className='PanelBottom'>
                 <PanelRangeContainer title='Volume'>
-                    <RangeSlider min='0' max='100'/>
+                    <RangeSlider min='0' max='100' onClick={() => new Audio(VolumeAdjustSound).play()}/>
                 </PanelRangeContainer>
                 <PanelRangeContainer title='Brightness'>
                     <RangeSlider min='0' max='100'/>

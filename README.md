@@ -2,7 +2,20 @@
 
 Welcome to BreezeOS, this is an open-source project generated using ReactJS and SASS. It was created by the Baodai government, which is not an actual government.
 
-![Screenshot](./public/screenshot.png)
+# Gallery
 
-**This project is still in development. Feel free to fork if you'd like to improve things in this project**
-### Live Demo: [https://baodaigov.github.io/BreezeOS](https://baodaigov.github.io/BreezeOS) (fullscreen for full experience).
+![Screenshot](./public/gallery/screenshot.png)
+![Screenshot 2](./public/gallery/screenshot2.png)
+![Screenshot 3](./public/gallery/screenshot3.png)
+![Screenshot 4](./public/gallery/screenshot4.png)
+![Screenshot 5](./public/gallery/screenshot5.png)
+
+# Contributors
+
+<a href="https://github.com/baodaigov/BreezeOS/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=baodaigov/BreezeOS" />
+</a>
+
+## **This project is still in development. Feel free to fork if you'd like to improve things in this project.**
+
+## [Live Demo](https://baodaigov.github.io/BreezeOS) (fullscreen for full experience).

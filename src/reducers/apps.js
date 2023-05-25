@@ -7,7 +7,11 @@ const initialState = {
         value: '1',
         settings: 'Wi-Fi',
         wallpaperValue: '1',
-    }
+    },
+    software: {
+        active: false,
+        min: false,
+    },
 }
 
 export const appsSlice = createSlice({
@@ -28,10 +32,16 @@ export const appsSlice = createSlice({
         },
         setValueWallpaper: (state, action) => {
             state.settings.wallpaperValue = action.payload;
-        }
+        },
+        toggleAppSoftware: (state, action) => {
+            state.software.active = action.payload;
+        },
+        toggleMinSoftware: (state, action) => {
+            state.software.min = action.payload;
+        },
     },
 });
 
-export const { toggleAppSettings, toggleMinSettings, setValue, setSettings, setValueWallpaper } = appsSlice.actions
+export const { toggleAppSettings, toggleMinSettings, setValue, setSettings, setValueWallpaper, toggleAppSoftware, toggleMinSoftware } = appsSlice.actions
 
 export default appsSlice.reducer

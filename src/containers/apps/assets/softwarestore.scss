@@ -367,22 +367,9 @@ $fgcolor: #e2e2e2;
 
                         .FeaturedApplicationContainer {
                             margin-top: 7px;
-                            animation: showUp ease .3s;
                             position: relative;
                             top: 0;
                             opacity: 1;
-                        }
-
-                        @keyframes showUp {
-                            0% {
-                                top: 20px;
-                                opacity: 0;
-                            }
-
-                            100% {
-                                top: 0;
-                                opacity: 1;
-                            }
                         }
 
                         .FeaturedApplicationWrapper {

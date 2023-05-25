@@ -8,6 +8,8 @@ import TopBarInteraction from '../../components/utils/window/TopBarInteraction';
 import StartApp from '../../components/startMenu/StartApp';
 import Webcam from 'react-webcam';
 import ActMenu, { ActMenuSelector } from "../../components/utils/menu/index";
+import CountdownSound from '../../sounds/mixkit-clock-countdown-bleeps-916_Bq9La32i.wav';
+import CameraShutter from '../../sounds/camera_shutter.mp3';
 
 export const CameraApp = () => {
     const toggle = () => {
@@ -55,8 +57,8 @@ export default function Camera() {
         const [interaction, disableInteraction] = useState('capturing');
         const [img, setImg] = useState(null);
         const [audio, setAudio] = useState(false);
-        var countdownSound = new Audio('https://raw.githubusercontent.com/baodaigov/BreezeOS/master/src/sounds/mixkit-clock-countdown-bleeps-916_Bq9La32i.wav');
-        var cameraShutter = new Audio('https://raw.githubusercontent.com/baodaigov/BreezeOS/master/src/sounds/camera_shutter.mp3');
+        var countdownSound = new Audio(CountdownSound);
+        var cameraShutter = new Audio(CameraShutter);
 
         useEffect(() => {
 
