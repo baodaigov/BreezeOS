@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import Panel from './panel/Panel';
 import Time from '../header/Time';
 import Task from '../header/Task';
 import Home from '../header/Home';
@@ -36,6 +37,7 @@ const Header = () => {
                 </div>
                 {TaskIcon.map(i => <i key={i.id} className={i.icon}></i>)}
             </Task>
+            <Panel style={{ top: "45px", right: "0" }}/>
         </div>
     )
 }

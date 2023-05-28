@@ -3,7 +3,7 @@ $fgcolor: #fff;
 $fbgcolor: #83aaff;
 
 .Panel {
-    position: fixed;
+    position: absolute;
     z-index:999999;
     background: $bgcolor;
     color:$fgcolor;

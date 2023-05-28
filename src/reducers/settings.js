@@ -10,9 +10,11 @@ export const settingsSlice = createSlice({
     reducers: {
         toggleLightMode: (state) => {
             state.themeLight = true;
+            document.getElementsByClassName('Desktop')[0].classList.add('lightMode');
         },
         toggleDarkMode: (state) => {
             state.themeLight = false;
+            document.getElementsByClassName('Desktop')[0].classList.remove('lightMode');
         }
     },
 });

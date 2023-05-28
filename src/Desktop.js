@@ -2,7 +2,6 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import Wallpaper from './components/Wallpaper';
 import './Desktop.scss';
-import Panel from './components/panel/Panel';
 import Clock from './components/utils/widget/Clock';
 import Window from './components/utils/window/Window';
 import WindowDefault from './components/utils/window/WindowDefault';
@@ -15,8 +14,6 @@ import Dock from './components/Dock';
 import DesktopBody from './DesktopBody';
 
 const Desktop = () => {
-    const settingsReducer = useSelector(state => state.settings);
-
     function isMobile() {
         var check = false;
         (function(a){
@@ -31,14 +28,13 @@ const Desktop = () => {
     },2000);
 
     return (
-        <div className={`Desktop ${settingsReducer.themeLight ? 'lightMode' : ''}`}>
+        <div className='Desktop'>
             <TerminalWindow/>
             {isMobile() ? <h1 className='error'>Sorry, in order to use the operating system, please switch to the desktop.</h1> : ''}
             <LockScreen/>
             <Menu/>
             <StartMenu/>
             <Header/>
-            <Panel style={{ top: "0", right: "0", margin: "45px 15px" }}/>
             <Wallpaper/>
             <DesktopBody/>
             <Dock/>
