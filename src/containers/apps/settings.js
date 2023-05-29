@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { toggleAppSettings, toggleMinSettings, setValue, setSettings, setValueWallpaper } from '../../reducers/apps';
 import { toggleLightMode, toggleDarkMode } from '../../reducers/settings';
 import wallpaper, { changeWallpaper } from '../../reducers/wallpaper';
 import '../../components/utils/window/Window.scss';
@@ -23,12 +22,9 @@ import W5 from '../../components/52532.jpg';
 import W6 from '../../components/52544.jpg';
 
 export const SettingsApp = () => {
-    const dispatch = useDispatch();
-
     const toggle = () => {
         document.getElementsByClassName('SettingsApp')[0].classList.add('clicked');
         setTimeout(() => document.getElementsByClassName('settings')[0].classList.add('active'), 500);
-        setTimeout(() => dispatch(toggleAppSettings(true)), 800);
     };
     
     useEffect(() => {
@@ -47,7 +43,6 @@ export const SettingsApp = () => {
 };
 
 export const SettingsStartApp = () => {
-    const dispatch = useDispatch();
     
     const toggle = () => {
         document.getElementsByClassName('StartMenuWrapper')[0].classList.remove('active');
@@ -55,7 +50,6 @@ export const SettingsStartApp = () => {
         document.getElementsByClassName('DesktopBody')[0].classList.add('active');
         document.getElementsByClassName('SettingsApp')[0].classList.add('clicked');
         setTimeout(() => document.getElementsByClassName('settings')[0].classList.add('active'), 500);
-        setTimeout(() => dispatch(toggleAppSettings(true)), 800);
     };
 
     return (
@@ -64,126 +58,122 @@ export const SettingsStartApp = () => {
 }
 
 export default function Settings(){
-    const appsReducer = useSelector(state => state.apps.settings);
-    const min = useSelector(state => state.apps.settings.min);
-
     const SettingsWindow = () => {
         const settingsReducer = useSelector(state => state.settings);
-        const tabsReducer = useSelector(state => state.apps.settings.settings);
-        const value = useSelector(state => state.apps.settings.value);
-        const wallpaperValue = useSelector(state => state.apps.settings.wallpaperValue);
-        const wallpaperId = useSelector(state => state.wallpaper.id);
-        const dispatch = useDispatch();
+        const [settings, setSettings] = useState('Wi-Fi');
+        const [value, setValue] = useState('1');
+        const [wallpaperValue, setValueWallpaper] = useState('1');
         const [statusWifi, setStatusWifi] = useState(true);
+        const dispatch = useDispatch();
 
         function wifi(){
-            dispatch(setValue('1'));
-	        dispatch(setSettings('Wi-Fi'));
+            setValue('1');
+	        setSettings('Wi-Fi');
         }
         
         function bluetooth(){
-            dispatch(setValue('2'));
-	    dispatch(setSettings('Bluetooth'));
+            setValue('2');
+	    setSettings('Bluetooth');
         }
         
         function network(){
-            dispatch(setValue('3'));
-	    dispatch(setSettings('Network'));
+            setValue('3');
+	    setSettings('Network');
         }
         
         function appearance(){
-            dispatch(setValue('4'));
-	    dispatch(setSettings('Appearance'));
+            setValue('4');
+	    setSettings('Appearance');
         }
         
         function notifications(){
-            dispatch(setValue('5'));
-	    dispatch(setSettings('Notifications'));
+            setValue('5');
+	    setSettings('Notifications');
         }
         
         function onlineAccounts(){
-            dispatch(setValue('6'));
-	    dispatch(setSettings('Online Accounts'));
+            setValue('6');
+	    setSettings('Online Accounts');
         }
         
         function updates(){
-            dispatch(setValue('7'));
-	    dispatch(setSettings('Updates'));
+            setValue('7');
+	    setSettings('Updates');
         }
         
         function search(){
-            dispatch(setValue('8'));
-	    dispatch(setSettings('Search'));
+            setValue('8');
+	    setSettings('Search');
         }
         
         function battery(){
-            dispatch(setValue('9'));
-	    dispatch(setSettings('Battery'));
+            setValue('9');
+	    setSettings('Battery');
         }
         
         function apps(){
-            dispatch(setValue('10'));
-	    dispatch(setSettings('Apps'));
+            setValue('10');
+	    setSettings('Apps');
         }
         
         function privacy(){
-            dispatch(setValue('11'));
-	    dispatch(setSettings('Privacy'));
+            setValue('11');
+	    setSettings('Privacy');
         }
         
         function security(){
-            dispatch(setValue('12'));
-	    dispatch(setSettings('Security'));
+            setValue('12');
+	    setSettings('Security');
         }
         
         function share(){
-            dispatch(setValue('13'));
-	    dispatch(setSettings('Share'));
+            setValue('13');
+	    setSettings('Share');
         }
         
         function sound(){
-            dispatch(setValue('14'));
-	    dispatch(setSettings('Sound'));
+            setValue('14');
+	    setSettings('Sound');
         }
         
         function displays(){
-            dispatch(setValue('15'));
-	    dispatch(setSettings('Displays'));
+            setValue('15');
+	    setSettings('Displays');
         }
         
         function mouseTouchpad(){
-            dispatch(setValue('16'));
-	    dispatch(setSettings('Mouse & Touchpad'));
+            setValue('16');
+	    setSettings('Mouse & Touchpad');
         }
         
         function keyboard(){
-            dispatch(setValue('17'));
-	    dispatch(setSettings('Keyboard'));
+            setValue('17');
+	    setSettings('Keyboard');
         }
         
         function printer(){
-            dispatch(setValue('18'));
-	    dispatch(setSettings('Printer'));
+            setValue('18');
+	    setSettings('Printer');
         }
         
         function regionLanguage(){
-            dispatch(setValue('19'));
-	    dispatch(setSettings('Region & Language'));
+            setValue('19');
+	    setSettings('Region & Language');
         }
         
         function accessibility(){
-            dispatch(setValue('20'));
-	    dispatch(setSettings('Accessibility'));
+            setValue('20');
+	    setSettings('Accessibility');
         }
         
         function dateTime(){
-            dispatch(setValue('21'));
-	    dispatch(setSettings('Date & Time'));
+            setValue('21');
+	    setSettings('Date & Time');
         }
         
         function about(){
-            dispatch(setValue('22'));
-	    dispatch(setSettings('About'));
+            setValue('22');
+	    setSettings('About');
         }
 
     const wifis = [
@@ -447,36 +437,36 @@ export default function Settings(){
 
     function w1(){
         dispatch(changeWallpaper('w1'));
-        dispatch(setValueWallpaper('1'));
+        setValueWallpaper('1');
     }
 
     function w2(){
         dispatch(changeWallpaper('w2'));
-        dispatch(setValueWallpaper('2'));
+        setValueWallpaper('2');
     }
 
     function w3(){
         dispatch(changeWallpaper('w3'));
-        dispatch(setValueWallpaper('3'));
+        setValueWallpaper('3');
     }
 
     function w4(){
         dispatch(changeWallpaper('w4'));
-        dispatch(setValueWallpaper('4'));
+        setValueWallpaper('4');
     }
 
     function w5(){
         dispatch(changeWallpaper('w5'));
-        dispatch(setValueWallpaper('5'));
+        setValueWallpaper('5');
     }
 
     function w6(){
         dispatch(changeWallpaper('w6'));
-        dispatch(setValueWallpaper('6'));
+        setValueWallpaper('6');
     }
 
 	function switchTab(){
-		switch(tabsReducer){
+		switch(settings){
 			case 'Wi-Fi':
 				return (
                     <div className='WiFiWrapper'>
@@ -737,16 +727,17 @@ export default function Settings(){
 				return <p>Nothing in this section.</p>
         }
     }
+
+    const [min, isMin] = useState(false);
     
     function close(){
         document.getElementById('settings').classList.remove('clicked');
         document.getElementsByClassName('settings')[0].classList.remove('active');
-        setTimeout(() => {dispatch(toggleAppSettings(false))}, 300);
     }
     
     function minimize(){
         document.getElementsByClassName('settings')[0].classList.toggle('minimize');
-        setTimeout(() => dispatch(toggleMinSettings(!min)), 300);
+        isMin(!min);
     }
 
         return (
@@ -777,15 +768,15 @@ export default function Settings(){
                                 	<i className="fa-regular fa-magnifying-glass"></i>
                                 </div>
                             </div>
-                            <div className='TabBarItem TabBarSettingsName' style={tabsReducer == 'Wi-Fi' ? { justifyContent: 'space-between' } : { justifyContent: 'center' }}>
-                                {tabsReducer == 'Wi-Fi' ? (
+                            <div className='TabBarItem TabBarSettingsName' style={settings == 'Wi-Fi' ? { justifyContent: 'space-between' } : { justifyContent: 'center' }}>
+                                {settings == 'Wi-Fi' ? (
                                     <>
                                         <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                                            <p>{tabsReducer}</p>
+                                            <p>{settings}</p>
                                         </div>
                                         <div className={`Toggle ${statusWifi ? 'active' : ''}`} onClick={() => setStatusWifi(!statusWifi)}></div>
                                     </>
-                                ) : <p>{tabsReducer}</p>}
+                                ) : <p>{settings}</p>}
                             </div>
                         </div>
                     </div>
@@ -917,7 +908,7 @@ export default function Settings(){
     return (
         <div className='SettingsWindow'>   
                 <div
-                    className={`Window settings ${appsReducer.active ? 'active' : ''} ${min ? 'minimize' : ''}`}
+                    className='Window settings'
                     key={Math.random()}
                 >
                     <SettingsWindow/>

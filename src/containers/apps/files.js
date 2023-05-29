@@ -947,28 +947,44 @@ export default function Files(){
 			case '/home/localhost/Pictures':
 				return (
 					<div className='FilesSection2'>
-		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/localhost/Pictures/Screenshots')}>
-		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
-		                                    <p className='FilesName'>Screenshots</p>
-		                                </div>
-		                                <div className='FilesItem'>
-		                                    <img className='FilesIcon' src='https:\/\/github.com/feross/TheAnnoyingSite.com/blob/master/static/cat-ceiling.jpg?raw=true' width='auto' height={iconSize}/>
-		                                    <p className='FilesName'>cat-ceiling.jpg</p>
-		                                </div>
-		                        </div>
+		                <div className='FilesItem' onDoubleClick={() => setDirectory('/home/localhost/Pictures/Screenshots')}>
+		                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+		                    <p className='FilesName'>Screenshots</p>
+		                </div>
+		                <div className='FilesItem'>
+		                    <img className='FilesIcon' src='https:\/\/github.com/feross/TheAnnoyingSite.com/blob/master/static/cat-ceiling.jpg?raw=true' width='auto' height={iconSize}/>
+		                    <p className='FilesName'>cat-ceiling.jpg</p>
+		                </div>
+				        <div className='FilesItem'>
+				            <img className='FilesIcon' src='https:\/\/github.com/baodaigov/BreezeOS/blob/master/public/gallery/screenshot.png?raw=true' width='auto' height={iconSize}/>
+				            <p className='FilesName'>picture.png</p>
+				        </div>
+				        <div className='FilesItem'>
+				            <img className='FilesIcon' src='https:\/\/github.com/baodaigov/BreezeOS/blob/master/public/gallery/screenshot2.png?raw=true' width='auto' height={iconSize}/>
+				            <p className='FilesName'>picture-2.png</p>
+				        </div>
+				        <div className='FilesItem'>
+				            <img className='FilesIcon' src='https:\/\/github.com/baodaigov/BreezeOS/blob/master/public/gallery/screenshot3.png?raw=true' width='auto' height={iconSize}/>
+				            <p className='FilesName'>picture-3.png</p>
+				        </div>
+				        <div className='FilesItem'>
+				            <img className='FilesIcon' src='https:\/\/github.com/baodaigov/BreezeOS/blob/master/public/gallery/screenshot4.png?raw=true' width='auto' height={iconSize}/>
+				            <p className='FilesName'>picture-4.png</p>
+				        </div>
+				        <div className='FilesItem'>
+				            <img className='FilesIcon' src='https:\/\/github.com/baodaigov/BreezeOS/blob/master/public/gallery/screenshot5.png?raw=true' width='auto' height={iconSize}/>
+				            <p className='FilesName'>picture-5.png</p>
+				        </div>
+		            </div>
 				)
 			case '/home/localhost/Pictures/Screenshots':
 				return (
 					<div className='FilesSection2'>
-		                                <div className='FilesItem'>
-		                                    <img className='FilesIcon' src={Image1} width='auto' height={iconSize}/>
-		                                    <p className='FilesName'>Screenshot from 2022-09-10 20-41-45.png</p>
-		                                </div>
-				                <div className='FilesItem'>
-				                	<img className='FilesIcon' src='https:\/\/github.com/baodaigov/BreezeOS/blob/master/public/screenshot.png?raw=true' width='auto' height={iconSize}/>
-				                        <p className='FilesName'>Screenshot from 2023-05-11 22-59-38.png</p>
-				                </div>
-		                        </div>
+		                <div className='FilesItem'>
+		                    <img className='FilesIcon' src={Image1} width='auto' height={iconSize}/>
+		                    <p className='FilesName'>Screenshot from 2022-09-10 20-41-45.png</p>
+		                </div>
+		            </div>
 				)
 			case '/home/localhost/Trash':
 				return (
@@ -1400,9 +1416,13 @@ export default function Files(){
                                     </div>
                                 </div>
                             </div>
-		            <div className='FilesContainer'>
-		                {switchTab()}	
-			    </div>
+		            		<div className='FilesContainer'>
+								<div style={{position:'relative',width:'100%',height:'100%'}}>
+									<div style={{position:'absolute',width:'100%',height:'100%',overflowY:'auto'}}>
+		                				{switchTab()}
+									</div>
+								</div>
+			    			</div>
                         </div>
                     </div>
                 </WindowBody>

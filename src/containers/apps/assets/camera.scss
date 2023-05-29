@@ -143,6 +143,93 @@ $fgcolor: #e2e2e2;
                 }
             }
         }
+
+        .ImageInformation {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            border-radius: 5px;
+            overflow: hidden;
+            z-index: 10000;
+            opacity: 0;
+            pointer-events: none;
+            transition: none;
+            width: 300px;
+            box-shadow: 0px 0 20px #00000089;
+
+            &.active {
+                opacity: 1;
+                pointer-events: all;
+            }
+
+            .WindowTopBar {
+                background: $bgcolor;
+                backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(15px);
+                padding: 7px 10px;
+                display: flex;
+                align-items: center;
+                transition: all ease .3s;
+                border-top-left-radius: 5px;
+                border-top-right-radius: 5px;
+
+                .WindowTopBarTitle {
+                    color: $fgcolor;
+                    font-size: 12px;
+                    margin: 0;
+                    width: 100%;
+                }
+
+                .WindowTopBarInteractionContainer {
+                    display: flex;
+                    width: 100%;
+
+                    .WindowTopBarInteraction {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        margin-left: auto;
+                        border-radius: 9999px;
+                        width: 20px;
+                        height: 20px;
+                        font-size: 11px;
+                        color: $fgcolor;
+
+                        &:hover {
+                            background: #3b3b3f;
+                        }
+        
+                        &.close:hover{
+                            background: #ff5252;
+                        }
+                    }
+                }
+            }
+
+            .WindowBodyDefault {
+                background: $bgcolor;
+                backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(15px);
+                border-bottom-left-radius: 5px;
+                border-bottom-right-radius: 5px;
+                padding: 10px 15px;
+                color: $fgcolor;
+        
+                * {
+                    margin: 0;
+                }
+
+                .WindowBodyContent {
+                    display: flex;
+                    justify-content: center;
+                    width: 150px;
+                    margin: 0 auto;
+                }
+            }
+        }
         
         .TabBarWrapper {
             margin: 0 10px;

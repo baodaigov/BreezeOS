@@ -30,7 +30,7 @@ export default class Clock extends Component {
   render() {
     return (
       <Draggable>
-        <div className="ClockWidget active">
+        <div className="ClockWidget active" onContextMenu={e => e.preventDefault()}>
           {/* <ActMenu style={{ zIndex: '1', top: '120px', left: '-30px' }}>
             <ActMenuSelector title='Change style'></ActMenuSelector>
             <ActMenuSelector title='Display seconds'></ActMenuSelector>

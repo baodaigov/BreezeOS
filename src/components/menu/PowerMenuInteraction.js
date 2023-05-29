@@ -212,8 +212,9 @@ export default function PowerMenuInteraction(props){
     }
     
     document.addEventListener('keydown', e => {
-        if(e.altKey && e.keyCode === 76){
-            Lock()
+        if(e.ctrlKey && e.keyCode === 76){
+            e.preventDefault();
+            Lock();
         }
     })
     
@@ -249,8 +250,11 @@ export default function PowerMenuInteraction(props){
 
         setTimeout(() => {
             dispatch(pushItem(<pre>Started Monitoring of LVM2 mirrors, etc. using dmeventd or progress polling... OK</pre>));
-            dispatch(pushItem(<pre>Started Monitoring of LVM2 mirrors, etc. using dmeventd or progress polling... OK</pre>));
         }, 20700);
+
+        setTimeout(() => {
+            dispatch(pushItem(<pre>Started Monitoring of LVM2 mirrors, etc. using dmeventd or progress polling... OK</pre>));
+        }, 20800);
 
         setTimeout(() => {
             dispatch(pushItem(<pre>Welcome to BreezeOS!</pre>));
@@ -258,10 +262,13 @@ export default function PowerMenuInteraction(props){
 
         setTimeout(() => {
             dispatch(pushItem(<pre>Reached target Mounted All Filesystems... OK</pre>));
+        }, 23500);
+
+        setTimeout(() => {
             dispatch(pushItem(<pre>Reached target Mounted All Filesystems... OK</pre>));
             dispatch(pushItem(<pre>Started Create System Users... OK</pre>));
             dispatch(pushItem(<pre>Started Remount Root and Kernel File Systems... OK</pre>));
-        }, 23500);
+        }, 23600);
 
         setTimeout(() => {
             dispatch(pushItem(<pre>Started target Swap... OK</pre>));
@@ -269,28 +276,40 @@ export default function PowerMenuInteraction(props){
 
         setTimeout(() => {
             dispatch(pushItem(<pre>Mounted /run/breezeos/cowspace... OK</pre>));
-            dispatch(pushItem(<pre>Mounted /run/breezeos/sfs/airootfs... OK</pre>));
-            dispatch(pushItem(<pre>Mounted Temporary Directory &#40;/tmp&#41;... OK</pre>));
         }, 24000);
 
         setTimeout(() => {
+            dispatch(pushItem(<pre>Mounted /run/breezeos/sfs/airootfs... OK</pre>));
+        }, 24500);
+
+        setTimeout(() => {
+            dispatch(pushItem(<pre>Mounted Temporary Directory &#40;/tmp&#41;... OK</pre>));
+        }, 24900);
+
+        setTimeout(() => {
             dispatch(pushItem(<pre>Started Local File Systems... OK</pre>));
+        }, 25100);
+
+        setTimeout(() => {
             dispatch(pushItem(<pre>Started Local File Systems &#40;Pre&#41;</pre>));
             dispatch(pushItem(<pre>Started Local File Systems &#40;Pre&#41;... OK</pre>));
-        }, 25100);
+        }, 25200);
 
         setTimeout(() => {
             dispatch(pushItem(<pre>Mounted Temporary Directory &#40;/tmp&#41;... OK</pre>));
             dispatch(pushItem(<pre>Mounted /run/breezeos/cowspace... OK</pre>));
             dispatch(pushItem(<pre>Mounted /run/breezeos/sfs/airootfs... OK</pre>));
-        }, 25200);
+        }, 25300);
 
         setTimeout(() => {
             dispatch(pushItem(<pre>Started Network Time Synchronization... OK</pre>));
             dispatch(pushItem(<pre>Started Loading Kernel Modules... OK</pre>));
+        }, 25400);
+
+        setTimeout(() => {
             dispatch(pushItem(<pre>Started Local File Systems</pre>));
             dispatch(pushItem(<pre>Mounted Temporary /etc/pacman.d/gnupg directory... OK</pre>));
-        }, 25400);
+        }, 25750);
 
         setTimeout(() => {
             dispatch(pushItem(<pre>Starting Breeze Desktop Environment</pre>));
@@ -299,7 +318,13 @@ export default function PowerMenuInteraction(props){
 
         setTimeout(() => {
             dispatch(pushItem(<pre>Added Redux Selector... OK</pre>));
+        }, 26100);
+
+        setTimeout(() => {
             dispatch(pushItem(<pre>Added Redux Dispatch... OK</pre>));
+        }, 26200);
+
+        setTimeout(() => {
             dispatch(pushItem(<pre>Added Redux Slice... OK</pre>));
             dispatch(pushItem(<pre>Added Redux Store... OK</pre>));
         }, 26300);
@@ -312,9 +337,12 @@ export default function PowerMenuInteraction(props){
 
         setTimeout(() => {
             dispatch(pushItem(<pre>Added containers/msgbox/BatteryLow.js... OK</pre>));
+        }, 26500);
+
+        setTimeout(() => {
             dispatch(pushItem(<pre>Added containers/msgbox/MissingPermissionCamera.js... OK</pre>));
             dispatch(pushItem(<pre>Added containers/msgbox/UnsuitableBrowser.js... OK</pre>));
-        }, 26500);
+        }, 26600);
 
         setTimeout(() => {
             dispatch(pushItem(<pre>Added containers/apps/settings.js... OK</pre>));
@@ -328,14 +356,10 @@ export default function PowerMenuInteraction(props){
         }, 27000);
 
         setTimeout(() => {
-            dispatch(pushItem(<pre>Added containers/apps/firefox.js... OK</pre>));
             dispatch(pushItem(<pre>Added containers/apps/files.js... OK</pre>));
-            dispatch(pushItem(<pre>Added containers/apps/camera.js... OK</pre>));
         }, 27300);
 
         setTimeout(() => {
-            dispatch(pushItem(<pre>Added containers/apps/firefox.js... OK</pre>));
-            dispatch(pushItem(<pre>Added containers/apps/files.js... OK</pre>));
             dispatch(pushItem(<pre>Added containers/apps/camera.js... OK</pre>));
         }, 27600);
 
@@ -350,12 +374,15 @@ export default function PowerMenuInteraction(props){
             dispatch(pushItem(<pre>Added components/utils/widget/Clock.js... OK</pre>));
             dispatch(pushItem(<pre>Added components/utils/window/TopBar.js... OK</pre>));
             dispatch(pushItem(<pre>Added components/utils/window/TopBarInteraction.js... OK</pre>));
+        }, 28050);
+
+        setTimeout(() => {
             dispatch(pushItem(<pre>Added components/utils/window/Window.js... OK</pre>));
             dispatch(pushItem(<pre>Added components/utils/window/WindowBody.js... OK</pre>));
             dispatch(pushItem(<pre>Added components/utils/window/WindowBodyButton.js... OK</pre>));
             dispatch(pushItem(<pre>Added components/utils/window/WindowBodyDefault.js... OK</pre>));
             dispatch(pushItem(<pre>Added components/utils/window/WindowDefault.js... OK</pre>));
-        }, 28050);
+        }, 28080);
 
         setTimeout(() => {
             dispatch(pushItem(<pre>Added Desktop.js... OK</pre>));
@@ -363,22 +390,28 @@ export default function PowerMenuInteraction(props){
             dispatch(pushItem(<pre>Added components/Dock.js... OK</pre>));
             dispatch(pushItem(<pre>Added components/DockItem.js... OK</pre>));
             dispatch(pushItem(<pre>Added components/Header.js... OK</pre>));
+        }, 28110);
+
+        setTimeout(() => {
             dispatch(pushItem(<pre>Added components/lockScreen/LockScreen.js... OK</pre>));
             dispatch(pushItem(<pre>Added components/lockScreen/LoginButton.js... OK</pre>));
             dispatch(pushItem(<pre>Added components/lockScreen/SplashScreen.js... OK</pre>));
             dispatch(pushItem(<pre>Added components/lockScreen/SplashScreenDate.js... OK</pre>));
             dispatch(pushItem(<pre>Added components/lockScreen/SplashScreenTime.js... OK</pre>));
+        }, 28130);
+
+        setTimeout(() => {
             dispatch(pushItem(<pre>Added components/menu/Menu.js... OK</pre>));
             dispatch(pushItem(<pre>Added components/menu/PowerMenu.js... OK</pre>));
             dispatch(pushItem(<pre>Added components/menu/PowerMenuInteraction.js... OK</pre>));
             dispatch(pushItem(<pre>Added components/Wallpaper.js... OK</pre>));
             dispatch(pushItem(<pre>Added components/Wallpaper.js... OK</pre>));
-        }, 28110);
+        }, 28160);
 
         setTimeout(() => {
             dispatch(pushItem(<pre>Started Breeze Desktop Environment... OK</pre>));
             dispatch(pushItem(<pre>Started Initializes Pacman keyring... OK</pre>));
-        }, 28160);
+        }, 28190);
 
         setTimeout(() => dispatch(pushItem(<pre>Started Load/Save Random Seed... OK</pre>)), 29700);
     
@@ -403,12 +436,12 @@ export default function PowerMenuInteraction(props){
         setTimeout(() => {
             document.getElementsByClassName('Wallpaper')[0].classList.remove('activeAnimation');
             document.getElementsByClassName('Wallpaper')[0].classList.add('active');
-        }, 37000);
+        }, 36300);
     
         setTimeout(() => {
             document.getElementsByClassName('Header')[0].classList.add('active');
             document.getElementsByClassName('Dock')[0].classList.add('active');
-        }, 37500);
+        }, 37000);
     
         setTimeout(() => {
             document.getElementsByClassName('DesktopBody')[0].classList.add('active');

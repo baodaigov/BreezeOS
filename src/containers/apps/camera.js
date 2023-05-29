@@ -247,9 +247,11 @@ export default function Camera() {
         }
 
         const [msgboxDelete, displayMsgboxDelete] = useState(false);
+        const [imageInformationMsgbox, displayImageInformationMsgbox] = useState(false);
 
         function closeMsgBoxDelete(){
             displayMsgboxDelete(false);
+            displayImageInformationMsgbox(false);
         }
 
         function deleteImage(){
@@ -303,6 +305,22 @@ export default function Camera() {
         
         return (
             <>
+                <div className={`ImageInformation ${imageInformationMsgbox ? 'active' : ''}`}>
+                    <div className='WindowTopBar'>
+                        <div class="WindowTopBarInteractionContainer">
+                            <div class="WindowTopBarInteraction close" onClick={closeMsgBoxDelete}>
+                                <i class="fa-solid fa-xmark fa-lg"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="WindowBodyDefault">
+                        <div className='WindowBodyContent'>
+                            <div style={{ display: 'flex', flexDirection: 'column' }}>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div className={`PermanentlyDeleteMedia ${msgboxDelete ? 'active' : ''}`}>
                     <div className='WindowTopBar'>
                         <p className='WindowTopBarTitle'>Delete this image?</p>
@@ -345,7 +363,7 @@ export default function Camera() {
                                 {img != null ? (
                                     <>
                                         <div className='CameraMediaImg'>
-                                            <img src={img} alt="screenshot"/>
+                                            <img src={img} alt='screenshot'/>
                                         </div>
                                     </>
                                 ) : (
@@ -359,8 +377,13 @@ export default function Camera() {
                                     </div>
                                     {img != null ? (
                                         <div style={{ display: 'flex' }}>
-                                            <div className='CameraButton'>
-                                                <p>Save image</p>
+                                            <a href={img} download='image'>
+                                                <div className='CameraButton'>
+                                                    <p>Save image</p>
+                                                </div>
+                                            </a>
+                                            <div className='CameraButton' onClick={() => displayImageInformationMsgbox(true)}>
+                                                <p>Info</p>
                                             </div>
                                             <div className='CameraButton' onClick={() => displayMsgboxDelete(true)} onDoubleClick={deleteImage}>
                                                 <p>Delete</p>
