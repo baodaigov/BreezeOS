@@ -382,9 +382,6 @@ export default function Camera() {
                                                     <p>Save image</p>
                                                 </div>
                                             </a>
-                                            <div className='CameraButton' onClick={() => displayImageInformationMsgbox(true)}>
-                                                <p>Info</p>
-                                            </div>
                                             <div className='CameraButton' onClick={() => displayMsgboxDelete(true)} onDoubleClick={deleteImage}>
                                                 <p>Delete</p>
                                             </div>

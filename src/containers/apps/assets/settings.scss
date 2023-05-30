@@ -619,6 +619,21 @@ $actcolor: #8fb6ff;
 		                }
 		            }
             }
+		    &[value='23']{
+		            .NavPanel .DropdownMenu.widgets {
+		                color: $actcolor;
+		                margin-left: 10px;
+
+		                i {
+		                    width: 30px;
+		                }
+
+		                p {
+		                    font-weight: 700;
+		                    background: transparentize($actcolor, 0.87);
+		                }
+		            }
+            }
 	    }
 
             .SettingsContainer {
@@ -1220,6 +1235,12 @@ $actcolor: #8fb6ff;
 				
 				&[value='22']{
 					.NavPanel .DropdownMenu.about p {
+						background: $fgcolor;
+					}
+				}
+				
+				&[value='23']{
+					.NavPanel .DropdownMenu.widgets p {
 						background: $fgcolor;
 					}
 				}

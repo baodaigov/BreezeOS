@@ -13,16 +13,6 @@ import { TextEditorStartApp } from '../../containers/apps/texteditor';
 import { SoftwareStoreStartApp } from '../../containers/apps/softwarestore';
 import { CalendarStartApp } from '../../containers/apps/calendar';
 
-const items = [
-    {
-        "name": "Calendar",
-        "icon": "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/calendar.svg",
-        "id": "calendar"
-    },
-]
-
-
-
 function useOutsideAlerter(ref) {
   useEffect(() => {
     /**

@@ -175,6 +175,11 @@ export default function Settings(){
             setValue('22');
 	    setSettings('About');
         }
+        
+        function widgets(){
+            setValue('23');
+	    setSettings('Widgets');
+        }
 
     const wifis = [
         {
@@ -810,6 +815,10 @@ export default function Settings(){
                                                 <div className='DropdownMenu appearance' onMouseDown={appearance}>
                                                     <i className='fa-regular fa-paintbrush'></i>
                                                     <p className='DropdownTitle'>Appearance</p>
+                                                </div>
+                                                <div className='DropdownMenu widgets' onMouseDown={widgets}>
+                                                    <i className='fa-regular fa-shapes'></i>
+                                                    <p className='DropdownTitle'>Widgets</p>
                                                 </div>
                                                 <div className='DropdownMenu notifications' onMouseDown={notifications}>
                                                     <i className='fa-regular fa-bell'></i>

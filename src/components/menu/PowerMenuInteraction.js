@@ -45,17 +45,23 @@ export default function PowerMenuInteraction(props){
             dispatch(pushItem(<pre>Removed components/Dock.js... OK</pre>));
             dispatch(pushItem(<pre>Removed components/DockItem.js... OK</pre>));
             dispatch(pushItem(<pre>Removed components/Header.js... OK</pre>));
+        }, 3650);
+
+        setTimeout(() => {
             dispatch(pushItem(<pre>Removed components/lockScreen/LockScreen.js... OK</pre>));
             dispatch(pushItem(<pre>Removed components/lockScreen/LoginButton.js... OK</pre>));
             dispatch(pushItem(<pre>Removed components/lockScreen/SplashScreen.js... OK</pre>));
             dispatch(pushItem(<pre>Removed components/lockScreen/SplashScreenDate.js... OK</pre>));
             dispatch(pushItem(<pre>Removed components/lockScreen/SplashScreenTime.js... OK</pre>));
             dispatch(pushItem(<pre>Removed components/menu/Menu.js... OK</pre>));
+        }, 3670);
+
+        setTimeout(() => {
             dispatch(pushItem(<pre>Removed components/menu/PowerMenu.js... OK</pre>));
             dispatch(pushItem(<pre>Removed components/menu/PowerMenuInteraction.js... OK</pre>));
             dispatch(pushItem(<pre>Removed components/Wallpaper.js... OK</pre>));
             dispatch(pushItem(<pre>Removed components/Wallpaper.js... OK</pre>));
-        }, 3650);
+        }, 3690);
 
         setTimeout(() => {
             dispatch(pushItem(<pre>Removed components/panel/Battery.js... OK</pre>));
@@ -64,11 +70,14 @@ export default function PowerMenuInteraction(props){
             dispatch(pushItem(<pre>Removed components/panel/PanelItem.js... OK</pre>));
             dispatch(pushItem(<pre>Removed components/panel/PanelItemContainer.js... OK</pre>));
             dispatch(pushItem(<pre>Removed components/panel/PanelTop.js... OK</pre>));
+        }, 3700);
+
+        setTimeout(() => {
             dispatch(pushItem(<pre>Removed components/panel/Battery.js... OK</pre>));
             dispatch(pushItem(<pre>Removed components/startMenu/SearchMenu.js... OK</pre>));
             dispatch(pushItem(<pre>Removed components/startMenu/StartApp.js... OK</pre>));
             dispatch(pushItem(<pre>Removed components/startMenu/StartMenu.js... OK</pre>));
-        }, 3700);
+        }, 3710);
 
         setTimeout(() => {
             dispatch(pushItem(<pre>Removed components/utils/menu/index.js... OK</pre>));
@@ -76,12 +85,15 @@ export default function PowerMenuInteraction(props){
             dispatch(pushItem(<pre>Removed components/utils/widget/Clock.js... OK</pre>));
             dispatch(pushItem(<pre>Removed components/utils/window/TopBar.js... OK</pre>));
             dispatch(pushItem(<pre>Removed components/utils/window/TopBarInteraction.js... OK</pre>));
+        }, 3720);
+
+        setTimeout(() => {
             dispatch(pushItem(<pre>Removed components/utils/window/Window.js... OK</pre>));
             dispatch(pushItem(<pre>Removed components/utils/window/WindowBody.js... OK</pre>));
             dispatch(pushItem(<pre>Removed components/utils/window/WindowBodyButton.js... OK</pre>));
             dispatch(pushItem(<pre>Removed components/utils/window/WindowBodyDefault.js... OK</pre>));
             dispatch(pushItem(<pre>Removed components/utils/window/WindowDefault.js... OK</pre>));
-        }, 3720);
+        }, 3725);
 
         setTimeout(() => {
             dispatch(pushItem(<pre>Removed containers/apps/calculator.js... OK</pre>));
@@ -99,6 +111,10 @@ export default function PowerMenuInteraction(props){
         setTimeout(() => {
             dispatch(pushItem(<pre>Removed containers/apps/firefox.js... OK</pre>));
         }, 3900);
+
+        setTimeout(() => {
+            dispatch(pushItem(<pre>Removed containers/apps/imageview.js... OK</pre>));
+        }, 4300);
 
         setTimeout(() => {
             dispatch(pushItem(<pre>Removed containers/apps/settings.js... OK</pre>));
@@ -343,6 +359,10 @@ export default function PowerMenuInteraction(props){
             dispatch(pushItem(<pre>Added containers/msgbox/MissingPermissionCamera.js... OK</pre>));
             dispatch(pushItem(<pre>Added containers/msgbox/UnsuitableBrowser.js... OK</pre>));
         }, 26600);
+
+        setTimeout(() => {
+            dispatch(pushItem(<pre>Removed containers/apps/imageview.js... OK</pre>));
+        }, 26630);
 
         setTimeout(() => {
             dispatch(pushItem(<pre>Added containers/apps/settings.js... OK</pre>));

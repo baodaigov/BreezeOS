@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { openPic } from '../../reducers/imgview';
 import '../../components/utils/window/Window.scss';
 import TopBar from '../../components/utils/window/TopBar';
 import WindowBody from '../../components/utils/window/WindowBody';
@@ -54,10 +56,11 @@ export const FilesStartApp = () => {
 export default function Files(){
 
     const FilesWindow = () => {
+		const dispatch = useDispatch();
     	const [value, setValue] = useState('1');
-	const [directory, setDirectory] = useState('/home/localhost');
-	const [iconSize, setIconSize] = useState(70);
-	const [settingsMenu, showSettingsMenu] = useState(false);
+		const [directory, setDirectory] = useState('/home/localhost');
+		const [iconSize, setIconSize] = useState(70);
+		const [settingsMenu, showSettingsMenu] = useState(false);
 
         const Dropdown = [
             {
@@ -980,7 +983,7 @@ export default function Files(){
 			case '/home/localhost/Pictures/Screenshots':
 				return (
 					<div className='FilesSection2'>
-		                <div className='FilesItem'>
+		                <div className='FilesItem' onDoubleClick={() => dispatch(openPic(Image1))}>
 		                    <img className='FilesIcon' src={Image1} width='auto' height={iconSize}/>
 		                    <p className='FilesName'>Screenshot from 2022-09-10 20-41-45.png</p>
 		                </div>

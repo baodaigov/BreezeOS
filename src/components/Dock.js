@@ -40,7 +40,7 @@ const Dock = () => {
 	    <a href='https://github.com/baodaigov/BreezeOS'>
                 <DockItem id="github" title="GitHub" icon="https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/github-desktop.svg"/>
             </a>
-            <a href='https://github.dev/baodaigov/BreezeOS'>
+            <a href='https://vscode.dev/baodaigov/BreezeOS'>
                 <DockItem id="vscode" title="Fork this repository" icon="https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/visual-studio-code.svg"/>
             </a>
         </div>

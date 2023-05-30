@@ -50,12 +50,12 @@ export default function Firefox() {
 
     const FirefoxWindow = () => {
         const [url, setUrl] = useState('');
-        const [hist, setHist] = useState(["https://cyplucastero.github.io/khangteo1000.github.io", "https://cyplucastero.github.io/khangteo1000.github.io"]);
+        const [hist, setHist] = useState(["https://breezeos.github.io", "https://breezeos.github.io"]);
 
         useEffect(() => {
 
             document.getElementById('firefox').onclick = () => {
-                setUrl('https://cyplucastero.github.io/khangteo1000.github.io')
+                setUrl('https://breezeos.github.io')
             }
 
         }, []);
