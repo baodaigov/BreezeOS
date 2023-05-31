@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { toggleLightMode, toggleDarkMode } from '../../reducers/settings';
+import { toggleAirplaneModeOff, toggleAirplaneModeOn, toggleLightMode, toggleDarkMode, toggleWifi, toggleBluetooth } from '../../reducers/settings';
 import wallpaper, { changeWallpaper } from '../../reducers/wallpaper';
 import '../../components/utils/window/Window.scss';
 import TopBar from '../../components/utils/window/TopBar';
@@ -63,7 +63,6 @@ export default function Settings(){
         const [settings, setSettings] = useState('Wi-Fi');
         const [value, setValue] = useState('1');
         const [wallpaperValue, setValueWallpaper] = useState('1');
-        const [statusWifi, setStatusWifi] = useState(true);
         const dispatch = useDispatch();
 
         function wifi(){
@@ -476,27 +475,33 @@ export default function Settings(){
 				return (
                     <div className='WiFiWrapper'>
                         <div className='WiFi'>
-                            {statusWifi ? (
-                                <div style={{ display: 'flex', flexDirection: 'column', width: '75%' }}>
-                                    <p className='font-bold' style={{ marginBottom: '30px' }}>Visible Networks</p>
-                                    <div className='VisibleNetworks'>
-                                        {wifis.map((i) => 
-                                            <div className='VisibleNetworksItem'>
-                                                <p>{i.name}</p>
-                                                <div className='VisibleNetworksIcon'>
-                                                    {i.connected ? <i className='fa-solid fa-check'></i> : ''}
-                                                    {i.private ? <i className='fa-solid fa-lock'></i> : ''}
-                                                    {i.status == 'good' ? <i className='fa-solid fa-wifi'></i> : i.status == 'fair' ? <i className='fa-duotone fa-wifi-fair'></i> : i.status == 'weak' ? <i className='fa-duotone fa-wifi-weak'></i> : ''}
+                            <div style={{ display: 'flex', flexDirection: 'column', width: '75%' }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '40px' }}>
+                                    <p className='font-bold'>Airplane Mode</p>
+                                    <div className={`Toggle ${settingsReducer.airplaneMode ? 'active' : ''}`} onClick={settingsReducer.airplaneMode ? () => dispatch(toggleAirplaneModeOff()) : () => dispatch(toggleAirplaneModeOn())}></div>
+                                </div>
+                                {settingsReducer.wifi ? (
+                                    <>
+                                        <p className='font-bold' style={{ marginBottom: '30px' }}>Visible Networks</p>
+                                        <div className='VisibleNetworks'>
+                                            {wifis.map((i) => 
+                                                <div className='VisibleNetworksItem'>
+                                                    <p>{i.name}</p>
+                                                    <div className='VisibleNetworksIcon'>
+                                                        {i.connected ? <i className='fa-solid fa-check'></i> : ''}
+                                                        {i.private ? <i className='fa-solid fa-lock'></i> : ''}
+                                                        {i.status == 'good' ? <i className='fa-solid fa-wifi'></i> : i.status == 'fair' ? <i className='fa-duotone fa-wifi-fair'></i> : i.status == 'weak' ? <i className='fa-duotone fa-wifi-weak'></i> : ''}
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        )}
+                                            )}
+                                        </div>
+                                    </>
+                                ) : (
+                                    <div className='StatusWifiFalse'>
+                                        <p>To get access to Internet connection, please turn on the Wi-Fi.</p>
                                     </div>
-                                </div>
-                            ) : (
-                                <div className='StatusWifiFalse'>
-                                    <p>To get access to Internet connection, please turn on the Wi-Fi.</p>
-                                </div>
-                            )}
+                                )}
+                            </div>
                         </div>
                     </div>
                 )
@@ -779,7 +784,14 @@ export default function Settings(){
                                         <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                                             <p>{settings}</p>
                                         </div>
-                                        <div className={`Toggle ${statusWifi ? 'active' : ''}`} onClick={() => setStatusWifi(!statusWifi)}></div>
+                                        <div className={`Toggle ${settingsReducer.wifi ? 'active' : ''}`} onClick={() => dispatch(toggleWifi())}></div>
+                                    </>
+                                ) : settings == 'Bluetooth' ? (
+                                    <>
+                                        <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                                            <p>{settings}</p>
+                                        </div>
+                                        <div className={`Toggle ${settingsReducer.bluetooth ? 'active' : ''}`} onClick={() => dispatch(toggleBluetooth())}></div>
                                     </>
                                 ) : <p>{settings}</p>}
                             </div>

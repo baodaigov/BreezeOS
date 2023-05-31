@@ -1,20 +1,14 @@
-import React, { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import Panel from './panel/Panel';
 import Time from '../header/Time';
 import Task from '../header/Task';
 import Home from '../header/Home';
 import { useBattery } from 'react-use';
 
-const TaskIcon = [
-    {
-        "id": "wifi", "icon": "fa-solid fa-wifi"
-    },
-    {
-        "id": "volume", "icon": "fa-solid fa-volume"
-    }
-]
-
 const Header = () => {
+    const settingsReducer = useSelector(state => state.settings);
+
     useEffect(() => {
         setTimeout(() => {
             document.getElementsByClassName('Header')[0].classList.add('active');
@@ -35,7 +29,10 @@ const Header = () => {
                 <div className={`BatteryStatus ${batteryPercent <= 10 ? "low-battery" : ""}`}>
                     <p className={`BatteryStatusLevel font-bold ${batteryState.charging ? "in-charge" : ""}`}>{isNaN(batteryPercent) ? '-' : batteryPercent + '%'}</p>
                 </div>
-                {TaskIcon.map(i => <i key={i.id} className={i.icon}></i>)}
+                {settingsReducer.airplaneMode ? <i key={Math.random()} className='fa-solid fa-plane'></i> : ''}
+                {settingsReducer.bluetooth ? <i key={Math.random()} className='fa-solid fa-bluetooth'></i> : ''}
+                {settingsReducer.wifi ? <i key={Math.random()} className='fa-solid fa-wifi'></i> : ''}
+                <i key={Math.random()} className='fa-solid fa-volume'></i>
             </Task>
             <Panel style={{ top: "45px", right: "0" }}/>
         </div>

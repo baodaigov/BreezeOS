@@ -48,20 +48,6 @@ export const TerminalStartApp = () => {
 export default function Terminal() {
     const TerminalWindow = () => {
 
-        const onInput = (e) => {
-            if(e.key == 'Enter'){
-                const lt = [...lineTerminal, lineTerminal.push(<pre>{e}</pre>,)];
-                setLineTerminal(lt);
-            }
-        }
-
-        const [lineTerminal, setLineTerminal] = useState([
-            <pre>Welcome to BreezeOS (GNU/Linux 6.2.1 x86_64)</pre>,
-            <pre id='input'>[localhost@breezeos]$ 
-                <input type='text' spellCheck='false' onKeyDown={onInput}/>
-            </pre>,
-        ]);
-
         const [min, isMin] = useState(false);
 
         function close(){
@@ -83,7 +69,10 @@ export default function Terminal() {
                 </TopBar>
                 <WindowBody>
                     <div className='Terminal'>
-                        {lineTerminal}
+                        <pre>Welcome to BreezeOS (GNU/Linux 6.2.1 x86_64)</pre>
+                        <pre id='input'>[localhost@breezeos]$ 
+                            <input type='text' spellCheck='false'/>
+                        </pre>
                     </div>
                 </WindowBody>
             </>

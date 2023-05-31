@@ -31,6 +31,35 @@ $actcolor: #8fb6ff;
             height: 100%;
         }
 
+		.Toggle {
+			border-radius: 999px;
+			width: 42px;
+			height: 20px;
+			background: transparentize($fgcolor, 0.9);
+			display: flex;
+			padding: 0 3px;
+			align-items: center;
+			transition: all ease .3s;
+
+			&::before {
+				content: '';
+				display: block;
+				background: $fgcolor;
+				height: 15px;
+				width: 15px;
+				border-radius: 999px;
+				transition: all ease .1s;
+			}
+
+			&.active {
+				background: $actcolor;
+
+				&::before {
+					transform: translateX(20px);
+				}
+			}
+		}
+
         .MaximumExceededBox {
             position: absolute;
             display: flex;
@@ -186,35 +215,6 @@ $actcolor: #8fb6ff;
 					width: 100%;
                     border-radius: 5px;
                 }
-
-				.Toggle {
-					border-radius: 999px;
-					width: 42px;
-					height: 20px;
-					background: transparentize($fgcolor, 0.9);
-					display: flex;
-					padding: 0 3px;
-					align-items: center;
-					transition: all ease .3s;
-
-					&::before {
-						content: '';
-						display: block;
-						background: $fgcolor;
-						height: 15px;
-						width: 15px;
-						border-radius: 999px;
-						transition: all ease .1s;
-					}
-
-					&.active {
-						background: $actcolor;
-
-						&::before {
-							transform: translateX(19px);
-						}
-					}
-				}
             }
         }
         
@@ -1027,6 +1027,10 @@ $actcolor: #8fb6ff;
 
 .lightMode {
     .settings {
+		.Toggle {
+			background: transparentize($bgcolor, 0.75);
+		}
+
         .MaximumExceededBox {
             .WindowTopBar {
                 background: $fgcolor;
@@ -1081,10 +1085,6 @@ $actcolor: #8fb6ff;
                     background-color: #0000001e;
                 }
             }
-
-			.Toggle {
-				background: transparentize($bgcolor, 0.75);
-			}
         }
     }
 
