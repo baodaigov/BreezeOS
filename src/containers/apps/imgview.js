@@ -10,7 +10,7 @@ export default function ImgView() {
     const ImgViewWindow = () => {
         const pic = useSelector(state => state.imgview.pic);
 
-        const [min, isMin] = useState(false);
+        const [min, isMin] = useState(true);
         
         function close(){
             document.getElementsByClassName('imgview')[0].classList.remove('active');
@@ -23,14 +23,14 @@ export default function ImgView() {
 
         return (
             <>
-                <TopBar title='Image Viewer' onDblClick={minimize}>
+                <TopBar title={`Image Viewer – ${pic}`} onDblClick={minimize}>
                     <TopBarInteraction action='hide'/>
                     <TopBarInteraction action={min ? 'max' : 'min'} onMinMax={minimize} />
                     <TopBarInteraction action='close' onClose={close}/>
                 </TopBar>
                 <WindowBody>
                     <div className='ImgView'>
-                        <p>{pic}</p>
+                        <img src={pic}/>
                     </div>
                 </WindowBody>
             </>
@@ -40,7 +40,7 @@ export default function ImgView() {
     return (
         <div className='ImgViewWindow'>   
                 <div
-                    className='Window imgview'
+                    className='Window imgview minimize'
                     key={Math.random()}
                 >
                     <ImgViewWindow/>

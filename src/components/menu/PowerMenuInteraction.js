@@ -113,7 +113,7 @@ export default function PowerMenuInteraction(props){
         }, 3900);
 
         setTimeout(() => {
-            dispatch(pushItem(<pre>Removed containers/apps/imageview.js... OK</pre>));
+            dispatch(pushItem(<pre>Removed containers/apps/imgview.js... OK</pre>));
         }, 4300);
 
         setTimeout(() => {
@@ -361,7 +361,7 @@ export default function PowerMenuInteraction(props){
         }, 26600);
 
         setTimeout(() => {
-            dispatch(pushItem(<pre>Removed containers/apps/imageview.js... OK</pre>));
+            dispatch(pushItem(<pre>Removed containers/apps/imgview.js... OK</pre>));
         }, 26630);
 
         setTimeout(() => {

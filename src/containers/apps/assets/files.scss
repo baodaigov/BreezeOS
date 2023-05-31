@@ -558,7 +558,13 @@ $actcolor: #8fb6ff;
 		        color: $bgcolor!important;
 		    }
 		}
-                .OtherLocations .OtherLocationsItem:hover {background:transparentize($bgcolor, 0.8)!important}
+                .OtherLocations {
+                	.HeaderBar {
+                		border-bottom: 0.5px solid transparentize($bgcolor, 0.65)!important;
+                	}
+
+                    .OtherLocationsItem:hover {background:transparentize($bgcolor, 0.8)!important}
+                }
 	}
     }
 }

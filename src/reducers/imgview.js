@@ -10,7 +10,7 @@ const imgViewSlice = createSlice({
     reducers: {
         openPic: (state, action) => {
             state.pic = action.payload;
-            document.getElementsByClassName('imgview')[0].classList.add('active');
+            setTimeout(() => document.getElementsByClassName('imgview')[0].classList.add('active'), 100);
         }
     }
 });

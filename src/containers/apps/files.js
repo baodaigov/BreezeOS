@@ -11,6 +11,10 @@ import StartApp from '../../components/startMenu/StartApp';
 import ActMenu, { ActMenuSelector } from "../../components/utils/menu/index";
 import Image1 from './assets/Screenshot from 2022-09-10 20-41-45.png';
 import Image2 from './assets/favicon.ico';
+import Image3 from './assets/dark.png';
+import Image4 from './assets/light.png';
+import Image5 from './assets/logo-d.png';
+import Image6 from './assets/logo-l.png';
 
 export const FilesApp = () => {
 
@@ -580,6 +584,28 @@ export default function Files(){
 		                                </div>
 		                        </div>
 				)
+			case '/usr/share':
+				return (
+					<div className='FilesSection2'>
+		                                <div className='FilesItem' onDoubleClick={() => setDirectory('/usr/share/pixmaps')}>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
+				                        	<p className='FilesName'>pixmaps</p>
+		                                </div>
+		                        </div>
+				)
+			case '/usr/share/pixmaps':
+				return (
+					<div className='FilesSection2'>
+		                <div className='FilesItem' onDoubleClick={() => dispatch(openPic(Image5))}>
+		                    <img className='FilesIcon' src={Image5} width='auto' height={iconSize}/>
+				            <p className='FilesName'>logo-d.png</p>
+		                </div>
+		                <div className='FilesItem' onDoubleClick={() => dispatch(openPic(Image6))}>
+		                    <img className='FilesIcon' src={Image6} width='auto' height={iconSize}/>
+				            <p className='FilesName'>logo-l.png</p>
+		                </div>
+		        	</div>
+				)
 			case '/usr/lib':
 				return (
 					<div className='FilesSection2'>
@@ -920,11 +946,11 @@ export default function Files(){
 		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>Palatino</p>
 		                                </div>
-		                                <div className='FilesItem'>
+		                                <div className='FilesItem' onDoubleClick={() => dispatch(openPic('https:\/\/github.com/feross/TheAnnoyingSite.com/blob/master/static/cat-cute.jpg?raw=true'))}>
 		                                    <img className='FilesIcon' src='https:\/\/github.com/feross/TheAnnoyingSite.com/blob/master/static/cat-cute.jpg?raw=true' width='auto' height={iconSize}/>
 		                                    <p className='FilesName'>cat-cute.jpg</p>
 		                                </div>
-		                                <div className='FilesItem'>
+		                                <div className='FilesItem' onDoubleClick={() => dispatch(openPic('https:\/\/github.com/feross/TheAnnoyingSite.com/blob/master/static/cat-blue-eyes.jpg?raw=true'))}>
 		                                    <img className='FilesIcon' src='https:\/\/github.com/feross/TheAnnoyingSite.com/blob/master/static/cat-blue-eyes.jpg?raw=true' width='auto' height={iconSize}/>
 		                                    <p className='FilesName'>cat-blue-eyes.jpg</p>
 		                                </div>
@@ -954,27 +980,35 @@ export default function Files(){
 		                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 		                    <p className='FilesName'>Screenshots</p>
 		                </div>
-		                <div className='FilesItem'>
+		                <div className='FilesItem' onDoubleClick={() => dispatch(openPic('https:\/\/github.com/feross/TheAnnoyingSite.com/blob/master/static/cat-ceiling.jpg?raw=true'))}>
 		                    <img className='FilesIcon' src='https:\/\/github.com/feross/TheAnnoyingSite.com/blob/master/static/cat-ceiling.jpg?raw=true' width='auto' height={iconSize}/>
 		                    <p className='FilesName'>cat-ceiling.jpg</p>
 		                </div>
-				        <div className='FilesItem'>
+		                <div className='FilesItem' onDoubleClick={() => dispatch(openPic(Image3))}>
+		                    <img className='FilesIcon' src={Image3} width='auto' height={iconSize}/>
+				            <p className='FilesName'>dark.png</p>
+		                </div>
+		                <div className='FilesItem' onDoubleClick={() => dispatch(openPic(Image4))}>
+		                    <img className='FilesIcon' src={Image4} width='auto' height={iconSize}/>
+				            <p className='FilesName'>light.png</p>
+		                </div>
+				        <div className='FilesItem' onDoubleClick={() => dispatch(openPic('https:\/\/github.com/baodaigov/BreezeOS/blob/master/public/gallery/screenshot.png?raw=true'))}>
 				            <img className='FilesIcon' src='https:\/\/github.com/baodaigov/BreezeOS/blob/master/public/gallery/screenshot.png?raw=true' width='auto' height={iconSize}/>
 				            <p className='FilesName'>picture.png</p>
 				        </div>
-				        <div className='FilesItem'>
+				        <div className='FilesItem' onDoubleClick={() => dispatch(openPic('https:\/\/github.com/baodaigov/BreezeOS/blob/master/public/gallery/screenshot2.png?raw=true'))}>
 				            <img className='FilesIcon' src='https:\/\/github.com/baodaigov/BreezeOS/blob/master/public/gallery/screenshot2.png?raw=true' width='auto' height={iconSize}/>
 				            <p className='FilesName'>picture-2.png</p>
 				        </div>
-				        <div className='FilesItem'>
+				        <div className='FilesItem' onDoubleClick={() => dispatch(openPic('https:\/\/github.com/baodaigov/BreezeOS/blob/master/public/gallery/screenshot3.png?raw=true'))}>
 				            <img className='FilesIcon' src='https:\/\/github.com/baodaigov/BreezeOS/blob/master/public/gallery/screenshot3.png?raw=true' width='auto' height={iconSize}/>
 				            <p className='FilesName'>picture-3.png</p>
 				        </div>
-				        <div className='FilesItem'>
+				        <div className='FilesItem' onDoubleClick={() => dispatch(openPic('https:\/\/github.com/baodaigov/BreezeOS/blob/master/public/gallery/screenshot4.png?raw=true'))}>
 				            <img className='FilesIcon' src='https:\/\/github.com/baodaigov/BreezeOS/blob/master/public/gallery/screenshot4.png?raw=true' width='auto' height={iconSize}/>
 				            <p className='FilesName'>picture-4.png</p>
 				        </div>
-				        <div className='FilesItem'>
+				        <div className='FilesItem' onDoubleClick={() => dispatch(openPic('https:\/\/github.com/baodaigov/BreezeOS/blob/master/public/gallery/screenshot5.png?raw=true'))}>
 				            <img className='FilesIcon' src='https:\/\/github.com/baodaigov/BreezeOS/blob/master/public/gallery/screenshot5.png?raw=true' width='auto' height={iconSize}/>
 				            <p className='FilesName'>picture-5.png</p>
 				        </div>
@@ -1018,7 +1052,7 @@ export default function Files(){
 		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>.gitignore</p>
 		                                </div>
-		                                <div className='FilesItem'>
+		                                <div className='FilesItem' onDoubleClick={() => dispatch(openPic(Image2))}>
 		                                    <img className='FilesIcon' src={Image2} width='auto' height={iconSize}/>
 		                                    <p className='FilesName'>favicon.ico</p>
 		                                </div>
@@ -1369,7 +1403,7 @@ export default function Files(){
                             <div style={{ display: 'flex' }}>
                                     <div className='TabBarItem TabBarFileSystem'>
                                         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                                            <i className="fa-regular fa-folder" style={{ marginRight: '5px' }}></i>
+                                            <i className={`fa-regular ${directory == 'Recent' ? 'fa-clock-rotate-left' : directory == 'Starred' ? 'fa-star' : directory == '/home/localhost' ? 'fa-house' : directory == '500MB Partition' ? 'fa-hard-drive' : directory == 'Other Locations' ? 'fa-plus' : 'fa-folder'}`} style={{ marginRight: '5px' }}></i>
                                             <p>{directory}</p>
                                         </div>
                                         <div className='TabBarInteraction'>

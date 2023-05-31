@@ -10,7 +10,7 @@ import Calculator from '../../../containers/apps/calculator';
 import TextEditor from '../../../containers/apps/texteditor';
 import SoftwareStore from '../../../containers/apps/softwarestore';
 import Calendar from '../../../containers/apps/calendar';
-import ImgView from '../../../containers/apps/imageview';
+import ImgView from '../../../containers/apps/imgview';
 
 export default function Window(){
   return (
