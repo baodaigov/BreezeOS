@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+    deviceName: 'breezeos',
     airplaneMode: false,
     wifi: true,
     bluetooth: false,
@@ -11,32 +12,35 @@ export const settingsSlice = createSlice({
     name: 'settings',
     initialState,
     reducers: {
-        toggleAirplaneModeOff: (state) => {
+        setDeviceName: (state, action) => {
+            state.deviceName = action.payload
+        },
+        toggleAirplaneModeOff: state => {
             state.airplaneMode = false;
             state.wifi = true;
         },
-        toggleAirplaneModeOn: (state) => {
+        toggleAirplaneModeOn: state => {
             state.airplaneMode = true;
             state.wifi = false;
             state.bluetooth = false;
         },
-        toggleWifi: (state) => {
+        toggleWifi: state => {
             state.wifi = !state.wifi;
         },
-        toggleBluetooth: (state) => {
+        toggleBluetooth: state => {
             state.bluetooth = !state.bluetooth;
         },
-        toggleLightMode: (state) => {
+        toggleLightMode: state => {
             state.themeLight = true;
             document.getElementsByClassName('Desktop')[0].classList.add('lightMode');
         },
-        toggleDarkMode: (state) => {
+        toggleDarkMode: state => {
             state.themeLight = false;
             document.getElementsByClassName('Desktop')[0].classList.remove('lightMode');
         }
     },
 });
 
-export const { toggleAirplaneModeOff, toggleAirplaneModeOn, toggleWifi, toggleBluetooth, toggleLightMode, toggleDarkMode } = settingsSlice.actions
+export const { setDeviceName, toggleAirplaneModeOff, toggleAirplaneModeOn, toggleWifi, toggleBluetooth, toggleLightMode, toggleDarkMode } = settingsSlice.actions
 
 export default settingsSlice.reducer

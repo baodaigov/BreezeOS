@@ -1,15 +1,17 @@
 .ClockWidget {
   position: absolute;
-  top: 0;
-  right: 0;
-  margin: 5px 15px;
+  top: 5px;
+  right: 15px;
   width: 200px;
   height: 200px;
-  padding: 10px;
   border-radius:999px;
   background-color: #d5e3ff;
   opacity: 0;
   pointer-events: none;
+
+  .ActMenu {
+    transition: opacity .2s ease!important;
+  }
 
   .Close {
     width: 31px;
@@ -59,6 +61,22 @@
     border-radius: 999px;
     top: 10px;
     left: 47%;
+    transform-origin: bottom;
+    z-index: 10000;
+  }
+
+  .Sec {
+    &.active {
+      display: block;
+    }
+    display: none;
+    position: absolute;
+    width: 10px;
+    height: 93px;
+    background: #222;
+    border-radius: 999px;
+    top: 7px;
+    left: 46%;
     transform-origin: bottom;
     z-index: 10000;
   }

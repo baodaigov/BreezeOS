@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { toggleAirplaneModeOff, toggleAirplaneModeOn, toggleLightMode, toggleDarkMode, toggleWifi, toggleBluetooth } from '../../reducers/settings';
+import { toggleAirplaneModeOff, toggleAirplaneModeOn, toggleLightMode, toggleDarkMode, toggleWifi, toggleBluetooth, setDeviceName } from '../../reducers/settings';
 import wallpaper, { changeWallpaper } from '../../reducers/wallpaper';
 import '../../components/utils/window/Window.scss';
 import TopBar from '../../components/utils/window/TopBar';
@@ -243,7 +243,6 @@ export default function Settings(){
     const [resolutionMenu, showResolutionMenu] = useState(false);
     const [refreshRateMenu, showRefreshRateMenu] = useState(false);
     const [editDeviceName, allowEditDeviceName] = useState(false);
-    const [deviceName, setDeviceName] = useState('breezeos');
 
     function useOutsideCursorMenu(ref) {
       useEffect(() => {
@@ -431,10 +430,10 @@ export default function Settings(){
         if(e.key == 'Enter'){
             if(e.target.value.length > 43){
                 displayMaximumExceeded(true);
-                setDeviceName(deviceName);
+                dispatch(setDeviceName(settingsReducer.deviceName));
             } else {
                 allowEditDeviceName(false);
-                setDeviceName(e.target.value);
+                dispatch(setDeviceName(e.target.value));
             }
         }
     }
@@ -693,12 +692,12 @@ export default function Settings(){
                                     <div className='AboutMenu' onClick={() => allowEditDeviceName(!editDeviceName)}>
                                         <p>Device Name</p>
                                         <div style={{ display: 'flex', alignItems: 'center' }}>
-                                            <p className='BlurText' style={{ marginRight: '15px' }}>{deviceName}</p>
+                                            <p className='BlurText' style={{ marginRight: '15px' }}>{settingsReducer.deviceName}</p>
                                             <i className={`fa-regular fa-chevron-right ${editDeviceName ? 'rotated' : ''}`}></i>
                                         </div>
                                     </div>
                                     <div className={`AboutMenu EditName ${editDeviceName ? 'active' : ''}`}>
-                                        <input className='EditNameInput' type='text' placeholder={deviceName} onKeyUp={submitDeviceName}/>
+                                        <input className='EditNameInput' type='text' placeholder={settingsReducer.deviceName} onKeyUp={submitDeviceName}/>
                                     </div>
                                     <div className='AboutMenu'>
                                         <p>System Name</p>
