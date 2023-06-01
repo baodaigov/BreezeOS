@@ -7,6 +7,7 @@ import TopBar from '../../components/utils/window/TopBar';
 import WindowBody from '../../components/utils/window/WindowBody';
 import DockItem from '../../components/DockItem';
 import './assets/settings.scss';
+import '../../components/utils/widget/Clock.scss';
 import TopBarInteraction from '../../components/utils/window/TopBarInteraction';
 import StartApp from '../../components/startMenu/StartApp';
 import ActMenu, { ActMenuSelector } from "../../components/utils/menu/index";
@@ -20,6 +21,7 @@ import W3 from '../../components/52496.jpg';
 import W4 from '../../components/52791.jpg';
 import W5 from '../../components/52532.jpg';
 import W6 from '../../components/52544.jpg';
+import Wifi1 from './assets/BreezeOS-WiFi.png'
 
 export const SettingsApp = () => {
     const toggle = () => {
@@ -194,7 +196,7 @@ export default function Settings(){
         },
         {
             name: 'APTEK',
-            private: false,
+            private: true,
             status: 'weak'
         },
         {
@@ -468,41 +470,68 @@ export default function Settings(){
         setValueWallpaper('6');
     }
 
+    const [shareWifi, setShareWifi] = useState(false);
+
+    var mouseHold;
+
+    function mouseUp(){
+        if(mouseHold) window.clearTimeout(mouseHold);
+    }
+
+    function mouseDown(){
+        mouseHold = window.setTimeout(() => setShareWifi(true), 800);
+    }
+
 	function switchTab(){
 		switch(settings){
 			case 'Wi-Fi':
 				return (
-                    <div className='WiFiWrapper'>
-                        <div className='WiFi'>
-                            <div style={{ display: 'flex', flexDirection: 'column', width: '75%' }}>
-                                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '40px' }}>
-                                    <p className='font-bold'>Airplane Mode</p>
-                                    <div className={`Toggle ${settingsReducer.airplaneMode ? 'active' : ''}`} onClick={settingsReducer.airplaneMode ? () => dispatch(toggleAirplaneModeOff()) : () => dispatch(toggleAirplaneModeOn())}></div>
-                                </div>
-                                {settingsReducer.wifi ? (
-                                    <>
-                                        <p className='font-bold' style={{ marginBottom: '30px' }}>Visible Networks</p>
-                                        <div className='VisibleNetworks'>
-                                            {wifis.map((i) => 
-                                                <div className='VisibleNetworksItem'>
-                                                    <p>{i.name}</p>
-                                                    <div className='VisibleNetworksIcon'>
-                                                        {i.connected ? <i className='fa-solid fa-check'></i> : ''}
-                                                        {i.private ? <i className='fa-solid fa-lock'></i> : ''}
-                                                        {i.status == 'good' ? <i className='fa-solid fa-wifi'></i> : i.status == 'fair' ? <i className='fa-duotone fa-wifi-fair'></i> : i.status == 'weak' ? <i className='fa-duotone fa-wifi-weak'></i> : ''}
-                                                    </div>
-                                                </div>
-                                            )}
-                                        </div>
-                                    </>
-                                ) : (
-                                    <div className='StatusWifiFalse'>
-                                        <p>To get access to Internet connection, please turn on the Wi-Fi.</p>
+                    <>
+                        <div className='WiFiWrapper'>
+                            <div className='WiFi'>
+                                <div style={{ display: 'flex', flexDirection: 'column', width: '649.516px' }}>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '40px' }}>
+                                        <p className='font-bold'>Airplane Mode</p>
+                                        <div className={`Toggle ${settingsReducer.airplaneMode ? 'active' : ''}`} onClick={settingsReducer.airplaneMode ? () => dispatch(toggleAirplaneModeOff()) : () => dispatch(toggleAirplaneModeOn())}></div>
                                     </div>
-                                )}
+                                    {settingsReducer.wifi ? (
+                                        <>
+                                            <p className='font-bold' style={{ marginBottom: '30px' }}>Visible Networks</p>
+                                            <div className='VisibleNetworks'>
+                                                {wifis.map((i) => 
+                                                    <>
+                                                        {i.connected ? (
+                                                            <div className='VisibleNetworksItem' onMouseDown={mouseDown} onMouseUp={mouseUp}>
+                                                                <p>{i.name}</p>
+                                                                <div className='VisibleNetworksIcon'>
+                                                                    {i.connected ? <i className='fa-solid fa-check'></i> : ''}
+                                                                    {i.private ? <i className='fa-solid fa-lock'></i> : ''}
+                                                                    {i.status == 'good' ? <i className='fa-solid fa-wifi'></i> : i.status == 'fair' ? <i className='fa-duotone fa-wifi-fair'></i> : i.status == 'weak' ? <i className='fa-duotone fa-wifi-weak'></i> : ''}
+                                                                </div>
+                                                            </div>
+                                                        ) : (
+                                                            <div className='VisibleNetworksItem'>
+                                                                <p>{i.name}</p>
+                                                                <div className='VisibleNetworksIcon'>
+                                                                    {i.connected ? <i className='fa-solid fa-check'></i> : ''}
+                                                                    {i.private ? <i className='fa-solid fa-lock'></i> : ''}
+                                                                    {i.status == 'good' ? <i className='fa-solid fa-wifi'></i> : i.status == 'fair' ? <i className='fa-duotone fa-wifi-fair'></i> : i.status == 'weak' ? <i className='fa-duotone fa-wifi-weak'></i> : ''}
+                                                                </div>
+                                                            </div>
+                                                        )}
+                                                    </>
+                                                )}
+                                            </div>
+                                        </>
+                                    ) : (
+                                        <div className='StatusWifiFalse'>
+                                            <p>To get access to Internet connection, please turn on the Wi-Fi.</p>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </>
                 )
 			case 'Appearance':
 				return (
@@ -621,6 +650,41 @@ export default function Settings(){
                                         <ActMenu style={{ zIndex: '1', width: '200px', transform: 'translate(415px, 30px)' }} className={legacyApplicationsMenu ? 'active' : ''} ref={legacyAppsMenuRef}>
                                             <ActMenuSelector title='Default' active></ActMenuSelector>
                                         </ActMenu>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )
+			case 'Widgets':
+				return (
+                    <div className='WidgetsWrapper'>
+                        <div className='Widgets'>
+                            <div className='CurrentWidgets'>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '30px' }}>
+                                    <p className='font-bold'>Current widgets</p>
+                                    <i className='fa-regular fa-plus WidgetsButton'></i>
+                                </div>
+                                <div style={{ width: '649.516px', display: 'flex' }}>
+                                    <div className='WidgetsContainer'>
+                                        <div className="ClockWidget active default">
+                                            <div
+                                            className="Hour"
+                                            style={{
+                                                transform: 'rotateZ(300deg)'
+                                            }}
+                                            />
+                                            <div
+                                            className="Min"
+                                            style={{
+                                                transform: 'rotateZ(60deg)'
+                                            }}
+                                            />
+                                            <span className="Number twelve">12</span>
+                                            <span className="Number three">3</span>
+                                            <span className="Number six">6</span>
+                                            <span className="Number nine">9</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -803,6 +867,24 @@ export default function Settings(){
                     </div>
                 </TopBar>
                 <WindowBody>
+                    <div className={`BlackScr ${shareWifi ? 'active' : ''}`}>
+                        <div className='WifiSharing'>
+                            <div className='WindowTopBar'>
+                                <p className='WindowTopBarTitle'>Wi-Fi Sharing</p>
+                                <div class="WindowTopBarInteractionContainer">
+                                    <div class="WindowTopBarInteraction close" onClick={() => setShareWifi(false)}>
+                                        <i class="fa-solid fa-xmark fa-lg"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="WindowBodyDefault">
+                                <div className='WindowBodyContent'>
+                                    <p style={{ marginBottom: '30px' }} className='font-bold'>BreezeOS</p>
+                                    <img width='auto' height={300} src={Wifi1}/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div className='Settings'>
                         <div className='SettingsSection'>
                             <div style={{ width: '295px', height: '100%' }}>

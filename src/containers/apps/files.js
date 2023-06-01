@@ -929,6 +929,10 @@ export default function Files(){
 		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>Untitled-1.txt</p>
 		                                </div>
+		                                <div className='FilesItem'>
+		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-cpp.svg' width={iconSize} height={iconSize}/>
+		                                    <p className='FilesName'>hello.cpp</p>
+		                                </div>
 		                        </div>
 				)
 			case '/home/localhost/Downloads':

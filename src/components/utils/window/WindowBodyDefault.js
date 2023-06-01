@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './Window.scss';
 
-export default function WindowBodyDefault({ type, title, content, children }) {
-  switch(type){
+export default function WindowBodyDefault(props) {
+  switch(props.type){
     case "critical":
       return (
         <div className='WindowBodyDefault'>
@@ -11,11 +11,11 @@ export default function WindowBodyDefault({ type, title, content, children }) {
               <i class="fa-regular fa-xmark"></i>
             </div>
             <div className='WindowBodyRight' style={{ marginLeft: "10px" }}>
-              <p className='WindowBodyTitle'>{title}</p>
-              <p className='WindowBodyContent'>{content}</p>
+              <p className='WindowBodyTitle'>{props.title}</p>
+              <p className='WindowBodyContent'>{props.content}</p>
             </div>
           </div>
-          {children}
+          {props.children}
         </div>
       )
     case "exclamation":
@@ -26,11 +26,11 @@ export default function WindowBodyDefault({ type, title, content, children }) {
               <i class="fa-solid fa-exclamation"></i>
             </div>
             <div className='WindowBodyRight' style={{ marginLeft: "10px" }}>
-              <p className='WindowBodyTitle'>{title}</p>
-              <p className='WindowBodyContent'>{content}</p>
+              <p className='WindowBodyTitle'>{props.title}</p>
+              <p className='WindowBodyContent'>{props.content}</p>
             </div>
           </div>
-          {children}
+          {props.children}
         </div>
       )
   }

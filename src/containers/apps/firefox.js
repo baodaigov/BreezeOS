@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { openUrl, closeUrl } from '../../reducers/firefox';
 import '../../components/utils/window/Window.scss';
 import TopBar from '../../components/utils/window/TopBar';
 import WindowBody from '../../components/utils/window/WindowBody';
@@ -8,11 +10,13 @@ import TopBarInteraction from '../../components/utils/window/TopBarInteraction';
 import StartApp from '../../components/startMenu/StartApp';
 
 export const FirefoxApp = () => {
-
+    const dispatch = useDispatch();
+    
     const toggle = () => {
         document.getElementsByClassName('FirefoxApp')[0].classList.add('clicked')
         setTimeout(() => {
             document.getElementsByClassName('firefox')[0].classList.add('active');
+            dispatch(openUrl('https://breezeos.github.io'));
         }, 500);
     };
     
@@ -30,6 +34,7 @@ export const FirefoxApp = () => {
 };
 
 export const FirefoxStartApp = () => {
+    const dispatch = useDispatch();
     
     const toggle = () => {
         document.getElementsByClassName('StartMenuWrapper')[0].classList.remove('active');
@@ -38,6 +43,7 @@ export const FirefoxStartApp = () => {
         document.getElementsByClassName('FirefoxApp')[0].classList.add('clicked')
         setTimeout(() => {
             document.getElementsByClassName('firefox')[0].classList.add('active');
+            dispatch(openUrl('https://breezeos.github.io'));
         }, 500);
     };
 
@@ -47,18 +53,10 @@ export const FirefoxStartApp = () => {
 }
 
 export default function Firefox() {
-
     const FirefoxWindow = () => {
-        const [url, setUrl] = useState('');
+        const url = useSelector(state => state.firefox.url);
+        const dispatch = useDispatch();
         const [hist, setHist] = useState(["https://breezeos.github.io", "https://breezeos.github.io"]);
-
-        useEffect(() => {
-
-            document.getElementById('firefox').onclick = () => {
-                setUrl('https://breezeos.github.io')
-            }
-
-        }, []);
         
         const isValidURL = (string) => {
             var res = string.match(
@@ -81,18 +79,8 @@ export default function Firefox() {
         
                 e.target.value = qry;
                 setHist([hist[0], qry]);
-                setUrl(qry);
+                dispatch(openUrl(qry));
             }
-        }
-
-        const back = (e) => {
-            setUrl(hist[0]);
-            e.target.value = url;
-        }
-
-        const forward = (e) => {
-            setUrl(hist[1]);
-            e.target.value = url;
         }
     
         function reload(){
@@ -105,7 +93,7 @@ export default function Firefox() {
             document.getElementsByClassName('firefox')[0].classList.remove('active');
             document.getElementById('firefox').classList.remove('clicked');
             setTimeout(() => {
-                setUrl('');
+                dispatch(closeUrl());
                 document.getElementById('ffsearch').value = '';
             }, 300);
         }
@@ -131,8 +119,8 @@ export default function Firefox() {
                     <div className='TabBar'>
                         <div className='TabBarItem TabSearchItem' style={{ width: '700px' }}>
                             <div className='TabBarInteraction'>
-                                <i className="fa-regular fa-chevron-left" onClick={back}></i>
-                                <i className="fa-regular fa-chevron-right" onClick={forward}></i>
+                                <i className="fa-regular fa-chevron-left" onClick={() => dispatch(openUrl(hist[0]))}></i>
+                                <i className="fa-regular fa-chevron-right" onClick={() => dispatch(openUrl(hist[1]))}></i>
                                 <i className="fa-regular fa-rotate-right" onClick={reload}></i>
                             </div>
                             <input className='TabSearch' id='ffsearch' type='text' spellCheck='false' placeholder='Search with Google or enter address' onKeyDown={action}/>

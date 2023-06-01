@@ -6,6 +6,7 @@ const initialState = {
     wifi: true,
     bluetooth: false,
     themeLight: false,
+    boldText: false
 }
 
 export const settingsSlice = createSlice({
@@ -37,10 +38,18 @@ export const settingsSlice = createSlice({
         toggleDarkMode: state => {
             state.themeLight = false;
             document.getElementsByClassName('Desktop')[0].classList.remove('lightMode');
+        },
+        enableBoldText: state => {
+            state.boldText = true;
+            document.getElementsByClassName('Desktop')[0].classList.add('isBold');
+        },
+        disableBoldText: state => {
+            state.boldText = false;
+            document.getElementsByClassName('Desktop')[0].classList.remove('isBold');
         }
     },
 });
 
-export const { setDeviceName, toggleAirplaneModeOff, toggleAirplaneModeOn, toggleWifi, toggleBluetooth, toggleLightMode, toggleDarkMode } = settingsSlice.actions
+export const { setDeviceName, toggleAirplaneModeOff, toggleAirplaneModeOn, toggleWifi, toggleBluetooth, toggleLightMode, toggleDarkMode, enableBoldText, disableBoldText } = settingsSlice.actions
 
 export default settingsSlice.reducer

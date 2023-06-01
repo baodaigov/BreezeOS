@@ -12,6 +12,7 @@ import { CalculatorStartApp } from '../../containers/apps/calculator';
 import { TextEditorStartApp } from '../../containers/apps/texteditor';
 import { SoftwareStoreStartApp } from '../../containers/apps/softwarestore';
 import { CalendarStartApp } from '../../containers/apps/calendar';
+import { VSCodeStartApp } from '../../containers/apps/vscode';
 
 function useOutsideAlerter(ref) {
   useEffect(() => {
@@ -53,11 +54,6 @@ export default function StartMenu(){
             "id": "githubdesktop"
         },
         {
-            "name": "Visual Studio Code",
-            "icon": "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/visual-studio-code.svg",
-            "id": "vscode"
-        },
-        {
             "name": "Vim",
             "icon": "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/vim.svg",
             "id": "vim"
@@ -97,6 +93,7 @@ export default function StartMenu(){
                         <TextEditorStartApp/>
                         <TerminalStartApp/>
                         <SoftwareStoreStartApp/>
+                        <VSCodeStartApp/>
                         {items.map(i => <StartApp key={i.id} icon={i.icon} name={i.name} onClick={openApp}/>)}
                     </div>
                 </div>

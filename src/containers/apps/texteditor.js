@@ -6,6 +6,7 @@ import DockItem from '../../components/DockItem';
 import './assets/texteditor.scss';
 import TopBarInteraction from '../../components/utils/window/TopBarInteraction';
 import StartApp from '../../components/startMenu/StartApp';
+import Sound1 from '../../sounds/Oxygen-Sys-App-Error-Critical.mp3';
 
 export const TextEditorApp = () => {
 
@@ -48,8 +49,10 @@ export const TextEditorStartApp = () => {
 
 export default function TextEditor() {
     const TextEditorWindow = () => {
-        const [changes, saveChanges] = useState(false);
+        const [changes, saveChanges] = useState(true);
         const [min, isMin] = useState(false);
+        const [msgboxChanges, displayMsgBoxChanges] = useState(false);
+        const sound1 = new Audio(Sound1);
 
         function close(){
             document.getElementsByClassName('texteditor')[0].classList.remove('active');
@@ -61,18 +64,54 @@ export default function TextEditor() {
             isMin(!min)
         }
 
+        function saveChangesAndExit(){
+            saveChanges(true);
+            displayMsgBoxChanges(false);
+            close();
+        }
+
+        function dontSaveChangesAndExit(){
+            saveChanges(false);
+            displayMsgBoxChanges(false);
+            close();
+        }
+
+        function saveChangesBeforeExit(){
+            displayMsgBoxChanges(true);
+            sound1.play();
+        }
+	
         useEffect(() => {
             document.getElementById('textEditor').addEventListener('keydown', e => {
+                saveChanges(false);
+
                 if(e.ctrlKey && e.keyCode === 115 || e.ctrlKey && e.keyCode === 83){
                     e.preventDefault();
-                    saveChanges(!changes);
-                    console.log('ok')
+                    saveChanges(true);
                 }
             })
         }, [])
 
         return (
             <>
+                <div className={`SaveChanges ${msgboxChanges ? 'active' : ''}`}>
+                    <div className='WindowTopBar'>
+                        <p className='WindowTopBarTitle'>Save & Exit</p>
+                        <div class="WindowTopBarInteractionContainer">
+                            <div class="WindowTopBarInteraction close" onClick={() => displayMsgBoxChanges(false)}>
+                                <i class="fa-solid fa-xmark fa-lg"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="WindowBodyDefault">
+                        <p class="WindowBodyContent">Save changes to hello.cpp and exit?</p>
+                        <div class="WindowBodyButton">
+                            <button class="Button" onClick={() => displayMsgBoxChanges(false)}>Cancel</button>
+                            <button class="Button" onClick={dontSaveChangesAndExit}>No</button>
+                            <button class="Button" onClick={saveChangesAndExit}>Yes</button>
+                        </div>
+                    </div>
+                </div>
                 <TopBar title={`${changes ? '' : '*'}hello.cpp – Text Editor`} onDblClick={minimize}>
                     <div className='TabBarWrapper'>
                         <div className='TabBar' style={{ display: 'flex', flexDirection: 'row-reverse', justifyContent: 'space-between' }}>
@@ -89,7 +128,7 @@ export default function TextEditor() {
                     <div className='TopBarInteractionWrapper' style={{ display: 'flex' }}>
                         <TopBarInteraction action='hide'/>
                         <TopBarInteraction action={min ? 'max' : 'min'} onMinMax={minimize}/>
-                        <TopBarInteraction action='close' onClose={close}/>
+                        <TopBarInteraction action='close' onClose={changes == true ? close : saveChangesBeforeExit}/>
                     </div>
                 </TopBar>
                 <WindowBody>

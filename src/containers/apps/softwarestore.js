@@ -748,7 +748,7 @@ export default function SoftwareStore() {
                             <div className='SoftwareTab'>
                                 {search ? (
                                     <div className='SoftwareNav'>
-                                        <input className='SoftwareSearchbar' id='softwaresearch' spellCheck={false} placeholder='Search apps...'/>
+                                        <input className='SoftwareSearchbar' id='softwaresearch' spellCheck={false} placeholder='Search apps...' autoFocus='1'/>
                                         <i className='fa-regular fa-xmark CloseSearchbar' onClick={() => onSearch(!search)}></i>
                                     </div>
                                 ) : (

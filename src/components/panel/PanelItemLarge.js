@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import settings, { toggleAirplaneModeOff, toggleAirplaneModeOn, toggleBluetooth, toggleWifi, toggleLightMode, toggleDarkMode} from '../../reducers/settings';
+import settings, { toggleAirplaneModeOff, toggleAirplaneModeOn, toggleBluetooth, toggleWifi, toggleLightMode, toggleDarkMode, enableBoldText, disableBoldText } from '../../reducers/settings';
 import './Panel.scss';
 
 const PanelItemLarge = ({ type }) => {
@@ -94,10 +94,19 @@ const PanelItemLarge = ({ type }) => {
                 )
             case "bold-text":
                 return (
-                    <div className={`PanelItemLarge font-bold ${isActive ? "" : "focused"}`} onClick={boldText}>
-                        <i className="fa-solid fa-b"></i>
-                        Bold Text
-                    </div>
+                    <>
+                        {settingsReducer.boldText ? (
+                            <div className='PanelItemLarge font-bold focused' onClick={() => dispatch(disableBoldText())}>
+                                <i className="fa-solid fa-b"></i>
+                                Bold Text
+                            </div>
+                        ) : (
+                            <div className='PanelItemLarge font-bold' onClick={() => dispatch(enableBoldText())}>
+                                <i className="fa-solid fa-b"></i>
+                                Bold Text
+                            </div>
+                        )}
+                    </>
                 )
             default:
                 return (

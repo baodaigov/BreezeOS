@@ -158,10 +158,7 @@ export default function Clock() {
         }
 
         function mouseDown(){
-            mouseHold = window.setTimeout(() => {
-                navigator.vibrate(200);
-                showAlarmSettings(true);
-            }, 800);
+            mouseHold = window.setTimeout(() => showAlarmSettings(true), 800);
         }
 
         function editAlarm(){

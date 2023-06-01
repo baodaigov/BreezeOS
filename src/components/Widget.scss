@@ -1,0 +1,9 @@
+.Widget {
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    display: flex;
+    flex-direction: column;
+
+    & > * {margin-bottom:20px}
+}

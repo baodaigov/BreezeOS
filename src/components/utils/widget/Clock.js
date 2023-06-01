@@ -2,13 +2,16 @@ import { useEffect, useState, useRef } from "react";
 import './Clock.scss';
 import Draggable from 'react-draggable';
 import ActMenu, { ActMenuSelector } from "../menu";
+import { useSelector, useDispatch } from "react-redux";
+import { removeClock, displaySeconds } from "../../../reducers/widget";
 
 const Clock = () => {
   const [hour, setHour] = useState(null);
   const [min, setMin] = useState(null);
   const [sec, setSec] = useState(null);
   const [contextMenuEnabled, setContextMenuEnabled] = useState(false);
-  const [displaySeconds, setDisplaySeconds] = useState(false);
+  const dispatch = useDispatch();
+  const clock = useSelector(state => state.widget.clock);
 
   useEffect(() => {
     setInterval(() => {
@@ -48,21 +51,17 @@ const Clock = () => {
 
   function displayseconds(){
     setContextMenuEnabled(false);
-    setDisplaySeconds(!displaySeconds)
-  }
-
-  function close(){
-    document.getElementsByClassName('ClockWidget')[0].classList.remove('active');
+    dispatch(displaySeconds(!clock.seconds));
   }
   
   return (
     <Draggable>
-      <div className="ClockWidget active" onContextMenu={onContextMenu}>
+      <div className={`ClockWidget ${clock.active ? 'active' : ''} ${clock.style}`} onContextMenu={onContextMenu}>
         <ActMenu style={{ position: 'relative', zIndex: '10001', top: '100px', right: '100px' }} className={contextMenuEnabled ? 'active' : ''} ref={contextMenuRef}>
           <ActMenuSelector title='Change style'></ActMenuSelector>
-          {displaySeconds ? <ActMenuSelector title='Display seconds' active onClick={displayseconds}></ActMenuSelector> : <ActMenuSelector title='Display seconds' onClick={displayseconds}></ActMenuSelector>} 
+          {clock.seconds ? <ActMenuSelector title='Display seconds' active onClick={displayseconds}></ActMenuSelector> : <ActMenuSelector title='Display seconds' onClick={displayseconds}></ActMenuSelector>} 
         </ActMenu>
-        <div className="Close" onClick={close}>
+        <div className="Close" onClick={() => dispatch(removeClock())}>
           <i class="fa-solid fa-xmark"></i>
         </div>
         <div
@@ -78,7 +77,7 @@ const Clock = () => {
           }}
         />
         <div
-          className={`Sec ${displaySeconds ? 'active' : ''}`}
+          className={`Sec ${clock.seconds ? 'active' : ''}`}
           style={{
             transform: `rotateZ(${sec}deg)`
           }}

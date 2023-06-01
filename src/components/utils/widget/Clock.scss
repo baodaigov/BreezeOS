@@ -1,13 +1,10 @@
 .ClockWidget {
-  position: absolute;
-  top: 5px;
-  right: 15px;
   width: 200px;
   height: 200px;
   border-radius:999px;
-  background-color: #d5e3ff;
-  opacity: 0;
-  pointer-events: none;
+  display: none;
+
+  &.active {display:block}
 
   .ActMenu {
     transition: opacity .2s ease!important;
@@ -36,18 +33,12 @@
     }
   }
 
-  &.active {
-    opacity: 1;
-    pointer-events: all;
-  }
-
   .Hour {
     position: absolute;
     width: 10px;
-    height: 70px;
-    background: #222;
+    height: 80px;
     border-radius: 999px;
-    top: 30px;
+    top: 20px;
     left: 93px;
     transform-origin: bottom;
     z-index: 10000;
@@ -57,7 +48,6 @@
     position: absolute;
     width: 10px;
     height: 90px;
-    background: #222;
     border-radius: 999px;
     top: 10px;
     left: 47%;
@@ -72,8 +62,7 @@
     display: none;
     position: absolute;
     width: 10px;
-    height: 93px;
-    background: #222;
+    height: 95px;
     border-radius: 999px;
     top: 7px;
     left: 46%;
@@ -81,32 +70,54 @@
     z-index: 10000;
   }
 
-}
-
-.Number {
-  font-weight: 800!important;
-  letter-spacing: -3px;
-  position: absolute;
-  color: #97b8ff;
-  font-size: 50px;
-
-  &.twelve {
-    top: 10px;
-    left: 36%;
+  .Number {
+    font-weight: 800!important;
+    letter-spacing: -3px;
+    position: absolute;
+    font-size: 50px;
+  
+    &.twelve {
+      top: 10px;
+      left: 36%;
+    }
+  
+    &.three {
+      right: 13px;
+      top: 35%;
+    }
+  
+    &.six {
+      bottom: 10px;
+      left: 42%;
+    }
+  
+    &.nine {
+      left: 10px;
+      top: 35%;
+    }
   }
 
-  &.three {
-    right: 13px;
-    top: 35%;
+  &.default {
+    background-color: #d5e3ff;
+
+    .Hour, .Min, .Sec {
+      background: #222;
+    }
+
+    .Number {
+      color: darken(#d5e3ff, 10%);
+    }
   }
 
-  &.six {
-    bottom: 10px;
-    left: 42%;
-  }
+  &.matcha {
+    background-color: #d5ffd9;
 
-  &.nine {
-    left: 10px;
-    top: 35%;
+    .Hour, .Min, .Sec {
+      background: #222;
+    }
+
+    .Number {
+      color: darken(#d5ffd9, 10%);
+    }
   }
 }

@@ -4,7 +4,7 @@ $fgcolor: #fff;
 .Header{
     position: relative;
     top: -50px;
-    z-index:999999;
+    z-index:2;
     background: $bgcolor;
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);

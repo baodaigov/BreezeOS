@@ -31,6 +31,114 @@ $actcolor: #8fb6ff;
             height: 100%;
         }
 
+		.BlackScr {
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 1;
+			background: transparentize($bgcolor, 0.3);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			transition: all ease .3s;
+			opacity: 0;
+			pointer-events: none;
+
+			&.active {
+				opacity: 1;
+				pointer-events: all;
+			}
+
+			.WifiSharing {
+				position: absolute;
+				display: flex;
+				flex-direction: column;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%,-50%);
+				border-radius: 5px;
+				overflow: hidden;
+				z-index: inherit;
+				width: 400px;
+				box-shadow: 0px 0 20px #00000089;
+	
+				.WindowTopBar {
+					background: $bgcolor;
+					backdrop-filter: blur(15px);
+					-webkit-backdrop-filter: blur(15px);
+					padding: 7px 10px;
+					display: flex;
+					align-items: center;
+					transition: all ease .3s;
+					border-top-left-radius: 5px;
+					border-top-right-radius: 5px;
+	
+					.WindowTopBarTitle {
+						color: $fgcolor;
+						font-size: 12px;
+						margin: 0;
+						width: 100%;
+					}
+	
+					.WindowTopBarInteractionContainer {
+						display: flex;
+	
+						.WindowTopBarInteraction {
+							display: flex;
+							justify-content: center;
+							align-items: center;
+							margin-left: 7px;
+							border-radius: 9999px;
+							width: 20px;
+							height: 20px;
+							font-size: 11px;
+							color: $fgcolor;
+	
+							&:hover {
+								background: #3b3b3f;
+							}
+			
+							&.close:hover{
+								background: #ff5252;
+							}
+						}
+					}
+				}
+	
+				.WindowBodyDefault {
+					background: $bgcolor;
+					backdrop-filter: blur(15px);
+					-webkit-backdrop-filter: blur(15px);
+					border-bottom-left-radius: 5px;
+					border-bottom-right-radius: 5px;
+					padding: 25px 15px;
+					color: $fgcolor;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					text-align: center;
+			
+					* {
+						margin: 0;
+					}
+			
+					.WindowBodyTitle {
+						font-size: 17px;
+						margin-bottom: 10px;
+						font-weight: 700;
+					}
+			
+					.WindowBodyContent {
+						font-size: 35px;
+					}
+				}
+			}
+		}
+
 		.Toggle {
 			border-radius: 999px;
 			width: 42px;
@@ -864,6 +972,50 @@ $actcolor: #8fb6ff;
 						}
 					}
 
+					.WidgetsWrapper {
+						.Widgets {
+							display: flex;
+							justify-content: center;
+							margin: 0 auto;
+							margin-bottom: 30px;
+							max-width: 70%;
+
+							.CurrentWidgets {
+								display: flex;
+								flex-direction: column;
+								
+								.WidgetsButton {
+									height: 20px;
+									width: 20px;
+									display: flex;
+									justify-content: center;
+									align-items: center;
+									transition: all ease .3s;
+									border-radius: 999px;
+									&:hover {
+										background: transparentize($fgcolor, 0.8);
+									}
+								}
+
+								.WidgetsContainer {
+									display: flex;
+
+									& > * {
+										margin-right: 20px;
+									}
+
+									.ClockWidget {
+										position: relative;
+										top: 0;
+										right: 0;
+										bottom: 0;
+										left: 0;
+									}
+								}
+							}
+						}
+					}
+
 					.DisplaysWrapper {
 						.Displays {
 							display: flex;
@@ -1027,6 +1179,43 @@ $actcolor: #8fb6ff;
 
 .lightMode {
     .settings {
+		.BlackScr {
+			.WifiSharing {
+				.WindowTopBar {
+					background: $fgcolor;
+	
+					.WindowTopBarTitle {
+						color: $bgcolor;
+					}
+	
+					.WindowTopBarInteractionContainer .WindowTopBarInteraction {
+							color: $bgcolor;
+	
+							&:hover {
+								background: #3b3b3f;
+							}
+			
+							&.close:hover{
+								background: #ff5252;
+							}
+						}
+				}
+	
+				.WindowBodyDefault {
+					background: $fgcolor;
+					color: $bgcolor;
+				}
+		  
+				.WindowBodyButton {
+					.Button {
+						background-color: #00000010;
+						color: $bgcolor;
+						&:hover { background-color: #00000020; }
+					}
+				}
+			}
+		}
+
 		.Toggle {
 			background: transparentize($bgcolor, 0.75);
 		}
@@ -1313,7 +1502,7 @@ $actcolor: #8fb6ff;
 
 						&.EditName {
 							.EditNameInput {
-								background: transparentize($bgcolor, 0.8)!important;
+								background: transparentize($bgcolor, 0.85)!important;
 							}
 
 							&.active {

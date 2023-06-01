@@ -11,6 +11,7 @@ import TextEditor from '../../../containers/apps/texteditor';
 import SoftwareStore from '../../../containers/apps/softwarestore';
 import Calendar from '../../../containers/apps/calendar';
 import ImgView from '../../../containers/apps/imgview';
+import VSCode from '../../../containers/apps/vscode';
 
 export default function Window(){
   return (
@@ -25,6 +26,7 @@ export default function Window(){
       <TextEditor/>
       <Terminal/>
       <SoftwareStore/>
+      <VSCode/>
       <ImgView/>
     </div>
   )
