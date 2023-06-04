@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { insertPasswordFor, cancelPassword } from '../../reducers/wifipassword'
-import InsertWiFiPassword from '../msgbox/InsertWifiPassword';
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleAirplaneModeOff, toggleAirplaneModeOn, toggleLightMode, toggleDarkMode, toggleWifi, toggleBluetooth, setDeviceName } from '../../reducers/settings';
 import wallpaper, { changeWallpaper } from '../../reducers/wallpaper';
