@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { insertPasswordFor, cancelPassword } from '../../reducers/wifipassword'
+import InsertWiFiPassword from '../msgbox/InsertWifiPassword';
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleAirplaneModeOff, toggleAirplaneModeOn, toggleLightMode, toggleDarkMode, toggleWifi, toggleBluetooth, setDeviceName } from '../../reducers/settings';
 import wallpaper, { changeWallpaper } from '../../reducers/wallpaper';
@@ -510,7 +512,7 @@ export default function Settings(){
                                                                 </div>
                                                             </div>
                                                         ) : (
-                                                            <div className='VisibleNetworksItem'>
+                                                            <div className='VisibleNetworksItem' onClick={() => dispatch(insertPasswordFor(i.name))}>
                                                                 <p>{i.name}</p>
                                                                 <div className='VisibleNetworksIcon'>
                                                                     {i.connected ? <i className='fa-solid fa-check'></i> : ''}
@@ -813,6 +815,8 @@ export default function Settings(){
         isMin(!min);
     }
 
+    const wp = useSelector(state => state.wifipassword);
+
         return (
             <>
                 {maximumExceeded ? (
@@ -867,8 +871,8 @@ export default function Settings(){
                     </div>
                 </TopBar>
                 <WindowBody>
-                    <div className={`BlackScr ${shareWifi ? 'active' : ''}`}>
-                        <div className='WifiSharing'>
+                    <div className={`BlackScr ${shareWifi ? 'active' : ''} ${wp.active ? 'active' : ''}`}>
+                        <div className={`WifiSharing ${shareWifi ? 'active' : ''}`}>
                             <div className='WindowTopBar'>
                                 <p className='WindowTopBarTitle'>Wi-Fi Sharing</p>
                                 <div class="WindowTopBarInteractionContainer">
@@ -881,6 +885,31 @@ export default function Settings(){
                                 <div className='WindowBodyContent'>
                                     <p style={{ marginBottom: '30px' }} className='font-bold'>BreezeOS</p>
                                     <img width='auto' height={300} src={Wifi1}/>
+                                </div>
+                            </div>
+                        </div>
+                        <div className={`InsertWifiPassword ${wp.active ? 'active' : ''}`}>
+                            <div className='WindowTopBar'>
+                                <p className='WindowTopBarTitle'></p>
+                                <div class="WindowTopBarInteractionContainer">
+                                    <div class="WindowTopBarInteraction close" onClick={() => dispatch(cancelPassword())}>
+                                        <i class="fa-solid fa-xmark fa-lg"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="WindowBodyDefault">
+                                <div className='WindowBodyContent'>
+                                    <div className='WindowBodyIcon'>
+                                        <i class="fa-regular fa-key"></i>
+                                    </div>
+                                    <div style={{ marginLeft: '10px' }}>
+                                        <p>Connect to Wi-Fi "{wp.passwordFor}"</p>
+                                        <input type='password' autoComplete={false} spellCheck={false} className='InputPassword'/>
+                                    </div>
+                                </div>
+                                <div class="WindowBodyButton">
+                                    <button class="Button" onClick={() => dispatch(cancelPassword())}>Cancel</button>
+                                    <button class="Button">Connect</button>
                                 </div>
                             </div>
                         </div>
