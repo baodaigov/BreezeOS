@@ -40,7 +40,7 @@ $fgcolor: #fff;
         align-items: center;
     }
 
-    .Header-item:hover{
+    .Header-item:active{
         background: #ffffff10;
     }
 
@@ -49,6 +49,9 @@ $fgcolor: #fff;
         align-items: center;
         i {
             margin: 0 5px;
+        }
+        &.active {
+            background: #ffffff10;
         }
     }
 
