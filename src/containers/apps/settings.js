@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { insertPasswordFor, cancelPassword } from '../../reducers/wifipassword'
+import { insertPasswordFor, cancelPassword, setInputPassword, setPasswordDisable, displayPassword, setWrongPassword } from '../../reducers/wifipassword'
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleAirplaneModeOff, toggleAirplaneModeOn, toggleLightMode, toggleDarkMode, toggleWifi, toggleBluetooth, setDeviceName } from '../../reducers/settings';
 import wallpaper, { changeWallpaper } from '../../reducers/wallpaper';
@@ -803,6 +803,7 @@ export default function Settings(){
     }
 
     const [min, isMin] = useState(false);
+    const [wrongPasswordAni, setWrongPasswordAni] = useState(false);
     
     function close(){
         document.getElementById('settings').classList.remove('clicked');
@@ -814,8 +815,23 @@ export default function Settings(){
         isMin(!min);
     }
 
-    const wp = useSelector(state => state.wifipassword);
+    function submitPassword(){
+        dispatch(setPasswordDisable(true));
+        dispatch(setWrongPassword(false));
+        setTimeout(() => {
+            dispatch(setPasswordDisable(false));
+            dispatch(setWrongPassword(true));
+            setWrongPasswordAni(true);
+        }, 4000);
+        setTimeout(() => setWrongPasswordAni(false), 4550);
+    }
 
+    function inputPassword(e){
+        dispatch(setInputPassword(e.target.value));
+        if(e.key === 'Enter') submitPassword();
+    }
+
+    const wp = useSelector(state => state.wifipassword);
         return (
             <>
                 {maximumExceeded ? (
@@ -901,14 +917,17 @@ export default function Settings(){
                                     <div className='WindowBodyIcon'>
                                         <i class="fa-regular fa-key"></i>
                                     </div>
-                                    <div style={{ marginLeft: '10px' }}>
-                                        <p>Connect to Wi-Fi "{wp.passwordFor}"</p>
-                                        <input type='password' autoComplete={false} spellCheck={false} className='InputPassword'/>
+                                    <div style={{ marginLeft: '10px', width: '100%' }}>
+                                        <p className='font-bold' style={{ fontSize: '17px' }}>Connect to Wi-Fi "{wp.passwordFor}"</p>
+                                        <div className={`PasswordContainer ${wp.disabled ? 'disabled' : ''}`}>
+                                            <input type={wp.isShow ? 'text' : 'password'} id='password' placeholder='Password' autoComplete={false} spellCheck={false} autofocus='1' value={wp.value} onInput={inputPassword} className={`InputPassword ${wp.isWrong ? 'wrongPassword' : ''} ${wrongPasswordAni ? 'activeAnimation' : ''}`}/>
+                                            <i class={`fa-regular ${wp.isShow ? 'fa-eye-slash' : 'fa-eye'} displayPassword ${wp.value == '' ? 'disabled' : ''}`} onClick={() => wp.isShow ? dispatch(displayPassword(false)) : dispatch(displayPassword(true))}></i>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="WindowBodyButton">
-                                    <button class="Button" onClick={() => dispatch(cancelPassword())}>Cancel</button>
-                                    <button class="Button">Connect</button>
+                                <div class={`WindowBodyButton`}>
+                                    <button class={`Button ${wp.disabled ? 'disabled' : ''}`} onClick={() => dispatch(cancelPassword())}>Cancel</button>
+                                    <button class={`Button ${wp.value.length < 8 ? 'disabled' : ''} ${wp.disabled ? 'disabled' : ''}`} onClick={submitPassword}>Connect</button>
                                 </div>
                             </div>
                         </div>
