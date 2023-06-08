@@ -128,7 +128,7 @@ export default function TextEditor() {
                     <div className='TopBarInteractionWrapper' style={{ display: 'flex' }}>
                         <TopBarInteraction action='hide'/>
                         <TopBarInteraction action={min ? 'max' : 'min'} onMinMax={minimize}/>
-                        <TopBarInteraction action='close' onClose={changes == true ? close : saveChangesBeforeExit}/>
+                        <TopBarInteraction action='close' onClose={changes === true ? close : saveChangesBeforeExit}/>
                     </div>
                 </TopBar>
                 <WindowBody>

@@ -23,48 +23,37 @@ const PanelItemLarge = ({ type }) => {
 	switch (type) {
             case "wifi":
                 return (
-                    <>
-                        {settingsReducer.wifi ? (
-                            <div className='PanelItemLarge font-bold focused' onClick={() => dispatch(toggleWifi())}>
-                                <i className='fa-solid fa-wifi'></i>
-                                BreezeOS
-                            </div>
-                        ) : (
-                            <div className='PanelItemLarge font-bold' onClick={() => dispatch(toggleWifi())}>
-                                <i className='fa-solid fa-wifi-slash'></i>
-                                Wi-Fi
-                            </div>
-                        )}
-                    </>
+                    <div className={`PanelItemLarge ${settingsReducer.wifi ? 'focused' : ''}`} onClick={() => dispatch(toggleWifi())}>
+                        <i className={`fa-solid ${settingsReducer.wifi ? 'fa-wifi' : 'fa-wifi-slash'}`}></i>
+                        <p className={`${settingsReducer.wifi ? 'font-medium' : 'font-bold'} activeAnimation ${settingsReducer.wifi ? 'minimize' : ''}`}>Wi-Fi</p>
+                        <p className={`PanelItemName ${settingsReducer.wifi ? 'active' : ''} font-bold`}>BreezeOS</p>
+                        <div className='PanelItemNext'>
+                            <i className='fa-regular fa-chevron-right'></i>
+                        </div>
+                    </div>
                 )
             case "bluetooth":
                 return (
-                    <>
-                        {settingsReducer.bluetooth ? (
-                            <div className='PanelItemLarge font-bold focused' onClick={() => dispatch(toggleBluetooth())}>
-                                <i className="fa-solid fa-bluetooth"></i>
-                                Bluetooth
-                            </div>
-                        ) : (
-                            <div className='PanelItemLarge font-bold' onClick={() => dispatch(toggleBluetooth())}>
-                                <i className="fa-solid fa-bluetooth"></i>
-                                Bluetooth
-                            </div>
-                        )}
-                    </>
+                    <div className={`PanelItemLarge ${settingsReducer.bluetooth ? 'focused' : ''}`} onClick={() => dispatch(toggleBluetooth())}>
+                        <i className="fa-solid fa-bluetooth"></i>
+                        <p className='font-bold'>Bluetooth</p>
+                        <div className='PanelItemNext'>
+                            <i className='fa-regular fa-chevron-right'></i>
+                        </div>
+                    </div>
                 )
             case "dark-mode":
                 return (
                     <>
                         {settingsReducer.themeLight ? (
-                            <div className='PanelItemLarge font-bold' onClick={() => dispatch(toggleDarkMode())}>
+                            <div className='PanelItemLarge' onClick={() => dispatch(toggleDarkMode())}>
                                 <i className="fa-solid fa-circle-half-stroke"></i>
-                                Dark Mode
+                                <p className='font-bold'>Dark Mode</p>
                             </div>
                         ) : (
-                            <div className='PanelItemLarge font-bold focused' onClick={() => dispatch(toggleLightMode())}>
+                            <div className='PanelItemLarge focused' onClick={() => dispatch(toggleLightMode())}>
                                 <i className="fa-solid fa-circle-half-stroke"></i>
-                                Dark Mode
+                                <p className='font-bold'>Dark Mode</p>
                             </div>
                         )}
                     </>
@@ -73,37 +62,37 @@ const PanelItemLarge = ({ type }) => {
                 return (
                     <>
                         {settingsReducer.airplaneMode ? (
-                            <div className='PanelItemLarge font-bold focused' onClick={() => dispatch(toggleAirplaneModeOff())}>
+                            <div className='PanelItemLarge focused' onClick={() => dispatch(toggleAirplaneModeOff())}>
                                 <i className="fa-solid fa-plane"></i>
-                                Airplane Mode
+                                <p className='font-bold'>Airplane Mode</p>
                             </div>
                         ) : (
-                            <div className='PanelItemLarge font-bold' onClick={() => dispatch(toggleAirplaneModeOn())}>
+                            <div className='PanelItemLarge' onClick={() => dispatch(toggleAirplaneModeOn())}>
                                 <i className="fa-solid fa-plane"></i>
-                                Airplane Mode
+                                <p className='font-bold'>Airplane Mode</p>
                             </div>
                         )}
                     </>
                 )
             case "night-light":
                 return (
-                    <div className={`PanelItemLarge font-bold ${isActive ? "" : "focused"}`} onClick={nightShift}>
+                    <div className={`PanelItemLarge ${isActive ? "" : "focused"}`} onClick={nightShift}>
                         <i className="fa-regular fa-brightness"></i>
-                        Night Light
+                        <p className='font-bold'>Night Light</p>
                     </div>
                 )
             case "bold-text":
                 return (
                     <>
                         {settingsReducer.boldText ? (
-                            <div className='PanelItemLarge font-bold focused' onClick={() => dispatch(disableBoldText())}>
+                            <div className='PanelItemLarge focused' onClick={() => dispatch(disableBoldText())}>
                                 <i className="fa-solid fa-b"></i>
-                                Bold Text
+                                <p className='font-bold'>Bold Text</p>
                             </div>
                         ) : (
-                            <div className='PanelItemLarge font-bold' onClick={() => dispatch(enableBoldText())}>
+                            <div className='PanelItemLarge' onClick={() => dispatch(enableBoldText())}>
                                 <i className="fa-solid fa-b"></i>
-                                Bold Text
+                                <p className='font-bold'>Bold Text</p>
                             </div>
                         )}
                     </>

@@ -548,9 +548,12 @@ export default function Settings(){
                             <div className='Bluetooth'>
                                 <div style={{ display: 'flex', flexDirection: 'column', width: '649.516px', height: '100%' }}>
                                     {settingsReducer.bluetooth ? (
-                                        <>
-                                            <p className='font-bold' style={{ marginBottom: '30px' }}>Visible Networks</p>
-                                        </>
+                                        <div className='BluetoothDevices'>
+                                            <p className='Description'>Now discoverable as "{settingsReducer.deviceName}".</p>
+                                            <div style={{ marginTop: '30px' }}>
+                                                <p className='font-bold' style={{ marginBottom: '30px' }}>Other Devices</p>
+                                            </div>
+                                        </div>
                                     ) : (
                                         <div className='StatusBluetoothFalse'>
                                             <i className='fa-solid fa-bluetooth'></i>

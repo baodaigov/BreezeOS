@@ -124,7 +124,6 @@ export default function PowerMenuInteraction(props){
         }, 4900);
 
         setTimeout(() => {
-            dispatch(pushItem(<pre>Removed containers/msgbox/BatteryLow.js... OK</pre>));
             dispatch(pushItem(<pre>Removed containers/msgbox/MissingPermissionCamera.js... OK</pre>));
             dispatch(pushItem(<pre>Removed containers/msgbox/UnsuitableBrowser.js... OK</pre>));
         }, 5200);
@@ -217,14 +216,19 @@ export default function PowerMenuInteraction(props){
     function Lock(){
         document.getElementsByClassName('Menu')[0].classList.remove('active');
         document.getElementsByClassName('PowerMenu')[0].classList.remove('active');
-    
+
         setTimeout(() => {
-            document.getElementsByClassName('LockScreen')[0].classList.add('active');
+            document.getElementsByClassName('Header')[0].classList.remove('active');
+            document.getElementsByClassName('Dock')[0].classList.remove('active');
         }, 200);
     
         setTimeout(() => {
+            document.getElementsByClassName('LockScreen')[0].classList.add('active');
+        }, 400);
+
+        setTimeout(() => {
             document.getElementsByClassName('LockScreenWrapper')[0].classList.add('active');
-        }, 250);
+        }, 500);
     }
     
     document.addEventListener('keydown', e => {
@@ -350,10 +354,6 @@ export default function PowerMenuInteraction(props){
             dispatch(pushItem(<pre>Added headers/Task.js... OK</pre>));
             dispatch(pushItem(<pre>Added headers/Time.js... OK</pre>));
         }, 26400);
-
-        setTimeout(() => {
-            dispatch(pushItem(<pre>Added containers/msgbox/BatteryLow.js... OK</pre>));
-        }, 26500);
 
         setTimeout(() => {
             dispatch(pushItem(<pre>Added containers/msgbox/MissingPermissionCamera.js... OK</pre>));

@@ -78,7 +78,6 @@ const Header = props => {
                         <p className={`BatteryStatusLevel font-bold ${batteryState.charging ? "in-charge" : ""}`}>{isNaN(batteryPercent) ? '-' : batteryPercent + '%'}</p>
                     </div>
                     {settingsReducer.airplaneMode ? <i key={Math.random()} className='fa-solid fa-plane'></i> : ''}
-                    {settingsReducer.bluetooth ? <i key={Math.random()} className='fa-solid fa-bluetooth'></i> : ''}
                     {settingsReducer.wifi ? <i key={Math.random()} className='fa-solid fa-wifi'></i> : ''}
                     <i key={Math.random()} className='fa-solid fa-volume'></i>
                 </Task>

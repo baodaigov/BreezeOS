@@ -7,14 +7,12 @@ $fgcolor: #e2e2e2;
     background-size: cover;
     background-position: center;
     position: absolute;
-    bottom: 1000px;
     opacity: 0;
     pointer-events: none;
     z-index: 1000000;
     transition: all ease .5s;
 
     &.active {
-        bottom: 0;
         opacity: 1;
         pointer-events: all;
     }

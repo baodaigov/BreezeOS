@@ -1006,6 +1006,12 @@ $actcolor: #8fb6ff;
 							justify-content: center;
 							margin: 0 auto;
 							height: 100%;
+
+							.BluetoothDevices {
+								.Description {
+									color: transparentize($fgcolor, 0.8);
+								}
+							}
 		
 							.StatusBluetoothFalse {
 								height: 100%;
@@ -1732,7 +1738,27 @@ $actcolor: #8fb6ff;
 
 			.WiFi {
 				.StatusWifiFalse {
-					color: transparentize($bgcolor, 0.75)!important;
+					height: 100%;
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					align-items: center;
+					text-align: center;
+
+					i {
+						font-size: 70px;
+						margin-bottom: 40px;
+						color: transparentize($bgcolor, 0.7)!important;
+					}
+
+					.Title {
+						font-size: 40px;
+						margin-bottom: 10px;
+					}
+
+					.Description {
+						color: transparentize($bgcolor, 0.7)!important;
+					}
 				}
 
 				.VisibleNetworks {
@@ -1746,6 +1772,37 @@ $actcolor: #8fb6ff;
 						.VisibleNetworksIcon {
 							i.fa-duotone {--fa-secondary-color: #20202396!important}
 						}
+					}
+				}
+			}
+
+			.Bluetooth {
+				.StatusBluetoothFalse {
+					height: 100%;
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					align-items: center;
+					text-align: center;
+
+					i {
+						font-size: 70px;
+						margin-bottom: 40px;
+						color: transparentize($bgcolor, 0.7)!important;
+					}
+
+					.Title {
+						font-size: 40px;
+						margin-bottom: 10px;
+					}
+
+					.Description {
+						color: transparentize($bgcolor, 0.7)!important;
+					}
+				}
+				.BluetoothDevices {
+					.Description {
+						color: transparentize($bgcolor, 0.7)!important;
 					}
 				}
 			}
