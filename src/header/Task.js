@@ -34,7 +34,7 @@ const Task = props => {
     return (
         <div className={`Task Header-item ${panelActive ? 'active' : ''}`} onMouseDown={() => dispatch(activePanel())} ref={panelRef}>
             {props.children}
-            <Panel style={{ top: "45px", right: "0" }}/>
+            <Panel style={{ top: "45px", right: "0", height: "330px" }}/>
         </div>
     )
 }

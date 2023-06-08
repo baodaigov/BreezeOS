@@ -6,11 +6,12 @@ $fbgcolor: #83aaff;
     position: absolute;
     background: $bgcolor;
     color:$fgcolor;
-    padding: 8px;
+    padding: 0 8px;
     border-radius: 10px;
     width: 350px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     transition: all ease .15s;
     opacity: 0;
     pointer-events: none;
@@ -76,7 +77,7 @@ $fbgcolor: #83aaff;
 
             i {
                 margin: 0 5px;
-                margin-left: 0;
+                margin-left: 0!important;
             }
 
             &.focused{

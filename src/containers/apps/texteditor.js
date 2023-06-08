@@ -82,7 +82,7 @@ export default function TextEditor() {
         }
 	
         useEffect(() => {
-            document.getElementById('textEditor').addEventListener('keydown', e => {
+            document.getElementById('textEditor').addEventListener('input', e => {
                 saveChanges(false);
 
                 if(e.ctrlKey && e.keyCode === 115 || e.ctrlKey && e.keyCode === 83){

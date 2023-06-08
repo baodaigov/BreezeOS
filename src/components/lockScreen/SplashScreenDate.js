@@ -11,7 +11,9 @@ export default class SplashScreenDate extends Component {
     componentDidMount() {
       setInterval(() => {
         this.setState({
-          curDate: new Date().toLocaleDateString()
+          curDate: new Date().toLocaleDateString('en-US', {
+            dateStyle: 'medium'
+          })
         })
       }, 1000)
     }

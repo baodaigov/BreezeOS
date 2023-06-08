@@ -490,7 +490,7 @@ export default function Settings(){
                     <>
                         <div className='WiFiWrapper'>
                             <div className='WiFi'>
-                                <div style={{ display: 'flex', flexDirection: 'column', width: '649.516px' }}>
+                                <div style={{ display: 'flex', flexDirection: 'column', width: '649.516px', height: '100%' }}>
                                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '40px' }}>
                                         <p className='font-bold'>Airplane Mode</p>
                                         <div className={`Toggle ${settingsReducer.airplaneMode ? 'active' : ''}`} onClick={settingsReducer.airplaneMode ? () => dispatch(toggleAirplaneModeOff()) : () => dispatch(toggleAirplaneModeOn())}></div>
@@ -511,22 +511,51 @@ export default function Settings(){
                                                                 </div>
                                                             </div>
                                                         ) : (
-                                                            <div className='VisibleNetworksItem' onClick={() => dispatch(insertPasswordFor(i.name))}>
-                                                                <p>{i.name}</p>
-                                                                <div className='VisibleNetworksIcon'>
-                                                                    {i.connected ? <i className='fa-solid fa-check'></i> : ''}
-                                                                    {i.private ? <i className='fa-solid fa-lock'></i> : ''}
-                                                                    {i.status == 'good' ? <i className='fa-solid fa-wifi'></i> : i.status == 'fair' ? <i className='fa-duotone fa-wifi-fair'></i> : i.status == 'weak' ? <i className='fa-duotone fa-wifi-weak'></i> : ''}
+                                                            <>
+                                                                <div className='VisibleNetworksItem' onClick={() => dispatch(insertPasswordFor(i.name))}>
+                                                                    <p>{i.name}</p>
+                                                                    <div className='VisibleNetworksIcon'>
+                                                                        {i.connected ? <i className='fa-solid fa-check'></i> : ''}
+                                                                        {i.private ? <i className='fa-solid fa-lock'></i> : ''}
+                                                                        {i.status == 'good' ? <i className='fa-solid fa-wifi'></i> : i.status == 'fair' ? <i className='fa-duotone fa-wifi-fair'></i> : i.status == 'weak' ? <i className='fa-duotone fa-wifi-weak'></i> : ''}
+                                                                    </div>
                                                                 </div>
-                                                            </div>
+                                                            </>
                                                         )}
                                                     </>
                                                 )}
+                                                <div className='VisibleNetworksItem'>
+                                                    <p>Connect to Hidden Networks...</p>
+                                                </div>
                                             </div>
                                         </>
                                     ) : (
                                         <div className='StatusWifiFalse'>
-                                            <p>To get access to Internet connection, please turn on the Wi-Fi.</p>
+                                            <i className='fa-solid fa-wifi-slash'></i>
+                                            <p className='Title font-bold'>Wi-Fi Has Turned Off</p>
+                                            <p className='Description'>To get access to Internet connection, please turn on the Wi-Fi.</p>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                    </>
+                )
+			case 'Bluetooth':
+				return (
+                    <>
+                        <div className='BluetoothWrapper'>
+                            <div className='Bluetooth'>
+                                <div style={{ display: 'flex', flexDirection: 'column', width: '649.516px', height: '100%' }}>
+                                    {settingsReducer.bluetooth ? (
+                                        <>
+                                            <p className='font-bold' style={{ marginBottom: '30px' }}>Visible Networks</p>
+                                        </>
+                                    ) : (
+                                        <div className='StatusBluetoothFalse'>
+                                            <i className='fa-solid fa-bluetooth'></i>
+                                            <p className='Title font-bold'>Bluetooth Has Turned Off</p>
+                                            <p className='Description'>To get access to Bluetooth devices, please turn on the Bluetooth.</p>
                                         </div>
                                     )}
                                 </div>
@@ -826,11 +855,6 @@ export default function Settings(){
         setTimeout(() => setWrongPasswordAni(false), 4550);
     }
 
-    function inputPassword(e){
-        dispatch(setInputPassword(e.target.value));
-        if(e.key === 'Enter') submitPassword();
-    }
-
     const wp = useSelector(state => state.wifipassword);
         return (
             <>
@@ -904,14 +928,6 @@ export default function Settings(){
                             </div>
                         </div>
                         <div className={`InsertWifiPassword ${wp.active ? 'active' : ''}`}>
-                            <div className='WindowTopBar'>
-                                <p className='WindowTopBarTitle'></p>
-                                <div class="WindowTopBarInteractionContainer">
-                                    <div class="WindowTopBarInteraction close" onClick={() => dispatch(cancelPassword())}>
-                                        <i class="fa-solid fa-xmark fa-lg"></i>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="WindowBodyDefault">
                                 <div className='WindowBodyContent'>
                                     <div className='WindowBodyIcon'>
@@ -920,7 +936,7 @@ export default function Settings(){
                                     <div style={{ marginLeft: '10px', width: '100%' }}>
                                         <p className='font-bold' style={{ fontSize: '17px' }}>Connect to Wi-Fi "{wp.passwordFor}"</p>
                                         <div className={`PasswordContainer ${wp.disabled ? 'disabled' : ''}`}>
-                                            <input type={wp.isShow ? 'text' : 'password'} id='password' placeholder='Password' autoComplete={false} spellCheck={false} autofocus='1' value={wp.value} onInput={inputPassword} className={`InputPassword ${wp.isWrong ? 'wrongPassword' : ''} ${wrongPasswordAni ? 'activeAnimation' : ''}`}/>
+                                            <input type={wp.isShow ? 'text' : 'password'} id='password' placeholder='Password' autoComplete={false} spellCheck={false} autofocus='1' value={wp.value} onInput={e => dispatch(setInputPassword(e.target.value))} className={`InputPassword ${wp.isWrong ? 'wrongPassword' : ''} ${wrongPasswordAni ? 'activeAnimation' : ''}`}/>
                                             <i class={`fa-regular ${wp.isShow ? 'fa-eye-slash' : 'fa-eye'} displayPassword ${wp.value == '' ? 'disabled' : ''}`} onClick={() => wp.isShow ? dispatch(displayPassword(false)) : dispatch(displayPassword(true))}></i>
                                         </div>
                                     </div>

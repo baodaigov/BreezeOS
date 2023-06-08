@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Wallpaper from './components/Wallpaper';
 import './Desktop.scss';

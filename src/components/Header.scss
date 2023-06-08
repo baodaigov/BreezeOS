@@ -4,16 +4,13 @@ $fgcolor: #fff;
 .Header{
     position: relative;
     top: -50px;
-    z-index:2;
+    z-index: 2;
+    display: flex;
     background: $bgcolor;
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
-    display: flex;
-    justify-content: space-between;
-    font-size: 11.5px;
     padding: 3px 4px;
     transition: all .3s;
-    width: 900px;
     margin: 5px auto;
     border-radius: 999px;
 
@@ -25,66 +22,151 @@ $fgcolor: #fff;
         margin: 0;
     }
 
-    .Header-left {
-      display: flex;
-    }
-
-    .Header-item {
-        padding: 3px 10px;
+    .default {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        font-size: 11.5px;
         color: $fgcolor;
-        background:transparent;
-        width: fit-content;
-        border-radius:999px;
-        transition: ease .05s;
-        display: flex;
-        align-items: center;
-    }
+        transition: all ease .3s;
+        opacity: 0;
+        pointer-events: none;
 
-    .Header-item:active{
-        background: #ffffff10;
-    }
-
-    .Task {
-        display: flex;
-        align-items: center;
-        i {
-            margin: 0 5px;
-        }
         &.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .Header-left {
+            display: flex;
+        }
+
+        .Header-item {
+            padding: 3px 10px;
+            background:transparent;
+            width: fit-content;
+            border-radius:999px;
+            transition: ease .05s;
+            display: flex;
+            align-items: center;
+        }
+
+        .Header-item:active{
             background: #ffffff10;
         }
-    }
 
-    .BatteryStatus {
-        background: #3795ff;
-        border-radius: 9999px;
-        padding: 4px 16px;
-        margin: 0 5px;
-        margin-left: 0;
-        display: flex;
-        align-items: center;
-
-        &.low-battery {
-            background: #e46a6a;
+        .Task {
+            display: flex;
+            align-items: center;
+            i {
+                margin: 0 5px;
+            }
+            &.active {
+                background: #ffffff10;
+            }
         }
 
-        .BatteryStatusLevel {
-            color: #202020;
-            font-size: 14px;
+        .BatteryStatus {
+            background: #3795ff;
+            border-radius: 9999px;
+            padding: 4px 16px;
+            margin: 0 5px;
+            margin-left: 0;
+            display: flex;
+            align-items: center;
 
-            &.in-charge::before {
-                content: '\f0e7';
-                font-family: "Font Awesome 6 Pro";
+            &.low-battery {
+                background: #e46a6a;
+            }
+
+            .BatteryStatusLevel {
                 color: #202020;
-                font-size: 12px;
-                margin-right: 5px;
+                font-size: 14px;
+
+                &.in-charge::before {
+                    content: '\f0e7';
+                    font-family: "Font Awesome 6 Pro";
+                    color: #202020;
+                    font-size: 12px;
+                    margin-right: 5px;
+                }
             }
         }
     }
-}
 
-@media screen and (max-width: 911px){
-	.Header {
-		width: auto;
-	}
+    .lowbattery {
+        display: flex;
+        justify-content: space-between;
+        font-size: 13px;
+        color: $fgcolor;
+        padding: 3px 15px;
+        width: 99.2%;
+        transition: all ease .3s;
+        opacity: 0;
+        pointer-events: none;
+        position: absolute;
+        z-index: 1;
+
+        &.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .LowBatteryText {
+            display: flex;
+            align-items: center;
+            padding: 4px 0;
+        }
+
+        .BatteryLevel {
+            padding: 4px 0;
+
+            .BatteryLevelText {
+                color: #e46a6a;
+                font-size: 14px;
+            }
+        }
+    }
+
+    .charging {
+        display: flex;
+        justify-content: space-between;
+        font-size: 13px;
+        color: $fgcolor;
+        padding: 3px 15px;
+        width: 99.2%;
+        transition: all ease .3s;
+        opacity: 0;
+        pointer-events: none;
+        position: absolute;
+        z-index: 1;
+
+        &.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .ChargingText {
+            display: flex;
+            align-items: center;
+            padding: 4px 0;
+        }
+
+        .BatteryLevel {
+            padding: 4px 0;
+
+            .BatteryLevelText {
+                color: #6ae4a9;
+                font-size: 14px;
+
+                &::before {
+                    content: '\f0e7';
+                    font-family: "Font Awesome 6 Pro";
+                    color: #6ae4a9;
+                    font-size: 12px;
+                    margin-right: 5px;
+                }
+            }
+        }
+    }
 }

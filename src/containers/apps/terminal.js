@@ -47,8 +47,6 @@ export const TerminalStartApp = () => {
 }
 
 export default function Terminal() {
-    const settingsReducer = useSelector(state => state.settings);
-
     const TerminalWindow = () => {
 
         const [min, isMin] = useState(false);
@@ -73,7 +71,7 @@ export default function Terminal() {
                 <WindowBody>
                     <div className='Terminal'>
                         <pre>Welcome to BreezeOS (GNU/Linux 6.2.1 x86_64)</pre>
-                        <pre id='input'>&#91;localhost@{settingsReducer.deviceName}&#93;$ 
+                        <pre id='input'>&#91;localhost@breezeos&#93;$ 
                             <input type='text' spellCheck='false'/>
                         </pre>
                     </div>
