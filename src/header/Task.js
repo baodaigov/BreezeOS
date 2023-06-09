@@ -7,6 +7,7 @@ import '../components/Header.scss';
 
 const Task = props => {
     const panelActive = useSelector(state => state.panel.active);
+    const panelType = useSelector(state => state.panel.type);
     const dispatch = useDispatch();
     
     function useOutsidePanel(ref) {
@@ -32,10 +33,12 @@ const Task = props => {
     useOutsidePanel(panelRef);
 
     return (
-        <div className={`Task Header-item ${panelActive ? 'active' : ''}`} onMouseDown={() => dispatch(activePanel())} ref={panelRef}>
-            {props.children}
-            <Panel style={{ top: "45px", right: "0", height: "340px" }}/>
-        </div>
+        <>
+            <div className={`Task Header-item ${panelActive ? 'active' : ''}`} onMouseDown={() => panelActive ? '' : dispatch(activePanel())} ref={panelRef}>
+                {props.children}
+                <Panel style={{ top: "45px", right: "0", height: panelType === 'default' ? '340px' : panelType === 'wifi' ? '545px' : panelType === 'bluetooth' ? '545px' : '340px' }}/>
+            </div>
+        </>
     )
 }
 

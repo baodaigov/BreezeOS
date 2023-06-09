@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import settings, { toggleAirplaneModeOff, toggleAirplaneModeOn, toggleBluetooth, toggleWifi, toggleLightMode, toggleDarkMode, enableBoldText, disableBoldText } from '../../reducers/settings';
+import { toggleAirplaneModeOff, toggleAirplaneModeOn, toggleBluetooth, toggleWifi, toggleLightMode, toggleDarkMode, enableBoldText, disableBoldText } from '../../reducers/settings';
+import {switchType} from '../../reducers/panel';
 import './Panel.scss';
 
 const PanelItemLarge = ({ type }) => {
@@ -23,21 +24,25 @@ const PanelItemLarge = ({ type }) => {
 	switch (type) {
             case "wifi":
                 return (
-                    <div className={`PanelItemLarge ${settingsReducer.wifi ? 'focused' : ''}`} onClick={() => dispatch(toggleWifi())}>
-                        <i className={`fa-solid ${settingsReducer.wifi ? 'fa-wifi' : 'fa-wifi-slash'}`}></i>
-                        <p className={`${settingsReducer.wifi ? 'font-medium' : 'font-bold'} activeAnimation ${settingsReducer.wifi ? 'minimize' : ''}`}>Wi-Fi</p>
-                        <p className={`PanelItemName ${settingsReducer.wifi ? 'active' : ''} font-bold`}>BreezeOS</p>
-                        <div className='PanelItemNext'>
+                    <div className={`PanelItemLarge ${settingsReducer.wifi ? 'focused' : ''}`} style={{padding: 0}}>
+                        <div style={{ display: 'flex', alignItems: 'center', padding: '12px 17px', width: '126px' }} onClick={() => dispatch(toggleWifi())}>
+                            <i className={`fa-solid ${settingsReducer.wifi ? 'fa-wifi' : 'fa-wifi-slash'}`}></i>
+                            <p className={`${settingsReducer.wifi ? 'font-medium' : 'font-bold'} activeAnimation ${settingsReducer.wifi ? 'minimize' : ''}`}>Wi-Fi</p>
+                            <p className={`PanelItemName ${settingsReducer.wifi ? 'active' : ''} font-bold`}>BreezeOS</p>
+                        </div>
+                        <div className='PanelItemNext' onClick={() => dispatch(switchType('wifi'))}>
                             <i className='fa-regular fa-chevron-right'></i>
                         </div>
                     </div>
                 )
             case "bluetooth":
                 return (
-                    <div className={`PanelItemLarge ${settingsReducer.bluetooth ? 'focused' : ''}`} onClick={() => dispatch(toggleBluetooth())}>
-                        <i className="fa-solid fa-bluetooth"></i>
-                        <p className='font-bold'>Bluetooth</p>
-                        <div className='PanelItemNext'>
+                    <div className={`PanelItemLarge ${settingsReducer.bluetooth ? 'focused' : ''}`} style={{padding: 0}}>
+                        <div style={{ display: 'flex', alignItems: 'center', padding: '12px 17px', width: '126px' }} onClick={() => dispatch(toggleBluetooth())}>
+                            <i className="fa-solid fa-bluetooth"></i>
+                            <p className='font-bold'>Bluetooth</p>
+                        </div>
+                        <div className='PanelItemNext' onClick={() => dispatch(switchType('bluetooth'))}>
                             <i className='fa-regular fa-chevron-right'></i>
                         </div>
                     </div>

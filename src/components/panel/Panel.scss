@@ -6,11 +6,9 @@ $fbgcolor: #83aaff;
     position: absolute;
     background: $bgcolor;
     color:$fgcolor;
-    padding: 0 8px;
+    padding: 7px 8px;
     border-radius: 10px;
     width: 350px;
-    display: flex;
-    flex-direction: column;
     justify-content: center;
     transition: all ease .15s;
     opacity: 0;
@@ -21,134 +19,371 @@ $fbgcolor: #83aaff;
         pointer-events: all;
     }
 
-    .PanelItem {
-        background: transparent;
-        padding: 10px 15px;
-        font-size: 12px;
-        border-radius: 999px;
+    .PanelTypeContainer {
+        position: absolute;
         display: flex;
-        justify-content: center;
-        align-items: center;
+        transition: all ease .2s;
+        width: 0;
 
-        &:hover {
-            background: lighten($bgcolor, 5%);
-        }
-
-        i {
-            margin: 0 5px;
-            margin-left: 0!important;
-        }
-
-        .PanelBatteryLevel {
-            margin: 0;
-            padding: 0;
-        }
-    }
-
-    .PanelItemInteraction {
-        padding: 10px 12px;
-
-        i{
-            margin: 0;
-        }
-    }
-
-    .PanelTop {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 10px;
-    }
-
-    .PanelBottom {
-        .PanelContainer {
+        .defaultPanel {
             display: flex;
-            .PanelItemLarge{
-                background: lighten($bgcolor,5%);
-                padding: 12px 17px;
-                margin-right: 10px;
-                margin-bottom: 10px;
+            flex-direction: column;
+            opacity: 0;
+            pointer-events: none;
+            transition: all ease .2s;
+            height: fit-content;
+
+            &.active {
+                opacity: 1;
+                pointer-events: all;
+            }
+
+        .PanelItem {
+                background: transparent;
+                padding: 10px 15px;
+                font-size: 12px;
                 border-radius: 999px;
                 display: flex;
+                justify-content: center;
                 align-items: center;
-                width: 157px;
-                transition: all ease .1s;
-
-                .PanelItemNext {
-                    position: absolute;
-                    transform: translateX(109px);
-                    height: 41px;
-                    padding: 12px 11px;
-                    background: lighten($bgcolor,10%);
-                    border-top-right-radius: 999px;
-                    border-bottom-right-radius: 999px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    transition: all ease .1s;
-                    *{margin: 0}
-                }
 
                 &:hover {
-                    background: lighten($bgcolor,12%);
-
-                    .PanelItemNext {
-                        background: lighten($bgcolor,15%);
-                    }
+                    background: lighten($bgcolor, 5%);
                 }
 
-                i {
-                    margin: 0 7px;
+            i {
+                    margin: 0 5px;
                     margin-left: 0!important;
-                    font-size: 14px;
                 }
 
-                p {
-                    font-size: 14px;
-                    transition: all ease .15s;
-
-                    &.minimize {
-                        font-size: 9px;
-                        transform: translateY(-8px);
-                    }
-
-                    &.PanelItemName {
-                        position: absolute;
-                        transform: translate(24px, 5px);
-                        opacity: 0;
-
-                        &.active {opacity: 1}
-                    }
+            .PanelBatteryLevel {
+                    margin: 0;
+                    padding: 0;
                 }
+            }
 
-                &.focused{
-                    background: $fbgcolor;
-                    color:#000;
+        .PanelItemInteraction {
+                padding: 10px 12px;
 
-                    .PanelItemNext {
-                        background: lighten($fbgcolor, 5%);
-                    }
+                i{
+                    margin: 0;
+                }
+            }
 
-                    &:hover {
-                        background: lighten($fbgcolor,5%);
+    .PanelTop {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 10px;
+            }
+
+    .PanelBottom {
+                .PanelContainer {
+                    display: flex;
+                    .PanelItemLarge{
+                        background: lighten($bgcolor,5%);
+                        padding: 12px 17px;
+                        margin-right: 10px;
+                        margin-bottom: 10px;
+                        border-radius: 999px;
+                        display: flex;
+                        align-items: center;
+                        width: 157px;
+                        transition: all ease .1s;
 
                         .PanelItemNext {
-                            background: lighten($fbgcolor, 10%);
+                            position: absolute;
+                            transform: translateX(126px);
+                            height: 41.5px;
+                            padding: 12px 11px;
+                            background: lighten($bgcolor,10%);
+                            border-top-right-radius: 999px;
+                            border-bottom-right-radius: 999px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            transition: all ease .1s;
+                            *{margin: 0}
+                        }
+
+                &:hover {
+                            background: lighten($bgcolor,12%);
+
+                            .PanelItemNext {
+                                background: lighten($bgcolor,15%);
+                            }
+                        }
+
+                i {
+                            margin: 0 7px;
+                            margin-left: 0!important;
+                            font-size: 14px;
+                        }
+
+                p {
+                            font-size: 14px;
+                            transition: all ease .15s;
+
+                            &.minimize {
+                                font-size: 9px;
+                                transform: translateY(-8px);
+                            }
+
+                    &.PanelItemName {
+                                position: absolute;
+                                transform: translate(24px, 5px);
+                                opacity: 0;
+
+                                &.active {opacity: 1}
+                            }
+                        }
+
+                &.focused{
+                            background: $fbgcolor;
+                            color:#000;
+
+                            .PanelItemNext {
+                                background: lighten($fbgcolor, 5%);
+                            }
+
+                    &:hover {
+                                background: lighten($fbgcolor,5%);
+
+                                .PanelItemNext {
+                                    background: lighten($fbgcolor, 10%);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+    .PanelRangeContainer {
+                margin: 0 10px;
+                margin-bottom: 12px;
+
+                .PanelRangeTitle {
+                    font-size: 12px;
+                    color: #fff;
+                    margin: 0;
+                    margin-bottom: 5px;
+                }
+            }
+        }
+
+    .wifiPanel {
+            display: flex;
+            flex-direction: column;
+            padding: 3px 0;
+            opacity: 0;
+            pointer-events: none;
+            transition: all ease .2s;
+            height: fit-content;
+
+            &.active {
+                opacity: 1;
+                pointer-events: all;
+            }
+
+        .PanelItem {
+                background: transparent;
+                padding: 7px 9px;
+                font-size: 12px;
+                border-radius: 999px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                &:hover {
+                    background: lighten($bgcolor, 5%);
+                }
+
+            i {
+                    margin: 0 5px;
+                    margin-left: 0!important;
+                }
+            }
+
+        .PanelName {
+                font-size: 16px;
+                margin-left: 5px;
+            }
+
+	   	   .Toggle {
+                border-radius: 999px;
+                width: 42px;
+                height: 20px;
+                background: transparentize($fgcolor, 0.9);
+                display: flex;
+                padding: 0 4px;
+                align-items: center;
+                transition: all ease .3s;
+
+                &::before {
+                    content: '';
+                    display: block;
+                    background: $fgcolor;
+                    height: 15px;
+                    width: 15px;
+                    border-radius: 999px;
+                    transition: all ease .1s;
+                }
+
+	   	       	&.active {
+                    background: $fbgcolor;
+
+                    &::before {
+                        transform: translateX(20px);
+                    }
+                }
+            }
+
+            .WifiStatusFalse {
+                height: 497px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+                align-items: center;
+
+                i {
+                    font-size: 60px;
+                    margin-bottom: 30px;
+                    color: transparentize($fgcolor, 0.8);
+				}
+
+                .Title {
+                    font-size: 27px;
+					margin-bottom: 10px;
+                }
+            }
+
+            .WifiList {
+                display: flex;
+                flex-direction: column;
+                margin-top: 13px;
+
+                .WifiListItem {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    width: 100%;
+                    border-radius: 999px;
+                    padding: 12px 20px;
+                    margin-bottom: 3px;
+
+                    &:hover {
+                        background-color: transparentize($fgcolor, .95)
+                    }
+
+                    .WifiName {
+                        font-size: 13px;
+                        font-weight: 300;
+                    }
+
+                    .WifiListIcon {
+                        display: flex;
+
+                        i {
+                            margin-left: 5px;
                         }
                     }
                 }
             }
         }
-    }
 
-    .PanelRangeContainer {
-        margin: 0 10px;
-        margin-bottom: 12px;
+    .bluetoothPanel {
+            display: flex;
+            flex-direction: column;
+            padding: 3px 0;
+            opacity: 0;
+            pointer-events: none;
+            transition: all ease .2s;
+            height: fit-content;
 
-        .PanelRangeTitle {
-            font-size: 12px;
-            color: #fff;
-            margin: 0;
-            margin-bottom: 5px;
+            &.active {
+                opacity: 1;
+                pointer-events: all;
+            }
+
+        .PanelItem {
+                background: transparent;
+                padding: 7px 9px;
+                font-size: 12px;
+                border-radius: 999px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                &:hover {
+                    background: lighten($bgcolor, 5%);
+                }
+
+            i {
+                    margin: 0 5px;
+                    margin-left: 0!important;
+                }
+            }
+
+        .PanelName {
+                font-size: 16px;
+                margin-left: 5px;
+            }
+
+	   	   .Toggle {
+                border-radius: 999px;
+                width: 42px;
+                height: 20px;
+                background: transparentize($fgcolor, 0.9);
+                display: flex;
+                padding: 0 4px;
+                align-items: center;
+                transition: all ease .3s;
+
+                &::before {
+                    content: '';
+                    display: block;
+                    background: $fgcolor;
+                    height: 15px;
+                    width: 15px;
+                    border-radius: 999px;
+                    transition: all ease .1s;
+                }
+
+	   	       	&.active {
+                    background: $fbgcolor;
+
+                    &::before {
+                        transform: translateX(20px);
+                    }
+                }
+            }
+
+            .Description {
+                font-size: 12px;
+                font-weight: 300;
+                color: transparentize($fgcolor, .8);
+                margin-top: 10px;
+            }
+
+            .BluetoothStatusFalse {
+                height: 497px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+                align-items: center;
+
+                i {
+                    font-size: 60px;
+                    margin-bottom: 30px;
+                    color: transparentize($fgcolor, 0.8);
+                }
+
+                .Title {
+                    font-size: 27px;
+                    margin-bottom: 10px;
+                }
+            }
         }
     }
 }
@@ -158,34 +393,103 @@ $fbgcolor: #83aaff;
         background: $fgcolor;
         color: $bgcolor;
 
-        .PanelItem {
-            &:hover {
-                background: darken($fgcolor,5%);
-            }
-        }
+        .PanelTypeContainer {
+            .defaultPanel {
 
-        .PanelRangeContainer {
-            .PanelRangeTitle {
-                color: $bgcolor;
-            }
-        }
-
-        .PanelBottom {
-            .PanelItemLarge{
-                background: darken($fgcolor,5%);
-
-                .PanelItemNext {
-                    background: darken($fgcolor,10%);
+                .PanelItem {
+                    &:hover {
+                        background: darken($fgcolor,5%);
+                    }
                 }
 
-                &:hover {
-                    background: darken($fgcolor,12%);
+        .PanelRangeContainer {
+                    .PanelRangeTitle {
+                        color: $bgcolor;
+                    }
+                }
 
-                    .PanelItemNext {
-                        background: darken($fgcolor,15%);
+        .PanelBottom {
+                    .PanelItemLarge{
+                        background: darken($fgcolor,5%);
+
+                        .PanelItemNext {
+                            background: darken($fgcolor,10%);
+                        }
+
+                &:hover {
+                            background: darken($fgcolor,12%);
+
+                            .PanelItemNext {
+                                background: darken($fgcolor,15%);
+                            }
+                        }
+                    }
+                }
+            }
+
+                .wifiPanel {
+                    .PanelItem {
+                        &:hover {
+                            background: darken($fgcolor, 7%);
+                        }
+                    }
+
+    	   	            .Toggle {
+                            background: transparentize($bgcolor, 0.85);
+
+                            &.active {
+                                background: $fbgcolor;
+
+                                &::before {
+                                    transform: translateX(20px);
+                                }
+                            }
+                        }
+
+                    .WifiStatusFalse {
+                        i {
+                            color: transparentize($bgcolor, .8)
+                        }
+                    }
+
+                    .WifiList {
+                        .WifiListItem {
+                            &:hover {
+                                background-color: transparentize($bgcolor, .93);
+                            }
+                        }
+                    }
+                }
+
+                .bluetoothPanel {
+                    .PanelItem {
+                        &:hover {
+                            background: darken($fgcolor, 7%);
+                        }
+                    }
+
+    	   	        .Toggle {
+                        background: transparentize($bgcolor, 0.85);
+
+                        &.active {
+                            background: $fbgcolor;
+
+                            &::before {
+                                transform: translateX(20px);
+                            }
+                        }
+                    }
+
+                    .Description {
+                        color: transparentize($bgcolor, .9);
+                    }
+
+                    .BluetoothStatusFalse {
+                        i {
+                            color: transparentize($bgcolor, .8)
+                        }
                     }
                 }
             }
         }
-    }
 }

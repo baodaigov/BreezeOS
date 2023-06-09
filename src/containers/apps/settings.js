@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
+import {setSettingsActive} from "../../reducers/apps";
 import { insertPasswordFor, cancelPassword, setInputPassword, setPasswordDisable, displayPassword, setWrongPassword } from '../../reducers/wifipassword'
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleAirplaneModeOff, toggleAirplaneModeOn, toggleLightMode, toggleDarkMode, toggleWifi, toggleBluetooth, setDeviceName } from '../../reducers/settings';
-import wallpaper, { changeWallpaper } from '../../reducers/wallpaper';
+import { changeWallpaper } from '../../reducers/wallpaper';
 import '../../components/utils/window/Window.scss';
 import TopBar from '../../components/utils/window/TopBar';
 import WindowBody from '../../components/utils/window/WindowBody';
@@ -25,22 +26,28 @@ import W6 from '../../components/52544.jpg';
 import Wifi1 from './assets/BreezeOS-WiFi.png'
 
 export const SettingsApp = () => {
-    const toggle = () => {
-        document.getElementsByClassName('SettingsApp')[0].classList.add('clicked');
-        setTimeout(() => document.getElementsByClassName('settings')[0].classList.add('active'), 500);
-    };
-    
+    const isActive = useSelector(state => state.apps.settings.active);
+    const dispatch = useDispatch();
+
+    document.addEventListener('keydown', (e) => {
+        if(e.ctrlKey && e.keyCode === 51){
+            dispatch(setSettingsActive(true));
+        }
+    });
+
     useEffect(() => {
-	    document.addEventListener('keydown', (e) => {
-	    	if(e.ctrlKey && e.keyCode === 51){
-	    		toggle();
-	    	}
-	    })
-    }, []);
+        if(isActive){
+            document.getElementsByClassName('SettingsApp')[0].classList.add('clicked');
+            setTimeout(() => document.getElementsByClassName('settings')[0].classList.add('active'), 500);
+        } else {
+            document.getElementsByClassName('SettingsApp')[0].classList.remove('clicked');
+            document.getElementsByClassName('settings')[0].classList.remove('active');
+        }
+    }, [isActive]);
     
 	return (
 		<>
-			<DockItem id='settings' class="SettingsApp" title='Settings' icon='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/applications-system.svg' onClick={toggle}/>
+            <DockItem id='settings' class="SettingsApp" title='Settings' icon='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/applications-system.svg' onClick={() => dispatch(setSettingsActive(true))}/>
 		</>
 	)
 };
@@ -63,6 +70,7 @@ export const SettingsStartApp = () => {
 export default function Settings(){
     const SettingsWindow = () => {
         const settingsReducer = useSelector(state => state.settings);
+        const wifis = useSelector(state => state.settings.wifiList);
         const [settings, setSettings] = useState('Wi-Fi');
         const [value, setValue] = useState('1');
         const [wallpaperValue, setValueWallpaper] = useState('1');
@@ -180,62 +188,8 @@ export default function Settings(){
         
         function widgets(){
             setValue('23');
-	    setSettings('Widgets');
+            setSettings('Widgets');
         }
-
-    const wifis = [
-        {
-            name: 'BreezeOS',
-            private: true,
-            status: 'good',
-            connected: true
-        },
-        {
-            name: 'Nokia Lumia',
-            private: true,
-            status: 'fair'
-        },
-        {
-            name: 'APTEK',
-            private: true,
-            status: 'weak'
-        },
-        {
-            name: 'daothanhminh\'s iPhone',
-            private: true,
-            status: 'fair'
-        },
-        {
-            name: 'FPT Telecom',
-            private: true,
-            status: 'good'
-        },
-        {
-            name: 'Coffee Shop',
-            private: true,
-            status: 'fair'
-        },
-        {
-            name: 'Samsung Galaxy S20',
-            private: true,
-            status: 'weak'
-        },
-        {
-            name: 'KING COFFEE',
-            private: true,
-            status: 'weak'
-        },
-        {
-            name: 'VIETTEL',
-            private: true,
-            status: 'fair'
-        },
-        {
-            name: 'Nguyet Thanh',
-            private: true,
-            status: 'weak'
-        }
-    ]
     
     const [cursorMenu, showCursorMenu] = useState(false);
     const [iconsMenu, showIconsMenu] = useState(false);
@@ -837,11 +791,6 @@ export default function Settings(){
     const [min, isMin] = useState(false);
     const [wrongPasswordAni, setWrongPasswordAni] = useState(false);
     
-    function close(){
-        document.getElementById('settings').classList.remove('clicked');
-        document.getElementsByClassName('settings')[0].classList.remove('active');
-    }
-    
     function minimize(){
         document.getElementsByClassName('settings')[0].classList.toggle('minimize');
         isMin(!min);
@@ -858,6 +807,12 @@ export default function Settings(){
         setTimeout(() => setWrongPasswordAni(false), 4550);
     }
 
+    document.addEventListener('keydown', e => {
+        if(e.keyCode === 27){
+            dispatch(cancelPassword());
+        }
+    });
+
     const wp = useSelector(state => state.wifipassword);
         return (
             <>
@@ -865,16 +820,16 @@ export default function Settings(){
                     <div className='MaximumExceededBox'>
                         <div className='WindowTopBar'>
                             <p className='WindowTopBarTitle'>Error!</p>
-                            <div class="WindowTopBarInteractionContainer">
-                                <div class="WindowTopBarInteraction close" onClick={() => displayMaximumExceeded(false)}>
-                                    <i class="fa-solid fa-xmark fa-lg"></i>
+                            <div className="WindowTopBarInteractionContainer">
+                                <div className="WindowTopBarInteraction close" onClick={() => displayMaximumExceeded(false)}>
+                                    <i className="fa-solid fa-xmark fa-lg"></i>
                                 </div>
                             </div>
                         </div>
-                        <div class="WindowBodyDefault">
-                            <p class="WindowBodyContent">Maximum characters exceeded</p>
-                            <div class="WindowBodyButton">
-                                <button class="Button" onClick={() => displayMaximumExceeded(false)}>OK</button>
+                        <div className="WindowBodyDefault">
+                            <p className="WindowBodyContent">Maximum characters exceeded</p>
+                            <div className="WindowBodyButton">
+                                <button className="Button" onClick={() => displayMaximumExceeded(false)}>OK</button>
                             </div>
                         </div>
                     </div>
@@ -909,7 +864,7 @@ export default function Settings(){
                     <div className='TopBarInteractionWrapper' style={{ display: 'flex' }}>
                         <TopBarInteraction action='hide'/>
                         <TopBarInteraction action={min ? 'max' : 'min'} onMinMax={minimize}/>
-                        <TopBarInteraction action='close' onClose={close}/>
+                        <TopBarInteraction action='close' onClose={() => dispatch(setSettingsActive(false))}/>
                     </div>
                 </TopBar>
                 <WindowBody>
@@ -917,13 +872,13 @@ export default function Settings(){
                         <div className={`WifiSharing ${shareWifi ? 'active' : ''}`}>
                             <div className='WindowTopBar'>
                                 <p className='WindowTopBarTitle'>Wi-Fi Sharing</p>
-                                <div class="WindowTopBarInteractionContainer">
-                                    <div class="WindowTopBarInteraction close" onClick={() => setShareWifi(false)}>
-                                        <i class="fa-solid fa-xmark fa-lg"></i>
+                                <div className="WindowTopBarInteractionContainer">
+                                    <div className="WindowTopBarInteraction close" onClick={() => setShareWifi(false)}>
+                                        <i className="fa-solid fa-xmark fa-lg"></i>
                                     </div>
                                 </div>
                             </div>
-                            <div class="WindowBodyDefault">
+                            <div className="WindowBodyDefault">
                                 <div className='WindowBodyContent'>
                                     <p style={{ marginBottom: '30px' }} className='font-bold'>BreezeOS</p>
                                     <img width='auto' height={300} src={Wifi1}/>
@@ -931,22 +886,22 @@ export default function Settings(){
                             </div>
                         </div>
                         <div className={`InsertWifiPassword ${wp.active ? 'active' : ''}`}>
-                            <div class="WindowBodyDefault">
+                            <div className="WindowBodyDefault">
                                 <div className='WindowBodyContent'>
                                     <div className='WindowBodyIcon'>
-                                        <i class="fa-regular fa-key"></i>
+                                        <i className="fa-regular fa-key"></i>
                                     </div>
                                     <div style={{ marginLeft: '10px', width: '100%' }}>
                                         <p className='font-bold' style={{ fontSize: '17px' }}>Connect to Wi-Fi "{wp.passwordFor}"</p>
                                         <div className={`PasswordContainer ${wp.disabled ? 'disabled' : ''}`}>
                                             <input type={wp.isShow ? 'text' : 'password'} id='password' placeholder='Password' autoComplete={false} spellCheck={false} autofocus='1' value={wp.value} onInput={e => dispatch(setInputPassword(e.target.value))} className={`InputPassword ${wp.isWrong ? 'wrongPassword' : ''} ${wrongPasswordAni ? 'activeAnimation' : ''}`}/>
-                                            <i class={`fa-regular ${wp.isShow ? 'fa-eye-slash' : 'fa-eye'} displayPassword ${wp.value == '' ? 'disabled' : ''}`} onClick={() => wp.isShow ? dispatch(displayPassword(false)) : dispatch(displayPassword(true))}></i>
+                                            <i className={`fa-regular ${wp.isShow ? 'fa-eye-slash' : 'fa-eye'} displayPassword ${wp.value == '' ? 'disabled' : ''}`} onClick={() => wp.isShow ? dispatch(displayPassword(false)) : dispatch(displayPassword(true))}></i>
                                         </div>
                                     </div>
                                 </div>
-                                <div class={`WindowBodyButton`}>
-                                    <button class={`Button ${wp.disabled ? 'disabled' : ''}`} onClick={() => dispatch(cancelPassword())}>Cancel</button>
-                                    <button class={`Button ${wp.value.length < 8 ? 'disabled' : ''} ${wp.disabled ? 'disabled' : ''}`} onClick={submitPassword}>Connect</button>
+                                <div className={`WindowBodyButton`}>
+                                    <button className={`Button ${wp.disabled ? 'disabled' : ''}`} onClick={() => dispatch(cancelPassword())}>Cancel</button>
+                                    <button className={`Button ${wp.value.length < 8 ? 'disabled' : ''} ${wp.disabled ? 'disabled' : ''}`} onClick={submitPassword}>Connect</button>
                                 </div>
                             </div>
                         </div>

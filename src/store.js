@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+import appsReducer from './reducers/apps';
 import batteryReducer from './reducers/battery';
 import panelReducer from './reducers/panel';
 import shutdownReducer from './reducers/shutdown';
@@ -12,6 +13,7 @@ import vscodeReducer from './reducers/vscode'
 
 export const store = configureStore({
     reducer: {
+        apps: appsReducer,
         battery: batteryReducer,
         panel: panelReducer,
         shutdown: shutdownReducer,

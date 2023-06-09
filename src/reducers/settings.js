@@ -4,6 +4,59 @@ const initialState = {
     deviceName: 'breezeos',
     airplaneMode: false,
     wifi: true,
+    wifiList: [
+        {
+            name: 'BreezeOS',
+            private: true,
+            status: 'good',
+            connected: true
+        },
+        {
+            name: 'Nokia Lumia',
+            private: true,
+            status: 'fair'
+        },
+        {
+            name: 'APTEK',
+            private: true,
+            status: 'weak'
+        },
+        {
+            name: 'daothanhminh\'s iPhone',
+            private: true,
+            status: 'fair'
+        },
+        {
+            name: 'FPT Telecom',
+            private: true,
+            status: 'good'
+        },
+        {
+            name: 'Coffee Shop',
+            private: true,
+            status: 'fair'
+        },
+        {
+            name: 'Samsung Galaxy S20',
+            private: true,
+            status: 'weak'
+        },
+        {
+            name: 'KING COFFEE',
+            private: true,
+            status: 'weak'
+        },
+        {
+            name: 'VIETTEL',
+            private: true,
+            status: 'fair'
+        },
+        {
+            name: 'Nguyet Thanh',
+            private: true,
+            status: 'weak'
+        }
+    ],
     bluetooth: false,
     themeLight: false,
     boldText: false
