@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
-import { openPic } from '../../reducers/imgview';
+import { useSelector, useDispatch } from 'react-redux';
+import {setActive, setHide} from "../../reducers/apps/files";
+import { setLocation, openPic } from '../../reducers/imgview';
 import '../../components/utils/window/Window.scss';
 import TopBar from '../../components/utils/window/TopBar';
 import WindowBody from '../../components/utils/window/WindowBody';
@@ -17,39 +18,53 @@ import Image5 from './assets/logo-d.png';
 import Image6 from './assets/logo-l.png';
 
 export const FilesApp = () => {
-
-    const toggle = () => {
-        document.getElementsByClassName('FilesApp')[0].classList.add('clicked')
-        setTimeout(() => {
-            document.getElementsByClassName('files')[0].classList.add('active');
-        }, 500);
-    };
+    const isActive = useSelector(state => state.appsFiles.active);
+    const isHide = useSelector(state => state.appsFiles.hide);
+    const dispatch = useDispatch();
     
+    document.addEventListener('keydown', (e) => {
+        if(e.ctrlKey && e.keyCode === 54){
+            dispatch(setActive(true));
+        }
+    });
+
     useEffect(() => {
-	    document.addEventListener('keydown', (e) => {
-	    	if(e.ctrlKey && e.keyCode === 54){
-	    		toggle();
-	    	}
-	    })
-    }, []);
+        if(isActive){
+            document.getElementsByClassName('FilesApp')[0].classList.add('clicked');
+            setTimeout(() => document.getElementsByClassName('files')[0].classList.add('active'), 500);
+        } else {
+            document.getElementsByClassName('FilesApp')[0].classList.remove('clicked');
+            document.getElementsByClassName('files')[0].classList.remove('active');
+        }
+        if(isHide){
+            document.getElementsByClassName('FilesApp')[0].classList.add('hide');
+            document.getElementsByClassName('files')[0].classList.add('hide');
+        } else {
+            document.getElementsByClassName('FilesApp')[0].classList.remove('hide');
+            document.getElementsByClassName('files')[0].classList.remove('hide');
+        }
+    }, [isActive, isHide]);
     
 	return (
 		<>
-			<DockItem id='files' class="FilesApp" title='Files' icon='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' onClick={toggle}/>
+            <DockItem id='files' class="FilesApp" title='Files' icon='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' onClick={() => isHide ? dispatch(setHide(false)) : dispatch(setActive(true))}/>
 		</>
 	)
 };
 
 export const FilesStartApp = () => {
+    const isHide = useSelector(state => state.appsFiles.hide);
+    const dispatch = useDispatch();
     
     const toggle = () => {
         document.getElementsByClassName('StartMenuWrapper')[0].classList.remove('active');
         document.getElementsByClassName('Header')[0].classList.add('active');
         document.getElementsByClassName('DesktopBody')[0].classList.add('active');
-        document.getElementsByClassName('FilesApp')[0].classList.add('clicked')
-        setTimeout(() => {
-            document.getElementsByClassName('files')[0].classList.add('active');
-        }, 500);
+        if(isHide){
+            dispatch(setHide(false));
+        } else {
+            dispatch(setActive(true));
+        }
     };
 
     return (
@@ -58,6 +73,7 @@ export const FilesStartApp = () => {
 }
 
 export default function Files(){
+    const dispatch = useDispatch();
 
     const FilesWindow = () => {
 		const dispatch = useDispatch();
@@ -197,11 +213,15 @@ export default function Files(){
 		const settingsMenuRef = useRef(null);
 		useOutsideSettingsMenu(settingsMenuRef);
 
+        function openPicture(location, pic){
+            dispatch(setLocation(location));
+            dispatch(openPic(pic));
+        }
+
         const [min, isMin] = useState(false);
     
         function close(){
-            document.getElementsByClassName('files')[0].classList.remove('active');
-            document.getElementById('files').classList.remove('clicked');
+            dispatch(setActive(false));
             setTimeout(() => {
             	setValue('1');
             	house();
@@ -596,11 +616,11 @@ export default function Files(){
 			case '/usr/share/pixmaps':
 				return (
 					<div className='FilesSection2'>
-		                <div className='FilesItem' onDoubleClick={() => dispatch(openPic(Image5))}>
+                        <div className='FilesItem' onDoubleClick={() => openPicture('/usr/share/pixmaps/logo-d.png',Image5)}>
 		                    <img className='FilesIcon' src={Image5} width='auto' height={iconSize}/>
 				            <p className='FilesName'>logo-d.png</p>
 		                </div>
-		                <div className='FilesItem' onDoubleClick={() => dispatch(openPic(Image6))}>
+                        <div className='FilesItem' onDoubleClick={() => openPicture('/usr/share/pixmaps/logo-l.png',Image6)}>
 		                    <img className='FilesIcon' src={Image6} width='auto' height={iconSize}/>
 				            <p className='FilesName'>logo-l.png</p>
 		                </div>
@@ -950,11 +970,11 @@ export default function Files(){
 		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>Palatino</p>
 		                                </div>
-		                                <div className='FilesItem' onDoubleClick={() => dispatch(openPic('https:\/\/github.com/feross/TheAnnoyingSite.com/blob/master/static/cat-cute.jpg?raw=true'))}>
+                                        <div className='FilesItem' onDoubleClick={() => openPicture('/home/localhost/Downloads/cat-cute.jpg','https:\/\/github.com/feross/TheAnnoyingSite.com/blob/master/static/cat-cute.jpg?raw=true')}>
 		                                    <img className='FilesIcon' src='https:\/\/github.com/feross/TheAnnoyingSite.com/blob/master/static/cat-cute.jpg?raw=true' width='auto' height={iconSize}/>
 		                                    <p className='FilesName'>cat-cute.jpg</p>
 		                                </div>
-		                                <div className='FilesItem' onDoubleClick={() => dispatch(openPic('https:\/\/github.com/feross/TheAnnoyingSite.com/blob/master/static/cat-blue-eyes.jpg?raw=true'))}>
+                                        <div className='FilesItem' onDoubleClick={() => openPicture('/home/localhost/Downloads/cat-blue-eyes.jpg','https:\/\/github.com/feross/TheAnnoyingSite.com/blob/master/static/cat-blue-eyes.jpg?raw=true')}>
 		                                    <img className='FilesIcon' src='https:\/\/github.com/feross/TheAnnoyingSite.com/blob/master/static/cat-blue-eyes.jpg?raw=true' width='auto' height={iconSize}/>
 		                                    <p className='FilesName'>cat-blue-eyes.jpg</p>
 		                                </div>
@@ -984,35 +1004,35 @@ export default function Files(){
 		                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg' width={iconSize} height={iconSize}/>
 		                    <p className='FilesName'>Screenshots</p>
 		                </div>
-		                <div className='FilesItem' onDoubleClick={() => dispatch(openPic('https:\/\/github.com/feross/TheAnnoyingSite.com/blob/master/static/cat-ceiling.jpg?raw=true'))}>
+                        <div className='FilesItem' onDoubleClick={() => openPicture('/home/localhost/Pictures/cat-ceiling.jpg','https:\/\/github.com/feross/TheAnnoyingSite.com/blob/master/static/cat-ceiling.jpg?raw=true')}>
 		                    <img className='FilesIcon' src='https:\/\/github.com/feross/TheAnnoyingSite.com/blob/master/static/cat-ceiling.jpg?raw=true' width='auto' height={iconSize}/>
 		                    <p className='FilesName'>cat-ceiling.jpg</p>
 		                </div>
-		                <div className='FilesItem' onDoubleClick={() => dispatch(openPic(Image3))}>
+		                <div className='FilesItem' onDoubleClick={() => openPicture('/home/localhost/Pictures/dark.png',Image3)}>
 		                    <img className='FilesIcon' src={Image3} width='auto' height={iconSize}/>
 				            <p className='FilesName'>dark.png</p>
 		                </div>
-		                <div className='FilesItem' onDoubleClick={() => dispatch(openPic(Image4))}>
+                        <div className='FilesItem' onDoubleClick={() => openPicture('/home/localhost/Pictures/light.png',Image4)}>
 		                    <img className='FilesIcon' src={Image4} width='auto' height={iconSize}/>
 				            <p className='FilesName'>light.png</p>
 		                </div>
-				        <div className='FilesItem' onDoubleClick={() => dispatch(openPic('https:\/\/github.com/baodaigov/BreezeOS/blob/master/public/gallery/screenshot.png?raw=true'))}>
+                        <div className='FilesItem' onDoubleClick={() => openPicture('/home/localhost/Pictures/picture.png','https:\/\/github.com/baodaigov/BreezeOS/blob/master/public/gallery/screenshot.png?raw=true')}>
 				            <img className='FilesIcon' src='https:\/\/github.com/baodaigov/BreezeOS/blob/master/public/gallery/screenshot.png?raw=true' width='auto' height={iconSize}/>
 				            <p className='FilesName'>picture.png</p>
 				        </div>
-				        <div className='FilesItem' onDoubleClick={() => dispatch(openPic('https:\/\/github.com/baodaigov/BreezeOS/blob/master/public/gallery/screenshot2.png?raw=true'))}>
+                        <div className='FilesItem' onDoubleClick={() => openPicture('/home/localhost/Pictures/picture-2.png','https:\/\/github.com/baodaigov/BreezeOS/blob/master/public/gallery/screenshot2.png?raw=true')}>
 				            <img className='FilesIcon' src='https:\/\/github.com/baodaigov/BreezeOS/blob/master/public/gallery/screenshot2.png?raw=true' width='auto' height={iconSize}/>
 				            <p className='FilesName'>picture-2.png</p>
 				        </div>
-				        <div className='FilesItem' onDoubleClick={() => dispatch(openPic('https:\/\/github.com/baodaigov/BreezeOS/blob/master/public/gallery/screenshot3.png?raw=true'))}>
+                        <div className='FilesItem' onDoubleClick={() => openPicture('/home/localhost/Pictures/picture-3.png','https:\/\/github.com/baodaigov/BreezeOS/blob/master/public/gallery/screenshot3.png?raw=true')}>
 				            <img className='FilesIcon' src='https:\/\/github.com/baodaigov/BreezeOS/blob/master/public/gallery/screenshot3.png?raw=true' width='auto' height={iconSize}/>
 				            <p className='FilesName'>picture-3.png</p>
 				        </div>
-				        <div className='FilesItem' onDoubleClick={() => dispatch(openPic('https:\/\/github.com/baodaigov/BreezeOS/blob/master/public/gallery/screenshot4.png?raw=true'))}>
+                        <div className='FilesItem' onDoubleClick={() => openPicture('/home/localhost/Pictures/picture-4.png','https:\/\/github.com/baodaigov/BreezeOS/blob/master/public/gallery/screenshot4.png?raw=true')}>
 				            <img className='FilesIcon' src='https:\/\/github.com/baodaigov/BreezeOS/blob/master/public/gallery/screenshot4.png?raw=true' width='auto' height={iconSize}/>
 				            <p className='FilesName'>picture-4.png</p>
 				        </div>
-				        <div className='FilesItem' onDoubleClick={() => dispatch(openPic('https:\/\/github.com/baodaigov/BreezeOS/blob/master/public/gallery/screenshot5.png?raw=true'))}>
+                        <div className='FilesItem' onDoubleClick={() => openPicture('/home/localhost/Pictures/picture-5.png','https:\/\/github.com/baodaigov/BreezeOS/blob/master/public/gallery/screenshot5.png?raw=true')}>
 				            <img className='FilesIcon' src='https:\/\/github.com/baodaigov/BreezeOS/blob/master/public/gallery/screenshot5.png?raw=true' width='auto' height={iconSize}/>
 				            <p className='FilesName'>picture-5.png</p>
 				        </div>
@@ -1021,7 +1041,7 @@ export default function Files(){
 			case '/home/localhost/Pictures/Screenshots':
 				return (
 					<div className='FilesSection2'>
-		                <div className='FilesItem' onDoubleClick={() => dispatch(openPic(Image1))}>
+                        <div className='FilesItem' onDoubleClick={() => openPicture('/home/localhost/Pictures/Screenshots/Screenshot from 2022-09-10 20-41-45.png',Image1)}>
 		                    <img className='FilesIcon' src={Image1} width='auto' height={iconSize}/>
 		                    <p className='FilesName'>Screenshot from 2022-09-10 20-41-45.png</p>
 		                </div>
@@ -1056,7 +1076,7 @@ export default function Files(){
 		                                    <img className='FilesIcon' src='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/text-x-generic.svg' width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>.gitignore</p>
 		                                </div>
-		                                <div className='FilesItem' onDoubleClick={() => dispatch(openPic(Image2))}>
+                                        <div className='FilesItem' onDoubleClick={() => openPicture('/home/localhost/Trash/thanhhafmcvn/thanhhafmcvn.github.io/favicon.ico',Image2)}>
 		                                    <img className='FilesIcon' src={Image2} width='auto' height={iconSize}/>
 		                                    <p className='FilesName'>favicon.ico</p>
 		                                </div>
@@ -1433,7 +1453,7 @@ export default function Files(){
                         </div>
                     </div>
                     <div className='TopBarInteractionWrapper' style={{ display: 'flex' }}>
-                        <TopBarInteraction action='hide'/>
+                        <TopBarInteraction action='hide' onHide={() => dispatch(setHide(true))}/>
                         <TopBarInteraction action={min ? 'max' : 'min'} onMinMax={minimize}/>
                         <TopBarInteraction action='close' onClose={close}/>
                     </div>

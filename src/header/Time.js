@@ -1,30 +1,25 @@
-import React, { Component } from 'react'
+import { useEffect, useState } from 'react';
+import {useDispatch} from "react-redux";
+import {setActive} from "../reducers/apps/clock";
 
-class Time extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      curTime: null,
-    }
-  }
-  componentDidMount() {
+const Time = () => {
+  const dispatch = useDispatch();
+  const [curTime, setCurTime] = useState(null);
+
+  useEffect(() => {
     setInterval(() => {
-      this.setState({
-        curTime: new Date().toLocaleString('en-US', {
-          hour: "2-digit",
-          minute: "2-digit"
-        })
-      })
-    }, 1000)
-  }
+      setCurTime(new Date().toLocaleString('en-US', {
+        hour: "2-digit",
+        minute: "2-digit"
+      }));
+    }, 1000);
+  }, [curTime]);
 
-  render(){
-    return (
-      <div className='Time Header-item'>
-          <p>{this.state.curTime}</p>
-      </div>
-    )
-  }
+  return (
+    <div className='Time Header-item' onClick={() => dispatch(setActive(true))}>
+      <p>{curTime}</p>
+    </div>
+  )
 }
 
 export default Time;

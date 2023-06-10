@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { openUrl, closeUrl } from '../../reducers/vscode';
+import {setActive, setHide} from "../../reducers/apps/vscode";
 import '../../components/utils/window/Window.scss';
 import TopBar from '../../components/utils/window/TopBar';
 import WindowBody from '../../components/utils/window/WindowBody';
@@ -10,33 +11,49 @@ import TopBarInteraction from '../../components/utils/window/TopBarInteraction';
 import StartApp from '../../components/startMenu/StartApp';
 
 export const VSCodeApp = () => {
+    const isActive = useSelector(state => state.appsVscode.active);
+    const isHide = useSelector(state => state.appsVscode.hide);
     const dispatch = useDispatch();
-    
-    const toggle = () => {
-        document.getElementsByClassName('VSCodeApp')[0].classList.add('clicked')
-        setTimeout(() => {
-            document.getElementsByClassName('vscode')[0].classList.add('active');
-            dispatch(openUrl());
-        }, 500);
-    };
+
+    useEffect(() => {
+        if(isActive){
+            document.getElementsByClassName('VSCodeApp')[0].classList.add('clicked');
+            setTimeout(() => {
+                document.getElementsByClassName('vscode')[0].classList.add('active');
+                dispatch(openUrl());
+            }, 500);
+        } else {
+            document.getElementsByClassName('VSCodeApp')[0].classList.remove('clicked');
+            document.getElementsByClassName('vscode')[0].classList.remove('active');
+        }
+        if(isHide){
+            document.getElementsByClassName('VSCodeApp')[0].classList.add('hide');
+            document.getElementsByClassName('vscode')[0].classList.add('hide');
+        } else {
+            document.getElementsByClassName('VSCodeApp')[0].classList.remove('hide');
+            document.getElementsByClassName('vscode')[0].classList.remove('hide');
+        }
+    }, [isActive, isHide]);
     
 	return (
-		<DockItem id='vscode' class="VSCodeApp" title='Visual Studio Code' icon='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/visual-studio-code.svg' onClick={toggle}/>
+        <DockItem id='vscode' class="VSCodeApp" title='Visual Studio Code' icon='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/visual-studio-code.svg' onClick={() => isHide ? dispatch(setHide(false)) : dispatch(setActive(true))}/>
 	)
 };
 
 export const VSCodeStartApp = () => {
+    const isHide = useSelector(state => state.appsVscode.hide);
     const dispatch = useDispatch();
     
     const toggle = () => {
         document.getElementsByClassName('StartMenuWrapper')[0].classList.remove('active');
         document.getElementsByClassName('Header')[0].classList.add('active');
         document.getElementsByClassName('DesktopBody')[0].classList.add('active');
-        document.getElementsByClassName('VSCodeApp')[0].classList.add('clicked')
-        setTimeout(() => {
-            document.getElementsByClassName('vscode')[0].classList.add('active');
-            dispatch(openUrl());
-        }, 500);
+        if(isHide){
+            dispatch(setHide(false));
+        } else {
+            dispatch(setActive(true));
+            setTimeout(() => dispatch(openUrl()), 500);
+        }
     };
 
     return (
@@ -45,14 +62,13 @@ export const VSCodeStartApp = () => {
 }
 
 export default function VSCode() {
+    const dispatch = useDispatch();
     const VSCodeWindow = () => {
         const [min, isMin] = useState(false);
         const url = useSelector(state => state.vscode.url);
-        const dispatch = useDispatch();
         
         function close(){
-            document.getElementsByClassName('vscode')[0].classList.remove('active');
-            document.getElementById('vscode').classList.remove('clicked');
+            dispatch(setActive(false));
             dispatch(closeUrl());
         }
         
@@ -64,7 +80,7 @@ export default function VSCode() {
         return (
             <>
                 <TopBar title='Visual Studio Code' onDblClick={minimize}>
-                    <TopBarInteraction action='hide'/>
+                    <TopBarInteraction action='hide' onHide={() => dispatch(setHide(true))}/>
                     <TopBarInteraction action={min ? 'max' : 'min'} onMinMax={minimize} />
                     <TopBarInteraction action='close' onClose={close}/>
                 </TopBar>

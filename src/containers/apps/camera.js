@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
+import {useSelector, useDispatch} from "react-redux";
+import {setActive, setHide} from "../../reducers/apps/camera";
 import '../../components/utils/window/Window.scss';
 import TopBar from '../../components/utils/window/TopBar';
 import WindowBody from '../../components/utils/window/WindowBody';
@@ -12,36 +14,51 @@ import CountdownSound from '../../sounds/mixkit-clock-countdown-bleeps-916_Bq9La
 import CameraShutter from '../../sounds/camera_shutter.mp3';
 
 export const CameraApp = () => {
-    const toggle = () => {
-        document.getElementsByClassName('CameraApp')[0].classList.add('clicked');
-        setTimeout(() => {
-            document.getElementsByClassName('camera')[0].classList.add('active');
-        }, 500);
-    };
+    const isActive = useSelector(state => state.appsCamera.active);
+    const isHide = useSelector(state => state.appsCamera.hide);
+    const dispatch = useDispatch();
     
+    document.addEventListener('keydown', (e) => {
+        if(e.ctrlKey && e.keyCode === 53){
+            dispatch(setActive(true));
+        }
+    });
+
     useEffect(() => {
-	    document.addEventListener('keydown', (e) => {
-	    	if(e.ctrlKey && e.keyCode === 53){
-	    		toggle();
-	    	}
-	    })
-    }, []);
+        if(isActive){
+            document.getElementsByClassName('CameraApp')[0].classList.add('clicked');
+            setTimeout(() => document.getElementsByClassName('camera')[0].classList.add('active'), 500);
+        } else {
+            document.getElementsByClassName('CameraApp')[0].classList.remove('clicked');
+            document.getElementsByClassName('camera')[0].classList.remove('active');
+        }
+        if(isHide){
+            document.getElementsByClassName('CameraApp')[0].classList.add('hide');
+            document.getElementsByClassName('camera')[0].classList.add('hide');
+        } else {
+            document.getElementsByClassName('CameraApp')[0].classList.remove('hide');
+            document.getElementsByClassName('camera')[0].classList.remove('hide');
+        }
+    }, [isActive, isHide]);
     
 	return (
-		<DockItem id='camera' class="CameraApp" title='Camera' icon='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/accessories-camera.svg' onClick={toggle}/>
+        <DockItem id='camera' class="CameraApp" title='Camera' icon='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/accessories-camera.svg' onClick={() => isHide ? dispatch(setHide(false)) : dispatch(setActive(true))}/>
 	)
 };
 
 export const CameraStartApp = () => {
+    const isHide = useSelector(state => state.appsCamera.hide);
+    const dispatch = useDispatch();
     
     const toggle = () => {
         document.getElementsByClassName('StartMenuWrapper')[0].classList.remove('active');
         document.getElementsByClassName('Header')[0].classList.add('active');
         document.getElementsByClassName('DesktopBody')[0].classList.add('active');
-        document.getElementsByClassName('CameraApp')[0].classList.add('clicked')
-        setTimeout(() => {
-            document.getElementsByClassName('camera')[0].classList.add('active');
-        }, 500);
+        if(isHide){
+            dispatch(setHide(false));
+        } else {
+            dispatch(setActive(true));
+        }
     };
 
     return (
@@ -51,6 +68,7 @@ export const CameraStartApp = () => {
   
 
 export default function Camera() {
+    const dispatch = useDispatch();
 
     const CameraWindow = () => {
         const [webcam, setWebcam] = useState(false);
@@ -285,8 +303,7 @@ export default function Camera() {
         const [min, isMin] = useState(false);
 
         function close(){
-            document.getElementsByClassName('camera')[0].classList.remove('active');
-            document.getElementById('camera').classList.remove('clicked');
+            dispatch(setActive(false));
             setTimeout(() => {
                 setWebcam(!webcam);
                 disableInteraction('capturing');
@@ -307,13 +324,13 @@ export default function Camera() {
             <>
                 <div className={`ImageInformation ${imageInformationMsgbox ? 'active' : ''}`}>
                     <div className='WindowTopBar'>
-                        <div class="WindowTopBarInteractionContainer">
-                            <div class="WindowTopBarInteraction close" onClick={closeMsgBoxDelete}>
-                                <i class="fa-solid fa-xmark fa-lg"></i>
+                        <div className="WindowTopBarInteractionContainer">
+                            <div className="WindowTopBarInteraction close" onClick={closeMsgBoxDelete}>
+                                <i className="fa-solid fa-xmark fa-lg"></i>
                             </div>
                         </div>
                     </div>
-                    <div class="WindowBodyDefault">
+                    <div className="WindowBodyDefault">
                         <div className='WindowBodyContent'>
                             <div style={{ display: 'flex', flexDirection: 'column' }}>
 
@@ -324,17 +341,17 @@ export default function Camera() {
                 <div className={`PermanentlyDeleteMedia ${msgboxDelete ? 'active' : ''}`}>
                     <div className='WindowTopBar'>
                         <p className='WindowTopBarTitle'>Delete this image?</p>
-                        <div class="WindowTopBarInteractionContainer">
-                            <div class="WindowTopBarInteraction close" onClick={closeMsgBoxDelete}>
-                                <i class="fa-solid fa-xmark fa-lg"></i>
+                        <div className="WindowTopBarInteractionContainer">
+                            <div className="WindowTopBarInteraction close" onClick={closeMsgBoxDelete}>
+                                <i className="fa-solid fa-xmark fa-lg"></i>
                             </div>
                         </div>
                     </div>
-                    <div class="WindowBodyDefault">
-                        <p class="WindowBodyContent">This action is irreversible!</p>
-                        <div class="WindowBodyButton">
-                            <button class="Button" onClick={closeMsgBoxDelete}>No</button>
-                            <button class="Button" onClick={deleteImage}>Yes</button>
+                    <div className="WindowBodyDefault">
+                        <p className="WindowBodyContent">This action is irreversible!</p>
+                        <div className="WindowBodyButton">
+                            <button className="Button" onClick={closeMsgBoxDelete}>No</button>
+                            <button className="Button" onClick={deleteImage}>Yes</button>
                         </div>
                     </div>
                 </div>
@@ -352,7 +369,7 @@ export default function Camera() {
                             </div>
                         </div>
                     </div>
-                    <TopBarInteraction action='hide'/>
+                    <TopBarInteraction action='hide' onHide={() => dispatch(setHide(true))}/>
                     <TopBarInteraction action={min ? 'max' : 'min'} onMinMax={minimize}/>
                     <TopBarInteraction action='close' onClose={close}/>
                 </TopBar>
@@ -373,7 +390,7 @@ export default function Camera() {
                                 )}
                                 <div className='CameraViewInteraction'>
                                     <div className='GoBackBtn' onClick={() => setViewMedia(!viewMedia)}>
-                                        <i class="fa-regular fa-arrow-left"></i>
+                                        <i className="fa-regular fa-arrow-left"></i>
                                     </div>
                                     {img != null ? (
                                         <div style={{ display: 'flex' }}>

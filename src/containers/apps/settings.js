@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import {setSettingsActive} from "../../reducers/apps";
+import {setActive, setHide} from "../../reducers/apps/settings";
 import { insertPasswordFor, cancelPassword, setInputPassword, setPasswordDisable, displayPassword, setWrongPassword } from '../../reducers/wifipassword'
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleAirplaneModeOff, toggleAirplaneModeOn, toggleLightMode, toggleDarkMode, toggleWifi, toggleBluetooth, setDeviceName } from '../../reducers/settings';
@@ -26,12 +26,13 @@ import W6 from '../../components/52544.jpg';
 import Wifi1 from './assets/BreezeOS-WiFi.png'
 
 export const SettingsApp = () => {
-    const isActive = useSelector(state => state.apps.settings.active);
+    const isActive = useSelector(state => state.appsSettings.active);
+    const isHide = useSelector(state => state.appsSettings.hide);
     const dispatch = useDispatch();
 
     document.addEventListener('keydown', (e) => {
         if(e.ctrlKey && e.keyCode === 51){
-            dispatch(setSettingsActive(true));
+            dispatch(setActive(true));
         }
     });
 
@@ -43,23 +44,35 @@ export const SettingsApp = () => {
             document.getElementsByClassName('SettingsApp')[0].classList.remove('clicked');
             document.getElementsByClassName('settings')[0].classList.remove('active');
         }
-    }, [isActive]);
+        if(isHide){
+            document.getElementsByClassName('SettingsApp')[0].classList.add('hide');
+            document.getElementsByClassName('settings')[0].classList.add('hide');
+        } else {
+            document.getElementsByClassName('SettingsApp')[0].classList.remove('hide');
+            document.getElementsByClassName('settings')[0].classList.remove('hide');
+        }
+    }, [isActive, isHide]);
     
 	return (
 		<>
-            <DockItem id='settings' class="SettingsApp" title='Settings' icon='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/applications-system.svg' onClick={() => dispatch(setSettingsActive(true))}/>
+            <DockItem id='settings' class="SettingsApp" title='Settings' icon='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/applications-system.svg' onClick={() => isHide ? dispatch(setHide(false)) : dispatch(setActive(true))}/>
 		</>
 	)
 };
 
 export const SettingsStartApp = () => {
+    const isHide = useSelector(state => state.appsSettings.hide);
+    const dispatch = useDispatch();
     
     const toggle = () => {
         document.getElementsByClassName('StartMenuWrapper')[0].classList.remove('active');
         document.getElementsByClassName('Header')[0].classList.add('active');
         document.getElementsByClassName('DesktopBody')[0].classList.add('active');
-        document.getElementsByClassName('SettingsApp')[0].classList.add('clicked');
-        setTimeout(() => document.getElementsByClassName('settings')[0].classList.add('active'), 500);
+        if(isHide){
+            dispatch(setHide(false));
+        } else {
+            dispatch(setActive(true));
+        }
     };
 
     return (
@@ -862,9 +875,9 @@ export default function Settings(){
                         </div>
                     </div>
                     <div className='TopBarInteractionWrapper' style={{ display: 'flex' }}>
-                        <TopBarInteraction action='hide'/>
+                        <TopBarInteraction action='hide' onHide={() => dispatch(setHide(true))}/>
                         <TopBarInteraction action={min ? 'max' : 'min'} onMinMax={minimize}/>
-                        <TopBarInteraction action='close' onClose={() => dispatch(setSettingsActive(false))}/>
+                        <TopBarInteraction action='close' onClose={() => dispatch(setActive(false))}/>
                     </div>
                 </TopBar>
                 <WindowBody>

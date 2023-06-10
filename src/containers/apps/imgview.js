@@ -8,24 +8,16 @@ import TopBarInteraction from '../../components/utils/window/TopBarInteraction';
 
 export default function ImgView() {
     const ImgViewWindow = () => {
+        const picLocation = useSelector(state => state.imgview.location);
         const pic = useSelector(state => state.imgview.pic);
-
-        const [min, isMin] = useState(true);
         
         function close(){
             document.getElementsByClassName('imgview')[0].classList.remove('active');
         }
-        
-        function minimize(){
-            document.getElementsByClassName('imgview')[0].classList.toggle('minimize');
-            isMin(!min);
-        }
 
         return (
             <>
-                <TopBar title={`Image Viewer – ${pic}`} onDblClick={minimize}>
-                    <TopBarInteraction action='hide'/>
-                    <TopBarInteraction action={min ? 'max' : 'min'} onMinMax={minimize} />
+                <TopBar title={`Image Viewer – ${picLocation}`}>
                     <TopBarInteraction action='close' onClose={close}/>
                 </TopBar>
                 <WindowBody>

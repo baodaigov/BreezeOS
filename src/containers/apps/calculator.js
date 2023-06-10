@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import {setActive, setHide} from "../../reducers/apps/calculator";
 import '../../components/utils/window/Window.scss';
 import TopBar from '../../components/utils/window/TopBar';
 import WindowBody from '../../components/utils/window/WindowBody';
@@ -8,37 +10,51 @@ import TopBarInteraction from '../../components/utils/window/TopBarInteraction';
 import StartApp from '../../components/startMenu/StartApp';
 
 export const CalculatorApp = () => {
+  const isActive = useSelector(state => state.appsCalculator.active);
+  const isHide = useSelector(state => state.appsCalculator.hide);
+  const dispatch = useDispatch();
 
-    const toggle = () => {
-        document.getElementsByClassName('CalculatorApp')[0].classList.add('clicked')
-        setTimeout(() => {
-            document.getElementsByClassName('calculator')[0].classList.add('active');
-        }, 500);
-    };
-    
-    useEffect(() => {
-	    document.addEventListener('keydown', (e) => {
-	    	if(e.ctrlKey && e.keyCode === 55){
-	    		toggle();
-	    	}
-	    })
-    }, []);
+  document.addEventListener('keydown', (e) => {
+    if(e.ctrlKey && e.keyCode === 55){
+      dispatch(setActive(true));
+    }
+  });
+
+  useEffect(() => {
+    if(isActive){
+      document.getElementsByClassName('CalculatorApp')[0].classList.add('clicked');
+      setTimeout(() => document.getElementsByClassName('calculator')[0].classList.add('active'), 500);
+    } else {
+      document.getElementsByClassName('CalculatorApp')[0].classList.remove('clicked');
+      document.getElementsByClassName('calculator')[0].classList.remove('active');
+    }
+    if(isHide){
+      document.getElementsByClassName('CalculatorApp')[0].classList.add('hide');
+      document.getElementsByClassName('calculator')[0].classList.add('hide');
+    } else {
+      document.getElementsByClassName('CalculatorApp')[0].classList.remove('hide');
+      document.getElementsByClassName('calculator')[0].classList.remove('hide');
+    }
+  }, [isActive, isHide]);
     
 	return (
-		<DockItem id='calculator' class="CalculatorApp" title='Calculator' icon='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/accessories-calculator.svg' onClick={toggle}/>
+    <DockItem id='calculator' class="CalculatorApp" title='Calculator' icon='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/accessories-calculator.svg' onClick={() => isHide ? dispatch(setHide(false)) : dispatch(setActive(true))}/>
 	)
 };
 
 export const CalculatorStartApp = () => {
+    const isHide = useSelector(state => state.appsCalculator.hide);
+    const dispatch = useDispatch();
     
     const toggle = () => {
         document.getElementsByClassName('StartMenuWrapper')[0].classList.remove('active');
         document.getElementsByClassName('Header')[0].classList.add('active');
         document.getElementsByClassName('DesktopBody')[0].classList.add('active');
-        document.getElementsByClassName('CalculatorApp')[0].classList.add('clicked')
-        setTimeout(() => {
-            document.getElementsByClassName('calculator')[0].classList.add('active');
-        }, 500);
+        if(isHide){
+          dispatch(setHide(false));
+        } else {
+          dispatch(setActive(true));
+        }
     };
 
     return (
@@ -47,6 +63,8 @@ export const CalculatorStartApp = () => {
 }
 
 export default function Calculator() {
+    const dispatch = useDispatch();
+
     const CalculatorWindow = () => {
         const btnValues = [
           ["C", "+-", "%", "/"],
@@ -167,15 +185,14 @@ export default function Calculator() {
         };
 
         function close(){
-            document.getElementsByClassName('calculator')[0].classList.remove('active');
-            document.getElementById('calculator').classList.remove('clicked');
+            dispatch(setActive(false));
             resetClickHandler();
         }
 
         return (
             <>
                 <TopBar title='Calculator'>
-                    <TopBarInteraction action='hide'/>
+                    <TopBarInteraction action='hide' onHide={() => dispatch(setHide(true))}/>
                     <TopBarInteraction action='close' onClose={close}/>
                 </TopBar>
                 <WindowBody>

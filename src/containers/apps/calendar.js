@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import {useSelector, useDispatch} from "react-redux";
+import {setActive, setHide} from "../../reducers/apps/calendar";
 import '../../components/utils/window/Window.scss';
 import TopBar from '../../components/utils/window/TopBar';
 import WindowBody from '../../components/utils/window/WindowBody';
@@ -10,37 +12,51 @@ import dayjs from 'dayjs';
 import range from 'lodash-es/range';
 
 export const CalendarApp = () => {
+    const isActive = useSelector(state => state.appsCalendar.active);
+    const isHide = useSelector(state => state.appsCalendar.hide);
+    const dispatch = useDispatch();
 
-    const toggle = () => {
-        document.getElementsByClassName('CalendarApp')[0].classList.add('clicked')
-        setTimeout(() => {
-            document.getElementsByClassName('calendar')[0].classList.add('active');
-        }, 500);
-    };
-    
+    document.addEventListener('keydown', (e) => {
+        if(e.ctrlKey && e.keyCode === 50){
+            dispatch(setActive(true));
+        }
+    });
+
     useEffect(() => {
-	    document.addEventListener('keydown', (e) => {
-	    	if(e.ctrlKey && e.keyCode === 50){
-	    		toggle();
-	    	}
-	    })
-    }, []);
+        if(isActive){
+            document.getElementsByClassName('CalendarApp')[0].classList.add('clicked');
+            setTimeout(() => document.getElementsByClassName('calendar')[0].classList.add('active'), 500);
+        } else {
+            document.getElementsByClassName('CalendarApp')[0].classList.remove('clicked');
+            document.getElementsByClassName('calendar')[0].classList.remove('active');
+        }
+        if(isHide){
+            document.getElementsByClassName('CalendarApp')[0].classList.add('hide');
+            document.getElementsByClassName('calendar')[0].classList.add('hide');
+        } else {
+            document.getElementsByClassName('CalendarApp')[0].classList.remove('hide');
+            document.getElementsByClassName('calendar')[0].classList.remove('hide');
+        }
+    }, [isActive, isHide]);
     
 	return (
-		<DockItem id='calendar' class="CalendarApp" title='Calendar' icon='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/calendar.svg' onClick={toggle}/>
+        <DockItem id='calendar' class="CalendarApp" title='Calendar' icon='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/calendar.svg' onClick={() => isHide ? dispatch(setHide(false)) : dispatch(setActive(true))}/>
 	)
 };
 
 export const CalendarStartApp = () => {
+    const isHide = useSelector(state => state.appsCalendar.hide);
+    const dispatch = useDispatch();
     
     const toggle = () => {
         document.getElementsByClassName('StartMenuWrapper')[0].classList.remove('active');
         document.getElementsByClassName('Header')[0].classList.add('active');
         document.getElementsByClassName('DesktopBody')[0].classList.add('active');
-        document.getElementsByClassName('CalendarApp')[0].classList.add('clicked')
-        setTimeout(() => {
-            document.getElementsByClassName('calendar')[0].classList.add('active');
-        }, 500);
+        if(isHide){
+            dispatch(setHide(false));
+        } else {
+            dispatch(setActive(true));
+        }
     };
 
     return (
@@ -49,6 +65,8 @@ export const CalendarStartApp = () => {
 }
 
 export default function Calendar() {
+    const dispatch = useDispatch();
+
     const CalendarWindow = () => {
         const [min, isMin] = useState(false);
 
@@ -75,11 +93,6 @@ export default function Calendar() {
           setDayObj(dayObj.add(1, "month"))
         }
 
-        function close(){
-            document.getElementsByClassName('calendar')[0].classList.remove('active');
-            document.getElementById('calendar').classList.remove('clicked');
-        }
-
         function minimize(){
             document.getElementsByClassName('calendar')[0].classList.toggle('minimize');
             isMin(!min)
@@ -102,9 +115,9 @@ export default function Calendar() {
                         </div>
                     </div>
                     <div className='TopBarInteractionWrapper' style={{ display: 'flex' }}>
-                        <TopBarInteraction action='hide'/>
+                        <TopBarInteraction action='hide' onHide={() => dispatch(setHide(true))}/>
                         <TopBarInteraction action={min ? 'max' : 'min'} onMinMax={minimize}/>
-                        <TopBarInteraction action='close' onClose={close}/>
+                        <TopBarInteraction action='close' onClose={() => dispatch(setActive(false))}/>
                     </div>
                 </TopBar>
                 <WindowBody>

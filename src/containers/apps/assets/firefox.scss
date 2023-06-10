@@ -102,6 +102,11 @@
             width: 100vw;
             height: 100%;
         }
+
+        &.hide {
+            top: 153%;
+            pointer-events: none;
+        }
     
         .TabBarWrapper {
             margin: 0 10px;

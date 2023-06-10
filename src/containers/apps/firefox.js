@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import {setActive, setHide} from "../../reducers/apps/firefox";
 import { openUrl, closeUrl } from '../../reducers/firefox';
 import '../../components/utils/window/Window.scss';
 import TopBar from '../../components/utils/window/TopBar';
@@ -10,41 +11,53 @@ import TopBarInteraction from '../../components/utils/window/TopBarInteraction';
 import StartApp from '../../components/startMenu/StartApp';
 
 export const FirefoxApp = () => {
+    const isActive = useSelector(state => state.appsFirefox.active);
+    const isHide = useSelector(state => state.appsFirefox.hide);
     const dispatch = useDispatch();
     
-    const toggle = () => {
-        document.getElementsByClassName('FirefoxApp')[0].classList.add('clicked')
-        setTimeout(() => {
-            document.getElementsByClassName('firefox')[0].classList.add('active');
-            dispatch(openUrl('https://breezeos.github.io'));
-        }, 500);
-    };
-    
+    document.addEventListener('keydown', (e) => {
+        if(e.ctrlKey && e.keyCode === 49){
+            dispatch(setActive(true));
+        }
+    });
+
     useEffect(() => {
-	    document.addEventListener('keydown', (e) => {
-	    	if(e.ctrlKey && e.keyCode === 49){
-	    		toggle();
-	    	}
-	    })
-    }, []);
+        if(isActive){
+            document.getElementsByClassName('FirefoxApp')[0].classList.add('clicked');
+            setTimeout(() => document.getElementsByClassName('firefox')[0].classList.add('active'), 500);
+            dispatch(openUrl('https://breezeos.github.io'));
+        } else {
+            document.getElementsByClassName('FirefoxApp')[0].classList.remove('clicked');
+            document.getElementsByClassName('firefox')[0].classList.remove('active');
+        }
+        if(isHide){
+            document.getElementsByClassName('FirefoxApp')[0].classList.add('hide');
+            document.getElementsByClassName('firefox')[0].classList.add('hide');
+        } else {
+            document.getElementsByClassName('FirefoxApp')[0].classList.remove('hide');
+            document.getElementsByClassName('firefox')[0].classList.remove('hide');
+        }
+    }, [isActive, isHide]);
     
 	return (
-		<DockItem id='firefox' class="FirefoxApp" title='Firefox' number='1' icon='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/firefox.svg' onClick={toggle}/>
+        <DockItem id='firefox' class="FirefoxApp" title='Firefox' number='1' icon='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/firefox.svg' onClick={() => isHide ? dispatch(setHide(false)) : dispatch(setActive(true))}/>
 	)
 };
 
 export const FirefoxStartApp = () => {
+    const isHide = useSelector(state => state.appsFirefox.hide);
     const dispatch = useDispatch();
     
     const toggle = () => {
         document.getElementsByClassName('StartMenuWrapper')[0].classList.remove('active');
         document.getElementsByClassName('Header')[0].classList.add('active');
         document.getElementsByClassName('DesktopBody')[0].classList.add('active');
-        document.getElementsByClassName('FirefoxApp')[0].classList.add('clicked')
-        setTimeout(() => {
-            document.getElementsByClassName('firefox')[0].classList.add('active');
+        if(isHide){
+            dispatch(setHide(false));
+        } else {
+            dispatch(setActive(true));
             dispatch(openUrl('https://breezeos.github.io'));
-        }, 500);
+        }
     };
 
     return (
@@ -90,8 +103,7 @@ export default function Firefox() {
         const [min, isMin] = useState(false);
     
         function close(){
-            document.getElementsByClassName('firefox')[0].classList.remove('active');
-            document.getElementById('firefox').classList.remove('clicked');
+            dispatch(setActive(false));
             setTimeout(() => {
                 dispatch(closeUrl());
                 document.getElementById('ffsearch').value = '';
@@ -111,7 +123,7 @@ export default function Firefox() {
                             <div className='TabBarItem' style={{ justifyContent: 'space-between' }}>
                                 <p>New Tab</p>
                                 <div className='CloseButton' onClick={close}>
-                                    <i class="fa-regular fa-xmark"></i>
+                                    <i className="fa-regular fa-xmark"></i>
                                 </div>
                             </div>
                         </div>
@@ -127,7 +139,7 @@ export default function Firefox() {
                         </div>
                     </div>
                     <div className='TopBarInteractionWrapper' style={{ display: 'flex' }}>
-                        <TopBarInteraction action='hide'/>
+                        <TopBarInteraction action='hide' onHide={() => dispatch(setHide(true))}/>
                         <TopBarInteraction action={min ? 'max' : 'min'} onMinMax={minimize}/>
                         <TopBarInteraction action='close' onClose={close}/>
                     </div>

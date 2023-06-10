@@ -1,4 +1,4 @@
-import {setSettingsActive} from "../../reducers/apps";
+import {setActive} from "../../reducers/apps/settings";
 import {inactivePanel} from '../../reducers/panel';
 import { insertPasswordFor } from '../../reducers/wifipassword';
 import {useSelector, useDispatch} from "react-redux";
@@ -15,7 +15,7 @@ const Panel = props => {
 
     function connectWifi(e){
         dispatch(inactivePanel());
-        dispatch(setSettingsActive(true));
+        dispatch(setActive(true));
         setTimeout(() => {
             dispatch(insertPasswordFor(e));
         }, 800);

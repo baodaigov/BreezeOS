@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import {setActive, setHide} from "../../reducers/apps/softwarestore";
 import '../../components/utils/window/Window.scss';
 import TopBar from '../../components/utils/window/TopBar';
 import WindowBody from '../../components/utils/window/WindowBody';
@@ -8,37 +10,51 @@ import TopBarInteraction from '../../components/utils/window/TopBarInteraction';
 import StartApp from '../../components/startMenu/StartApp';
 
 export const SoftwareStoreApp = () => {
+    const isActive = useSelector(state => state.appsSoftwareStore.active);
+    const isHide = useSelector(state => state.appsSoftwareStore.hide);
+    const dispatch = useDispatch();
 
-    const toggle = () => {
-        document.getElementsByClassName('SoftwareStoreApp')[0].classList.add('clicked')
-        setTimeout(() => {
-            document.getElementsByClassName('softwarestore')[0].classList.add('active');
-        }, 500);
-    };
-    
+    document.addEventListener('keydown', (e) => {
+        if(e.ctrlKey && e.keyCode === 48){
+            dispatch(setActive(true));
+        }
+    });
+
     useEffect(() => {
-	    document.addEventListener('keydown', (e) => {
-	    	if(e.ctrlKey && e.keyCode === 48){
-	    		toggle();
-	    	}
-	    })
-    }, []);
+        if(isActive){
+            document.getElementsByClassName('SoftwareStoreApp')[0].classList.add('clicked');
+            setTimeout(() => document.getElementsByClassName('softwarestore')[0].classList.add('active'), 500);
+        } else {
+            document.getElementsByClassName('SoftwareStoreApp')[0].classList.remove('clicked');
+            document.getElementsByClassName('softwarestore')[0].classList.remove('active');
+        }
+        if(isHide){
+            document.getElementsByClassName('SoftwareStoreApp')[0].classList.add('hide');
+            document.getElementsByClassName('softwarestore')[0].classList.add('hide');
+        } else {
+            document.getElementsByClassName('SoftwareStoreApp')[0].classList.remove('hide');
+            document.getElementsByClassName('softwarestore')[0].classList.remove('hide');
+        }
+    }, [isActive, isHide]);
     
 	return (
-		<DockItem id='softwarestore' class="SoftwareStoreApp" title='Software Store' icon='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/software-store.svg' onClick={toggle}/>
+        <DockItem id='softwarestore' class="SoftwareStoreApp" title='Software Store' icon='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/software-store.svg' onClick={() => isHide ? dispatch(setHide(false)) : dispatch(setActive(true))}/>
 	)
 };
 
 export const SoftwareStoreStartApp = () => {
+    const isHide = useSelector(state => state.appsSoftwareStore.hide);
+    const dispatch = useDispatch();
     
     const toggle = () => {
         document.getElementsByClassName('StartMenuWrapper')[0].classList.remove('active');
         document.getElementsByClassName('Header')[0].classList.add('active');
         document.getElementsByClassName('DesktopBody')[0].classList.add('active');
-        document.getElementsByClassName('SoftwareStoreApp')[0].classList.add('clicked')
-        setTimeout(() => {
-            document.getElementsByClassName('softwarestore')[0].classList.add('active');
-        }, 500);
+        if(isHide){
+            dispatch(setHide(false));
+        } else {
+            dispatch(setActive(true));
+        }
     };
 
     return (
@@ -47,6 +63,7 @@ export const SoftwareStoreStartApp = () => {
 }
 
 export default function SoftwareStore() {
+    const dispatch = useDispatch();
     const SoftwareStoreWindow = () => {
         const [min, isMin] = useState(false);
         const [tabLayout, setTabLayout] = useState(true);
@@ -71,8 +88,7 @@ export default function SoftwareStore() {
         }
 
         function close(){
-            document.getElementsByClassName('softwarestore')[0].classList.remove('active');
-            document.getElementById('softwarestore').classList.remove('clicked');
+            dispatch(setActive(false));
             setTimeout(() => {
                 explorerTab();
             }, 300);
@@ -706,7 +722,7 @@ export default function SoftwareStore() {
         return (
             <>
                 <TopBar title='Software Store' onDblClick={minimize}>
-                    <TopBarInteraction action='hide'/>
+                    <TopBarInteraction action='hide' onHide={() => dispatch(setHide(true))}/>
                     <TopBarInteraction action={min ? 'max' : 'min'} onMinMax={minimize}/>
                     <TopBarInteraction action='close' onClose={close}/>
                 </TopBar>

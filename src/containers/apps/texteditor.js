@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import {setActive, setHide} from "../../reducers/apps/texteditor";
 import '../../components/utils/window/Window.scss';
 import TopBar from '../../components/utils/window/TopBar';
 import WindowBody from '../../components/utils/window/WindowBody';
@@ -9,37 +11,51 @@ import StartApp from '../../components/startMenu/StartApp';
 import Sound1 from '../../sounds/Oxygen-Sys-App-Error-Critical.mp3';
 
 export const TextEditorApp = () => {
+    const isActive = useSelector(state => state.appsTextEditor.active);
+    const isHide = useSelector(state => state.appsTextEditor.hide);
+    const dispatch = useDispatch();
 
-    const toggle = () => {
-        document.getElementsByClassName('TextEditorApp')[0].classList.add('clicked')
-        setTimeout(() => {
-            document.getElementsByClassName('texteditor')[0].classList.add('active');
-        }, 500);
-    };
-    
+    document.addEventListener('keydown', (e) => {
+        if(e.ctrlKey && e.keyCode === 56){
+            dispatch(setActive(true));
+        }
+    });
+
     useEffect(() => {
-	    document.addEventListener('keydown', (e) => {
-	    	if(e.ctrlKey && e.keyCode === 56){
-	    		toggle();
-	    	}
-	    })
-    }, []);
+        if(isActive){
+            document.getElementsByClassName('TextEditorApp')[0].classList.add('clicked');
+            setTimeout(() => document.getElementsByClassName('texteditor')[0].classList.add('active'), 500);
+        } else {
+            document.getElementsByClassName('TextEditorApp')[0].classList.remove('clicked');
+            document.getElementsByClassName('texteditor')[0].classList.remove('active');
+        }
+        if(isHide){
+            document.getElementsByClassName('TextEditorApp')[0].classList.add('hide');
+            document.getElementsByClassName('texteditor')[0].classList.add('hide');
+        } else {
+            document.getElementsByClassName('TextEditorApp')[0].classList.remove('hide');
+            document.getElementsByClassName('texteditor')[0].classList.remove('hide');
+        }
+    }, [isActive, isHide]);
     
 	return (
-		<DockItem id='texteditor' class="TextEditorApp" title='Text Editor' icon='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/accessories-text-editor.svg' onClick={toggle}/>
+        <DockItem id='texteditor' class="TextEditorApp" title='Text Editor' icon='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/accessories-text-editor.svg' onClick={() => isHide ? dispatch(setHide(false)) : dispatch(setActive(true))}/>
 	)
 };
 
 export const TextEditorStartApp = () => {
+    const isHide = useSelector(state => state.appsTextEditor.hide);
+    const dispatch = useDispatch();
     
     const toggle = () => {
         document.getElementsByClassName('StartMenuWrapper')[0].classList.remove('active');
         document.getElementsByClassName('Header')[0].classList.add('active');
         document.getElementsByClassName('DesktopBody')[0].classList.add('active');
-        document.getElementsByClassName('TextEditorApp')[0].classList.add('clicked')
-        setTimeout(() => {
-            document.getElementsByClassName('texteditor')[0].classList.add('active');
-        }, 500);
+        if(isHide){
+            dispatch(setHide(false));
+        } else {
+            dispatch(setActive(true));
+        }
     };
 
     return (
@@ -48,16 +64,13 @@ export const TextEditorStartApp = () => {
 }
 
 export default function TextEditor() {
+    const dispatch = useDispatch();
+
     const TextEditorWindow = () => {
         const [changes, saveChanges] = useState(true);
         const [min, isMin] = useState(false);
         const [msgboxChanges, displayMsgBoxChanges] = useState(false);
         const sound1 = new Audio(Sound1);
-
-        function close(){
-            document.getElementsByClassName('texteditor')[0].classList.remove('active');
-            document.getElementById('texteditor').classList.remove('clicked');
-        }
 
         function minimize(){
             document.getElementsByClassName('texteditor')[0].classList.toggle('minimize');
@@ -67,13 +80,13 @@ export default function TextEditor() {
         function saveChangesAndExit(){
             saveChanges(true);
             displayMsgBoxChanges(false);
-            close();
+            dispatch(setActive(false));
         }
 
         function dontSaveChangesAndExit(){
             saveChanges(false);
             displayMsgBoxChanges(false);
-            close();
+            dispatch(setActive(false));
         }
 
         function saveChangesBeforeExit(){
@@ -97,18 +110,18 @@ export default function TextEditor() {
                 <div className={`SaveChanges ${msgboxChanges ? 'active' : ''}`}>
                     <div className='WindowTopBar'>
                         <p className='WindowTopBarTitle'>Save & Exit</p>
-                        <div class="WindowTopBarInteractionContainer">
-                            <div class="WindowTopBarInteraction close" onClick={() => displayMsgBoxChanges(false)}>
-                                <i class="fa-solid fa-xmark fa-lg"></i>
+                        <div className="WindowTopBarInteractionContainer">
+                            <div className="WindowTopBarInteraction close" onClick={() => displayMsgBoxChanges(false)}>
+                                <i className="fa-solid fa-xmark fa-lg"></i>
                             </div>
                         </div>
                     </div>
-                    <div class="WindowBodyDefault">
-                        <p class="WindowBodyContent">Save changes to hello.cpp and exit?</p>
-                        <div class="WindowBodyButton">
-                            <button class="Button" onClick={() => displayMsgBoxChanges(false)}>Cancel</button>
-                            <button class="Button" onClick={dontSaveChangesAndExit}>No</button>
-                            <button class="Button" onClick={saveChangesAndExit}>Yes</button>
+                    <div className="WindowBodyDefault">
+                        <p className="WindowBodyContent">Save changes to hello.cpp and exit?</p>
+                        <div className="WindowBodyButton">
+                            <button className="Button" onClick={() => displayMsgBoxChanges(false)}>Cancel</button>
+                            <button className="Button" onClick={dontSaveChangesAndExit}>No</button>
+                            <button className="Button" onClick={saveChangesAndExit}>Yes</button>
                         </div>
                     </div>
                 </div>
@@ -126,9 +139,9 @@ export default function TextEditor() {
                         </div>
                     </div>
                     <div className='TopBarInteractionWrapper' style={{ display: 'flex' }}>
-                        <TopBarInteraction action='hide'/>
+                        <TopBarInteraction action='hide' onHide={() => dispatch(setHide(true))}/>
                         <TopBarInteraction action={min ? 'max' : 'min'} onMinMax={minimize}/>
-                        <TopBarInteraction action='close' onClose={changes === true ? close : saveChangesBeforeExit}/>
+                        <TopBarInteraction action='close' onClose={changes === true ? () => dispatch(setActive(false)) : saveChangesBeforeExit}/>
                     </div>
                 </TopBar>
                 <WindowBody>

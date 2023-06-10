@@ -29,7 +29,12 @@ $actcolor: #8fb6ff;
             pointer-events: all;
             width: 100vw;
             height: 100%;
-        }
+		}
+
+        &.hide {
+			top: 153%;
+			pointer-events: none;
+		}
 
 		.BlackScr {
 			position: absolute;

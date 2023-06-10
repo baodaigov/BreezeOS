@@ -30,6 +30,11 @@ $fgcolor: #e2e2e2;
             height: 100%;
         }
 
+        &.hide {
+            top: 153%;
+            pointer-events: none;
+        }
+
         &.minimize {
             width: 60vw;
             height: 90%;

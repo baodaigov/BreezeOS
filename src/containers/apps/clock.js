@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import {setActive, setHide} from "../../reducers/apps/clock";
 import '../../components/utils/window/Window.scss';
 import TopBar from '../../components/utils/window/TopBar';
 import WindowBody from '../../components/utils/window/WindowBody';
@@ -8,37 +10,51 @@ import TopBarInteraction from '../../components/utils/window/TopBarInteraction';
 import StartApp from '../../components/startMenu/StartApp';
 
 export const ClockApp = () => {
+    const isActive = useSelector(state => state.appsClock.active);
+    const isHide = useSelector(state => state.appsClock.hide);
+    const dispatch = useDispatch();
 
-    const toggle = () => {
-        document.getElementsByClassName('ClockApp')[0].classList.add('clicked')
-        setTimeout(() => {
-            document.getElementsByClassName('clock')[0].classList.add('active');
-        }, 500);
-    };
-    
+    document.addEventListener('keydown', (e) => {
+        if(e.ctrlKey && e.keyCode === 52){
+            dispatch(setActive(true));
+        }
+    });
+
     useEffect(() => {
-	    document.addEventListener('keydown', (e) => {
-	    	if(e.ctrlKey && e.keyCode === 52){
-	    		toggle();
-	    	}
-	    })
-    }, []);
+        if(isActive){
+            document.getElementsByClassName('ClockApp')[0].classList.add('clicked');
+            setTimeout(() => document.getElementsByClassName('clock')[0].classList.add('active'), 500);
+        } else {
+            document.getElementsByClassName('ClockApp')[0].classList.remove('clicked');
+            document.getElementsByClassName('clock')[0].classList.remove('active');
+        }
+        if(isHide){
+            document.getElementsByClassName('ClockApp')[0].classList.add('hide');
+            document.getElementsByClassName('clock')[0].classList.add('hide');
+        } else {
+            document.getElementsByClassName('ClockApp')[0].classList.remove('hide');
+            document.getElementsByClassName('clock')[0].classList.remove('hide');
+        }
+    }, [isActive, isHide]);
     
 	return (
-		<DockItem id='clock' class="ClockApp" title='Clock' icon='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/preferences-system-time.svg' onClick={toggle}/>
+        <DockItem id='clock' class="ClockApp" title='Clock' icon='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/preferences-system-time.svg' onClick={() => isHide ? dispatch(setHide(false)) : dispatch(setActive(true))}/>
 	)
 };
 
 export const ClockStartApp = () => {
+    const dispatch = useDispatch();
+    const isHide = useSelector(state => state.appsClock.hide);
     
     const toggle = () => {
         document.getElementsByClassName('StartMenuWrapper')[0].classList.remove('active');
         document.getElementsByClassName('Header')[0].classList.add('active');
         document.getElementsByClassName('DesktopBody')[0].classList.add('active');
-        document.getElementsByClassName('ClockApp')[0].classList.add('clicked')
-        setTimeout(() => {
-            document.getElementsByClassName('clock')[0].classList.add('active');
-        }, 500);
+        if(isHide){
+            dispatch(setHide(false));
+        } else {
+            dispatch(setActive(true));
+        }
     };
 
     return (
@@ -47,14 +63,14 @@ export const ClockStartApp = () => {
 }
 
 export default function Clock() {
+    const dispatch = useDispatch();
+
     const ClockWindow = () => {
         const [min, isMin] = useState(false);
         const [tab, setTab] = useState('worldclock');
         const [translateX, setTranslateX] = useState('');
         const [width, setWidth] = useState('103px');
         const [value, setValue] = useState('1');
-
-        const ClockItems = document.getElementsByClassName('ClockItems')[0];
         
         function worldClockTab(){
             setTranslateX('translate(0)');
@@ -183,8 +199,7 @@ export default function Clock() {
         }, [running]);
     
         function close(){
-            document.getElementsByClassName('clock')[0].classList.remove('active');
-            document.getElementById('clock').classList.remove('clicked');
+            dispatch(setActive(false));
             setTimeout(() => {
                 setRunning(false);
             }, 300);
@@ -288,7 +303,7 @@ export default function Clock() {
         return (
             <>
                 <TopBar title='Clock' onDblClick={minimize}>
-                    <TopBarInteraction action='hide'/>
+                    <TopBarInteraction action='hide' onHide={() => dispatch(setHide(true))}/>
                     <TopBarInteraction action={min ? 'max' : 'min'} onMinMax={minimize}/>
                     <TopBarInteraction action='close' onClose={close}/>
                 </TopBar>

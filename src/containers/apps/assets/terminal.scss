@@ -12,6 +12,11 @@
 			opacity: 1;
 			pointer-events: all;
 		}
+
+        &.hide {
+			top: 153%;
+			pointer-events: none;
+		}
 		
 		&.minimize {
 			width: 1000px;
