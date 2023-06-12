@@ -12,6 +12,7 @@ import StartApp from '../../components/startMenu/StartApp';
 export const CalculatorApp = () => {
   const isActive = useSelector(state => state.appsCalculator.active);
   const isHide = useSelector(state => state.appsCalculator.hide);
+  const icon = useSelector(state => state.appearance.iconTheme);
   const dispatch = useDispatch();
 
   document.addEventListener('keydown', (e) => {
@@ -38,13 +39,14 @@ export const CalculatorApp = () => {
   }, [isActive, isHide]);
     
 	return (
-    <DockItem id='calculator' class="CalculatorApp" title='Calculator' icon='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/accessories-calculator.svg' onClick={() => isHide ? dispatch(setHide(false)) : dispatch(setActive(true))}/>
+    <DockItem id='calculator' class="CalculatorApp" title='Calculator' icon={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/original/calc.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/accessories-calculator.svg'} onClick={() => isHide ? dispatch(setHide(false)) : dispatch(setActive(true))}/>
 	)
 };
 
 export const CalculatorStartApp = () => {
     const isHide = useSelector(state => state.appsCalculator.hide);
     const dispatch = useDispatch();
+    const icon = useSelector(state => state.appearance.iconTheme);
     
     const toggle = () => {
         document.getElementsByClassName('StartMenuWrapper')[0].classList.remove('active');
@@ -58,7 +60,7 @@ export const CalculatorStartApp = () => {
     };
 
     return (
-        <StartApp key='calculator' icon='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/accessories-calculator.svg' name='Calculator' onClick={toggle}/>
+        <StartApp key='calculator' icon={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/original/calc.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/accessories-calculator.svg'} name='Calculator' onClick={toggle}/>
     )
 }
 

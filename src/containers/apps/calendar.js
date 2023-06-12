@@ -15,6 +15,7 @@ export const CalendarApp = () => {
     const isActive = useSelector(state => state.appsCalendar.active);
     const isHide = useSelector(state => state.appsCalendar.hide);
     const dispatch = useDispatch();
+    const icon = useSelector(state => state.appearance.iconTheme);
 
     document.addEventListener('keydown', (e) => {
         if(e.ctrlKey && e.keyCode === 50){
@@ -40,13 +41,14 @@ export const CalendarApp = () => {
     }, [isActive, isHide]);
     
 	return (
-        <DockItem id='calendar' class="CalendarApp" title='Calendar' icon='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/calendar.svg' onClick={() => isHide ? dispatch(setHide(false)) : dispatch(setActive(true))}/>
+        <DockItem id='calendar' class="CalendarApp" title='Calendar' icon={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/original/calendar.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/calendar.svg'} onClick={() => isHide ? dispatch(setHide(false)) : dispatch(setActive(true))}/>
 	)
 };
 
 export const CalendarStartApp = () => {
     const isHide = useSelector(state => state.appsCalendar.hide);
     const dispatch = useDispatch();
+    const icon = useSelector(state => state.appearance.iconTheme);
     
     const toggle = () => {
         document.getElementsByClassName('StartMenuWrapper')[0].classList.remove('active');
@@ -60,7 +62,7 @@ export const CalendarStartApp = () => {
     };
 
     return (
-        <StartApp key='calendar' icon='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/calendar.svg' name='Calendar' onClick={toggle}/>
+        <StartApp key='calendar' icon={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/original/calendar.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/calendar.svg'} name='Calendar' onClick={toggle}/>
     )
 }
 

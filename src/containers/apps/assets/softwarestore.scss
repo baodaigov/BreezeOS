@@ -587,11 +587,11 @@ $fgcolor: #e2e2e2;
             .Software {
                 .explorer {
                     .Application {
-                        background: transparentize($bgcolor, 0.82);
+                        background: transparentize($bgcolor, 0.87);
                         color: $bgcolor;
 
                         .ApplicationInstallButton.installed {
-                            background: transparentize($bgcolor, 0.82);
+                            background: transparentize($bgcolor, 0.85);
                             color: darken($fgcolor, 12%);
                         }
                     }
@@ -606,7 +606,7 @@ $fgcolor: #e2e2e2;
                 .installed {
                     .InstalledAppContainer {
                         .Application {
-                            background: transparentize($bgcolor, 0.82);
+                            background: transparentize($bgcolor, 0.87);
                             color: $bgcolor;
                             
                             .ApplicationInstallButton :hover {background: #ff8f8f0a}

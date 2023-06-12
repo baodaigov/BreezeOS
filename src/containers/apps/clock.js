@@ -13,6 +13,7 @@ export const ClockApp = () => {
     const isActive = useSelector(state => state.appsClock.active);
     const isHide = useSelector(state => state.appsClock.hide);
     const dispatch = useDispatch();
+    const icon = useSelector(state => state.appearance.iconTheme);
 
     document.addEventListener('keydown', (e) => {
         if(e.ctrlKey && e.keyCode === 52){
@@ -38,13 +39,14 @@ export const ClockApp = () => {
     }, [isActive, isHide]);
     
 	return (
-        <DockItem id='clock' class="ClockApp" title='Clock' icon='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/preferences-system-time.svg' onClick={() => isHide ? dispatch(setHide(false)) : dispatch(setActive(true))}/>
+        <DockItem id='clock' class="ClockApp" title='Clock' icon={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/preferences-system-time.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/preferences-system-time.svg'} onClick={() => isHide ? dispatch(setHide(false)) : dispatch(setActive(true))}/>
 	)
 };
 
 export const ClockStartApp = () => {
     const dispatch = useDispatch();
     const isHide = useSelector(state => state.appsClock.hide);
+    const icon = useSelector(state => state.appearance.iconTheme);
     
     const toggle = () => {
         document.getElementsByClassName('StartMenuWrapper')[0].classList.remove('active');
@@ -58,7 +60,7 @@ export const ClockStartApp = () => {
     };
 
     return (
-        <StartApp key='clock' icon='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/preferences-system-time.svg' name='Clock' onClick={toggle}/>
+        <StartApp key='clock' icon={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/preferences-system-time.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/preferences-system-time.svg'} name='Clock' onClick={toggle}/>
     )
 }
 

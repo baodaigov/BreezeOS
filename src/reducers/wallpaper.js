@@ -5,7 +5,7 @@ const initialState = {
 }
 
 export const wallpaperSlice = createSlice({
-    name: 'apps',
+    name: 'wallpaper',
     initialState,
     reducers: {
         changeWallpaper: (state, action) => {

@@ -13,6 +13,7 @@ export const TerminalApp = () => {
     const isActive = useSelector(state => state.appsTerminal.active);
     const isHide = useSelector(state => state.appsTerminal.hide);
     const dispatch = useDispatch();
+    const icon = useSelector(state => state.appearance.iconTheme);
 
     document.addEventListener('keydown', (e) => {
         if(e.ctrlKey && e.keyCode === 57){
@@ -38,13 +39,14 @@ export const TerminalApp = () => {
     }, [isActive, isHide]);
     
 	return (
-        <DockItem id='terminal' class="TerminalApp" title='Terminal' icon='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/utilities-x-terminal.svg' onClick={() => isHide ? dispatch(setHide(false)) : dispatch(setActive(true))}/>
+        <DockItem id='terminal' class="TerminalApp" title='Terminal' icon={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/original/terminal.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/utilities-x-terminal.svg'} onClick={() => isHide ? dispatch(setHide(false)) : dispatch(setActive(true))}/>
 	)
 };
 
 export const TerminalStartApp = () => {
     const isHide = useSelector(state => state.appsTerminal.hide);
     const dispatch = useDispatch();
+    const icon = useSelector(state => state.appearance.iconTheme);
     
     const toggle = () => {
         document.getElementsByClassName('StartMenuWrapper')[0].classList.remove('active');
@@ -58,7 +60,7 @@ export const TerminalStartApp = () => {
     };
 
     return (
-        <StartApp key='terminal' icon='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/utilities-x-terminal.svg' name='Terminal' onClick={toggle}/>
+        <StartApp key='terminal' icon={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/original/terminal.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/utilities-x-terminal.svg'} name='Terminal' onClick={toggle}/>
     )
 }
 
@@ -66,7 +68,7 @@ export default function Terminal() {
     const dispatch = useDispatch();
     const TerminalWindow = () => {
 
-        const [min, isMin] = useState(false);
+        const [min, isMin] = useState(true);
     
         function minimize(){
             document.getElementsByClassName('terminal')[0].classList.toggle('minimize');

@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {setActive, setHide} from "../../reducers/apps/settings";
-import { insertPasswordFor, cancelPassword, setInputPassword, setPasswordDisable, displayPassword, setWrongPassword } from '../../reducers/wifipassword'
+import { insertPasswordFor, cancelPassword, setInputPassword, setPasswordDisable, displayPassword, setWrongPassword } from '../../reducers/wifipassword';
+import {toggleActive, setSecurity, setWifiName, setInactive} from '../../reducers/newwifi';
+import {switchIcons} from '../../reducers/appearance';
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleAirplaneModeOff, toggleAirplaneModeOn, toggleLightMode, toggleDarkMode, toggleWifi, toggleBluetooth, setDeviceName } from '../../reducers/settings';
 import { changeWallpaper } from '../../reducers/wallpaper';
@@ -17,7 +19,7 @@ import Image1 from './assets/dark.png';
 import Image2 from './assets/light.png';
 import LogoD from './assets/logo-d.png';
 import LogoL from './assets/logo-l.png';
-import W1 from '../../components/Windows-11-4k-Wallpaper-scaled.jpg';
+import W1 from '../../components/default.jpg';
 import W2 from '../../components/52697.jpg';
 import W3 from '../../components/52496.jpg';
 import W4 from '../../components/52791.jpg';
@@ -29,6 +31,7 @@ export const SettingsApp = () => {
     const isActive = useSelector(state => state.appsSettings.active);
     const isHide = useSelector(state => state.appsSettings.hide);
     const dispatch = useDispatch();
+    const icon = useSelector(state => state.appearance.iconTheme);
 
     document.addEventListener('keydown', (e) => {
         if(e.ctrlKey && e.keyCode === 51){
@@ -55,7 +58,7 @@ export const SettingsApp = () => {
     
 	return (
 		<>
-            <DockItem id='settings' class="SettingsApp" title='Settings' icon='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/applications-system.svg' onClick={() => isHide ? dispatch(setHide(false)) : dispatch(setActive(true))}/>
+            <DockItem id='settings' class="SettingsApp" title='Settings' icon={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/original/applications-system.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/applications-system.svg'} onClick={() => isHide ? dispatch(setHide(false)) : dispatch(setActive(true))}/>
 		</>
 	)
 };
@@ -63,6 +66,7 @@ export const SettingsApp = () => {
 export const SettingsStartApp = () => {
     const isHide = useSelector(state => state.appsSettings.hide);
     const dispatch = useDispatch();
+    const icon = useSelector(state => state.appearance.iconTheme);
     
     const toggle = () => {
         document.getElementsByClassName('StartMenuWrapper')[0].classList.remove('active');
@@ -76,7 +80,7 @@ export const SettingsStartApp = () => {
     };
 
     return (
-        <StartApp key='settings' icon='https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/applications-system.svg' name='Settings' onClick={toggle}/>
+        <StartApp key='settings' icon={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/original/applications-system.svg' : 'https:\/\/raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/applications-system.svg'} name='Settings' onClick={toggle}/>
     )
 }
 
@@ -203,7 +207,8 @@ export default function Settings(){
             setValue('23');
             setSettings('Widgets');
         }
-    
+
+    const nw = useSelector(state => state.newwifi);
     const [cursorMenu, showCursorMenu] = useState(false);
     const [iconsMenu, showIconsMenu] = useState(false);
     const [shellMenu, showShellMenu] = useState(false);
@@ -212,6 +217,7 @@ export default function Settings(){
     const [orientationMenu, showOrientationMenu] = useState(false);
     const [resolutionMenu, showResolutionMenu] = useState(false);
     const [refreshRateMenu, showRefreshRateMenu] = useState(false);
+    const [securityMenu, showSecurityMenu] = useState(false);
     const [editDeviceName, allowEditDeviceName] = useState(false);
 
     function useOutsideCursorMenu(ref) {
@@ -394,6 +400,28 @@ export default function Settings(){
     const refreshRateMenuRef = useRef(null);
     useOutsideRRMenu(refreshRateMenuRef);
 
+    function useOutsideSecurityMenu(ref) {
+        useEffect(() => {
+            /**
+         * Alert if clicked on outside of element
+         */
+        function handleClickOutside(event) {
+                if (ref.current && !ref.current.contains(event.target)) {
+                    showSecurityMenu(false);
+                }
+            }
+            // Bind the event listener
+            document.addEventListener("mousedown", handleClickOutside);
+            return () => {
+                // Unbind the event listener on clean up
+                document.removeEventListener("mousedown", handleClickOutside);
+            };
+        }, [ref]);
+    }
+
+    const securityMenuRef = useRef(null);
+    useOutsideSecurityMenu(securityMenuRef);
+
     const [maximumExceeded, displayMaximumExceeded] = useState(false);
 
     function submitDeviceName(e){
@@ -408,34 +436,9 @@ export default function Settings(){
         }
     }
 
-    function w1(){
-        dispatch(changeWallpaper('w1'));
-        setValueWallpaper('1');
-    }
-
-    function w2(){
-        dispatch(changeWallpaper('w2'));
-        setValueWallpaper('2');
-    }
-
-    function w3(){
-        dispatch(changeWallpaper('w3'));
-        setValueWallpaper('3');
-    }
-
-    function w4(){
-        dispatch(changeWallpaper('w4'));
-        setValueWallpaper('4');
-    }
-
-    function w5(){
-        dispatch(changeWallpaper('w5'));
-        setValueWallpaper('5');
-    }
-
-    function w6(){
-        dispatch(changeWallpaper('w6'));
-        setValueWallpaper('6');
+    function switchWallpaper(i, j){
+        dispatch(changeWallpaper(i));
+        setValueWallpaper(j);
     }
 
     const [shareWifi, setShareWifi] = useState(false);
@@ -450,12 +453,19 @@ export default function Settings(){
         mouseHold = window.setTimeout(() => setShareWifi(true), 800);
     }
 
+    const appearanceReducer = useSelector(state => state.appearance);
+
+    function changeIcons(e){
+        dispatch(switchIcons(e));
+        showIconsMenu(false);
+    }
+
 	function switchTab(){
 		switch(settings){
 			case 'Wi-Fi':
 				return (
                     <>
-                        <div className='WiFiWrapper'>
+                        <div className='WiFiWrapper' style={{ height: !settingsReducer.wifi ? '100%' : '' }}>
                             <div className='WiFi'>
                                 <div style={{ display: 'flex', flexDirection: 'column', width: '649.516px', height: '100%' }}>
                                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '40px' }}>
@@ -491,8 +501,8 @@ export default function Settings(){
                                                         )}
                                                     </>
                                                 )}
-                                                <div className='VisibleNetworksItem'>
-                                                    <p>Connect to Hidden Networks...</p>
+                                                <div className='VisibleNetworksItem' onClick={() => dispatch(toggleActive(true))}>
+                                                    <p>Other...</p>
                                                 </div>
                                             </div>
                                         </>
@@ -553,22 +563,22 @@ export default function Settings(){
                             <div className='Wallpapers' value={wallpaperValue}>
                                 <p className='font-bold' style={{ marginBottom: '30px' }}>Wallpaper</p>
                                 <div style={{ width: '649.516px', display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-                                    <div className='WImageContainer w1' onClick={w1}>
+                                    <div className='WImageContainer w1' onClick={() => switchWallpaper('w1', '1')}>
                                         <img src={W1}/>
                                     </div>
-                                    <div className='WImageContainer w2' onClick={w2}>
+                                    <div className='WImageContainer w2' onClick={() => switchWallpaper('w2', '2')}>
                                         <img src={W2}/>
                                     </div>
-                                    <div className='WImageContainer w3' onClick={w3}>
+                                    <div className='WImageContainer w3' onClick={() => switchWallpaper('w3', '3')}>
                                         <img src={W3}/>
                                     </div>
-                                    <div className='WImageContainer w4' onClick={w4}>
+                                    <div className='WImageContainer w4' onClick={() => switchWallpaper('w4', '4')}>
                                         <img src={W4}/>
                                     </div>
-                                    <div className='WImageContainer w5' onClick={w5}>
+                                    <div className='WImageContainer w5' onClick={() => switchWallpaper('w5', '5')}>
                                         <img src={W5}/>
                                     </div>
-                                    <div className='WImageContainer w6' onClick={w6}>
+                                    <div className='WImageContainer w6' onClick={() => switchWallpaper('w6', '6')}>
                                         <img src={W6}/>
                                     </div>
                                 </div>
@@ -603,13 +613,12 @@ export default function Settings(){
                                             <p>Icons</p>
                                         </div>
                                         <div className='ThemesMenuSection' onClick={() => showIconsMenu(true)}>
-                                            <p style={{ marginRight: '7px' }}>Default</p>
+                                            <p style={{ marginRight: '7px' }}>{appearanceReducer.iconTheme}</p>
                                             <i className='fa-regular fa-chevron-down'></i>
                                         </div>
                                         <ActMenu style={{ zIndex: '1', width: '200px', transform: 'translate(415px, 30px)' }} className={iconsMenu ? 'active' : ''} ref={iconsMenuRef}>
-                                            <ActMenuSelector title='Default' active></ActMenuSelector>
-                                            <ActMenuSelector title='Citrus-icon-theme'></ActMenuSelector>
-                                            <ActMenuSelector title='Font Awesome'></ActMenuSelector>
+                                            {appearanceReducer.iconTheme === 'Default' ? <ActMenuSelector title='Default' active onClick={() => changeIcons('Default')}></ActMenuSelector> : <ActMenuSelector title='Default' onClick={() => changeIcons('Default')}></ActMenuSelector>}
+                                            {appearanceReducer.iconTheme === 'WhiteSur-icon-theme' ? <ActMenuSelector title='WhiteSur-icon-theme' active onClick={() => changeIcons('WhiteSur-icon-theme')}></ActMenuSelector> : <ActMenuSelector title='WhiteSur-icon-theme' onClick={() => changeIcons('WhiteSur-icon-theme')}></ActMenuSelector>}
                                         </ActMenu>
                                     </div>
                                     <div className='ThemesMenu'>
@@ -826,7 +835,18 @@ export default function Settings(){
         }
     });
 
+    const cancel = () => {
+        dispatch(setInactive());
+        dispatch(cancelPassword());
+    }
+
+    function switchSecurity(e){
+        showSecurityMenu(false);
+        dispatch(setSecurity(e));
+    }
+
     const wp = useSelector(state => state.wifipassword);
+
         return (
             <>
                 {maximumExceeded ? (
@@ -881,7 +901,7 @@ export default function Settings(){
                     </div>
                 </TopBar>
                 <WindowBody>
-                    <div className={`BlackScr ${shareWifi ? 'active' : ''} ${wp.active ? 'active' : ''}`}>
+                    <div className={`BlackScr ${shareWifi ? 'active' : ''} ${wp.active ? 'active' : ''} ${nw.active ? 'active' : ''}`}>
                         <div className={`WifiSharing ${shareWifi ? 'active' : ''}`}>
                             <div className='WindowTopBar'>
                                 <p className='WindowTopBarTitle'>Wi-Fi Sharing</p>
@@ -907,13 +927,50 @@ export default function Settings(){
                                     <div style={{ marginLeft: '10px', width: '100%' }}>
                                         <p className='font-bold' style={{ fontSize: '17px' }}>Connect to Wi-Fi "{wp.passwordFor}"</p>
                                         <div className={`PasswordContainer ${wp.disabled ? 'disabled' : ''}`}>
-                                            <input type={wp.isShow ? 'text' : 'password'} id='password' placeholder='Password' autoComplete={false} spellCheck={false} autofocus='1' value={wp.value} onInput={e => dispatch(setInputPassword(e.target.value))} className={`InputPassword ${wp.isWrong ? 'wrongPassword' : ''} ${wrongPasswordAni ? 'activeAnimation' : ''}`}/>
+                                            <input type={wp.isShow ? 'text' : 'password'} id='password' placeholder='Password' autoComplete={false} spellCheck={false} value={wp.value} onInput={e => dispatch(setInputPassword(e.target.value))} className={`InputPassword ${wp.isWrong ? 'wrongPassword' : ''} ${wrongPasswordAni ? 'activeAnimation' : ''}`}/>
                                             <i className={`fa-regular ${wp.isShow ? 'fa-eye-slash' : 'fa-eye'} displayPassword ${wp.value == '' ? 'disabled' : ''}`} onClick={() => wp.isShow ? dispatch(displayPassword(false)) : dispatch(displayPassword(true))}></i>
                                         </div>
                                     </div>
                                 </div>
                                 <div className={`WindowBodyButton`}>
                                     <button className={`Button ${wp.disabled ? 'disabled' : ''}`} onClick={() => dispatch(cancelPassword())}>Cancel</button>
+                                    <button className={`Button ${wp.value.length < 8 ? 'disabled' : ''} ${wp.disabled ? 'disabled' : ''}`} onClick={submitPassword}>Connect</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className={`ConnectOtherNetworks ${nw.active ? 'active' : ''}`}>
+                            <div className="WindowBodyDefault">
+                                <div className='WindowBodyContent'>
+                                    <div className='WindowBodyIcon'>
+                                        <i className="fa-regular fa-wifi"></i>
+                                    </div>
+                                    <div style={{ marginLeft: '10px', width: '100%' }}>
+                                        <p className='font-bold' style={{ fontSize: '17px' }}>Connect to Hidden Networks</p>
+                                        <p className='font-normal' style={{ marginTop: '7px', fontSize: '11px' }}>Enter network information that you wish to connect to.</p>
+                                        <div className={`InfoContainer ${wp.disabled ? 'disabled' : ''}`}>
+                                            <input type='text' placeholder='Network Name' autoComplete={false} spellCheck={false} value={nw.name} onInput={e => dispatch(setWifiName(e.target.value))} className={`Input ${wp.isWrong ? 'wrongInfo' : ''} ${wrongPasswordAni ? 'activeAnimation' : ''}`}/>
+                                            <div className={`Input ${wp.isWrong ? 'wrongInfo' : ''} ${wrongPasswordAni ? 'activeAnimation' : ''}`} onClick={() => showSecurityMenu(true)}>
+                                                <p>Security: {nw.security}</p>
+                                                <i className='fa-regular fa-chevron-down'></i>
+                                                <ActMenu style={{ zIndex: '1', width: '388px', top: '27px', right: '0' }} className={securityMenu ? 'active' : ''} ref={securityMenuRef}>
+                                                    {nw.security === 'None' ? <ActMenuSelector title='None' active onClick={() => switchSecurity('None')}></ActMenuSelector> : <ActMenuSelector title='None' onClick={() => switchSecurity('None')}></ActMenuSelector>}
+                                                    {nw.security === 'WEP' ? <ActMenuSelector title='WEP' active onClick={() => switchSecurity('WEP')}></ActMenuSelector> : <ActMenuSelector title='WEP' onClick={() => switchSecurity('WEP')}></ActMenuSelector>}
+                                                    {nw.security === 'WPA' ? <ActMenuSelector title='WPA' active onClick={() => switchSecurity('WPA')}></ActMenuSelector> : <ActMenuSelector title='WPA' onClick={() => switchSecurity('WPA')}></ActMenuSelector>}
+                                                    {nw.security === 'WPA2' ? <ActMenuSelector title='WPA2' active onClick={() => switchSecurity('WPA2')}></ActMenuSelector> : <ActMenuSelector title='WPA2' onClick={() => switchSecurity('WPA2')}></ActMenuSelector>}
+                                                    {nw.security === 'WPA Enterprise' ? <ActMenuSelector title='WPA Enterprise' active onClick={() => switchSecurity('WPA Enterprise')}></ActMenuSelector> : <ActMenuSelector title='WPA Enterprise' onClick={() => switchSecurity('WPA Enterprise')}></ActMenuSelector>}
+                                                    {nw.security === 'WPA2 Enterprise' ? <ActMenuSelector title='WPA2 Enterprise' active onClick={() => switchSecurity('WPA2 Enterprise')}></ActMenuSelector> : <ActMenuSelector title='WPA2 Enterprise' onClick={() => switchSecurity('WPA2 Enterprise')}></ActMenuSelector>}
+                                                    {nw.security === 'WPA3 Enterprise' ? <ActMenuSelector title='WPA3 Enterprise' active onClick={() => switchSecurity('WPA3 Enterprise')}></ActMenuSelector> : <ActMenuSelector title='WPA3 Enterprise' onClick={() => switchSecurity('WPA3 Enterprise')}></ActMenuSelector>}
+                                                </ActMenu>
+                                            </div>
+                                            <div style={{ display: 'flex' }}>
+                                                <input type={wp.isShow ? 'text' : 'password'} id='password' placeholder='Password' autoComplete={false} spellCheck={false} value={wp.value} onInput={e => dispatch(setInputPassword(e.target.value))} className={`Input ${wp.isWrong ? 'wrongInfo' : ''} ${wrongPasswordAni ? 'activeAnimation' : ''}`}/>
+                                                <i className={`fa-regular ${wp.isShow ? 'fa-eye-slash' : 'fa-eye'} displayPassword ${wp.value == '' ? 'disabled' : ''}`} onClick={() => wp.isShow ? dispatch(displayPassword(false)) : dispatch(displayPassword(true))}></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className={`WindowBodyButton`}>
+                                    <button className={`Button ${wp.disabled ? 'disabled' : ''}`} onClick={cancel}>Cancel</button>
                                     <button className={`Button ${wp.value.length < 8 ? 'disabled' : ''} ${wp.disabled ? 'disabled' : ''}`} onClick={submitPassword}>Connect</button>
                                 </div>
                             </div>

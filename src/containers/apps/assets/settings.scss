@@ -36,6 +36,42 @@ $actcolor: #8fb6ff;
 			pointer-events: none;
 		}
 
+		.ActMenu {
+			background: $bgcolor;
+			backdrop-filter: blur(15px);
+			-webkit-backdrop-filter: blur(15px);
+			padding: 5px;
+			border-radius: 7px;
+			position: absolute;
+			box-shadow: 0px 0 20px #0000004e;
+			transition: all ease .15s !important;
+			opacity: 0;
+			pointer-events: none;
+
+			&.active {
+				opacity: 1;
+				pointer-events: all;
+			}
+
+			.ActMenuSelector {
+				padding: 5px 8px;
+				border-radius: 7px;
+				background: transparent;
+				color: $fgcolor;
+				font-size: 13px;
+				display: flex;
+				align-items: center;
+
+				* {margin: 0;}
+
+				i {margin-right: 7px}
+
+				&:hover {
+					background: #ffffff12;
+				}
+			}
+		}
+
 		.BlackScr {
 			position: absolute;
 			top: 0;
@@ -235,7 +271,7 @@ $actcolor: #8fb6ff;
 
 									&.activeAnimation {
 										animation: wrongPassword .5s!important;
-		
+
 										@keyframes wrongPassword {
 											0% {
 												right: 0;
@@ -259,7 +295,7 @@ $actcolor: #8fb6ff;
 									}
 								}
 							}
-							
+
 							.displayPassword {
 								margin-left: 5px;
 								width: 30px;
@@ -282,13 +318,13 @@ $actcolor: #8fb6ff;
 						}
 					}
 				}
-      
+
 				.WindowBodyButton {
 					display: flex;
 					flex-direction: row-reverse;
 					margin: 15px 0;
 					margin-bottom: 0;
-			
+
 					.Button {
 						border: none;
 						outline: none;
@@ -298,9 +334,178 @@ $actcolor: #8fb6ff;
 						padding: 7px 20px;
 						border-radius: 5px;
 						margin-left: 5px;
-			
+
 						&:hover { background-color: #ffffff20; }
-							
+
+						&.disabled {
+							background-color: transparentize($fgcolor, 0.98);
+							color: transparentize($fgcolor, 0.7);
+							pointer-events: none;
+						}
+					}
+				}
+			}
+
+			.ConnectOtherNetworks {
+				position: absolute;
+				display: flex;
+				flex-direction: column;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%,-50%);
+				border-radius: 5px;
+				overflow: hidden;
+				z-index: inherit;
+				opacity: 0;
+				pointer-events: none;
+				width: 450px;
+				box-shadow: 0px 0 20px #00000089;
+
+				&.active {
+					opacity: 1;
+					pointer-events: all;
+				}
+
+				.WindowBodyDefault {
+					background: $bgcolor;
+					backdrop-filter: blur(15px);
+					-webkit-backdrop-filter: blur(15px);
+					border-radius: 5px;
+					padding: 10px 15px;
+					padding-top: 30px;
+					height: 400px;
+					display: flex;
+					flex-direction: column;
+					justify-content: space-between;
+					color: $fgcolor;
+
+					* {
+						margin: 0;
+					}
+
+					.WindowBodyTitle {
+						font-size: 17px;
+						margin-bottom: 10px;
+						font-weight: 700;
+					}
+
+					.WindowBodyContent {
+						display: flex;
+
+						.WindowBodyIcon {
+							font-size: 18px;
+						}
+
+						.InfoContainer {
+							display: flex;
+							flex-direction: column;
+							margin-top: 18px;
+
+							&.disabled {
+								.Input {
+									background-color: transparentize($fgcolor, 0.98);
+									color: transparentize($fgcolor, 0.7);
+								}
+								* {
+									color: transparentize($fgcolor, 0.7);
+									pointer-events: none;
+								}
+							}
+
+							.Input {
+								position: relative;
+								display: flex;
+								justify-content: space-between;
+								align-items: center;
+								appearance: none;
+								border: none;
+								outline: none;
+								color: $fgcolor;
+								border-radius: 5px;
+								width: 100%;
+								font-size: 12px;
+								padding: 5px 10px;
+								margin-bottom: 10px;
+								background-color: transparentize($fgcolor, 0.93);
+								transition: all ease .3s;
+
+								&::-ms-clear, &::-ms-reveal {display:none}
+
+								&:focus {
+									border-bottom: 1px solid $actcolor;
+								}
+
+								&.wrongInfo {
+									border-bottom: 1px solid #ff9191;
+
+									&.activeAnimation {
+										animation: wrongPassword .5s!important;
+
+										@keyframes wrongPassword {
+											0% {
+												right: 0;
+											}
+											20% {
+												right: 5px;
+											}
+											40% {
+												right: -5px;
+											}
+											60% {
+												right: 5px;
+											}
+											80% {
+												right: -5px;
+											}
+											100% {
+												right: 0px;
+											}
+										}
+									}
+								}
+							}
+
+							.displayPassword {
+								margin-left: 5px;
+								width: 30px;
+								height: 27px;
+								border-radius: 999px;
+								font-size: 13px;
+								display: flex;
+								justify-content: center;
+								align-items: center;
+
+								&.disabled {
+									opacity: 0;
+									pointer-events: none;
+								}
+
+								&:hover {
+									background: transparentize($fgcolor, 0.9);
+								}
+							}
+						}
+					}
+				}
+
+				.WindowBodyButton {
+					display: flex;
+					flex-direction: row-reverse;
+					margin: 15px 0;
+					margin-bottom: 0;
+
+					.Button {
+						border: none;
+						outline: none;
+						background-color: #ffffff10;
+						color: $fgcolor;
+						font-size: 12px;
+						padding: 7px 20px;
+						border-radius: 5px;
+						margin-left: 5px;
+
+						&:hover { background-color: #ffffff20; }
+
 						&.disabled {
 							background-color: transparentize($fgcolor, 0.98);
 							color: transparentize($fgcolor, 0.7);
@@ -932,7 +1137,7 @@ $actcolor: #8fb6ff;
 					p{margin: 0}
 
 					.WiFiWrapper {
-						height: 100%;
+
 						.WiFi {
 							display: flex;
 							justify-content: center;
@@ -973,23 +1178,15 @@ $actcolor: #8fb6ff;
 									padding: 15px 25px;
 									display: flex;
 									justify-content: space-between;
-									border-bottom: 1px solid transparentize($fgcolor, 0.95);
+									border-radius: 999px;
+									margin-bottom: 7px;
+
+									p {font-weight: 300}
 	
 									&:hover {
-										background: transparentize($fgcolor, 0.97);
+										background: transparentize($fgcolor, 0.95);
 									}
-	
-									&:first-child {
-										border-top-left-radius: 7px;
-										border-top-right-radius: 7px;
-									}
-	
-									&:last-child {
-										border: 0;
-										border-bottom-left-radius: 7px;
-										border-bottom-right-radius: 7px;
-									}
-	
+
 									.VisibleNetworksIcon {
 										i {
 											margin-right: 13px;
@@ -1166,42 +1363,6 @@ $actcolor: #8fb6ff;
 										border-radius: 7px;
 									}
 								}
-
-								.ActMenu {
-									background: $bgcolor;
-									backdrop-filter: blur(15px);
-									-webkit-backdrop-filter: blur(15px);
-									padding: 5px;
-									border-radius: 7px;
-									position: absolute;
-									box-shadow: 0px 0 20px #0000004e;
-									transition: all ease .15s !important;
-									opacity: 0;
-									pointer-events: none;
-								
-									&.active {
-										opacity: 1;
-										pointer-events: all;
-									}
-									
-									.ActMenuSelector {
-										padding: 5px 8px;
-										border-radius: 7px;
-										background: transparent;
-										color: $fgcolor;
-										font-size: 13px;
-										display: flex;
-										align-items: center;
-								
-										* {margin: 0;}
-								
-										i {margin-right: 7px}
-								
-										&:hover {
-											background: #ffffff12;
-										}
-									}
-								}
 							}
 						}
 					}
@@ -1279,42 +1440,6 @@ $actcolor: #8fb6ff;
 									width: 190px;
 									align-items: center;
 									border-radius: 7px;
-								}
-							}
-
-							.ActMenu {
-								background: $bgcolor;
-								backdrop-filter: blur(15px);
-								-webkit-backdrop-filter: blur(15px);
-								padding: 5px;
-								border-radius: 7px;
-								position: absolute;
-								box-shadow: 0px 0 20px #0000004e;
-								transition: all ease .15s !important;
-								opacity: 0;
-								pointer-events: none;
-							
-								&.active {
-									opacity: 1;
-									pointer-events: all;
-								}
-								
-								.ActMenuSelector {
-									padding: 5px 8px;
-									border-radius: 7px;
-									background: transparent;
-									color: $fgcolor;
-									font-size: 13px;
-									display: flex;
-									align-items: center;
-							
-									* {margin: 0;}
-							
-									i {margin-right: 7px}
-							
-									&:hover {
-										background: #ffffff12;
-									}
 								}
 							}
 						}
@@ -1411,7 +1536,18 @@ $actcolor: #8fb6ff;
 }
 
 .lightMode {
-    .settings {
+	.settings {
+		.ActMenu {
+			background: $fgcolor;
+
+			.ActMenuSelector {
+				color: $bgcolor;
+
+				&:hover {
+					background: #00000012;
+				}
+			}
+		}
 		.BlackScr {
 			.WifiSharing {
 				.WindowTopBar {
@@ -1451,28 +1587,28 @@ $actcolor: #8fb6ff;
 			.InsertWifiPassword {
 				.WindowTopBar {
 					background: $fgcolor;
-	
+
 					.WindowTopBarTitle {
 						color: $bgcolor;
 					}
-	
+
 					.WindowTopBarInteractionContainer {
 						display: flex;
-	
+
 						.WindowTopBarInteraction {
 							color: $bgcolor;
-	
+
 							&:hover {
 								background: #3b3b3f;
 							}
-			
+
 							&.close:hover{
 								background: #ff5252;
 							}
 						}
 					}
 				}
-	
+
 				.WindowBodyDefault {
 					background: $fgcolor;
 					color: $bgcolor;
@@ -1488,12 +1624,12 @@ $actcolor: #8fb6ff;
 									pointer-events: none;
 								}
 							}
-							
+
 							.InputPassword {
 								background-color: transparentize($bgcolor, 0.86);
 								color: $bgcolor;
 							}
-	
+
 							.displayPassword {
 								&:hover {
 									background: transparentize($bgcolor, 0.83);
@@ -1502,13 +1638,83 @@ $actcolor: #8fb6ff;
 						}
 					}
 				}
-		  
+
 				.WindowBodyButton {
 					.Button {
 						background-color: #00000010;
 						color: $bgcolor;
 						&:hover { background-color: #00000020; }
-							
+
+						&.disabled {
+							background-color: darken($fgcolor, 2%);
+							color: lighten($bgcolor, 60%);
+							pointer-events: none;
+						}
+					}
+				}
+			}
+
+			.ConnectOtherNetworks {
+				.WindowTopBar {
+					background: $fgcolor;
+
+					.WindowTopBarTitle {
+						color: $bgcolor;
+					}
+
+					.WindowTopBarInteractionContainer {
+						display: flex;
+
+						.WindowTopBarInteraction {
+							color: $bgcolor;
+
+							&:hover {
+								background: #3b3b3f;
+							}
+
+							&.close:hover{
+								background: #ff5252;
+							}
+						}
+					}
+				}
+
+				.WindowBodyDefault {
+					background: $fgcolor;
+					color: $bgcolor;
+					.WindowBodyContent {
+						.InfoContainer {
+							&.disabled {
+								.Input {
+									background-color: darken($fgcolor, 2%);
+									color: lighten($bgcolor, 60%);
+								}
+								* {
+									color: lighten($bgcolor, 60%);
+									pointer-events: none;
+								}
+							}
+
+							.Input {
+								background-color: transparentize($bgcolor, 0.86);
+								color: $bgcolor;
+							}
+
+							.displayPassword {
+								&:hover {
+									background: transparentize($bgcolor, 0.83);
+								}
+							}
+						}
+					}
+				}
+
+				.WindowBodyButton {
+					.Button {
+						background-color: #00000010;
+						color: $bgcolor;
+						&:hover { background-color: #00000020; }
+
 						&.disabled {
 							background-color: darken($fgcolor, 2%);
 							color: lighten($bgcolor, 60%);
@@ -1768,8 +1974,6 @@ $actcolor: #8fb6ff;
 
 				.VisibleNetworks {
 					.VisibleNetworksItem {
-						border-bottom: 1px solid transparentize($bgcolor, 0.8)!important;
-
 						&:hover {
 							background: transparentize($bgcolor, 0.82)!important;
 						}
@@ -1817,31 +2021,8 @@ $actcolor: #8fb6ff;
 					.WallpaperMenuSection {background: transparentize($bgcolor, 0.82)!important}
 				}
 				.Themes {
-					.ActMenu {
-						background: $fgcolor;
-				
-						.ActMenuSelector {
-							color: $bgcolor;
-				
-							&:hover {
-								background: #00000012;
-							}
-						}
-					}
-					
 					.ThemesMenu {
 						.ThemesMenuSection {background: transparentize($bgcolor, 0.82)!important}
-						.ActMenu {
-							background: $fgcolor;
-					
-							.ActMenuSelector {
-								color: $bgcolor;
-					
-								&:hover {
-									background: #00000012;
-								}
-							}
-						}
 					}
 				}
 			}

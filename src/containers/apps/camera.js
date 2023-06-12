@@ -17,6 +17,7 @@ export const CameraApp = () => {
     const isActive = useSelector(state => state.appsCamera.active);
     const isHide = useSelector(state => state.appsCamera.hide);
     const dispatch = useDispatch();
+    const icon = useSelector(state => state.appearance.iconTheme);
     
     document.addEventListener('keydown', (e) => {
         if(e.ctrlKey && e.keyCode === 53){
@@ -42,13 +43,14 @@ export const CameraApp = () => {
     }, [isActive, isHide]);
     
 	return (
-        <DockItem id='camera' class="CameraApp" title='Camera' icon='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/accessories-camera.svg' onClick={() => isHide ? dispatch(setHide(false)) : dispatch(setActive(true))}/>
+        <DockItem id='camera' class="CameraApp" title='Camera' icon={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/original/cheese.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/accessories-camera.svg'} onClick={() => isHide ? dispatch(setHide(false)) : dispatch(setActive(true))}/>
 	)
 };
 
 export const CameraStartApp = () => {
     const isHide = useSelector(state => state.appsCamera.hide);
     const dispatch = useDispatch();
+    const icon = useSelector(state => state.appearance.iconTheme);
     
     const toggle = () => {
         document.getElementsByClassName('StartMenuWrapper')[0].classList.remove('active');
@@ -62,7 +64,7 @@ export const CameraStartApp = () => {
     };
 
     return (
-        <StartApp key='camera' icon='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/accessories-camera.svg' name='Camera' onClick={toggle}/>
+        <StartApp key='camera' icon={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/original/cheese.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/accessories-camera.svg'} name='Camera' onClick={toggle}/>
     )
 }
   

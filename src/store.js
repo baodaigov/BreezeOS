@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
+import appearanceReducer from './reducers/appearance';
 import batteryReducer from './reducers/battery';
 import panelReducer from './reducers/panel';
 import shutdownReducer from './reducers/shutdown';
 import settingsReducer from './reducers/settings';
 import wpReducer from './reducers/wifipassword';
+import nwReducer from './reducers/newwifi';
 import wallpaperReducer from './reducers/wallpaper';
 import imgViewReducer from './reducers/imgview';
 import widgetReducer from './reducers/widget'
@@ -24,11 +26,13 @@ import appsVscodeReducer from './reducers/apps/vscode';
 
 export const store = configureStore({
     reducer: {
+        appearance: appearanceReducer,
         battery: batteryReducer,
         panel: panelReducer,
         shutdown: shutdownReducer,
         settings: settingsReducer,
         wifipassword: wpReducer,
+        newwifi: nwReducer,
         wallpaper: wallpaperReducer,
         imgview: imgViewReducer,
         widget: widgetReducer,

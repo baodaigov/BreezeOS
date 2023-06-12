@@ -1,9 +1,10 @@
+import {useSelector, useDispatch} from "react-redux";
 import {setActive} from "../../reducers/apps/settings";
 import {inactivePanel} from '../../reducers/panel';
 import { insertPasswordFor } from '../../reducers/wifipassword';
-import {useSelector, useDispatch} from "react-redux";
 import {switchType} from "../../reducers/panel";
 import {toggleBluetooth, toggleWifi} from "../../reducers/settings";
+import {toggleActive} from "../../reducers/newwifi";
 import './Panel.scss';
 import PanelTop from './PanelTop';
 import PanelBottom from './PanelBottom';
@@ -18,6 +19,14 @@ const Panel = props => {
         dispatch(setActive(true));
         setTimeout(() => {
             dispatch(insertPasswordFor(e));
+        }, 800);
+    }
+
+    function connectOtherWifi(){
+        dispatch(inactivePanel());
+        dispatch(setActive(true));
+        setTimeout(() => {
+            dispatch(toggleActive(true));
         }, 800);
     }
 
@@ -63,7 +72,7 @@ const Panel = props => {
                                         )}
                                     </>
                                 ))}
-                                <div className='WifiListItem'>
+                                <div className='WifiListItem' onClick={connectOtherWifi}>
                                     <p className='WifiName'>Other...</p>
                                 </div>
                             </div>

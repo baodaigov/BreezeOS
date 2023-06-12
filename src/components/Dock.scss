@@ -6,7 +6,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 13px 0;
+    margin: 11px 0;
     transition: all .3s;
 
     &.active {
@@ -22,12 +22,12 @@
 
             img {
                 cursor: pointer!important;
-		transition: all ease .2s;
-		
-		&:active {
-			width: 28px;
-			height: 28px;
-		}
+        		transition: all ease .2s;
+
+        		&:active {
+        			width: 28px;
+        			height: 28px;
+        		}
             }
 
             &::after{

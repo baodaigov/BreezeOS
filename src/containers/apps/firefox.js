@@ -13,6 +13,7 @@ import StartApp from '../../components/startMenu/StartApp';
 export const FirefoxApp = () => {
     const isActive = useSelector(state => state.appsFirefox.active);
     const isHide = useSelector(state => state.appsFirefox.hide);
+    const icon = useSelector(state => state.appearance.iconTheme);
     const dispatch = useDispatch();
     
     document.addEventListener('keydown', (e) => {
@@ -40,13 +41,14 @@ export const FirefoxApp = () => {
     }, [isActive, isHide]);
     
 	return (
-        <DockItem id='firefox' class="FirefoxApp" title='Firefox' number='1' icon='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/firefox.svg' onClick={() => isHide ? dispatch(setHide(false)) : dispatch(setActive(true))}/>
+        <DockItem id='firefox' class="FirefoxApp" title='Firefox' number='1' icon={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/firefox.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/firefox.svg'} onClick={() => isHide ? dispatch(setHide(false)) : dispatch(setActive(true))}/>
 	)
 };
 
 export const FirefoxStartApp = () => {
     const isHide = useSelector(state => state.appsFirefox.hide);
     const dispatch = useDispatch();
+    const icon = useSelector(state => state.appearance.iconTheme);
     
     const toggle = () => {
         document.getElementsByClassName('StartMenuWrapper')[0].classList.remove('active');
@@ -61,7 +63,7 @@ export const FirefoxStartApp = () => {
     };
 
     return (
-        <StartApp key='firefox' icon='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/firefox.svg' name='Firefox' onClick={toggle}/>
+        <StartApp key='firefox' icon={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/firefox.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/firefox.svg'} name='Firefox' onClick={toggle}/>
     )
 }
 

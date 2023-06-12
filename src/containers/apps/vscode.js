@@ -14,6 +14,7 @@ export const VSCodeApp = () => {
     const isActive = useSelector(state => state.appsVscode.active);
     const isHide = useSelector(state => state.appsVscode.hide);
     const dispatch = useDispatch();
+    const icon = useSelector(state => state.appearance.iconTheme);
 
     useEffect(() => {
         if(isActive){
@@ -36,13 +37,14 @@ export const VSCodeApp = () => {
     }, [isActive, isHide]);
     
 	return (
-        <DockItem id='vscode' class="VSCodeApp" title='Visual Studio Code' icon='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/visual-studio-code.svg' onClick={() => isHide ? dispatch(setHide(false)) : dispatch(setActive(true))}/>
+        <DockItem id='vscode' class="VSCodeApp" title='Visual Studio Code' icon={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/visual-studio-code.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/visual-studio-code.svg'} onClick={() => isHide ? dispatch(setHide(false)) : dispatch(setActive(true))}/>
 	)
 };
 
 export const VSCodeStartApp = () => {
     const isHide = useSelector(state => state.appsVscode.hide);
     const dispatch = useDispatch();
+    const icon = useSelector(state => state.appearance.iconTheme);
     
     const toggle = () => {
         document.getElementsByClassName('StartMenuWrapper')[0].classList.remove('active');
@@ -57,7 +59,7 @@ export const VSCodeStartApp = () => {
     };
 
     return (
-        <StartApp key='vscode' icon='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/visual-studio-code.svg' name='Visual Studio Code' onClick={toggle}/>
+        <StartApp key='vscode' icon={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/visual-studio-code.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/visual-studio-code.svg'} name='Visual Studio Code' onClick={toggle}/>
     )
 }
 

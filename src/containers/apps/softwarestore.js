@@ -13,6 +13,7 @@ export const SoftwareStoreApp = () => {
     const isActive = useSelector(state => state.appsSoftwareStore.active);
     const isHide = useSelector(state => state.appsSoftwareStore.hide);
     const dispatch = useDispatch();
+    const icon = useSelector(state => state.appearance.iconTheme);
 
     document.addEventListener('keydown', (e) => {
         if(e.ctrlKey && e.keyCode === 48){
@@ -38,13 +39,14 @@ export const SoftwareStoreApp = () => {
     }, [isActive, isHide]);
     
 	return (
-        <DockItem id='softwarestore' class="SoftwareStoreApp" title='Software Store' icon='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/software-store.svg' onClick={() => isHide ? dispatch(setHide(false)) : dispatch(setActive(true))}/>
+        <DockItem id='softwarestore' class="SoftwareStoreApp" title='Software Store' icon={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/original/softwarecenter.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/software-store.svg'} onClick={() => isHide ? dispatch(setHide(false)) : dispatch(setActive(true))}/>
 	)
 };
 
 export const SoftwareStoreStartApp = () => {
     const isHide = useSelector(state => state.appsSoftwareStore.hide);
     const dispatch = useDispatch();
+    const icon = useSelector(state => state.appearance.iconTheme);
     
     const toggle = () => {
         document.getElementsByClassName('StartMenuWrapper')[0].classList.remove('active');
@@ -58,13 +60,14 @@ export const SoftwareStoreStartApp = () => {
     };
 
     return (
-        <StartApp key='softwarestore' icon='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/software-store.svg' name='Software Store' onClick={toggle}/>
+        <StartApp key='softwarestore' icon={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/original/softwarecenter.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/software-store.svg'} name='Software Store' onClick={toggle}/>
     )
 }
 
 export default function SoftwareStore() {
     const dispatch = useDispatch();
     const SoftwareStoreWindow = () => {
+        const icon = useSelector(state => state.appearance.iconTheme);
         const [min, isMin] = useState(false);
         const [tabLayout, setTabLayout] = useState(true);
         const [value, setValue] = useState('1');
@@ -167,7 +170,7 @@ export default function SoftwareStore() {
                                     <h2 className='font-bold'>Editor's Choice</h2>
                                     <div className='EditorChoiceContainer'>
                                         <div className='Application'>
-                                            <img src='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/blender.svg' alt="Application" width={45} height={45}/>
+                                            <img src={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/blender.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/blender.svg'} alt="Application" width={45} height={45}/>
                                             <div style={{ marginLeft: '15px', width: '100%' }}>
                                                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '5px' }}>
                                                     <p className='ApplicationTitle'>Blender</p>
@@ -184,7 +187,7 @@ export default function SoftwareStore() {
                                             </div>
                                         </div>
                                         <div className='Application'>
-                                            <img src='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/gimp.svg' alt="Application" width={45} height={45}/>
+                                            <img src={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/gimp.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/gimp.svg'} alt="Application" width={45} height={45}/>
                                             <div style={{ marginLeft: '15px', width: '100%' }}>
                                                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '5px' }}>
                                                     <p className='ApplicationTitle'>GIMP</p>
@@ -201,7 +204,7 @@ export default function SoftwareStore() {
                                             </div>
                                         </div>
                                         <div className='Application'>
-                                            <img src='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/libreoffice.svg' alt="Application" width={45} height={45}/>
+                                            <img src={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/libreoffice.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/libreoffice.svg'} alt="Application" width={45} height={45}/>
                                             <div style={{ marginLeft: '15px', width: '100%' }}>
                                                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '5px' }}>
                                                     <p className='ApplicationTitle'>LibreOffice</p>
@@ -218,7 +221,7 @@ export default function SoftwareStore() {
                                             </div>
                                         </div>
                                         <div className='Application'>
-                                            <img src='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/inkscape.svg' alt="Application" width={45} height={45}/>
+                                            <img src={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/inkscape.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/inkscape.svg'} alt="Application" width={45} height={45}/>
                                             <div style={{ marginLeft: '15px', width: '100%' }}>
                                                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '5px' }}>
                                                     <p className='ApplicationTitle'>Inkscape</p>
@@ -235,7 +238,7 @@ export default function SoftwareStore() {
                                             </div>
                                         </div>
                                         <div className='Application'>
-                                            <img src='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/brave.svg' alt="Application" width={45} height={45}/>
+                                            <img src={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/brave.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/brave.svg'} alt="Application" width={45} height={45}/>
                                             <div style={{ marginLeft: '15px', width: '100%' }}>
                                                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '5px' }}>
                                                     <p className='ApplicationTitle'>Brave</p>
@@ -252,7 +255,7 @@ export default function SoftwareStore() {
                                             </div>
                                         </div>
                                         <div className='Application'>
-                                            <img src='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/spotify-client.svg' alt="Application" width={45} height={45}/>
+                                            <img src={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/spotify-client.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/spotify-client.svg'} alt="Application" width={45} height={45}/>
                                             <div style={{ marginLeft: '15px', width: '100%' }}>
                                                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '5px' }}>
                                                     <p className='ApplicationTitle'>Spotify</p>
@@ -274,7 +277,7 @@ export default function SoftwareStore() {
                                     <h2 className='font-bold'>Recent Releases</h2>
                                     <div className='RecentReleasesContainer'>
                                         <div className='Application'>
-                                            <img src='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/audacity.svg' alt="Application" width={45} height={45}/>
+                                            <img src={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/audacity.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/audacity.svg'} alt="Application" width={45} height={45}/>
                                             <div style={{ marginLeft: '15px', width: '100%' }}>
                                                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '5px' }}>
                                                     <p className='ApplicationTitle'>Audacity</p>
@@ -291,7 +294,7 @@ export default function SoftwareStore() {
                                             </div>
                                         </div>
                                         <div className='Application'>
-                                            <img src='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/telegram.svg' alt="Application" width={45} height={45}/>
+                                            <img src={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/telegram.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/telegram.svg'} alt="Application" width={45} height={45}/>
                                             <div style={{ marginLeft: '15px', width: '100%' }}>
                                                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '5px' }}>
                                                     <p className='ApplicationTitle'>Telegram</p>
@@ -308,7 +311,7 @@ export default function SoftwareStore() {
                                             </div>
                                         </div>
                                         <div className='Application'>
-                                            <img src='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/discord.svg' alt="Application" width={45} height={45}/>
+                                            <img src={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/discord.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/discord.svg'} alt="Application" width={45} height={45}/>
                                             <div style={{ marginLeft: '15px', width: '100%' }}>
                                                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '5px' }}>
                                                     <p className='ApplicationTitle'>Discord</p>
@@ -342,7 +345,7 @@ export default function SoftwareStore() {
                                             </div>
                                         </div>
                                         <div className='Application'>
-                                            <img src='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/visual-studio-code.svg' alt="Application" width={45} height={45}/>
+                                            <img src={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/visual-studio-code.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/visual-studio-code.svg'} alt="Application" width={45} height={45}/>
                                             <div style={{ marginLeft: '15px', width: '100%' }}>
                                                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '5px' }}>
                                                     <p className='ApplicationTitle'>Visual Studio Code</p>
@@ -359,7 +362,7 @@ export default function SoftwareStore() {
                                             </div>
                                         </div>
                                         <div className='Application'>
-                                            <img src='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/sublime-text.svg' alt="Application" width={45} height={45}/>
+                                            <img src={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/sublime-text.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/sublime-text.svg'} alt="Application" width={45} height={45}/>
                                             <div style={{ marginLeft: '15px', width: '100%' }}>
                                                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '5px' }}>
                                                     <p className='ApplicationTitle'>Sublime Text</p>
@@ -376,7 +379,7 @@ export default function SoftwareStore() {
                                             </div>
                                         </div>
                                         <div className='Application'>
-                                            <img src='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/github-desktop.svg' alt="Application" width={45} height={45}/>
+                                            <img src={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/github-desktop.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/github-desktop.svg'} alt="Application" width={45} height={45}/>
                                             <div style={{ marginLeft: '15px', width: '100%' }}>
                                                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '5px' }}>
                                                     <p className='ApplicationTitle'>GitHub Desktop</p>
@@ -393,7 +396,7 @@ export default function SoftwareStore() {
                                             </div>
                                         </div>
                                         <div className='Application'>
-                                            <img src='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/vim.svg' alt="Application" width={45} height={45}/>
+                                            <img src={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/vim.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/vim.svg'} alt="Application" width={45} height={45}/>
                                             <div style={{ marginLeft: '15px', width: '100%' }}>
                                                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '5px' }}>
                                                     <p className='ApplicationTitle'>Vim</p>
@@ -410,7 +413,7 @@ export default function SoftwareStore() {
                                             </div>
                                         </div>
                                         <div className='Application'>
-                                            <img src='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/vlc.svg' alt="Application" width={45} height={45}/>
+                                            <img src={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/vlc.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/vlc.svg'} alt="Application" width={45} height={45}/>
                                             <div style={{ marginLeft: '15px', width: '100%' }}>
                                                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '5px' }}>
                                                     <p className='ApplicationTitle'>VLC</p>
@@ -427,7 +430,7 @@ export default function SoftwareStore() {
                                             </div>
                                         </div>
                                         <div className='Application'>
-                                            <img src='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/brave.svg' alt="Application" width={45} height={45}/>
+                                            <img src={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/brave.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/brave.svg'} alt="Application" width={45} height={45}/>
                                             <div style={{ marginLeft: '15px', width: '100%' }}>
                                                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '5px' }}>
                                                     <p className='ApplicationTitle'>Brave</p>
@@ -444,7 +447,7 @@ export default function SoftwareStore() {
                                             </div>
                                         </div>
                                         <div className='Application'>
-                                            <img src='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/firefox.svg' alt="Application" width={45} height={45}/>
+                                            <img src={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/firefox.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/firefox.svg'} alt="Application" width={45} height={45}/>
                                             <div style={{ marginLeft: '15px', width: '100%' }}>
                                                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '5px' }}>
                                                     <p className='ApplicationTitle'>Firefox</p>
@@ -461,7 +464,7 @@ export default function SoftwareStore() {
                                             </div>
                                         </div>
                                         <div className='Application'>
-                                            <img src='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/chrome.svg' alt="Application" width={45} height={45}/>
+                                            <img src={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/google-chrome.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/chrome.svg'} alt="Application" width={45} height={45}/>
                                             <div style={{ marginLeft: '15px', width: '100%' }}>
                                                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '5px' }}>
                                                     <p className='ApplicationTitle'>Google Chrome</p>
@@ -478,7 +481,7 @@ export default function SoftwareStore() {
                                             </div>
                                         </div>
                                         <div className='Application'>
-                                            <img src='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/opera.svg' alt="Application" width={45} height={45}/>
+                                            <img src={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/opera.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/opera.svg'} alt="Application" width={45} height={45}/>
                                             <div style={{ marginLeft: '15px', width: '100%' }}>
                                                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '5px' }}>
                                                     <p className='ApplicationTitle'>Opera</p>
@@ -495,7 +498,7 @@ export default function SoftwareStore() {
                                             </div>
                                         </div>
                                         <div className='Application'>
-                                            <img src='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/internet-mail.svg' alt="Application" width={45} height={45}/>
+                                            <img src={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/thunderbird.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/internet-mail.svg'} alt="Application" width={45} height={45}/>
                                             <div style={{ marginLeft: '15px', width: '100%' }}>
                                                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '5px' }}>
                                                     <p className='ApplicationTitle'>Thunderbird</p>
@@ -512,7 +515,7 @@ export default function SoftwareStore() {
                                             </div>
                                         </div>
                                         <div className='Application'>
-                                            <img src='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/2048.svg' alt="Application" width={45} height={45}/>
+                                            <img src={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/2048.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/2048.svg'} alt="Application" width={45} height={45}/>
                                             <div style={{ marginLeft: '15px', width: '100%' }}>
                                                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '5px' }}>
                                                     <p className='ApplicationTitle'>2048</p>
@@ -529,7 +532,7 @@ export default function SoftwareStore() {
                                             </div>
                                         </div>
                                         <div className='Application'>
-                                            <img src='https://linuxkamarada.com/files/2019/12/kmahjongg.svg' alt="Application" width={45} height={45}/>
+                                            <img src={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/gnome-mahjongg.svg' : 'https://linuxkamarada.com/files/2019/12/kmahjongg.svg'} alt="Application" width={45} height={45}/>
                                             <div style={{ marginLeft: '15px', width: '100%' }}>
                                                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '5px' }}>
                                                     <p className='ApplicationTitle'>Mahjongg</p>
@@ -546,7 +549,7 @@ export default function SoftwareStore() {
                                             </div>
                                         </div>
                                         <div className='Application'>
-                                            <img src='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/chess.svg' alt="Application" width={45} height={45}/>
+                                            <img src={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/chess.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/chess.svg'} alt="Application" width={45} height={45}/>
                                             <div style={{ marginLeft: '15px', width: '100%' }}>
                                                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '5px' }}>
                                                     <p className='ApplicationTitle'>Chess</p>
@@ -563,7 +566,7 @@ export default function SoftwareStore() {
                                             </div>
                                         </div>
                                         <div className='Application'>
-                                            <img src='https://linuxkamarada.com/files/2019/12/ksudoku.svg' alt="Application" width={45} height={45}/>
+                                            <img src={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/ksudoku.svg' : 'https://linuxkamarada.com/files/2019/12/ksudoku.svg'} alt="Application" width={45} height={45}/>
                                             <div style={{ marginLeft: '15px', width: '100%' }}>
                                                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '5px' }}>
                                                     <p className='ApplicationTitle'>Sudoku</p>
@@ -580,7 +583,7 @@ export default function SoftwareStore() {
                                             </div>
                                         </div>
                                         <div className='Application'>
-                                            <img src='https://linuxkamarada.com/files/2019/12/qgo.svg' alt="Application" width={45} height={45}/>
+                                            <img src={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/iagno.svg' : 'https://linuxkamarada.com/files/2019/12/qgo.svg'} alt="Application" width={45} height={45}/>
                                             <div style={{ marginLeft: '15px', width: '100%' }}>
                                                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '5px' }}>
                                                     <p className='ApplicationTitle'>Othello</p>
@@ -605,7 +608,7 @@ export default function SoftwareStore() {
                         <div className='installed'>
                             <div className='InstalledAppContainer'>
                                 <div className='Application'>
-                                    <img src='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/firefox.svg' alt="Application" width={45} height={45}/>
+                                    <img src={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/firefox.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/firefox.svg'} alt="Application" width={45} height={45}/>
                                     <div style={{ marginLeft: '15px', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                         <p className='ApplicationTitle'>Firefox</p>
                                         <div className='ApplicationInstallButton'>
@@ -614,7 +617,7 @@ export default function SoftwareStore() {
                                     </div>
                                 </div>
                                 <div className='Application'>
-                                    <img src='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/preferences-system-time.svg' alt="Application" width={45} height={45}/>
+                                    <img src={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/alternative/apps/preferences-system-time.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/preferences-system-time.svg'} alt="Application" width={45} height={45}/>
                                     <div style={{ marginLeft: '15px', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                         <p className='ApplicationTitle'>Clock</p>
                                         <div className='ApplicationInstallButton'>
@@ -623,7 +626,7 @@ export default function SoftwareStore() {
                                     </div>
                                 </div>
                                 <div className='Application'>
-                                    <img src='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/accessories-camera.svg' alt="Application" width={45} height={45}/>
+                                    <img src={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/devices/scalable/camera-photo.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/accessories-camera.svg'} alt="Application" width={45} height={45}/>
                                     <div style={{ marginLeft: '15px', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                         <p className='ApplicationTitle'>Camera</p>
                                         <div className='ApplicationInstallButton'>
@@ -632,7 +635,7 @@ export default function SoftwareStore() {
                                     </div>
                                 </div>
                                 <div className='Application'>
-                                    <img src='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/accessories-calculator.svg' alt="Application" width={45} height={45}/>
+                                    <img src={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/original/calc.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/accessories-calculator.svg'} alt="Application" width={45} height={45}/>
                                     <div style={{ marginLeft: '15px', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                         <p className='ApplicationTitle'>Calculator</p>
                                         <div className='ApplicationInstallButton'>
@@ -641,7 +644,7 @@ export default function SoftwareStore() {
                                     </div>
                                 </div>
                                 <div className='Application'>
-                                    <img src='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/accessories-text-editor.svg' alt="Application" width={45} height={45}/>
+                                    <img src={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/text-editor.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/accessories-text-editor.svg'} alt="Application" width={45} height={45}/>
                                     <div style={{ marginLeft: '15px', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                         <p className='ApplicationTitle'>Text Editor</p>
                                         <div className='ApplicationInstallButton'>
@@ -650,7 +653,7 @@ export default function SoftwareStore() {
                                     </div>
                                 </div>
                                 <div className='Application'>
-                                    <img src='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/calendar.svg' alt="Application" width={45} height={45}/>
+                                    <img src={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/original/calendar.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/calendar.svg'} alt="Application" width={45} height={45}/>
                                     <div style={{ marginLeft: '15px', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                         <p className='ApplicationTitle'>Calendar</p>
                                         <div className='ApplicationInstallButton'>
@@ -659,7 +662,7 @@ export default function SoftwareStore() {
                                     </div>
                                 </div>
                                 <div className='Application'>
-                                    <img src='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/utilities-x-terminal.svg' alt="Application" width={45} height={45}/>
+                                    <img src={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/original/terminal.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/utilities-x-terminal.svg'} alt="Application" width={45} height={45}/>
                                     <div style={{ marginLeft: '15px', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                         <p className='ApplicationTitle'>Terminal</p>
                                         <div className='ApplicationInstallButton'>
@@ -668,7 +671,7 @@ export default function SoftwareStore() {
                                     </div>
                                 </div>
                                 <div className='Application'>
-                                    <img src='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/internet-mail.svg' alt="Application" width={45} height={45}/>
+                                    <img src={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/thunderbird.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/internet-mail.svg'} alt="Application" width={45} height={45}/>
                                     <div style={{ marginLeft: '15px', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                         <p className='ApplicationTitle'>Thunderbird</p>
                                         <div className='ApplicationInstallButton'>
@@ -677,7 +680,7 @@ export default function SoftwareStore() {
                                     </div>
                                 </div>
                                 <div className='Application'>
-                                    <img src='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/github-desktop.svg' alt="Application" width={45} height={45}/>
+                                    <img src={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/github-desktop.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/github-desktop.svg'} alt="Application" width={45} height={45}/>
                                     <div style={{ marginLeft: '15px', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                         <p className='ApplicationTitle'>GitHub Desktop</p>
                                         <div className='ApplicationInstallButton'>
@@ -686,7 +689,7 @@ export default function SoftwareStore() {
                                     </div>
                                 </div>
                                 <div className='Application'>
-                                    <img src='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/visual-studio-code.svg' alt="Application" width={45} height={45}/>
+                                    <img src={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/visual-studio-code.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/visual-studio-code.svg'} alt="Application" width={45} height={45}/>
                                     <div style={{ marginLeft: '15px', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                         <p className='ApplicationTitle'>Visual Studio Code</p>
                                         <div className='ApplicationInstallButton'>
@@ -695,7 +698,7 @@ export default function SoftwareStore() {
                                     </div>
                                 </div>
                                 <div className='Application'>
-                                    <img src='https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/vim.svg' alt="Application" width={45} height={45}/>
+                                    <img src={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/vim.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/vim.svg'} alt="Application" width={45} height={45}/>
                                     <div style={{ marginLeft: '15px', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                         <p className='ApplicationTitle'>Vim</p>
                                         <div className='ApplicationInstallButton'>
