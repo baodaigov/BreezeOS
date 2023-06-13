@@ -70,6 +70,7 @@ export const FirefoxStartApp = () => {
 export default function Firefox() {
     const FirefoxWindow = () => {
         const url = useSelector(state => state.firefox.url);
+        const wifi = useSelector(state => state.settings.wifi);
         const dispatch = useDispatch();
         const [hist, setHist] = useState(["https://breezeos.github.io", "https://breezeos.github.io"]);
         
@@ -135,7 +136,7 @@ export default function Firefox() {
                             <div className='TabBarInteraction'>
                                 <i className="fa-regular fa-chevron-left" onClick={() => dispatch(openUrl(hist[0]))}></i>
                                 <i className="fa-regular fa-chevron-right" onClick={() => dispatch(openUrl(hist[1]))}></i>
-                                <i className="fa-regular fa-rotate-right" onClick={reload}></i>
+                                <i className="fa-regular fa-rotate-right" onClick={wifi ? reload : null}></i>
                             </div>
                             <input className='TabSearch' id='ffsearch' type='text' spellCheck='false' placeholder='Search with Google or enter address' onKeyDown={action}/>
                         </div>
@@ -148,7 +149,23 @@ export default function Firefox() {
                 </TopBar>
                 <WindowBody>
                     <div className='Firefox'>
-                        <iframe id='iFrameFF' className='iFrameFF' src={url} title='New Tab' frameBorder='0' allowFullScreen={true}/>
+                        {wifi ? <iframe id='iFrameFF' className='iFrameFF' src={url} title='New Tab' frameBorder='0' allowFullScreen={true}/> : (
+                            <div className='CantBeReached'>
+                                <i className='fa-light fa-router'></i>
+                                <p className='CantBeReachedText'>No Internet connection</p>
+                                <div className='Description'>
+                                    <span className='font-bold'>{url}</span>
+                                    <span> can't be reached because your computer isn't connected to Internet.</span>
+                                    <p>Try:</p>
+                                    <ul className='List'>
+                                        <li>Checking the network cable or router</li>
+                                        <li>Resetting the modem or router</li>
+                                        <li>Reconnecting to Wi-Fi</li>
+                                    </ul>
+                                    <p className='ErrorCode'>ERR_INTERNET_DISCONNECTED</p>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </WindowBody>
             </>

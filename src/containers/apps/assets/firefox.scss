@@ -1,3 +1,6 @@
+$bgcolor: #202023e5;
+$fgcolor: #e2e2e2;
+
 .FirefoxWindow {
     * {
         transition: all ease .3s;
@@ -123,7 +126,7 @@
     }
     
     .Firefox {
-		background: #fff;
+        background: #202023;
         height: 100%;
 
         & > * {
@@ -131,14 +134,51 @@
             height: 100%;
             margin: 0;
         }
+
+        .CantBeReached {
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            padding: 50px 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-width: 62%;
+            margin: 0 auto;
+            color: $fgcolor;
+
+            i {
+                font-size: 55px;
+            }
+
+            .CantBeReachedText {
+                font-weight: 700;
+                font-size: 28px;
+                margin-bottom: 25px;
+            }
+
+            .Description {
+                font-size: 13px;
+                line-height: 1.8;
+
+                .ErrorCode {
+                    margin: 30px 0;
+                    margin-bottom: 0;
+                    font-size: 12px;
+                    color: transparentize($fgcolor, .8);
+                    font-weight: 300;
+                }
+            }
+        }
     }    
 }
 
 .lightMode {
-    .FirefoxWindow .Window .TopBar .TopBarInteractionContainer .TabBar .TabBarItem{
+    .FirefoxWindow {
+        .Window .TopBar .TopBarInteractionContainer .TabBar .TabBarItem{
             background-color: #0000000a;
             color: #000;
-    
+
             &:hover {
                 .CloseButton {
                     &:hover {
@@ -158,5 +198,19 @@
                     color: #00000036;
                 }
             }
+        }
+        .Firefox {
+            background: $fgcolor;
+
+            .CantBeReached {
+                color: $bgcolor;
+
+                .Description {
+                    .ErrorCode {
+                        color: transparentize($bgcolor, .7);
+                    }
+                }
+            }
+        }
     }
 }
