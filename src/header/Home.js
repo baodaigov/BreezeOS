@@ -1,17 +1,18 @@
 import React from 'react';
+import {useSelector} from "react-redux";
 
-function startMenu(){
-  document.getElementsByClassName('DesktopBody')[0].classList.remove('active');
-  document.getElementsByClassName('Header')[0].classList.remove('active');
-  document.getElementsByClassName('StartMenuWrapper')[0].classList.add('active');
-}
+export default function Home(){
+  const shellTheme = useSelector(state => state.shell.theme);
 
-function Home(){
+  function startMenu(){
+      document.getElementsByClassName('DesktopBody')[0].classList.remove('active');
+      document.getElementsByClassName('Header')[0].classList.remove('active');
+      document.getElementsByClassName('StartMenuWrapper')[0].classList.add('active');
+  }
+
   return (
     <div className='Home Header-item' onClick={startMenu}>
-      <i className="fa-regular fa-circle"></i>
+        {shellTheme === 'WhiteSur' ? <i className="fa-brands fa-apple Apple"></i> : <i className="fa-regular fa-circle"></i>}
     </div>
   )
 }
-
-export default Home;

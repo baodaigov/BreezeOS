@@ -16,6 +16,7 @@ import { VSCodeApp } from '../containers/apps/vscode';
 
 const Dock = () => {
     const icon = useSelector(state => state.appearance.iconTheme);
+    const shellTheme = useSelector(state => state.shell.theme);
 
     useEffect(() => {
         setTimeout(() => {
@@ -30,21 +31,23 @@ const Dock = () => {
     };
     
     return (
-        <div className='Dock'>
-            <FirefoxApp/>
-            <CalendarApp/>
-            <SettingsApp/>
-            <ClockApp/>
-            <CameraApp/>
-            <FilesApp/>
-            <CalculatorApp/>
-            <TextEditorApp/>
-            <TerminalApp/>
-            <SoftwareStoreApp/>
-            <a href='https://github.com/baodaigov/BreezeOS'>
-                <DockItem id="github" title="GitHub" icon={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/github-desktop.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/github-desktop.svg'}/>
-            </a>
-            <VSCodeApp/>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <div className={`Dock ${shellTheme === 'WhiteSur' ? 'whitesur' : ''}`}>
+                <FirefoxApp/>
+                <CalendarApp/>
+                <SettingsApp/>
+                <ClockApp/>
+                <CameraApp/>
+                <FilesApp/>
+                <CalculatorApp/>
+                <TextEditorApp/>
+                <TerminalApp/>
+                <SoftwareStoreApp/>
+                <a href='https://github.com/baodaigov/BreezeOS'>
+                    <DockItem id="github" title="GitHub" icon={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/github-desktop.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/github-desktop.svg'}/>
+                </a>
+                <VSCodeApp/>
+            </div>
         </div>
     )
 }

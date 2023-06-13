@@ -169,4 +169,54 @@ $fgcolor: #fff;
             }
         }
     }
+
+    &.whitesur {
+        width: 100%!important;
+        margin: 0;
+        border-radius: 0;
+        padding: 6px 15px;
+
+        .default {
+            .Header-left {
+                .AppMenu {
+                    display: flex;
+                    align-items: center;
+                    * {
+                        list-style: none;
+                        padding: 0;
+                        margin: 0;
+                    }
+                    ul {
+                        display: flex;
+                    }
+                    li {
+                        border-radius: 3px;
+                        padding: 5px 15px;
+                        font-size: 12.5px;
+                    }
+                }
+            }
+            .Header-item {
+                .Apple {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 15px;
+                }
+            }
+
+            .Task {
+                .DateNTime {
+                    font-size: 12.5px;
+                    margin: 0 8px;
+                    margin-left: 20px;
+                }
+            }
+        }
+
+        .lowbattery, .charging {
+            width: 100%;
+            padding: 3px 50px;
+        }
+    }
 }

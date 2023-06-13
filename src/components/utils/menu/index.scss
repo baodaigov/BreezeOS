@@ -2,14 +2,14 @@ $bgcolor: #202023e5;
 $fgcolor: #e2e2e2;
 
 .ActMenu {
-    background: $bgcolor;
+    background: transparentize($bgcolor, .5);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     padding: 5px;
     border-radius: 7px;
     position: absolute;
     box-shadow: 0px 0 20px #0000004e;
-    transition: all ease .15s !important;
+    transition: all ease .15s;
     opacity: 0;
     pointer-events: none;
 
@@ -43,17 +43,42 @@ $fgcolor: #e2e2e2;
             background: #ffffff12;
         }
     }
+
+    &.whitesur {
+        transition: none;
+        padding: 3px;
+        border-radius: 3px;
+
+        .ActMenuSelector {
+            padding: 5px 8px;
+            border-radius: 3px;
+
+            &:hover {
+                background: #007bff;
+                color: $fgcolor;
+            }
+        }
+    }
 }
 
 .lightMode {
     .ActMenu {
-        background: $fgcolor;
+        background: transparentize($fgcolor, .5);
 
         .ActMenuSelector {
             color: $bgcolor;
 
             &:hover {
                 background: #00000012;
+            }
+        }
+
+        &.whitesur {
+            .ActMenuSelector {
+                &:hover {
+                    background: #007bff;
+                    color: $fgcolor;
+                }
             }
         }
     }

@@ -24,6 +24,7 @@ function useOutsideAlerter(ref) {
       if (ref.current && !ref.current.contains(event.target)) {
         document.getElementsByClassName('StartMenuWrapper')[0].classList.remove('active');
         document.getElementsByClassName('Header')[0].classList.add('active');
+        document.getElementsByClassName('Dock')[0].classList.add('active');
         document.getElementsByClassName('DesktopBody')[0].classList.add('active');
       }
     }

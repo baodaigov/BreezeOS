@@ -1,3 +1,4 @@
+import {useSelector} from "react-redux";
 import { forwardRef } from 'react';
 import './index.scss';
 
@@ -12,8 +13,9 @@ export const ActMenuSelector = (props) => {
 }
 
 function ActMenu(props, ref){
+    const shellTheme = useSelector(state => state.shell.theme);
     return (
-        <div className={`ActMenu ${props.className}`} style={props.style} ref={ref}>{props.children}</div>
+        <div className={`ActMenu ${props.className} ${shellTheme === 'WhiteSur' ? 'whitesur' : ''}`} style={props.style} ref={ref}>{props.children}</div>
     )
 }
 

@@ -1,17 +1,15 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import {useSelector} from "react-redux";
 import './Window.scss';
-import TopBarInteraction from './TopBarInteraction';
 
-export default class TopBar extends Component {
-    render(){
-      return (
-        <div className='TopBar' onDoubleClick={this.props.onDblClick}>
-            <p className='TopBarTitle'>{this.props.title}</p>
+export default function TopBar(props){
+    const shellTheme = useSelector(state => state.shell.theme);
+
+    return (
+        <div className={`TopBar ${shellTheme === 'WhiteSur' ? 'whitesur' : ''}`} onDoubleClick={props.onDblClick}>
+            <p className='TopBarTitle'>{props.title}</p>
             <div className='TopBarInteractionContainer'>
-              {this.props.children}
+                {props.children}
             </div>
         </div>
-      )
-    }
+    )
 }

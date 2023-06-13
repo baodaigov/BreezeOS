@@ -1,3 +1,6 @@
+$bgcolor: #202023e5;
+$fgcolor: #e2e2e2;
+
 .Dock {
     position: absolute;
     bottom: -100px;
@@ -14,7 +17,6 @@
     }
 
     .DockItemContainer {
-
         .DockItem {
             margin-right: 11px;
             display: flex;
@@ -92,6 +94,69 @@
             &:hover{
                 .DockItemTitle{
                     opacity: 1;
+                }
+            }
+        }
+    }
+
+    &.whitesur {
+        background: transparentize($bgcolor, .2);
+        backdrop-filter: blur(15px);
+        width: fit-content;
+        -webkit-backdrop-filter: blur(15px);
+        border: 0.5px solid lighten($bgcolor, 25%);
+        border-radius: 13px;
+        margin: 5px 0;
+        padding: 10px 15px;
+
+        .DockItemContainer {
+            .DockItem {
+                img {
+                    transition: none;
+                    &:active {
+                        width: 37px;
+                        height: 37px;
+                        filter: brightness(60%);
+                    }
+                }
+
+                &::after {
+                    position: absolute;
+                    top: 50px;
+                    width: 0;
+                    height: 3px;
+                    transition: none;
+                }
+
+                &.clicked {
+                    img {
+                        position: relative;
+                        animation: focused ease 1s;
+                    }
+
+                    @keyframes focused {
+                        0% {
+                            bottom: 0;
+                        }
+                        50% {
+                            bottom: 10px;
+                        }
+                        100% {
+                            bottom: 0;
+                        }
+                    }
+
+                    &::after {
+                        width: 3px;
+                        background-color: #d9d9d9;
+                    }
+                }
+
+                &.hide {
+                    &::after {
+                        width: 3px;
+                        background-color: #d9d9d9;
+                    }
                 }
             }
         }

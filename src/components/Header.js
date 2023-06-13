@@ -4,10 +4,13 @@ import Time from '../header/Time';
 import Task from '../header/Task';
 import Home from '../header/Home';
 import { useBattery } from 'react-use';
+import DateNTime from "../header/DateNTime";
+import AppMenu from "../header/AppMenu";
 
 const Header = props => {
     const settingsReducer = useSelector(state => state.settings);
     const batteryChargingStatus = useSelector(state => state.battery.charging);
+    const shellTheme = useSelector(state => state.shell.theme);
     const [width, setWidth] = useState('900');
 
     const batteryState = useBattery();
@@ -51,7 +54,7 @@ const Header = props => {
     }, [batteryChargingStatus]);
 
     return (
-        <div className='Header' style={{ width: `${width}px` }}>
+        <div className={`Header ${shellTheme === 'WhiteSur' ? 'whitesur' : ''}`} style={{ width: `${width}px` }}>
             <div className='lowbattery' key='lowbattery'>
                 <div className='LowBatteryText'>
                     <p className='font-bold'>Low Battery</p>
@@ -71,7 +74,8 @@ const Header = props => {
             <div className='default active' key='default'>
                 <div className='Header-left'>
                     <Home/>
-                    <Time/>
+                    {shellTheme !== 'WhiteSur' ? <Time/> : ''}
+                    {shellTheme === 'WhiteSur' ? <AppMenu/> : ''}
                 </div>
                 <Task>
                     <div className={`BatteryStatus ${batteryPercent <= 10 ? "low-battery" : ""}`}>
@@ -80,6 +84,7 @@ const Header = props => {
                     {settingsReducer.airplaneMode ? <i key={Math.random()} className='fa-solid fa-plane'></i> : ''}
                     {settingsReducer.wifi ? <i key={Math.random()} className='fa-solid fa-wifi'></i> : ''}
                     <i key={Math.random()} className='fa-solid fa-volume'></i>
+                    {shellTheme === 'WhiteSur' ? <DateNTime/> : ''}
                 </Task>
             </div>
         </div>

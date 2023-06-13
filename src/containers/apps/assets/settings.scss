@@ -36,42 +36,6 @@ $actcolor: #8fb6ff;
 			pointer-events: none;
 		}
 
-		.ActMenu {
-			background: $bgcolor;
-			backdrop-filter: blur(15px);
-			-webkit-backdrop-filter: blur(15px);
-			padding: 5px;
-			border-radius: 7px;
-			position: absolute;
-			box-shadow: 0px 0 20px #0000004e;
-			transition: all ease .15s !important;
-			opacity: 0;
-			pointer-events: none;
-
-			&.active {
-				opacity: 1;
-				pointer-events: all;
-			}
-
-			.ActMenuSelector {
-				padding: 5px 8px;
-				border-radius: 7px;
-				background: transparent;
-				color: $fgcolor;
-				font-size: 13px;
-				display: flex;
-				align-items: center;
-
-				* {margin: 0;}
-
-				i {margin-right: 7px}
-
-				&:hover {
-					background: #ffffff12;
-				}
-			}
-		}
-
 		.BlackScr {
 			position: absolute;
 			top: 0;
@@ -543,6 +507,12 @@ $actcolor: #8fb6ff;
 					transform: translateX(20px);
 				}
 			}
+
+			&.whitesur {
+				&.active {
+					background: #009dff;
+				}
+			}
 		}
 
         .MaximumExceededBox {
@@ -646,14 +616,14 @@ $actcolor: #8fb6ff;
                 }
             }
         }
-        
+
         .TabBarWrapper {
             margin: 0 10px;
             margin-right: 0;
-    
+
             .TabBar {
                 display: flex;
-    
+
                 .TabBarItem {
                     padding: 4px 9px;
                     color: #fff;
@@ -661,9 +631,9 @@ $actcolor: #8fb6ff;
                     align-items: center;
                     font-size: 11px;
                     margin-right: 5px;
-    
+
                     * { margin: 0 }
-                    
+
                     .TabSeparator {
                         background-color: #ffffff1e;
                         width: 1px;
@@ -702,13 +672,13 @@ $actcolor: #8fb6ff;
                 }
             }
         }
-        
+
         &.minimize {
             width: 1000px;
             height: 600px;
         }
     }
-    
+
     .Settings {
         background: $bgcolor;
         backdrop-filter: blur(15px);
@@ -1532,22 +1502,523 @@ $actcolor: #8fb6ff;
 				}
             }
         }
+
+		&.whitesur {
+			background: #202023;
+
+			.SettingsSection {
+				div {
+					.NavPanel {
+						border-radius: 0;
+						background: transparent;
+						border-bottom: 0.5px solid transparentize($fgcolor, 0.8);
+
+						&:last-child {border-bottom: none}
+
+						.DropdownMenu {
+							transition: none;
+							margin-left: 15px;
+							i {
+								color: #009dff;
+								font-size: 15px;
+								width: 15px;
+								margin-right: 7px;
+							}
+							p {
+								padding: 7px 8px;
+								color: darken($fgcolor, 10%);
+								border-radius: 5px;
+								font-weight: 300;
+							}
+							&:hover {
+								p {
+									background: transparentize($fgcolor, .93);
+								}
+							}
+						}
+					}
+
+		    &[value='1']{
+						.NavPanel .DropdownMenu.wifi {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($fgcolor, .85);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($fgcolor, .85);
+								}
+							}
+						}
+					}
+
+		    &[value='2']{
+						.NavPanel .DropdownMenu.bluetooth {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($fgcolor, .85);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($fgcolor, .85);
+								}
+							}
+						}
+					}
+
+		    &[value='3']{
+						.NavPanel .DropdownMenu.network {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($fgcolor, .85);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($fgcolor, .85);
+								}
+							}
+						}
+					}
+
+		    &[value='4']{
+						.NavPanel .DropdownMenu.appearance {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($fgcolor, .85);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($fgcolor, .85);
+								}
+							}
+						}
+					}
+
+		    &[value='5']{
+						.NavPanel .DropdownMenu.notifications {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($fgcolor, .85);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($fgcolor, .85);
+								}
+							}
+						}
+					}
+
+		    &[value='6']{
+						.NavPanel .DropdownMenu.onlineAccounts {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($fgcolor, .85);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($fgcolor, .85);
+								}
+							}
+						}
+					}
+
+		    &[value='7']{
+						.NavPanel .DropdownMenu.updates {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($fgcolor, .85);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($fgcolor, .85);
+								}
+							}
+						}
+					}
+
+		    &[value='8']{
+						.NavPanel .DropdownMenu.search {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($fgcolor, .85);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($fgcolor, .85);
+								}
+							}
+						}
+					}
+
+		    &[value='9']{
+						.NavPanel .DropdownMenu.battery {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($fgcolor, .85);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($fgcolor, .85);
+								}
+							}
+						}
+					}
+
+		    &[value='10']{
+						.NavPanel .DropdownMenu.apps {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($fgcolor, .85);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($fgcolor, .85);
+								}
+							}
+						}
+					}
+
+		    &[value='11']{
+						.NavPanel .DropdownMenu.privacy {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($fgcolor, .85);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($fgcolor, .85);
+								}
+							}
+						}
+					}
+
+		    &[value='12']{
+						.NavPanel .DropdownMenu.security {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($fgcolor, .85);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($fgcolor, .85);
+								}
+							}
+						}
+					}
+
+		    &[value='13']{
+						.NavPanel .DropdownMenu.share {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($fgcolor, .85);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($fgcolor, .85);
+								}
+							}
+						}
+					}
+
+		    &[value='14']{
+						.NavPanel .DropdownMenu.sound {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($fgcolor, .85);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($fgcolor, .85);
+								}
+							}
+						}
+					}
+		    &[value='15']{
+						.NavPanel .DropdownMenu.displays {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($fgcolor, .85);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($fgcolor, .85);
+								}
+							}
+						}
+					}
+		    &[value='16']{
+						.NavPanel .DropdownMenu.mouseTouchpad {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($fgcolor, .85);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($fgcolor, .85);
+								}
+							}
+						}
+					}
+		    &[value='17']{
+						.NavPanel .DropdownMenu.keyboard {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($fgcolor, .85);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($fgcolor, .85);
+								}
+							}
+						}
+					}
+		    &[value='18']{
+						.NavPanel .DropdownMenu.printer {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($fgcolor, .85);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($fgcolor, .85);
+								}
+							}
+						}
+					}
+		    &[value='19']{
+						.NavPanel .DropdownMenu.regionLanguage {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($fgcolor, .85);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($fgcolor, .85);
+								}
+							}
+						}
+					}
+		    &[value='20']{
+						.NavPanel .DropdownMenu.accessibility {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($fgcolor, .85);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($fgcolor, .85);
+								}
+							}
+						}
+					}
+		    &[value='21']{
+						.NavPanel .DropdownMenu.dateTime {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($fgcolor, .85);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($fgcolor, .85);
+								}
+							}
+						}
+					}
+		    &[value='22']{
+						.NavPanel .DropdownMenu.about {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($fgcolor, .85);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($fgcolor, .85);
+								}
+							}
+						}
+					}
+		    &[value='23']{
+						.NavPanel .DropdownMenu.widgets {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($fgcolor, .85);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($fgcolor, .85);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
     }
 }
 
 .lightMode {
 	.settings {
-		.ActMenu {
-			background: $fgcolor;
-
-			.ActMenuSelector {
-				color: $bgcolor;
-
-				&:hover {
-					background: #00000012;
-				}
-			}
-		}
 		.BlackScr {
 			.WifiSharing {
 				.WindowTopBar {
@@ -2050,6 +2521,506 @@ $actcolor: #8fb6ff;
 						}
 
 						.BlurText {color: transparentize($bgcolor, 0.67)!important;}
+					}
+				}
+			}
+		}
+
+		&.whitesur {
+			background: $fgcolor;
+
+			.SettingsSection {
+				div {
+					.NavPanel {
+						border-bottom: 0.5px solid transparentize($bgcolor, .7);
+
+						.DropdownMenu {
+							i {
+								color: #009dff;
+							}
+							p {
+								color: lighten($bgcolor, 10%);
+							}
+							&:hover {
+								p {
+									background: transparentize($bgcolor, .85);
+								}
+							}
+						}
+					}
+
+		    &[value='1']{
+						.NavPanel .DropdownMenu.wifi {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($bgcolor, .8);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($bgcolor, .8);
+								}
+							}
+						}
+					}
+
+		    &[value='2']{
+						.NavPanel .DropdownMenu.bluetooth {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($bgcolor, .8);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($bgcolor, .8);
+								}
+							}
+						}
+					}
+
+		    &[value='3']{
+						.NavPanel .DropdownMenu.network {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($bgcolor, .8);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($bgcolor, .8);
+								}
+							}
+						}
+					}
+
+		    &[value='4']{
+						.NavPanel .DropdownMenu.appearance {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($bgcolor, .8);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($bgcolor, .8);
+								}
+							}
+						}
+					}
+
+		    &[value='5']{
+						.NavPanel .DropdownMenu.notifications {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($bgcolor, .8);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($bgcolor, .8);
+								}
+							}
+						}
+					}
+
+		    &[value='6']{
+						.NavPanel .DropdownMenu.onlineAccounts {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($bgcolor, .8);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($bgcolor, .8);
+								}
+							}
+						}
+					}
+
+		    &[value='7']{
+						.NavPanel .DropdownMenu.updates {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($bgcolor, .8);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($bgcolor, .8);
+								}
+							}
+						}
+					}
+
+		    &[value='8']{
+						.NavPanel .DropdownMenu.search {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($bgcolor, .8);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($bgcolor, .8);
+								}
+							}
+						}
+					}
+
+		    &[value='9']{
+						.NavPanel .DropdownMenu.battery {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($bgcolor, .8);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($bgcolor, .8);
+								}
+							}
+						}
+					}
+
+		    &[value='10']{
+						.NavPanel .DropdownMenu.apps {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($bgcolor, .8);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($bgcolor, .8);
+								}
+							}
+						}
+					}
+
+		    &[value='11']{
+						.NavPanel .DropdownMenu.privacy {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($bgcolor, .8);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($bgcolor, .8);
+								}
+							}
+						}
+					}
+
+		    &[value='12']{
+						.NavPanel .DropdownMenu.security {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($bgcolor, .8);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($bgcolor, .8);
+								}
+							}
+						}
+					}
+
+		    &[value='13']{
+						.NavPanel .DropdownMenu.share {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($bgcolor, .8);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($bgcolor, .8);
+								}
+							}
+						}
+					}
+
+		    &[value='14']{
+						.NavPanel .DropdownMenu.sound {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($bgcolor, .8);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($bgcolor, .8);
+								}
+							}
+						}
+					}
+		    &[value='15']{
+						.NavPanel .DropdownMenu.displays {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($bgcolor, .8);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($bgcolor, .8);
+								}
+							}
+						}
+					}
+		    &[value='16']{
+						.NavPanel .DropdownMenu.mouseTouchpad {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($bgcolor, .8);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($bgcolor, .8);
+								}
+							}
+						}
+					}
+		    &[value='17']{
+						.NavPanel .DropdownMenu.keyboard {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($bgcolor, .8);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($bgcolor, .8);
+								}
+							}
+						}
+					}
+		    &[value='18']{
+						.NavPanel .DropdownMenu.printer {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($bgcolor, .8);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($bgcolor, .8);
+								}
+							}
+						}
+					}
+		    &[value='19']{
+						.NavPanel .DropdownMenu.regionLanguage {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($bgcolor, .8);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($bgcolor, .8);
+								}
+							}
+						}
+					}
+		    &[value='20']{
+						.NavPanel .DropdownMenu.accessibility {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($bgcolor, .8);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($bgcolor, .8);
+								}
+							}
+						}
+					}
+		    &[value='21']{
+						.NavPanel .DropdownMenu.dateTime {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($bgcolor, .8);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($bgcolor, .8);
+								}
+							}
+						}
+					}
+		    &[value='22']{
+						.NavPanel .DropdownMenu.about {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($bgcolor, .8);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($bgcolor, .8);
+								}
+							}
+						}
+					}
+		    &[value='23']{
+						.NavPanel .DropdownMenu.widgets {
+							margin-left: 15px;
+							i {
+								width: 15px;
+								margin-right: 7px;
+							}
+
+		                	p {
+								font-weight: inherit;
+								background: transparentize($bgcolor, .8);
+							}
+
+							&:hover {
+								p {
+									background: transparentize($bgcolor, .8);
+								}
+							}
+						}
 					}
 				}
 			}

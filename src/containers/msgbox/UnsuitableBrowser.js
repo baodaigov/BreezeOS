@@ -4,7 +4,6 @@ import '../../components/utils/window/Window.scss';
 import TopBar from '../../components/utils/window/TopBar';
 import WindowBodyDefault from '../../components/utils/window/WindowBodyDefault';
 import WindowBodyButton from '../../components/utils/window/WindowBodyButton';
-import Draggable from 'react-draggable';
 import TopBarInteraction from '../../components/utils/window/TopBarInteraction';
 import './assets/index.scss';
 
@@ -20,22 +19,20 @@ export default function UnsuitableBrowser() {
 
     return (
         <div>
-            <Draggable positionOffset={{ x: '-50%', y: '-50%' }}>
-                <div
-                    className={`Window UnsuitableBrowser ${isNaN(batteryPercent) ? 'active' : ''}`}
-                    style={{ width: '690px'}}
-                    key={Math.random()}
-                >
-                    <TopBar>
-                      <TopBarInteraction action='close' onClose={close}/>
-                    </TopBar>
-                    <WindowBodyDefault type='exclamation' title='Unsuitable web browser' content='Some features may not be supported in this browser, we recommend you to use a different one for full experience.'>
-                      <WindowBodyButton>
-                        <button className='Button' key={Math.random()} onClick={close}>OK</button>
-                      </WindowBodyButton>
-                    </WindowBodyDefault>
-                </div>
-            </Draggable>
+            <div
+              className={`Window UnsuitableBrowser ${isNaN(batteryPercent) ? 'active' : ''}`}
+              style={{ width: '690px'}}
+              key={Math.random()}
+              >
+              <TopBar>
+                <TopBarInteraction action='close' onClose={close}/>
+              </TopBar>
+              <WindowBodyDefault type='exclamation' title='Unsuitable web browser' content='Some features may not be supported in this browser, we recommend you to use a different one for full experience.'>
+                <WindowBodyButton>
+                  <button className='Button' key={Math.random()} onClick={close}>OK</button>
+                </WindowBodyButton>
+              </WindowBodyDefault>
+            </div>
         </div>
     )
 }

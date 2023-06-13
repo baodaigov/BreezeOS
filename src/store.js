@@ -8,6 +8,7 @@ import wpReducer from './reducers/wifipassword';
 import nwReducer from './reducers/newwifi';
 import wallpaperReducer from './reducers/wallpaper';
 import imgViewReducer from './reducers/imgview';
+import shellReducer from './reducers/shell';
 import widgetReducer from './reducers/widget'
 import firefoxReducer from './reducers/firefox'
 import vscodeReducer from './reducers/vscode'
@@ -35,6 +36,7 @@ export const store = configureStore({
         newwifi: nwReducer,
         wallpaper: wallpaperReducer,
         imgview: imgViewReducer,
+        shell: shellReducer,
         widget: widgetReducer,
         firefox: firefoxReducer,
         vscode: vscodeReducer,

@@ -26,6 +26,7 @@ import W4 from '../../components/52791.jpg';
 import W5 from '../../components/52532.jpg';
 import W6 from '../../components/52544.jpg';
 import Wifi1 from './assets/BreezeOS-WiFi.png'
+import {changeShell} from "../../reducers/shell";
 
 export const SettingsApp = () => {
     const isActive = useSelector(state => state.appsSettings.active);
@@ -87,6 +88,7 @@ export const SettingsStartApp = () => {
 export default function Settings(){
     const SettingsWindow = () => {
         const settingsReducer = useSelector(state => state.settings);
+        const shellTheme = useSelector(state => state.shell.theme);
         const wifis = useSelector(state => state.settings.wifiList);
         const [settings, setSettings] = useState('Wi-Fi');
         const [value, setValue] = useState('1');
@@ -210,10 +212,10 @@ export default function Settings(){
 
     const nw = useSelector(state => state.newwifi);
     const [cursorMenu, showCursorMenu] = useState(false);
+    const [fontsMenu, showFontsMenu] = useState(false);
     const [iconsMenu, showIconsMenu] = useState(false);
     const [shellMenu, showShellMenu] = useState(false);
     const [soundMenu, showSoundMenu] = useState(false);
-    const [legacyApplicationsMenu, showLegacyApplicationsMenu] = useState(false);
     const [orientationMenu, showOrientationMenu] = useState(false);
     const [resolutionMenu, showResolutionMenu] = useState(false);
     const [refreshRateMenu, showRefreshRateMenu] = useState(false);
@@ -308,14 +310,14 @@ export default function Settings(){
     const soundMenuRef = useRef(null);
     useOutsideSoundMenu(soundMenuRef);
 
-    function useOutsideLegacyAppsMenu(ref) {
+    function useOutsideFontsMenu(ref) {
       useEffect(() => {
         /**
          * Alert if clicked on outside of element
          */
         function handleClickOutside(event) {
           if (ref.current && !ref.current.contains(event.target)) {
-            showLegacyApplicationsMenu(false);
+            showFontsMenu(false);
           }
         }
         // Bind the event listener
@@ -328,8 +330,8 @@ export default function Settings(){
       }, [ref]);
     }
 
-    const legacyAppsMenuRef = useRef(null);
-    useOutsideLegacyAppsMenu(legacyAppsMenuRef);
+    const fontsMenuRef = useRef(null);
+    useOutsideFontsMenu(fontsMenuRef);
 
     function useOutsideOrientationMenu(ref) {
       useEffect(() => {
@@ -460,6 +462,11 @@ export default function Settings(){
         showIconsMenu(false);
     }
 
+    function switchShell(e){
+        dispatch(changeShell(e));
+        showShellMenu(false);
+    }
+
 	function switchTab(){
 		switch(settings){
 			case 'Wi-Fi':
@@ -470,7 +477,7 @@ export default function Settings(){
                                 <div style={{ display: 'flex', flexDirection: 'column', width: '649.516px', height: '100%' }}>
                                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '40px' }}>
                                         <p className='font-bold'>Airplane Mode</p>
-                                        <div className={`Toggle ${settingsReducer.airplaneMode ? 'active' : ''}`} onClick={settingsReducer.airplaneMode ? () => dispatch(toggleAirplaneModeOff()) : () => dispatch(toggleAirplaneModeOn())}></div>
+                                        <div className={`Toggle ${shellTheme === 'WhiteSur' ? 'whitesur' : ''} ${settingsReducer.airplaneMode ? 'active' : ''}`} onClick={settingsReducer.airplaneMode ? () => dispatch(toggleAirplaneModeOff()) : () => dispatch(toggleAirplaneModeOn())}></div>
                                     </div>
                                     {settingsReducer.wifi ? (
                                         <>
@@ -623,15 +630,29 @@ export default function Settings(){
                                     </div>
                                     <div className='ThemesMenu'>
                                         <div style={{ display: 'flex', alignItems: 'center' }}>
+                                            <i className='fa-solid fa-font-case' style={{marginRight: '7px'}}></i>
+                                            <p>Fonts</p>
+                                        </div>
+                                        <div className='ThemesMenuSection' onClick={() => showFontsMenu(true)}>
+                                            <p style={{ marginRight: '7px' }}>Optimistic Display</p>
+                                            <i className='fa-regular fa-chevron-down'></i>
+                                        </div>
+                                        <ActMenu style={{ zIndex: '1', width: '200px', transform: 'translate(415px, 30px)' }} className={fontsMenu ? 'active' : ''} ref={fontsMenuRef}>
+                                            <ActMenuSelector title='Optimistic Display' active></ActMenuSelector>
+                                        </ActMenu>
+                                    </div>
+                                    <div className='ThemesMenu'>
+                                        <div style={{ display: 'flex', alignItems: 'center' }}>
                                             <i className='fa-solid fa-browser' style={{marginRight: '7px'}}></i>
                                             <p>Shell</p>
                                         </div>
                                         <div className='ThemesMenuSection' onClick={() => showShellMenu(true)}>
-                                            <p style={{ marginRight: '7px' }}>Breeze</p>
+                                            <p style={{ marginRight: '7px' }}>{shellTheme}</p>
                                             <i className='fa-regular fa-chevron-down'></i>
                                         </div>
                                         <ActMenu style={{ zIndex: '1', width: '200px', transform: 'translate(415px, 30px)' }} className={shellMenu ? 'active' : ''} ref={shellMenuRef}>
-                                            <ActMenuSelector title='Breeze' active></ActMenuSelector>
+                                            {shellTheme === 'Breeze' ? <ActMenuSelector title='Breeze' active onClick={() => switchShell('Breeze')}></ActMenuSelector> : <ActMenuSelector title='Breeze' onClick={() => switchShell('Breeze')}></ActMenuSelector>}
+                                            {shellTheme === 'WhiteSur' ? <ActMenuSelector title='WhiteSur (beta)' active onClick={() => switchShell('WhiteSur')}></ActMenuSelector> : <ActMenuSelector title='WhiteSur (beta)' onClick={() => switchShell('WhiteSur')}></ActMenuSelector>}
                                         </ActMenu>
                                     </div>
                                     <div className='ThemesMenu'>
@@ -645,19 +666,6 @@ export default function Settings(){
                                         </div>
                                         <ActMenu style={{ zIndex: '1', width: '200px', transform: 'translate(415px, 30px)' }} className={soundMenu ? 'active' : ''} ref={soundMenuRef}>
                                             <ActMenuSelector title='Oxygen' active></ActMenuSelector>
-                                        </ActMenu>
-                                    </div>
-                                    <div className='ThemesMenu'>
-                                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                                            <i className='fa-solid fa-browser' style={{marginRight: '7px'}}></i>
-                                            <p>Legacy Applications</p>
-                                        </div>
-                                        <div className='ThemesMenuSection' onClick={() => showLegacyApplicationsMenu(true)}>
-                                            <p style={{ marginRight: '7px' }}>Default</p>
-                                            <i className='fa-regular fa-chevron-down'></i>
-                                        </div>
-                                        <ActMenu style={{ zIndex: '1', width: '200px', transform: 'translate(415px, 30px)' }} className={legacyApplicationsMenu ? 'active' : ''} ref={legacyAppsMenuRef}>
-                                            <ActMenuSelector title='Default' active></ActMenuSelector>
                                         </ActMenu>
                                     </div>
                                 </div>
@@ -870,7 +878,7 @@ export default function Settings(){
                 <TopBar title='Settings' onDblClick={minimize}>
                     <div className='TabBarWrapper' style={{ width: '100%' }}>
                         <div className='TabBar' style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <div className='TabBarItem' style={{ width: '207px', flexDirection: 'row-reverse' }}>
+                            <div className='TabBarItem' style={{ width: '200px', flexDirection: 'row-reverse' }}>
                                 <div className='TabBarInteraction'>
                                 	<i className="fa-regular fa-magnifying-glass"></i>
                                 </div>
@@ -881,20 +889,20 @@ export default function Settings(){
                                         <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                                             <p>{settings}</p>
                                         </div>
-                                        <div className={`Toggle ${settingsReducer.wifi ? 'active' : ''}`} onClick={() => dispatch(toggleWifi())}></div>
+                                        <div className={`Toggle ${shellTheme === 'WhiteSur' ? 'whitesur' : ''} ${settingsReducer.wifi ? 'active' : ''}`} onClick={() => dispatch(toggleWifi())}></div>
                                     </>
                                 ) : settings == 'Bluetooth' ? (
                                     <>
                                         <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                                             <p>{settings}</p>
                                         </div>
-                                        <div className={`Toggle ${settingsReducer.bluetooth ? 'active' : ''}`} onClick={() => dispatch(toggleBluetooth())}></div>
+                                        <div className={`Toggle ${shellTheme === 'WhiteSur' ? 'whitesur' : ''} ${settingsReducer.bluetooth ? 'active' : ''}`} onClick={() => dispatch(toggleBluetooth())}></div>
                                     </>
                                 ) : <p>{settings}</p>}
                             </div>
                         </div>
                     </div>
-                    <div className='TopBarInteractionWrapper' style={{ display: 'flex' }}>
+                    <div className='To>pBarInteractionWrapper' style={{ display: 'flex' }}>
                         <TopBarInteraction action='hide' onHide={() => dispatch(setHide(true))}/>
                         <TopBarInteraction action={min ? 'max' : 'min'} onMinMax={minimize}/>
                         <TopBarInteraction action='close' onClose={() => dispatch(setActive(false))}/>
@@ -976,7 +984,7 @@ export default function Settings(){
                             </div>
                         </div>
                     </div>
-                    <div className='Settings'>
+                    <div className={`Settings ${shellTheme === 'WhiteSur' ? 'whitesur' : ''}`}>
                         <div className='SettingsSection'>
                             <div style={{ width: '295px', height: '100%' }}>
                                 <div style={{ position: 'relative', width: '100%', height: '100%' }}>
