@@ -789,6 +789,10 @@ export default function Settings(){
                                         <p className='BlurText'>2.0.0</p>
                                     </div>
                                     <div className='AboutMenu'>
+                                        <p>Shell</p>
+                                        <p className='BlurText'>{shellTheme}</p>
+                                    </div>
+                                    <div className='AboutMenu'>
                                         <p>Kernel</p>
                                         <p className='BlurText'>GNU/Linux 6.2.1 x86_64</p>
                                     </div>

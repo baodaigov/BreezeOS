@@ -135,6 +135,59 @@ $fgcolor: #e2e2e2;
             margin: 0;
         }
 
+        .MainScreen {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            transition: none;
+
+            .Main {
+                max-width: 800px;
+                padding: 30px 20px;
+
+                .NonCollapsibleSection {
+                    padding: 0 25px;
+
+                    .SearchWrapper {
+                        padding: 34px 0 38px;
+
+                        .LogoWordMark {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            margin-bottom: 48px;
+
+                            .Logo {
+                                background: url("https://www.mozilla.org/media/img/structured-data/logo-firefox-browser.fbc7ffbb50fd.png") no-repeat center;background-size: 82px;
+                                display: inline-block;
+                                height: 82px;
+                                width: 82px;
+                            }
+
+                            .WordMark {
+                                background: url("./firefox-d.svg") no-repeat center center;
+                                background-size: auto;
+                                background-size: 134px;
+                                display: inline-block;
+                                height: 82px;
+                                margin-inline-start: 16px;
+                                width: 134px;
+                            }
+                        }
+
+                        .Text {
+                            font-weight: 300;
+                            font-size: 20px;
+                            color: $fgcolor;
+                            text-align: center;
+                        }
+                    }
+                }
+            }
+        }
+
         .CantBeReached {
             width: 100%;
             height: 100%;
@@ -146,6 +199,7 @@ $fgcolor: #e2e2e2;
             max-width: 65%;
             margin: 0 auto;
             color: $fgcolor;
+            transition: none;
 
             .CantBeReachedText {
                 font-weight: 700;
@@ -217,6 +271,30 @@ $fgcolor: #e2e2e2;
         }
         .Firefox {
             background: $fgcolor;
+
+            .MainScreen {
+                .Main {
+                    .NonCollapsibleSection {
+                        .SearchWrapper {
+                            .LogoWordMark {
+                                .WordMark {
+                                    background: url("./firefox-l.svg") no-repeat center center;
+                                    background-size: auto;
+                                    background-size: 134px;
+                                    display: inline-block;
+                                    height: 82px;
+                                    margin-inline-start: 16px;
+                                    width: 134px;
+                                }
+                            }
+
+                            .Text {
+                                color: $bgcolor;
+                            }
+                        }
+                    }
+                }
+            }
 
             .CantBeReached {
                 color: $bgcolor;

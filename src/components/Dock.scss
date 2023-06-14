@@ -23,7 +23,6 @@ $fgcolor: #e2e2e2;
             justify-content: center;
 
             img {
-                cursor: pointer!important;
         		transition: all ease .2s;
 
         		&:active {
@@ -88,6 +87,7 @@ $fgcolor: #e2e2e2;
                 border-radius: 30px;
                 opacity: 0;
                 text-align: center;
+                pointer-events: none;
                 transition: all .15s;
             }
 
@@ -107,7 +107,7 @@ $fgcolor: #e2e2e2;
         border: 0.5px solid lighten($bgcolor, 25%);
         border-radius: 13px;
         margin: 5px 0;
-        padding: 10px 15px;
+        padding: 8px;
 
         .DockItemContainer {
             .DockItem {
@@ -122,7 +122,7 @@ $fgcolor: #e2e2e2;
 
                 &::after {
                     position: absolute;
-                    top: 50px;
+                    top: 47px;
                     width: 0;
                     height: 3px;
                     transition: none;

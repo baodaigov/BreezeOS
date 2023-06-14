@@ -92,8 +92,10 @@ export default function Firefox() {
                   if (!qry.startsWith("http")) {
                     qry = "https://" + qry;
                   }
+                } else if(qry === ''){
+                    qry = 'https://breezeos.github.io'
                 } else {
-                  qry = "https://www.bing.com/search?q=" + encodeURIComponent(qry);
+                    qry = "https://www.bing.com/search?q=" + encodeURIComponent(qry);
                 }
         
                 e.target.value = qry;
@@ -132,9 +134,9 @@ export default function Firefox() {
                             <div className='TabBarInteraction'>
                                 <i className="fa-regular fa-chevron-left" onClick={() => dispatch(openUrl(hist[0]))}></i>
                                 <i className="fa-regular fa-chevron-right" onClick={() => dispatch(openUrl(hist[1]))}></i>
-                                <i className="fa-regular fa-rotate-right" onClick={wifi ? reload : null}></i>
+                                {url === '' || !wifi ? <i className="fa-regular fa-rotate-right"></i> : <i className="fa-regular fa-rotate-right" onClick={reload}></i>}
                             </div>
-                            <input className='TabSearch' id='ffsearch' type='text' spellCheck='false' placeholder='Search with Google or enter address' onKeyDown={action}/>
+                            <input className='TabSearch' id='ffsearch' type='text' spellCheck='false' placeholder='Search with Bing or enter address' onKeyDown={action}/>
                         </div>
                     </div>
                     <div className='TopBarInteractionWrapper' style={{ display: 'flex' }}>
@@ -145,22 +147,40 @@ export default function Firefox() {
                 </TopBar>
                 <WindowBody>
                     <div className='Firefox'>
-                        {wifi ? <iframe id='iFrameFF' className='iFrameFF' src={url} title='New Tab' frameBorder='0' allowFullScreen={true}/> : (
-                            <div className='CantBeReached'>
-                                <p className='CantBeReachedText'>Hmm. We're having trouble finding that site.</p>
-                                <div className='Description'>
-                                    <span>We can't conect to the server at {url}</span>
-                                    <p className='font-bold'>If you entered the right address, you can:</p>
-                                    <ul className='List'>
-                                        <li>Try again later</li>
-                                        <li>Check your network connection</li>
-                                        <li>Check that Firefox has permission to access the web &#40;you might be connected but behind a firewall&#41;</li>
-                                    </ul>
-                                    <div className='ButtonContainer'>
-                                        <button className='Button'>Try Again</button>
+                        {url === '' ? (
+                            <div className='MainScreen'>
+                                <div className='Main'>
+                                    <div className='NonCollapsibleSection'>
+                                        <div className='SearchWrapper'>
+                                            <div className='LogoWordMark'>
+                                                <div className='Logo'></div>
+                                                <div className='WordMark'></div>
+                                            </div>
+                                            <p className='Text'>Welcome to Firefox on BreezeOS, search with Bing or enter address, or leave blank to get redirected to BreezeOS official website.</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                        ) : (
+                            <>
+                                {wifi ? <iframe id='iFrameFF' className='iFrameFF' src={url} title='New Tab' frameBorder='0' allowFullScreen={true}/> : (
+                                    <div className='CantBeReached'>
+                                        <p className='CantBeReachedText'>Hmm. We're having trouble finding that site.</p>
+                                        <div className='Description'>
+                                            <span>We can't conect to the server at {url}</span>
+                                            <p className='font-bold'>If you entered the right address, you can:</p>
+                                            <ul className='List'>
+                                                <li>Try again later</li>
+                                                <li>Check your network connection</li>
+                                                <li>Check that Firefox has permission to access the web &#40;you might be connected but behind a firewall&#41;</li>
+                                            </ul>
+                                            <div className='ButtonContainer'>
+                                                <button className='Button'>Try Again</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+                            </>
                         )}
                     </div>
                 </WindowBody>
