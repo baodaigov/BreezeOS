@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/BreezeOS/static/css/main.01af6195.css",
-    "main.js": "/BreezeOS/static/js/main.4881184c.js",
+    "main.css": "/BreezeOS/static/css/main.66818cbe.css",
+    "main.js": "/BreezeOS/static/js/main.30b96b5d.js",
     "static/media/dark.png": "/BreezeOS/static/media/dark.6234c8ee9fb7421f25c8.png",
     "static/media/52496.jpg": "/BreezeOS/static/media/52496.d0aca8ed79fb92a3f932.jpg",
     "static/media/52791.jpg": "/BreezeOS/static/media/52791.2a35203ad57d4fa40bb5.jpg",
@@ -21,11 +21,11 @@
     "static/media/Oxygen-Sys-Special.mp3": "/BreezeOS/static/media/Oxygen-Sys-Special.a1b6fcd2784a78d37e48.mp3",
     "static/media/camera_shutter.mp3": "/BreezeOS/static/media/camera_shutter.51584e05de2aa9b91978.mp3",
     "index.html": "/BreezeOS/index.html",
-    "main.01af6195.css.map": "/BreezeOS/static/css/main.01af6195.css.map",
-    "main.4881184c.js.map": "/BreezeOS/static/js/main.4881184c.js.map"
+    "main.66818cbe.css.map": "/BreezeOS/static/css/main.66818cbe.css.map",
+    "main.30b96b5d.js.map": "/BreezeOS/static/js/main.30b96b5d.js.map"
   },
   "entrypoints": [
-    "static/css/main.01af6195.css",
-    "static/js/main.4881184c.js"
+    "static/css/main.66818cbe.css",
+    "static/js/main.30b96b5d.js"
   ]
 }
