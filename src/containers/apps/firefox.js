@@ -26,10 +26,13 @@ export const FirefoxApp = () => {
         if(isActive){
             document.getElementsByClassName('FirefoxApp')[0].classList.add('clicked');
             setTimeout(() => document.getElementsByClassName('firefox')[0].classList.add('active'), 500);
-            dispatch(openUrl('https://breezeos.github.io'));
         } else {
             document.getElementsByClassName('FirefoxApp')[0].classList.remove('clicked');
             document.getElementsByClassName('firefox')[0].classList.remove('active');
+            setTimeout(() => {
+                dispatch(closeUrl());
+                document.getElementById('ffsearch').value = '';
+            }, 300);
         }
         if(isHide){
             document.getElementsByClassName('FirefoxApp')[0].classList.add('hide');
@@ -104,14 +107,7 @@ export default function Firefox() {
         }
 
         const [min, isMin] = useState(false);
-    
-        function close(){
-            dispatch(setActive(false));
-            setTimeout(() => {
-                dispatch(closeUrl());
-                document.getElementById('ffsearch').value = '';
-            }, 300);
-        }
+
     
         function minimize(){
             document.getElementsByClassName('firefox')[0].classList.toggle('minimize');
@@ -125,7 +121,7 @@ export default function Firefox() {
                         <div className='TabBar'>
                             <div className='TabBarItem' style={{ justifyContent: 'space-between' }}>
                                 <p>New Tab</p>
-                                <div className='CloseButton' onClick={close}>
+                                <div className='CloseButton' onClick={() => dispatch(setActive(false))}>
                                     <i className="fa-regular fa-xmark"></i>
                                 </div>
                             </div>
@@ -144,25 +140,25 @@ export default function Firefox() {
                     <div className='TopBarInteractionWrapper' style={{ display: 'flex' }}>
                         <TopBarInteraction action='hide' onHide={() => dispatch(setHide(true))}/>
                         <TopBarInteraction action={min ? 'max' : 'min'} onMinMax={minimize}/>
-                        <TopBarInteraction action='close' onClose={close}/>
+                        <TopBarInteraction action='close' onClose={() => dispatch(setActive(false))}/>
                     </div>
                 </TopBar>
                 <WindowBody>
                     <div className='Firefox'>
                         {wifi ? <iframe id='iFrameFF' className='iFrameFF' src={url} title='New Tab' frameBorder='0' allowFullScreen={true}/> : (
                             <div className='CantBeReached'>
-                                <i className='fa-light fa-router'></i>
-                                <p className='CantBeReachedText'>No Internet connection</p>
+                                <p className='CantBeReachedText'>Hmm. We're having trouble finding that site.</p>
                                 <div className='Description'>
-                                    <span className='font-bold'>{url}</span>
-                                    <span> can't be reached because your computer isn't connected to Internet.</span>
-                                    <p>Try:</p>
+                                    <span>We can't conect to the server at {url}</span>
+                                    <p className='font-bold'>If you entered the right address, you can:</p>
                                     <ul className='List'>
-                                        <li>Checking the network cable or router</li>
-                                        <li>Resetting the modem or router</li>
-                                        <li>Reconnecting to Wi-Fi</li>
+                                        <li>Try again later</li>
+                                        <li>Check your network connection</li>
+                                        <li>Check that Firefox has permission to access the web &#40;you might be connected but behind a firewall&#41;</li>
                                     </ul>
-                                    <p className='ErrorCode'>ERR_INTERNET_DISCONNECTED</p>
+                                    <div className='ButtonContainer'>
+                                        <button className='Button'>Try Again</button>
+                                    </div>
                                 </div>
                             </div>
                         )}

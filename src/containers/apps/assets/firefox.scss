@@ -143,17 +143,13 @@ $fgcolor: #e2e2e2;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            max-width: 62%;
+            max-width: 65%;
             margin: 0 auto;
             color: $fgcolor;
 
-            i {
-                font-size: 55px;
-            }
-
             .CantBeReachedText {
                 font-weight: 700;
-                font-size: 28px;
+                font-size: 26px;
                 margin-bottom: 25px;
             }
 
@@ -161,12 +157,32 @@ $fgcolor: #e2e2e2;
                 font-size: 13px;
                 line-height: 1.8;
 
-                .ErrorCode {
-                    margin: 30px 0;
-                    margin-bottom: 0;
-                    font-size: 12px;
-                    color: transparentize($fgcolor, .8);
-                    font-weight: 300;
+                .ButtonContainer {
+                    margin: 40px 0;
+                    display: flex;
+                    flex-direction: row-reverse;
+
+                    .Button {
+                        appearance: none;
+                        border: none;
+                        border-radius: 4px;
+                        outline: none;
+                        padding: 0 1.5em;
+                        min-height: 32px;
+                        background: #00ddff;
+                        color: $bgcolor;
+                        font-size: 14px;
+                        font-weight: 700;
+                        transition: none;
+
+                        &:hover {
+                            background: lighten(#00ddff, 20%);
+                        }
+
+                        &:active {
+                            background: lighten(#00ddff, 30%);
+                        }
+                    }
                 }
             }
         }
@@ -206,8 +222,19 @@ $fgcolor: #e2e2e2;
                 color: $bgcolor;
 
                 .Description {
-                    .ErrorCode {
-                        color: transparentize($bgcolor, .7);
+                    .ButtonContainer {
+                        .Button {
+                            background: #0061df;
+                            color: $fgcolor;
+
+                            &:hover {
+                                background: darken(#0061df, 10%);
+                            }
+
+                            &:active {
+                                background: darken(#0061df, 20%);
+                            }
+                        }
                     }
                 }
             }
