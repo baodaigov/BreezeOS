@@ -23,12 +23,6 @@ const Dock = () => {
             document.getElementsByClassName('Dock')[0].classList.add('active');
         },1000);
     }, []);
-
-    const [isActive, setActive] = useState('false');
-
-    const toggle = () => {
-  		setActive(!isActive);
-    };
     
     return (
         <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -43,9 +37,7 @@ const Dock = () => {
                 <TextEditorApp/>
                 <TerminalApp/>
                 <SoftwareStoreApp/>
-                <a href='https://github.com/baodaigov/BreezeOS'>
-                    <DockItem id="github" title="GitHub" icon={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/github-desktop.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/github-desktop.svg'}/>
-                </a>
+                <DockItem id="github" title="GitHub" icon={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/github-desktop.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/github-desktop.svg'} redirectTo='https://github.com/baodaigov/BreezeOS'/>
                 <VSCodeApp/>
             </div>
         </div>

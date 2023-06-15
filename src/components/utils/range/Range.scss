@@ -1,9 +1,10 @@
+$bgcolor: #202023e5;
+$fgcolor: #e2e2e2;
 $rbgcolor: #353535;
 $rtbgcolor: #83aaff;
 
 .Range {
     appearance: none;
-    -webkit-appearance: none;
     height: 27px;
     background-color: $rbgcolor;
     border-radius: 999px;
@@ -11,20 +12,41 @@ $rtbgcolor: #83aaff;
     overflow: hidden;
     transition: all ease .15s;
 
-    &::-webkit-slider-thumb{
+    &::-webkit-slider-thumb {
         appearance: none;
         -webkit-appearance: none;
         width: 30px;
         height: 27px;
         background: $rtbgcolor;
-        box-shadow: 0 0 0 0 $rtbgcolor;
         border-radius: 999px;
         border: 0;
         box-shadow: -210px 0 0 195px $rtbgcolor;
+    }
 
-        &:hover {
+    &:hover {
+        &::-webkit-slider-thumb {
             background: lighten($rtbgcolor,5%);
             box-shadow: -210px 0 0 195px lighten($rtbgcolor,5%);
+        }
+    }
+
+    &.whitesur {
+        height: 5px;
+        margin: 13px 0;
+
+        &::-webkit-slider-thumb {
+            width: 15px;
+            height: 15px;
+            border-radius: 0;
+            background: #009dff;
+            box-shadow: -210px 0 0 195px #009dff;
+        }
+
+        &:hover {
+            &::-webkit-slider-thumb {
+                background: lighten(#009dff,15%);
+                box-shadow: -210px 0 0 195px lighten(#009dff,15%);
+            }
         }
     }
 }

@@ -1991,7 +1991,7 @@ $actcolor: #8fb6ff;
 							}
 						}
 					}
-		    &[value='23']{
+		    		&[value='23']{
 						.NavPanel .DropdownMenu.widgets {
 							margin-left: 15px;
 							i {
@@ -2007,6 +2007,25 @@ $actcolor: #8fb6ff;
 							&:hover {
 								p {
 									background: transparentize($fgcolor, .85);
+								}
+							}
+						}
+					}
+				}
+
+				.SettingsContainer {
+					.SettingsContainerInside {
+						.WiFiWrapper {
+							.WiFi {
+								.VisibleNetworks {
+									.VisibleNetworksItem {
+										border-radius: 5px;
+										padding: 8px 20px;
+
+										&:hover {
+											background: #007bff;
+										}
+									}
 								}
 							}
 						}

@@ -97,13 +97,19 @@ $fgcolor: #e2e2e2;
                 }
             }
         }
+
+        &:last-child {
+            .DockItem {
+                margin-right: 0;
+            }
+        }
     }
 
     &.whitesur {
         background: transparentize($bgcolor, .2);
         backdrop-filter: blur(15px);
-        width: fit-content;
         -webkit-backdrop-filter: blur(15px);
+        width: 99%;
         border: 0.5px solid lighten($bgcolor, 25%);
         border-radius: 13px;
         margin: 5px 0;

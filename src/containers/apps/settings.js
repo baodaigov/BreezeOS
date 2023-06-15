@@ -906,7 +906,7 @@ export default function Settings(){
                             </div>
                         </div>
                     </div>
-                    <div className='To>pBarInteractionWrapper' style={{ display: 'flex' }}>
+                    <div className='TopBarInteractionWrapper' style={{ display: 'flex' }}>
                         <TopBarInteraction action='hide' onHide={() => dispatch(setHide(true))}/>
                         <TopBarInteraction action={min ? 'max' : 'min'} onMinMax={minimize}/>
                         <TopBarInteraction action='close' onClose={() => dispatch(setActive(false))}/>

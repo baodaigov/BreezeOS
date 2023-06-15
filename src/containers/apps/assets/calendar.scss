@@ -122,12 +122,10 @@ $fgcolor: #e2e2e2;
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
-            
 
             .CalendarDateCell {
                 padding: 10px;
                 padding-right: 0;
-                border-radius: 999px;
                 width: 14%;
 
                 p {
@@ -138,7 +136,6 @@ $fgcolor: #e2e2e2;
                     align-items: center;
                     border-radius: 999px;
                     float: right;
-                    transition: all ease .3s;
 
                     &:hover {
                         background: transparentize($fgcolor, 0.95);
@@ -151,9 +148,26 @@ $fgcolor: #e2e2e2;
                     &.today {
                         background: #8fb6ff;
                         color: $bgcolor;
-    
+
                         &:hover {
                             background: #7b9cd9;
+                        }
+                    }
+                }
+            }
+        }
+
+        &.whitesur {
+            background: #202023;
+            .CalendarDate {
+                .CalendarDateCell {
+                    p {
+                        &:hover {
+                            background: inherit;
+                        }
+
+                        &.today {
+                            background: #ff453a;
                         }
                     }
                 }
@@ -200,6 +214,10 @@ $fgcolor: #e2e2e2;
                     background: transparentize($bgcolor, 0.79);
                 }
             }
+        }
+
+        &.whitesur {
+            background: $fgcolor;
         }
     }
 }

@@ -9,6 +9,7 @@ export default function DockItem(props) {
               className={`DockItem ${props.class}`}
               id={props.id}
               key={props.id}
+              onClick={() => props.redirectTo ? window.location.href = props.redirectTo : ''}
             >
               <p className='DockItemTitle'>{props.title}</p>
               <img

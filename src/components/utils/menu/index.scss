@@ -2,7 +2,7 @@ $bgcolor: #202023e5;
 $fgcolor: #e2e2e2;
 
 .ActMenu {
-    background: transparentize($bgcolor, .5);
+    background: $bgcolor;
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     padding: 5px;
@@ -45,9 +45,14 @@ $fgcolor: #e2e2e2;
     }
 
     &.whitesur {
-        transition: none;
+        background: transparentize($bgcolor, .5);
         padding: 3px;
         border-radius: 3px;
+        transition: all ease .25s;
+
+        &.active {
+            transition: none;
+        }
 
         .ActMenuSelector {
             padding: 5px 8px;
@@ -74,6 +79,7 @@ $fgcolor: #e2e2e2;
         }
 
         &.whitesur {
+            background: transparentize($fgcolor, .5);
             .ActMenuSelector {
                 &:hover {
                     background: #007bff;

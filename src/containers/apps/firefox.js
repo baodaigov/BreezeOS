@@ -167,7 +167,7 @@ export default function Firefox() {
                                     <div className='CantBeReached'>
                                         <p className='CantBeReachedText'>Hmm. We're having trouble finding that site.</p>
                                         <div className='Description'>
-                                            <span>We can't conect to the server at {url}</span>
+                                            <span>We can't connect to the server at {url}</span>
                                             <p className='font-bold'>If you entered the right address, you can:</p>
                                             <ul className='List'>
                                                 <li>Try again later</li>

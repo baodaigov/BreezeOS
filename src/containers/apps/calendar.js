@@ -71,6 +71,7 @@ export default function Calendar() {
 
     const CalendarWindow = () => {
         const [min, isMin] = useState(false);
+        const shellTheme = useSelector(state => state.shell.theme);
 
         const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
         const todayObj = dayjs();
@@ -123,7 +124,7 @@ export default function Calendar() {
                     </div>
                 </TopBar>
                 <WindowBody>
-                    <div className='Calendar'>
+                    <div className={`Calendar ${shellTheme === 'WhiteSur' ? 'whitesur' : ''}`}>
                         <div className='CalendarHeader'>
                             {weekDays.map(d => (
                                 <div className="WeekCell">
