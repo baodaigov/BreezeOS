@@ -1,4 +1,5 @@
-import React, { useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
+import { useSelector } from "react-redux";
 import PowerMenuInteraction from './PowerMenuInteraction';
 import './PowerMenu.scss';
 
@@ -20,10 +21,11 @@ function useOutside(ref) {
 }
 
 export default function PowerMenu(){
+    const shellTheme = useSelector(state => state.shell.theme);
     const powerRef = useRef(null);
     useOutside(powerRef);
     return (
-        <div className='PowerMenu' ref={powerRef}>
+        <div className={`PowerMenu ${shellTheme === 'WhiteSur' ? 'whitesur' : ''}`} ref={powerRef}>
             <PowerMenuInteraction type='sleep' key={Math.random()}/>
             <PowerMenuInteraction type='lock' key={Math.random()}/>
             <PowerMenuInteraction type='shutdown' key={Math.random()}/>

@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
+import {useDispatch} from "react-redux";
+import {setActive} from "../reducers/apps/clock";
 
 const Time = () => {
+    const dispatch = useDispatch();
     const [curDate, setCurDate] = useState(null);
     const [curTime, setCurTime] = useState(null);
 
@@ -17,8 +20,8 @@ const Time = () => {
     }, [curTime, curDate]);
 
     return (
-        <div className='DateNTime'>
-            <span style={{ marginRight: '15px' }}>{curDate}</span>
+        <div className='Header-item DateNTime' onClick={() => dispatch(setActive(true))}>
+            <span style={{ marginRight: '10px' }}>{curDate}</span>
             <span>{curTime}</span>
         </div>
     )

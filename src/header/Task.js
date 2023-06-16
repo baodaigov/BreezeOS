@@ -36,7 +36,7 @@ const Task = props => {
         <>
             <div className={`Task Header-item ${panelActive ? 'active' : ''}`} onMouseDown={() => panelActive ? '' : dispatch(activePanel())} ref={panelRef}>
                 {props.children}
-                <Panel style={{ top: "45px", right: "0", height: panelType === 'default' ? '340px' : panelType === 'wifi' ? '545px' : panelType === 'bluetooth' ? '545px' : '340px' }}/>
+                <Panel style={{ height: panelType === 'default' ? '340px' : panelType === 'wifi' ? '545px' : panelType === 'bluetooth' ? '545px' : '340px' }}/>
             </div>
         </>
     )

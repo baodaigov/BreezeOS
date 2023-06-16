@@ -15,7 +15,7 @@ $rtbgcolor: #83aaff;
     &::-webkit-slider-thumb {
         appearance: none;
         -webkit-appearance: none;
-        width: 30px;
+        width: 27px;
         height: 27px;
         background: $rtbgcolor;
         border-radius: 999px;
@@ -31,21 +31,15 @@ $rtbgcolor: #83aaff;
     }
 
     &.whitesur {
-        height: 5px;
-        margin: 13px 0;
+        border: 0.5px solid lighten($rbgcolor, 6%);
 
         &::-webkit-slider-thumb {
-            width: 15px;
-            height: 15px;
-            border-radius: 0;
-            background: #009dff;
-            box-shadow: -210px 0 0 195px #009dff;
-        }
-
-        &:hover {
-            &::-webkit-slider-thumb {
-                background: lighten(#009dff,15%);
-                box-shadow: -210px 0 0 195px lighten(#009dff,15%);
+            border: 0.5px solid lighten(#202023, 25%);
+            background: $fgcolor;
+            box-shadow: -210px 0 0 195px $fgcolor;
+            
+            &:active {
+                background: darken($fgcolor, 10%);
             }
         }
     }

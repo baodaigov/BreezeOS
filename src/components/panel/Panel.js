@@ -12,6 +12,7 @@ import PanelBottom from './PanelBottom';
 const Panel = props => {
     const panelType = useSelector(state => state.panel.type);
     const settings = useSelector(state => state.settings);
+    const shellTheme = useSelector(state => state.shell.theme);
     const dispatch = useDispatch();
 
     function connectWifi(e){
@@ -31,7 +32,7 @@ const Panel = props => {
     }
 
     return (
-        <div className='Panel' style={props.style}>
+        <div className={`Panel ${shellTheme === 'WhiteSur' ? 'whitesur' : ''}`} style={props.style}>
             <div style={{ position: 'relative' }}>
                 <div className='PanelTypeContainer' style={{ transform: `translateX(${panelType === 'default' ? '0' : panelType === 'wifi' ? '-330px' : panelType === 'bluetooth' ? '-653px' : '0'})`}}>
                     <div className={`defaultPanel ${panelType === 'default' ? 'active' : ''}`}>
@@ -46,7 +47,7 @@ const Panel = props => {
                                 </div>
                                 <p className='PanelName'>Wi-Fi</p>
                             </div>
-                            <div className={`Toggle ${settings.wifi ? 'active' : ''}`} onClick={() => dispatch(toggleWifi())}></div>
+                            <div className={`Toggle ${shellTheme === 'WhiteSur' ? 'whitesur' : ''} ${settings.wifi ? 'active' : ''}`} onClick={() => dispatch(toggleWifi())}></div>
                         </div>
                         {settings.wifi ? (
                             <div className='WifiList'>
@@ -91,7 +92,7 @@ const Panel = props => {
                                 </div>
                                 <p className='PanelName'>Bluetooth</p>
                             </div>
-                            <div className={`Toggle ${settings.bluetooth ? 'active' : ''}`} onClick={() => dispatch(toggleBluetooth())}></div>
+                            <div className={`Toggle ${shellTheme === 'WhiteSur' ? 'whitesur' : ''} ${settings.bluetooth ? 'active' : ''}`} onClick={() => dispatch(toggleBluetooth())}></div>
                         </div>
                         {settings.bluetooth ? (
                             <p className='Description'>Now discoverable as "{settings.deviceName}"</p>

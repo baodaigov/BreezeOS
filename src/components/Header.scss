@@ -41,9 +41,9 @@ $fgcolor: #fff;
             display: flex;
         }
 
-
         .Header-right {
             display: flex;
+            align-items: center;
         }
 
         .Header-item {
@@ -54,6 +54,10 @@ $fgcolor: #fff;
             transition: ease .05s;
             display: flex;
             align-items: center;
+            
+            &.active {
+                background: #ffffff10;
+            }
         }
 
         .Header-item:active{
@@ -65,9 +69,6 @@ $fgcolor: #fff;
             align-items: center;
             i {
                 margin: 0 5px;
-            }
-            &.active {
-                background: #ffffff10;
             }
         }
 
@@ -179,7 +180,7 @@ $fgcolor: #fff;
         width: 100%!important;
         margin: 0;
         border-radius: 0;
-        padding: 3px 15px;
+        padding: 4px 15px;
 
         .default {
             .Header-left {
@@ -202,20 +203,33 @@ $fgcolor: #fff;
                 }
             }
 
+            .Header-right {
+                .Header-item {
+                    border-radius: 4px;
+                    padding: 5px 10px;
+
+                    i {
+                        font-size: 12.5px;
+                    }
+
+                    &.disabled {
+                        * {
+                            color: transparentize($fgcolor, .8);
+                        }
+                    }
+                }
+                
+                .DateNTime {
+                    font-size: 12px;
+                }
+            }
+
             .Header-item {
                 .Apple {
                     display: flex;
                     justify-content: center;
                     align-items: center;
                     font-size: 15px;
-                }
-            }
-
-            .Task {
-                .DateNTime {
-                    font-size: 12.5px;
-                    margin: 0 8px;
-                    margin-left: 20px;
                 }
             }
         }

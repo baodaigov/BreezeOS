@@ -47,4 +47,9 @@ $fgcolor: #e2e2e2;
             font-size: 14px;
         }
     }
+
+    &.whitesur {
+        background: #151515;
+        border: 0.5px solid lighten(#202023, 8%);
+    }
 }
