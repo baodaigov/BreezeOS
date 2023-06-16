@@ -75,7 +75,7 @@ export default function Firefox() {
         const url = useSelector(state => state.firefox.url);
         const wifi = useSelector(state => state.settings.wifi);
         const dispatch = useDispatch();
-        const [hist, setHist] = useState(["https://breezeos.github.io", "https://breezeos.github.io"]);
+        const [hist, setHist] = useState(['', '']);
         
         const isValidURL = (string) => {
             var res = string.match(

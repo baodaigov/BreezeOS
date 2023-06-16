@@ -222,7 +222,8 @@ $actcolor: #8fb6ff;
 								font-size: 12px;
 								padding: 5px 10px;
 								background-color: transparentize($fgcolor, 0.93);
-								transition: all ease .3s;
+								transition: all ease .1s;
+								border-bottom: 1px solid transparent;
 
 								&::-ms-clear, &::-ms-reveal {display:none}
 
@@ -305,6 +306,30 @@ $actcolor: #8fb6ff;
 							background-color: transparentize($fgcolor, 0.98);
 							color: transparentize($fgcolor, 0.7);
 							pointer-events: none;
+						}
+					}
+				}
+
+				&.whitesur {
+					.WindowBodyDefault {
+						border-radius: 10px;
+						background: #202023;
+						border: 0.5px solid lighten($bgcolor, 25%);
+
+						.WindowBodyContent {
+							.PasswordContainer {
+								.InputPassword {
+									border: 3px solid transparent;
+
+									&:focus {
+										border: 3px solid transparentize(#009dff, 0.6);
+									}
+	
+									&.wrongPassword {
+										border: 3px solid transparentize(#ff9191, 0.6);
+									}
+								}
+							}
 						}
 					}
 				}
@@ -2075,30 +2100,6 @@ $actcolor: #8fb6ff;
 			}
 
 			.InsertWifiPassword {
-				.WindowTopBar {
-					background: $fgcolor;
-
-					.WindowTopBarTitle {
-						color: $bgcolor;
-					}
-
-					.WindowTopBarInteractionContainer {
-						display: flex;
-
-						.WindowTopBarInteraction {
-							color: $bgcolor;
-
-							&:hover {
-								background: #3b3b3f;
-							}
-
-							&.close:hover{
-								background: #ff5252;
-							}
-						}
-					}
-				}
-
 				.WindowBodyDefault {
 					background: $fgcolor;
 					color: $bgcolor;

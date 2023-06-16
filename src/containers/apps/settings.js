@@ -930,7 +930,7 @@ export default function Settings(){
                                 </div>
                             </div>
                         </div>
-                        <div className={`InsertWifiPassword ${wp.active ? 'active' : ''}`}>
+                        <div className={`InsertWifiPassword ${wp.active ? 'active' : ''} ${shellTheme === 'WhiteSur' ? 'whitesur' : ''}`}>
                             <div className="WindowBodyDefault">
                                 <div className='WindowBodyContent'>
                                     <div className='WindowBodyIcon'>
