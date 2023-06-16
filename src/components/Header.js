@@ -77,15 +77,17 @@ const Header = props => {
                     {shellTheme !== 'WhiteSur' ? <Time/> : ''}
                     {shellTheme === 'WhiteSur' ? <AppMenu/> : ''}
                 </div>
-                <Task>
-                    <div className={`BatteryStatus ${batteryPercent <= 10 ? "low-battery" : ""}`}>
-                        <p className={`BatteryStatusLevel font-bold ${batteryState.charging ? "in-charge" : ""}`}>{isNaN(batteryPercent) ? '-' : batteryPercent + '%'}</p>
-                    </div>
-                    {settingsReducer.airplaneMode ? <i key={Math.random()} className='fa-solid fa-plane'></i> : ''}
-                    {settingsReducer.wifi ? <i key={Math.random()} className='fa-solid fa-wifi'></i> : ''}
-                    <i key={Math.random()} className='fa-solid fa-volume'></i>
-                    {shellTheme === 'WhiteSur' ? <DateNTime/> : ''}
-                </Task>
+                <div className='Header-right'>
+                    <Task>
+                        <div className={`BatteryStatus ${batteryPercent <= 10 ? "low-battery" : ""}`}>
+                            <p className={`BatteryStatusLevel font-bold ${batteryState.charging ? "in-charge" : ""}`}>{isNaN(batteryPercent) ? '-' : batteryPercent + '%'}</p>
+                        </div>
+                        {settingsReducer.airplaneMode ? <i key={Math.random()} className='fa-solid fa-plane'></i> : ''}
+                        {settingsReducer.wifi ? <i key={Math.random()} className='fa-solid fa-wifi'></i> : ''}
+                        <i key={Math.random()} className='fa-solid fa-volume'></i>
+                        {shellTheme === 'WhiteSur' ? <DateNTime/> : ''}
+                    </Task>
+                </div>
             </div>
         </div>
     )

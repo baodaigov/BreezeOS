@@ -914,7 +914,7 @@ export default function Settings(){
                 </TopBar>
                 <WindowBody>
                     <div className={`BlackScr ${shareWifi ? 'active' : ''} ${wp.active ? 'active' : ''} ${nw.active ? 'active' : ''}`}>
-                        <div className={`WifiSharing ${shareWifi ? 'active' : ''}`}>
+                        <div className={`WifiSharing ${shellTheme === 'WhiteSur' ? 'whitesur' : ''} ${shareWifi ? 'active' : ''}`}>
                             <div className='WindowTopBar'>
                                 <p className='WindowTopBarTitle'>Wi-Fi Sharing</p>
                                 <div className="WindowTopBarInteractionContainer">
@@ -930,7 +930,7 @@ export default function Settings(){
                                 </div>
                             </div>
                         </div>
-                        <div className={`InsertWifiPassword ${wp.active ? 'active' : ''} ${shellTheme === 'WhiteSur' ? 'whitesur' : ''}`}>
+                        <div className={`InsertWifiPassword ${shellTheme === 'WhiteSur' ? 'whitesur' : ''} ${wp.active ? 'active' : ''}`}>
                             <div className="WindowBodyDefault">
                                 <div className='WindowBodyContent'>
                                     <div className='WindowBodyIcon'>
@@ -950,7 +950,7 @@ export default function Settings(){
                                 </div>
                             </div>
                         </div>
-                        <div className={`ConnectOtherNetworks ${nw.active ? 'active' : ''}`}>
+                        <div className={`ConnectOtherNetworks ${shellTheme === 'WhiteSur' ? 'whitesur' : ''} ${nw.active ? 'active' : ''}`}>
                             <div className="WindowBodyDefault">
                                 <div className='WindowBodyContent'>
                                     <div className='WindowBodyIcon'>
@@ -974,8 +974,8 @@ export default function Settings(){
                                                     {nw.security === 'WPA3 Enterprise' ? <ActMenuSelector title='WPA3 Enterprise' active onClick={() => switchSecurity('WPA3 Enterprise')}></ActMenuSelector> : <ActMenuSelector title='WPA3 Enterprise' onClick={() => switchSecurity('WPA3 Enterprise')}></ActMenuSelector>}
                                                 </ActMenu>
                                             </div>
-                                            <div style={{ display: 'flex' }}>
-                                                <input type={wp.isShow ? 'text' : 'password'} id='password' placeholder='Password' autoComplete={false} spellCheck={false} value={wp.value} onInput={e => dispatch(setInputPassword(e.target.value))} className={`Input ${wp.isWrong ? 'wrongInfo' : ''} ${wrongPasswordAni ? 'activeAnimation' : ''}`}/>
+                                            <div style={{ display: 'flex', alignItems: 'center' }}>
+                                                <input type={wp.isShow ? 'text' : 'password'} id='password' placeholder='Password' autoComplete={false} spellCheck={false} value={wp.value} onInput={e => dispatch(setInputPassword(e.target.value))} className={`Input ${wp.isWrong ? 'wrongInfo' : ''} ${wrongPasswordAni ? 'activeAnimation' : ''}`} style={{ margin: '0' }}/>
                                                 <i className={`fa-regular ${wp.isShow ? 'fa-eye-slash' : 'fa-eye'} displayPassword ${wp.value == '' ? 'disabled' : ''}`} onClick={() => wp.isShow ? dispatch(displayPassword(false)) : dispatch(displayPassword(true))}></i>
                                             </div>
                                         </div>

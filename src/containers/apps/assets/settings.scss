@@ -148,6 +148,47 @@ $actcolor: #8fb6ff;
 						font-size: 35px;
 					}
 				}
+
+				&.whitesur {
+					.WindowTopBar {
+						background: #202023;
+						padding-left: 12px;
+						padding-right: 12px;
+						border-top-left-radius: 10px;
+						border-top-right-radius: 10px;
+						border: 0.5px solid lighten(#202023, 25%);
+						border-bottom: none;
+		  
+						.WindowTopBarInteractionContainer {
+							.WindowTopBarInteraction {
+								width: 13px;
+								height: 13px;
+								color: $bgcolor;
+								font-size: 8px;
+								margin-left: 8px;
+		  
+								i {display: none}
+		  
+								&.close {
+									background: #ff5e57;
+		  
+									&:active {
+										background: lighten(#ff5e57, 20%);
+									}
+		  
+									&:hover {
+										i {display: block}
+									}
+								}
+							}
+						}
+					}
+					.WindowBodyDefault {
+						background: #202023;
+						border: 0.5px solid lighten(#202023, 25%);
+						border-top: none;
+					}
+				}
 			}
 
 			.InsertWifiPassword {
@@ -223,7 +264,6 @@ $actcolor: #8fb6ff;
 								padding: 5px 10px;
 								background-color: transparentize($fgcolor, 0.93);
 								transition: all ease .1s;
-								border-bottom: 1px solid transparent;
 
 								&::-ms-clear, &::-ms-reveal {display:none}
 
@@ -311,6 +351,7 @@ $actcolor: #8fb6ff;
 				}
 
 				&.whitesur {
+					border-radius: 10px;
 					.WindowBodyDefault {
 						border-radius: 10px;
 						background: #202023;
@@ -319,8 +360,6 @@ $actcolor: #8fb6ff;
 						.WindowBodyContent {
 							.PasswordContainer {
 								.InputPassword {
-									border: 3px solid transparent;
-
 									&:focus {
 										border: 3px solid transparentize(#009dff, 0.6);
 									}
@@ -499,6 +538,29 @@ $actcolor: #8fb6ff;
 							background-color: transparentize($fgcolor, 0.98);
 							color: transparentize($fgcolor, 0.7);
 							pointer-events: none;
+						}
+					}
+				}
+
+				&.whitesur {
+					border-radius: 10px;
+					.WindowBodyDefault {
+						border-radius: 10px;
+						background: #202023;
+						border: 0.5px solid lighten($bgcolor, 25%);
+
+						.WindowBodyContent {
+							.InfoContainer {
+								.Input {
+									&:focus {
+										border: 3px solid transparentize(#009dff, 0.6);
+									}
+	
+									&.wrongInfo {
+										border: 3px solid transparentize(#ff9191, 0.6);
+									}
+								}
+							}
 						}
 					}
 				}
@@ -2097,6 +2159,20 @@ $actcolor: #8fb6ff;
 						&:hover { background-color: #00000020; }
 					}
 				}
+
+				&.whitesur {
+					.WindowTopBar {
+						background: $fgcolor;
+						border: 0.5px solid lighten(#202023, 5%);
+						border-bottom: none;
+					}
+
+					.WindowBodyDefault {
+						background: $fgcolor;
+						border: 0.5px solid lighten(#202023, 5%);
+						border-top: none;
+					}
+				}
 			}
 
 			.InsertWifiPassword {
@@ -2141,6 +2217,13 @@ $actcolor: #8fb6ff;
 							color: lighten($bgcolor, 60%);
 							pointer-events: none;
 						}
+					}
+				}
+
+				&.whitesur {
+					.WindowBodyDefault {
+						background: $fgcolor;
+						border: 0.5px solid lighten(#202023, 5%);
 					}
 				}
 			}
@@ -2211,6 +2294,13 @@ $actcolor: #8fb6ff;
 							color: lighten($bgcolor, 60%);
 							pointer-events: none;
 						}
+					}
+				}
+
+				&.whitesur {
+					.WindowBodyDefault {
+						background: $fgcolor;
+						border: 0.5px solid lighten(#202023, 5%);
 					}
 				}
 			}
@@ -3038,6 +3128,26 @@ $actcolor: #8fb6ff;
 							&:hover {
 								p {
 									background: transparentize($bgcolor, .8);
+								}
+							}
+						}
+					}
+				}
+
+				.SettingsContainer {
+					.SettingsContainerInside {
+						.WiFiWrapper {
+							.WiFi {
+								.VisibleNetworks {
+									.VisibleNetworksItem {
+										border-radius: 5px;
+										padding: 8px 20px;
+
+										&:hover {
+											background: #007bff!important;
+											color: $fgcolor;
+										}
+									}
 								}
 							}
 						}
