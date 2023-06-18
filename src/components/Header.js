@@ -8,6 +8,7 @@ import Panel from './panel/Panel'
 import { useBattery } from 'react-use';
 import DateNTime from "../header/DateNTime";
 import AppMenu from "../header/AppMenu";
+import PanelType from './panel/PanelType';
 
 const Header = props => {
     const dispatch = useDispatch();
@@ -17,6 +18,11 @@ const Header = props => {
     const batteryChargingStatus = useSelector(state => state.battery.charging);
     const shellTheme = useSelector(state => state.shell.theme);
     const [width, setWidth] = useState('900');
+    const [wifiPanelActive, setWifiPanelActive] = useState(false);
+    const [batteryPanelActive, setBatteryPanelActive] = useState(false);
+    const [bluetoothPanelActive, setBluetoothPanelActive] = useState(false);
+    const [brightnessPanelActive, setBrightnessPanelActive] = useState(false);
+    const [volumePanelActive, setVolumePanelActive] = useState(false);
     
     function useOutsidePanel(ref) {
         useEffect(() => {
@@ -39,6 +45,116 @@ const Header = props => {
 
     const panelRef = useRef(null);
     useOutsidePanel(panelRef);
+    
+    function useOutsideWifiPanel(ref) {
+        useEffect(() => {
+            /**
+                * Alert if clicked on outside of element
+            */
+            function handleClickOutside(event) {
+                if (ref.current && !ref.current.contains(event.target)) {
+                    setWifiPanelActive(false);
+                }
+            }
+            // Bind the event listener
+            document.addEventListener("mousedown", handleClickOutside);
+            return () => {
+                // Unbind the event listener on clean up
+                document.removeEventListener("mousedown", handleClickOutside);
+            };
+        }, [ref]);
+    }
+
+    const wifiPanelRef = useRef(null);
+    useOutsideWifiPanel(wifiPanelRef);
+
+    function useOutsideBatteryPanel(ref) {
+        useEffect(() => {
+            /**
+                * Alert if clicked on outside of element
+            */
+            function handleClickOutside(event) {
+                if (ref.current && !ref.current.contains(event.target)) {
+                    setBatteryPanelActive(false);
+                }
+            }
+            // Bind the event listener
+            document.addEventListener("mousedown", handleClickOutside);
+            return () => {
+                // Unbind the event listener on clean up
+                document.removeEventListener("mousedown", handleClickOutside);
+            };
+        }, [ref]);
+    }
+
+    const batteryPanelRef = useRef(null);
+    useOutsideBatteryPanel(batteryPanelRef);
+    
+    function useOutsideBluetoothPanel(ref) {
+        useEffect(() => {
+            /**
+                * Alert if clicked on outside of element
+            */
+            function handleClickOutside(event) {
+                if (ref.current && !ref.current.contains(event.target)) {
+                    setBluetoothPanelActive(false);
+                }
+            }
+            // Bind the event listener
+            document.addEventListener("mousedown", handleClickOutside);
+            return () => {
+                // Unbind the event listener on clean up
+                document.removeEventListener("mousedown", handleClickOutside);
+            };
+        }, [ref]);
+    }
+
+    const bluetoothPanelRef = useRef(null);
+    useOutsideBluetoothPanel(bluetoothPanelRef);
+    
+    function useOutsideBrightnessPanel(ref) {
+        useEffect(() => {
+            /**
+                * Alert if clicked on outside of element
+            */
+            function handleClickOutside(event) {
+                if (ref.current && !ref.current.contains(event.target)) {
+                    setBrightnessPanelActive(false);
+                }
+            }
+            // Bind the event listener
+            document.addEventListener("mousedown", handleClickOutside);
+            return () => {
+                // Unbind the event listener on clean up
+                document.removeEventListener("mousedown", handleClickOutside);
+            };
+        }, [ref]);
+    }
+
+    const brightnessPanelRef = useRef(null);
+    useOutsideBrightnessPanel(brightnessPanelRef);
+    
+    function useOutsideVolumePanel(ref) {
+        useEffect(() => {
+            /**
+                * Alert if clicked on outside of element
+            */
+            function handleClickOutside(event) {
+                if (ref.current && !ref.current.contains(event.target)) {
+                    setVolumePanelActive(false);
+                }
+            }
+            // Bind the event listener
+            document.addEventListener("mousedown", handleClickOutside);
+            return () => {
+                // Unbind the event listener on clean up
+                document.removeEventListener("mousedown", handleClickOutside);
+            };
+        }, [ref]);
+    }
+
+    const volumePanelRef = useRef(null);
+    useOutsideVolumePanel(volumePanelRef);
 
     const batteryState = useBattery();
 
@@ -121,20 +237,25 @@ const Header = props => {
                                 <i className='fa-regular fa-chevron-down'></i>
                                 <Panel style={{ height: panelType === 'default' ? '340px' : panelType === 'wifi' ? '545px' : panelType === 'bluetooth' ? '545px' : '340px' }}/>
                             </div>
-                            <div className={`Header-item ${settingsReducer.bluetooth ? '' : 'disabled'}`}>
+                            <div className={`Header-item ${settingsReducer.bluetooth ? '' : 'disabled'} ${bluetoothPanelActive ? 'active' : ''}`} onMouseDown={() => bluetoothPanelActive ? '' : setBluetoothPanelActive(true)} ref={bluetoothPanelRef}>
                                 <i className='fa-regular fa-bluetooth'></i>
+                                <PanelType type='bluetooth' onActive={bluetoothPanelActive ? true : false} style={{ height: '545px', right: '300px' }}/>
                             </div>
-                            <div className='Header-item'>
-                                {batteryChargingStatus ? <i className='fa-regular fa-battery-bolt'></i> : <i className='fa-regular fa-battery-full'></i>}
+                            <div className={`Header-item ${batteryPanelActive ? 'active' : ''}`} onMouseDown={() => batteryPanelActive ? '' : setBatteryPanelActive(true)} ref={batteryPanelRef}>
+                                {batteryChargingStatus ? <i className='fa-regular fa-battery-bolt'></i> : batteryPercent <= 10 ? <i class="fa-regular fa-battery-exclamation" style={{ color: '#bd3a35' }}></i> : <i className='fa-regular fa-battery-full'></i>}
+                                <PanelType type='battery' onActive={batteryPanelActive ? true : false} style={{ height: '80px', right: '268px' }}/>
                             </div>
-                            <div className={`Header-item ${settingsReducer.wifi ? '' : 'disabled'}`}>
+                            <div className={`Header-item ${settingsReducer.wifi ? '' : 'disabled'} ${wifiPanelActive ? 'active' : ''}`} onMouseDown={() => wifiPanelActive ? '' : setWifiPanelActive(true)} ref={wifiPanelRef}>
                                 {settingsReducer.wifi ? <i className='fa-regular fa-wifi'></i> : <i className='fa-regular fa-wifi-slash'></i>}
+                                <PanelType type='wifi' onActive={wifiPanelActive ? true : false} style={{ height: '585px', right: '232px' }}/>
                             </div>
-                            <div className='Header-item'>
+                            <div className={`Header-item ${brightnessPanelActive ? 'active' : ''}`} onMouseDown={() => brightnessPanelActive ? '' : setBrightnessPanelActive(true)} ref={brightnessPanelRef}>
                                 <i className='fa-regular fa-brightness'></i>
+                                <PanelType type='brightness' onActive={brightnessPanelActive ? true : false} style={{ height: '90px', right: '198px' }}/>
                             </div>
-                            <div className='Header-item'>
+                            <div className={`Header-item ${volumePanelActive ? 'active' : ''}`} onMouseDown={() => volumePanelActive ? '' : setVolumePanelActive(true)} ref={volumePanelRef}>
                                 <i className='fa-regular fa-volume'></i>
+                                <PanelType type='volume' onActive={volumePanelActive ? true : false} style={{ height: '90px', right: '163px' }}/>
                             </div>
                             <DateNTime/>
                         </>

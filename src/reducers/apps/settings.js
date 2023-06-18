@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     active: false,
-    hide: false
+    hide: false,
+    settings: 'Wi-Fi'
 }
 
 const settingsSlice = createSlice({
@@ -15,10 +16,13 @@ const settingsSlice = createSlice({
         },
         setHide: (state, action) => {
             state.hide = action.payload;
+        },
+        setSettings: (state, action) => {
+            state.settings = action.payload;
         }
     }
 });
 
-export const {setActive,setHide} = settingsSlice.actions;
+export const {setActive,setHide,setSettings} = settingsSlice.actions;
 
 export default settingsSlice.reducer;

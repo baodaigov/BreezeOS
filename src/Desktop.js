@@ -28,17 +28,20 @@ const Desktop = () => {
     },2000);
 
     return (
-        <div className='Desktop' onContextMenu={e => e.preventDefault()}>
-            <TerminalWindow/>
-            {isMobile() ? <h1 className='error'>Sorry, in order to use the operating system, please switch to the desktop.</h1> : ''}
-            <LockScreen/>
-            <Menu/>
-            <StartMenu/>
-            <Header/>
-            <Wallpaper/>
-            <DesktopBody/>
-            <Dock/>
-        </div>
+        <>
+            <div className='Desktop' onContextMenu={e => e.preventDefault()}>
+                <TerminalWindow/>
+                {isMobile() ? <h1 className='error'>Sorry, in order to use the operating system, please switch to the desktop.</h1> : ''}
+                <LockScreen/>
+                <Menu/>
+                <StartMenu/>
+                <Header/>
+                <Wallpaper/>
+                <DesktopBody/>
+                <Dock/>
+            </div>
+            <div id='brightness'></div>
+        </>
     )
 }
 

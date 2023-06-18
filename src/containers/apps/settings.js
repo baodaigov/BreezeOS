@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import {setActive, setHide} from "../../reducers/apps/settings";
+import {setActive, setHide, setSettings} from "../../reducers/apps/settings";
 import { insertPasswordFor, cancelPassword, setInputPassword, setPasswordDisable, displayPassword, setWrongPassword } from '../../reducers/wifipassword';
 import {toggleActive, setSecurity, setWifiName, setInactive} from '../../reducers/newwifi';
 import {switchIcons} from '../../reducers/appearance';
@@ -90,124 +90,124 @@ export default function Settings(){
         const settingsReducer = useSelector(state => state.settings);
         const shellTheme = useSelector(state => state.shell.theme);
         const wifis = useSelector(state => state.settings.wifiList);
-        const [settings, setSettings] = useState('Wi-Fi');
+        const settings = useSelector(state => state.appsSettings.settings);
         const [value, setValue] = useState('1');
         const [wallpaperValue, setValueWallpaper] = useState('1');
         const dispatch = useDispatch();
 
         function wifi(){
             setValue('1');
-	        setSettings('Wi-Fi');
+	        dispatch(setSettings('Wi-Fi'));
         }
         
         function bluetooth(){
             setValue('2');
-	    setSettings('Bluetooth');
+	    dispatch(setSettings('Bluetooth'));
         }
         
         function network(){
             setValue('3');
-	    setSettings('Network');
+	    dispatch(setSettings('Network'));
         }
         
         function appearance(){
             setValue('4');
-	    setSettings('Appearance');
+	    dispatch(setSettings('Appearance'));
         }
         
         function notifications(){
             setValue('5');
-	    setSettings('Notifications');
+	    dispatch(setSettings('Notifications'));
         }
         
         function onlineAccounts(){
             setValue('6');
-	    setSettings('Online Accounts');
+	    dispatch(setSettings('Online Accounts'));
         }
         
         function updates(){
             setValue('7');
-	    setSettings('Updates');
+	    dispatch(setSettings('Updates'));
         }
         
         function search(){
             setValue('8');
-	    setSettings('Search');
+	    dispatch(setSettings('Search'));
         }
         
         function battery(){
             setValue('9');
-	    setSettings('Battery');
+	    dispatch(setSettings('Battery'));
         }
         
         function apps(){
             setValue('10');
-	    setSettings('Apps');
+	    dispatch(setSettings('Apps'));
         }
         
         function privacy(){
             setValue('11');
-	    setSettings('Privacy');
+	    dispatch(setSettings('Privacy'));
         }
         
         function security(){
             setValue('12');
-	    setSettings('Security');
+	    dispatch(setSettings('Security'));
         }
         
         function share(){
             setValue('13');
-	    setSettings('Share');
+	    dispatch(setSettings('Share'));
         }
         
         function sound(){
             setValue('14');
-	    setSettings('Sound');
+	    dispatch(setSettings('Sound'));
         }
         
         function displays(){
             setValue('15');
-	    setSettings('Displays');
+	    dispatch(setSettings('Displays'));
         }
         
         function mouseTouchpad(){
             setValue('16');
-	    setSettings('Mouse & Touchpad');
+	    dispatch(setSettings('Mouse & Touchpad'));
         }
         
         function keyboard(){
             setValue('17');
-	    setSettings('Keyboard');
+	    dispatch(setSettings('Keyboard'));
         }
         
         function printer(){
             setValue('18');
-	    setSettings('Printer');
+	    dispatch(setSettings('Printer'));
         }
         
         function regionLanguage(){
             setValue('19');
-	    setSettings('Region & Language');
+	    dispatch(setSettings('Region & Language'));
         }
         
         function accessibility(){
             setValue('20');
-	    setSettings('Accessibility');
+	    dispatch(setSettings('Accessibility'));
         }
         
         function dateTime(){
             setValue('21');
-	    setSettings('Date & Time');
+	    dispatch(setSettings('Date & Time'));
         }
         
         function about(){
             setValue('22');
-	    setSettings('About');
+	    dispatch(setSettings('About'));
         }
         
         function widgets(){
             setValue('23');
-            setSettings('Widgets');
+            dispatch(setSettings('Widgets'));
         }
 
     const nw = useSelector(state => state.newwifi);

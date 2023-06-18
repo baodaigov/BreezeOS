@@ -57,6 +57,8 @@ const initialState = {
             status: 'weak'
         }
     ],
+    volume: 100,
+    brightness: 100,
     bluetooth: false,
     themeLight: false,
     boldText: false
@@ -81,6 +83,12 @@ export const settingsSlice = createSlice({
         toggleWifi: state => {
             state.wifi = !state.wifi;
         },
+        setVolume: (state, action) => {
+            state.volume = action.payload;
+        },
+        setBrightness: (state, action) => {
+            state.brightness = action.payload;
+        },
         toggleBluetooth: state => {
             state.bluetooth = !state.bluetooth;
         },
@@ -103,6 +111,6 @@ export const settingsSlice = createSlice({
     },
 });
 
-export const { setDeviceName, toggleAirplaneModeOff, toggleAirplaneModeOn, toggleWifi, toggleBluetooth, toggleLightMode, toggleDarkMode, enableBoldText, disableBoldText } = settingsSlice.actions
+export const { setDeviceName, toggleAirplaneModeOff, toggleAirplaneModeOn, toggleWifi, setVolume, setBrightness, toggleBluetooth, toggleLightMode, toggleDarkMode, enableBoldText, disableBoldText } = settingsSlice.actions
 
 export default settingsSlice.reducer

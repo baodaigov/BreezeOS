@@ -1,4 +1,4 @@
-$bgcolor: #222222;
+$bgcolor: #222222f8;
 $fgcolor: #fff;
 $fbgcolor: #83aaff;
 
@@ -7,6 +7,8 @@ $fbgcolor: #83aaff;
     top: 40px;
     right: 0;
     background: $bgcolor;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     color:$fgcolor;
     padding: 7px 8px;
     border-radius: 10px;
@@ -24,7 +26,7 @@ $fbgcolor: #83aaff;
     .PanelTypeContainer {
         position: absolute;
         display: flex;
-        transition: all ease .2s;
+        transition: transform ease .2s;
         width: 0;
 
         .defaultPanel {
@@ -95,7 +97,7 @@ $fbgcolor: #83aaff;
 
                         .PanelItemNext {
                             position: absolute;
-                            transform: translateX(126px);
+                            transform: translateX(125.5px);
                             height: 41.5px;
                             padding: 12px 11px;
                             background: lighten($bgcolor,10%);
@@ -300,6 +302,50 @@ $fbgcolor: #83aaff;
             }
         }
 
+        .batteryPanel {
+            font-size: 12.5px;
+            opacity: 0;
+            pointer-events: none;
+            transition: all ease .25s;
+
+            &.active {
+                opacity: 1;
+                pointer-events: all;
+                transition: none;
+            }
+
+            .BatteryContent {
+                width: 332px;
+
+                .BatteryHeader {
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 6px 10px;
+                    margin-bottom: 3px;
+                    border-bottom: 0.5px solid transparentize($fgcolor, .8);
+    
+                    .BatteryLevel {
+                        color: #6ae4a9;
+    
+                        &.low-battery {
+                            color: #e46a6a;
+                        }
+                    }
+                }
+
+                .ActMenu {
+                    background: transparent;
+                    backdrop-filter: blur(0);
+                    -webkit-backdrop-filter: blur(0);
+                    box-shadow: none;
+
+                    .ActMenuSelector {
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+
         .bluetoothPanel {
             display: flex;
             flex-direction: column;
@@ -403,11 +449,22 @@ $fbgcolor: #83aaff;
     }
 
     &.whitesur {
-        right: 325px;
+        right: 329px;
         border: 0.5px solid lighten(#202023, 25%);
+        transition: all ease .25s;
+
+        &.active {
+            transition: height ease .15s;
+        }
 
         .PanelTypeContainer {
             .defaultPanel {
+                transition: all ease .25s;
+
+                &.active {
+                    transition: none;
+                }
+                
                 .PanelBottom {
                     .PanelContainer {
                         .PanelItemLarge {
@@ -510,6 +567,12 @@ $fbgcolor: #83aaff;
                                     transform: translateX(20px);
                                 }
                             }
+
+                            &.whitesur {
+                                &.active {
+                                    background: #009dff;
+                                }
+                            }
                         }
 
                     .WifiStatusFalse {
@@ -523,6 +586,14 @@ $fbgcolor: #83aaff;
                             &:hover {
                                 background-color: transparentize($bgcolor, .93);
                             }
+                        }
+                    }
+                }
+
+                .batteryPanel {
+                    .BatteryContent {
+                        .BatteryHeader {
+                            border-bottom: 0.5px solid transparentize($bgcolor, .8);
                         }
                     }
                 }
@@ -544,6 +615,12 @@ $fbgcolor: #83aaff;
                                 transform: translateX(20px);
                             }
                         }
+
+                        &.whitesur {
+                            &.active {
+                                background: #009dff;
+                            }
+                        }
                     }
 
                     .Description {
@@ -560,6 +637,19 @@ $fbgcolor: #83aaff;
 
         &.whitesur {
             border: 0.5px solid lighten(#202023, 5%);
+
+            .PanelTypeContainer {
+                .wifiPanel {
+                    .WifiList {
+                        .WifiListItem {
+                            &:hover {
+                                background: #007bff;
+                                color: $fgcolor;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

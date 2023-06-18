@@ -58,6 +58,10 @@ $fgcolor: #fff;
             &.active {
                 background: #ffffff10;
             }
+
+            i {
+                pointer-events: none;
+            }
         }
 
         .Header-item:active{
@@ -207,13 +211,18 @@ $fgcolor: #fff;
                 .Header-item {
                     border-radius: 4px;
                     padding: 5px 10px;
+                    transition: all ease .25s;
+
+                    &.active {
+                        transition: none;
+                    }
 
                     i {
                         font-size: 12.5px;
                     }
 
                     &.disabled {
-                        * {
+                        i {
                             color: transparentize($fgcolor, .8);
                         }
                     }
