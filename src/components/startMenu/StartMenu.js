@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import './StartMenu.scss';
 import SearchMenu from './SearchMenu';
 import StartApp from './StartApp';
@@ -14,37 +14,40 @@ import { TextEditorStartApp } from '../../containers/apps/texteditor';
 import { SoftwareStoreStartApp } from '../../containers/apps/softwarestore';
 import { CalendarStartApp } from '../../containers/apps/calendar';
 import { VSCodeStartApp } from '../../containers/apps/vscode';
-
-function useOutsideAlerter(ref) {
-  useEffect(() => {
-    /**
-     * Alert if clicked on outside of element
-     */
-    function handleClickOutside(event) {
-      if (ref.current && !ref.current.contains(event.target)) {
-        document.getElementsByClassName('StartMenuWrapper')[0].classList.remove('active');
-        document.getElementsByClassName('Header')[0].classList.add('active');
-        document.getElementsByClassName('Dock')[0].classList.add('active');
-        document.getElementsByClassName('DesktopBody')[0].classList.add('active');
-      }
-    }
-    // Bind the event listener
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      // Unbind the event listener on clean up
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [ref]);
-}
-
-function openApp(){
-    document.getElementsByClassName('StartMenuWrapper')[0].classList.remove('active');
-    document.getElementsByClassName('Header')[0].classList.add('active');
-    document.getElementsByClassName('DesktopBody')[0].classList.add('active');
-}
+import {setHeaderActive} from "../../reducers/header";
+import {setDockActive} from "../../reducers/dock";
 
 export default function StartMenu(){
     const icon = useSelector(state => state.appearance.iconTheme);
+    const dispatch = useDispatch();
+
+    function useOutsideAlerter(ref) {
+        useEffect(() => {
+            /**
+             * Alert if clicked on outside of element
+             */
+            function handleClickOutside(event) {
+                if (ref.current && !ref.current.contains(event.target)) {
+                    document.getElementsByClassName('StartMenuWrapper')[0].classList.remove('active');
+                    dispatch(setHeaderActive(true));
+                    dispatch(setDockActive(true));
+                    document.getElementsByClassName('DesktopBody')[0].classList.add('active');
+                }
+            }
+            // Bind the event listener
+            document.addEventListener("mousedown", handleClickOutside);
+            return () => {
+                // Unbind the event listener on clean up
+                document.removeEventListener("mousedown", handleClickOutside);
+            };
+        }, [ref]);
+    }
+
+    function openApp(){
+        document.getElementsByClassName('StartMenuWrapper')[0].classList.remove('active');
+        dispatch(setHeaderActive(true));
+        document.getElementsByClassName('DesktopBody')[0].classList.add('active');
+    }
 
     const items = [
         {

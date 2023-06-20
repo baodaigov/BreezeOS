@@ -1468,6 +1468,15 @@ $actcolor: #8fb6ff;
 						}
 					}
 
+					.NotificationsWrapper {
+						.Notifications {
+							display: flex;
+							justify-content: center;
+							margin: 0 auto;
+							height: 100%;
+						}
+					}
+
 					.DisplaysWrapper {
 						.Displays {
 							display: flex;

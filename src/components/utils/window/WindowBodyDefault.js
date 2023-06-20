@@ -1,11 +1,13 @@
-import React, { Component } from 'react';
+import {useSelector} from "react-redux";
 import './Window.scss';
 
 export default function WindowBodyDefault(props) {
+  const shellTheme = useSelector(state => state.shell.theme);
+
   switch(props.type){
     case "critical":
       return (
-        <div className='WindowBodyDefault'>
+        <div className={`WindowBodyDefault ${shellTheme === 'WhiteSur' ? 'whitesur' : ''}}`}>
           <div style={{ display: "flex" }}>
             <div className='WindowBodyIcon critical'>
               <i class="fa-regular fa-xmark"></i>
@@ -20,7 +22,7 @@ export default function WindowBodyDefault(props) {
       )
     case "exclamation":
       return (
-        <div className='WindowBodyDefault'>
+        <div className={`WindowBodyDefault ${shellTheme === 'WhiteSur' ? 'whitesur' : ''}`}>
           <div style={{ display: "flex" }}>
             <div className='WindowBodyIcon exclamation'>
               <i class="fa-solid fa-exclamation"></i>
@@ -35,7 +37,7 @@ export default function WindowBodyDefault(props) {
       )
     default:
       return (
-        <div className='WindowBodyDefault'>
+        <div className={`WindowBodyDefault ${shellTheme === 'WhiteSur' ? 'whitesur' : ''}`}>
           <div style={{ display: "flex" }}>
             <div className='WindowBodyIcon'>
               <i className={`fa-regular ${props.icon}`}></i>

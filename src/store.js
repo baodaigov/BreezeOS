@@ -1,6 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import appearanceReducer from './reducers/appearance';
 import batteryReducer from './reducers/battery';
+import headerReducer from './reducers/header';
+import dockReducer from './reducers/dock';
 import panelReducer from './reducers/panel';
 import shutdownReducer from './reducers/shutdown';
 import settingsReducer from './reducers/settings';
@@ -29,6 +31,8 @@ export const store = configureStore({
     reducer: {
         appearance: appearanceReducer,
         battery: batteryReducer,
+        header: headerReducer,
+        dock: dockReducer,
         panel: panelReducer,
         shutdown: shutdownReducer,
         settings: settingsReducer,

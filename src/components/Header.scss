@@ -1,4 +1,4 @@
-$bgcolor: #20202388;
+$bgcolor: #20202395;
 $fgcolor: #fff;
 
 .Header{
@@ -104,13 +104,45 @@ $fgcolor: #fff;
         }
     }
 
+    .Icon {
+        display: flex;
+        align-items: center;
+        padding: 4px 0;
+        color: $fgcolor;
+    }
+
+    .Text {
+        padding: 4px 0;
+        color: $fgcolor;
+        font-size: 14px;
+    }
+
+    .notifications {
+        display: flex;
+        justify-content: space-between;
+        font-size: 13px;
+        color: $fgcolor;
+        padding: 3px 20px;
+        width: 98%;
+        transition: all ease .3s;
+        opacity: 0;
+        pointer-events: none;
+        position: absolute;
+        z-index: 1;
+
+        &.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+    }
+
     .lowbattery {
         display: flex;
         justify-content: space-between;
         font-size: 13px;
         color: $fgcolor;
-        padding: 3px 15px;
-        width: 99.2%;
+        padding: 3px 20px;
+        width: 98%;
         transition: all ease .3s;
         opacity: 0;
         pointer-events: none;
@@ -143,8 +175,8 @@ $fgcolor: #fff;
         justify-content: space-between;
         font-size: 13px;
         color: $fgcolor;
-        padding: 3px 15px;
-        width: 99.2%;
+        padding: 3px 20px;
+        width: 99%;
         transition: all ease .3s;
         opacity: 0;
         pointer-events: none;

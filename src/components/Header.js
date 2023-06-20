@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {activePanel, inactivePanel} from '../reducers/panel';
+import {setHeaderActive,setHeaderType,setWidth} from '../reducers/header';
 import Time from '../header/Time';
 import Task from '../header/Task';
 import Home from '../header/Home';
@@ -12,12 +13,14 @@ import PanelType from './panel/PanelType';
 
 const Header = props => {
     const dispatch = useDispatch();
+    const headerActive = useSelector(state => state.header.active);
+    const headerType = useSelector(state => state.header.type);
+    const headerWidth = useSelector(state => state.header.width);
     const panelActive = useSelector(state => state.panel.active);
     const panelType = useSelector(state => state.panel.type);
     const settingsReducer = useSelector(state => state.settings);
     const batteryChargingStatus = useSelector(state => state.battery.charging);
     const shellTheme = useSelector(state => state.shell.theme);
-    const [width, setWidth] = useState('900');
     const [wifiPanelActive, setWifiPanelActive] = useState(false);
     const [batteryPanelActive, setBatteryPanelActive] = useState(false);
     const [bluetoothPanelActive, setBluetoothPanelActive] = useState(false);
@@ -162,43 +165,51 @@ const Header = props => {
 
     useEffect(() => {
         setTimeout(() => {
-            document.getElementsByClassName('Header')[0].classList.add('active');
+            dispatch(setHeaderActive(true));
         },1000);
         
         if(batteryChargingStatus){
-            document.getElementsByClassName('default')[0].classList.remove('active');
-            setWidth('580');
+            dispatch(setHeaderType(''));
+            dispatch(setWidth(580));
             setTimeout(() => {
-                document.getElementsByClassName('charging')[0].classList.add('active');
+                dispatch(setHeaderType('charging'));
             }, 200);
             setTimeout(() => {
-                document.getElementsByClassName('charging')[0].classList.remove('active');
-                setWidth('900');
+                dispatch(setHeaderType(''));
+                dispatch(setWidth(900));
             }, 2350);
             setTimeout(() => {
-                document.getElementsByClassName('default')[0].classList.add('active');
+                dispatch(setHeaderType('default'));
             }, 2500);
         }
         
         if(batteryPercent <= 10){
-            document.getElementsByClassName('default')[0].classList.remove('active');
-            setWidth('580');
+            dispatch(setHeaderType(''));
+            dispatch(setWidth(580));
             setTimeout(() => {
-                document.getElementsByClassName('lowbattery')[0].classList.add('active');
+                dispatch(setHeaderType('lowbattery'));
             }, 200);
             setTimeout(() => {
-                document.getElementsByClassName('lowbattery')[0].classList.remove('active');
-                setWidth('900');
+                dispatch(setHeaderType(''));
+                dispatch(setWidth(900));
             }, 2350);
             setTimeout(() => {
-                document.getElementsByClassName('default')[0].classList.add('active');
+                dispatch(setHeaderType('default'));
             }, 2500);
         }
-    }, [batteryChargingStatus]);
+    }, [batteryChargingStatus, batteryPercent]);
 
     return (
-        <div className={`Header ${shellTheme === 'WhiteSur' ? 'whitesur' : ''}`} style={{ width: `${width}px` }}>
-            <div className='lowbattery' key='lowbattery'>
+        <div className={`Header ${shellTheme === 'WhiteSur' ? 'whitesur' : ''} ${headerActive ? 'active' : ''}`} style={{ width: `${headerWidth}px` }}>
+            <div className={`notifications ${headerType === 'notifications' ? 'active' : ''}`}>
+                <div className='Icon'>
+                    {settingsReducer.notifications ? <i className="fa-solid fa-bell-slash"></i> : <i className="fa-solid fa-bell"></i>}
+                </div>
+                <div className='Text'>
+                    <p className='font-bold'>{settingsReducer.notifications ? 'Off' : 'On'}</p>
+                </div>
+            </div>
+            <div className={`lowbattery ${headerType === 'lowbattery' ? 'active' : ''}`}>
                 <div className='LowBatteryText'>
                     <p className='font-bold'>Low Battery</p>
                 </div>
@@ -206,7 +217,7 @@ const Header = props => {
                     <p className='BatteryLevelText font-bold'>{isNaN(batteryPercent) ? '-' : batteryPercent + '%'}</p>
                 </div>
             </div>
-            <div className='charging' key='charging'>
+            <div className={`charging ${headerType === 'charging' ? 'active' : ''}`}>
                 <div className='ChargingText'>
                     <p className='font-bold'>{batteryPercent === 100 ? 'Fully Charged' : 'Charging'}</p>
                 </div>
@@ -214,7 +225,7 @@ const Header = props => {
                     <p className='BatteryLevelText font-bold'>{isNaN(batteryPercent) ? '-' : batteryPercent + '%'}</p>
                 </div>
             </div>
-            <div className='default active' key='default'>
+            <div className={`default ${headerType === 'default' ? 'active' : ''}`}>
                 <div className='Header-left'>
                     <Home/>
                     {shellTheme !== 'WhiteSur' ? <Time/> : ''}

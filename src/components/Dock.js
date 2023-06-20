@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import './Dock.scss';
 import DockItem from './DockItem';
 import { TerminalApp } from '../containers/apps/terminal';
@@ -13,20 +13,23 @@ import { TextEditorApp } from '../containers/apps/texteditor';
 import { SoftwareStoreApp } from '../containers/apps/softwarestore';
 import { CalendarApp } from '../containers/apps/calendar';
 import { VSCodeApp } from '../containers/apps/vscode';
+import {setDockActive} from "../reducers/dock";
 
 const Dock = () => {
     const icon = useSelector(state => state.appearance.iconTheme);
     const shellTheme = useSelector(state => state.shell.theme);
+    const dockActive = useSelector(state => state.dock.active);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         setTimeout(() => {
-            document.getElementsByClassName('Dock')[0].classList.add('active');
+            dispatch(setDockActive(true));
         },1000);
     }, []);
     
     return (
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <div className={`Dock ${shellTheme === 'WhiteSur' ? 'whitesur' : ''}`}>
+            <div className={`Dock ${shellTheme === 'WhiteSur' ? 'whitesur' : ''} ${dockActive ? 'active' : ''}`}>
                 <FirefoxApp/>
                 <CalendarApp/>
                 <SettingsApp/>

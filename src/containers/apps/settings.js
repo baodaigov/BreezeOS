@@ -4,7 +4,7 @@ import { insertPasswordFor, cancelPassword, setInputPassword, setPasswordDisable
 import {toggleActive, setSecurity, setWifiName, setInactive} from '../../reducers/newwifi';
 import {switchIcons} from '../../reducers/appearance';
 import { useSelector, useDispatch } from 'react-redux';
-import { toggleAirplaneModeOff, toggleAirplaneModeOn, toggleLightMode, toggleDarkMode, toggleWifi, toggleBluetooth, setDeviceName } from '../../reducers/settings';
+import { toggleAirplaneModeOff, toggleAirplaneModeOn, toggleLightMode, toggleDarkMode, toggleWifi, toggleNotifications, toggleBluetooth, setDeviceName } from '../../reducers/settings';
 import { changeWallpaper } from '../../reducers/wallpaper';
 import '../../components/utils/window/Window.scss';
 import TopBar from '../../components/utils/window/TopBar';
@@ -27,6 +27,7 @@ import W5 from '../../components/52532.jpg';
 import W6 from '../../components/52544.jpg';
 import Wifi1 from './assets/BreezeOS-WiFi.png'
 import {changeShell} from "../../reducers/shell";
+import {setHeaderActive, setHeaderType, setWidth} from "../../reducers/header";
 
 export const SettingsApp = () => {
     const isActive = useSelector(state => state.appsSettings.active);
@@ -71,7 +72,7 @@ export const SettingsStartApp = () => {
     
     const toggle = () => {
         document.getElementsByClassName('StartMenuWrapper')[0].classList.remove('active');
-        document.getElementsByClassName('Header')[0].classList.add('active');
+        dispatch(setHeaderActive(true));
         document.getElementsByClassName('DesktopBody')[0].classList.add('active');
         if(isHide){
             dispatch(setHide(false));
@@ -427,7 +428,7 @@ export default function Settings(){
     const [maximumExceeded, displayMaximumExceeded] = useState(false);
 
     function submitDeviceName(e){
-        if(e.key == 'Enter'){
+        if(e.key === 'Enter'){
             if(e.target.value.length > 43){
                 displayMaximumExceeded(true);
                 dispatch(setDeviceName(settingsReducer.deviceName));
@@ -465,6 +466,22 @@ export default function Settings(){
     function switchShell(e){
         dispatch(changeShell(e));
         showShellMenu(false);
+    }
+
+    function toggleDoNotDisturb(){
+        dispatch(toggleNotifications(!settingsReducer.notifications))
+        dispatch(setHeaderType(''));
+        dispatch(setWidth(300));
+        setTimeout(() => {
+            dispatch(setHeaderType('notifications'));
+        }, 200);
+        setTimeout(() => {
+            dispatch(setHeaderType(''));
+            dispatch(setWidth(900));
+        }, 2350);
+        setTimeout(() => {
+            dispatch(setHeaderType('default'));
+        }, 2500);
     }
 
 	function switchTab(){
@@ -703,6 +720,19 @@ export default function Settings(){
                                             <span className="Number nine">9</span>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    )
+			case 'Notifications':
+                return (
+                    <div className='NotificationsWrapper'>
+                        <div className='Notifications'>
+                            <div style={{ width: '649.516px' }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '40px' }}>
+                                    <p className='font-bold'>Do Not Disturb</p>
+                                    <div className={`Toggle ${shellTheme === 'WhiteSur' ? 'whitesur' : ''} ${settingsReducer.notifications ? 'active' : ''}`} onClick={toggleDoNotDisturb}></div>
                                 </div>
                             </div>
                         </div>

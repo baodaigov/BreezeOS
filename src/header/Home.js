@@ -1,12 +1,14 @@
 import React from 'react';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {setHeaderActive} from "../reducers/header";
 
 export default function Home(){
   const shellTheme = useSelector(state => state.shell.theme);
+  const dispatch = useDispatch();
 
   function startMenu(){
       document.getElementsByClassName('DesktopBody')[0].classList.remove('active');
-      document.getElementsByClassName('Header')[0].classList.remove('active');
+      dispatch(setHeaderActive(false));
       document.getElementsByClassName('StartMenuWrapper')[0].classList.add('active');
   }
 
