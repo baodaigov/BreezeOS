@@ -4,7 +4,7 @@ import { insertPasswordFor, cancelPassword, setInputPassword, setPasswordDisable
 import {toggleActive, setSecurity, setWifiName, setInactive} from '../../reducers/newwifi';
 import {switchIcons} from '../../reducers/appearance';
 import { useSelector, useDispatch } from 'react-redux';
-import { toggleAirplaneModeOff, toggleAirplaneModeOn, toggleLightMode, toggleDarkMode, toggleWifi, toggleNotifications, toggleBluetooth, setDeviceName } from '../../reducers/settings';
+import { toggleAirplaneModeOff, toggleAirplaneModeOn, toggleLightMode, toggleDarkMode, toggleWifi, toggleNotifications, toggleBluetooth, setDeviceName, toggle12Hour } from '../../reducers/settings';
 import { changeWallpaper } from '../../reducers/wallpaper';
 import '../../components/utils/window/Window.scss';
 import TopBar from '../../components/utils/window/TopBar';
@@ -788,6 +788,19 @@ export default function Settings(){
                                             <ActMenuSelector title='30.00 Hz'></ActMenuSelector>
                                         </ActMenu>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )
+			case 'Date & Time':
+				return (
+                    <div className='DateNTimeWrapper'>
+                        <div className='DateNTime'>
+                            <div style={{ width: '649.516px' }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '40px' }}>
+                                    <p className='font-bold'>24-hour time</p>
+                                    <div className={`Toggle ${shellTheme === 'WhiteSur' ? 'whitesur' : ''} ${settingsReducer.hour12 ? '' : 'active'}`} onClick={() => dispatch(toggle12Hour(!settingsReducer.hour12))}></div>
                                 </div>
                             </div>
                         </div>

@@ -14,6 +14,7 @@ import PanelType from './panel/PanelType';
 const Header = props => {
     const dispatch = useDispatch();
     const headerActive = useSelector(state => state.header.active);
+    const headerProMode = useSelector(state => state.header.proMode);
     const headerType = useSelector(state => state.header.type);
     const headerWidth = useSelector(state => state.header.width);
     const panelActive = useSelector(state => state.panel.active);
@@ -167,37 +168,39 @@ const Header = props => {
         setTimeout(() => {
             dispatch(setHeaderActive(true));
         },1000);
-        
-        if(batteryChargingStatus){
-            dispatch(setHeaderType(''));
-            dispatch(setWidth(580));
-            setTimeout(() => {
-                dispatch(setHeaderType('charging'));
-            }, 200);
-            setTimeout(() => {
+
+        if(headerProMode){
+            if(batteryChargingStatus){
                 dispatch(setHeaderType(''));
-                dispatch(setWidth(900));
-            }, 2350);
-            setTimeout(() => {
-                dispatch(setHeaderType('default'));
-            }, 2500);
-        }
-        
-        if(batteryPercent <= 10){
-            dispatch(setHeaderType(''));
-            dispatch(setWidth(580));
-            setTimeout(() => {
-                dispatch(setHeaderType('lowbattery'));
-            }, 200);
-            setTimeout(() => {
+                dispatch(setWidth(580));
+                setTimeout(() => {
+                    dispatch(setHeaderType('charging'));
+                }, 200);
+                setTimeout(() => {
+                    dispatch(setHeaderType(''));
+                    dispatch(setWidth(900));
+                }, 2350);
+                setTimeout(() => {
+                    dispatch(setHeaderType('default'));
+                }, 2500);
+            }
+            
+            if(batteryPercent <= 10){
                 dispatch(setHeaderType(''));
-                dispatch(setWidth(900));
-            }, 2350);
-            setTimeout(() => {
-                dispatch(setHeaderType('default'));
-            }, 2500);
+                dispatch(setWidth(580));
+                setTimeout(() => {
+                    dispatch(setHeaderType('lowbattery'));
+                }, 200);
+                setTimeout(() => {
+                    dispatch(setHeaderType(''));
+                    dispatch(setWidth(900));
+                }, 2350);
+                setTimeout(() => {
+                    dispatch(setHeaderType('default'));
+                }, 2500);
+            }
         }
-    }, [batteryChargingStatus, batteryPercent]);
+    }, [batteryPercent]);
 
     return (
         <div className={`Header ${shellTheme === 'WhiteSur' ? 'whitesur' : ''} ${headerActive ? 'active' : ''}`} style={{ width: `${headerWidth}px` }}>

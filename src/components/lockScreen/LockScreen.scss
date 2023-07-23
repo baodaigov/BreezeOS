@@ -44,6 +44,7 @@ $fgcolor: #e2e2e2;
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
+            text-align: center;
 
             .SplashScreenTitle {
                 font-size: 60px;
@@ -68,6 +69,10 @@ $fgcolor: #e2e2e2;
                         height: 15px;
                         background-color: $fgcolor;
                         margin-left: 15px;
+                    }
+
+                    &:first-child {
+                        margin-left: 0;
                     }
 
                     &:last-child:after {

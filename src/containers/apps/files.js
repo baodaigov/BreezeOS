@@ -986,7 +986,7 @@ export default function Files(){
 		                                    <img className='FilesIcon' src={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/mimes/scalable/x-office-presentation.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/x-office-presentation.svg'} width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>Simple Green.pptx</p>
 		                                </div>
-		                                <div className='FilesItem' onDoubleClick={() => window.location.href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'}>
+		                                <div className='FilesItem' onDoubleClick={() => window.location.href='https://youtu.be/y5jrmCE2-bg'}>
 		                                    <img className='FilesIcon' src={icon === 'WhiteSur-icon-theme' ? 'https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/mimes/scalable/video-x-generic.svg' : 'https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/video-x-generic.svg'} width={iconSize} height={iconSize}/>
 		                                    <p className='FilesName'>double-click this.mp4</p>
 		                                </div>

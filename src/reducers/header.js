@@ -4,6 +4,7 @@ const initialState = {
     active: false,
     type: 'default',
     width: 900,
+    proMode: true
 }
 
 const headerSlice = createSlice({
@@ -18,10 +19,13 @@ const headerSlice = createSlice({
         },
         setWidth: (state, action) => {
             state.width = action.payload;
+        },
+        setProMode: (state, action) => {
+            state.proMode = action.payload;
         }
     }
 });
 
-export const {setHeaderActive,setHeaderType,setWidth} = headerSlice.actions;
+export const {setHeaderActive,setHeaderType,setWidth,setProMode} = headerSlice.actions;
 
 export default headerSlice.reducer;

@@ -1,27 +1,31 @@
-import React, { Component } from 'react';
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
-export default class SplashScreenTime extends Component {
-    constructor(props){
-      super(props);
-      this.state = {
-        curTime: null,
-        curDate: null
-      }
+export default function SplashScreenTime(){
+    const SSTContent = () => {
+        const hour12 = useSelector(state => state.settings.hour12);
+        const [curTime, setCurTime] = useState(null);
+    
+        useEffect(() => {
+            if(curTime === null){
+                setCurTime(new Date().toLocaleString('en-US', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: hour12
+                }));
+            } else {
+                setInterval(() => {
+                    setCurTime(new Date().toLocaleString('en-US', {
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        hour12: hour12
+                    }));
+                }, 1000);
+            }
+        }, [curTime, hour12]);
+
+        return <p className='SplashScreenTitle'>{curTime}</p>
     }
-  
-    componentDidMount() {
-      setInterval(() => {
-        this.setState({
-          curTime: new Date().toLocaleString('en-US', {
-            hour: "2-digit",
-            minute: "2-digit"
-          }),
-          curDate: new Date().toLocaleDateString()
-        })
-      }, 1000)
-    }
-  
-    render(){
-      return <p className='SplashScreenTitle'>{this.state.curTime}</p>
-    }
-  }
+
+    return <SSTContent/>
+}

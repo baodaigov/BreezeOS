@@ -62,7 +62,8 @@ const initialState = {
     notifications: true,
     bluetooth: false,
     themeLight: false,
-    boldText: false
+    boldText: false,
+    hour12: true,
 }
 
 export const settingsSlice = createSlice({
@@ -111,10 +112,13 @@ export const settingsSlice = createSlice({
         disableBoldText: state => {
             state.boldText = false;
             document.getElementsByClassName('Desktop')[0].classList.remove('isBold');
+        },
+        toggle12Hour: (state, action) => {
+            state.hour12 = action.payload;
         }
     },
 });
 
-export const { setDeviceName, toggleAirplaneModeOff, toggleAirplaneModeOn, toggleWifi, setVolume, setBrightness, toggleNotifications, toggleBluetooth, toggleLightMode, toggleDarkMode, enableBoldText, disableBoldText } = settingsSlice.actions
+export const { setDeviceName, toggleAirplaneModeOff, toggleAirplaneModeOn, toggleWifi, setVolume, setBrightness, toggleNotifications, toggleBluetooth, toggleLightMode, toggleDarkMode, enableBoldText, disableBoldText, toggle12Hour } = settingsSlice.actions
 
 export default settingsSlice.reducer

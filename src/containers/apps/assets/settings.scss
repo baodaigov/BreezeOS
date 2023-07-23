@@ -1511,6 +1511,15 @@ $actcolor: #8fb6ff;
 						}
 					}
 
+					.DateNTimeWrapper {
+						.DateNTime {
+							display: flex;
+							justify-content: center;
+							margin: 0 auto;
+							height: 100%;
+						}
+					}
+
 					.AboutWrapper {
 						.About {
 							display: flex;

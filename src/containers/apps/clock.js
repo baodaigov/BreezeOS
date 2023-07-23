@@ -66,6 +66,7 @@ export const ClockStartApp = () => {
 }
 
 export default function Clock() {
+    const hour12 = useSelector(state => state.settings.hour12);
     const dispatch = useDispatch();
 
     const ClockWindow = () => {
@@ -109,11 +110,12 @@ export default function Clock() {
 
             useEffect(() => {
                 if(curTime == null && curDate == null){
-                    setCurTime(new Date().toLocaleString('vi-VN', {
+                    setCurTime(new Date().toLocaleString('en-US', {
                         timeZone: `${props.timeZone}`,
                         hour: "2-digit",
                         minute: "2-digit",
-                        second: "2-digit"
+                        second: "2-digit",
+                        hour12: hour12
                     }));
             
                     setCurDate(new Date().toLocaleDateString('en-US', {
@@ -122,11 +124,12 @@ export default function Clock() {
                     }));
                 } else {
                     setInterval(() => {
-                        setCurTime(new Date().toLocaleString('vi-VN', {
+                        setCurTime(new Date().toLocaleString('en-US', {
                             timeZone: `${props.timeZone}`,
                             hour: "2-digit",
                             minute: "2-digit",
-                            second: "2-digit"
+                            second: "2-digit",
+                            hour12: hour12
                         }));
                 
                         setCurDate(new Date().toLocaleDateString('en-US', {
