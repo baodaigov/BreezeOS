@@ -13,8 +13,8 @@ $fgcolor: #e2e2e2;
     }
 
     .calculator {
-        width: 220px;
-        height: 400px;
+        width: 265px;
+        height: 430px;
         opacity: 0;
         pointer-events: none;
         transition: all ease .3s;
@@ -22,8 +22,8 @@ $fgcolor: #e2e2e2;
         &.active {
             opacity: 1;
             pointer-events: all;
-            width: 270px;
-            height: 450px;
+            width: 280px;
+            height: 480px;
         }
 
         &.hide {
@@ -61,6 +61,7 @@ $fgcolor: #e2e2e2;
                 right: 0;
                 margin: 15px;
                 transition: none;
+                text-align: right;
             }
         }
 
@@ -79,8 +80,8 @@ $fgcolor: #e2e2e2;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                width: 55px;
-                height: 55px;
+                width: 52px;
+                height: 52px;
 
                 &:hover {
                     background: transparentize($fgcolor, 0.95)

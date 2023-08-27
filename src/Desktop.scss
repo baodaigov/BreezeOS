@@ -1,58 +1,63 @@
 @import url(https://site-assets.fontawesome.com/releases/v6.4.0/css/all.css);
 
 @font-face {
-    font-display: swap;
-    font-family: 'Optimistic Display';
-    font-style: normal;
-    font-weight: 200;
-    src: url(https://static.xx.fbcdn.net/rsrc.php/yu/r/UwoTM2u9U6b.woff2) format('woff2');
+  font-display: swap;
+  font-family: "Optimistic Display";
+  font-style: normal;
+  font-weight: 200;
+  src: url(https://static.xx.fbcdn.net/rsrc.php/yu/r/UwoTM2u9U6b.woff2)
+    format("woff2");
 }
 
 @font-face {
-    font-display: swap;
-    font-family: 'Optimistic Display';
-    font-style: normal;
-    font-weight: 300;
-    src: url(https://static.xx.fbcdn.net/rsrc.php/yJ/r/gJ8wmjmQhMa.woff2) format('woff2');
+  font-display: swap;
+  font-family: "Optimistic Display";
+  font-style: normal;
+  font-weight: 300;
+  src: url(https://static.xx.fbcdn.net/rsrc.php/yJ/r/gJ8wmjmQhMa.woff2)
+    format("woff2");
 }
 
 @font-face {
-    font-display: swap;
-    font-family: 'Optimistic Display';
-    font-style: normal;
-    font-weight: 500;
-    src: url(https://static.xx.fbcdn.net/rsrc.php/yL/r/jfwoHaS3i0K.woff2) format('woff2');
+  font-display: swap;
+  font-family: "Optimistic Display";
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://static.xx.fbcdn.net/rsrc.php/yL/r/jfwoHaS3i0K.woff2)
+    format("woff2");
 }
 
 @font-face {
-    font-display: swap;
-    font-family: 'Optimistic Display';
-    font-style: normal;
-    font-weight: 700;
-    src: url(https://static.xx.fbcdn.net/rsrc.php/yU/r/WXBYOaYZuYu.woff2) format('woff2');
+  font-display: swap;
+  font-family: "Optimistic Display";
+  font-style: normal;
+  font-weight: 700;
+  src: url(https://static.xx.fbcdn.net/rsrc.php/yU/r/WXBYOaYZuYu.woff2)
+    format("woff2");
 }
 
 @font-face {
-    font-display: swap;
-    font-family: 'Optimistic Display';
-    font-style: normal;
-    font-weight: 800;
-    src: url(https://static.xx.fbcdn.net/rsrc.php/yR/r/0wcuDYQ2laN.woff2) format('woff2');
+  font-display: swap;
+  font-family: "Optimistic Display";
+  font-style: normal;
+  font-weight: 800;
+  src: url(https://static.xx.fbcdn.net/rsrc.php/yR/r/0wcuDYQ2laN.woff2)
+    format("woff2");
 }
 
 @font-face {
-    font-family: Cascadia Code;
-    src: url(./fonts/CascadiaCode-Regular-VTT.woff2) format("woff2");
-    font-style: normal;
-    font-display: swap
+  font-family: Cascadia Code;
+  src: url(./fonts/CascadiaCode-Regular-VTT.woff2) format("woff2");
+  font-style: normal;
+  font-display: swap;
 }
 
 * ::-webkit-scrollbar {
-    width: 0;
+  width: 0;
 }
 
 * ::-webkit-scrollbar-thumb {
-    background: transparent;
+  background: transparent;
 }
 
 body {
@@ -61,124 +66,158 @@ body {
 }
 
 a {
-    text-decoration: none;
-    color: inherit;
+  text-decoration: none;
+  color: inherit;
 }
 
-*[contenteditable], input{
-    user-select: text;
-    -webkit-user-select: text;
+*[contenteditable],
+input {
+  user-select: text;
+  -webkit-user-select: text;
 }
 
 * {
-    box-sizing: border-box;
-    font-family: Optimistic Display, -apple-system, ui-sans-serif, system-ui, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-    font-weight: 500;
-    cursor: default;
-    -webkit-user-select: none; /* Safari */
-    -ms-user-select: none; /* IE 10 and IE 11 */
-    user-select: none; /* Standard syntax */
+  box-sizing: border-box;
+  font-weight: 300;
+  cursor: default;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
 
 .font-extrabold {
-    font-weight:800
+  font-weight: 800;
 }
 
 .font-bold {
-    font-weight:700
+  font-weight: 700;
 }
 
 .font-medium {
-    font-weight:500
+  font-weight: 500;
 }
 
 .font-normal {
-    font-weight:300
+  font-weight: 300;
 }
 
 .font-light {
-    font-weight:200
+  font-weight: 200;
+}
+
+.OptimisticDisplay {
+  *:not(i) {
+    font-family: Optimistic Display, -apple-system, ui-sans-serif, system-ui,
+      BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans,
+      sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol,
+      Noto Color Emoji;
+  }
+}
+
+.System {
+  *:not(i) {
+    font-family: -apple-system, ui-sans-serif, system-ui,
+      BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans,
+      sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol,
+      Noto Color Emoji;
+  }
 }
 
 .Desktop {
+  overflow: hidden;
+  width: 100%;
+  height: 100vh;
+
+  &.poweroff * {
+    display: none;
+    cursor: none !important;
+  }
+  &.blackscr * {
+    display: none;
+    cursor: default !important;
+  }
+  &.sleep {
+    background-color: #000 !important;
+    * {
+      display: none;
+      cursor: none !important;
+    }
+  }
+  &.cursorLoad * {
+    display: none;
+    cursor: wait !important;
+  }
+  &.isBold * {
+    font-weight: 700;
+  }
+
+  .DesktopBody {
+    display: none;
+    position: absolute;
     overflow: hidden;
+    height: calc(100vh - 105px);
+    width: 100vw;
+
+    &.active {
+      display: block;
+    }
+  }
+
+  &::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    display: block;
+    height: 100%;
     width: 100%;
-    height: 100vh;
+    z-index: 99999999999;
+    background: #ffbf0049;
+    pointer-events: none;
+    transition: all 2s ease;
+  }
 
-    &.poweroff * { display:none; cursor: none!important; }
-    &.blackscr * { display: none; cursor: default!important; }
-    &.sleep {
-        background-color: #000!important;
-        * { display: none; cursor: none!important; }
-    }
-    &.cursorLoad * { display: none; cursor: wait!important; }
-    &.isBold * {font-weight: 700;}
+  &.NightShiftEnabled::before {
+    opacity: 0.8;
+  }
 
-    .DesktopBody {
-        display: none;
-        position: absolute;
-        overflow: hidden;
-        height: calc(100vh - 105px);
-        width: 100vw;
+  &.capture::before {
+    animation: capture ease 2s;
+  }
 
-        &.active { display: block; }
+  @keyframes capture {
+    0% {
+      background-color: #fff;
+      opacity: 1;
     }
-
-    &::before {
-        content: "";
-        position: fixed;
-        top: 0;
-        left: 0;
-        opacity: 0;
-        display: block;
-        height: 100%;
-        width: 100%;
-        z-index: 99999999999;
-        background: #ffbf0049;
-        pointer-events: none;
-        transition: all 2s ease;
+    100% {
+      background-color: transparent;
+      opacity: 0;
     }
-
-    &.NightShiftEnabled::before {
-        opacity: .8;
-    }
-
-    &.capture::before {
-        animation: capture ease 2s;
-    }
-    
-    @keyframes capture {
-        0% {
-            background-color: #fff;
-            opacity: 1;
-        }
-        100% {
-            background-color: transparent;
-            opacity: 0;
-        }
-    }
+  }
 }
 
 .error {
-    font-size: 15px;
-    padding: 50px 25px;
-    color: #fff;
-    background: #000;
-    margin: 0;
-    width: 100%;
-    height: 100vh;
-    position: absolute;
-    z-index:1000000000000
+  font-size: 15px;
+  padding: 50px 25px;
+  color: #fff;
+  background: #000;
+  margin: 0;
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  z-index: 1000000000000;
 }
 
 #brightness {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index:1000000000000;
-    background: #000;
-    opacity: 0;
-    pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000000000000;
+  background: #000;
+  opacity: 0;
+  pointer-events: none;
 }

@@ -169,7 +169,7 @@ const Header = props => {
             dispatch(setHeaderActive(true));
         },1000);
 
-        if(headerProMode){
+        if(headerProMode === true){
             if(batteryChargingStatus){
                 dispatch(setHeaderType(''));
                 dispatch(setWidth(580));
@@ -200,7 +200,8 @@ const Header = props => {
                 }, 2500);
             }
         }
-    }, [batteryPercent]);
+        
+    }, [headerProMode, batteryPercent]);
 
     return (
         <div className={`Header ${shellTheme === 'WhiteSur' ? 'whitesur' : ''} ${headerActive ? 'active' : ''}`} style={{ width: `${headerWidth}px` }}>

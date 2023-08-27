@@ -1,5 +1,5 @@
 import {useSelector, useDispatch} from "react-redux";
-import {setActive} from "../../reducers/apps/settings";
+import {setActive, setSettings} from "../../reducers/apps/settings";
 import {inactivePanel} from '../../reducers/panel';
 import { insertPasswordFor } from '../../reducers/wifipassword';
 import {switchType} from "../../reducers/panel";
@@ -27,6 +27,7 @@ const Panel = props => {
         dispatch(inactivePanel());
         dispatch(setActive(true));
         setTimeout(() => {
+            dispatch(setSettings('Wi-Fi'));
             dispatch(toggleActive(true));
         }, 800);
     }

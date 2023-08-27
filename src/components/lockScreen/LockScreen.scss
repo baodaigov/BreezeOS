@@ -1,114 +1,204 @@
 $fgcolor: #e2e2e2;
 
 .LockScreen {
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1000000;
+  transition: all ease 0.5s;
+
+  &.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .LockScreenWrapper {
+    position: absolute;
+    background-color: #000000bc;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     width: 100%;
     height: 100%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    position: absolute;
+    color: $fgcolor;
+    display: flex;
+    justify-content: center;
     opacity: 0;
     pointer-events: none;
-    z-index: 1000000;
-    transition: all ease .5s;
+    transition: all 0.7s;
 
     &.active {
-        opacity: 1;
-        pointer-events: all;
+      opacity: 1;
+      pointer-events: all;
     }
-    
-    .LockScreenWrapper {
-        position: absolute;
-        background-color: #000000bc;
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        width: 100%;
-        height: 100%;
-        color: $fgcolor;
+
+    * {
+      margin: 0;
+    }
+
+    .SplashScreen {
+      margin: 80px 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+
+      .SplashScreenTitle {
+        font-size: 70px;
+        font-weight: 700;
+        margin-bottom: 15px;
+      }
+
+      .SplashScreenDesc {
+        font-size: 13px;
         display: flex;
         justify-content: center;
-        opacity: 0;
-        pointer-events: none;
-        transition: all .7s;
 
-        &.active {
-            opacity: 1;
-            pointer-events: all;
+        .SplashScreenItem {
+          margin-left: 15px;
+          display: flex;
+          align-items: center;
+
+          &::after {
+            content: "";
+            display: block;
+            width: 1px;
+            height: 15px;
+            background-color: $fgcolor;
+            margin-left: 15px;
+          }
+
+          &:first-child {
+            margin-left: 0;
+          }
+
+          &:last-child:after {
+            content: "";
+            display: none;
+          }
+
+          .SplashScreenIcon {
+            margin-right: 7px;
+          }
+        }
+      }
+
+      .SignInWrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .SignInInfo {
+          display: flex;
+          align-items: center;
+          margin-bottom: 30px;
+
+          .SignInName {
+            margin-left: 15px;
+            font-weight: 700;
+            font-size: 16px;
+          }
         }
 
-        * {margin: 0;}
+        .SignIn {
+          display: flex;
+          align-items: center;
+          font-size: 12px;
 
-        .SplashScreen {
-            margin: 120px 0;
+          .SignInPassword {
+            border-radius: 999px;
+            width: 220px;
+            background-color: transparentize($fgcolor, 0.95);
+            margin-right: 8px;
             display: flex;
-            flex-direction: column;
             justify-content: space-between;
             align-items: center;
-            text-align: center;
 
-            .SplashScreenTitle {
-                font-size: 60px;
-                font-weight: 700;
-                margin-bottom: 15px;
+            input {
+              background-color: transparent;
+              border: none;
+              outline: none;
+              appearance: none;
+              -webkit-appearance: none;
+              font-size: 12px;
+              color: $fgcolor;
+              width: 100%;
+              padding: 10px 16px;
+              padding-right: 0;
+
+              &::placeholder {
+                color: transparentize($fgcolor, 0.85);
+              }
+
+              &::-ms-clear,
+              &::-ms-reveal {
+                display: none;
+              }
             }
 
-            .SplashScreenDesc {
-                font-size: 13px;
-                display: flex;
-                justify-content: center;
+            .SignInRevealAndClear {
+              margin-left: 8px;
+              border-radius: 999px;
+              color: $fgcolor;
+              font-size: 13px;
+              padding: 10px 16px;
+              padding-left: 0;
+            }
+          }
 
-                .SplashScreenItem {
-                    margin-left: 15px;
-                    display: flex;
-                    align-items: center;
+          .LoginButton {
+            width: 31px;
+            height: 31px;
+            color: $fgcolor;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 999px;
+            font-size: 14px;
+            transition: all ease 0.1s;
 
-                    &::after {
-                        content: '';
-                        display: block;
-                        width: 1px;
-                        height: 15px;
-                        background-color: $fgcolor;
-                        margin-left: 15px;
-                    }
-
-                    &:first-child {
-                        margin-left: 0;
-                    }
-
-                    &:last-child:after {
-                        content: '';
-                        display: none;
-                    }
-
-                    .SplashScreenIcon {
-                        margin-right: 7px;
-                    }
-                }
+            &.disabled {
+              color: transparentize($fgcolor, 0.8);
+              pointer-events: none;
             }
 
-            .LoginButton {
-                width: 30px;
-                height: 30px;
-                color: $fgcolor;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                border-radius: 999px;
-                font-size: 14px;
-                transition: all ease .1s;
-
-                &:hover {
-                    background-color: $fgcolor;
-                    color: darken($fgcolor, 100%);
-                }
+            &:hover {
+              background-color: $fgcolor;
+              color: darken($fgcolor, 100%);
             }
+
+            &:active {
+              background-color: darken($fgcolor, 20%);
+              transition: none;
+              color: darken($fgcolor, 100%);
+            }
+          }
         }
+      }
     }
+  }
 
-    &.w1 {background-image: url('../default.jpg')}
-    &.w2 {background-image: url('../52697.jpg')}
-    &.w3 {background-image: url('../52496.jpg')}
-    &.w4 {background-image: url('../52791.jpg')}
-    &.w5 {background-image: url('../52532.jpg')}
-    &.w6 {background-image: url('../52544.jpg')}
+  &.w1 {
+    background-image: url("../default.jpg");
+  }
+  &.w2 {
+    background-image: url("../52697.jpg");
+  }
+  &.w3 {
+    background-image: url("../52496.jpg");
+  }
+  &.w4 {
+    background-image: url("../52791.jpg");
+  }
+  &.w5 {
+    background-image: url("../52532.jpg");
+  }
+  &.w6 {
+    background-image: url("../52544.jpg");
+  }
 }

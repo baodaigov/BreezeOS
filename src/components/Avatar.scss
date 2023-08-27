@@ -1,0 +1,13 @@
+$fgcolor: #e2e2e2;
+
+.SignInImage {
+  border-radius: 999px;
+
+  &.undefined {
+    background-color: transparentize($fgcolor, 0.95);
+    color: transparentize($fgcolor, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

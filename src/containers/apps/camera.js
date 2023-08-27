@@ -335,9 +335,7 @@ export default function Camera() {
                     </div>
                     <div className="WindowBodyDefault">
                         <div className='WindowBodyContent'>
-                            <div style={{ display: 'flex', flexDirection: 'column' }}>
-
-                            </div>
+                            <div style={{ display: 'flex', flexDirection: 'column' }}></div>
                         </div>
                     </div>
                 </div>
@@ -397,7 +395,7 @@ export default function Camera() {
                                     </div>
                                     {img != null ? (
                                         <div style={{ display: 'flex' }}>
-                                            <a href={img} download='image'>
+                                            <a href={img} download={`Picture_${Date.now()}`}>
                                                 <div className='CameraButton'>
                                                     <p>Save image</p>
                                                 </div>

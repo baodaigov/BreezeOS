@@ -3,573 +3,470 @@ $fgcolor: #e2e2e2;
 $actcolor: #8fb6ff;
 
 .FilesWindow {
-    .Window .TopBar {
-        padding: 4px 8px;
-        .TopBarInteractionContainer {
+  .Window .TopBar {
+    padding: 4px 8px;
+    .TopBarInteractionContainer {
+      display: flex;
+      width: 100vw;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .TopBarTitle {
+      width: auto;
+    }
+  }
+
+  .files {
+    width: 93vw;
+    height: 93%;
+    opacity: 0;
+    pointer-events: none;
+    transition: all ease 0.3s;
+
+    &.active {
+      opacity: 1;
+      pointer-events: all;
+      width: 100vw;
+      height: 100%;
+    }
+
+    &.hide {
+      top: 153%;
+      pointer-events: none;
+    }
+
+    .ActMenu .iconSize .ActMenuSelector {
+      &:hover {
+        background: transparent;
+      }
+
+      .ActMenuInteraction {
+        width: 20px;
+        height: 20px;
+        border-radius: 999px;
+        font-size: 13px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all ease 0.2s;
+
+        &:hover {
+          background: #ffffff12;
+        }
+
+        &.disabled {
+          color: #ffffff32;
+          pointer-events: none;
+          &:hover {
+            background: transparent;
+          }
+        }
+      }
+    }
+
+    .TabBarWrapper {
+      margin: 0 10px;
+      margin-right: 0;
+
+      .TabBar {
+        display: flex;
+
+        .TabBarItem {
+          padding: 4px 9px;
+          color: #fff;
+          display: flex;
+          align-items: center;
+          font-size: 11px;
+          margin-right: 5px;
+
+          * {
+            margin: 0;
+          }
+
+          .TabSeparator {
+            background-color: #ffffff1e;
+            width: 1px;
+          }
+
+          .TabBarInteraction {
             display: flex;
-            width: 100vw;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .TopBarTitle {width: auto;}
-    }
 
-    .files {
-        width: 93vw;
-        height: 93%;
-        opacity: 0;
-        pointer-events: none;
-        transition: all ease .3s;
+            i {
+              margin-right: 3px;
+              font-size: 12px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 999px;
+              height: 20px;
+              width: 20px;
 
-        &.active {
-            opacity: 1;
-            pointer-events: all;
-            width: 100vw;
-            height: 100%;
-        }
+              &:hover {
+                background-color: #ffffff1e;
+              }
 
-        &.hide {
-            top: 153%;
-            pointer-events: none;
-        }
-        
-        .ActMenu .iconSize .ActMenuSelector {
-        	&:hover {background: transparent}
-        	
-        	.ActMenuInteraction {
-        		width: 20px;
-        		height: 20px;
-        		border-radius: 999px;
-        		font-size: 13px;
-        		display: flex;
-        		justify-content: center;
-        		align-items: center;
-        		transition: all ease .2s;
-        		
-        		&:hover {background:#ffffff12}
-        		
-        		&.disabled {
-        			color:#ffffff32;
-        			pointer-events: none;
-        			&:hover {background: transparent}
-        		}
-        	}
-        }
-    
-        .TabBarWrapper {
-            margin: 0 10px;
-            margin-right: 0;
-    
-            .TabBar {
-                display: flex;
-    
-                .TabBarItem {
-                    padding: 4px 9px;
-                    color: #fff;
-                    display: flex;
-                    align-items: center;
-                    font-size: 11px;
-                    margin-right: 5px;
-    
-                    * { margin: 0 }
-                    
-                    .TabSeparator {
-                        background-color: #ffffff1e;
-                        width: 1px;
-                    }
-
-                    .TabBarInteraction {
-                        display: flex;
-
-                        i {
-                            margin-right: 3px;
-                            font-size: 12px;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            border-radius: 999px;
-                            height: 20px;
-                            width: 20px;
-
-                            &:hover {
-                                background-color: #ffffff1e;
-                            }
-
-                            &:last-child {
-                                margin: 0;
-                            }
-                        }
-                    }
-                }
-
-                .TabBarFileSystem {
-                    display: flex;
-                    justify-content: space-between;
-                    width: 600px;
-                    background-color: #ffffff0a;
-                    border-radius: 5px;
-                }
+              &:last-child {
+                margin: 0;
+              }
             }
+          }
         }
-        
-        &.minimize {
-            width: 1000px;
-            height: 600px;
-        }
-    }
-    
-    .Files {
-        background: $bgcolor;
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-        height: 100%;
-        color: $fgcolor;
 
-        .FilesSection {
+        .TabBarFileSystem {
+          display: flex;
+          justify-content: space-between;
+          width: 600px;
+          background-color: #ffffff0a;
+          border-radius: 5px;
+        }
+      }
+    }
+
+    &.minimize {
+      width: 1000px;
+      height: 600px;
+    }
+  }
+
+  .Files {
+    background: $bgcolor;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    height: 100%;
+    color: $fgcolor;
+
+    .FilesSection {
+      width: 100%;
+      height: 100%;
+      display: flex;
+
+      .NavPanel {
+        background: transparentize($actcolor, 0.95);
+        width: 260px;
+        max-height: 100%;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        padding: 10px 0;
+        margin: 7px;
+        border-radius: 13px;
+
+        .DropdownMenu {
+          display: flex;
+          align-items: center;
+          color: darken($fgcolor, 10%);
+          margin: 7px 0;
+          margin-left: 20px;
+          font-size: 13px;
+          transition: all ease 0.3s;
+
+          i {
+            width: 10px;
+            display: flex;
+            justify-content: center;
+          }
+
+          p {
+            margin: 0;
+            padding: 8px 0 8px 12px;
+            border-radius: 999px;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
             width: 100%;
-            height: 100%;
-            display: flex;
+          }
 
-            .NavPanel {
-                background: transparentize($actcolor, 0.95);
-                width: 260px;
-                max-height: 100%;
-                display: flex;
-                justify-content: space-between;
-                flex-direction: column;
-                padding: 10px 0;
-                margin: 7px;
-                border-radius: 13px;
+          &:hover {
+            color: $actcolor;
+          }
 
-                .DropdownMenu {
-                    display: flex;
-                    align-items: center;
-                    color: darken($fgcolor, 10%);
-                    margin: 8px 0;
-                    margin-left: 20px;
-                    font-size: 13px;
-                    transition: all ease .3s;
+          &.active {
+            color: $actcolor;
+            margin-left: 10px;
 
-                    i {
-                        width: 10px;
-                        display: flex;
-                        justify-content: center;
-                    }
-
-                    p {
-                        margin: 0;
-                        padding: 8px 0 8px 12px;
-                        border-radius: 999px;
-                        border-top-right-radius: 0;
-                        border-bottom-right-radius: 0;
-                        width: 100%;
-                    }
-
-                    &:hover {
-                        color: $actcolor;
-                    }
-                }
-
-                &[value='b']{
-                    .DropdownMenu.clock-rotate-left {
-                        color: $actcolor;
-                        margin-left: 10px;
-
-                        i {
-                            width: 30px;
-                        }
-
-                        p {
-                            font-weight: 700;
-                            background: transparentize($actcolor, 0.87);
-                        }
-                    }
-                }
-
-                &[value='a']{
-                    .DropdownMenu.star {
-                        color: $actcolor;
-                        margin-left: 10px;
-
-                        i {
-                            width: 30px;
-                        }
-
-                        p {
-                            font-weight: 700;
-                            background: transparentize($actcolor, 0.87);
-                        }
-                    }
-                }
-
-                &[value='1']{
-                    .DropdownMenu.house {
-                        color: $actcolor;
-                        margin-left: 10px;
-
-                        i {
-                            width: 30px;
-                        }
-
-                        p {
-                            font-weight: 700;
-                            background: transparentize($actcolor, 0.87);
-                        }
-                    }
-                }
-
-                &[value='2']{
-                    .DropdownMenu.desktop {
-                        color: $actcolor;
-                        margin-left: 10px;
-
-                        i {
-                            width: 30px;
-                        }
-
-                        p {
-                            font-weight: 700;
-                            background: transparentize($actcolor, 0.87);
-                        }
-                    }
-                }
-
-                &[value='3']{
-                    .DropdownMenu.file {
-                        color: $actcolor;
-                        margin-left: 10px;
-
-                        i {
-                            width: 30px;
-                        }
-
-                        p {
-                            font-weight: 700;
-                            background: transparentize($actcolor, 0.87);
-                        }
-                    }
-                }
-
-                &[value='4']{
-                    .DropdownMenu.download {
-                        color: $actcolor;
-                        margin-left: 10px;
-
-                        i {
-                            width: 30px;
-                        }
-
-                        p {
-                            font-weight: 700;
-                            background: transparentize($actcolor, 0.87);
-                        }
-                    }
-                }
-
-                &[value='5']{
-                    .DropdownMenu.music {
-                        color: $actcolor;
-                        margin-left: 10px;
-
-                        i {
-                            width: 30px;
-                        }
-
-                        p {
-                            font-weight: 700;
-                            background: transparentize($actcolor, 0.87);
-                        }
-                    }
-                }
-
-                &[value='6']{
-                    .DropdownMenu.image {
-                        color: $actcolor;
-                        margin-left: 10px;
-
-                        i {
-                            width: 30px;
-                        }
-
-                        p {
-                            font-weight: 700;
-                            background: transparentize($actcolor, 0.87);
-                        }
-                    }
-                }
-
-                &[value='7']{
-                    .DropdownMenu.film {
-                        color: $actcolor;
-                        margin-left: 10px;
-
-                        i {
-                            width: 30px;
-                        }
-
-                        p {
-                            font-weight: 700;
-                            background: transparentize($actcolor, 0.87);
-                        }
-                    }
-                }
-
-                &[value='8']{
-                    .DropdownMenu.trash {
-                        color: $actcolor;
-                        margin-left: 10px;
-
-                        i {
-                            width: 30px;
-                        }
-
-                        p {
-                            font-weight: 700;
-                            background: transparentize($actcolor, 0.87);
-                        }
-                    }
-                }
-
-                &[value='9']{
-                    .DropdownMenu.otherLocation {
-                        color: $actcolor;
-                        margin-left: 10px;
-
-                        i {
-                            width: 30px;
-                        }
-
-                        p {
-                            font-weight: 700;
-                            background: transparentize($actcolor, 0.87);
-                        }
-                    }
-                }
+            i {
+              width: 30px;
             }
 
-            .FilesContainer {
-                padding: 0 30px;
-                width: 100%;
-                height: 100%;
-                overflow-y: auto;
-                
-                .NoFiles {
-                    width: 100%;
-                    height: 100%;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    color: transparentize($fgcolor, 0.87);
-                    font-size: 27px;
-                }
-
-                .FilesSection2 {
-                    box-sizing: border-box;
-                    width: 100%;
-                    display: grid;
-                    padding-bottom: 25px;
-                    grid-template-columns: repeat(auto-fill, 8.6em);
-                    justify-content: space-between;
-                    align-items: flex-end;
-                    grid-column-gap: 1em;
-
-                    .FilesItem {
-                        display: flex;
-                        flex-direction: column;
-                        padding: 10px;
-                        align-items: center;
-                        margin-top: 25px;
-                        margin-bottom: auto;
-                        margin-right: 7px;
-                        height: auto;
-                        border-radius: 7px;
-                        line-height: 1.4;
-                        text-align: center;
-                        
-                        img {display:block}
-
-                        &:hover {
-                            background: transparentize($fgcolor, 0.93)
-                        }
-    
-                        .FilesName {
-                            font-size: 13px;
-                            color: $fgcolor;
-                            margin: 0;
-                            margin-top: 15px;
-                        }
-                    }
-                }
-                
-                .OtherLocations {
-                	width: 100%;
-                	height: 100%;
-                	
-                	.HeaderBar {
-                		margin-top: 10px;
-                		padding: 8px 15px;
-                		font-size: 12.5px;
-                		width: 100%;
-                		display: flex;
-                		justify-content: space-between;
-                		border-bottom: 0.5px solid transparentize($fgcolor, 0.8);
-                		
-                		* {margin:0}
-                	}
-                	
-                	.OtherLocationsItem {
-                		display: flex;
-                		justify-content: space-between;
-                		padding: 10px 20px;
-                		font-size: 13px;
-
-                		* {margin:0}
-                		
-                		&:hover {background:transparentize($fgcolor, 0.95)}
-                	}
-                }
+            p {
+              font-weight: 700;
+              background: transparentize($actcolor, 0.87);
             }
+          }
         }
+      }
+
+      .FilesContainer {
+        padding: 0 30px;
+        width: 100%;
+        height: 100%;
+        overflow-y: auto;
+
+        .NoFiles {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: transparentize($fgcolor, 0.87);
+          font-size: 27px;
+        }
+
+        .FilesSection2 {
+          box-sizing: border-box;
+          width: 100%;
+          display: grid;
+          padding-bottom: 25px;
+          grid-template-columns: repeat(auto-fill, 8.6em);
+          justify-content: space-between;
+          align-items: flex-end;
+          grid-column-gap: 1em;
+
+          .FilesItem {
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            align-items: center;
+            margin-top: 25px;
+            margin-bottom: auto;
+            margin-right: 7px;
+            height: auto;
+            border-radius: 7px;
+            line-height: 1.4;
+            text-align: center;
+
+            img {
+              display: block;
+            }
+
+            &:hover {
+              background: transparentize($fgcolor, 0.93);
+            }
+
+            .FilesName {
+              font-size: 13px;
+              color: $fgcolor;
+              margin: 0;
+              margin-top: 15px;
+            }
+          }
+        }
+
+        .OtherLocations {
+          width: 100%;
+          height: 100%;
+
+          .HeaderBar {
+            margin-top: 10px;
+            padding: 8px 15px;
+            font-size: 12.5px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 0.5px solid transparentize($fgcolor, 0.8);
+
+            * {
+              margin: 0;
+            }
+          }
+
+          .OtherLocationsItem {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
+            font-size: 13px;
+
+            * {
+              margin: 0;
+            }
+
+            &:hover {
+              background: transparentize($fgcolor, 0.95);
+            }
+          }
+        }
+      }
     }
+
+    &.whitesur {
+      background: #202023;
+
+      .FilesSection .NavPanel {
+        border-radius: 0;
+        background: transparent;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        .DropdownMenu {
+          transition: none;
+          margin-left: 15px;
+          i {
+            color: #009dff;
+            font-size: 15px;
+            width: 15px;
+            margin-right: 7px;
+          }
+          p {
+            padding: 7px 8px;
+            color: darken($fgcolor, 10%);
+            border-radius: 5px;
+            font-weight: 300;
+          }
+          &:hover {
+            p {
+              background: transparentize($fgcolor, 0.93);
+            }
+          }
+  
+          &.active {
+            margin-left: 15px;
+            i {
+              width: 15px;
+              margin-right: 7px;
+            }
+  
+            p {
+              font-weight: inherit;
+              background: transparentize($fgcolor, 0.85);
+            }
+  
+            &:hover {
+              p {
+                background: transparentize($fgcolor, 0.85);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 .lightMode {
-    .files {
-        	.ActMenu .iconSize .ActMenuSelector .ActMenuInteraction {
-        		
-        		&:hover {background:#00000012}
-        		
-        		&.disabled {
-        			color:#00000032;
-        		}
-        	}
-        	
-        .TabBarWrapper .TabBar {
-            .TabBarItem {
-                color: #000;
-                        
-                .TabSeparator {
-                    background-color: #0000001e;
-                }
-        
-                &:hover {
-                    .CloseButton {
-                        &:hover {
-                            background-color: #00000010;
-                        }
-                    }
-                }
+  .files {
+    .ActMenu .iconSize .ActMenuSelector .ActMenuInteraction {
+      &:hover {
+        background: #00000012;
+      }
 
-                .TabBarInteraction i:hover {
-                    background-color: #0000001e;
-                }
-            }
-            .TabBarFileSystem {
-                background-color: #0000000a;
-            }
-        }
+      &.disabled {
+        color: #00000032;
+      }
     }
 
-    .Files {
-        background: $fgcolor;
-        color: $bgcolor;
+    .TabBarWrapper .TabBar {
+      .TabBarItem {
+        color: #000;
 
-        .FilesSection .NavPanel {
-            background: transparentize($actcolor, 0.85);
-
-            .DropdownMenu {
-                color: lighten($bgcolor, 10%);
-
-                &:hover {
-                    color: $actcolor;
-                }
-            }
-
-            &[value='b']{
-                .DropdownMenu.clock-rotate-left p {
-                    background: $fgcolor;
-                }
-            }
-
-            &[value='a']{
-                .DropdownMenu.star p {
-                    background: $fgcolor;
-                }
-            }
-
-            &[value='1']{
-                .DropdownMenu.house p {
-                    background: $fgcolor;
-                }
-            }
-
-            &[value='2']{
-                .DropdownMenu.desktop p {
-                    background: $fgcolor;
-                }
-            }
-
-            &[value='3']{
-                .DropdownMenu.file p {
-                    background: $fgcolor;
-                }
-            }
-
-            &[value='4']{
-                .DropdownMenu.download p {
-                    background: $fgcolor;
-                }
-            }
-
-            &[value='5']{
-                .DropdownMenu.music p {
-                    background: $fgcolor;
-                }
-            }
-
-            &[value='6']{
-                .DropdownMenu.image p {
-                    background: $fgcolor;
-                }
-            }
-
-            &[value='7']{
-                .DropdownMenu.film p {
-                    background: $fgcolor;
-                }
-            }
-
-            &[value='8']{
-                .DropdownMenu.trash p {
-                    background: $fgcolor;
-                }
-            }
-
-            &[value='9']{
-                .DropdownMenu.otherLocation p {
-                    background: $fgcolor;
-                }
-            }
+        .TabSeparator {
+          background-color: #0000001e;
         }
 
-        .FilesContainer {
-        	.NoFiles {color: transparentize($bgcolor, 0.73)!important}
-		.FilesSection2 .FilesItem {
-		    &:hover {
-		        background: transparentize($bgcolor, 0.8)!important;
-		    }
+        &:hover {
+          .CloseButton {
+            &:hover {
+              background-color: #00000010;
+            }
+          }
+        }
 
-		    .FilesName {
-		        color: $bgcolor!important;
-		    }
-		}
-                .OtherLocations {
-                	.HeaderBar {
-                		border-bottom: 0.5px solid transparentize($bgcolor, 0.65)!important;
-                	}
-
-                    .OtherLocationsItem:hover {background:transparentize($bgcolor, 0.8)!important}
-                }
-	}
+        .TabBarInteraction i:hover {
+          background-color: #0000001e;
+        }
+      }
+      .TabBarFileSystem {
+        background-color: #0000000a;
+      }
     }
+  }
+
+  .Files {
+    background: $fgcolor;
+    color: $bgcolor;
+
+    .FilesSection .NavPanel {
+      background: transparentize($actcolor, 0.85);
+
+      .DropdownMenu {
+        color: lighten($bgcolor, 10%);
+
+        &:hover {
+          color: $actcolor;
+        }
+      }
+      .DropdownMenu {
+        &.active {
+          p {
+            background: $fgcolor;
+          }
+        }
+      }
+    }
+
+    .FilesContainer {
+      .NoFiles {
+        color: transparentize($bgcolor, 0.73) !important;
+      }
+      .FilesSection2 .FilesItem {
+        &:hover {
+          background: transparentize($bgcolor, 0.8) !important;
+        }
+
+        .FilesName {
+          color: $bgcolor !important;
+        }
+      }
+      .OtherLocations {
+        .HeaderBar {
+          border-bottom: 0.5px solid transparentize($bgcolor, 0.65) !important;
+        }
+
+        .OtherLocationsItem:hover {
+          background: transparentize($bgcolor, 0.8) !important;
+        }
+      }
+    }
+
+    &.whitesur {
+      background: $fgcolor;
+
+      .FilesSection .NavPanel {
+        border-bottom: 0.5px solid transparentize($bgcolor, 0.7);
+
+        .DropdownMenu {
+          i {
+            color: #009dff;
+          }
+          p {
+            color: lighten($bgcolor, 10%);
+          }
+          &:hover {
+            p {
+              background: transparentize($bgcolor, 0.85);
+            }
+          }
+
+          &.active {
+            margin-left: 15px;
+            i {
+              width: 15px;
+              margin-right: 7px;
+            }
+
+            p {
+              font-weight: inherit;
+              background: transparentize($bgcolor, 0.8);
+            }
+
+            &:hover {
+              p {
+                background: transparentize($bgcolor, 0.8);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

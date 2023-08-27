@@ -4,49 +4,90 @@ $rbgcolor: #353535;
 $rtbgcolor: #83aaff;
 
 .Range {
+  appearance: none;
+  height: 27px;
+  background-color: $rbgcolor;
+  border-radius: 999px;
+  width: 100%;
+  overflow: hidden;
+  transition: all ease 0.15s;
+
+  &::-webkit-slider-thumb {
     appearance: none;
+    -webkit-appearance: none;
+    width: 27px;
     height: 27px;
-    background-color: $rbgcolor;
+    background: $rtbgcolor;
     border-radius: 999px;
-    width: 100%;
-    overflow: hidden;
-    transition: all ease .15s;
+    border: 0;
+    box-shadow: -210px 0 0 195px $rtbgcolor;
+  }
+
+  &::-moz-range-thumb {
+    appearance: none;
+    width: 27px;
+    height: 27px;
+    background: $rtbgcolor;
+    border-radius: 999px;
+    border: 0;
+    box-shadow: -210px 0 0 195px $rtbgcolor;
+  }
+
+  &:hover {
+    &::-webkit-slider-thumb {
+      background: lighten($rtbgcolor, 5%);
+      box-shadow: -210px 0 0 195px lighten($rtbgcolor, 5%);
+    }
+
+    &::-moz-range-thumb {
+        background: lighten($rtbgcolor, 5%);
+        box-shadow: -210px 0 0 195px lighten($rtbgcolor, 5%);
+    }
+  }
+
+  &.whitesur {
+    border: 0.5px solid lighten($rbgcolor, 6%);
 
     &::-webkit-slider-thumb {
-        appearance: none;
-        -webkit-appearance: none;
-        width: 27px;
-        height: 27px;
-        background: $rtbgcolor;
-        border-radius: 999px;
-        border: 0;
-        box-shadow: -210px 0 0 195px $rtbgcolor;
+      border: 0.5px solid lighten(#202023, 25%);
+      background: $fgcolor;
+      box-shadow: -210px 0 0 195px $fgcolor;
+
+      &:active {
+        background: darken($fgcolor, 10%);
+      }
     }
 
-    &:hover {
-        &::-webkit-slider-thumb {
-            background: lighten($rtbgcolor,5%);
-            box-shadow: -210px 0 0 195px lighten($rtbgcolor,5%);
-        }
-    }
+    &::-moz-range-thumb {
+      border: 0.5px solid lighten(#202023, 25%);
+      background: $fgcolor;
+      box-shadow: -210px 0 0 195px $fgcolor;
 
-    &.whitesur {
-        border: 0.5px solid lighten($rbgcolor, 6%);
-
-        &::-webkit-slider-thumb {
-            border: 0.5px solid lighten(#202023, 25%);
-            background: $fgcolor;
-            box-shadow: -210px 0 0 195px $fgcolor;
-            
-            &:active {
-                background: darken($fgcolor, 10%);
-            }
-        }
+      &:active {
+        background: darken($fgcolor, 10%);
+      }
     }
+  }
 }
 
 .lightMode {
-    .Range {
-        background-color: lighten($rbgcolor,72%);
+  .Range {
+    background-color: lighten($rbgcolor, 70%);
+
+    &.whitesur {
+      border: 0.5px solid lighten($rbgcolor, 50%);
+
+      &::-webkit-slider-thumb {
+        border: 0.5px solid lighten(#202023, 75%);
+        background: lighten($fgcolor, 20%);
+        box-shadow: -210px 0 0 195px lighten($fgcolor, 20%);
+      }
+
+      &::-moz-range-thumb {
+        border: 0.5px solid lighten(#202023, 75%);
+        background: lighten($fgcolor, 20%);
+        box-shadow: -210px 0 0 195px lighten($fgcolor, 20%);
+      }
     }
+  }
 }

@@ -70,15 +70,15 @@ export default function Calculator() {
 
     const CalculatorWindow = () => {
         const btnValues = [
-          ["C", "+-", "%", "/"],
-          [7, 8, 9, "X"],
+          ["C", "+-", "%", "÷"],
+          [7, 8, 9, "×"],
           [4, 5, 6, "-"],
           [1, 2, 3, "+"],
           [0, ".", "="],
         ];
         
         const toLocaleString = (num) =>
-          String(num).replace(/(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g, "$1 ");
+          String(num).replace(/(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g, "$1");
         
         const removeSpaces = (num) => num.toString().replace(/\s/g, "");
 
@@ -135,15 +135,15 @@ export default function Calculator() {
                 ? a + b
                 : sign === "-"
                 ? a - b
-                : sign === "X"
+                : sign === "×"
                 ? a * b
                 : a / b;
       
             setCalc({
               ...calc,
               res:
-                calc.num === "0" && calc.sign === "/"
-                  ? "Can't divide with 0"
+                calc.num === "0" && calc.sign === "÷"
+                  ? "Error"
                   : toLocaleString(
                       math(
                         Number(removeSpaces(calc.res)),
@@ -215,7 +215,7 @@ export default function Calculator() {
                                             ? percentClickHandler
                                             : btn === "="
                                             ? equalsClickHandler
-                                            : btn === "/" || btn === "X" || btn === "-" || btn === "+"
+                                            : btn === "÷" || btn === "×" || btn === "-" || btn === "+"
                                             ? signClickHandler
                                             : btn === "."
                                             ? commaClickHandler

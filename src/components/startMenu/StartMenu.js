@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import './StartMenu.scss';
-import SearchMenu from './SearchMenu';
 import StartApp from './StartApp';
 import { TerminalStartApp } from '../../containers/apps/terminal';
 import { FirefoxStartApp } from '../../containers/apps/firefox';
@@ -34,19 +33,11 @@ export default function StartMenu(){
                     document.getElementsByClassName('DesktopBody')[0].classList.add('active');
                 }
             }
-            // Bind the event listener
             document.addEventListener("mousedown", handleClickOutside);
             return () => {
-                // Unbind the event listener on clean up
                 document.removeEventListener("mousedown", handleClickOutside);
             };
         }, [ref]);
-    }
-
-    function openApp(){
-        document.getElementsByClassName('StartMenuWrapper')[0].classList.remove('active');
-        dispatch(setHeaderActive(true));
-        document.getElementsByClassName('DesktopBody')[0].classList.add('active');
     }
 
     const items = [
@@ -88,7 +79,9 @@ export default function StartMenu(){
         <div className='StartMenuWrapper'>
             <div className='StartMenu'>
                 <div ref={startRef}>
-                    <SearchMenu onSearch={search} value={name} onChange={e => setName(e.target.innerText)}/>
+                    <div className='SearchMenu'>
+                        <div className='SearchInput' contentEditable onKeyUp={search} onChange={e => setName(e.target.innerText)} spellCheck='false'>{name}</div>
+                    </div>
                     <div className='StartApps'>
                         <FirefoxStartApp/>
                         <CalendarStartApp/>
@@ -101,7 +94,7 @@ export default function StartMenu(){
                         <TerminalStartApp/>
                         <SoftwareStoreStartApp/>
                         <VSCodeStartApp/>
-                        {items.map(i => <StartApp key={i.id} icon={i.icon} name={i.name} onClick={openApp}/>)}
+                        {items.map(i => <StartApp key={i.id} icon={i.icon} name={i.name}/>)}
                     </div>
                 </div>
             </div>
