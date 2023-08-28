@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component, useEffect, useState } from "react";
 import { useBattery } from "react-use";
 import "./LockScreen.scss";
 import SplashScreenTime from "./SplashScreenTime";
@@ -34,7 +34,7 @@ export default function SplashScreen() {
 
   return (
     <div className="SplashScreen">
-      <div style={{ paddingTop: "50px" }}>
+      <div style={{ paddingTop: "60px" }}>
         <SplashScreenTime />
         <div className="SplashScreenDesc">
           <div className="SplashScreenItem">
@@ -48,14 +48,14 @@ export default function SplashScreen() {
       </div>
       <div className="SignInWrapper">
         <div className="SignInInfo">
-          <Avatar size={40}/>
+          <Avatar size={40} />
           <p className="SignInName">{settings.user.name}</p>
         </div>
         <div className="SignIn">
           {settings.user.password ? (
             <>
               {invalidCount === invalidLimit ? (
-                <p>{invalidLimit} invalid times. Try again for 5 minutes.</p>
+                <p>{invalidLimit} invalid times. Try again for 1 minute.</p>
               ) : (
                 <>
                   <div className="SignInPassword">
@@ -103,6 +103,11 @@ export default function SplashScreen() {
             </div>
           )}
         </div>
+        {invalidCount !== invalidLimit && (
+          <p className="SignInFailedAttempts" style={{ opacity: invalidCount ? "1" : "0" }}>
+            {invalidCount} failed {invalidCount > 1 ? "attempts" : "attempt"}
+          </p>
+        )}
       </div>
     </div>
   );

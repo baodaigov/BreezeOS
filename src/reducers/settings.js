@@ -63,7 +63,7 @@ const initialState = {
       status: "weak",
     },
   ],
-  isLocked: false,
+  isLocked: true,
   volume: 100,
   brightness: 100,
   notifications: true,
@@ -78,6 +78,9 @@ export const settingsSlice = createSlice({
   name: "settings",
   initialState,
   reducers: {
+    setName: (state, action) => {
+      state.user.name = action.payload;
+    },
     setPassword: (state, action) => {
       state.user.password = action.payload;
     },
@@ -139,6 +142,7 @@ export const settingsSlice = createSlice({
 });
 
 export const {
+  setName,
   setPassword,
   setDeviceName,
   toggleAirplaneModeOff,

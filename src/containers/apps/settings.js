@@ -27,6 +27,7 @@ import {
   setDeviceName,
   toggle12Hour,
   setFontFamily,
+  setName,
 } from "../../reducers/settings";
 import { changeWallpaper } from "../../reducers/wallpaper";
 import "../../components/utils/window/Window.scss";
@@ -159,6 +160,12 @@ export default function Settings() {
     const header = useSelector((state) => state.header);
     const [wallpaperValue, setValueWallpaper] = useState("1");
     const dispatch = useDispatch();
+
+    useEffect(() => {
+      if (shellTheme === "WhiteSur") {
+        dispatch(setProMode(false));
+      }
+    }, [shellTheme]);
 
     const navItems = [
       [
@@ -551,6 +558,7 @@ export default function Settings() {
     }
 
     const [shareWifi, setShareWifi] = useState(false);
+    const [usersTab, setUsersTab] = useState("");
 
     var mouseHold;
 
@@ -873,11 +881,20 @@ export default function Settings() {
                         marginBottom: "40px",
                       }}
                     >
-                      <p>Enable ProMode</p>
+                      <p>
+                        Enable ProMode{" "}
+                        {shellTheme === "WhiteSur" &&
+                          "(This theme doesn't support ProMode.)"}
+                      </p>
                       <div
                         className={`Toggle ${
                           shellTheme === "WhiteSur" ? "whitesur" : ""
                         } ${header.proMode ? "active" : ""}`}
+                        style={{
+                          opacity: shellTheme === "WhiteSur" ? "0.5" : "1",
+                          pointerEvents:
+                            shellTheme === "WhiteSur" ? "none" : "all",
+                        }}
                         onClick={() => dispatch(setProMode(!header.proMode))}
                       ></div>
                     </div>
@@ -1296,7 +1313,13 @@ export default function Settings() {
           return (
             <div className="UsersWrapper">
               <div className="Users">
-                <div style={{ width: "649.516px", display: "flex", flexDirection: "column" }}>
+                <div
+                  style={{
+                    width: "649.516px",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
                   <div className="UserCard">
                     <div className="UserInfo">
                       <Avatar size={70} />
@@ -1306,19 +1329,25 @@ export default function Settings() {
                       </div>
                     </div>
                   </div>
-                  <div className="UserItem">
+                  <div
+                    className="UserItem"
+                    onClick={() => setUsersTab("general")}
+                  >
                     <div style={{ display: "flex", alignItems: "center" }}>
                       <i className="fa-regular fa-gear UserIcon"></i>
                       <p>General</p>
                     </div>
-                    <i className='fa-regular fa-chevron-right'></i>
+                    <i className="fa-regular fa-chevron-right"></i>
                   </div>
-                  <div className="UserItem">
+                  <div
+                    className="UserItem"
+                    onClick={() => setUsersTab("security")}
+                  >
                     <div style={{ display: "flex", alignItems: "center" }}>
                       <i className="fa-regular fa-lock UserIcon"></i>
                       <p>Security</p>
                     </div>
-                    <i className='fa-regular fa-chevron-right'></i>
+                    <i className="fa-regular fa-chevron-right"></i>
                   </div>
                 </div>
               </div>
@@ -1498,6 +1527,36 @@ export default function Settings() {
 
     const wp = useSelector((state) => state.wifipassword);
 
+    const [userName, setUserName] = useState("");
+
+    function switchUsersTab() {
+      switch (usersTab) {
+        case "general":
+          return (
+            <>
+              <Avatar size={90} />
+              <div className="UserInfo">
+                <input
+                  placeholder={settingsReducer.user.name}
+                  value={userName}
+                  onInput={(e) => setUserName(e.target.value)}
+                  className="Input"
+                />
+              </div>
+              <div
+                className={`Button ${!userName && "disabled"}`}
+                onClick={() => {
+                  setUsersTab("");
+                  dispatch(setName(userName));
+                }}
+              >
+                <p>OK</p>
+              </div>
+            </>
+          );
+      }
+    }
+
     return (
       <>
         {maximumExceeded ? (
@@ -1610,11 +1669,7 @@ export default function Settings() {
           </div>
         </TopBar>
         <WindowBody>
-          <div
-            className={`BlackScr ${shareWifi ? "active" : ""} ${
-              wp.active ? "active" : ""
-            } ${nw.active ? "active" : ""}`}
-          >
+          <div className={`BlackScr ${shareWifi && "active"}`}>
             <div
               className={`WifiSharing ${
                 shellTheme === "WhiteSur" ? "whitesur" : ""
@@ -1640,6 +1695,8 @@ export default function Settings() {
                 </div>
               </div>
             </div>
+          </div>
+          <div className={`BlackScr ${wp.active && "active"}`}>
             <div
               className={`InsertWifiPassword ${
                 shellTheme === "WhiteSur" ? "whitesur" : ""
@@ -1704,6 +1761,8 @@ export default function Settings() {
                 </div>
               </div>
             </div>
+          </div>
+          <div className={`BlackScr ${nw.active && "active"}`}>
             <div
               className={`ConnectOtherNetworks ${
                 shellTheme === "WhiteSur" ? "whitesur" : ""
@@ -1892,6 +1951,28 @@ export default function Settings() {
                     Connect
                   </button>
                 </div>
+              </div>
+            </div>
+          </div>
+          <div className={`BlackScr ${usersTab !== "" && "active"}`}>
+            <div
+              className={`UsersBox ${
+                shellTheme === "WhiteSur" ? "whitesur" : ""
+              } ${usersTab !== "" && "active"}`}
+            >
+              <div className="WindowTopBar">
+                <p className="WindowTopBarTitle"></p>
+                <div className="WindowTopBarInteractionContainer">
+                  <div
+                    className="WindowTopBarInteraction close"
+                    onClick={() => setUsersTab("")}
+                  >
+                    <i className="fa-solid fa-xmark fa-lg"></i>
+                  </div>
+                </div>
+              </div>
+              <div className="WindowBodyDefault">
+                <div className="WindowBodyContent">{switchUsersTab()}</div>
               </div>
             </div>
           </div>
