@@ -1,15 +1,18 @@
 .ClockWidget {
   width: 200px;
   height: 200px;
-  border-radius:999px;
+  overflow: hidden;
+  border-radius: 999px;
   display: none;
 
-  &.active {display:block}
+  &.active {
+    display: block;
+  }
 
   .Close {
     width: 31px;
     height: 31px;
-    background:#f7f7f7;
+    background: #f7f7f7;
     border-radius: 999px;
     font-size: 14px;
     display: flex;
@@ -19,6 +22,7 @@
     top: -5px;
     right: 0;
     opacity: 0;
+    z-index: 1;
 
     &:hover {
       opacity: 1;
@@ -32,9 +36,9 @@
   .Hour {
     position: absolute;
     width: 10px;
-    height: 80px;
+    height: 75px;
     border-radius: 999px;
-    top: 20px;
+    top: 25px;
     left: 93px;
     transform-origin: bottom;
     z-index: 10000;
@@ -67,36 +71,56 @@
   }
 
   .Number {
-    font-weight: 800!important;
+    font-weight: 800;
+    text-align: center;
     letter-spacing: -3px;
     position: absolute;
-    font-size: 50px;
-  
+    font-size: 115px;
+    letter-spacing: -15px;
+
     &.twelve {
-      top: 10px;
-      left: 36%;
+      top: -45px;
+      left: 39px;
+
+      &::before {
+        content: "12";
+      }
     }
-  
+
     &.three {
-      right: 13px;
-      top: 35%;
+      right: 0;
+      top: 40px;
+
+      &::before {
+        content: "3";
+      }
     }
-  
+
     &.six {
-      bottom: 10px;
-      left: 42%;
+      bottom: -50px;
+      left: 64px;
+
+      &::before {
+        content: "6";
+      }
     }
-  
+
     &.nine {
-      left: 10px;
-      top: 35%;
+      left: -8px;
+      top: 40px;
+
+      &::before {
+        content: "9";
+      }
     }
   }
 
   &.default {
-    background-color: #d5e3ff;
+    background-color: #d3e1ff;
 
-    .Hour, .Min, .Sec {
+    .Hour,
+    .Min,
+    .Sec {
       background: #222;
     }
 
@@ -106,9 +130,11 @@
   }
 
   &.matcha {
-    background-color: #d5ffd9;
+    background-color: #ddffe0;
 
-    .Hour, .Min, .Sec {
+    .Hour,
+    .Min,
+    .Sec {
       background: #222;
     }
 

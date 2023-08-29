@@ -158,6 +158,7 @@ export default function Settings() {
     const wifis = useSelector((state) => state.settings.wifiList);
     const settings = useSelector((state) => state.appsSettings.settings);
     const header = useSelector((state) => state.header);
+    const widget = useSelector((state) => state.widget);
     const [wallpaperValue, setValueWallpaper] = useState("1");
     const dispatch = useDispatch();
 
@@ -1144,7 +1145,7 @@ export default function Settings() {
                   </div>
                   <div style={{ width: "649.516px", display: "flex" }}>
                     <div className="WidgetsContainer">
-                      <div className="ClockWidget active default">
+                      <div className={`ClockWidget active ${widget.clock.style}`}>
                         <div
                           className="Hour"
                           style={{
@@ -1157,10 +1158,10 @@ export default function Settings() {
                             transform: "rotateZ(60deg)",
                           }}
                         />
-                        <span className="Number twelve">12</span>
-                        <span className="Number three">3</span>
-                        <span className="Number six">6</span>
-                        <span className="Number nine">9</span>
+                        <span className="Number twelve"></span>
+                        <span className="Number three"></span>
+                        <span className="Number six"></span>
+                        <span className="Number nine"></span>
                       </div>
                     </div>
                   </div>

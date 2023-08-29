@@ -53,12 +53,16 @@ const Clock = () => {
     setContextMenuEnabled(false);
     dispatch(displaySeconds(!clock.seconds));
   }
+
+  function changeStyle(){
+    setContextMenuEnabled(false);
+  }
   
   return (
     <Draggable>
       <div className={`ClockWidget ${clock.active ? 'active' : ''} ${clock.style}`} onContextMenu={onContextMenu}>
         <ActMenu style={{ position: 'relative', zIndex: '10001', top: '100px', right: '100px' }} className={contextMenuEnabled ? 'active' : ''} ref={contextMenuRef}>
-          <ActMenuSelector title='Change style'></ActMenuSelector>
+          <ActMenuSelector title='Change style' onClick={changeStyle}></ActMenuSelector>
           {clock.seconds ? <ActMenuSelector title='Display seconds' active onClick={displayseconds}></ActMenuSelector> : <ActMenuSelector title='Display seconds' onClick={displayseconds}></ActMenuSelector>} 
         </ActMenu>
         <div className="Close" onClick={() => dispatch(removeClock())}>
@@ -82,10 +86,10 @@ const Clock = () => {
             transform: `rotateZ(${sec}deg)`
           }}
         />
-        <span className="Number twelve">12</span>
-        <span className="Number three">3</span>
-        <span className="Number six">6</span>
-        <span className="Number nine">9</span>
+        <span className="Number twelve"></span>
+        <span className="Number three"></span>
+        <span className="Number six"></span>
+        <span className="Number nine"></span>
       </div>
     </Draggable>
   );

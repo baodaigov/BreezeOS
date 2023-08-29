@@ -26,6 +26,16 @@ export default function SplashScreen() {
     setPasswordValue("");
   }
 
+  function action(e){
+    if(e.key === "Enter"){
+      if(passwordValue !== settings.user.password){
+        wrongPassword();
+      } else {
+        login();
+      }
+    }
+  }
+
   const batteryIcon = { icon: "fa-regular fa-battery-full" };
 
   const batteryState = useBattery();
@@ -64,6 +74,7 @@ export default function SplashScreen() {
                       value={passwordValue}
                       placeholder="Enter password..."
                       onInput={(e) => setPasswordValue(e.target.value)}
+                      onKeyDown={action}
                     ></input>
                     {passwordValue.length !== 0 && (
                       <div
@@ -104,7 +115,10 @@ export default function SplashScreen() {
           )}
         </div>
         {invalidCount !== invalidLimit && (
-          <p className="SignInFailedAttempts" style={{ opacity: invalidCount ? "1" : "0" }}>
+          <p
+            className="SignInFailedAttempts"
+            style={{ opacity: invalidCount ? "1" : "0" }}
+          >
             {invalidCount} failed {invalidCount > 1 ? "attempts" : "attempt"}
           </p>
         )}
