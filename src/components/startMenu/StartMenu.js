@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import './StartMenu.scss';
 import StartApp from './StartApp';
 import { TerminalStartApp } from '../../containers/apps/terminal';
-import { FirefoxStartApp } from '../../containers/apps/firefox';
+import { SurfaceStartApp } from '../../containers/apps/surface';
 import { ClockStartApp } from '../../containers/apps/clock';
 import { SettingsStartApp } from '../../containers/apps/settings';
 import { CameraStartApp } from '../../containers/apps/camera';
@@ -83,7 +83,7 @@ export default function StartMenu(){
                         <div className='SearchInput' contentEditable onKeyUp={search} onChange={e => setName(e.target.innerText)} spellCheck='false'>{name}</div>
                     </div>
                     <div className='StartApps'>
-                        <FirefoxStartApp/>
+                        <SurfaceStartApp/>
                         <CalendarStartApp/>
                         <SettingsStartApp/>
                         <ClockStartApp/>

@@ -1,0 +1,332 @@
+$bgcolor: #202023e5;
+$fgcolor: #e2e2e2;
+
+.SurfaceWindow {
+  * {
+    transition: all ease 0.3s;
+  }
+  .Window .TopBar {
+    padding: 4px 8px;
+    .TopBarInteractionContainer {
+      display: flex;
+      width: 100vw;
+      justify-content: space-between;
+      align-items: center;
+
+      .TabBar {
+        display: flex;
+
+        .TabBarItem {
+          padding: 4px 9px;
+          border-radius: 5px;
+          color: #fff;
+          display: flex;
+          align-items: center;
+          font-size: 11px;
+          background-color: #ffffff0a;
+          width: 150px;
+          margin-right: 5px;
+
+          * {
+            margin: 0;
+          }
+
+          .CloseButton {
+            width: 18px;
+            height: 18px;
+            border-radius: 999px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            i {
+              display: none;
+              font-size: 10px;
+            }
+          }
+
+          &:hover {
+            .CloseButton {
+              i {
+                display: block;
+              }
+
+              &:hover {
+                background-color: #ffffff10;
+              }
+            }
+          }
+
+          .TabBarInteraction {
+            display: flex;
+            margin-right: 5px;
+
+            i {
+              margin-right: 3px;
+              font-size: 12px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 999px;
+              height: 20px;
+              width: 20px;
+
+              &:hover {
+                background-color: #ffffff1e;
+              }
+            }
+          }
+
+          .TabSearch {
+            appearance: none;
+            -webkit-appearance: none;
+            border: none;
+            outline: none;
+            background-color: transparent;
+            color: #fff;
+            width: 100%;
+            font-size: 12px;
+
+            &::placeholder {
+              color: #ffffff36;
+            }
+
+            &.disabled {
+              opacity: 0.3;
+              pointer-events: none;
+            }
+          }
+        }
+      }
+    }
+    .TopBarTitle {
+      width: auto;
+    }
+  }
+
+  .surface {
+    width: 93vw;
+    height: 93%;
+    opacity: 0;
+    pointer-events: none;
+    transition: all ease 0.3s;
+
+    &.active {
+      opacity: 1;
+      pointer-events: all;
+      width: 100vw;
+      height: 100%;
+    }
+
+    &.hide {
+      top: 153%;
+      pointer-events: none;
+    }
+
+    .TabBarWrapper {
+      margin: 0 10px;
+    }
+
+    &.minimize {
+      width: 1000px;
+      height: 600px;
+
+      .TabBar .TabSearchItem {
+        width: 650px !important;
+      }
+    }
+  }
+
+  .Surface {
+    background: #202023;
+    height: 100%;
+    position: relative;
+
+    & > * {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+    }
+
+    .SplashScreen {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      margin: auto;
+      width: 100%;
+      height: 100%;
+      background-color: #2563eb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all ease .5s;
+
+      .SplashScreenIcon {
+        width: 200px;
+        height: 200px;
+      }
+
+      &.disabled {
+        border-radius: 999px;
+        width: 120px;
+        height: 120px;
+        bottom: 100px;
+        .SplashScreenIcon {
+          width: 130px;
+          height: 130px;
+        }
+      }
+    }
+
+    .MainScreen {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      transition: none;
+
+      .Main {
+        max-width: 800px;
+        padding: 30px 20px;
+
+        .NonCollapsibleSection {
+          padding: 0 25px;
+
+          .SearchWrapper {
+            padding: 34px 0 38px;
+
+            .Text {
+              margin-top: 140px;
+              margin-bottom: 0;
+              font-weight: 300;
+              font-size: 20px;
+              color: $fgcolor;
+              text-align: center;
+            }
+          }
+        }
+      }
+    }
+
+    .CantBeReached {
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      padding: 50px 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      max-width: 65%;
+      margin: 0 auto;
+      color: $fgcolor;
+      transition: none;
+
+      .CantBeReachedText {
+        font-weight: 700;
+        font-size: 26px;
+        margin-bottom: 25px;
+      }
+
+      .Description {
+        font-size: 13px;
+        line-height: 1.8;
+
+        .ButtonContainer {
+          margin: 40px 0;
+          display: flex;
+          flex-direction: row-reverse;
+
+          .Button {
+            appearance: none;
+            border: none;
+            border-radius: 4px;
+            outline: none;
+            padding: 0 1.5em;
+            min-height: 32px;
+            background: #00ddff;
+            color: $bgcolor;
+            font-size: 14px;
+            font-weight: 700;
+            transition: none;
+
+            &:hover {
+              background: lighten(#00ddff, 20%);
+            }
+
+            &:active {
+              background: lighten(#00ddff, 30%);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.lightMode {
+  .SurfaceWindow {
+    .Window .TopBar .TopBarInteractionContainer .TabBar .TabBarItem {
+      background-color: #0000000a;
+      color: #000;
+
+      &:hover {
+        .CloseButton {
+          &:hover {
+            background-color: #00000010;
+          }
+        }
+      }
+
+      .TabBarInteraction i:hover {
+        background-color: #0000001e;
+      }
+
+      .TabSearch {
+        color: #000;
+
+        &::placeholder {
+          color: #00000036;
+        }
+      }
+    }
+    .Surface {
+      background: $fgcolor;
+
+      .MainScreen {
+        .Main {
+          .NonCollapsibleSection {
+            .SearchWrapper {
+              .Text {
+                color: $bgcolor;
+              }
+            }
+          }
+        }
+      }
+
+      .CantBeReached {
+        color: $bgcolor;
+
+        .Description {
+          .ButtonContainer {
+            .Button {
+              background: #0061df;
+              color: $fgcolor;
+
+              &:hover {
+                background: darken(#0061df, 10%);
+              }
+
+              &:active {
+                background: darken(#0061df, 20%);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

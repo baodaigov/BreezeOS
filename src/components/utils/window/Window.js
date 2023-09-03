@@ -1,7 +1,7 @@
 import {useSelector} from "react-redux";
 import './Window.scss';
 import Terminal from '../../../containers/apps/terminal'
-import Firefox from '../../../containers/apps/firefox';
+import Surface from '../../../containers/apps/surface';
 import Clock from '../../../containers/apps/clock';
 import Settings from '../../../containers/apps/settings';
 import Camera from '../../../containers/apps/camera';
@@ -16,7 +16,7 @@ import VSCode from '../../../containers/apps/vscode';
 export default function Window(){
   return (
     <div className='WindowContainer'>
-        <Firefox/>
+        <Surface/>
         <Calendar/>
         <Settings/>
         <Clock/>
