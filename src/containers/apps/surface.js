@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setActive, setHide } from "../../reducers/apps/surface";
+import { setActive, setHide, setPrivate } from "../../reducers/apps/surface";
 import { openUrl, closeUrl } from "../../reducers/surface";
 import "../../components/utils/window/Window.scss";
 import TopBar from "../../components/utils/window/TopBar";
@@ -11,11 +11,12 @@ import TopBarInteraction from "../../components/utils/window/TopBarInteraction";
 import StartApp from "../../components/startMenu/StartApp";
 import { setHeaderActive } from "../../reducers/header";
 import SurfaceIcon from "../../icons/surface.svg";
+import SurfacePrivateIcon from "../../icons/surface-private.svg";
 
 export const SurfaceApp = () => {
   const isActive = useSelector((state) => state.appsSurface.active);
   const isHide = useSelector((state) => state.appsSurface.hide);
-  const icon = useSelector((state) => state.appearance.iconTheme);
+  const isPrivate = useSelector((state) => state.appsSurface.private);
   const dispatch = useDispatch();
 
   document.addEventListener("keydown", (e) => {
@@ -39,6 +40,7 @@ export const SurfaceApp = () => {
       document.getElementsByClassName("surface")[0].classList.remove("active");
       setTimeout(() => {
         dispatch(closeUrl());
+        dispatch(setPrivate(false));
         document.getElementById("surfacesearch").value = "";
       }, 300);
     }
@@ -61,6 +63,26 @@ export const SurfaceApp = () => {
       menu={[
         [
           {
+            label: "New Tab",
+            action: () => dispatch(setActive(true)),
+          },
+          {
+            label: isPrivate ? "Turn off private mode" : "Turn on private mode",
+            disabled: isActive ? false : true,
+            action: () =>
+              isPrivate
+                ? dispatch(setPrivate(false))
+                : dispatch(setPrivate(true)),
+          },
+        ],
+        [
+          {
+            label: isHide ? "Unhide" : "Hide",
+            disabled: isActive ? false : true,
+            action: () =>
+              isHide ? dispatch(setHide(false)) : dispatch(setHide(true)),
+          },
+          {
             label: isActive ? "Quit" : "Open",
             action: () =>
               isActive ? dispatch(setActive(false)) : dispatch(setActive(true)),
@@ -77,7 +99,6 @@ export const SurfaceApp = () => {
 export const SurfaceStartApp = () => {
   const isHide = useSelector((state) => state.appsSurface.hide);
   const dispatch = useDispatch();
-  const icon = useSelector((state) => state.appearance.iconTheme);
 
   const toggle = () => {
     document
@@ -105,6 +126,7 @@ export const SurfaceStartApp = () => {
 export default function Surface() {
   const SurfaceWindow = () => {
     const isActive = useSelector((state) => state.appsSurface.active);
+    const isPrivate = useSelector((state) => state.appsSurface.private);
     const url = useSelector((state) => state.surface.url);
     const wifi = useSelector((state) => state.settings.wifi);
     const dispatch = useDispatch();
@@ -163,7 +185,7 @@ export default function Surface() {
                 className="TabBarItem"
                 style={{ justifyContent: "space-between" }}
               >
-                <p>New Tab</p>
+                <p>{isPrivate ? "New Private Tab" : "New Tab"}</p>
                 <div
                   className="CloseButton"
                   onClick={() => dispatch(setActive(false))}
@@ -226,8 +248,15 @@ export default function Surface() {
           <div className="Surface">
             {url === "" ? (
               <>
-                <div className={`SplashScreen ${!splashScreen && "disabled"}`}>
-                  <img className="SplashScreenIcon" src={SurfaceIcon} />
+                <div className={`SplashScreen ${isPrivate && "private"} ${!splashScreen && "disabled"}`}>
+                  {isPrivate ? (
+                    <img
+                      className="SplashScreenIcon"
+                      src={SurfacePrivateIcon}
+                    />
+                  ) : (
+                    <img className="SplashScreenIcon" src={SurfaceIcon} />
+                  )}
                 </div>
                 <div className="MainScreen">
                   <div className="Main">

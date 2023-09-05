@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setActive, setHide } from "../../reducers/apps/calculator";
+import {
+  setActive,
+  setHide,
+  setRecentResult,
+} from "../../reducers/apps/calculator";
 import "../../components/utils/window/Window.scss";
 import TopBar from "../../components/utils/window/TopBar";
 import WindowBody from "../../components/utils/window/WindowBody";
@@ -13,6 +17,9 @@ import { setHeaderActive } from "../../reducers/header";
 export const CalculatorApp = () => {
   const isActive = useSelector((state) => state.appsCalculator.active);
   const isHide = useSelector((state) => state.appsCalculator.hide);
+  const recentResult = useSelector(
+    (state) => state.appsCalculator.recentResult
+  );
   const icon = useSelector((state) => state.appearance.iconTheme);
   const dispatch = useDispatch();
 
@@ -65,6 +72,20 @@ export const CalculatorApp = () => {
       }
       menu={[
         [
+          {
+            label: "Recent Result",
+            description: recentResult,
+            disabled: !recentResult,
+            action: () => navigator.clipboard.writeText(recentResult),
+          },
+        ],
+        [
+          {
+            label: isHide ? "Unhide" : "Hide",
+            disabled: isActive ? false : true,
+            action: () =>
+              isHide ? dispatch(setHide(false)) : dispatch(setHide(true)),
+          },
           {
             label: isActive ? "Quit" : "Open",
             action: () =>
@@ -200,6 +221,20 @@ export default function Calculator() {
           sign: "",
           num: 0,
         });
+
+        dispatch(
+          setRecentResult(
+            calc.num === "0" && calc.sign === "÷"
+              ? "Error"
+              : toLocaleString(
+                  math(
+                    Number(removeSpaces(calc.res)),
+                    Number(removeSpaces(calc.num)),
+                    calc.sign
+                  )
+                )
+          )
+        );
       }
     };
 

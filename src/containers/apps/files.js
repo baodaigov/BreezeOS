@@ -67,8 +67,51 @@ export const FilesApp = () => {
         menu={[
           [
             {
+              label: "Recent",
+            },
+            {
+              label: "Starred",
+            },
+            {
+              label: "Home",
+            },
+            {
+              label: "Desktop",
+            },
+            {
+              label: "Documents",
+            },
+            {
+              label: "Downloads",
+            },
+            {
+              label: "Music",
+            },
+            {
+              label: "Pictures",
+            },
+            {
+              label: "Videos",
+            },
+            {
+              label: "Trash",
+            },
+          ],
+          [
+            {
+              label: isHide ? "Unhide" : "Hide",
+              disabled: isActive ? false : true,
+              action: () =>
+                isHide
+                  ? dispatch(setHide(false))
+                  : dispatch(setHide(true)),
+            },
+            {
               label: isActive ? "Quit" : "Open",
-              action: () => isActive ? dispatch(setActive(false)) : dispatch(setActive(true)),
+              action: () =>
+                isActive
+                  ? dispatch(setActive(false))
+                  : dispatch(setActive(true)),
             },
           ],
         ]}
@@ -3748,15 +3791,15 @@ export default function Files() {
               <div style={{ marginLeft: "15px", display: "flex" }}>
                 <i
                   className={`fa-regular fa-plus ActMenuInteraction ${
-                    iconSize == 145 ? "disabled" : ""
+                    iconSize === 145 ? "disabled" : ""
                   }`}
-                  onClick={() => setIconSize(iconSize + 25)}
+                  onClick={() => setIconSize((prev) => prev + 25)}
                 ></i>
                 <i
                   className={`fa-regular fa-minus ActMenuInteraction ${
-                    iconSize == 20 ? "disabled" : ""
+                    iconSize === 20 ? "disabled" : ""
                   }`}
-                  onClick={() => setIconSize(iconSize - 25)}
+                  onClick={() => setIconSize((prev) => prev - 25)}
                 ></i>
               </div>
             </ActMenuSelector>
@@ -3785,15 +3828,15 @@ export default function Files() {
                   >
                     <i
                       className={`fa-regular ${
-                        directory == "Recent"
+                        directory === "Recent"
                           ? "fa-clock-rotate-left"
-                          : directory == "Starred"
+                          : directory === "Starred"
                           ? "fa-star"
-                          : directory == `/home/${settings.user.name}`
+                          : directory === `/home/${settings.user.name}`
                           ? "fa-house"
-                          : directory == "500MB Partition"
+                          : directory === "500MB Partition"
                           ? "fa-hard-drive"
-                          : directory == "Other Locations"
+                          : directory === "Other Locations"
                           ? "fa-plus"
                           : "fa-folder"
                       }`}

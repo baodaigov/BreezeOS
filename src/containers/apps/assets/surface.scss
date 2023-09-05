@@ -168,6 +168,10 @@ $fgcolor: #e2e2e2;
         height: 200px;
       }
 
+      &.private {
+        background-color: #09090b;
+      }
+
       &.disabled {
         border-radius: 999px;
         width: 120px;

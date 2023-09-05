@@ -62,6 +62,12 @@ export const CameraApp = () => {
       menu={[
         [
           {
+            label: isHide ? "Unhide" : "Hide",
+            disabled: isActive ? false : true,
+            action: () =>
+              isHide ? dispatch(setHide(false)) : dispatch(setHide(true)),
+          },
+          {
             label: isActive ? "Quit" : "Open",
             action: () =>
               isActive ? dispatch(setActive(false)) : dispatch(setActive(true)),
@@ -233,11 +239,11 @@ export default function Camera() {
 
     useEffect(() => {
       let interval;
-      if (running == true) {
+      if (running === true) {
         interval = setInterval(() => {
           setTime((prevTime) => prevTime + 10);
         }, 10);
-      } else if (running == false) {
+      } else if (running === false) {
         clearInterval(interval);
         setTime(0);
       }

@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   active: false,
   hide: false,
+  private: false
 };
 
 const appsSurfaceSlice = createSlice({
@@ -15,9 +16,12 @@ const appsSurfaceSlice = createSlice({
     setHide: (state, action) => {
       state.hide = action.payload;
     },
+    setPrivate: (state, action) => {
+      state.private = action.payload;
+    },
   },
 });
 
-export const { setActive, setHide } = appsSurfaceSlice.actions;
+export const { setActive, setHide, setPrivate } = appsSurfaceSlice.actions;
 
 export default appsSurfaceSlice.reducer;

@@ -114,6 +114,12 @@ export const SettingsApp = () => {
         menu={[
           [
             {
+              label: isHide ? "Unhide" : "Hide",
+              disabled: isActive ? false : true,
+              action: () =>
+                isHide ? dispatch(setHide(false)) : dispatch(setHide(true)),
+            },
+            {
               label: isActive ? "Quit" : "Open",
               action: () =>
                 isActive
@@ -690,11 +696,11 @@ export default function Settings() {
                                     ) : (
                                       ""
                                     )}
-                                    {i.status == "good" ? (
+                                    {i.status === "good" ? (
                                       <i className="fa-solid fa-wifi"></i>
-                                    ) : i.status == "fair" ? (
+                                    ) : i.status === "fair" ? (
                                       <i className="fa-duotone fa-wifi-fair"></i>
-                                    ) : i.status == "weak" ? (
+                                    ) : i.status === "weak" ? (
                                       <i className="fa-duotone fa-wifi-weak"></i>
                                     ) : (
                                       ""
@@ -721,11 +727,11 @@ export default function Settings() {
                                       ) : (
                                         ""
                                       )}
-                                      {i.status == "good" ? (
+                                      {i.status === "good" ? (
                                         <i className="fa-solid fa-wifi"></i>
-                                      ) : i.status == "fair" ? (
+                                      ) : i.status === "fair" ? (
                                         <i className="fa-duotone fa-wifi-fair"></i>
-                                      ) : i.status == "weak" ? (
+                                      ) : i.status === "weak" ? (
                                         <i className="fa-duotone fa-wifi-weak"></i>
                                       ) : (
                                         ""
@@ -845,40 +851,6 @@ export default function Settings() {
                     }}
                   >
                     <div
-                      style={{
-                        position: "relative",
-                        width: "100%",
-                        marginBottom: "10px",
-                      }}
-                    >
-                      {wallpaperInput ? (
-                        <div
-                          className="WallpaperImage"
-                          style={{ backgroundImage: `url(${wallpaperInput})` }}
-                        >
-                          <button className="CloseButton" onClick={() => setWallpaperInput(null)}>
-                            <i className="fa-regular fa-xmark"></i>
-                          </button>
-                        </div>
-                      ) : (
-                        <>
-                          <div className="AddWallpaper">
-                            <i
-                              className="fa-regular fa-plus"
-                              style={{ fontSize: "35px", marginBottom: "20px" }}
-                            ></i>
-                            <p className="font-bold">Add wallpaper</p>
-                          </div>
-                          <input
-                            className="AddWallpaperInput"
-                            type="file"
-                            accept=".png,.jpg,.jpeg,.heic,.heif"
-                            onChange={addImage}
-                          />
-                        </>
-                      )}
-                    </div>
-                    <div
                       className="WImageContainer w1"
                       onClick={() => switchWallpaper(W1, "1")}
                     >
@@ -913,6 +885,43 @@ export default function Settings() {
                       onClick={() => switchWallpaper(W6, "6")}
                     >
                       <img src={W6} />
+                    </div>
+                    <div
+                      style={{
+                        position: "relative",
+                        width: "100%",
+                        marginTop: "5px",
+                      }}
+                    >
+                      {wallpaperInput ? (
+                        <div
+                          className="WallpaperImage"
+                          style={{ backgroundImage: `url(${wallpaperInput})` }}
+                        >
+                          <button
+                            className="CloseButton"
+                            onClick={() => setWallpaperInput(null)}
+                          >
+                            <i className="fa-regular fa-xmark"></i>
+                          </button>
+                        </div>
+                      ) : (
+                        <>
+                          <div className="AddWallpaper">
+                            <i
+                              className="fa-regular fa-plus"
+                              style={{ fontSize: "35px", marginBottom: "20px" }}
+                            ></i>
+                            <p className="font-bold">Add wallpaper</p>
+                          </div>
+                          <input
+                            className="AddWallpaperInput"
+                            type="file"
+                            accept=".png,.jpg,.gif,.jpeg,.heic,.heif"
+                            onChange={addImage}
+                          />
+                        </>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -1655,12 +1664,12 @@ export default function Settings() {
               <div
                 className="TabBarItem TabBarSettingsName"
                 style={
-                  settings == "Wi-Fi"
+                  settings === "Wi-Fi"
                     ? { justifyContent: "space-between" }
                     : { justifyContent: "center" }
                 }
               >
-                {settings == "Wi-Fi" ? (
+                {settings === "Wi-Fi" ? (
                   <>
                     <div
                       style={{
@@ -1679,7 +1688,7 @@ export default function Settings() {
                       onClick={() => dispatch(toggleWifi())}
                     ></div>
                   </>
-                ) : settings == "Bluetooth" ? (
+                ) : settings === "Bluetooth" ? (
                   <>
                     <div
                       style={{
@@ -1784,7 +1793,7 @@ export default function Settings() {
                       <i
                         className={`fa-regular ${
                           wp.isShow ? "fa-eye-slash" : "fa-eye"
-                        } displayPassword ${wp.value == "" ? "disabled" : ""}`}
+                        } displayPassword ${wp.value === "" ? "disabled" : ""}`}
                         onClick={() =>
                           wp.isShow
                             ? dispatch(displayPassword(false))
@@ -1974,7 +1983,7 @@ export default function Settings() {
                           className={`fa-regular ${
                             wp.isShow ? "fa-eye-slash" : "fa-eye"
                           } displayPassword ${
-                            wp.value == "" ? "disabled" : ""
+                            wp.value === "" ? "disabled" : ""
                           }`}
                           onClick={() =>
                             wp.isShow
