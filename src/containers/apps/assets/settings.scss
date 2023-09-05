@@ -326,10 +326,10 @@ $actcolor: #8fb6ff;
               background-color: transparentize($fgcolor, 0.93);
               padding: 10px 30px;
               font-size: 13px;
-              transition: all ease .25s;
+              transition: all ease 0.25s;
 
               &.disabled {
-                opacity: .4;
+                opacity: 0.4;
                 pointer-events: none;
               }
 
@@ -1253,15 +1253,63 @@ $actcolor: #8fb6ff;
                   }
                 }
 
-                .WallpaperMenuSection {
-                  font-size: 12px;
-                  padding: 7px 12px;
-                  background: transparentize($fgcolor, 0.93);
+                .AddWallpaper {
+                  border-radius: 15px;
+                  border: 4px dashed transparentize($fgcolor, 0.95);
+                  color: transparentize($fgcolor, 0.85);
+                  background: transparentize($fgcolor, 0.95);
+                  width: 649.52px;
+                  height: 189px;
+                  font-size: 20px;
                   display: flex;
-                  justify-content: space-between;
-                  width: 190px;
+                  flex-direction: column;
+                  justify-content: center;
                   align-items: center;
-                  border-radius: 7px;
+                  width: 100%;
+                }
+
+                .WallpaperImage {
+                  width: 649.52px;
+                  height: 189px;
+                  border-radius: 15px;
+                  background-position: center;
+                  background-size: cover;
+                  position: relative;
+
+                  .CloseButton {
+                    border: none;
+                    outline: none;
+                    appearance: none;
+                    position: absolute;
+                    top: -10px;
+                    right: -10px;
+                    background: $fgcolor;
+                    color: $bgcolor;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 27px;
+                    height: 27px;
+                    font-size: 14px;
+                    border-radius: 999px;
+                    transition: all ease .3s;
+                    
+                    &:active {
+                      background: darken($fgcolor, 15%);
+                      transition: none;
+                    }
+                  }
+                }
+
+                .AddWallpaperInput {
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  bottom: 0;
+                  right: 0;
+                  width: 100%;
+                  opacity: 0;
+                  border-radius: 15px;
                 }
               }
 
@@ -2022,8 +2070,10 @@ $actcolor: #8fb6ff;
 
       .AppearanceWrapper .Appearance {
         .Wallpapers {
-          .WallpaperMenuSection {
-            background: transparentize($bgcolor, 0.82) !important;
+          .AddWallpaper {
+            background: transparentize($bgcolor, 0.85) !important;
+            border: 4px dashed transparentize($bgcolor, 0.8) !important;
+            color: transparentize($bgcolor, 0.75) !important;
           }
         }
         .Themes {

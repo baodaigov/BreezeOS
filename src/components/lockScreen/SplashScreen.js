@@ -72,7 +72,7 @@ export default function SplashScreen() {
                     <input
                       type={passwordShown ? "text" : "password"}
                       value={passwordValue}
-                      placeholder="Enter password..."
+                      placeholder="Password..."
                       onInput={(e) => setPasswordValue(e.target.value)}
                       onKeyDown={action}
                     ></input>

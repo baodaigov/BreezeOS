@@ -49,7 +49,7 @@ $fgcolor: #e2e2e2;
       text-align: center;
 
       .SplashScreenTitle {
-        font-size: 72px;
+        font-size: 80px;
         font-weight: 700;
         margin-bottom: 15px;
       }
@@ -188,24 +188,5 @@ $fgcolor: #e2e2e2;
         }
       }
     }
-  }
-
-  &.w1 {
-    background-image: url("../default.jpg");
-  }
-  &.w2 {
-    background-image: url("../52697.jpg");
-  }
-  &.w3 {
-    background-image: url("../52496.jpg");
-  }
-  &.w4 {
-    background-image: url("../52791.jpg");
-  }
-  &.w5 {
-    background-image: url("../52532.jpg");
-  }
-  &.w6 {
-    background-image: url("../52544.jpg");
   }
 }

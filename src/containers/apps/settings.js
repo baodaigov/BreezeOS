@@ -571,6 +571,7 @@ export default function Settings() {
 
     const [shareWifi, setShareWifi] = useState(false);
     const [usersTab, setUsersTab] = useState("");
+    const [wallpaperInput, setWallpaperInput] = useState(null);
 
     var mouseHold;
 
@@ -597,6 +598,14 @@ export default function Settings() {
     function changeFont(e) {
       dispatch(setFontFamily(e));
       showFontsMenu(false);
+    }
+
+    function addImage(e) {
+      if (e.target.files && e.target.files[0]) {
+        setWallpaperInput(URL.createObjectURL(e.target.files[0]));
+        dispatch(changeWallpaper(URL.createObjectURL(e.target.files[0])));
+        setValueWallpaper("0");
+      }
     }
 
     function toggleDoNotDisturb() {
@@ -825,7 +834,7 @@ export default function Settings() {
               <div className="Appearance">
                 <div className="Wallpapers" value={wallpaperValue}>
                   <p className="font-bold" style={{ marginBottom: "30px" }}>
-                    Wallpaper
+                    Wallpapers
                   </p>
                   <div
                     style={{
@@ -836,46 +845,74 @@ export default function Settings() {
                     }}
                   >
                     <div
+                      style={{
+                        position: "relative",
+                        width: "100%",
+                        marginBottom: "10px",
+                      }}
+                    >
+                      {wallpaperInput ? (
+                        <div
+                          className="WallpaperImage"
+                          style={{ backgroundImage: `url(${wallpaperInput})` }}
+                        >
+                          <button className="CloseButton" onClick={() => setWallpaperInput(null)}>
+                            <i className="fa-regular fa-xmark"></i>
+                          </button>
+                        </div>
+                      ) : (
+                        <>
+                          <div className="AddWallpaper">
+                            <i
+                              className="fa-regular fa-plus"
+                              style={{ fontSize: "35px", marginBottom: "20px" }}
+                            ></i>
+                            <p className="font-bold">Add wallpaper</p>
+                          </div>
+                          <input
+                            className="AddWallpaperInput"
+                            type="file"
+                            accept=".png,.jpg,.jpeg,.heic,.heif"
+                            onChange={addImage}
+                          />
+                        </>
+                      )}
+                    </div>
+                    <div
                       className="WImageContainer w1"
-                      onClick={() => switchWallpaper("w1", "1")}
+                      onClick={() => switchWallpaper(W1, "1")}
                     >
                       <img src={W1} />
                     </div>
                     <div
                       className="WImageContainer w2"
-                      onClick={() => switchWallpaper("w2", "2")}
+                      onClick={() => switchWallpaper(W2, "2")}
                     >
                       <img src={W2} />
                     </div>
                     <div
                       className="WImageContainer w3"
-                      onClick={() => switchWallpaper("w3", "3")}
+                      onClick={() => switchWallpaper(W3, "3")}
                     >
                       <img src={W3} />
                     </div>
                     <div
                       className="WImageContainer w4"
-                      onClick={() => switchWallpaper("w4", "4")}
+                      onClick={() => switchWallpaper(W4, "4")}
                     >
                       <img src={W4} />
                     </div>
                     <div
                       className="WImageContainer w5"
-                      onClick={() => switchWallpaper("w5", "5")}
+                      onClick={() => switchWallpaper(W5, "5")}
                     >
                       <img src={W5} />
                     </div>
                     <div
                       className="WImageContainer w6"
-                      onClick={() => switchWallpaper("w6", "6")}
+                      onClick={() => switchWallpaper(W6, "6")}
                     >
                       <img src={W6} />
-                    </div>
-                  </div>
-                  <div style={{ marginTop: "20px", marginLeft: "auto" }}>
-                    <div className="WallpaperMenuSection">
-                      <p style={{ marginRight: "7px" }}>Select image...</p>
-                      <i className="fa-regular fa-image"></i>
                     </div>
                   </div>
                 </div>

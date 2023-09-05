@@ -7,7 +7,7 @@ import { setDockActive } from "../../reducers/dock";
 
 export default function LockScreen() {
   const dispatch = useDispatch();
-  const wallpaperId = useSelector((state) => state.wallpaper.id);
+  const wallpaperImg = useSelector((state) => state.wallpaper.img);
   const isLocked = useSelector((state) => state.settings.isLocked);
 
   useEffect(() => {
@@ -39,7 +39,7 @@ export default function LockScreen() {
   }, [isLocked]);
 
   return (
-    <div className={`LockScreen ${wallpaperId}`}>
+    <div className='LockScreen' style={{ backgroundImage: `url(${wallpaperImg})` }}>
       <div className="LockScreenWrapper">
         <SplashScreen />
       </div>
