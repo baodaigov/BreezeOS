@@ -52,13 +52,22 @@ export const CameraApp = () => {
   return (
     <DockItem
       id="camera"
-      class="CameraApp"
+      className="CameraApp"
       title="Camera"
       icon={
         icon === "WhiteSur-icon-theme"
           ? "https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/original/cheese.svg"
           : "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/accessories-camera.svg"
       }
+      menu={[
+        [
+          {
+            label: isActive ? "Quit" : "Open",
+            action: () =>
+              isActive ? dispatch(setActive(false)) : dispatch(setActive(true)),
+          },
+        ],
+      ]}
       onClick={() =>
         isHide ? dispatch(setHide(false)) : dispatch(setActive(true))
       }

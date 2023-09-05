@@ -54,10 +54,19 @@ export const SurfaceApp = () => {
   return (
     <DockItem
       id="surface"
-      class="SurfaceApp"
+      className="SurfaceApp"
       title="Surface"
       number="1"
       icon={SurfaceIcon}
+      menu={[
+        [
+          {
+            label: isActive ? "Quit" : "Open",
+            action: () =>
+              isActive ? dispatch(setActive(false)) : dispatch(setActive(true)),
+          },
+        ],
+      ]}
       onClick={() =>
         isHide ? dispatch(setHide(false)) : dispatch(setActive(true))
       }
@@ -192,6 +201,7 @@ export default function Surface() {
                 id="surfacesearch"
                 type="text"
                 spellCheck="false"
+                autoComplete="0"
                 placeholder="Search with Bing or enter address"
                 onKeyDown={action}
               />
@@ -217,7 +227,7 @@ export default function Surface() {
             {url === "" ? (
               <>
                 <div className={`SplashScreen ${!splashScreen && "disabled"}`}>
-                  <img className="SplashScreenIcon" src={SurfaceIcon}/>
+                  <img className="SplashScreenIcon" src={SurfaceIcon} />
                 </div>
                 <div className="MainScreen">
                   <div className="Main">
@@ -247,23 +257,15 @@ export default function Surface() {
                 ) : (
                   <div className="CantBeReached">
                     <p className="CantBeReachedText">
-                      Hmm. We're having trouble finding that site.
+                      Internet is not enabled.
                     </p>
                     <div className="Description">
-                      <span>We can't connect to the server at {url}</span>
-                      <p className="font-bold">
-                        If you entered the right address, you can:
+                      <p>
+                        You need Internet connection in order to connect to this
+                        website.
                       </p>
-                      <ul className="List">
-                        <li>Try again later</li>
-                        <li>Check your network connection</li>
-                        <li>
-                          Check that Surface has permission to access the web
-                          &#40;you might be connected but behind a firewall&#41;
-                        </li>
-                      </ul>
                       <div className="ButtonContainer">
-                        <button className="Button">Try Again</button>
+                        <button className="Button">Reload</button>
                       </div>
                     </div>
                   </div>

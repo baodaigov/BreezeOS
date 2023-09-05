@@ -2,169 +2,222 @@ $bgcolor: #202023e5;
 $fgcolor: #e2e2e2;
 
 .Dock {
-    position: absolute;
-    bottom: -100px;
-    z-index:1;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 11px 0;
-    transition: all .3s;
+  position: absolute;
+  bottom: -100px;
+  z-index: 1;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 11px 0;
+  transition: all 0.3s;
 
-    &.active {
-        bottom: 0;
-    }
+  &.active {
+    bottom: 0;
+  }
 
-    .DockItemContainer {
-        .DockItem {
-            margin-right: 11px;
-            display: flex;
-            justify-content: center;
+  .DockItemContainer {
+    .DockItem {
+      margin-right: 11px;
+      display: flex;
+      justify-content: center;
 
-            img {
-        		transition: all ease .2s;
+      img {
+        transition: all ease 0.2s;
 
-        		&:active {
-        			width: 28px;
-        			height: 28px;
-        		}
-            }
+        &:active {
+          width: 28px;
+          height: 28px;
+        }
+      }
 
-            &::after{
-                content: '';
-                display: block;
-                position: absolute;
-                top: 40px;
-                border-radius: 9999px;
-                width: 0;
-                height: 3px;
-                transition: all ease .3s;
-            }
+      &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 40px;
+        border-radius: 9999px;
+        width: 0;
+        height: 3px;
+        transition: all ease 0.3s;
+      }
 
-            &.clicked {
-                img {
-                    position: relative;
-                    animation: focused ease 1s;
-                }
-
-                @keyframes focused {
-                    0% {
-                        bottom: 0;
-                    }
-                    50% {
-                        bottom: 10px;
-                    }
-                    100% {
-                        bottom: 0;
-                    }
-                }
-
-                &::after {
-                    width: 20px;
-                    background-color: #4000ff;
-                    transition: all ease .3s;
-                }
-            }
-
-            &.hide {
-                &::after {
-                    width: 8px;
-                    background-color: #4a4a4a;
-                    transition: all ease .3s;
-                }
-            }
-
-            .DockItemTitle{
-                color:#fff;
-                position: absolute;
-                top: -45px;
-                font-size: 11px;
-                background:#20202383;
-                backdrop-filter: blur(15px);
-                -webkit-backdrop-filter: blur(15px);
-                padding: 5px 10px;
-                border-radius: 30px;
-                opacity: 0;
-                text-align: center;
-                pointer-events: none;
-                transition: all .15s;
-            }
-
-            &:hover{
-                .DockItemTitle{
-                    opacity: 1;
-                }
-            }
+      &.clicked {
+        img {
+          position: relative;
+          animation: focused ease 1s;
         }
 
-        &:last-child {
-            .DockItem {
-                margin-right: 0;
-            }
+        @keyframes focused {
+          0% {
+            bottom: 0;
+          }
+          50% {
+            bottom: 10px;
+          }
+          100% {
+            bottom: 0;
+          }
         }
-    }
 
-    &.whitesur {
-        background: transparentize($bgcolor, .2);
+        &::after {
+          width: 20px;
+          background-color: #4000ff;
+          transition: all ease 0.3s;
+        }
+      }
+
+      &.hide {
+        &::after {
+          width: 8px;
+          background-color: #4a4a4a;
+          transition: all ease 0.3s;
+        }
+      }
+
+      .ContextMenu {
+        position: absolute;
+        top: -45px;
+        transform: translateX(105px);
+        font-size: 12px;
         backdrop-filter: blur(15px);
         -webkit-backdrop-filter: blur(15px);
-        width: 99%;
-        border: 0.5px solid lighten($bgcolor, 25%);
-        border-radius: 13px;
-        margin: 7px 0;
-        padding: 8px;
+        background: #20202383;
+        color: $fgcolor;
+        border-radius: 10px;
+        padding: 2px;
+        transition: all ease 0.3s;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 1;
+        width: 250px;
 
-        .DockItemContainer {
-            .DockItem {
-                img {
-                    transition: none;
-                    &:active {
-                        width: 37px;
-                        height: 37px;
-                        filter: brightness(60%);
-                    }
-                }
-
-                &::after {
-                    position: absolute;
-                    top: 47px;
-                    width: 0;
-                    height: 3px;
-                    transition: none;
-                }
-
-                &.clicked {
-                    img {
-                        position: relative;
-                        animation: focused ease 1s;
-                    }
-
-                    @keyframes focused {
-                        0% {
-                            bottom: 0;
-                        }
-                        50% {
-                            bottom: 10px;
-                        }
-                        100% {
-                            bottom: 0;
-                        }
-                    }
-
-                    &::after {
-                        width: 3px;
-                        background-color: #d9d9d9;
-                    }
-                }
-
-                &.hide {
-                    &::after {
-                        width: 3px;
-                        background-color: #d9d9d9;
-                    }
-                }
-            }
+        &.active {
+          opacity: 1;
+          pointer-events: all;
         }
+
+        .ContextMenuItemContainer {
+          &::after {
+            content: "";
+            display: block;
+            margin: 4px auto;
+            width: 95%;
+            height: 1px;
+            background: transparentize($fgcolor, 0.95);
+          }
+
+          &:last-child {
+            &::after {
+              display: none
+            }
+          }
+
+          .ContextMenuItem {
+            border-radius: 8px;
+            padding: 8px 10px;
+
+            p {
+              margin: 0;
+            }
+  
+            &:hover {
+              background: transparentize($fgcolor, 0.95);
+            }
+          }
+        }
+      }
+
+      .DockItemTitle {
+        color: $fgcolor;
+        position: absolute;
+        top: -45px;
+        font-size: 11px;
+        background: #20202383;
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        padding: 5px 10px;
+        border-radius: 30px;
+        opacity: 0;
+        text-align: center;
+        pointer-events: none;
+        transition: all 0.15s;
+      }
+
+      &:hover {
+        .DockItemTitle {
+          opacity: 1;
+        }
+      }
     }
+
+    &:last-child {
+      .DockItem {
+        margin-right: 0;
+      }
+    }
+  }
+
+  &.whitesur {
+    background: transparentize($bgcolor, 0.2);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    width: 99%;
+    border: 0.5px solid lighten($bgcolor, 25%);
+    border-radius: 13px;
+    margin: 7px 0;
+    padding: 8px;
+
+    .DockItemContainer {
+      .DockItem {
+        img {
+          transition: none;
+          &:active {
+            width: 37px;
+            height: 37px;
+            filter: brightness(60%);
+          }
+        }
+
+        &::after {
+          position: absolute;
+          top: 47px;
+          width: 0;
+          height: 3px;
+          transition: none;
+        }
+
+        &.clicked {
+          img {
+            position: relative;
+            animation: focused ease 1s;
+          }
+
+          @keyframes focused {
+            0% {
+              bottom: 0;
+            }
+            50% {
+              bottom: 10px;
+            }
+            100% {
+              bottom: 0;
+            }
+          }
+
+          &::after {
+            width: 3px;
+            background-color: #d9d9d9;
+          }
+        }
+
+        &.hide {
+          &::after {
+            width: 3px;
+            background-color: #d9d9d9;
+          }
+        }
+      }
+    }
+  }
 }

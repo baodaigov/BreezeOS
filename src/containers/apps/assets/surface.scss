@@ -161,7 +161,7 @@ $fgcolor: #e2e2e2;
       display: flex;
       justify-content: center;
       align-items: center;
-      transition: all ease .5s;
+      transition: all ease 0.5s;
 
       .SplashScreenIcon {
         width: 200px;
@@ -219,6 +219,7 @@ $fgcolor: #e2e2e2;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      text-align: center;
       max-width: 65%;
       margin: 0 auto;
       color: $fgcolor;
@@ -226,38 +227,32 @@ $fgcolor: #e2e2e2;
 
       .CantBeReachedText {
         font-weight: 700;
-        font-size: 26px;
-        margin-bottom: 25px;
+        font-size: 40px;
+        margin-bottom: 10px;
       }
 
       .Description {
-        font-size: 13px;
+        font-size: 14px;
         line-height: 1.8;
 
         .ButtonContainer {
           margin: 40px 0;
-          display: flex;
-          flex-direction: row-reverse;
 
           .Button {
             appearance: none;
             border: none;
-            border-radius: 4px;
+            border-radius: 999px;
             outline: none;
-            padding: 0 1.5em;
-            min-height: 32px;
-            background: #00ddff;
-            color: $bgcolor;
+            padding: 12px 24px;
+            background: #0061df;
             font-size: 14px;
             font-weight: 700;
-            transition: none;
-
-            &:hover {
-              background: lighten(#00ddff, 20%);
-            }
+            transition: all ease .3s;
+            color: $fgcolor;
 
             &:active {
-              background: lighten(#00ddff, 30%);
+              transition: none;
+              background: darken(#0061df, 10%);
             }
           }
         }
@@ -309,23 +304,6 @@ $fgcolor: #e2e2e2;
 
       .CantBeReached {
         color: $bgcolor;
-
-        .Description {
-          .ButtonContainer {
-            .Button {
-              background: #0061df;
-              color: $fgcolor;
-
-              &:hover {
-                background: darken(#0061df, 10%);
-              }
-
-              &:active {
-                background: darken(#0061df, 20%);
-              }
-            }
-          }
-        }
       }
     }
   }
