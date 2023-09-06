@@ -184,6 +184,67 @@ $fgcolor: #e2e2e2;
 
     .DockItemContainer {
       .DockItem {
+        .ContextMenu {
+          bottom: 60px;
+          backdrop-filter: blur(15px);
+          -webkit-backdrop-filter: blur(15px);
+          background: #20202383;
+          border: 1px solid lighten($bgcolor, 10%);
+          box-shadow: 0px 0 10px transparentize($fgcolor, .97);
+  
+          &.active {
+            opacity: 1;
+            pointer-events: all;
+          }
+  
+          .ContextMenuItemContainer {
+            &::after {
+              content: "";
+              display: block;
+              margin: 4px auto;
+              width: 95%;
+              height: 1px;
+              background: transparentize($fgcolor, 0.95);
+            }
+  
+            &:last-child {
+              &::after {
+                display: none
+              }
+            }
+  
+            .ContextMenuItem {
+              height: 30.5px;
+              border-radius: 8px;
+              padding: 0 10px;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+  
+              .Description {
+                font-size: 10px;
+                color: transparentize($fgcolor, .8);
+              }
+  
+              p {
+                margin: 0;
+              }
+    
+              &:hover {
+                background: #007bff;
+              }
+    
+              &:active {
+                background: darken(#007bff, 10%);
+              }
+  
+              &.disabled {
+                display: none;
+              }
+            }
+          }
+        }
+
         img {
           transition: none;
           &:active {

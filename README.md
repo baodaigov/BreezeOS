@@ -9,6 +9,9 @@ Welcome to BreezeOS, this is an open-source project generated using ReactJS and 
 ![Screenshot 3](./public/gallery/screenshot3.png)
 ![Screenshot 4](./public/gallery/screenshot4.png)
 ![Screenshot 5](./public/gallery/screenshot5.png)
+![Screenshot 6](./public/gallery/screenshot6.png)
+![Screenshot 7](./public/gallery/screenshot7.png)
+![Screenshot 8](./public/gallery/screenshot8.png)
 
 # Contributors
 
