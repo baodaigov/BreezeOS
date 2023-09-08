@@ -78,8 +78,6 @@ export const CalculatorApp = () => {
             disabled: !recentResult,
             action: () => navigator.clipboard.writeText(recentResult),
           },
-        ],
-        [
           {
             label: isHide ? "Unhide" : "Hide",
             disabled: isActive ? false : true,

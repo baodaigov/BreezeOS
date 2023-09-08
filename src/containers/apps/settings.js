@@ -897,6 +897,7 @@ export default function Settings() {
                         <div
                           className="WallpaperImage"
                           style={{ backgroundImage: `url(${wallpaperInput})` }}
+                          onClick={() => dispatch(changeWallpaper(wallpaperInput))}
                         >
                           <button
                             className="CloseButton"
