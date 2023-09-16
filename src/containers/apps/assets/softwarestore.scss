@@ -2,622 +2,656 @@ $bgcolor: #202023e5;
 $fgcolor: #e2e2e2;
 
 .SoftwareStoreWindow {
-    .Window .TopBar {
-        justify-content: space-between;
-        .TopBarInteractionContainer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .TopBarTitle {width: auto;}
+  .Window .TopBar {
+    justify-content: space-between;
+    .TopBarInteractionContainer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .TopBarTitle {
+      width: auto;
+    }
+  }
+
+  .softwarestore {
+    width: 93vw;
+    height: 93%;
+    opacity: 0;
+    pointer-events: none;
+    transition: all ease 0.3s;
+
+    &.active {
+      opacity: 1;
+      pointer-events: all;
+      width: 100vw;
+      height: 100%;
     }
 
-    .softwarestore {
-        width: 93vw;
-        height: 93%;
-        opacity: 0;
-        pointer-events: none;
-        transition: all ease .3s;
-
-        &.active {
-            opacity: 1;
-            pointer-events: all;
-            width: 100vw;
-            height: 100%;
-        }
-
-        &.hide {
-            top: 153%;
-            pointer-events: none;
-        }
-        
-        &.minimize {
-            width: 1000px;
-            height: 600px;
-
-            .TopBarTitle {width: 200px;}
-        }
-    
-        .TabBarWrapper {
-            margin: 0 10px;
-            margin-right: 0;
-    
-            .TabBar {
-                display: flex;
-    
-                .TabBarItem {
-                    padding: 4px 9px;
-                    color: #fff;
-                    display: flex;
-                    align-items: center;
-                    font-size: 11px;
-                    margin-right: 5px;
-    
-                    * { margin: 0 }
-                    
-                    .TabSeparator {
-                        background-color: #ffffff1e;
-                        width: 1px;
-                    }
-
-                    .TabBarInteraction {
-                        display: flex;
-
-                        i {
-                            margin-right: 3px;
-                            font-size: 12px;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            border-radius: 999px;
-                            height: 20px;
-                            width: 20px;
-
-                            &:hover {
-                                background-color: #ffffff1e;
-                            }
-
-                            &:last-child {
-                                margin: 0;
-                            }
-                        }
-                    }
-                }
-            }
-        }
+    &.hide {
+      top: 153%;
+      pointer-events: none;
     }
-    
-    .SoftwareStore {
-        background: $bgcolor;
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-        width: 100%;
-        height: 100%;
-        color: $fgcolor;
+
+    &.minimize {
+      width: 1000px;
+      height: 600px;
+
+      .TopBarTitle {
+        width: 200px;
+      }
+    }
+
+    .TabBarWrapper {
+      margin: 0 10px;
+      margin-right: 0;
+
+      .TabBar {
         display: flex;
 
-        * {
+        .TabBarItem {
+          padding: 4px 9px;
+          color: #fff;
+          display: flex;
+          align-items: center;
+          font-size: 11px;
+          margin-right: 5px;
+
+          * {
             margin: 0;
+          }
+
+          .TabSeparator {
+            background-color: #ffffff1e;
+            width: 1px;
+          }
+
+          .TabBarInteraction {
+            display: flex;
+
+            i {
+              margin-right: 3px;
+              font-size: 12px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 999px;
+              height: 20px;
+              width: 20px;
+
+              &:hover {
+                background-color: #ffffff1e;
+              }
+
+              &:last-child {
+                margin: 0;
+              }
+            }
+          }
         }
-            
-        .SoftwareTableLayout {
-            position: absolute;
-            font-size: 20px;
+      }
+    }
+  }
+
+  .SoftwareStore {
+    background-color: $bgcolor;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    width: 100%;
+    height: 100%;
+    color: $fgcolor;
+    display: flex;
+
+    * {
+      margin: 0;
+    }
+
+    .SoftwareTableLayout {
+      position: absolute;
+      font-size: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      margin: 5px 10px;
+      transition: all ease 0.2s;
+      z-index: 1;
+
+      &:hover {
+        background-color: transparentize($fgcolor, 0.95);
+      }
+    }
+
+    .NavPanel {
+      height: 100%;
+      width: 330px;
+      transition: none;
+      background-color: transparentize($fgcolor, 0.97);
+      position: relative;
+      left: 0;
+      transition: all ease 0.3s;
+
+      &.inactive {
+        width: 0;
+        left: -125px;
+      }
+
+      * {
+        transition: all ease 0.1s;
+      }
+
+      .Category {
+        max-height: 100%;
+        width: 87%;
+        margin: 0 auto;
+        position: relative;
+        top: 50px;
+
+        .CategoryTitle {
+          font-weight: 700;
+          margin-bottom: 15px;
+        }
+
+        .Categories {
+          display: flex;
+          flex-direction: column;
+          overflow-y: auto;
+          overflow-x: hidden;
+
+          .CategoryItem {
+            border-radius: 5px;
+            margin-bottom: 10px;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            font-size: 15.5px;
+            padding: 15px 20px;
+
+            &.create {
+              background-color: linear-gradient(180deg, #3f2e93, #2662b1);
+              color: $fgcolor;
+            }
+
+            &.work {
+              background-color: #fffeb5;
+              color: #2662b1;
+            }
+
+            &.play {
+              background-color: linear-gradient(90deg, #ffe69a, #b28cff);
+              color: #003479;
+            }
+
+            &.socialize {
+              background-color: linear-gradient(90deg, #ff77a2, #ff9e77);
+              color: #202023;
+            }
+
+            &.learn {
+              background-color: linear-gradient(
+                180deg,
+                #80d184,
+                darken(#80d184, 10%)
+              );
+              color: $fgcolor;
+            }
+
+            &.develop {
+              background-color: linear-gradient(180deg, #140f2f, #20184b);
+              color: $fgcolor;
+            }
+          }
+        }
+      }
+    }
+
+    .SoftwareContainer {
+      width: 100%;
+      max-height: 100%;
+      display: flex;
+      flex-direction: column;
+
+      .SoftwareTab {
+        max-width: 100%;
+        display: flex;
+        justify-content: space-between;
+        background-color: $bgcolor;
+
+        .SoftwareNav {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 13px;
+          padding: 5px;
+
+          .SoftwareNavItem {
+            display: flex;
+            align-items: center;
+            padding: 7px 13px;
+            border-radius: 999px;
+            height: fit-content;
+            margin-right: 5px;
+            transition: all ease 0.05s;
+
+            &:last-child {
+              margin: 0;
+            }
+          }
+
+          &[value="1"] {
+            .SoftwareNavItem.explorer {
+              background-color: transparentize($fgcolor, 0.85);
+            }
+          }
+
+          &[value="2"] {
+            .SoftwareNavItem.installed {
+              background-color: transparentize($fgcolor, 0.85);
+            }
+          }
+
+          &[value="3"] {
+            .SoftwareNavItem.updates {
+              background-color: transparentize($fgcolor, 0.85);
+            }
+          }
+
+          .SoftwareSearchbar {
+            appearance: none;
+            background-color: #a5a5a512;
+            padding: 9px 15px;
+            outline: none;
+            border: none;
+            width: 500px;
+            border-radius: 999px;
+            color: $fgcolor;
+            font-size: 12px;
+            transition: width ease 0.3s;
+            animation: searchbar 0.3s;
+
+            &:focus {
+              border: 1px solid #8fb6ff;
+              width: 600px;
+            }
+
+            @keyframes searchbar {
+              0% {
+                width: 450px;
+              }
+
+              100% {
+                width: 500px;
+              }
+            }
+          }
+
+          .CloseSearchbar {
+            font-size: 15px;
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 40px;
-            height: 40px;
+            width: 25px;
+            height: 25px;
             border-radius: 999px;
-            margin: 5px 10px;
-            transition: all ease .2s;
+            margin-left: 10px;
+            transition: all ease 0.2s;
             z-index: 1;
+            margin: 5px;
 
             &:hover {
-                background: transparentize($fgcolor, 0.95);
+              background-color: transparentize($fgcolor, 0.95);
             }
+          }
         }
 
-        .NavPanel {
-            height: 100%;
-            width: 330px;
-            transition: none;
-            background: transparentize($fgcolor, 0.97);
-            position: relative;
-            left: 0;
-            transition: all ease .3s;
+        .SoftwareSearch {
+          font-size: 15px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 40px;
+          height: 40px;
+          border-radius: 999px;
+          margin-left: 10px;
+          padding: 0 20px;
+          transition: all ease 0.2s;
+          z-index: 1;
+          margin: 5px;
 
-            &.inactive {
-                width: 0;
-                left: -125px;
-            }
-
-            * {
-                transition: all ease .1s;
-            }
-
-            .Category {
-                max-height: 100%;
-                width: 87%;
-                margin: 0 auto;
-                position: relative;
-                top: 50px;
-
-                .CategoryTitle {
-                    font-weight: 700;
-                    margin-bottom: 15px;
-                }
-
-                .Categories {
-                    display: flex;
-                    flex-direction: column;
-                    overflow-y: auto;
-                    overflow-x: hidden;
-
-                    .CategoryItem {
-                        border-radius: 5px;
-                        margin-bottom: 10px;
-                        width: 100%;
-                        overflow: hidden;
-                        display: flex;
-                        align-items: center;
-                        font-size: 15.5px;
-                        padding: 15px 20px;
-
-                        &.create {
-                            background: linear-gradient(180deg, #3f2e93, #2662b1);
-                            color: $fgcolor;
-                        }
-
-                        &.work {
-                            background: #fffeb5;
-                            color: #2662b1;
-                        }
-
-                        &.play {
-                            background: linear-gradient(90deg, #ffe69a, #b28cff);
-                            color: #003479;
-                        }
-
-                        &.socialize {
-                            background: linear-gradient(90deg, #ff77a2, #ff9e77);
-                            color: #202023;
-                        }
-
-                        &.learn {
-                            background: linear-gradient(180deg, #80d184, darken(#80d184, 10%));
-                            color: $fgcolor;
-                        }
-
-                        &.develop {
-                            background: linear-gradient(180deg, #140f2f, #20184b);
-                            color: $fgcolor;
-                        }
-                    }
-                }
-            }
+          &:hover {
+            background-color: transparentize($fgcolor, 0.95);
+          }
         }
+      }
 
-        .SoftwareContainer {
-            width: 100%;
-            max-height: 100%;
+      .Software {
+        padding: 15px 20px;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        overflow-y: auto;
+
+        .explorer {
+          .Application {
+            display: flex;
+            border-radius: 10px;
+            background-color: transparentize($fgcolor, 0.96);
+            color: $fgcolor;
+            padding: 18px;
+            margin-left: 10px;
+            margin-bottom: 10px;
+            width: 400px;
+            font-size: 13px;
+
+            .ApplicationTitle {
+              font-weight: 700;
+              font-size: 17px;
+            }
+
+            .ApplicationRating {
+              margin-left: 7px;
+              display: flex;
+              font-size: 10px;
+            }
+
+            .ApplicationDesc {
+              font-size: 12px;
+              font-weight: 300;
+            }
+
+            .ApplicationInstallButton {
+              border-radius: 999px;
+              background-color: #8fb6ff53;
+              color: #8fb6ff;
+              margin-top: 10px;
+              font-size: 11px;
+              font-weight: 700;
+              padding: 5px 10px;
+              text-transform: uppercase;
+              float: right;
+
+              &:hover {
+                background-color: #8fb6ff6b;
+              }
+
+              &.installed {
+                background-color: transparentize($fgcolor, 0.97);
+                color: lighten($bgcolor, 15%);
+              }
+            }
+          }
+
+          .FeaturedApplication {
             display: flex;
             flex-direction: column;
+            margin-bottom: 30px;
 
-            .SoftwareTab {
-                max-width: 100%;
-                display: flex;
-                justify-content: space-between;
-                background: $bgcolor;
-
-                .SoftwareNav {
-                    width: 100%;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    font-size: 13px;
-                    padding: 5px;
-
-                    .SoftwareNavItem {
-                        display: flex;
-                        align-items: center;
-                        padding: 7px 13px;
-                        border-radius: 999px;
-                        height: fit-content;
-                        margin-right: 5px;
-                        transition: all ease .05s;
-
-                        &:last-child {margin: 0;}
-                    }
-
-                    &[value='1']{
-                        .SoftwareNavItem.explorer{background: transparentize($fgcolor, 0.85)}
-                    }
-
-                    &[value='2']{
-                        .SoftwareNavItem.installed{background: transparentize($fgcolor, 0.85)}
-                    }
-
-                    &[value='3']{
-                        .SoftwareNavItem.updates{background: transparentize($fgcolor, 0.85)}
-                    }
-
-                    .SoftwareSearchbar {
-                        appearance: none;
-                        background: #a5a5a512;
-                        padding: 9px 15px;
-                        outline: none;
-                        border: none;
-                        width: 500px;
-                        border-radius: 999px;
-                        color: $fgcolor;
-                        font-size: 12px;
-                        transition: width ease .3s;
-                        animation: searchbar .3s;
-
-                        &:focus {
-                            border: 1px solid #8fb6ff;
-                            width: 600px;
-                        }
-
-                        @keyframes searchbar {
-                            0% {
-                                width: 450px;
-                            }
-
-                            100% {
-                                width: 500px;
-                            }
-                        }
-                    }
-
-                    .CloseSearchbar {
-                        font-size: 15px;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        width: 25px;
-                        height: 25px;
-                        border-radius: 999px;
-                        margin-left: 10px;
-                        transition: all ease .2s;
-                        z-index: 1;
-                        margin: 5px;
-            
-                        &:hover {
-                            background: transparentize($fgcolor, 0.95);
-                        }
-                    }
-                }
-
-                .SoftwareSearch {
-                    font-size: 15px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    width: 40px;
-                    height: 40px;
-                    border-radius: 999px;
-                    margin-left: 10px;
-                    padding: 0 20px;
-                    transition: all ease .2s;
-                    z-index: 1;
-                    margin: 5px;
-        
-                    &:hover {
-                        background: transparentize($fgcolor, 0.95);
-                    }
-                }
+            .FeaturedApplicationContainer {
+              margin-top: 7px;
+              position: relative;
+              top: 0;
+              opacity: 1;
             }
 
-            .Software {
-                padding: 15px 20px;
-                width: 100%;
-                height: 100%;
-                position: absolute;
-                overflow-y: auto;
+            .FeaturedApplicationWrapper {
+              max-width: 80%;
+              margin: 0 auto;
 
-                .explorer {
-                    .Application {
-                        display: flex;
-                        border-radius: 10px;
-                        background: transparentize($fgcolor, 0.96);
-                        color: $fgcolor;
-                        padding: 18px;
-                        margin-left: 10px;
-                        margin-bottom: 10px;
-                        width: 400px;
-                        font-size: 13px;
-
-                        .ApplicationTitle {
-                            font-weight: 700;
-                            font-size: 17px;
-                        }
-
-                        .ApplicationRating {
-                            margin-left: 7px;
-                            display: flex;
-                            font-size: 10px;
-                        }
-
-                        .ApplicationDesc {
-                            font-size: 12px;
-                            font-weight: 300;
-                        }
-
-                        .ApplicationInstallButton {
-                            border-radius: 999px;
-                            background-color: #8fb6ff53;
-                            color: #8fb6ff;
-                            margin-top: 10px;
-                            font-size: 11px;
-                            font-weight: 700;
-                            padding: 5px 10px;
-                            text-transform: uppercase;
-                            float: right;
-
-                            &:hover {background: #8fb6ff6b}
-
-                            &.installed {
-                                background: transparentize($fgcolor, 0.97);
-                                color: lighten($bgcolor, 15%);
-                            }
-                        }
-                    }
-
-                    .FeaturedApplication {
-                        display: flex;
-                        flex-direction: column;
-                        margin-bottom: 30px;
-
-                        .FeaturedApplicationContainer {
-                            margin-top: 7px;
-                            position: relative;
-                            top: 0;
-                            opacity: 1;
-                        }
-
-                        .FeaturedApplicationWrapper {
-                            max-width: 80%;
-                            margin: 0 auto;
-                                
-                            .FeaturedApplicationInfo {
-                                margin-left: 30px;
-                            }
-                        }
-    
-                        .Blender {
-                            border-radius: 10px;
-                            overflow: hidden;
-                            background: linear-gradient(180deg, #ffcf5f, #ffc53c);
-                            box-shadow: 0px 0 20px #ffc43c93;
-                            padding: 50px;
-                            width: 100%;
-
-                            .FeaturedApplicationInfo {
-                                color: $bgcolor;
-                            }
-                        }
-    
-                        .Spotify {
-                            border-radius: 10px;
-                            overflow: hidden;
-                            background: linear-gradient(180deg, #5fff94, #3cffce);
-                            box-shadow: 0px 0 20px #3cff7d93;
-                            padding: 50px;
-                            width: 100%;
-
-                            .FeaturedApplicationInfo {
-                                color: $bgcolor;
-                            }
-                        }
-    
-                        .Caprine {
-                            border-radius: 10px;
-                            overflow: hidden;
-                            background: linear-gradient(180deg, #5faaff, #3c6dff);
-                            box-shadow: 0px 0 20px #2e4da8b1;
-                            padding: 50px;
-                            width: 100%;
-
-                            .FeaturedApplicationInfo {
-                                color: $fgcolor;
-                            }
-                        }
-                    }
-
-                    .EditorChoice {
-                        margin-bottom: 50px;
-
-                        .EditorChoiceContainer {
-                            margin-top: 7px;
-                            display: flex;
-                            flex-wrap: wrap;
-                            justify-content: center;
-                            align-items: center;
-                        }
-                    }
-
-                    .RecentReleases {
-                        margin-bottom: 50px;
-
-                        .RecentReleasesContainer {
-                            margin-top: 7px;
-                            display: flex;
-                            flex-wrap: wrap;
-                            justify-content: center;
-                            align-items: center;
-                        }
-                    }
-                }
-
-                .installed {
-                    .InstalledAppContainer {
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: center;
-                        align-items: center;
-
-                        .Application {
-                            display: flex;
-                            border-radius: 10px;
-                            background: transparentize($fgcolor, 0.96);
-                            color: $fgcolor;
-                            padding: 18px;
-                            margin-left: 10px;
-                            margin-bottom: 10px;
-                            width: 550px;
-                            font-size: 13px;
-    
-                            .ApplicationTitle {
-                                font-weight: 700;
-                                font-size: 17px;
-                                margin-bottom: 5px;
-                            }
-    
-                            .ApplicationInstallButton {
-                                border-radius: 999px;
-                                background-color: #ff8f8f1a;
-                                color: #ff8f8f;
-                                font-size: 14px;
-                                display: flex;
-                                justify-content: center;
-                                align-items: center;
-                                width: 35px;
-                                height: 35px;
-                                float: right;
-    
-                                &:hover {background: #ff8f8f2a}
-                            }
-                        }
-                    }
-                }
-
-                .updates {
-                    width: 100%;
-                    height: 100%;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    align-items: center;
-                    color: transparentize($fgcolor, 0.85);
-
-                    h1 {font-weight: 700;}
-                }
+              .FeaturedApplicationInfo {
+                margin-left: 30px;
+              }
             }
+
+            .Blender {
+              border-radius: 10px;
+              overflow: hidden;
+              background-color: linear-gradient(180deg, #ffcf5f, #ffc53c);
+              box-shadow: 0px 0 20px #ffc43c93;
+              padding: 50px;
+              width: 100%;
+
+              .FeaturedApplicationInfo {
+                color: $bgcolor;
+              }
+            }
+
+            .Spotify {
+              border-radius: 10px;
+              overflow: hidden;
+              background-color: linear-gradient(180deg, #5fff94, #3cffce);
+              box-shadow: 0px 0 20px #3cff7d93;
+              padding: 50px;
+              width: 100%;
+
+              .FeaturedApplicationInfo {
+                color: $bgcolor;
+              }
+            }
+
+            .Caprine {
+              border-radius: 10px;
+              overflow: hidden;
+              background-color: linear-gradient(180deg, #5faaff, #3c6dff);
+              box-shadow: 0px 0 20px #2e4da8b1;
+              padding: 50px;
+              width: 100%;
+
+              .FeaturedApplicationInfo {
+                color: $fgcolor;
+              }
+            }
+          }
+
+          .EditorChoice {
+            margin-bottom: 50px;
+
+            .EditorChoiceContainer {
+              margin-top: 7px;
+              display: flex;
+              flex-wrap: wrap;
+              justify-content: center;
+              align-items: center;
+            }
+          }
+
+          .RecentReleases {
+            margin-bottom: 50px;
+
+            .RecentReleasesContainer {
+              margin-top: 7px;
+              display: flex;
+              flex-wrap: wrap;
+              justify-content: center;
+              align-items: center;
+            }
+          }
         }
-    }    
+
+        .installed {
+          .InstalledAppContainer {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            .Application {
+              display: flex;
+              border-radius: 10px;
+              background-color: transparentize($fgcolor, 0.96);
+              color: $fgcolor;
+              padding: 18px;
+              margin-left: 10px;
+              margin-bottom: 10px;
+              width: 550px;
+              font-size: 13px;
+
+              .ApplicationTitle {
+                font-weight: 700;
+                font-size: 17px;
+                margin-bottom: 5px;
+              }
+
+              .ApplicationInstallButton {
+                border-radius: 999px;
+                background-color: #ff8f8f1a;
+                color: #ff8f8f;
+                font-size: 14px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 35px;
+                height: 35px;
+                float: right;
+
+                &:hover {
+                  background-color: #ff8f8f2a;
+                }
+              }
+            }
+          }
+        }
+
+        .updates {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          color: transparentize($fgcolor, 0.85);
+
+          h1 {
+            font-weight: 700;
+          }
+        }
+      }
+    }
+  }
 }
 
 .lightMode {
-    .softwarestore {
-        .TabBarWrapper .TabBar {
-            .TabBarItem {
-                color: #000;
-                        
-                .TabSeparator {
-                    background-color: #0000001e;
-                }
-        
-                &:hover {
-                    .CloseButton {
-                        &:hover {
-                            background-color: #00000010;
-                        }
-                    }
-                }
+  .softwarestore {
+    .TabBarWrapper .TabBar {
+      .TabBarItem {
+        color: #000;
 
-                .TabBarInteraction i:hover {
-                    background-color: #0000001e;
-                }
-            }
+        .TabSeparator {
+          background-color: #0000001e;
         }
-    }
-    
-    .SoftwareStore {
-        background: $fgcolor;
-        color: $bgcolor;
-            
-        .SoftwareTableLayout {
+
+        &:hover {
+          .CloseButton {
             &:hover {
-                background: transparentize($bgcolor, 0.8);
+              background-color: #00000010;
             }
-        }
-        
-        .NavPanel {
-            background: transparentize($bgcolor, 0.82);
+          }
         }
 
-        .SoftwareContainer {
-            .SoftwareTab {
-                background: transparentize($bgcolor, 0.82);
-
-                .SoftwareNav {
-                    &[value='1']{
-                        .SoftwareNavItem.explorer{background: transparentize($bgcolor, 0.75)}
-                    }
-
-                    &[value='2']{
-                        .SoftwareNavItem.installed{background: transparentize($bgcolor, 0.75)}
-                    }
-
-                    &[value='3']{
-                        .SoftwareNavItem.updates{background: transparentize($bgcolor, 0.75)}
-                    }
-
-                    .SoftwareSearchbar {
-                        color: $bgcolor;
-                        background: darken(#a5a5a512, 100%);
-                    }
-
-                    .CloseSearchbar {
-                        &:hover {
-                            background: transparentize($bgcolor, 0.78);
-                        }
-                    }
-                }
-
-                .SoftwareSearch {
-                    &:hover {
-                        background: transparentize($bgcolor, 0.75);
-                    }
-                }
-            }
-
-            .Software {
-                .explorer {
-                    .Application {
-                        background: transparentize($bgcolor, 0.87);
-                        color: $bgcolor;
-
-                        .ApplicationInstallButton.installed {
-                            background: transparentize($bgcolor, 0.85);
-                            color: darken($fgcolor, 12%);
-                        }
-                    }
-
-                    .FeaturedApplication .FeaturedApplicationContainer {
-                            .Blender, .Spotify, .Caprine {
-                                box-shadow: 0px 0 20px transparentize($bgcolor, 0.65);
-                            }
-                        }
-                }
-
-                .installed {
-                    .InstalledAppContainer {
-                        .Application {
-                            background: transparentize($bgcolor, 0.87);
-                            color: $bgcolor;
-                            
-                            .ApplicationInstallButton :hover {background: #ff8f8f0a}
-                        }
-                    }
-                }
-
-                .updates {
-                    color: transparentize($bgcolor, 0.7);
-                }
-            }
+        .TabBarInteraction i:hover {
+          background-color: #0000001e;
         }
+      }
     }
+  }
+
+  .SoftwareStore {
+    background-color: $fgcolor;
+    color: $bgcolor;
+
+    .SoftwareTableLayout {
+      &:hover {
+        background-color: transparentize($bgcolor, 0.8);
+      }
+    }
+
+    .NavPanel {
+      background-color: transparentize($bgcolor, 0.82);
+    }
+
+    .SoftwareContainer {
+      .SoftwareTab {
+        background-color: transparentize($bgcolor, 0.82);
+
+        .SoftwareNav {
+          &[value="1"] {
+            .SoftwareNavItem.explorer {
+              background-color: transparentize($bgcolor, 0.75);
+            }
+          }
+
+          &[value="2"] {
+            .SoftwareNavItem.installed {
+              background-color: transparentize($bgcolor, 0.75);
+            }
+          }
+
+          &[value="3"] {
+            .SoftwareNavItem.updates {
+              background-color: transparentize($bgcolor, 0.75);
+            }
+          }
+
+          .SoftwareSearchbar {
+            color: $bgcolor;
+            background-color: darken(#a5a5a512, 100%);
+          }
+
+          .CloseSearchbar {
+            &:hover {
+              background-color: transparentize($bgcolor, 0.78);
+            }
+          }
+        }
+
+        .SoftwareSearch {
+          &:hover {
+            background-color: transparentize($bgcolor, 0.75);
+          }
+        }
+      }
+
+      .Software {
+        .explorer {
+          .Application {
+            background-color: transparentize($bgcolor, 0.87);
+            color: $bgcolor;
+
+            .ApplicationInstallButton.installed {
+              background-color: transparentize($bgcolor, 0.85);
+              color: darken($fgcolor, 12%);
+            }
+          }
+
+          .FeaturedApplication .FeaturedApplicationContainer {
+            .Blender,
+            .Spotify,
+            .Caprine {
+              box-shadow: 0px 0 20px transparentize($bgcolor, 0.65);
+            }
+          }
+        }
+
+        .installed {
+          .InstalledAppContainer {
+            .Application {
+              background-color: transparentize($bgcolor, 0.87);
+              color: $bgcolor;
+
+              .ApplicationInstallButton :hover {
+                background-color: #ff8f8f0a;
+              }
+            }
+          }
+        }
+
+        .updates {
+          color: transparentize($bgcolor, 0.7);
+        }
+      }
+    }
+  }
 }

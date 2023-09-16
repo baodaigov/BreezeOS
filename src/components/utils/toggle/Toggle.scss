@@ -1,0 +1,43 @@
+.Toggle {
+  display: flex;
+  height: 24px;
+  width: 44px;
+  align-items: center;
+  border-radius: 999px;
+  padding: 2px;
+  background-color: transparentize(#f4f4f5, 0.9);
+  transition: all ease 0.3s;
+
+  .ToggleThumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 999px;
+    background-color: #f4f4f5;
+    transition: all ease 0.3s;
+  }
+
+  &:active {
+    .ToggleThumb {
+      width: 24px;
+    }
+  }
+
+  &.active {
+    background-color: #2563eb;
+
+    .ToggleThumb {
+      transform: translateX(100%);
+    }
+
+    &:active {
+      .ToggleThumb {
+        transform: translateX(67%);
+      }
+    }
+  }
+
+  &.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}

@@ -17,7 +17,7 @@ $rtbgcolor: #83aaff;
     -webkit-appearance: none;
     width: 27px;
     height: 27px;
-    background: $rtbgcolor;
+    background-color: $rtbgcolor;
     border-radius: 999px;
     border: 0;
     box-shadow: -210px 0 0 195px $rtbgcolor;
@@ -27,7 +27,7 @@ $rtbgcolor: #83aaff;
     appearance: none;
     width: 27px;
     height: 27px;
-    background: $rtbgcolor;
+    background-color: $rtbgcolor;
     border-radius: 999px;
     border: 0;
     box-shadow: -210px 0 0 195px $rtbgcolor;
@@ -35,13 +35,13 @@ $rtbgcolor: #83aaff;
 
   &:hover {
     &::-webkit-slider-thumb {
-      background: lighten($rtbgcolor, 5%);
+      background-color: lighten($rtbgcolor, 5%);
       box-shadow: -210px 0 0 195px lighten($rtbgcolor, 5%);
     }
 
     &::-moz-range-thumb {
-        background: lighten($rtbgcolor, 5%);
-        box-shadow: -210px 0 0 195px lighten($rtbgcolor, 5%);
+      background-color: lighten($rtbgcolor, 5%);
+      box-shadow: -210px 0 0 195px lighten($rtbgcolor, 5%);
     }
   }
 
@@ -50,21 +50,21 @@ $rtbgcolor: #83aaff;
 
     &::-webkit-slider-thumb {
       border: 0.5px solid lighten(#202023, 25%);
-      background: $fgcolor;
+      background-color: $fgcolor;
       box-shadow: -210px 0 0 195px $fgcolor;
 
       &:active {
-        background: darken($fgcolor, 10%);
+        background-color: darken($fgcolor, 10%);
       }
     }
 
     &::-moz-range-thumb {
       border: 0.5px solid lighten(#202023, 25%);
-      background: $fgcolor;
+      background-color: $fgcolor;
       box-shadow: -210px 0 0 195px $fgcolor;
 
       &:active {
-        background: darken($fgcolor, 10%);
+        background-color: darken($fgcolor, 10%);
       }
     }
   }
@@ -79,13 +79,13 @@ $rtbgcolor: #83aaff;
 
       &::-webkit-slider-thumb {
         border: 0.5px solid lighten(#202023, 75%);
-        background: lighten($fgcolor, 20%);
+        background-color: lighten($fgcolor, 20%);
         box-shadow: -210px 0 0 195px lighten($fgcolor, 20%);
       }
 
       &::-moz-range-thumb {
         border: 0.5px solid lighten(#202023, 75%);
-        background: lighten($fgcolor, 20%);
+        background-color: lighten($fgcolor, 20%);
         box-shadow: -210px 0 0 195px lighten($fgcolor, 20%);
       }
     }

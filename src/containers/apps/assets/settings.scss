@@ -48,7 +48,7 @@ $actcolor: #8fb6ff;
       width: 100%;
       height: 100%;
       z-index: 1;
-      background: transparentize($bgcolor, 0.1);
+      background-color: transparentize($bgcolor, 0.1);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -82,7 +82,7 @@ $actcolor: #8fb6ff;
         }
 
         .WindowTopBar {
-          background: $bgcolor;
+          background-color: $bgcolor;
           backdrop-filter: blur(15px);
           -webkit-backdrop-filter: blur(15px);
           padding: 7px 10px;
@@ -114,18 +114,18 @@ $actcolor: #8fb6ff;
               color: $fgcolor;
 
               &:hover {
-                background: #3b3b3f;
+                background-color: #3b3b3f;
               }
 
               &.close:hover {
-                background: #ff5252;
+                background-color: #ff5252;
               }
             }
           }
         }
 
         .WindowBodyDefault {
-          background: $bgcolor;
+          background-color: $bgcolor;
           backdrop-filter: blur(15px);
           -webkit-backdrop-filter: blur(15px);
           border-bottom-left-radius: 5px;
@@ -154,7 +154,7 @@ $actcolor: #8fb6ff;
 
         &.whitesur {
           .WindowTopBar {
-            background: #202023;
+            background-color: #202023;
             padding-left: 12px;
             padding-right: 12px;
             border-top-left-radius: 10px;
@@ -175,10 +175,10 @@ $actcolor: #8fb6ff;
                 }
 
                 &.close {
-                  background: #ff5e57;
+                  background-color: #ff5e57;
 
                   &:active {
-                    background: lighten(#ff5e57, 20%);
+                    background-color: lighten(#ff5e57, 20%);
                   }
 
                   &:hover {
@@ -191,7 +191,7 @@ $actcolor: #8fb6ff;
             }
           }
           .WindowBodyDefault {
-            background: #202023;
+            background-color: #202023;
             border: 0.5px solid lighten(#202023, 25%);
             border-top: none;
           }
@@ -218,7 +218,7 @@ $actcolor: #8fb6ff;
         }
 
         .WindowTopBar {
-          background: $bgcolor;
+          background-color: $bgcolor;
           backdrop-filter: blur(15px);
           -webkit-backdrop-filter: blur(15px);
           padding: 7px 10px;
@@ -250,18 +250,18 @@ $actcolor: #8fb6ff;
               color: $fgcolor;
 
               &:hover {
-                background: #3b3b3f;
+                background-color: #3b3b3f;
               }
 
               &.close:hover {
-                background: #ff5252;
+                background-color: #ff5252;
               }
             }
           }
         }
 
         .WindowBodyDefault {
-          background: $bgcolor;
+          background-color: $bgcolor;
           backdrop-filter: blur(15px);
           -webkit-backdrop-filter: blur(15px);
           border-bottom-left-radius: 5px;
@@ -343,7 +343,7 @@ $actcolor: #8fb6ff;
 
         &.whitesur {
           .WindowTopBar {
-            background: #202023;
+            background-color: #202023;
             padding-left: 12px;
             padding-right: 12px;
             border-top-left-radius: 10px;
@@ -364,10 +364,10 @@ $actcolor: #8fb6ff;
                 }
 
                 &.close {
-                  background: #ff5e57;
+                  background-color: #ff5e57;
 
                   &:active {
-                    background: lighten(#ff5e57, 20%);
+                    background-color: lighten(#ff5e57, 20%);
                   }
 
                   &:hover {
@@ -380,7 +380,7 @@ $actcolor: #8fb6ff;
             }
           }
           .WindowBodyDefault {
-            background: #202023;
+            background-color: #202023;
             border: 0.5px solid lighten(#202023, 25%);
             border-top: none;
           }
@@ -408,7 +408,7 @@ $actcolor: #8fb6ff;
         }
 
         .WindowBodyDefault {
-          background: $bgcolor;
+          background-color: $bgcolor;
           backdrop-filter: blur(15px);
           -webkit-backdrop-filter: blur(15px);
           border-radius: 5px;
@@ -516,7 +516,7 @@ $actcolor: #8fb6ff;
                 }
 
                 &:hover {
-                  background: transparentize($fgcolor, 0.9);
+                  background-color: transparentize($fgcolor, 0.9);
                 }
               }
             }
@@ -555,7 +555,7 @@ $actcolor: #8fb6ff;
           border-radius: 10px;
           .WindowBodyDefault {
             border-radius: 10px;
-            background: #202023;
+            background-color: #202023;
             border: 0.5px solid lighten($bgcolor, 25%);
 
             .WindowBodyContent {
@@ -596,7 +596,7 @@ $actcolor: #8fb6ff;
         }
 
         .WindowBodyDefault {
-          background: $bgcolor;
+          background-color: $bgcolor;
           backdrop-filter: blur(15px);
           -webkit-backdrop-filter: blur(15px);
           border-radius: 5px;
@@ -713,7 +713,7 @@ $actcolor: #8fb6ff;
                 }
 
                 &:hover {
-                  background: transparentize($fgcolor, 0.9);
+                  background-color: transparentize($fgcolor, 0.9);
                 }
               }
             }
@@ -752,7 +752,7 @@ $actcolor: #8fb6ff;
           border-radius: 10px;
           .WindowBodyDefault {
             border-radius: 10px;
-            background: #202023;
+            background-color: #202023;
             border: 0.5px solid lighten($bgcolor, 25%);
 
             .WindowBodyContent {
@@ -773,41 +773,6 @@ $actcolor: #8fb6ff;
       }
     }
 
-    .Toggle {
-      border-radius: 999px;
-      width: 42px;
-      height: 20px;
-      background: transparentize($fgcolor, 0.9);
-      display: flex;
-      padding: 0 3px;
-      align-items: center;
-      transition: all ease 0.3s;
-
-      &::before {
-        content: "";
-        display: block;
-        background: $fgcolor;
-        height: 15px;
-        width: 15px;
-        border-radius: 999px;
-        transition: all ease 0.1s;
-      }
-
-      &.active {
-        background: $actcolor;
-
-        &::before {
-          transform: translateX(20px);
-        }
-      }
-
-      &.whitesur {
-        &.active {
-          background: #009dff;
-        }
-      }
-    }
-
     .MaximumExceededBox {
       position: absolute;
       display: flex;
@@ -823,7 +788,7 @@ $actcolor: #8fb6ff;
       box-shadow: 0px 0 20px #00000089;
 
       .WindowTopBar {
-        background: $bgcolor;
+        background-color: $bgcolor;
         backdrop-filter: blur(15px);
         -webkit-backdrop-filter: blur(15px);
         padding: 7px 10px;
@@ -855,18 +820,18 @@ $actcolor: #8fb6ff;
             color: $fgcolor;
 
             &:hover {
-              background: #3b3b3f;
+              background-color: #3b3b3f;
             }
 
             &.close:hover {
-              background: #ff5252;
+              background-color: #ff5252;
             }
           }
         }
       }
 
       .WindowBodyDefault {
-        background: $bgcolor;
+        background-color: $bgcolor;
         backdrop-filter: blur(15px);
         -webkit-backdrop-filter: blur(15px);
         border-bottom-left-radius: 5px;
@@ -977,7 +942,7 @@ $actcolor: #8fb6ff;
   }
 
   .Settings {
-    background: $bgcolor;
+    background-color: $bgcolor;
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     height: 100%;
@@ -990,7 +955,7 @@ $actcolor: #8fb6ff;
 
       div {
         .NavPanel {
-          background: transparentize($actcolor, 0.95);
+          background-color: transparentize($actcolor, 0.95);
           display: flex;
           justify-content: space-between;
           flex-direction: column;
@@ -1036,7 +1001,7 @@ $actcolor: #8fb6ff;
 
               p {
                 font-weight: 700;
-                background: transparentize($actcolor, 0.87);
+                background-color: transparentize($actcolor, 0.87);
               }
             }
           }
@@ -1105,7 +1070,7 @@ $actcolor: #8fb6ff;
                   margin-bottom: 7px;
 
                   &:hover {
-                    background: transparentize($fgcolor, 0.95);
+                    background-color: transparentize($fgcolor, 0.95);
                   }
 
                   .VisibleNetworksIcon {
@@ -1257,7 +1222,7 @@ $actcolor: #8fb6ff;
                   border-radius: 15px;
                   border: 4px dashed transparentize($fgcolor, 0.95);
                   color: transparentize($fgcolor, 0.85);
-                  background: transparentize($fgcolor, 0.95);
+                  background-color: transparentize($fgcolor, 0.95);
                   width: 649.52px;
                   height: 189px;
                   font-size: 20px;
@@ -1283,7 +1248,7 @@ $actcolor: #8fb6ff;
                     position: absolute;
                     top: -10px;
                     right: -10px;
-                    background: $fgcolor;
+                    background-color: $fgcolor;
                     color: $bgcolor;
                     display: flex;
                     justify-content: center;
@@ -1292,10 +1257,10 @@ $actcolor: #8fb6ff;
                     height: 27px;
                     font-size: 14px;
                     border-radius: 999px;
-                    transition: all ease .3s;
-                    
+                    transition: all ease 0.3s;
+
                     &:active {
-                      background: darken($fgcolor, 15%);
+                      background-color: darken($fgcolor, 15%);
                       transition: none;
                     }
                   }
@@ -1334,7 +1299,7 @@ $actcolor: #8fb6ff;
                   .ThemesMenuSection {
                     font-size: 12px;
                     padding: 7px 12px;
-                    background: transparentize($fgcolor, 0.93);
+                    background-color: transparentize($fgcolor, 0.93);
                     display: flex;
                     justify-content: space-between;
                     width: 190px;
@@ -1367,7 +1332,7 @@ $actcolor: #8fb6ff;
                   transition: all ease 0.3s;
                   border-radius: 999px;
                   &:hover {
-                    background: transparentize($fgcolor, 0.8);
+                    background-color: transparentize($fgcolor, 0.8);
                   }
                 }
 
@@ -1423,7 +1388,7 @@ $actcolor: #8fb6ff;
                 .BiDMenuSection {
                   font-size: 12px;
                   padding: 7px 12px;
-                  background: transparentize($fgcolor, 0.93);
+                  background-color: transparentize($fgcolor, 0.93);
                   display: flex;
                   justify-content: space-between;
                   width: 190px;
@@ -1478,7 +1443,7 @@ $actcolor: #8fb6ff;
                 }
 
                 &:hover {
-                  background: transparentize($fgcolor, 0.95);
+                  background-color: transparentize($fgcolor, 0.95);
                 }
               }
             }
@@ -1510,11 +1475,11 @@ $actcolor: #8fb6ff;
                 justify-content: space-between;
                 align-items: center;
                 padding: 15px 25px;
-                background: transparentize($fgcolor, 0.93);
+                background-color: transparentize($fgcolor, 0.93);
                 border-bottom: 0.5px solid darken($fgcolor, 73%);
 
                 &:hover {
-                  background: transparentize($fgcolor, 0.9);
+                  background-color: transparentize($fgcolor, 0.9);
                 }
 
                 &:first-child {
@@ -1536,7 +1501,7 @@ $actcolor: #8fb6ff;
                   border: 0 !important;
 
                   &:hover {
-                    background: transparentize($fgcolor, 0.93);
+                    background-color: transparentize($fgcolor, 0.93);
                   }
 
                   * {
@@ -1547,7 +1512,7 @@ $actcolor: #8fb6ff;
                     appearance: none;
                     border: none;
                     outline: none;
-                    background: transparentize($fgcolor, 0.9);
+                    background-color: transparentize($fgcolor, 0.9);
                     color: inherit;
                     width: 100%;
                     height: 0;
@@ -1590,13 +1555,13 @@ $actcolor: #8fb6ff;
     }
 
     &.whitesur {
-      background: #202023;
+      background-color: #202023;
 
       .SettingsSection {
         div {
           .NavPanel {
             border-radius: 0;
-            background: transparent;
+            background-color: transparent;
             border-bottom: 0.5px solid transparentize($fgcolor, 0.8);
 
             &:last-child {
@@ -1620,7 +1585,7 @@ $actcolor: #8fb6ff;
               }
               &:hover {
                 p {
-                  background: transparentize($fgcolor, 0.93);
+                  background-color: transparentize($fgcolor, 0.93);
                 }
               }
 
@@ -1633,12 +1598,12 @@ $actcolor: #8fb6ff;
 
                 p {
                   font-weight: inherit;
-                  background: transparentize($fgcolor, 0.85);
+                  background-color: transparentize($fgcolor, 0.85);
                 }
 
                 &:hover {
                   p {
-                    background: transparentize($fgcolor, 0.85);
+                    background-color: transparentize($fgcolor, 0.85);
                   }
                 }
               }
@@ -1656,7 +1621,7 @@ $actcolor: #8fb6ff;
                     padding: 8px 20px;
 
                     &:hover {
-                      background: #007bff;
+                      background-color: #007bff;
                     }
                   }
                 }
@@ -1674,7 +1639,7 @@ $actcolor: #8fb6ff;
     .BlackScr {
       .WifiSharing {
         .WindowTopBar {
-          background: $fgcolor;
+          background-color: $fgcolor;
 
           .WindowTopBarTitle {
             color: $bgcolor;
@@ -1684,17 +1649,17 @@ $actcolor: #8fb6ff;
             color: $bgcolor;
 
             &:hover {
-              background: #3b3b3f;
+              background-color: #3b3b3f;
             }
 
             &.close:hover {
-              background: #ff5252;
+              background-color: #ff5252;
             }
           }
         }
 
         .WindowBodyDefault {
-          background: $fgcolor;
+          background-color: $fgcolor;
           color: $bgcolor;
         }
 
@@ -1710,13 +1675,13 @@ $actcolor: #8fb6ff;
 
         &.whitesur {
           .WindowTopBar {
-            background: $fgcolor;
+            background-color: $fgcolor;
             border: 0.5px solid lighten(#202023, 5%);
             border-bottom: none;
           }
 
           .WindowBodyDefault {
-            background: $fgcolor;
+            background-color: $fgcolor;
             border: 0.5px solid lighten(#202023, 5%);
             border-top: none;
           }
@@ -1725,7 +1690,7 @@ $actcolor: #8fb6ff;
 
       .UsersBox {
         .WindowTopBar {
-          background: $fgcolor;
+          background-color: $fgcolor;
 
           .WindowTopBarTitle {
             color: $bgcolor;
@@ -1735,17 +1700,17 @@ $actcolor: #8fb6ff;
             color: $bgcolor;
 
             &:hover {
-              background: #3b3b3f;
+              background-color: #3b3b3f;
             }
 
             &.close:hover {
-              background: #ff5252;
+              background-color: #ff5252;
             }
           }
         }
 
         .WindowBodyDefault {
-          background: $fgcolor;
+          background-color: $fgcolor;
           color: $bgcolor;
         }
 
@@ -1761,13 +1726,13 @@ $actcolor: #8fb6ff;
 
         &.whitesur {
           .WindowTopBar {
-            background: $fgcolor;
+            background-color: $fgcolor;
             border: 0.5px solid lighten(#202023, 5%);
             border-bottom: none;
           }
 
           .WindowBodyDefault {
-            background: $fgcolor;
+            background-color: $fgcolor;
             border: 0.5px solid lighten(#202023, 5%);
             border-top: none;
           }
@@ -1776,7 +1741,7 @@ $actcolor: #8fb6ff;
 
       .InsertWifiPassword {
         .WindowBodyDefault {
-          background: $fgcolor;
+          background-color: $fgcolor;
           color: $bgcolor;
           .WindowBodyContent {
             .PasswordContainer {
@@ -1798,7 +1763,7 @@ $actcolor: #8fb6ff;
 
               .displayPassword {
                 &:hover {
-                  background: transparentize($bgcolor, 0.83);
+                  background-color: transparentize($bgcolor, 0.83);
                 }
               }
             }
@@ -1823,7 +1788,7 @@ $actcolor: #8fb6ff;
 
         &.whitesur {
           .WindowBodyDefault {
-            background: $fgcolor;
+            background-color: $fgcolor;
             border: 0.5px solid lighten(#202023, 5%);
           }
         }
@@ -1831,7 +1796,7 @@ $actcolor: #8fb6ff;
 
       .ConnectOtherNetworks {
         .WindowTopBar {
-          background: $fgcolor;
+          background-color: $fgcolor;
 
           .WindowTopBarTitle {
             color: $bgcolor;
@@ -1844,18 +1809,18 @@ $actcolor: #8fb6ff;
               color: $bgcolor;
 
               &:hover {
-                background: #3b3b3f;
+                background-color: #3b3b3f;
               }
 
               &.close:hover {
-                background: #ff5252;
+                background-color: #ff5252;
               }
             }
           }
         }
 
         .WindowBodyDefault {
-          background: $fgcolor;
+          background-color: $fgcolor;
           color: $bgcolor;
           .WindowBodyContent {
             .InfoContainer {
@@ -1877,7 +1842,7 @@ $actcolor: #8fb6ff;
 
               .displayPassword {
                 &:hover {
-                  background: transparentize($bgcolor, 0.83);
+                  background-color: transparentize($bgcolor, 0.83);
                 }
               }
             }
@@ -1902,20 +1867,16 @@ $actcolor: #8fb6ff;
 
         &.whitesur {
           .WindowBodyDefault {
-            background: $fgcolor;
+            background-color: $fgcolor;
             border: 0.5px solid lighten(#202023, 5%);
           }
         }
       }
     }
 
-    .Toggle {
-      background: transparentize($bgcolor, 0.75);
-    }
-
     .MaximumExceededBox {
       .WindowTopBar {
-        background: $fgcolor;
+        background-color: $fgcolor;
 
         .WindowTopBarTitle {
           color: $bgcolor;
@@ -1925,17 +1886,17 @@ $actcolor: #8fb6ff;
           color: $bgcolor;
 
           &:hover {
-            background: #3b3b3f;
+            background-color: #3b3b3f;
           }
 
           &.close:hover {
-            background: #ff5252;
+            background-color: #ff5252;
           }
         }
       }
 
       .WindowBodyDefault {
-        background: $fgcolor;
+        background-color: $fgcolor;
         color: $bgcolor;
       }
 
@@ -1973,13 +1934,13 @@ $actcolor: #8fb6ff;
   }
 
   .Settings {
-    background: $fgcolor;
+    background-color: $fgcolor;
     color: $bgcolor;
 
     .SettingsSection {
       div {
         .NavPanel {
-          background: transparentize($actcolor, 0.85);
+          background-color: transparentize($actcolor, 0.85);
 
           .DropdownMenu {
             color: lighten($bgcolor, 10%);
@@ -1990,7 +1951,7 @@ $actcolor: #8fb6ff;
           }
 
           &.active {
-            background: $fgcolor;
+            background-color: $fgcolor;
           }
         }
       }
@@ -2025,7 +1986,7 @@ $actcolor: #8fb6ff;
         .VisibleNetworks {
           .VisibleNetworksItem {
             &:hover {
-              background: transparentize($bgcolor, 0.82) !important;
+              background-color: transparentize($bgcolor, 0.82) !important;
             }
 
             .VisibleNetworksIcon {
@@ -2071,7 +2032,7 @@ $actcolor: #8fb6ff;
       .AppearanceWrapper .Appearance {
         .Wallpapers {
           .AddWallpaper {
-            background: transparentize($bgcolor, 0.85) !important;
+            background-color: transparentize($bgcolor, 0.85) !important;
             border: 4px dashed transparentize($bgcolor, 0.8) !important;
             color: transparentize($bgcolor, 0.75) !important;
           }
@@ -2079,7 +2040,7 @@ $actcolor: #8fb6ff;
         .Themes {
           .ThemesMenu {
             .ThemesMenuSection {
-              background: transparentize($bgcolor, 0.82) !important;
+              background-color: transparentize($bgcolor, 0.82) !important;
             }
           }
         }
@@ -2088,12 +2049,12 @@ $actcolor: #8fb6ff;
       .AboutWrapper {
         .About {
           .AboutMenu {
-            background: transparentize($bgcolor, 0.83) !important;
+            background-color: transparentize($bgcolor, 0.83) !important;
             border-bottom: 0.5px solid darken($fgcolor, 10%) !important;
 
             &.EditName {
               .EditNameInput {
-                background: transparentize($bgcolor, 0.85) !important;
+                background-color: transparentize($bgcolor, 0.85) !important;
               }
 
               &.active {
@@ -2114,7 +2075,7 @@ $actcolor: #8fb6ff;
     }
 
     &.whitesur {
-      background: $fgcolor;
+      background-color: $fgcolor;
 
       .SettingsSection {
         div {
@@ -2130,7 +2091,7 @@ $actcolor: #8fb6ff;
               }
               &:hover {
                 p {
-                  background: transparentize($bgcolor, 0.85);
+                  background-color: transparentize($bgcolor, 0.85);
                 }
               }
 
@@ -2143,12 +2104,12 @@ $actcolor: #8fb6ff;
 
                 p {
                   font-weight: inherit;
-                  background: transparentize($bgcolor, 0.8);
+                  background-color: transparentize($bgcolor, 0.8);
                 }
 
                 &:hover {
                   p {
-                    background: transparentize($bgcolor, 0.8);
+                    background-color: transparentize($bgcolor, 0.8);
                   }
                 }
               }
@@ -2166,7 +2127,7 @@ $actcolor: #8fb6ff;
                     padding: 8px 20px;
 
                     &:hover {
-                      background: #007bff !important;
+                      background-color: #007bff !important;
                       color: $fgcolor;
                     }
                   }

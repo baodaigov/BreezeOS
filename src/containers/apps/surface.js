@@ -12,6 +12,7 @@ import StartApp from "../../components/startMenu/StartApp";
 import { setHeaderActive } from "../../reducers/header";
 import SurfaceIcon from "../../icons/surface.svg";
 import SurfacePrivateIcon from "../../icons/surface-private.svg";
+import Toggle from "../../components/utils/toggle/Toggle";
 
 export const SurfaceApp = () => {
   const isActive = useSelector((state) => state.appsSurface.active);
@@ -132,8 +133,8 @@ export default function Surface() {
     const dispatch = useDispatch();
     const [splashScreen, setSplashScreen] = useState(true);
     const [hist, setHist] = useState(["", ""]);
-    const disableSplashScreen =
-      isActive && setTimeout(() => setSplashScreen(false), 5000);
+    const [settingsOpened, setSettingsOpened] = useState(false);
+    isActive && setTimeout(() => setSplashScreen(false), 5000);
 
     const isValidURL = (string) => {
       var res = string.match(
@@ -182,7 +183,7 @@ export default function Surface() {
           <div className="TabBarWrapper">
             <div className="TabBar">
               <div
-                className="TabBarItem"
+                className="TabBarItem TabSearchItem"
                 style={{ justifyContent: "space-between" }}
               >
                 <p>{isPrivate ? "New Private Tab" : "New Tab"}</p>
@@ -198,7 +199,7 @@ export default function Surface() {
           <div className="TabBar">
             <div
               className="TabBarItem TabSearchItem"
-              style={{ width: "700px" }}
+              style={{ width: min ? "650px" : "700px" }}
             >
               <div className="TabBarInteraction">
                 <i
@@ -228,6 +229,14 @@ export default function Surface() {
                 onKeyDown={action}
               />
             </div>
+            <div className="TabBarItem TabSettingsItem">
+              <div className="TabBarInteraction">
+                <i
+                  className={`fa-regular fa-gear ${settingsOpened && "active"}`}
+                  onMouseDown={() => setSettingsOpened(!settingsOpened)}
+                ></i>
+              </div>
+            </div>
           </div>
           <div className="TopBarInteractionWrapper" style={{ display: "flex" }}>
             <TopBarInteraction
@@ -246,9 +255,61 @@ export default function Surface() {
         </TopBar>
         <WindowBody>
           <div className="Surface">
+            <div className={`Settings ${settingsOpened && "active"}`}>
+              <div
+                style={{
+                  maxWidth: "840px",
+                  margin: "0 auto",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row-reverse",
+                  }}
+                >
+                  <div
+                    className="CloseButton"
+                    onClick={() => setSettingsOpened(false)}
+                  >
+                    <i class="fa-light fa-xmark"></i>
+                  </div>
+                </div>
+                <div
+                  style={{
+                    maxWidth: "600px",
+                    margin: "0 auto",
+                  }}
+                >
+                  <div className="SettingsItem">
+                    <p className="SettingsName">Private mode</p>
+                    <Toggle
+                      active={isPrivate}
+                      onToggle={() => dispatch(setPrivate(!isPrivate))}
+                    />
+                  </div>
+                  <div className="SettingsItem allowClicking">
+                    <p className="SettingsName">Search engine</p>
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    >
+                      <p className="SettingsValue">Bing</p>
+                      <i className="fa-regular fa-chevron-right SettingsChevron"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
             {url === "" ? (
               <>
-                <div className={`SplashScreen ${isPrivate && "private"} ${!splashScreen && "disabled"}`}>
+                <div
+                  className={`SplashScreen ${isPrivate && "private"} ${
+                    !splashScreen && "disabled"
+                  }`}
+                >
                   {isPrivate ? (
                     <img
                       className="SplashScreenIcon"

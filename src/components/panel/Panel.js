@@ -8,6 +8,7 @@ import {toggleActive} from "../../reducers/newwifi";
 import './Panel.scss';
 import PanelTop from './PanelTop';
 import PanelBottom from './PanelBottom';
+import Toggle from "../utils/toggle/Toggle";
 
 const Panel = props => {
     const panelType = useSelector(state => state.panel.type);
@@ -48,7 +49,7 @@ const Panel = props => {
                                 </div>
                                 <p className='PanelName'>Wi-Fi</p>
                             </div>
-                            <div className={`Toggle ${shellTheme === 'WhiteSur' ? 'whitesur' : ''} ${settings.wifi ? 'active' : ''}`} onClick={() => dispatch(toggleWifi())}></div>
+                            <Toggle active={settings.wifi} onToggle={() => dispatch(toggleWifi())}/>
                         </div>
                         {settings.wifi ? (
                             <div className='WifiList'>
@@ -93,7 +94,7 @@ const Panel = props => {
                                 </div>
                                 <p className='PanelName'>Bluetooth</p>
                             </div>
-                            <div className={`Toggle ${shellTheme === 'WhiteSur' ? 'whitesur' : ''} ${settings.bluetooth ? 'active' : ''}`} onClick={() => dispatch(toggleBluetooth())}></div>
+                            <Toggle active={settings.bluetooth} onToggle={() => dispatch(toggleBluetooth())}/>
                         </div>
                         {settings.bluetooth ? (
                             <p className='Description'>Now discoverable as "{settings.deviceName}"</p>

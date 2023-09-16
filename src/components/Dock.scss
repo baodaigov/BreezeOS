@@ -82,8 +82,8 @@ $fgcolor: #e2e2e2;
         font-size: 12px;
         backdrop-filter: blur(15px);
         -webkit-backdrop-filter: blur(15px);
-        background: #20202383;
-        box-shadow: 0px 0 10px transparentize($fgcolor, .97);
+        background-color: #20202383;
+        box-shadow: 0px 0 10px transparentize($fgcolor, 0.97);
         color: $fgcolor;
         border-radius: 10px;
         padding: 4px;
@@ -105,12 +105,12 @@ $fgcolor: #e2e2e2;
             margin: 4px auto;
             width: 95%;
             height: 1px;
-            background: transparentize($fgcolor, 0.95);
+            background-color: transparentize($fgcolor, 0.95);
           }
 
           &:last-child {
             &::after {
-              display: none
+              display: none;
             }
           }
 
@@ -124,15 +124,15 @@ $fgcolor: #e2e2e2;
 
             .Description {
               font-size: 10px;
-              color: transparentize($fgcolor, .8);
+              color: transparentize($fgcolor, 0.8);
             }
 
             p {
               margin: 0;
             }
-  
+
             &:hover {
-              background: transparentize($fgcolor, 0.95);
+              background-color: transparentize($fgcolor, 0.95);
             }
 
             &.disabled {
@@ -147,7 +147,7 @@ $fgcolor: #e2e2e2;
         position: absolute;
         top: -45px;
         font-size: 11px;
-        background: #20202383;
+        background-color: #20202383;
         backdrop-filter: blur(15px);
         -webkit-backdrop-filter: blur(15px);
         padding: 5px 10px;
@@ -173,7 +173,7 @@ $fgcolor: #e2e2e2;
   }
 
   &.whitesur {
-    background: transparentize($bgcolor, 0.2);
+    background-color: transparentize($bgcolor, 0.2);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     width: 99%;
@@ -188,15 +188,15 @@ $fgcolor: #e2e2e2;
           bottom: 60px;
           backdrop-filter: blur(15px);
           -webkit-backdrop-filter: blur(15px);
-          background: #20202383;
+          background-color: #20202383;
           border: 1px solid lighten($bgcolor, 10%);
-          box-shadow: 0px 0 10px transparentize($fgcolor, .97);
-  
+          box-shadow: 0px 0 10px transparentize($fgcolor, 0.97);
+
           &.active {
             opacity: 1;
             pointer-events: all;
           }
-  
+
           .ContextMenuItemContainer {
             &::after {
               content: "";
@@ -204,15 +204,15 @@ $fgcolor: #e2e2e2;
               margin: 4px auto;
               width: 95%;
               height: 1px;
-              background: transparentize($fgcolor, 0.95);
+              background-color: transparentize($fgcolor, 0.95);
             }
-  
+
             &:last-child {
               &::after {
-                display: none
+                display: none;
               }
             }
-  
+
             .ContextMenuItem {
               height: 30.5px;
               border-radius: 8px;
@@ -220,24 +220,24 @@ $fgcolor: #e2e2e2;
               display: flex;
               flex-direction: column;
               justify-content: center;
-  
+
               .Description {
                 font-size: 10px;
-                color: transparentize($fgcolor, .8);
+                color: transparentize($fgcolor, 0.8);
               }
-  
+
               p {
                 margin: 0;
               }
-    
+
               &:hover {
-                background: #007bff;
+                background-color: #007bff;
               }
-    
+
               &:active {
-                background: darken(#007bff, 10%);
+                background-color: darken(#007bff, 10%);
               }
-  
+
               &.disabled {
                 display: none;
               }

@@ -2,568 +2,578 @@ $bgcolor: #202023e5;
 $fgcolor: #e2e2e2;
 
 .ClockWindow {
-    * {
-        transition: all ease .3s;
+  * {
+    transition: all ease 0.3s;
+  }
+
+  .clock {
+    width: 93vw;
+    height: 93%;
+    opacity: 0;
+    pointer-events: none;
+    transition: all ease 0.3s;
+
+    &.active {
+      opacity: 1;
+      pointer-events: all;
+      width: 100vw;
+      height: 100%;
     }
 
-    .clock {
-        width: 93vw;
-        height: 93%;
-        opacity: 0;
-        pointer-events: none;
-        transition: all ease .3s;
-
-        &.active {
-            opacity: 1;
-            pointer-events: all;
-            width: 100vw;
-            height: 100%;
-        }
-
-        &.hide {
-            top: 153%;
-            pointer-events: none;
-        }
-        
-        &.minimize {
-            width: 1000px;
-            height: 600px;
-        }
+    &.hide {
+      top: 153%;
+      pointer-events: none;
     }
-    
-    .Clock {
-        background: $bgcolor;
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
+
+    &.minimize {
+      width: 1000px;
+      height: 600px;
+    }
+  }
+
+  .Clock {
+    background-color: $bgcolor;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    height: 100%;
+    color: $fgcolor;
+    display: flex;
+    flex-direction: column;
+
+    &.blackscr {
+      &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 100%;
         height: 100%;
-        color: $fgcolor;
+        background-color: transparentize(#000, 0.5);
+        animation: showUpBlackscr 0.3s;
+      }
+
+      @keyframes showUpBlackscr {
+        0% {
+          background-color: transparent;
+        }
+        100% {
+          background-color: transparentize(#000, 0.5);
+        }
+      }
+    }
+
+    * {
+      margin: 0;
+    }
+
+    .ClockItems {
+      width: 100%;
+      height: 100%;
+      position: relative;
+
+      .world-clock {
+        position: absolute;
+        width: 100%;
+
+        .ClockItem {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          transition: all ease 0.2s;
+          padding: 10px;
+
+          &:hover {
+            background-color: transparentize($fgcolor, 0.95);
+          }
+
+          .ClockInfo {
+            margin: 15px;
+            margin-right: 50px;
+            border-radius: 10px;
+            width: 280px;
+
+            .ClockTitle {
+              color: $fgcolor;
+              font-size: 16px;
+            }
+
+            .ClockDesc {
+              color: transparentize($fgcolor, 0.8);
+              font-size: 12px;
+            }
+          }
+
+          .ClockTime {
+            background-color: #8fb6ff53;
+            color: #8fb6ff;
+            border-radius: 999px;
+            padding: 7px 13px;
+            font-size: 18px;
+          }
+        }
+      }
+
+      .alarm {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+
+        .AlarmClock {
+          width: 100%;
+          height: 100%;
+
+          .NoAlarm {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: transparentize($fgcolor, 0.85);
+            transition: none;
+          }
+
+          .AlarmContainer {
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+            overflow-y: auto;
+            padding: 10px 30px;
+
+            &::-webkit-scrollbar {
+              width: 3px;
+              border-radius: 3px;
+              position: absolute;
+            }
+
+            &::-webkit-scrollbar-thumb {
+              background-color: transparent;
+              border-radius: 10px;
+            }
+
+            &:hover {
+              &::-webkit-scrollbar-thumb {
+                background-color: $fgcolor;
+              }
+            }
+
+            .AlarmContainerItem {
+              position: relative;
+              top: 0;
+              background-color: #202023;
+              color: $fgcolor;
+              display: flex;
+              padding: 5px;
+              width: 750px;
+              margin: 15px auto;
+              margin-top: 0;
+              border-radius: 999px;
+              opacity: 1;
+              animation: showUpItem ease 0.5s;
+
+              @keyframes showUpItem {
+                0% {
+                  top: 20px;
+                  opacity: 0;
+                }
+
+                50% {
+                  top: -10px;
+                }
+
+                100% {
+                  top: 0;
+                  opacity: 1;
+                }
+              }
+
+              .AlarmSettings {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-size: 15px;
+
+                i {
+                  margin-left: 10px;
+
+                  &.delete {
+                    background-color: #ff5d5d;
+                    color: $fgcolor;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 23px;
+                    height: 23px;
+                    border-radius: 999px;
+                  }
+                }
+              }
+
+              .AlarmContainerTitle {
+                font-weight: 700;
+                font-size: 15px;
+                margin-left: 12px;
+                // height: 20px;
+                // width: 85%;
+
+                // &.edit {
+                //     appearance: none;
+                //     display: block;
+                //     border: none;
+                //     outline: none;
+                //     background-color: transparent;
+                //     color: inherit;
+                //     padding: 0;
+                //     height: 20px;
+                //     width: 85%;
+                //     color: #8fb6ff;
+                // }
+              }
+
+              .AlarmContainerTime {
+                background-color: #8fb6ff53;
+                color: #8fb6ff;
+                font-weight: 700;
+                border-radius: 999px;
+                padding: 7px 13px;
+                font-size: 14px;
+              }
+            }
+          }
+        }
+
+        .AlarmItem {
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          z-index: 1;
+          background-color: #8fb6ff;
+          box-shadow: 0px 0px 15px transparentize($bgcolor, 0.5);
+          width: 45px;
+          height: 45px;
+          color: $bgcolor;
+          font-size: 20px;
+          border-radius: 999px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin: 20px 30px;
+          transition: all ease 0.2s;
+
+          .AlarmItemTitle {
+            color: $fgcolor;
+            position: absolute;
+            bottom: 55px;
+            font-size: 11px;
+            background-color: $bgcolor;
+            padding: 5px 10px;
+            border-radius: 30px;
+            text-align: center;
+            opacity: 0;
+            transition: all 0.15s;
+          }
+
+          &:hover {
+            background-color: #7696d2;
+            .AlarmItemTitle {
+              opacity: 1;
+            }
+          }
+
+          &.disable {
+            background-color: #617bac;
+            pointer-events: none;
+          }
+
+          &.showSettings {
+            z-index: 2;
+            background-color: $fgcolor;
+            animation: changeColor 0.3s;
+
+            &:hover {
+              background-color: darken($fgcolor, 17%);
+            }
+
+            &:active {
+              background-color: $fgcolor;
+            }
+
+            @keyframes changeColor {
+              0% {
+                background-color: #8fb6ff;
+              }
+              100% {
+                background-color: $fgcolor;
+              }
+            }
+          }
+
+          &.done {
+            z-index: 2;
+            background-color: $fgcolor;
+
+            &:hover {
+              background-color: darken($fgcolor, 17%);
+            }
+          }
+
+          &.edit {
+            position: absolute;
+            transform: translate(-63px, -20px);
+            animation: showUpItemEdit 0.4s;
+          }
+
+          &.settings {
+            position: absolute;
+            transform: translate(-5px, -70px);
+            animation: showUpItemSettings 0.4s;
+          }
+
+          @keyframes showUpItemEdit {
+            0% {
+              transform: translate(0, 0);
+            }
+            50% {
+              transform: translate(-70px, -20px);
+            }
+            100% {
+              transform: translate(-63px, -20px);
+            }
+          }
+
+          @keyframes showUpItemSettings {
+            0% {
+              transform: translate(0, 0);
+            }
+            50% {
+              transform: translate(-5px, -77px);
+            }
+            100% {
+              transform: translate(-5px, -70px);
+            }
+          }
+        }
+      }
+
+      .stopwatch {
+        position: absolute;
         display: flex;
         flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
 
-        &.blackscr {
-            &::after {
-                content: '';
-                display: block;
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                background: transparentize(#000, 0.5);
-                animation: showUpBlackscr .3s;
-            }
+        .StopwatchTimer {
+          color: $fgcolor;
+          font-size: 65px;
+          display: flex;
+          justify-content: center;
+          color: transparentize($fgcolor, 0.75);
+          transition: all ease 0.3s;
+          margin-bottom: 20px;
 
-            @keyframes showUpBlackscr {
-                0% {
-                    background: transparent;
-                }
-                100% {
-                    background: transparentize(#000, 0.5);
-                }
+          * {
+            font-weight: 700;
+          }
+
+          .active {
+            color: $fgcolor;
+          }
+
+          .blinking {
+            animation: blinking ease-in-out 1s infinite;
+
+            @keyframes blinking {
+              0% {
+                color: transparentize($fgcolor, 0.75);
+              }
+              50% {
+                color: transparentize($fgcolor, 0.85);
+              }
+              100% {
+                color: transparentize($fgcolor, 0.75);
+              }
             }
+          }
+
+          .StopwatchMs {
+            color: #8fb6ff;
+          }
         }
 
-        * {
-            margin: 0;
+        .StopwatchButton {
+          padding: 9px 25px;
+          font-size: 15px;
+          border-radius: 999px;
+          transition: all ease 0.3s;
+
+          * {
+            transition: none;
+          }
+
+          &.start {
+            color: #8fb6ff;
+            background-color: transparentize(#8fb6ff, 0.7);
+          }
+
+          &.stop {
+            color: #ff8f8f;
+            background-color: transparentize(#ff8f8f, 0.7);
+          }
+        }
+      }
+    }
+
+    .ClockMenu {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+
+      .ClockMenuInside {
+        margin: 15px;
+        border-radius: 999px;
+        padding: 5px;
+        background-color: darken($bgcolor, 5%);
+        display: flex;
+
+        .ClockMenuItem {
+          padding: 5px 8px;
+          margin-right: 7px;
+          display: flex;
+          align-items: center;
+          font-size: 12px;
+          transition: cubic-bezier(0.17, 0.67, 0.49, 1) 0.05s;
+
+          i {
+            margin-right: 5px;
+          }
+
+          &:nth-child(4) {
+            margin-right: 5px;
+          }
         }
 
-        .ClockItems {
-            width: 100%;
-            height: 100%;
-            position: relative;
-
-            .world-clock {
-                position: absolute;
-                width: 100%;
-
-                .ClockItem {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    transition: all ease .2s;
-                    padding: 10px;
-
-                    &:hover {
-                        background: transparentize($fgcolor, 0.95);
-                    }
-
-                    .ClockInfo {
-                        margin: 15px;
-                        margin-right: 50px;
-                        border-radius: 10px;
-                        width: 280px;
-
-                        .ClockTitle {
-                            color: $fgcolor;
-                            font-size: 16px;
-                        }
-            
-                        .ClockDesc {
-                            color: transparentize($fgcolor, 0.8);
-                            font-size: 12px;
-                        }
-                    }
-
-                    .ClockTime {
-                        background-color: #8fb6ff53;
-                        color: #8fb6ff;
-                        border-radius: 999px;
-                        padding: 7px 13px;
-                        font-size: 18px;
-                    }
-                }
-            }
-
-            .alarm {
-                position: absolute;
-                width: 100%;
-                height: 100%;
-
-                .AlarmClock {
-                    width: 100%;
-                    height: 100%;
-
-                    .NoAlarm {
-                        width: 100%;
-                        height: 100%;
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: center;
-                        align-items: center;
-                        color: transparentize($fgcolor, 0.85);
-                        transition: none;
-                    }
-
-                    .AlarmContainer {
-                        width: 100%;
-                        height: 100%;
-                        overflow-x: hidden;
-                        overflow-y: auto;
-                        padding: 10px 30px;
-
-                        &::-webkit-scrollbar {
-                            width: 3px;
-                            border-radius: 3px;
-                            position: absolute;
-                        }
-                        
-                        &::-webkit-scrollbar-thumb {
-                            background: transparent;
-                            border-radius: 10px;
-                        }
-
-                        &:hover {
-                            &::-webkit-scrollbar-thumb {
-                                background: $fgcolor;
-                            }
-                        }
-
-                        .AlarmContainerItem {
-                            position: relative;
-                            top: 0;
-                            background: #202023;
-                            color: $fgcolor;
-                            display: flex;
-                            padding: 5px;
-                            width: 750px;
-                            margin: 15px auto;
-                            margin-top: 0;
-                            border-radius: 999px;
-                            opacity: 1;
-                            animation: showUpItem ease .5s;
-
-                            @keyframes showUpItem {
-                                0% {
-                                    top: 20px;
-                                    opacity: 0;
-                                }
-
-                                50% {
-                                    top: -10px;
-                                }
-
-                                100% {
-                                    top: 0;
-                                    opacity: 1;
-                                }
-                            }
-
-                            .AlarmSettings {
-                                display: flex;
-                                justify-content: space-between;
-                                align-items: center;
-                                font-size: 15px;
-
-                                i {
-                                    margin-left: 10px;
-
-                                    &.delete {
-                                        background: #ff5d5d;
-                                        color: $fgcolor;
-                                        display: flex;
-                                        justify-content: center;
-                                        align-items: center;
-                                        width: 23px;
-                                        height: 23px;
-                                        border-radius: 999px;
-                                    }
-                                }
-                            }
-
-                            .AlarmContainerTitle {
-                                font-weight: 700;
-                                font-size: 15px;
-                                margin-left: 12px;
-                                // height: 20px;
-                                // width: 85%;
-
-                                // &.edit {
-                                //     appearance: none;
-                                //     display: block;
-                                //     border: none;
-                                //     outline: none;
-                                //     background: transparent;
-                                //     color: inherit;
-                                //     padding: 0;
-                                //     height: 20px;
-                                //     width: 85%;
-                                //     color: #8fb6ff;
-                                // }
-                            }
-
-                            .AlarmContainerTime {
-                                background-color: #8fb6ff53;
-                                color: #8fb6ff;
-                                font-weight: 700;
-                                border-radius: 999px;
-                                padding: 7px 13px;
-                                font-size: 14px;
-                            }
-                        }
-                    }
-                }
-
-                .AlarmItem {
-                    position: absolute;
-                    right: 0;
-                    bottom: 0;
-                    z-index: 1;
-                    background: #8fb6ff;
-                    box-shadow: 0px 0px 15px transparentize($bgcolor, 0.5);
-                    width: 45px;
-                    height: 45px;
-                    color: $bgcolor;
-                    font-size: 20px;
-                    border-radius: 999px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    margin: 20px 30px;
-                    transition: all ease .2s;
-
-                    .AlarmItemTitle{
-                        color:$fgcolor;
-                        position: absolute;
-                        bottom: 55px;
-                        font-size: 11px;
-                        background:$bgcolor;
-                        padding: 5px 10px;
-                        border-radius: 30px;
-                        text-align: center;
-                        opacity: 0;
-                        transition: all .15s;
-                    }
-
-                    &:hover {
-                        background: #7696d2;
-                        .AlarmItemTitle {
-                            opacity: 1;
-                        }
-                    }
-
-                    &.disable {
-                        background: #617bac;
-                        pointer-events: none;
-                    }
-
-                    &.showSettings {
-                        z-index: 2;
-                        background-color: $fgcolor;
-                        animation: changeColor .3s;
-
-                        &:hover {
-                            background: darken($fgcolor, 17%);
-                        }
-
-                        &:active {
-                            background:$fgcolor;
-                        }
-
-                        @keyframes changeColor {
-                            0% {
-                                background: #8fb6ff;
-                            }
-                            100% {
-                                background: $fgcolor;
-                            }
-                        }
-                    }
-
-                    &.done {
-                        z-index: 2;
-                        background-color: $fgcolor;
-
-                        &:hover {
-                            background: darken($fgcolor, 17%);
-                        }
-                    }
-
-                    &.edit {
-                        position: absolute;
-                        transform: translate(-63px, -20px);
-                        animation: showUpItemEdit .4s
-                    }
-
-                    &.settings {
-                        position: absolute;
-                        transform: translate(-5px, -70px);
-                        animation: showUpItemSettings .4s
-                    }
-
-                    @keyframes showUpItemEdit {
-                        0% {
-                            transform: translate(0, 0);
-                        }
-                        50% {
-                            transform: translate(-70px, -20px);
-                        }
-                        100% {
-                            transform: translate(-63px, -20px);
-                        }
-                    }
-
-                    @keyframes showUpItemSettings {
-                        0% {
-                            transform: translate(0, 0);
-                        }
-                        50% {
-                            transform: translate(-5px, -77px);
-                        }
-                        100% {
-                            transform: translate(-5px, -70px);
-                        }
-                    }
-                }
-            }
-
-            .stopwatch {
-                position: absolute;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                width: 100%;
-                height: 100%;
-
-                .StopwatchTimer {
-                    color: $fgcolor;
-                    font-size: 65px;
-                    display: flex;
-                    justify-content: center;
-                    color: transparentize($fgcolor, 0.75);
-                    transition: all ease .3s;
-                    margin-bottom: 20px;
-
-                    * {
-                        font-weight: 700;
-                    }
-
-                    .active {
-                        color: $fgcolor;
-                    }
-
-                    .blinking {
-                        animation: blinking ease-in-out 1s infinite;
-
-                        @keyframes blinking {
-                            0% {
-                                color: transparentize($fgcolor, 0.75);
-                            }
-                            50% {
-                                color: transparentize($fgcolor, 0.85);
-                            }
-                            100% {
-                                color: transparentize($fgcolor, 0.75);
-                            }
-                        }
-                    }
-
-                    .StopwatchMs {
-                        color: #8fb6ff;
-                    }
-                }
-
-                .StopwatchButton {
-                    padding: 9px 25px;
-                    font-size: 15px;
-                    border-radius: 999px;
-                    transition: all ease .3s;
-
-                    * {transition: none;}
-
-                    &.start {
-                        color: #8fb6ff;
-                        background: transparentize(#8fb6ff, 0.7)
-                    }
-
-                    &.stop {
-                        color: #ff8f8f;
-                        background: transparentize(#ff8f8f, 0.7)
-                    }
-                }
-            }
+        .ClockSlider {
+          border-radius: 999px;
+          height: 25px;
+          background-color: transparentize(#8fb6ff, 0.8);
+          position: absolute;
+          transition: cubic-bezier(0.17, 0.67, 0.49, 1) 0.25s;
         }
+      }
 
-        .ClockMenu {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            width: 100%;
-
-            .ClockMenuInside {
-                margin: 15px;
-                border-radius: 999px;
-                padding: 5px;
-                background-color: darken($bgcolor,5%);
-                display: flex;
-
-                .ClockMenuItem {
-                    padding: 5px 8px;
-                    margin-right: 7px;
-                    display: flex;
-                    align-items: center;
-                    font-size: 12px;
-                    transition: cubic-bezier(.17,.67,.49,1) .05s;
-
-                    i { margin-right: 5px }
-
-                    &:nth-child(4) {
-                        margin-right: 5px;
-                    }
-                }
-
-                .ClockSlider {
-                    border-radius: 999px;
-                    height: 25px;
-                    background-color: transparentize(#8fb6ff, 0.8);
-                    position: absolute;
-                    transition: cubic-bezier(.17,.67,.49,1) .25s;
-                }
-            }
-
-            &[value='1']{
-                .ClockMenuItem.world-clock {
-                    color: #8fb6ff;
-                }
-            }
-
-            &[value='2']{
-                .ClockMenuItem.alarm-clock {
-                    color: #8fb6ff;
-                }
-            }
-
-            &[value='3']{
-                .ClockMenuItem.stopwatch {
-                    color: #8fb6ff;
-                }
-            }
-
-            &[value='4']{
-                .ClockMenuItem.timer {
-                    color: #8fb6ff;
-                }
-            }
+      &[value="1"] {
+        .ClockMenuItem.world-clock {
+          color: #8fb6ff;
         }
-    }    
+      }
+
+      &[value="2"] {
+        .ClockMenuItem.alarm-clock {
+          color: #8fb6ff;
+        }
+      }
+
+      &[value="3"] {
+        .ClockMenuItem.stopwatch {
+          color: #8fb6ff;
+        }
+      }
+
+      &[value="4"] {
+        .ClockMenuItem.timer {
+          color: #8fb6ff;
+        }
+      }
+    }
+  }
 }
 
 .lightMode {
-    .Clock {
-        background: $fgcolor;
-        color: $bgcolor;
+  .Clock {
+    background-color: $fgcolor;
+    color: $bgcolor;
 
-        .ClockItems {
-            .world-clock .ClockItem {
-                &:hover {
-                    background: transparentize($bgcolor, 0.82);
-                }
-
-                .ClockInfo {
-                    .ClockTitle {
-                        color: $bgcolor;
-                    }
-        
-                    .ClockDesc {
-                        color: transparentize($bgcolor, 0.6);
-                    }
-                }
-            }
-
-            .alarm {
-                .AlarmClock {
-                    .NoAlarm {
-                        color: transparentize($bgcolor, 0.75);
-                    }
-
-                    .AlarmContainer {
-                        &::-webkit-scrollbar { width: 3px; border-radius: 3px; }
-                        &::-webkit-scrollbar-thumb { background: $bgcolor; border-radius: 10px; }
-
-                        .AlarmContainerItem {
-                            background: darken($fgcolor, 3%);
-                            color: $bgcolor;
-                        }
-                    }
-                }
-
-                .AlarmItem .AlarmItemTitle{
-                        color:$bgcolor;
-                        background:$fgcolor;
-                    }
-            }
-
-            .stopwatch {
-                .StopwatchTimer {
-                    color: transparentize($bgcolor, 0.75);
-
-                    .active {
-                        color: $bgcolor;
-                    }
-
-                    .blinking {
-                        animation: blinkingLight ease-in-out 1s infinite;
-
-                        @keyframes blinkingLight {
-                            0% {
-                                color: transparentize($bgcolor, 0.75);
-                            }
-                            50% {
-                                color: transparentize($bgcolor, 0.8);
-                            }
-                            100% {
-                                color: transparentize($bgcolor, 0.75);
-                            }
-                        }
-                    }
-
-                    .StopwatchMs {
-                        color: #8fb6ff;
-                    }
-                }
-            }
+    .ClockItems {
+      .world-clock .ClockItem {
+        &:hover {
+          background-color: transparentize($bgcolor, 0.82);
         }
 
-        .ClockMenu .ClockMenuInside {
-            background-color: darken($fgcolor,3.5%);
+        .ClockInfo {
+          .ClockTitle {
+            color: $bgcolor;
+          }
+
+          .ClockDesc {
+            color: transparentize($bgcolor, 0.6);
+          }
         }
+      }
+
+      .alarm {
+        .AlarmClock {
+          .NoAlarm {
+            color: transparentize($bgcolor, 0.75);
+          }
+
+          .AlarmContainer {
+            &::-webkit-scrollbar {
+              width: 3px;
+              border-radius: 3px;
+            }
+            &::-webkit-scrollbar-thumb {
+              background-color: $bgcolor;
+              border-radius: 10px;
+            }
+
+            .AlarmContainerItem {
+              background-color: darken($fgcolor, 3%);
+              color: $bgcolor;
+            }
+          }
+        }
+
+        .AlarmItem .AlarmItemTitle {
+          color: $bgcolor;
+          background-color: $fgcolor;
+        }
+      }
+
+      .stopwatch {
+        .StopwatchTimer {
+          color: transparentize($bgcolor, 0.75);
+
+          .active {
+            color: $bgcolor;
+          }
+
+          .blinking {
+            animation: blinkingLight ease-in-out 1s infinite;
+
+            @keyframes blinkingLight {
+              0% {
+                color: transparentize($bgcolor, 0.75);
+              }
+              50% {
+                color: transparentize($bgcolor, 0.8);
+              }
+              100% {
+                color: transparentize($bgcolor, 0.75);
+              }
+            }
+          }
+
+          .StopwatchMs {
+            color: #8fb6ff;
+          }
+        }
+      }
     }
+
+    .ClockMenu .ClockMenuInside {
+      background-color: darken($fgcolor, 3.5%);
+    }
+  }
 }

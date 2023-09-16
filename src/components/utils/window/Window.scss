@@ -2,207 +2,219 @@ $bgcolor: #202023e5;
 $fgcolor: #e2e2e2;
 
 .Window {
-    position: absolute;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 6px;
+  box-shadow: 0px 0 15px 0 transparentize($bgcolor, 0.2);
+  overflow: hidden;
+  z-index: 1;
+
+  .TopBar {
+    background-color: $bgcolor;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    padding: 7px 10px;
     display: flex;
-    flex-direction: column;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    border-radius: 6px;
-    box-shadow: 0px 0 15px 0 transparentize($bgcolor, 0.2);
-    overflow: hidden;
-    z-index: 1;
+    align-items: center;
+    transition: all ease 0.3s;
 
-    .TopBar {
-          background: $bgcolor;
-          backdrop-filter: blur(15px);
-          -webkit-backdrop-filter: blur(15px);
-          padding: 7px 10px;
-          display: flex;
-          align-items: center;
-          transition: all ease .3s;
+    .TopBarInteractionContainer {
+      display: flex;
 
-          .TopBarInteractionContainer {
-              display: flex;
+      .TopBarInteraction {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 6px;
+        border-radius: 9999px;
+        width: 20px;
+        height: 20px;
+        font-size: 11px;
+        color: $fgcolor;
 
-              .TopBarInteraction {
-                  display: flex;
-                  justify-content: center;
-                  align-items: center;
-                  margin-left: 6px;
-                  border-radius: 9999px;
-                  width: 20px;
-                  height: 20px;
-                  font-size: 11px;
-                  color: $fgcolor;
+        &:first-child {
+          margin-left: 0;
+        }
 
-                  &:first-child {margin-left: 0}
+        &:hover {
+          background-color: #3b3b3f;
+        }
 
-                  &:hover {
-                      background: #3b3b3f;
-                  }
+        &.close:hover {
+          background-color: #ff5252;
+        }
+      }
+    }
 
-                  &.close:hover{
-                      background: #ff5252;
-                  }
+    .TopBarTitle {
+      color: $fgcolor;
+      font-size: 12px;
+      margin: 0;
+      width: 100%;
+    }
+
+    &.whitesur {
+      background-color: #202023;
+      padding-left: 12px !important;
+      padding-right: 12px !important;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      border: 0.5px solid lighten(#202023, 25%);
+      border-bottom: none;
+
+      .TopBarInteractionContainer {
+        .TopBarInteraction {
+          width: 13px;
+          height: 13px;
+          color: $bgcolor;
+          font-size: 8px;
+          margin-left: 8px;
+
+          i {
+            display: none;
+          }
+
+          &.hide {
+            background-color: #febb2e;
+
+            &:active {
+              background-color: lighten(#febb2e, 20%);
+            }
+
+            &:hover {
+              i {
+                display: block;
               }
+            }
           }
 
-          .TopBarTitle {
-              color:$fgcolor;
-              font-size: 12px;
-              margin: 0;
-              width: 100%;
-          }
+          &.max,
+          &.min {
+            background-color: #28c840;
 
-          &.whitesur {
-              background: #202023;
-              padding-left: 12px!important;
-              padding-right: 12px!important;
-              border-top-left-radius: 10px;
-              border-top-right-radius: 10px;
-              border: 0.5px solid lighten(#202023, 25%);
-              border-bottom: none;
+            &:active {
+              background-color: lighten(#28c840, 20%);
+            }
 
-              .TopBarInteractionContainer {
-                  .TopBarInteraction {
-                          width: 13px;
-                          height: 13px;
-                          color: $bgcolor;
-                          font-size: 8px;
-                          margin-left: 8px;
-
-                          i {display: none}
-
-                          &.hide {
-                              background: #febb2e;
-
-                              &:active {
-                                  background: lighten(#febb2e, 20%);
-                              }
-
-                              &:hover {
-                                  i {display: block}
-                              }
-                          }
-
-                          &.max, &.min {
-                              background: #28c840;
-
-                              &:active {
-                                background: lighten(#28c840, 20%);
-                              }
-
-                              &:hover {
-                                i {display: block}
-                              }
-                          }
-
-                          &.close {
-                              background: #ff5e57;
-
-                              &:active {
-                                background: lighten(#ff5e57, 20%);
-                              }
-
-                              &:hover {
-                                i {display: block}
-                              }
-                          }
-                  }
+            &:hover {
+              i {
+                display: block;
               }
+            }
           }
+
+          &.close {
+            background-color: #ff5e57;
+
+            &:active {
+              background-color: lighten(#ff5e57, 20%);
+            }
+
+            &:hover {
+              i {
+                display: block;
+              }
+            }
+          }
+        }
       }
+    }
+  }
 
-      .WindowBody {
-          height: calc(100vh - 140px);
+  .WindowBody {
+    height: calc(100vh - 140px);
 
-          & > * {
-            border-bottom-left-radius: 5px;
-            border-bottom-right-radius: 5px;
-          }
+    & > * {
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
 
-          &.whitesur {
-              border-bottom-left-radius: 10px;
-              border-bottom-right-radius: 10px;
-              border: 0.5px solid lighten(#202023, 25%);
-              border-top: none;
-          }
+    &.whitesur {
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      border: 0.5px solid lighten(#202023, 25%);
+      border-top: none;
+    }
+  }
+
+  .WindowBodyDefault {
+    background-color: $bgcolor;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    padding: 10px 15px;
+    color: $fgcolor;
+
+    * {
+      margin: 0;
+    }
+
+    .critical {
+      height: 25px;
+      width: 25px;
+      background-color: #ff6161;
+      border-radius: 999px;
+      font-size: 18px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .exclamation {
+      height: 25px;
+      width: 25px;
+      background-color: #fcff61;
+      color: #212121;
+      border-radius: 999px;
+      font-size: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .WindowBodyTitle {
+      font-size: 17px;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .WindowBodyContent {
+      font-size: 12px;
+    }
+
+    &.whitesur {
+      background-color: #202023;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      border: 0.5px solid lighten(#202023, 25%);
+      border-top: none;
+    }
+  }
+
+  .WindowBodyButton {
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 15px 0;
+    margin-bottom: 0;
+
+    .Button {
+      border: none;
+      outline: none;
+      background-color: #ffffff10;
+      color: $fgcolor;
+      font-size: 12px;
+      padding: 7px 20px;
+      border-radius: 5px;
+      margin-left: 5px;
+
+      &:hover {
+        background-color: #ffffff20;
       }
-
-
-      .WindowBodyDefault {
-          background: $bgcolor;
-          backdrop-filter: blur(15px);
-          -webkit-backdrop-filter: blur(15px);
-          padding: 10px 15px;
-          color: $fgcolor;
-
-          * {
-            margin: 0;
-          }
-
-          .critical {
-            height: 25px;
-            width: 25px;
-            background-color: #ff6161;
-            border-radius: 999px;
-            font-size: 18px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-          }
-
-          .exclamation {
-            height: 25px;
-            width: 25px;
-            background-color: #fcff61;
-            color: #212121;
-            border-radius: 999px;
-            font-size: 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-          }
-
-          .WindowBodyTitle {
-            font-size: 17px;
-            margin-bottom: 10px;
-            font-weight: 700;
-          }
-
-          .WindowBodyContent {
-            font-size: 12px;
-          }
-
-          &.whitesur {
-              background: #202023;
-              border-bottom-left-radius: 10px;
-              border-bottom-right-radius: 10px;
-              border: 0.5px solid lighten(#202023, 25%);
-              border-top: none;
-          }
-      }
-
-      .WindowBodyButton {
-          display: flex;
-          flex-direction: row-reverse;
-          margin: 15px 0;
-          margin-bottom: 0;
-
-          .Button {
-            border: none;
-            outline: none;
-            background-color: #ffffff10;
-            color: $fgcolor;
-            font-size: 12px;
-            padding: 7px 20px;
-            border-radius: 5px;
-            margin-left: 5px;
-
-            &:hover { background-color: #ffffff20; }
-          }
-      }
+    }
+  }
 }
 
 .WindowDefaultContainer {
@@ -210,41 +222,41 @@ $fgcolor: #e2e2e2;
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
   }
 }
 
 .lightMode {
   .TopBar {
-      background: $fgcolor;
-      .TopBarInteractionContainer .TopBarInteraction {
-        color: $bgcolor;
-        &:hover {
-          background: #c9c9d3;
-        }
+    background-color: $fgcolor;
+    .TopBarInteractionContainer .TopBarInteraction {
+      color: $bgcolor;
+      &:hover {
+        background-color: #c9c9d3;
       }
-      .TopBarTitle {
-        color: $bgcolor;
-      }
+    }
+    .TopBarTitle {
+      color: $bgcolor;
+    }
 
-      &.whitesur {
-        background: $fgcolor;
-        border: 0.5px solid lighten(#202023, 5%);
-        border-bottom: none;
-      }
+    &.whitesur {
+      background-color: $fgcolor;
+      border: 0.5px solid lighten(#202023, 5%);
+      border-bottom: none;
+    }
   }
 
   .WindowBody {
-      &.whitesur {
-          border: 0.5px solid lighten(#202023, 5%);
-          border-top: none;
-      }
+    &.whitesur {
+      border: 0.5px solid lighten(#202023, 5%);
+      border-top: none;
+    }
   }
 
   .WindowBodyDefault {
-    background: $fgcolor;
+    background-color: $fgcolor;
     color: $bgcolor;
-    
+
     .critical {
       color: #212121;
     }
@@ -259,9 +271,9 @@ $fgcolor: #e2e2e2;
     }
 
     &.whitesur {
-        background: $fgcolor;
-        border: 0.5px solid lighten(#202023, 5%);
-        border-top: none;
+      background-color: $fgcolor;
+      border: 0.5px solid lighten(#202023, 5%);
+      border-top: none;
     }
   }
 }

@@ -58,6 +58,7 @@ import {
   setWidth,
 } from "../../reducers/header";
 import Avatar from "../../components/Avatar";
+import Toggle from "../../components/utils/toggle/Toggle";
 
 export const SettingsApp = () => {
   const isActive = useSelector((state) => state.appsSettings.active);
@@ -656,16 +657,14 @@ export default function Settings() {
                       }}
                     >
                       <p className="font-bold">Airplane Mode</p>
-                      <div
-                        className={`Toggle ${
-                          shellTheme === "WhiteSur" ? "whitesur" : ""
-                        } ${settingsReducer.airplaneMode ? "active" : ""}`}
-                        onClick={
+                      <Toggle
+                        active={settingsReducer.airplaneMode}
+                        onToggle={
                           settingsReducer.airplaneMode
                             ? () => dispatch(toggleAirplaneModeOff())
                             : () => dispatch(toggleAirplaneModeOn())
                         }
-                      ></div>
+                      />
                     </div>
                     {settingsReducer.wifi ? (
                       <>
@@ -897,7 +896,9 @@ export default function Settings() {
                         <div
                           className="WallpaperImage"
                           style={{ backgroundImage: `url(${wallpaperInput})` }}
-                          onClick={() => dispatch(changeWallpaper(wallpaperInput))}
+                          onClick={() =>
+                            dispatch(changeWallpaper(wallpaperInput))
+                          }
                         >
                           <button
                             className="CloseButton"
@@ -945,17 +946,11 @@ export default function Settings() {
                         {shellTheme === "WhiteSur" &&
                           "(This theme doesn't support ProMode.)"}
                       </p>
-                      <div
-                        className={`Toggle ${
-                          shellTheme === "WhiteSur" ? "whitesur" : ""
-                        } ${header.proMode ? "active" : ""}`}
-                        style={{
-                          opacity: shellTheme === "WhiteSur" ? "0.5" : "1",
-                          pointerEvents:
-                            shellTheme === "WhiteSur" ? "none" : "all",
-                        }}
-                        onClick={() => dispatch(setProMode(!header.proMode))}
-                      ></div>
+                      <Toggle
+                        active={header.proMode}
+                        disabled={shellTheme === "WhiteSur"}
+                        onToggle={() => dispatch(setProMode(!header.proMode))}
+                      />
                     </div>
                   </div>
                 </div>
@@ -1242,12 +1237,10 @@ export default function Settings() {
                     }}
                   >
                     <p className="font-bold">Do Not Disturb</p>
-                    <div
-                      className={`Toggle ${
-                        shellTheme === "WhiteSur" ? "whitesur" : ""
-                      } ${settingsReducer.notifications ? "active" : ""}`}
-                      onClick={toggleDoNotDisturb}
-                    ></div>
+                    <Toggle
+                      active={settingsReducer.notifications}
+                      onToggle={toggleDoNotDisturb}
+                    />
                   </div>
                 </div>
               </div>
@@ -1427,14 +1420,12 @@ export default function Settings() {
                     }}
                   >
                     <p className="font-bold">24-hour time</p>
-                    <div
-                      className={`Toggle ${
-                        shellTheme === "WhiteSur" ? "whitesur" : ""
-                      } ${settingsReducer.hour12 ? "" : "active"}`}
-                      onClick={() =>
+                    <Toggle
+                      active={settingsReducer.hour12}
+                      onToggle={() =>
                         dispatch(toggle12Hour(!settingsReducer.hour12))
                       }
-                    ></div>
+                    />
                   </div>
                 </div>
               </div>
@@ -1674,7 +1665,7 @@ export default function Settings() {
                   <>
                     <div
                       style={{
-                        width: "100%",
+                        width: "95%",
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
@@ -1682,18 +1673,16 @@ export default function Settings() {
                     >
                       <p>{settings}</p>
                     </div>
-                    <div
-                      className={`Toggle ${
-                        shellTheme === "WhiteSur" ? "whitesur" : ""
-                      } ${settingsReducer.wifi ? "active" : ""}`}
-                      onClick={() => dispatch(toggleWifi())}
-                    ></div>
+                    <Toggle
+                      active={settingsReducer.wifi}
+                      onToggle={() => dispatch(toggleWifi())}
+                    />
                   </>
                 ) : settings === "Bluetooth" ? (
                   <>
                     <div
                       style={{
-                        width: "100%",
+                        width: "95%",
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
@@ -1701,12 +1690,10 @@ export default function Settings() {
                     >
                       <p>{settings}</p>
                     </div>
-                    <div
-                      className={`Toggle ${
-                        shellTheme === "WhiteSur" ? "whitesur" : ""
-                      } ${settingsReducer.bluetooth ? "active" : ""}`}
-                      onClick={() => dispatch(toggleBluetooth())}
-                    ></div>
+                    <Toggle
+                      active={settingsReducer.bluetooth}
+                      onToggle={() => dispatch(toggleBluetooth())}
+                    />
                   </>
                 ) : (
                   <p>{settings}</p>

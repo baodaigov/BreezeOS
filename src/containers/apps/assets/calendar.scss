@@ -2,222 +2,225 @@ $bgcolor: #202023e5;
 $fgcolor: #e2e2e2;
 
 .CalendarWindow {
-    .Window .TopBar {
-        .TopBarInteractionContainer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-        }
-        .TopBarTitle {width: auto;}
+  .Window .TopBar {
+    .TopBarInteractionContainer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+    .TopBarTitle {
+      width: auto;
+    }
+  }
+
+  .calendar {
+    width: 93vw;
+    height: 93%;
+    opacity: 0;
+    pointer-events: none;
+    transition: all ease 0.3s;
+
+    &.active {
+      opacity: 1;
+      pointer-events: all;
+      width: 100vw;
+      height: 100%;
     }
 
-    .calendar {
-        width: 93vw;
-        height: 93%;
-        opacity: 0;
-        pointer-events: none;
-        transition: all ease .3s;
-
-        &.active {
-            opacity: 1;
-            pointer-events: all;
-            width: 100vw;
-            height: 100%;
-        }
-
-        &.hide {
-            top: 153%;
-            pointer-events: none;
-        }
-        
-        &.minimize {
-            width: 1000px;
-            height: 600px;
-        }
-    
-        .TabBarWrapper {
-            margin: 0 10px;
-            width: 100%;
-    
-            .TabBar {
-                display: flex;
-                justify-content: center;
-    
-                .TabBarItem {
-                    color: #fff;
-                    display: flex;
-                    align-items: center;
-                    font-size: 11.5px;
-    
-                    * { margin: 0 }
-                    
-                    .TabSeparator {
-                        background-color: #ffffff1e;
-                        width: 1px;
-                    }
-
-                    .TabBarInteraction {
-                        display: flex;
-
-                        i {
-                            margin-right: 3px;
-                            font-size: 12px;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            border-radius: 999px;
-                            height: 20px;
-                            width: 20px;
-                            transition: all ease .3s;
-
-                            &:hover {
-                                background-color: #ffffff1e;
-                            }
-
-                            &:last-child {
-                                margin: 0;
-                            }
-                        }
-                    }
-                }
-            }
-        }
+    &.hide {
+      top: 153%;
+      pointer-events: none;
     }
-    
-    .Calendar {
-        background: $bgcolor;
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-        width: 100%;
-        height: 100%;
-        color: $fgcolor;
+
+    &.minimize {
+      width: 1000px;
+      height: 600px;
+    }
+
+    .TabBarWrapper {
+      margin: 0 10px;
+      width: 100%;
+
+      .TabBar {
         display: flex;
-        flex-direction: column;
-        padding-right: 40px;
+        justify-content: center;
 
-        * {
+        .TabBarItem {
+          color: #fff;
+          display: flex;
+          align-items: center;
+          font-size: 11.5px;
+
+          * {
             margin: 0;
-        }
+          }
 
-        .CalendarHeader {
-            width: 100%;
+          .TabSeparator {
+            background-color: #ffffff1e;
+            width: 1px;
+          }
+
+          .TabBarInteraction {
             display: flex;
-            padding: 15px 0;
-            justify-content: space-between;
 
-            .WeekCell {
-                width: 12.5%;
+            i {
+              margin-right: 3px;
+              font-size: 12px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 999px;
+              height: 20px;
+              width: 20px;
+              transition: all ease 0.3s;
 
-                p {
-                    width: 30px;
-                    height: 30px;
-                }
+              &:hover {
+                background-color: #ffffff1e;
+              }
+
+              &:last-child {
+                margin: 0;
+              }
             }
+          }
         }
-
-        .CalendarDate {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-
-            .CalendarDateCell {
-                padding: 10px;
-                padding-right: 0;
-                width: 14%;
-
-                p {
-                    width: 30px;
-                    height: 30px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    border-radius: 999px;
-                    float: right;
-
-                    &:hover {
-                        background: transparentize($fgcolor, 0.95);
-                    }
-
-                    &.fade {
-                        color: transparentize($fgcolor, 0.83);
-                    }
-    
-                    &.today {
-                        background: #8fb6ff;
-                        color: $bgcolor;
-
-                        &:hover {
-                            background: #7b9cd9;
-                        }
-                    }
-                }
-            }
-        }
-
-        &.whitesur {
-            background: #202023;
-            .CalendarDate {
-                .CalendarDateCell {
-                    p {
-                        &:hover {
-                            background: inherit;
-                        }
-
-                        &.today {
-                            background: #ff453a;
-                        }
-                    }
-                }
-            }
-        }
+      }
     }
+  }
+
+  .Calendar {
+    background-color: $bgcolor;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    width: 100%;
+    height: 100%;
+    color: $fgcolor;
+    display: flex;
+    flex-direction: column;
+    padding-right: 40px;
+
+    * {
+      margin: 0;
+    }
+
+    .CalendarHeader {
+      width: 100%;
+      display: flex;
+      padding: 15px 0;
+      justify-content: space-between;
+
+      .WeekCell {
+        width: 12.5%;
+
+        p {
+          width: 30px;
+          height: 30px;
+        }
+      }
+    }
+
+    .CalendarDate {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+      .CalendarDateCell {
+        padding: 10px;
+        padding-right: 0;
+        width: 14%;
+
+        p {
+          width: 30px;
+          height: 30px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 999px;
+          float: right;
+
+          &:hover {
+            background-color: transparentize($fgcolor, 0.95);
+          }
+
+          &.fade {
+            color: transparentize($fgcolor, 0.83);
+          }
+
+          &.today {
+            background-color: #8fb6ff;
+            color: $bgcolor;
+
+            &:hover {
+              background-color: #7b9cd9;
+            }
+          }
+        }
+      }
+    }
+
+    &.whitesur {
+      background-color: #202023;
+      .CalendarDate {
+        .CalendarDateCell {
+          p {
+            &:hover {
+              background-color: inherit;
+            }
+
+            &.today {
+              background-color: #ff453a;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 .lightMode {
-    .calendar {
-        .TabBarWrapper .TabBar {
-            .TabBarItem {
-                color: #000;
-        
-                &:hover {
-                    .CloseButton {
-                        &:hover {
-                            background-color: #00000010;
-                        }
-                    }
-                }
+  .calendar {
+    .TabBarWrapper .TabBar {
+      .TabBarItem {
+        color: #000;
 
-                .TabBarInteraction i:hover {
-                    background-color: #0000001e;
-                }
+        &:hover {
+          .CloseButton {
+            &:hover {
+              background-color: #00000010;
             }
+          }
         }
+
+        .TabBarInteraction i:hover {
+          background-color: #0000001e;
+        }
+      }
     }
-    
-    .Calendar {
-        background: $fgcolor;
-        color: $bgcolor;
+  }
 
-        .CalendarDate {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            
+  .Calendar {
+    background-color: $fgcolor;
+    color: $bgcolor;
 
-            .CalendarDateCell p {
-                &:hover {
-                    background: transparentize($bgcolor, 0.79);
-                }
-            }
+    .CalendarDate {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+      .CalendarDateCell p {
+        &:hover {
+          background-color: transparentize($bgcolor, 0.79);
         }
-
-        &.whitesur {
-            background: $fgcolor;
-        }
+      }
     }
+
+    &.whitesur {
+      background-color: $fgcolor;
+    }
+  }
 }
