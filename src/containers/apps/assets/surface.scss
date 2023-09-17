@@ -110,6 +110,7 @@ $fgcolor: #e2e2e2;
             margin: 0;
 
             .TabBarInteraction {
+              margin-right: 5px;
               i {
                 transition: none;
 
@@ -171,7 +172,8 @@ $fgcolor: #e2e2e2;
       margin: 0;
     }
 
-    .Settings {
+    .Settings,
+    .Support {
       position: absolute;
       top: 0;
       left: 0;
@@ -207,7 +209,9 @@ $fgcolor: #e2e2e2;
           transition: none;
         }
       }
+    }
 
+    .Settings {
       .SettingsItem {
         border-radius: 999px;
         margin-bottom: 10px;
@@ -242,6 +246,18 @@ $fgcolor: #e2e2e2;
             transition: none;
           }
         }
+      }
+    }
+
+    .Support {
+      .SupportTitle {
+        font-weight: 700;
+        font-size: 30px;
+        margin-bottom: 25px;
+      }
+
+      .SupportDesc {
+        font-size: 14px;
       }
     }
 
@@ -290,7 +306,7 @@ $fgcolor: #e2e2e2;
       transition: none;
 
       .Main {
-        max-width: 800px;
+        max-width: 600px;
         padding: 30px 20px;
 
         .NonCollapsibleSection {
@@ -303,7 +319,7 @@ $fgcolor: #e2e2e2;
               margin-top: 140px;
               margin-bottom: 0;
               font-weight: 300;
-              font-size: 20px;
+              font-size: 22px;
               color: $fgcolor;
               text-align: center;
             }
@@ -390,6 +406,22 @@ $fgcolor: #e2e2e2;
     }
     .Surface {
       background-color: $fgcolor;
+
+      .Settings,
+      .Support {
+        background-color: #f4f4f5;
+        color: #09090b;
+
+        .CloseButton {
+          background-color: transparentize($bgcolor, 0.85);
+          color: $bgcolor;
+
+          &:active {
+            background-color: transparentize($bgcolor, 0.8);
+            transition: none;
+          }
+        }
+      }
 
       .MainScreen {
         .Main {

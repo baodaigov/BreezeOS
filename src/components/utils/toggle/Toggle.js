@@ -1,12 +1,26 @@
+import Hammer from "react-hammerjs";
 import "./Toggle.scss";
 
 export default function Toggle({ active, disabled, onToggle }) {
   return (
-    <div
-      className={`Toggle ${active && "active"} ${disabled && "disabled"}`}
-      onClick={onToggle}
-    >
-      <div className="ToggleThumb"></div>
-    </div>
+    <>
+      {active ? (
+        <Hammer onTap={onToggle} onSwipeLeft={onToggle}>
+          <div
+            className={`Toggle ${active && "active"} ${disabled && "disabled"}`}
+          >
+            <div className="ToggleThumb"></div>
+          </div>
+        </Hammer>
+      ) : (
+        <Hammer onTap={onToggle} onSwipeRight={onToggle}>
+          <div
+            className={`Toggle ${active && "active"} ${disabled && "disabled"}`}
+          >
+            <div className="ToggleThumb"></div>
+          </div>
+        </Hammer>
+      )}
+    </>
   );
 }

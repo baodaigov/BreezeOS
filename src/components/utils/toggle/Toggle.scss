@@ -41,3 +41,13 @@
     pointer-events: none;
   }
 }
+
+.lightMode {
+  .Toggle {
+    background-color: transparentize(#09090b, 0.93);
+
+    &.active {
+      background-color: #2563eb;
+    }
+  }
+}

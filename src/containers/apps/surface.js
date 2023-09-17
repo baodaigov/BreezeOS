@@ -39,11 +39,7 @@ export const SurfaceApp = () => {
         .getElementsByClassName("SurfaceApp")[0]
         .classList.remove("clicked");
       document.getElementsByClassName("surface")[0].classList.remove("active");
-      setTimeout(() => {
-        dispatch(closeUrl());
-        dispatch(setPrivate(false));
-        document.getElementById("surfacesearch").value = "";
-      }, 300);
+      setTimeout(() => dispatch(closeUrl()), 300);
     }
     if (isHide) {
       document.getElementsByClassName("SurfaceApp")[0].classList.add("hide");
@@ -132,8 +128,10 @@ export default function Surface() {
     const wifi = useSelector((state) => state.settings.wifi);
     const dispatch = useDispatch();
     const [splashScreen, setSplashScreen] = useState(true);
+    const [searchValue, setSearchValue] = useState("");
     const [hist, setHist] = useState(["", ""]);
     const [settingsOpened, setSettingsOpened] = useState(false);
+    const [supportOpened, setSupportOpened] = useState(false);
     isActive && setTimeout(() => setSplashScreen(false), 5000);
 
     const isValidURL = (string) => {
@@ -145,7 +143,7 @@ export default function Surface() {
 
     const action = (e) => {
       if (e.key === "Enter") {
-        var qry = e.target.value;
+        var qry = searchValue;
 
         if (isValidURL(qry)) {
           if (!qry.startsWith("http")) {
@@ -157,7 +155,7 @@ export default function Surface() {
           qry = "https://www.bing.com/search?q=" + encodeURIComponent(qry);
         }
 
-        e.target.value = qry;
+        setSearchValue(qry);
         setHist([hist[0], qry]);
         dispatch(openUrl(qry));
       }
@@ -199,7 +197,7 @@ export default function Surface() {
           <div className="TabBar">
             <div
               className="TabBarItem TabSearchItem"
-              style={{ width: min ? "650px" : "700px" }}
+              style={{ width: min ? "610px" : "700px" }}
             >
               <div className="TabBarInteraction">
                 <i
@@ -221,11 +219,12 @@ export default function Surface() {
               </div>
               <input
                 className={`TabSearch ${splashScreen && "disabled"}`}
-                id="surfacesearch"
                 type="text"
                 spellCheck="false"
                 autoComplete="0"
                 placeholder="Search with Bing or enter address"
+                onInput={(e) => setSearchValue(e.target.value)}
+                value={searchValue}
                 onKeyDown={action}
               />
             </div>
@@ -234,6 +233,14 @@ export default function Surface() {
                 <i
                   className={`fa-regular fa-gear ${settingsOpened && "active"}`}
                   onMouseDown={() => setSettingsOpened(!settingsOpened)}
+                ></i>
+              </div>
+              <div className="TabBarInteraction">
+                <i
+                  className={`fa-regular fa-circle-question ${
+                    supportOpened && "active"
+                  }`}
+                  onMouseDown={() => setSupportOpened(!supportOpened)}
                 ></i>
               </div>
             </div>
@@ -303,6 +310,35 @@ export default function Surface() {
                 </div>
               </div>
             </div>
+            <div className={`Support ${supportOpened && "active"}`}>
+              <div
+                style={{
+                  maxWidth: "840px",
+                  margin: "0 auto",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row-reverse",
+                  }}
+                >
+                  <div
+                    className="CloseButton"
+                    onClick={() => setSupportOpened(false)}
+                  >
+                    <i class="fa-light fa-xmark"></i>
+                  </div>
+                </div>
+                <p className="SupportTitle">
+                  Why does my browser display "Refused to connect" whenever
+                  connected to a specific website?
+                </p>
+                <p className="SupportDesc">
+                  lorem ipsum dolor sit amet
+                </p>
+              </div>
+            </div>
             {url === "" ? (
               <>
                 <div
@@ -324,9 +360,8 @@ export default function Surface() {
                     <div className="NonCollapsibleSection">
                       <div className="SearchWrapper">
                         <p className="Text">
-                          Welcome to Surface. Search with Bing or enter address,
-                          or leave blank to get redirected to BreezeOS official
-                          website.
+                          Search with Bing or enter address, or leave blank to
+                          get redirected to BreezeOS official website.
                         </p>
                       </div>
                     </div>

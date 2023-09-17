@@ -6,14 +6,20 @@ import SplashScreenDate from "./SplashScreenDate";
 import { useSelector, useDispatch } from "react-redux";
 import { setLocked } from "../../reducers/settings";
 import Avatar from "../Avatar";
+import useCountdown from "../../hooks/useCountdown";
 
 export default function SplashScreen() {
+  const dispatch = useDispatch();
   const settings = useSelector((state) => state.settings);
   const [passwordShown, setPasswordShown] = useState(false);
   const [passwordValue, setPasswordValue] = useState("");
   const [invalidCount, setInvalidCount] = useState(0);
+  const { secondsLeft, start } = useCountdown();
   const invalidLimit = 7;
-  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (secondsLeft <= 0) setInvalidCount(0);
+  }, [secondsLeft]);
 
   function login() {
     dispatch(setLocked(false));
@@ -26,13 +32,14 @@ export default function SplashScreen() {
     setPasswordValue("");
   }
 
-  function action(e){
-    if(e.key === "Enter"){
-      if(passwordValue !== settings.user.password){
+  function action(e) {
+    if (e.key === "Enter") {
+      if (passwordValue !== settings.user.password) {
         wrongPassword();
       } else {
         login();
       }
+      if (invalidCount === invalidLimit - 1) start(60);
     }
   }
 
@@ -65,7 +72,10 @@ export default function SplashScreen() {
           {settings.user.password ? (
             <>
               {invalidCount === invalidLimit ? (
-                <p>{invalidLimit} invalid times. Try again for 1 minute.</p>
+                <p>
+                  {invalidLimit} invalid times. Try again for {secondsLeft}{" "}
+                  seconds.
+                </p>
               ) : (
                 <>
                   <div className="SignInPassword">
