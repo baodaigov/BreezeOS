@@ -2,7 +2,7 @@ $bgcolor: #2020208f;
 $fgcolor: #e2e2e2;
 
 .PowerMenu {
-  background-color: $bgcolor;
+  background: $bgcolor;
   color: $fgcolor;
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
@@ -23,7 +23,7 @@ $fgcolor: #e2e2e2;
   }
 
   .PowerMenuInteraction {
-    background-color: transparent;
+    background: transparent;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -40,7 +40,7 @@ $fgcolor: #e2e2e2;
     }
 
     &:hover {
-      background-color: #9d9d9d11;
+      background: #9d9d9d11;
     }
 
     .PowerMenuInteractionTitle {
@@ -51,7 +51,7 @@ $fgcolor: #e2e2e2;
   }
 
   &.whitesur {
-    background-color: #151515;
+    background: #151515;
     border: 0.5px solid lighten(#202023, 8%);
   }
 }

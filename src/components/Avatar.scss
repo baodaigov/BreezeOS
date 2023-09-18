@@ -4,7 +4,7 @@ $fgcolor: #e2e2e2;
   border-radius: 999px;
 
   &.undefined {
-    background-color: transparentize($fgcolor, 0.95);
+    background: transparentize($fgcolor, 0.95);
     color: transparentize($fgcolor, 0.8);
     display: flex;
     justify-content: center;

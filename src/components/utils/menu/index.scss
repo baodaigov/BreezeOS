@@ -2,7 +2,7 @@ $bgcolor: #202023e5;
 $fgcolor: #e2e2e2;
 
 .ActMenu {
-  background-color: $bgcolor;
+  background: $bgcolor;
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
   padding: 5px;
@@ -21,7 +21,7 @@ $fgcolor: #e2e2e2;
   .ActMenuSelector {
     padding: 5px 8px;
     border-radius: 7px;
-    background-color: transparent;
+    background: transparent;
     color: $fgcolor;
     font-size: 13px;
     display: flex;
@@ -42,12 +42,12 @@ $fgcolor: #e2e2e2;
     }
 
     &:hover {
-      background-color: #ffffff12;
+      background: #ffffff12;
     }
   }
 
   &.whitesur {
-    background-color: transparentize($bgcolor, 0.5);
+    background: transparentize($bgcolor, 0.5);
     padding: 3px;
     border-radius: 3px;
     transition: all ease 0.25s;
@@ -61,7 +61,7 @@ $fgcolor: #e2e2e2;
       border-radius: 3px;
 
       &:hover {
-        background-color: #007bff;
+        background: #007bff;
         color: $fgcolor;
       }
     }
@@ -70,21 +70,21 @@ $fgcolor: #e2e2e2;
 
 .lightMode {
   .ActMenu {
-    background-color: transparentize($fgcolor, 0.5);
+    background: transparentize($fgcolor, 0.5);
 
     .ActMenuSelector {
       color: $bgcolor;
 
       &:hover {
-        background-color: #00000012;
+        background: #00000012;
       }
     }
 
     &.whitesur {
-      background-color: transparentize($fgcolor, 0.5);
+      background: transparentize($fgcolor, 0.5);
       .ActMenuSelector {
         &:hover {
-          background-color: #007bff;
+          background: #007bff;
           color: $fgcolor;
         }
       }

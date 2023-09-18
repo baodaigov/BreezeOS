@@ -330,13 +330,6 @@ export default function Surface() {
                     <i class="fa-light fa-xmark"></i>
                   </div>
                 </div>
-                <p className="SupportTitle">
-                  Why does my browser display "Refused to connect" whenever
-                  connected to a specific website?
-                </p>
-                <p className="SupportDesc">
-                  lorem ipsum dolor sit amet
-                </p>
               </div>
             </div>
             {url === "" ? (

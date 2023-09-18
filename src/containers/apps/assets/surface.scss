@@ -41,7 +41,7 @@ $fgcolor: #e2e2e2;
               width: 20px;
 
               &:hover {
-                background-color: #ffffff1e;
+                background: #ffffff1e;
               }
             }
           }
@@ -49,7 +49,7 @@ $fgcolor: #e2e2e2;
           &.TabSearchItem {
             width: 150px;
             border-radius: 5px;
-            background-color: #ffffff0a;
+            background: #ffffff0a;
 
             .TabBarInteraction {
               margin-right: 5px;
@@ -80,7 +80,7 @@ $fgcolor: #e2e2e2;
                 }
 
                 &:hover {
-                  background-color: #ffffff10;
+                  background: #ffffff10;
                 }
               }
             }
@@ -90,7 +90,7 @@ $fgcolor: #e2e2e2;
               -webkit-appearance: none;
               border: none;
               outline: none;
-              background-color: transparent;
+              background: transparent;
               color: #fff;
               width: 100%;
               font-size: 12px;
@@ -115,11 +115,11 @@ $fgcolor: #e2e2e2;
                 transition: none;
 
                 &:hover {
-                  background-color: transparent;
+                  background: transparent;
                 }
 
                 &.active {
-                  background-color: #ffffff1e;
+                  background: #ffffff1e;
                 }
               }
             }
@@ -162,7 +162,7 @@ $fgcolor: #e2e2e2;
   }
 
   .Surface {
-    background-color: #202023;
+    background: #202023;
     height: 100%;
     position: relative;
 
@@ -181,7 +181,7 @@ $fgcolor: #e2e2e2;
       right: 0;
       width: 100%;
       height: 100%;
-      background-color: #09090b;
+      background: #09090b;
       color: #f4f4f5;
       z-index: 1;
       padding: 30px 0;
@@ -194,7 +194,7 @@ $fgcolor: #e2e2e2;
       }
 
       .CloseButton {
-        background-color: transparentize($fgcolor, 0.95);
+        background: transparentize($fgcolor, 0.95);
         border-radius: 999px;
         width: 42px;
         height: 42px;
@@ -205,7 +205,7 @@ $fgcolor: #e2e2e2;
         color: $fgcolor;
 
         &:active {
-          background-color: transparentize($fgcolor, 0.9);
+          background: transparentize($fgcolor, 0.9);
           transition: none;
         }
       }
@@ -242,7 +242,7 @@ $fgcolor: #e2e2e2;
 
         &.allowClicking {
           &:active {
-            background-color: #f4f4f50c;
+            background: #f4f4f50c;
             transition: none;
           }
         }
@@ -250,12 +250,6 @@ $fgcolor: #e2e2e2;
     }
 
     .Support {
-      .SupportTitle {
-        font-weight: 700;
-        font-size: 30px;
-        margin-bottom: 25px;
-      }
-
       .SupportDesc {
         font-size: 14px;
       }
@@ -270,7 +264,7 @@ $fgcolor: #e2e2e2;
       margin: auto;
       width: 100%;
       height: 100%;
-      background-color: #2563eb;
+      background: #2563eb;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -282,7 +276,7 @@ $fgcolor: #e2e2e2;
       }
 
       &.private {
-        background-color: #09090b;
+        background: #09090b;
       }
 
       &.disabled {
@@ -318,7 +312,6 @@ $fgcolor: #e2e2e2;
             .Text {
               margin-top: 140px;
               margin-bottom: 0;
-              font-weight: 300;
               font-size: 22px;
               color: $fgcolor;
               text-align: center;
@@ -331,7 +324,7 @@ $fgcolor: #e2e2e2;
     .CantBeReached {
       width: 100%;
       height: 100%;
-      background-color: transparent;
+      background: transparent;
       padding: 50px 0;
       display: flex;
       flex-direction: column;
@@ -361,7 +354,7 @@ $fgcolor: #e2e2e2;
             border-radius: 999px;
             outline: none;
             padding: 12px 24px;
-            background-color: #0061df;
+            background: #0061df;
             font-size: 14px;
             font-weight: 700;
             transition: all ease 0.3s;
@@ -369,7 +362,7 @@ $fgcolor: #e2e2e2;
 
             &:active {
               transition: none;
-              background-color: darken(#0061df, 10%);
+              background: darken(#0061df, 10%);
             }
           }
         }
@@ -381,19 +374,19 @@ $fgcolor: #e2e2e2;
 .lightMode {
   .SurfaceWindow {
     .Window .TopBar .TopBarInteractionContainer .TabBar .TabBarItem {
-      background-color: #0000000a;
+      background: #0000000a;
       color: #000;
 
       &:hover {
         .CloseButton {
           &:hover {
-            background-color: #00000010;
+            background: #00000010;
           }
         }
       }
 
       .TabBarInteraction i:hover {
-        background-color: #0000001e;
+        background: #0000001e;
       }
 
       .TabSearch {
@@ -405,19 +398,19 @@ $fgcolor: #e2e2e2;
       }
     }
     .Surface {
-      background-color: $fgcolor;
+      background: $fgcolor;
 
       .Settings,
       .Support {
-        background-color: #f4f4f5;
+        background: #f4f4f5;
         color: #09090b;
 
         .CloseButton {
-          background-color: transparentize($bgcolor, 0.85);
+          background: transparentize($bgcolor, 0.85);
           color: $bgcolor;
 
           &:active {
-            background-color: transparentize($bgcolor, 0.8);
+            background: transparentize($bgcolor, 0.8);
             transition: none;
           }
         }

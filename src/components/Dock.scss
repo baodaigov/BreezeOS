@@ -62,7 +62,7 @@ $fgcolor: #e2e2e2;
 
         &::after {
           width: 20px;
-          background-color: #4000ff;
+          background: #4000ff;
           transition: all ease 0.3s;
         }
       }
@@ -70,7 +70,7 @@ $fgcolor: #e2e2e2;
       &.hide {
         &::after {
           width: 8px;
-          background-color: #4a4a4a;
+          background: #4a4a4a;
           transition: all ease 0.3s;
         }
       }
@@ -82,7 +82,7 @@ $fgcolor: #e2e2e2;
         font-size: 12px;
         backdrop-filter: blur(15px);
         -webkit-backdrop-filter: blur(15px);
-        background-color: #20202383;
+        background: #20202383;
         box-shadow: 0px 0 10px transparentize($fgcolor, 0.97);
         color: $fgcolor;
         border-radius: 10px;
@@ -105,7 +105,7 @@ $fgcolor: #e2e2e2;
             margin: 4px auto;
             width: 95%;
             height: 1px;
-            background-color: transparentize($fgcolor, 0.95);
+            background: transparentize($fgcolor, 0.95);
           }
 
           &:last-child {
@@ -132,7 +132,7 @@ $fgcolor: #e2e2e2;
             }
 
             &:hover {
-              background-color: transparentize($fgcolor, 0.95);
+              background: transparentize($fgcolor, 0.95);
             }
 
             &.disabled {
@@ -147,7 +147,7 @@ $fgcolor: #e2e2e2;
         position: absolute;
         top: -45px;
         font-size: 11px;
-        background-color: #20202383;
+        background: #20202383;
         backdrop-filter: blur(15px);
         -webkit-backdrop-filter: blur(15px);
         padding: 5px 10px;
@@ -173,7 +173,7 @@ $fgcolor: #e2e2e2;
   }
 
   &.whitesur {
-    background-color: transparentize($bgcolor, 0.2);
+    background: transparentize($bgcolor, 0.2);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     width: 99%;
@@ -188,7 +188,7 @@ $fgcolor: #e2e2e2;
           bottom: 60px;
           backdrop-filter: blur(15px);
           -webkit-backdrop-filter: blur(15px);
-          background-color: #20202383;
+          background: #20202383;
           border: 1px solid lighten($bgcolor, 10%);
           box-shadow: 0px 0 10px transparentize($fgcolor, 0.97);
 
@@ -204,7 +204,7 @@ $fgcolor: #e2e2e2;
               margin: 4px auto;
               width: 95%;
               height: 1px;
-              background-color: transparentize($fgcolor, 0.95);
+              background: transparentize($fgcolor, 0.95);
             }
 
             &:last-child {
@@ -231,11 +231,11 @@ $fgcolor: #e2e2e2;
               }
 
               &:hover {
-                background-color: #007bff;
+                background: #007bff;
               }
 
               &:active {
-                background-color: darken(#007bff, 10%);
+                background: darken(#007bff, 10%);
               }
 
               &.disabled {
@@ -282,14 +282,14 @@ $fgcolor: #e2e2e2;
 
           &::after {
             width: 3px;
-            background-color: #d9d9d9;
+            background: #d9d9d9;
           }
         }
 
         &.hide {
           &::after {
             width: 3px;
-            background-color: #d9d9d9;
+            background: #d9d9d9;
           }
         }
       }

@@ -6,7 +6,7 @@ $fbgcolor: #83aaff;
   position: absolute;
   top: 40px;
   right: 0;
-  background-color: $bgcolor;
+  background: $bgcolor;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   color: $fgcolor;
@@ -43,7 +43,7 @@ $fbgcolor: #83aaff;
       }
 
       .PanelItem {
-        background-color: transparent;
+        background: transparent;
         padding: 10px 15px;
         font-size: 12px;
         border-radius: 999px;
@@ -52,7 +52,7 @@ $fbgcolor: #83aaff;
         align-items: center;
 
         &:hover {
-          background-color: lighten($bgcolor, 5%);
+          background: lighten($bgcolor, 5%);
         }
 
         i {
@@ -85,7 +85,7 @@ $fbgcolor: #83aaff;
           display: flex;
 
           .PanelItemLarge {
-            background-color: lighten($bgcolor, 5%);
+            background: lighten($bgcolor, 5%);
             padding: 12px 17px;
             margin-right: 10px;
             margin-bottom: 10px;
@@ -100,7 +100,7 @@ $fbgcolor: #83aaff;
               transform: translateX(125.5px);
               height: 41.5px;
               padding: 12px 11px;
-              background-color: lighten($bgcolor, 10%);
+              background: lighten($bgcolor, 10%);
               border-top-right-radius: 999px;
               border-bottom-right-radius: 999px;
               display: flex;
@@ -113,10 +113,10 @@ $fbgcolor: #83aaff;
             }
 
             &:hover {
-              background-color: lighten($bgcolor, 12%);
+              background: lighten($bgcolor, 12%);
 
               .PanelItemNext {
-                background-color: lighten($bgcolor, 15%);
+                background: lighten($bgcolor, 15%);
               }
             }
 
@@ -147,18 +147,18 @@ $fbgcolor: #83aaff;
             }
 
             &.focused {
-              background-color: $fbgcolor;
+              background: $fbgcolor;
               color: #000;
 
               .PanelItemNext {
-                background-color: lighten($fbgcolor, 5%);
+                background: lighten($fbgcolor, 5%);
               }
 
               &:hover {
-                background-color: lighten($fbgcolor, 5%);
+                background: lighten($fbgcolor, 5%);
 
                 .PanelItemNext {
-                  background-color: lighten($fbgcolor, 10%);
+                  background: lighten($fbgcolor, 10%);
                 }
               }
             }
@@ -194,7 +194,7 @@ $fbgcolor: #83aaff;
       }
 
       .PanelItem {
-        background-color: transparent;
+        background: transparent;
         padding: 7px 9px;
         font-size: 12px;
         border-radius: 999px;
@@ -203,7 +203,7 @@ $fbgcolor: #83aaff;
         align-items: center;
 
         &:hover {
-          background-color: lighten($bgcolor, 5%);
+          background: lighten($bgcolor, 5%);
         }
 
         i {
@@ -252,7 +252,7 @@ $fbgcolor: #83aaff;
           margin-bottom: 3px;
 
           &:hover {
-            background-color: transparentize($fgcolor, 0.95);
+            background: transparentize($fgcolor, 0.95);
           }
 
           .WifiName {
@@ -303,7 +303,7 @@ $fbgcolor: #83aaff;
         }
 
         .ActMenu {
-          background-color: transparent;
+          background: transparent;
           backdrop-filter: blur(0);
           -webkit-backdrop-filter: blur(0);
           box-shadow: none;
@@ -330,7 +330,7 @@ $fbgcolor: #83aaff;
       }
 
       .PanelItem {
-        background-color: transparent;
+        background: transparent;
         padding: 7px 9px;
         font-size: 12px;
         border-radius: 999px;
@@ -339,7 +339,7 @@ $fbgcolor: #83aaff;
         align-items: center;
 
         &:hover {
-          background-color: lighten($bgcolor, 5%);
+          background: lighten($bgcolor, 5%);
         }
 
         i {
@@ -404,17 +404,17 @@ $fbgcolor: #83aaff;
             .PanelItemLarge {
               border: 0.5px solid lighten(#202023, 25%);
               &.focused {
-                background-color: #009dff;
+                background: #009dff;
 
                 .PanelItemNext {
-                  background-color: lighten(#009dff, 10%);
+                  background: lighten(#009dff, 10%);
                 }
 
                 &:hover {
-                  background-color: lighten(#009dff, 5%);
+                  background: lighten(#009dff, 5%);
 
                   .PanelItemNext {
-                    background-color: lighten(#009dff, 15%);
+                    background: lighten(#009dff, 15%);
                   }
                 }
               }
@@ -430,7 +430,7 @@ $fbgcolor: #83aaff;
             padding: 8px 20px;
 
             &:hover {
-              background-color: #007bff;
+              background: #007bff;
             }
 
             .WifiListIcon {
@@ -447,14 +447,14 @@ $fbgcolor: #83aaff;
 
 .lightMode {
   .Panel {
-    background-color: $fgcolor;
+    background: $fgcolor;
     color: $bgcolor;
 
     .PanelTypeContainer {
       .defaultPanel {
         .PanelItem {
           &:hover {
-            background-color: darken($fgcolor, 5%);
+            background: darken($fgcolor, 5%);
           }
         }
 
@@ -466,17 +466,17 @@ $fbgcolor: #83aaff;
 
         .PanelBottom {
           .PanelItemLarge {
-            background-color: darken($fgcolor, 5%);
+            background: darken($fgcolor, 5%);
 
             .PanelItemNext {
-              background-color: darken($fgcolor, 10%);
+              background: darken($fgcolor, 10%);
             }
 
             &:hover {
-              background-color: darken($fgcolor, 12%);
+              background: darken($fgcolor, 12%);
 
               .PanelItemNext {
-                background-color: darken($fgcolor, 15%);
+                background: darken($fgcolor, 15%);
               }
             }
           }
@@ -486,7 +486,7 @@ $fbgcolor: #83aaff;
       .wifiPanel {
         .PanelItem {
           &:hover {
-            background-color: darken($fgcolor, 7%);
+            background: darken($fgcolor, 7%);
           }
         }
 
@@ -499,7 +499,7 @@ $fbgcolor: #83aaff;
         .WifiList {
           .WifiListItem {
             &:hover {
-              background-color: transparentize($bgcolor, 0.93);
+              background: transparentize($bgcolor, 0.93);
             }
           }
         }
@@ -516,7 +516,7 @@ $fbgcolor: #83aaff;
       .bluetoothPanel {
         .PanelItem {
           &:hover {
-            background-color: darken($fgcolor, 7%);
+            background: darken($fgcolor, 7%);
           }
         }
 
@@ -540,7 +540,7 @@ $fbgcolor: #83aaff;
           .WifiList {
             .WifiListItem {
               &:hover {
-                background-color: #007bff;
+                background: #007bff;
                 color: $fgcolor;
               }
             }

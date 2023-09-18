@@ -64,7 +64,7 @@ $fgcolor: #e2e2e2;
       }
 
       .WindowTopBar {
-        background-color: $bgcolor;
+        background: $bgcolor;
         backdrop-filter: blur(15px);
         -webkit-backdrop-filter: blur(15px);
         padding: 7px 10px;
@@ -96,18 +96,18 @@ $fgcolor: #e2e2e2;
             color: $fgcolor;
 
             &:hover {
-              background-color: #3b3b3f;
+              background: #3b3b3f;
             }
 
             &.close:hover {
-              background-color: #ff5252;
+              background: #ff5252;
             }
           }
         }
       }
 
       .WindowBodyDefault {
-        background-color: $bgcolor;
+        background: $bgcolor;
         backdrop-filter: blur(15px);
         -webkit-backdrop-filter: blur(15px);
         border-bottom-left-radius: 5px;
@@ -139,7 +139,7 @@ $fgcolor: #e2e2e2;
         .Button {
           border: none;
           outline: none;
-          background-color: #ffffff10;
+          background: #ffffff10;
           color: $fgcolor;
           font-size: 12px;
           padding: 7px 20px;
@@ -147,7 +147,7 @@ $fgcolor: #e2e2e2;
           margin-left: 5px;
 
           &:hover {
-            background-color: #ffffff20;
+            background: #ffffff20;
           }
         }
       }
@@ -175,7 +175,7 @@ $fgcolor: #e2e2e2;
       }
 
       .WindowTopBar {
-        background-color: $bgcolor;
+        background: $bgcolor;
         backdrop-filter: blur(15px);
         -webkit-backdrop-filter: blur(15px);
         padding: 7px 10px;
@@ -208,18 +208,18 @@ $fgcolor: #e2e2e2;
             color: $fgcolor;
 
             &:hover {
-              background-color: #3b3b3f;
+              background: #3b3b3f;
             }
 
             &.close:hover {
-              background-color: #ff5252;
+              background: #ff5252;
             }
           }
         }
       }
 
       .WindowBodyDefault {
-        background-color: $bgcolor;
+        background: $bgcolor;
         backdrop-filter: blur(15px);
         -webkit-backdrop-filter: blur(15px);
         border-bottom-left-radius: 5px;
@@ -260,7 +260,7 @@ $fgcolor: #e2e2e2;
           }
 
           .TabSeparator {
-            background-color: #ffffff1e;
+            background: #ffffff1e;
             width: 1px;
           }
 
@@ -278,7 +278,7 @@ $fgcolor: #e2e2e2;
               width: 20px;
 
               &:hover {
-                background-color: #ffffff1e;
+                background: #ffffff1e;
               }
 
               &:last-child {
@@ -292,7 +292,7 @@ $fgcolor: #e2e2e2;
   }
 
   .Camera {
-    background-color: $bgcolor;
+    background: $bgcolor;
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     height: 100%;
@@ -355,7 +355,7 @@ $fgcolor: #e2e2e2;
         }
 
         &:hover {
-          background-color: $fgcolor;
+          background: $fgcolor;
           color: $bgcolor;
         }
 
@@ -384,7 +384,7 @@ $fgcolor: #e2e2e2;
           transition: all ease 0.1s;
 
           &:hover {
-            background-color: $fgcolor;
+            background: $fgcolor;
             color: $bgcolor;
           }
         }
@@ -421,7 +421,7 @@ $fgcolor: #e2e2e2;
         p {
           position: absolute;
           top: 10px;
-          background-color: $bgcolor;
+          background: $bgcolor;
           padding: 7px 12px;
           border-radius: 999px;
           color: $fgcolor;
@@ -436,21 +436,21 @@ $fgcolor: #e2e2e2;
           height: 12px;
           border-radius: 999px;
           margin-right: 7px;
-          background-color: #ff4b4b;
+          background: #ff4b4b;
           animation: record ease 1s infinite;
         }
 
         @keyframes record {
           0% {
-            background-color: #ff4b4b;
+            background: #ff4b4b;
           }
 
           50% {
-            background-color: darken(#ff4b4b, 30%);
+            background: darken(#ff4b4b, 30%);
           }
 
           100% {
-            background-color: #ff4b4b;
+            background: #ff4b4b;
           }
         }
       }
@@ -501,7 +501,7 @@ $fgcolor: #e2e2e2;
         position: sticky;
         z-index: 2;
         bottom: 0;
-        background-color: $bgcolor;
+        background: $bgcolor;
         backdrop-filter: blur(15px);
         -webkit-backdrop-filter: blur(15px);
         display: flex;
@@ -525,7 +525,7 @@ $fgcolor: #e2e2e2;
           width: 50px;
           height: 50px;
           border-radius: 999px;
-          background-color: lighten($fgcolor, 5%);
+          background: lighten($fgcolor, 5%);
           color: #000;
           font-size: 23px;
           display: flex;
@@ -534,11 +534,11 @@ $fgcolor: #e2e2e2;
           transition: none;
 
           &:active {
-            background-color: darken($fgcolor, 25%);
+            background: darken($fgcolor, 25%);
           }
 
           &.isRecording {
-            background-color: #ff4b4b;
+            background: #ff4b4b;
             color: $fgcolor;
             opacity: 1;
 
@@ -571,7 +571,7 @@ $fgcolor: #e2e2e2;
   .camera {
     .PermanentlyDeleteMedia {
       .WindowTopBar {
-        background-color: $fgcolor;
+        background: $fgcolor;
 
         .WindowTopBarTitle {
           color: $bgcolor;
@@ -581,26 +581,26 @@ $fgcolor: #e2e2e2;
           color: $bgcolor;
 
           &:hover {
-            background-color: #3b3b3f;
+            background: #3b3b3f;
           }
 
           &.close:hover {
-            background-color: #ff5252;
+            background: #ff5252;
           }
         }
       }
 
       .WindowBodyDefault {
-        background-color: $fgcolor;
+        background: $fgcolor;
         color: $bgcolor;
       }
 
       .WindowBodyButton {
         .Button {
-          background-color: #00000010;
+          background: #00000010;
           color: $bgcolor;
           &:hover {
-            background-color: #00000020;
+            background: #00000020;
           }
         }
       }
@@ -611,26 +611,26 @@ $fgcolor: #e2e2e2;
         color: #000;
 
         .TabSeparator {
-          background-color: #0000001e;
+          background: #0000001e;
         }
 
         &:hover {
           .CloseButton {
             &:hover {
-              background-color: #00000010;
+              background: #00000010;
             }
           }
         }
 
         .TabBarInteraction i:hover {
-          background-color: #0000001e;
+          background: #0000001e;
         }
       }
     }
   }
 
   .Camera {
-    background-color: $fgcolor;
+    background: $fgcolor;
 
     .CameraViewMedia {
       .NoMedia {
@@ -642,7 +642,7 @@ $fgcolor: #e2e2e2;
           color: $bgcolor;
 
           &:hover {
-            background-color: $bgcolor;
+            background: $bgcolor;
             color: $fgcolor;
           }
         }
@@ -650,7 +650,7 @@ $fgcolor: #e2e2e2;
         .CameraButton {
           color: $bgcolor;
           &:hover {
-            background-color: $bgcolor;
+            background: $bgcolor;
             color: $fgcolor;
           }
         }
@@ -663,28 +663,28 @@ $fgcolor: #e2e2e2;
 
       .CameraRecordTime {
         p {
-          background-color: $fgcolor;
+          background: $fgcolor;
           color: $bgcolor;
         }
       }
 
       .CameraInteraction {
-        background-color: $fgcolor;
+        background: $fgcolor;
 
         .CameraAct {
           color: $bgcolor;
         }
 
         .CameraCapture {
-          background-color: darken($fgcolor, 5%);
+          background: darken($fgcolor, 5%);
           color: #000;
 
           &:active {
-            background-color: darken($fgcolor, 25%);
+            background: darken($fgcolor, 25%);
           }
 
           &.isRecording {
-            background-color: darken($fgcolor, 5%);
+            background: darken($fgcolor, 5%);
             color: #ff4b4b;
           }
         }

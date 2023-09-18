@@ -25,7 +25,7 @@
   }
 
   .Terminal {
-    background-color: #000;
+    background: #000;
     padding: 15px 5px;
     height: 100%;
 
@@ -44,7 +44,7 @@
         -webkit-appearance: none;
         border: none;
         outline: none;
-        background-color: transparent;
+        background: transparent;
         margin-left: 5px;
         width: 100%;
       }
@@ -54,7 +54,7 @@
 
 .lightMode {
   .Terminal {
-    background-color: #fff;
+    background: #fff;
 
     * {
       color: #000;

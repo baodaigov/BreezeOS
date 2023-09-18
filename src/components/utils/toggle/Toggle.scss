@@ -5,14 +5,14 @@
   align-items: center;
   border-radius: 999px;
   padding: 2px;
-  background-color: transparentize(#f4f4f5, 0.9);
+  background: transparentize(#f4f4f5, 0.9);
   transition: all ease 0.3s;
 
   .ToggleThumb {
     width: 20px;
     height: 20px;
     border-radius: 999px;
-    background-color: #f4f4f5;
+    background: #f4f4f5;
     transition: all ease 0.3s;
   }
 
@@ -23,7 +23,7 @@
   }
 
   &.active {
-    background-color: #2563eb;
+    background: #2563eb;
 
     .ToggleThumb {
       transform: translateX(100%);
@@ -44,10 +44,10 @@
 
 .lightMode {
   .Toggle {
-    background-color: transparentize(#09090b, 0.93);
+    background: transparentize(#09090b, 0.93);
 
     &.active {
-      background-color: #2563eb;
+      background: #2563eb;
     }
   }
 }

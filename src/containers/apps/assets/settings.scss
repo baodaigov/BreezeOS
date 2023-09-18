@@ -48,7 +48,7 @@ $actcolor: #8fb6ff;
       width: 100%;
       height: 100%;
       z-index: 1;
-      background-color: transparentize($bgcolor, 0.1);
+      background: transparentize($bgcolor, 0.1);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -82,7 +82,7 @@ $actcolor: #8fb6ff;
         }
 
         .WindowTopBar {
-          background-color: $bgcolor;
+          background: $bgcolor;
           backdrop-filter: blur(15px);
           -webkit-backdrop-filter: blur(15px);
           padding: 7px 10px;
@@ -114,18 +114,18 @@ $actcolor: #8fb6ff;
               color: $fgcolor;
 
               &:hover {
-                background-color: #3b3b3f;
+                background: #3b3b3f;
               }
 
               &.close:hover {
-                background-color: #ff5252;
+                background: #ff5252;
               }
             }
           }
         }
 
         .WindowBodyDefault {
-          background-color: $bgcolor;
+          background: $bgcolor;
           backdrop-filter: blur(15px);
           -webkit-backdrop-filter: blur(15px);
           border-bottom-left-radius: 5px;
@@ -154,7 +154,7 @@ $actcolor: #8fb6ff;
 
         &.whitesur {
           .WindowTopBar {
-            background-color: #202023;
+            background: #202023;
             padding-left: 12px;
             padding-right: 12px;
             border-top-left-radius: 10px;
@@ -175,10 +175,10 @@ $actcolor: #8fb6ff;
                 }
 
                 &.close {
-                  background-color: #ff5e57;
+                  background: #ff5e57;
 
                   &:active {
-                    background-color: lighten(#ff5e57, 20%);
+                    background: lighten(#ff5e57, 20%);
                   }
 
                   &:hover {
@@ -191,7 +191,7 @@ $actcolor: #8fb6ff;
             }
           }
           .WindowBodyDefault {
-            background-color: #202023;
+            background: #202023;
             border: 0.5px solid lighten(#202023, 25%);
             border-top: none;
           }
@@ -218,7 +218,7 @@ $actcolor: #8fb6ff;
         }
 
         .WindowTopBar {
-          background-color: $bgcolor;
+          background: $bgcolor;
           backdrop-filter: blur(15px);
           -webkit-backdrop-filter: blur(15px);
           padding: 7px 10px;
@@ -250,18 +250,18 @@ $actcolor: #8fb6ff;
               color: $fgcolor;
 
               &:hover {
-                background-color: #3b3b3f;
+                background: #3b3b3f;
               }
 
               &.close:hover {
-                background-color: #ff5252;
+                background: #ff5252;
               }
             }
           }
         }
 
         .WindowBodyDefault {
-          background-color: $bgcolor;
+          background: $bgcolor;
           backdrop-filter: blur(15px);
           -webkit-backdrop-filter: blur(15px);
           border-bottom-left-radius: 5px;
@@ -307,7 +307,7 @@ $actcolor: #8fb6ff;
                 font-size: 13px;
                 padding: 7px 12px;
                 margin-bottom: 10px;
-                background-color: transparentize($fgcolor, 0.93);
+                background: transparentize($fgcolor, 0.93);
                 transition: all ease 0.3s;
 
                 &::-ms-clear,
@@ -323,7 +323,7 @@ $actcolor: #8fb6ff;
 
             .Button {
               border-radius: 999px;
-              background-color: transparentize($fgcolor, 0.93);
+              background: transparentize($fgcolor, 0.93);
               padding: 10px 30px;
               font-size: 13px;
               transition: all ease 0.25s;
@@ -334,7 +334,7 @@ $actcolor: #8fb6ff;
               }
 
               &:active {
-                background-color: transparentize($fgcolor, 0.89);
+                background: transparentize($fgcolor, 0.89);
                 transition: none;
               }
             }
@@ -343,7 +343,7 @@ $actcolor: #8fb6ff;
 
         &.whitesur {
           .WindowTopBar {
-            background-color: #202023;
+            background: #202023;
             padding-left: 12px;
             padding-right: 12px;
             border-top-left-radius: 10px;
@@ -364,10 +364,10 @@ $actcolor: #8fb6ff;
                 }
 
                 &.close {
-                  background-color: #ff5e57;
+                  background: #ff5e57;
 
                   &:active {
-                    background-color: lighten(#ff5e57, 20%);
+                    background: lighten(#ff5e57, 20%);
                   }
 
                   &:hover {
@@ -380,7 +380,7 @@ $actcolor: #8fb6ff;
             }
           }
           .WindowBodyDefault {
-            background-color: #202023;
+            background: #202023;
             border: 0.5px solid lighten(#202023, 25%);
             border-top: none;
           }
@@ -408,7 +408,7 @@ $actcolor: #8fb6ff;
         }
 
         .WindowBodyDefault {
-          background-color: $bgcolor;
+          background: $bgcolor;
           backdrop-filter: blur(15px);
           -webkit-backdrop-filter: blur(15px);
           border-radius: 5px;
@@ -439,7 +439,7 @@ $actcolor: #8fb6ff;
 
               &.disabled {
                 .InputPassword {
-                  background-color: transparentize($fgcolor, 0.98);
+                  background: transparentize($fgcolor, 0.98);
                   color: transparentize($fgcolor, 0.7);
                 }
                 * {
@@ -458,7 +458,7 @@ $actcolor: #8fb6ff;
                 width: 100%;
                 font-size: 12px;
                 padding: 5px 10px;
-                background-color: transparentize($fgcolor, 0.93);
+                background: transparentize($fgcolor, 0.93);
                 transition: all ease 0.1s;
 
                 &::-ms-clear,
@@ -516,7 +516,7 @@ $actcolor: #8fb6ff;
                 }
 
                 &:hover {
-                  background-color: transparentize($fgcolor, 0.9);
+                  background: transparentize($fgcolor, 0.9);
                 }
               }
             }
@@ -532,7 +532,7 @@ $actcolor: #8fb6ff;
           .Button {
             border: none;
             outline: none;
-            background-color: #ffffff10;
+            background: #ffffff10;
             color: $fgcolor;
             font-size: 12px;
             padding: 7px 20px;
@@ -540,11 +540,11 @@ $actcolor: #8fb6ff;
             margin-left: 5px;
 
             &:hover {
-              background-color: #ffffff20;
+              background: #ffffff20;
             }
 
             &.disabled {
-              background-color: transparentize($fgcolor, 0.98);
+              background: transparentize($fgcolor, 0.98);
               color: transparentize($fgcolor, 0.7);
               pointer-events: none;
             }
@@ -555,7 +555,7 @@ $actcolor: #8fb6ff;
           border-radius: 10px;
           .WindowBodyDefault {
             border-radius: 10px;
-            background-color: #202023;
+            background: #202023;
             border: 0.5px solid lighten($bgcolor, 25%);
 
             .WindowBodyContent {
@@ -596,7 +596,7 @@ $actcolor: #8fb6ff;
         }
 
         .WindowBodyDefault {
-          background-color: $bgcolor;
+          background: $bgcolor;
           backdrop-filter: blur(15px);
           -webkit-backdrop-filter: blur(15px);
           border-radius: 5px;
@@ -632,7 +632,7 @@ $actcolor: #8fb6ff;
 
               &.disabled {
                 .Input {
-                  background-color: transparentize($fgcolor, 0.98);
+                  background: transparentize($fgcolor, 0.98);
                   color: transparentize($fgcolor, 0.7);
                 }
                 * {
@@ -655,7 +655,7 @@ $actcolor: #8fb6ff;
                 font-size: 12px;
                 padding: 5px 10px;
                 margin-bottom: 10px;
-                background-color: transparentize($fgcolor, 0.93);
+                background: transparentize($fgcolor, 0.93);
                 transition: all ease 0.3s;
 
                 &::-ms-clear,
@@ -713,7 +713,7 @@ $actcolor: #8fb6ff;
                 }
 
                 &:hover {
-                  background-color: transparentize($fgcolor, 0.9);
+                  background: transparentize($fgcolor, 0.9);
                 }
               }
             }
@@ -729,7 +729,7 @@ $actcolor: #8fb6ff;
           .Button {
             border: none;
             outline: none;
-            background-color: #ffffff10;
+            background: #ffffff10;
             color: $fgcolor;
             font-size: 12px;
             padding: 7px 20px;
@@ -737,11 +737,11 @@ $actcolor: #8fb6ff;
             margin-left: 5px;
 
             &:hover {
-              background-color: #ffffff20;
+              background: #ffffff20;
             }
 
             &.disabled {
-              background-color: transparentize($fgcolor, 0.98);
+              background: transparentize($fgcolor, 0.98);
               color: transparentize($fgcolor, 0.7);
               pointer-events: none;
             }
@@ -752,7 +752,7 @@ $actcolor: #8fb6ff;
           border-radius: 10px;
           .WindowBodyDefault {
             border-radius: 10px;
-            background-color: #202023;
+            background: #202023;
             border: 0.5px solid lighten($bgcolor, 25%);
 
             .WindowBodyContent {
@@ -788,7 +788,7 @@ $actcolor: #8fb6ff;
       box-shadow: 0px 0 20px #00000089;
 
       .WindowTopBar {
-        background-color: $bgcolor;
+        background: $bgcolor;
         backdrop-filter: blur(15px);
         -webkit-backdrop-filter: blur(15px);
         padding: 7px 10px;
@@ -820,18 +820,18 @@ $actcolor: #8fb6ff;
             color: $fgcolor;
 
             &:hover {
-              background-color: #3b3b3f;
+              background: #3b3b3f;
             }
 
             &.close:hover {
-              background-color: #ff5252;
+              background: #ff5252;
             }
           }
         }
       }
 
       .WindowBodyDefault {
-        background-color: $bgcolor;
+        background: $bgcolor;
         backdrop-filter: blur(15px);
         -webkit-backdrop-filter: blur(15px);
         border-bottom-left-radius: 5px;
@@ -863,7 +863,7 @@ $actcolor: #8fb6ff;
         .Button {
           border: none;
           outline: none;
-          background-color: #ffffff10;
+          background: #ffffff10;
           color: $fgcolor;
           font-size: 12px;
           padding: 7px 20px;
@@ -871,7 +871,7 @@ $actcolor: #8fb6ff;
           margin-left: 5px;
 
           &:hover {
-            background-color: #ffffff20;
+            background: #ffffff20;
           }
         }
       }
@@ -897,7 +897,7 @@ $actcolor: #8fb6ff;
           }
 
           .TabSeparator {
-            background-color: #ffffff1e;
+            background: #ffffff1e;
             width: 1px;
           }
 
@@ -916,7 +916,7 @@ $actcolor: #8fb6ff;
               transition: all ease 0.3s;
 
               &:hover {
-                background-color: #ffffff1e;
+                background: #ffffff1e;
               }
 
               &:last-child {
@@ -942,7 +942,7 @@ $actcolor: #8fb6ff;
   }
 
   .Settings {
-    background-color: $bgcolor;
+    background: $bgcolor;
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     height: 100%;
@@ -955,7 +955,7 @@ $actcolor: #8fb6ff;
 
       div {
         .NavPanel {
-          background-color: transparentize($actcolor, 0.95);
+          background: transparentize($actcolor, 0.95);
           display: flex;
           justify-content: space-between;
           flex-direction: column;
@@ -1001,7 +1001,7 @@ $actcolor: #8fb6ff;
 
               p {
                 font-weight: 700;
-                background-color: transparentize($actcolor, 0.87);
+                background: transparentize($actcolor, 0.87);
               }
             }
           }
@@ -1070,7 +1070,7 @@ $actcolor: #8fb6ff;
                   margin-bottom: 7px;
 
                   &:hover {
-                    background-color: transparentize($fgcolor, 0.95);
+                    background: transparentize($fgcolor, 0.95);
                   }
 
                   .VisibleNetworksIcon {
@@ -1222,7 +1222,7 @@ $actcolor: #8fb6ff;
                   border-radius: 15px;
                   border: 4px dashed transparentize($fgcolor, 0.95);
                   color: transparentize($fgcolor, 0.85);
-                  background-color: transparentize($fgcolor, 0.95);
+                  background: transparentize($fgcolor, 0.95);
                   width: 649.52px;
                   height: 189px;
                   font-size: 20px;
@@ -1248,7 +1248,7 @@ $actcolor: #8fb6ff;
                     position: absolute;
                     top: -10px;
                     right: -10px;
-                    background-color: $fgcolor;
+                    background: $fgcolor;
                     color: $bgcolor;
                     display: flex;
                     justify-content: center;
@@ -1260,7 +1260,7 @@ $actcolor: #8fb6ff;
                     transition: all ease 0.3s;
 
                     &:active {
-                      background-color: darken($fgcolor, 15%);
+                      background: darken($fgcolor, 15%);
                       transition: none;
                     }
                   }
@@ -1299,7 +1299,7 @@ $actcolor: #8fb6ff;
                   .ThemesMenuSection {
                     font-size: 12px;
                     padding: 7px 12px;
-                    background-color: transparentize($fgcolor, 0.93);
+                    background: transparentize($fgcolor, 0.93);
                     display: flex;
                     justify-content: space-between;
                     width: 190px;
@@ -1332,7 +1332,7 @@ $actcolor: #8fb6ff;
                   transition: all ease 0.3s;
                   border-radius: 999px;
                   &:hover {
-                    background-color: transparentize($fgcolor, 0.8);
+                    background: transparentize($fgcolor, 0.8);
                   }
                 }
 
@@ -1388,7 +1388,7 @@ $actcolor: #8fb6ff;
                 .BiDMenuSection {
                   font-size: 12px;
                   padding: 7px 12px;
-                  background-color: transparentize($fgcolor, 0.93);
+                  background: transparentize($fgcolor, 0.93);
                   display: flex;
                   justify-content: space-between;
                   width: 190px;
@@ -1443,7 +1443,7 @@ $actcolor: #8fb6ff;
                 }
 
                 &:hover {
-                  background-color: transparentize($fgcolor, 0.95);
+                  background: transparentize($fgcolor, 0.95);
                 }
               }
             }
@@ -1475,11 +1475,11 @@ $actcolor: #8fb6ff;
                 justify-content: space-between;
                 align-items: center;
                 padding: 15px 25px;
-                background-color: transparentize($fgcolor, 0.93);
+                background: transparentize($fgcolor, 0.93);
                 border-bottom: 0.5px solid darken($fgcolor, 73%);
 
                 &:hover {
-                  background-color: transparentize($fgcolor, 0.9);
+                  background: transparentize($fgcolor, 0.9);
                 }
 
                 &:first-child {
@@ -1501,7 +1501,7 @@ $actcolor: #8fb6ff;
                   border: 0 !important;
 
                   &:hover {
-                    background-color: transparentize($fgcolor, 0.93);
+                    background: transparentize($fgcolor, 0.93);
                   }
 
                   * {
@@ -1512,7 +1512,7 @@ $actcolor: #8fb6ff;
                     appearance: none;
                     border: none;
                     outline: none;
-                    background-color: transparentize($fgcolor, 0.9);
+                    background: transparentize($fgcolor, 0.9);
                     color: inherit;
                     width: 100%;
                     height: 0;
@@ -1555,13 +1555,13 @@ $actcolor: #8fb6ff;
     }
 
     &.whitesur {
-      background-color: #202023;
+      background: #202023;
 
       .SettingsSection {
         div {
           .NavPanel {
             border-radius: 0;
-            background-color: transparent;
+            background: transparent;
             border-bottom: 0.5px solid transparentize($fgcolor, 0.8);
 
             &:last-child {
@@ -1585,7 +1585,7 @@ $actcolor: #8fb6ff;
               }
               &:hover {
                 p {
-                  background-color: transparentize($fgcolor, 0.93);
+                  background: transparentize($fgcolor, 0.93);
                 }
               }
 
@@ -1598,12 +1598,12 @@ $actcolor: #8fb6ff;
 
                 p {
                   font-weight: inherit;
-                  background-color: transparentize($fgcolor, 0.85);
+                  background: transparentize($fgcolor, 0.85);
                 }
 
                 &:hover {
                   p {
-                    background-color: transparentize($fgcolor, 0.85);
+                    background: transparentize($fgcolor, 0.85);
                   }
                 }
               }
@@ -1621,7 +1621,7 @@ $actcolor: #8fb6ff;
                     padding: 8px 20px;
 
                     &:hover {
-                      background-color: #007bff;
+                      background: #007bff;
                     }
                   }
                 }
@@ -1639,7 +1639,7 @@ $actcolor: #8fb6ff;
     .BlackScr {
       .WifiSharing {
         .WindowTopBar {
-          background-color: $fgcolor;
+          background: $fgcolor;
 
           .WindowTopBarTitle {
             color: $bgcolor;
@@ -1649,39 +1649,39 @@ $actcolor: #8fb6ff;
             color: $bgcolor;
 
             &:hover {
-              background-color: #3b3b3f;
+              background: #3b3b3f;
             }
 
             &.close:hover {
-              background-color: #ff5252;
+              background: #ff5252;
             }
           }
         }
 
         .WindowBodyDefault {
-          background-color: $fgcolor;
+          background: $fgcolor;
           color: $bgcolor;
         }
 
         .WindowBodyButton {
           .Button {
-            background-color: #00000010;
+            background: #00000010;
             color: $bgcolor;
             &:hover {
-              background-color: #00000020;
+              background: #00000020;
             }
           }
         }
 
         &.whitesur {
           .WindowTopBar {
-            background-color: $fgcolor;
+            background: $fgcolor;
             border: 0.5px solid lighten(#202023, 5%);
             border-bottom: none;
           }
 
           .WindowBodyDefault {
-            background-color: $fgcolor;
+            background: $fgcolor;
             border: 0.5px solid lighten(#202023, 5%);
             border-top: none;
           }
@@ -1690,7 +1690,7 @@ $actcolor: #8fb6ff;
 
       .UsersBox {
         .WindowTopBar {
-          background-color: $fgcolor;
+          background: $fgcolor;
 
           .WindowTopBarTitle {
             color: $bgcolor;
@@ -1700,39 +1700,39 @@ $actcolor: #8fb6ff;
             color: $bgcolor;
 
             &:hover {
-              background-color: #3b3b3f;
+              background: #3b3b3f;
             }
 
             &.close:hover {
-              background-color: #ff5252;
+              background: #ff5252;
             }
           }
         }
 
         .WindowBodyDefault {
-          background-color: $fgcolor;
+          background: $fgcolor;
           color: $bgcolor;
         }
 
         .WindowBodyButton {
           .Button {
-            background-color: #00000010;
+            background: #00000010;
             color: $bgcolor;
             &:hover {
-              background-color: #00000020;
+              background: #00000020;
             }
           }
         }
 
         &.whitesur {
           .WindowTopBar {
-            background-color: $fgcolor;
+            background: $fgcolor;
             border: 0.5px solid lighten(#202023, 5%);
             border-bottom: none;
           }
 
           .WindowBodyDefault {
-            background-color: $fgcolor;
+            background: $fgcolor;
             border: 0.5px solid lighten(#202023, 5%);
             border-top: none;
           }
@@ -1741,13 +1741,13 @@ $actcolor: #8fb6ff;
 
       .InsertWifiPassword {
         .WindowBodyDefault {
-          background-color: $fgcolor;
+          background: $fgcolor;
           color: $bgcolor;
           .WindowBodyContent {
             .PasswordContainer {
               &.disabled {
                 .InputPassword {
-                  background-color: darken($fgcolor, 2%);
+                  background: darken($fgcolor, 2%);
                   color: lighten($bgcolor, 60%);
                 }
                 * {
@@ -1757,13 +1757,13 @@ $actcolor: #8fb6ff;
               }
 
               .InputPassword {
-                background-color: transparentize($bgcolor, 0.86);
+                background: transparentize($bgcolor, 0.86);
                 color: $bgcolor;
               }
 
               .displayPassword {
                 &:hover {
-                  background-color: transparentize($bgcolor, 0.83);
+                  background: transparentize($bgcolor, 0.83);
                 }
               }
             }
@@ -1772,14 +1772,14 @@ $actcolor: #8fb6ff;
 
         .WindowBodyButton {
           .Button {
-            background-color: #00000010;
+            background: #00000010;
             color: $bgcolor;
             &:hover {
-              background-color: #00000020;
+              background: #00000020;
             }
 
             &.disabled {
-              background-color: darken($fgcolor, 2%);
+              background: darken($fgcolor, 2%);
               color: lighten($bgcolor, 60%);
               pointer-events: none;
             }
@@ -1788,7 +1788,7 @@ $actcolor: #8fb6ff;
 
         &.whitesur {
           .WindowBodyDefault {
-            background-color: $fgcolor;
+            background: $fgcolor;
             border: 0.5px solid lighten(#202023, 5%);
           }
         }
@@ -1796,7 +1796,7 @@ $actcolor: #8fb6ff;
 
       .ConnectOtherNetworks {
         .WindowTopBar {
-          background-color: $fgcolor;
+          background: $fgcolor;
 
           .WindowTopBarTitle {
             color: $bgcolor;
@@ -1809,24 +1809,24 @@ $actcolor: #8fb6ff;
               color: $bgcolor;
 
               &:hover {
-                background-color: #3b3b3f;
+                background: #3b3b3f;
               }
 
               &.close:hover {
-                background-color: #ff5252;
+                background: #ff5252;
               }
             }
           }
         }
 
         .WindowBodyDefault {
-          background-color: $fgcolor;
+          background: $fgcolor;
           color: $bgcolor;
           .WindowBodyContent {
             .InfoContainer {
               &.disabled {
                 .Input {
-                  background-color: darken($fgcolor, 2%);
+                  background: darken($fgcolor, 2%);
                   color: lighten($bgcolor, 60%);
                 }
                 * {
@@ -1836,13 +1836,13 @@ $actcolor: #8fb6ff;
               }
 
               .Input {
-                background-color: transparentize($bgcolor, 0.86);
+                background: transparentize($bgcolor, 0.86);
                 color: $bgcolor;
               }
 
               .displayPassword {
                 &:hover {
-                  background-color: transparentize($bgcolor, 0.83);
+                  background: transparentize($bgcolor, 0.83);
                 }
               }
             }
@@ -1851,14 +1851,14 @@ $actcolor: #8fb6ff;
 
         .WindowBodyButton {
           .Button {
-            background-color: #00000010;
+            background: #00000010;
             color: $bgcolor;
             &:hover {
-              background-color: #00000020;
+              background: #00000020;
             }
 
             &.disabled {
-              background-color: darken($fgcolor, 2%);
+              background: darken($fgcolor, 2%);
               color: lighten($bgcolor, 60%);
               pointer-events: none;
             }
@@ -1867,7 +1867,7 @@ $actcolor: #8fb6ff;
 
         &.whitesur {
           .WindowBodyDefault {
-            background-color: $fgcolor;
+            background: $fgcolor;
             border: 0.5px solid lighten(#202023, 5%);
           }
         }
@@ -1876,7 +1876,7 @@ $actcolor: #8fb6ff;
 
     .MaximumExceededBox {
       .WindowTopBar {
-        background-color: $fgcolor;
+        background: $fgcolor;
 
         .WindowTopBarTitle {
           color: $bgcolor;
@@ -1886,26 +1886,26 @@ $actcolor: #8fb6ff;
           color: $bgcolor;
 
           &:hover {
-            background-color: #3b3b3f;
+            background: #3b3b3f;
           }
 
           &.close:hover {
-            background-color: #ff5252;
+            background: #ff5252;
           }
         }
       }
 
       .WindowBodyDefault {
-        background-color: $fgcolor;
+        background: $fgcolor;
         color: $bgcolor;
       }
 
       .WindowBodyButton {
         .Button {
-          background-color: #00000010;
+          background: #00000010;
           color: $bgcolor;
           &:hover {
-            background-color: #00000020;
+            background: #00000020;
           }
         }
       }
@@ -1915,32 +1915,32 @@ $actcolor: #8fb6ff;
         color: #000;
 
         .TabSeparator {
-          background-color: #0000001e;
+          background: #0000001e;
         }
 
         &:hover {
           .CloseButton {
             &:hover {
-              background-color: #00000010;
+              background: #00000010;
             }
           }
         }
 
         .TabBarInteraction i:hover {
-          background-color: #0000001e;
+          background: #0000001e;
         }
       }
     }
   }
 
   .Settings {
-    background-color: $fgcolor;
+    background: $fgcolor;
     color: $bgcolor;
 
     .SettingsSection {
       div {
         .NavPanel {
-          background-color: transparentize($actcolor, 0.85);
+          background: transparentize($actcolor, 0.85);
 
           .DropdownMenu {
             color: lighten($bgcolor, 10%);
@@ -1951,7 +1951,7 @@ $actcolor: #8fb6ff;
           }
 
           &.active {
-            background-color: $fgcolor;
+            background: $fgcolor;
           }
         }
       }
@@ -1986,7 +1986,7 @@ $actcolor: #8fb6ff;
         .VisibleNetworks {
           .VisibleNetworksItem {
             &:hover {
-              background-color: transparentize($bgcolor, 0.82) !important;
+              background: transparentize($bgcolor, 0.82) !important;
             }
 
             .VisibleNetworksIcon {
@@ -2032,7 +2032,7 @@ $actcolor: #8fb6ff;
       .AppearanceWrapper .Appearance {
         .Wallpapers {
           .AddWallpaper {
-            background-color: transparentize($bgcolor, 0.85) !important;
+            background: transparentize($bgcolor, 0.85) !important;
             border: 4px dashed transparentize($bgcolor, 0.8) !important;
             color: transparentize($bgcolor, 0.75) !important;
           }
@@ -2040,7 +2040,7 @@ $actcolor: #8fb6ff;
         .Themes {
           .ThemesMenu {
             .ThemesMenuSection {
-              background-color: transparentize($bgcolor, 0.82) !important;
+              background: transparentize($bgcolor, 0.82) !important;
             }
           }
         }
@@ -2049,12 +2049,12 @@ $actcolor: #8fb6ff;
       .AboutWrapper {
         .About {
           .AboutMenu {
-            background-color: transparentize($bgcolor, 0.83) !important;
+            background: transparentize($bgcolor, 0.83) !important;
             border-bottom: 0.5px solid darken($fgcolor, 10%) !important;
 
             &.EditName {
               .EditNameInput {
-                background-color: transparentize($bgcolor, 0.85) !important;
+                background: transparentize($bgcolor, 0.85) !important;
               }
 
               &.active {
@@ -2075,7 +2075,7 @@ $actcolor: #8fb6ff;
     }
 
     &.whitesur {
-      background-color: $fgcolor;
+      background: $fgcolor;
 
       .SettingsSection {
         div {
@@ -2091,7 +2091,7 @@ $actcolor: #8fb6ff;
               }
               &:hover {
                 p {
-                  background-color: transparentize($bgcolor, 0.85);
+                  background: transparentize($bgcolor, 0.85);
                 }
               }
 
@@ -2104,12 +2104,12 @@ $actcolor: #8fb6ff;
 
                 p {
                   font-weight: inherit;
-                  background-color: transparentize($bgcolor, 0.8);
+                  background: transparentize($bgcolor, 0.8);
                 }
 
                 &:hover {
                   p {
-                    background-color: transparentize($bgcolor, 0.8);
+                    background: transparentize($bgcolor, 0.8);
                   }
                 }
               }
@@ -2127,7 +2127,7 @@ $actcolor: #8fb6ff;
                     padding: 8px 20px;
 
                     &:hover {
-                      background-color: #007bff !important;
+                      background: #007bff !important;
                       color: $fgcolor;
                     }
                   }

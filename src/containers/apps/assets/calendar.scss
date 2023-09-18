@@ -57,7 +57,7 @@ $fgcolor: #e2e2e2;
           }
 
           .TabSeparator {
-            background-color: #ffffff1e;
+            background: #ffffff1e;
             width: 1px;
           }
 
@@ -76,7 +76,7 @@ $fgcolor: #e2e2e2;
               transition: all ease 0.3s;
 
               &:hover {
-                background-color: #ffffff1e;
+                background: #ffffff1e;
               }
 
               &:last-child {
@@ -90,7 +90,7 @@ $fgcolor: #e2e2e2;
   }
 
   .Calendar {
-    background-color: $bgcolor;
+    background: $bgcolor;
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     width: 100%;
@@ -142,7 +142,7 @@ $fgcolor: #e2e2e2;
           float: right;
 
           &:hover {
-            background-color: transparentize($fgcolor, 0.95);
+            background: transparentize($fgcolor, 0.95);
           }
 
           &.fade {
@@ -150,11 +150,11 @@ $fgcolor: #e2e2e2;
           }
 
           &.today {
-            background-color: #8fb6ff;
+            background: #8fb6ff;
             color: $bgcolor;
 
             &:hover {
-              background-color: #7b9cd9;
+              background: #7b9cd9;
             }
           }
         }
@@ -162,16 +162,16 @@ $fgcolor: #e2e2e2;
     }
 
     &.whitesur {
-      background-color: #202023;
+      background: #202023;
       .CalendarDate {
         .CalendarDateCell {
           p {
             &:hover {
-              background-color: inherit;
+              background: inherit;
             }
 
             &.today {
-              background-color: #ff453a;
+              background: #ff453a;
             }
           }
         }
@@ -189,20 +189,20 @@ $fgcolor: #e2e2e2;
         &:hover {
           .CloseButton {
             &:hover {
-              background-color: #00000010;
+              background: #00000010;
             }
           }
         }
 
         .TabBarInteraction i:hover {
-          background-color: #0000001e;
+          background: #0000001e;
         }
       }
     }
   }
 
   .Calendar {
-    background-color: $fgcolor;
+    background: $fgcolor;
     color: $bgcolor;
 
     .CalendarDate {
@@ -214,13 +214,13 @@ $fgcolor: #e2e2e2;
 
       .CalendarDateCell p {
         &:hover {
-          background-color: transparentize($bgcolor, 0.79);
+          background: transparentize($bgcolor, 0.79);
         }
       }
     }
 
     &.whitesur {
-      background-color: $fgcolor;
+      background: $fgcolor;
     }
   }
 }

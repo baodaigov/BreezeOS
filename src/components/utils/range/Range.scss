@@ -6,7 +6,7 @@ $rtbgcolor: #83aaff;
 .Range {
   appearance: none;
   height: 27px;
-  background-color: $rbgcolor;
+  background: $rbgcolor;
   border-radius: 999px;
   width: 100%;
   overflow: hidden;
@@ -17,7 +17,7 @@ $rtbgcolor: #83aaff;
     -webkit-appearance: none;
     width: 27px;
     height: 27px;
-    background-color: $rtbgcolor;
+    background: $rtbgcolor;
     border-radius: 999px;
     border: 0;
     box-shadow: -210px 0 0 195px $rtbgcolor;
@@ -27,7 +27,7 @@ $rtbgcolor: #83aaff;
     appearance: none;
     width: 27px;
     height: 27px;
-    background-color: $rtbgcolor;
+    background: $rtbgcolor;
     border-radius: 999px;
     border: 0;
     box-shadow: -210px 0 0 195px $rtbgcolor;
@@ -35,12 +35,12 @@ $rtbgcolor: #83aaff;
 
   &:hover {
     &::-webkit-slider-thumb {
-      background-color: lighten($rtbgcolor, 5%);
+      background: lighten($rtbgcolor, 5%);
       box-shadow: -210px 0 0 195px lighten($rtbgcolor, 5%);
     }
 
     &::-moz-range-thumb {
-      background-color: lighten($rtbgcolor, 5%);
+      background: lighten($rtbgcolor, 5%);
       box-shadow: -210px 0 0 195px lighten($rtbgcolor, 5%);
     }
   }
@@ -50,21 +50,21 @@ $rtbgcolor: #83aaff;
 
     &::-webkit-slider-thumb {
       border: 0.5px solid lighten(#202023, 25%);
-      background-color: $fgcolor;
+      background: $fgcolor;
       box-shadow: -210px 0 0 195px $fgcolor;
 
       &:active {
-        background-color: darken($fgcolor, 10%);
+        background: darken($fgcolor, 10%);
       }
     }
 
     &::-moz-range-thumb {
       border: 0.5px solid lighten(#202023, 25%);
-      background-color: $fgcolor;
+      background: $fgcolor;
       box-shadow: -210px 0 0 195px $fgcolor;
 
       &:active {
-        background-color: darken($fgcolor, 10%);
+        background: darken($fgcolor, 10%);
       }
     }
   }
@@ -72,20 +72,20 @@ $rtbgcolor: #83aaff;
 
 .lightMode {
   .Range {
-    background-color: lighten($rbgcolor, 70%);
+    background: lighten($rbgcolor, 70%);
 
     &.whitesur {
       border: 0.5px solid lighten($rbgcolor, 50%);
 
       &::-webkit-slider-thumb {
         border: 0.5px solid lighten(#202023, 75%);
-        background-color: lighten($fgcolor, 20%);
+        background: lighten($fgcolor, 20%);
         box-shadow: -210px 0 0 195px lighten($fgcolor, 20%);
       }
 
       &::-moz-range-thumb {
         border: 0.5px solid lighten(#202023, 75%);
-        background-color: lighten($fgcolor, 20%);
+        background: lighten($fgcolor, 20%);
         box-shadow: -210px 0 0 195px lighten($fgcolor, 20%);
       }
     }

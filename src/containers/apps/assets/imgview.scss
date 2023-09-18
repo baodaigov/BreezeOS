@@ -27,7 +27,7 @@ $fgcolor: #e2e2e2;
   }
 
   .ImgView {
-    background-color: #000;
+    background: #000;
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     height: 100%;
@@ -48,6 +48,6 @@ $fgcolor: #e2e2e2;
 
 .lightMode {
   .ImgView {
-    background-color: #fff;
+    background: #fff;
   }
 }

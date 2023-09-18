@@ -8,6 +8,7 @@ import DockItem from "../../components/DockItem";
 import "./assets/softwarestore.scss";
 import TopBarInteraction from "../../components/utils/window/TopBarInteraction";
 import StartApp from "../../components/startMenu/StartApp";
+import SurfaceIcon from "../../icons/surface.svg";
 import { setHeaderActive } from "../../reducers/header";
 
 export const SoftwareStoreApp = () => {
@@ -791,11 +792,7 @@ export default function SoftwareStore() {
                   </div>
                   <div className="Application">
                     <img
-                      src={
-                        icon === "WhiteSur-icon-theme"
-                          ? "https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/firefox.svg"
-                          : "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/firefox.svg"
-                      }
+                      src={SurfaceIcon}
                       alt="Application"
                       width={45}
                       height={45}
@@ -808,7 +805,7 @@ export default function SoftwareStore() {
                           marginBottom: "5px",
                         }}
                       >
-                        <p className="ApplicationTitle">Firefox</p>
+                        <p className="ApplicationTitle">Surface</p>
                         <div className="ApplicationRating">
                           <i className="fa-solid fa-star-sharp"></i>
                           <i className="fa-solid fa-star-sharp"></i>
@@ -1091,11 +1088,7 @@ export default function SoftwareStore() {
               <div className="InstalledAppContainer">
                 <div className="Application">
                   <img
-                    src={
-                      icon === "WhiteSur-icon-theme"
-                        ? "https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/firefox.svg"
-                        : "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/firefox.svg"
-                    }
+                    src={SurfaceIcon}
                     alt="Application"
                     width={45}
                     height={45}
@@ -1109,7 +1102,7 @@ export default function SoftwareStore() {
                       alignItems: "center",
                     }}
                   >
-                    <p className="ApplicationTitle">Firefox</p>
+                    <p className="ApplicationTitle">Surface</p>
                     <div className="ApplicationInstallButton">
                       <i className="fa-regular fa-trash"></i>
                     </div>

@@ -37,7 +37,7 @@ $actcolor: #8fb6ff;
 
     .ActMenu .iconSize .ActMenuSelector {
       &:hover {
-        background-color: transparent;
+        background: transparent;
       }
 
       .ActMenuInteraction {
@@ -51,14 +51,14 @@ $actcolor: #8fb6ff;
         transition: all ease 0.2s;
 
         &:hover {
-          background-color: #ffffff12;
+          background: #ffffff12;
         }
 
         &.disabled {
           color: #ffffff32;
           pointer-events: none;
           &:hover {
-            background-color: transparent;
+            background: transparent;
           }
         }
       }
@@ -84,7 +84,7 @@ $actcolor: #8fb6ff;
           }
 
           .TabSeparator {
-            background-color: #ffffff1e;
+            background: #ffffff1e;
             width: 1px;
           }
 
@@ -102,7 +102,7 @@ $actcolor: #8fb6ff;
               width: 20px;
 
               &:hover {
-                background-color: #ffffff1e;
+                background: #ffffff1e;
               }
 
               &:last-child {
@@ -116,7 +116,7 @@ $actcolor: #8fb6ff;
           display: flex;
           justify-content: space-between;
           width: 600px;
-          background-color: #ffffff0a;
+          background: #ffffff0a;
           border-radius: 5px;
         }
       }
@@ -129,7 +129,7 @@ $actcolor: #8fb6ff;
   }
 
   .Files {
-    background-color: $bgcolor;
+    background: $bgcolor;
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     height: 100%;
@@ -141,7 +141,7 @@ $actcolor: #8fb6ff;
       display: flex;
 
       .NavPanel {
-        background-color: transparentize($actcolor, 0.95);
+        background: transparentize($actcolor, 0.95);
         width: 260px;
         max-height: 100%;
         display: flex;
@@ -189,7 +189,7 @@ $actcolor: #8fb6ff;
 
             p {
               font-weight: 700;
-              background-color: transparentize($actcolor, 0.87);
+              background: transparentize($actcolor, 0.87);
             }
           }
         }
@@ -239,7 +239,7 @@ $actcolor: #8fb6ff;
             }
 
             &:hover {
-              background-color: transparentize($fgcolor, 0.93);
+              background: transparentize($fgcolor, 0.93);
             }
 
             .FilesName {
@@ -280,7 +280,7 @@ $actcolor: #8fb6ff;
             }
 
             &:hover {
-              background-color: transparentize($fgcolor, 0.95);
+              background: transparentize($fgcolor, 0.95);
             }
           }
         }
@@ -288,11 +288,11 @@ $actcolor: #8fb6ff;
     }
 
     &.whitesur {
-      background-color: #202023;
+      background: #202023;
 
       .FilesSection .NavPanel {
         border-radius: 0;
-        background-color: transparent;
+        background: transparent;
 
         &:last-child {
           border-bottom: none;
@@ -315,7 +315,7 @@ $actcolor: #8fb6ff;
           }
           &:hover {
             p {
-              background-color: transparentize($fgcolor, 0.93);
+              background: transparentize($fgcolor, 0.93);
             }
           }
 
@@ -328,12 +328,12 @@ $actcolor: #8fb6ff;
 
             p {
               font-weight: inherit;
-              background-color: transparentize($fgcolor, 0.85);
+              background: transparentize($fgcolor, 0.85);
             }
 
             &:hover {
               p {
-                background-color: transparentize($fgcolor, 0.85);
+                background: transparentize($fgcolor, 0.85);
               }
             }
           }
@@ -347,7 +347,7 @@ $actcolor: #8fb6ff;
   .files {
     .ActMenu .iconSize .ActMenuSelector .ActMenuInteraction {
       &:hover {
-        background-color: #00000012;
+        background: #00000012;
       }
 
       &.disabled {
@@ -360,33 +360,33 @@ $actcolor: #8fb6ff;
         color: #000;
 
         .TabSeparator {
-          background-color: #0000001e;
+          background: #0000001e;
         }
 
         &:hover {
           .CloseButton {
             &:hover {
-              background-color: #00000010;
+              background: #00000010;
             }
           }
         }
 
         .TabBarInteraction i:hover {
-          background-color: #0000001e;
+          background: #0000001e;
         }
       }
       .TabBarFileSystem {
-        background-color: #0000000a;
+        background: #0000000a;
       }
     }
   }
 
   .Files {
-    background-color: $fgcolor;
+    background: $fgcolor;
     color: $bgcolor;
 
     .FilesSection .NavPanel {
-      background-color: transparentize($actcolor, 0.85);
+      background: transparentize($actcolor, 0.85);
 
       .DropdownMenu {
         color: lighten($bgcolor, 10%);
@@ -398,7 +398,7 @@ $actcolor: #8fb6ff;
       .DropdownMenu {
         &.active {
           p {
-            background-color: $fgcolor;
+            background: $fgcolor;
           }
         }
       }
@@ -410,7 +410,7 @@ $actcolor: #8fb6ff;
       }
       .FilesSection2 .FilesItem {
         &:hover {
-          background-color: transparentize($bgcolor, 0.8) !important;
+          background: transparentize($bgcolor, 0.8) !important;
         }
 
         .FilesName {
@@ -423,13 +423,13 @@ $actcolor: #8fb6ff;
         }
 
         .OtherLocationsItem:hover {
-          background-color: transparentize($bgcolor, 0.8) !important;
+          background: transparentize($bgcolor, 0.8) !important;
         }
       }
     }
 
     &.whitesur {
-      background-color: $fgcolor;
+      background: $fgcolor;
 
       .FilesSection .NavPanel {
         border-bottom: 0.5px solid transparentize($bgcolor, 0.7);
@@ -443,7 +443,7 @@ $actcolor: #8fb6ff;
           }
           &:hover {
             p {
-              background-color: transparentize($bgcolor, 0.85);
+              background: transparentize($bgcolor, 0.85);
             }
           }
 
@@ -456,12 +456,12 @@ $actcolor: #8fb6ff;
 
             p {
               font-weight: inherit;
-              background-color: transparentize($bgcolor, 0.8);
+              background: transparentize($bgcolor, 0.8);
             }
 
             &:hover {
               p {
-                background-color: transparentize($bgcolor, 0.8);
+                background: transparentize($bgcolor, 0.8);
               }
             }
           }

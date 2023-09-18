@@ -62,7 +62,7 @@ $fgcolor: #e2e2e2;
           }
 
           .TabSeparator {
-            background-color: #ffffff1e;
+            background: #ffffff1e;
             width: 1px;
           }
 
@@ -80,7 +80,7 @@ $fgcolor: #e2e2e2;
               width: 20px;
 
               &:hover {
-                background-color: #ffffff1e;
+                background: #ffffff1e;
               }
 
               &:last-child {
@@ -94,7 +94,7 @@ $fgcolor: #e2e2e2;
   }
 
   .SoftwareStore {
-    background-color: $bgcolor;
+    background: $bgcolor;
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     width: 100%;
@@ -120,7 +120,7 @@ $fgcolor: #e2e2e2;
       z-index: 1;
 
       &:hover {
-        background-color: transparentize($fgcolor, 0.95);
+        background: transparentize($fgcolor, 0.95);
       }
     }
 
@@ -128,7 +128,7 @@ $fgcolor: #e2e2e2;
       height: 100%;
       width: 330px;
       transition: none;
-      background-color: transparentize($fgcolor, 0.97);
+      background: transparentize($fgcolor, 0.97);
       position: relative;
       left: 0;
       transition: all ease 0.3s;
@@ -171,27 +171,27 @@ $fgcolor: #e2e2e2;
             padding: 15px 20px;
 
             &.create {
-              background-color: linear-gradient(180deg, #3f2e93, #2662b1);
+              background: linear-gradient(180deg, #3f2e93, #2662b1);
               color: $fgcolor;
             }
 
             &.work {
-              background-color: #fffeb5;
+              background: #fffeb5;
               color: #2662b1;
             }
 
             &.play {
-              background-color: linear-gradient(90deg, #ffe69a, #b28cff);
+              background: linear-gradient(90deg, #ffe69a, #b28cff);
               color: #003479;
             }
 
             &.socialize {
-              background-color: linear-gradient(90deg, #ff77a2, #ff9e77);
+              background: linear-gradient(90deg, #ff77a2, #ff9e77);
               color: #202023;
             }
 
             &.learn {
-              background-color: linear-gradient(
+              background: linear-gradient(
                 180deg,
                 #80d184,
                 darken(#80d184, 10%)
@@ -200,7 +200,7 @@ $fgcolor: #e2e2e2;
             }
 
             &.develop {
-              background-color: linear-gradient(180deg, #140f2f, #20184b);
+              background: linear-gradient(180deg, #140f2f, #20184b);
               color: $fgcolor;
             }
           }
@@ -218,7 +218,7 @@ $fgcolor: #e2e2e2;
         max-width: 100%;
         display: flex;
         justify-content: space-between;
-        background-color: $bgcolor;
+        background: $bgcolor;
 
         .SoftwareNav {
           width: 100%;
@@ -244,25 +244,25 @@ $fgcolor: #e2e2e2;
 
           &[value="1"] {
             .SoftwareNavItem.explorer {
-              background-color: transparentize($fgcolor, 0.85);
+              background: transparentize($fgcolor, 0.85);
             }
           }
 
           &[value="2"] {
             .SoftwareNavItem.installed {
-              background-color: transparentize($fgcolor, 0.85);
+              background: transparentize($fgcolor, 0.85);
             }
           }
 
           &[value="3"] {
             .SoftwareNavItem.updates {
-              background-color: transparentize($fgcolor, 0.85);
+              background: transparentize($fgcolor, 0.85);
             }
           }
 
           .SoftwareSearchbar {
             appearance: none;
-            background-color: #a5a5a512;
+            background: #a5a5a512;
             padding: 9px 15px;
             outline: none;
             border: none;
@@ -303,7 +303,7 @@ $fgcolor: #e2e2e2;
             margin: 5px;
 
             &:hover {
-              background-color: transparentize($fgcolor, 0.95);
+              background: transparentize($fgcolor, 0.95);
             }
           }
         }
@@ -323,7 +323,7 @@ $fgcolor: #e2e2e2;
           margin: 5px;
 
           &:hover {
-            background-color: transparentize($fgcolor, 0.95);
+            background: transparentize($fgcolor, 0.95);
           }
         }
       }
@@ -339,7 +339,7 @@ $fgcolor: #e2e2e2;
           .Application {
             display: flex;
             border-radius: 10px;
-            background-color: transparentize($fgcolor, 0.96);
+            background: transparentize($fgcolor, 0.96);
             color: $fgcolor;
             padding: 18px;
             margin-left: 10px;
@@ -365,7 +365,7 @@ $fgcolor: #e2e2e2;
 
             .ApplicationInstallButton {
               border-radius: 999px;
-              background-color: #8fb6ff53;
+              background: #8fb6ff53;
               color: #8fb6ff;
               margin-top: 10px;
               font-size: 11px;
@@ -375,11 +375,11 @@ $fgcolor: #e2e2e2;
               float: right;
 
               &:hover {
-                background-color: #8fb6ff6b;
+                background: #8fb6ff6b;
               }
 
               &.installed {
-                background-color: transparentize($fgcolor, 0.97);
+                background: transparentize($fgcolor, 0.97);
                 color: lighten($bgcolor, 15%);
               }
             }
@@ -409,7 +409,7 @@ $fgcolor: #e2e2e2;
             .Blender {
               border-radius: 10px;
               overflow: hidden;
-              background-color: linear-gradient(180deg, #ffcf5f, #ffc53c);
+              background: linear-gradient(180deg, #ffcf5f, #ffc53c);
               box-shadow: 0px 0 20px #ffc43c93;
               padding: 50px;
               width: 100%;
@@ -422,7 +422,7 @@ $fgcolor: #e2e2e2;
             .Spotify {
               border-radius: 10px;
               overflow: hidden;
-              background-color: linear-gradient(180deg, #5fff94, #3cffce);
+              background: linear-gradient(180deg, #5fff94, #3cffce);
               box-shadow: 0px 0 20px #3cff7d93;
               padding: 50px;
               width: 100%;
@@ -435,7 +435,7 @@ $fgcolor: #e2e2e2;
             .Caprine {
               border-radius: 10px;
               overflow: hidden;
-              background-color: linear-gradient(180deg, #5faaff, #3c6dff);
+              background: linear-gradient(180deg, #5faaff, #3c6dff);
               box-shadow: 0px 0 20px #2e4da8b1;
               padding: 50px;
               width: 100%;
@@ -481,7 +481,7 @@ $fgcolor: #e2e2e2;
             .Application {
               display: flex;
               border-radius: 10px;
-              background-color: transparentize($fgcolor, 0.96);
+              background: transparentize($fgcolor, 0.96);
               color: $fgcolor;
               padding: 18px;
               margin-left: 10px;
@@ -497,7 +497,7 @@ $fgcolor: #e2e2e2;
 
               .ApplicationInstallButton {
                 border-radius: 999px;
-                background-color: #ff8f8f1a;
+                background: #ff8f8f1a;
                 color: #ff8f8f;
                 font-size: 14px;
                 display: flex;
@@ -508,7 +508,7 @@ $fgcolor: #e2e2e2;
                 float: right;
 
                 &:hover {
-                  background-color: #ff8f8f2a;
+                  background: #ff8f8f2a;
                 }
               }
             }
@@ -540,76 +540,76 @@ $fgcolor: #e2e2e2;
         color: #000;
 
         .TabSeparator {
-          background-color: #0000001e;
+          background: #0000001e;
         }
 
         &:hover {
           .CloseButton {
             &:hover {
-              background-color: #00000010;
+              background: #00000010;
             }
           }
         }
 
         .TabBarInteraction i:hover {
-          background-color: #0000001e;
+          background: #0000001e;
         }
       }
     }
   }
 
   .SoftwareStore {
-    background-color: $fgcolor;
+    background: $fgcolor;
     color: $bgcolor;
 
     .SoftwareTableLayout {
       &:hover {
-        background-color: transparentize($bgcolor, 0.8);
+        background: transparentize($bgcolor, 0.8);
       }
     }
 
     .NavPanel {
-      background-color: transparentize($bgcolor, 0.82);
+      background: transparentize($bgcolor, 0.82);
     }
 
     .SoftwareContainer {
       .SoftwareTab {
-        background-color: transparentize($bgcolor, 0.82);
+        background: transparentize($bgcolor, 0.82);
 
         .SoftwareNav {
           &[value="1"] {
             .SoftwareNavItem.explorer {
-              background-color: transparentize($bgcolor, 0.75);
+              background: transparentize($bgcolor, 0.75);
             }
           }
 
           &[value="2"] {
             .SoftwareNavItem.installed {
-              background-color: transparentize($bgcolor, 0.75);
+              background: transparentize($bgcolor, 0.75);
             }
           }
 
           &[value="3"] {
             .SoftwareNavItem.updates {
-              background-color: transparentize($bgcolor, 0.75);
+              background: transparentize($bgcolor, 0.75);
             }
           }
 
           .SoftwareSearchbar {
             color: $bgcolor;
-            background-color: darken(#a5a5a512, 100%);
+            background: darken(#a5a5a512, 100%);
           }
 
           .CloseSearchbar {
             &:hover {
-              background-color: transparentize($bgcolor, 0.78);
+              background: transparentize($bgcolor, 0.78);
             }
           }
         }
 
         .SoftwareSearch {
           &:hover {
-            background-color: transparentize($bgcolor, 0.75);
+            background: transparentize($bgcolor, 0.75);
           }
         }
       }
@@ -617,11 +617,11 @@ $fgcolor: #e2e2e2;
       .Software {
         .explorer {
           .Application {
-            background-color: transparentize($bgcolor, 0.87);
+            background: transparentize($bgcolor, 0.87);
             color: $bgcolor;
 
             .ApplicationInstallButton.installed {
-              background-color: transparentize($bgcolor, 0.85);
+              background: transparentize($bgcolor, 0.85);
               color: darken($fgcolor, 12%);
             }
           }
@@ -638,11 +638,11 @@ $fgcolor: #e2e2e2;
         .installed {
           .InstalledAppContainer {
             .Application {
-              background-color: transparentize($bgcolor, 0.87);
+              background: transparentize($bgcolor, 0.87);
               color: $bgcolor;
 
               .ApplicationInstallButton :hover {
-                background-color: #ff8f8f0a;
+                background: #ff8f8f0a;
               }
             }
           }

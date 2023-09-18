@@ -14,7 +14,7 @@ $fgcolor: #e2e2e2;
   z-index: 1;
 
   .TopBar {
-    background-color: $bgcolor;
+    background: $bgcolor;
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     padding: 7px 10px;
@@ -41,11 +41,11 @@ $fgcolor: #e2e2e2;
         }
 
         &:hover {
-          background-color: #3b3b3f;
+          background: #3b3b3f;
         }
 
         &.close:hover {
-          background-color: #ff5252;
+          background: #ff5252;
         }
       }
     }
@@ -58,7 +58,7 @@ $fgcolor: #e2e2e2;
     }
 
     &.whitesur {
-      background-color: #202023;
+      background: #202023;
       padding-left: 12px !important;
       padding-right: 12px !important;
       border-top-left-radius: 10px;
@@ -79,10 +79,10 @@ $fgcolor: #e2e2e2;
           }
 
           &.hide {
-            background-color: #febb2e;
+            background: #febb2e;
 
             &:active {
-              background-color: lighten(#febb2e, 20%);
+              background: lighten(#febb2e, 20%);
             }
 
             &:hover {
@@ -94,10 +94,10 @@ $fgcolor: #e2e2e2;
 
           &.max,
           &.min {
-            background-color: #28c840;
+            background: #28c840;
 
             &:active {
-              background-color: lighten(#28c840, 20%);
+              background: lighten(#28c840, 20%);
             }
 
             &:hover {
@@ -108,10 +108,10 @@ $fgcolor: #e2e2e2;
           }
 
           &.close {
-            background-color: #ff5e57;
+            background: #ff5e57;
 
             &:active {
-              background-color: lighten(#ff5e57, 20%);
+              background: lighten(#ff5e57, 20%);
             }
 
             &:hover {
@@ -142,7 +142,7 @@ $fgcolor: #e2e2e2;
   }
 
   .WindowBodyDefault {
-    background-color: $bgcolor;
+    background: $bgcolor;
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     padding: 10px 15px;
@@ -155,7 +155,7 @@ $fgcolor: #e2e2e2;
     .critical {
       height: 25px;
       width: 25px;
-      background-color: #ff6161;
+      background: #ff6161;
       border-radius: 999px;
       font-size: 18px;
       display: flex;
@@ -166,7 +166,7 @@ $fgcolor: #e2e2e2;
     .exclamation {
       height: 25px;
       width: 25px;
-      background-color: #fcff61;
+      background: #fcff61;
       color: #212121;
       border-radius: 999px;
       font-size: 15px;
@@ -186,7 +186,7 @@ $fgcolor: #e2e2e2;
     }
 
     &.whitesur {
-      background-color: #202023;
+      background: #202023;
       border-bottom-left-radius: 10px;
       border-bottom-right-radius: 10px;
       border: 0.5px solid lighten(#202023, 25%);
@@ -203,7 +203,7 @@ $fgcolor: #e2e2e2;
     .Button {
       border: none;
       outline: none;
-      background-color: #ffffff10;
+      background: #ffffff10;
       color: $fgcolor;
       font-size: 12px;
       padding: 7px 20px;
@@ -211,7 +211,7 @@ $fgcolor: #e2e2e2;
       margin-left: 5px;
 
       &:hover {
-        background-color: #ffffff20;
+        background: #ffffff20;
       }
     }
   }
@@ -228,11 +228,11 @@ $fgcolor: #e2e2e2;
 
 .lightMode {
   .TopBar {
-    background-color: $fgcolor;
+    background: $fgcolor;
     .TopBarInteractionContainer .TopBarInteraction {
       color: $bgcolor;
       &:hover {
-        background-color: #c9c9d3;
+        background: #c9c9d3;
       }
     }
     .TopBarTitle {
@@ -240,7 +240,7 @@ $fgcolor: #e2e2e2;
     }
 
     &.whitesur {
-      background-color: $fgcolor;
+      background: $fgcolor;
       border: 0.5px solid lighten(#202023, 5%);
       border-bottom: none;
     }
@@ -254,7 +254,7 @@ $fgcolor: #e2e2e2;
   }
 
   .WindowBodyDefault {
-    background-color: $fgcolor;
+    background: $fgcolor;
     color: $bgcolor;
 
     .critical {
@@ -262,16 +262,16 @@ $fgcolor: #e2e2e2;
     }
 
     .WindowBodyButton .Button {
-      background-color: #00000010;
+      background: #00000010;
       color: $bgcolor;
 
       &:hover {
-        background-color: #00000020;
+        background: #00000020;
       }
     }
 
     &.whitesur {
-      background-color: $fgcolor;
+      background: $fgcolor;
       border: 0.5px solid lighten(#202023, 5%);
       border-top: none;
     }

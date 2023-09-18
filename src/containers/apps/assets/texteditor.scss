@@ -68,7 +68,7 @@ $fgcolor: #e2e2e2;
       }
 
       .WindowTopBar {
-        background-color: $bgcolor;
+        background: $bgcolor;
         backdrop-filter: blur(15px);
         -webkit-backdrop-filter: blur(15px);
         padding: 7px 10px;
@@ -100,18 +100,18 @@ $fgcolor: #e2e2e2;
             color: $fgcolor;
 
             &:hover {
-              background-color: #3b3b3f;
+              background: #3b3b3f;
             }
 
             &.close:hover {
-              background-color: #ff5252;
+              background: #ff5252;
             }
           }
         }
       }
 
       .WindowBodyDefault {
-        background-color: $bgcolor;
+        background: $bgcolor;
         backdrop-filter: blur(15px);
         -webkit-backdrop-filter: blur(15px);
         border-bottom-left-radius: 5px;
@@ -143,7 +143,7 @@ $fgcolor: #e2e2e2;
         .Button {
           border: none;
           outline: none;
-          background-color: #ffffff10;
+          background: #ffffff10;
           color: $fgcolor;
           font-size: 12px;
           padding: 7px 20px;
@@ -151,7 +151,7 @@ $fgcolor: #e2e2e2;
           margin-left: 5px;
 
           &:hover {
-            background-color: #ffffff20;
+            background: #ffffff20;
           }
         }
       }
@@ -177,7 +177,7 @@ $fgcolor: #e2e2e2;
           }
 
           .TabSeparator {
-            background-color: #ffffff1e;
+            background: #ffffff1e;
             width: 1px;
           }
 
@@ -195,7 +195,7 @@ $fgcolor: #e2e2e2;
               width: 20px;
 
               &:hover {
-                background-color: #ffffff1e;
+                background: #ffffff1e;
               }
 
               &:last-child {
@@ -209,7 +209,7 @@ $fgcolor: #e2e2e2;
   }
 
   .TextEditor {
-    background-color: $bgcolor;
+    background: $bgcolor;
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     width: 100%;
@@ -246,7 +246,7 @@ $fgcolor: #e2e2e2;
       .TextArea {
         border: none;
         outline: none;
-        background-color: transparent;
+        background: transparent;
         color: inherit;
         font-size: 15px;
         padding-bottom: 10px;
@@ -259,7 +259,7 @@ $fgcolor: #e2e2e2;
         }
 
         &::selection {
-          background-color: #8fb6ff76;
+          background: #8fb6ff76;
           color: inherit;
         }
 
@@ -310,7 +310,7 @@ $fgcolor: #e2e2e2;
   .texteditor {
     .SaveChanges {
       .WindowTopBar {
-        background-color: $fgcolor;
+        background: $fgcolor;
 
         .WindowTopBarTitle {
           color: $bgcolor;
@@ -320,26 +320,26 @@ $fgcolor: #e2e2e2;
           color: $bgcolor;
 
           &:hover {
-            background-color: #3b3b3f;
+            background: #3b3b3f;
           }
 
           &.close:hover {
-            background-color: #ff5252;
+            background: #ff5252;
           }
         }
       }
 
       .WindowBodyDefault {
-        background-color: $fgcolor;
+        background: $fgcolor;
         color: $bgcolor;
       }
 
       .WindowBodyButton {
         .Button {
-          background-color: #00000010;
+          background: #00000010;
           color: $bgcolor;
           &:hover {
-            background-color: #00000020;
+            background: #00000020;
           }
         }
       }
@@ -350,26 +350,26 @@ $fgcolor: #e2e2e2;
         color: #000;
 
         .TabSeparator {
-          background-color: #0000001e;
+          background: #0000001e;
         }
 
         &:hover {
           .CloseButton {
             &:hover {
-              background-color: #00000010;
+              background: #00000010;
             }
           }
         }
 
         .TabBarInteraction i:hover {
-          background-color: #0000001e;
+          background: #0000001e;
         }
       }
     }
   }
 
   .TextEditor {
-    background-color: $fgcolor;
+    background: $fgcolor;
     color: $bgcolor;
 
     .TextLineNumber {

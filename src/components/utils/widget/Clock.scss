@@ -12,7 +12,7 @@
   .Close {
     width: 31px;
     height: 31px;
-    background-color: #f7f7f7;
+    background: #f7f7f7;
     border-radius: 999px;
     font-size: 14px;
     display: flex;
@@ -116,12 +116,12 @@
   }
 
   &.default {
-    background-color: #d3e1ff;
+    background: #d3e1ff;
 
     .Hour,
     .Min,
     .Sec {
-      background-color: #222;
+      background: #222;
     }
 
     .Number {
@@ -130,12 +130,12 @@
   }
 
   &.matcha {
-    background-color: #ddffe0;
+    background: #ddffe0;
 
     .Hour,
     .Min,
     .Sec {
-      background-color: #222;
+      background: #222;
     }
 
     .Number {

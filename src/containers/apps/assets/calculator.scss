@@ -38,7 +38,7 @@ $fgcolor: #e2e2e2;
   }
 
   .Calculator {
-    background-color: $bgcolor;
+    background: $bgcolor;
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     height: 100%;
@@ -84,16 +84,16 @@ $fgcolor: #e2e2e2;
         height: 52px;
 
         &:hover {
-          background-color: transparentize($fgcolor, 0.95);
+          background: transparentize($fgcolor, 0.95);
         }
 
         &.equals {
-          background-color: #8fb6ff;
+          background: #8fb6ff;
           color: $bgcolor;
           width: 118px;
 
           &:hover {
-            background-color: lighten(#8fb6ff, 5%);
+            background: lighten(#8fb6ff, 5%);
           }
         }
       }
@@ -103,7 +103,7 @@ $fgcolor: #e2e2e2;
 
 .lightMode {
   .Calculator {
-    background-color: $fgcolor;
+    background: $fgcolor;
     color: $bgcolor;
 
     .CalculatorSection {
@@ -111,7 +111,7 @@ $fgcolor: #e2e2e2;
         color: $bgcolor;
 
         &:hover {
-          background-color: transparentize($bgcolor, 0.8);
+          background: transparentize($bgcolor, 0.8);
         }
       }
     }

@@ -32,7 +32,7 @@ $fgcolor: #e2e2e2;
   }
 
   .VSCode {
-    background-color: $bgcolor;
+    background: $bgcolor;
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     height: 100%;
@@ -53,7 +53,7 @@ $fgcolor: #e2e2e2;
 
 .lightMode {
   .VSCode {
-    background-color: $fgcolor;
+    background: $fgcolor;
     color: $bgcolor;
   }
 }

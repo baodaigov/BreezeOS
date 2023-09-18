@@ -59,7 +59,7 @@ $fgcolor: #e8e8e8;
       -webkit-appearance: none;
       outline: none;
       border: none;
-      background-color: #a5a5a512;
+      background: #a5a5a512;
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       padding: 10px 20px;
@@ -70,7 +70,7 @@ $fgcolor: #e8e8e8;
       transition: all ease 0.3s;
 
       &:active {
-        background-color: darken(#a5a5a512, 11%);
+        background: darken(#a5a5a512, 11%);
       }
 
       &:empty::before {
