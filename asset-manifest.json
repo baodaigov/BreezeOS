@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/BreezeOS/static/css/main.7133dec9.css",
-    "main.js": "/BreezeOS/static/js/main.db134354.js",
+    "main.css": "/BreezeOS/static/css/main.7f9f6305.css",
+    "main.js": "/BreezeOS/static/js/main.8caaf7ef.js",
     "static/media/dark.png": "/BreezeOS/static/media/dark.6234c8ee9fb7421f25c8.png",
     "static/media/52496.jpg": "/BreezeOS/static/media/52496.d0aca8ed79fb92a3f932.jpg",
     "static/media/52791.jpg": "/BreezeOS/static/media/52791.2a35203ad57d4fa40bb5.jpg",
@@ -13,6 +13,11 @@
     "static/media/mixkit-clock-countdown-bleeps-916_Bq9La32i.wav": "/BreezeOS/static/media/mixkit-clock-countdown-bleeps-916_Bq9La32i.5fb91f472e300e055c3f.wav",
     "static/media/logo-d.png": "/BreezeOS/static/media/logo-d.99175ccae1cd34a7c319.png",
     "static/media/logo-l.png": "/BreezeOS/static/media/logo-l.ac02b99fc4a555d75f8b.png",
+    "static/media/SF800.woff": "/BreezeOS/static/media/SF800.22ca3897f0a586ae5a20.woff",
+    "static/media/SF500.woff": "/BreezeOS/static/media/SF500.fb7fd486cb419bdf895f.woff",
+    "static/media/SF700.woff": "/BreezeOS/static/media/SF700.c95feae6d20dc7252528.woff",
+    "static/media/SF200.woff": "/BreezeOS/static/media/SF200.b03ff12fcc6a971a136a.woff",
+    "static/media/SF300.woff": "/BreezeOS/static/media/SF300.e832200372c4dc52129e.woff",
     "static/media/CascadiaCode-Regular-VTT.woff2": "/BreezeOS/static/media/CascadiaCode-Regular-VTT.823f7943de13dee39b78.woff2",
     "static/media/default.jpg": "/BreezeOS/static/media/default.557ec81467de22ddd91a.jpg",
     "static/media/Oxygen-Sys-App-Error-Critical.mp3": "/BreezeOS/static/media/Oxygen-Sys-App-Error-Critical.7cb1c49a51ddd753fad6.mp3",
@@ -23,11 +28,11 @@
     "static/media/surface-private.svg": "/BreezeOS/static/media/surface-private.0e4a8432dfa45bf2a94b5b8a31cad95a.svg",
     "static/media/surface.svg": "/BreezeOS/static/media/surface.b74420142de514461d723e4a737e5710.svg",
     "index.html": "/BreezeOS/index.html",
-    "main.7133dec9.css.map": "/BreezeOS/static/css/main.7133dec9.css.map",
-    "main.db134354.js.map": "/BreezeOS/static/js/main.db134354.js.map"
+    "main.7f9f6305.css.map": "/BreezeOS/static/css/main.7f9f6305.css.map",
+    "main.8caaf7ef.js.map": "/BreezeOS/static/js/main.8caaf7ef.js.map"
   },
   "entrypoints": [
-    "static/css/main.7133dec9.css",
-    "static/js/main.db134354.js"
+    "static/css/main.7f9f6305.css",
+    "static/js/main.8caaf7ef.js"
   ]
 }
