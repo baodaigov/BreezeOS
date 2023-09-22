@@ -34,7 +34,7 @@ $fgcolor: #fff;
 
     &.active {
       opacity: 1;
-      pointer-events: all;
+      pointer-events: auto;
     }
 
     .Header-left {
@@ -132,7 +132,7 @@ $fgcolor: #fff;
 
     &.active {
       opacity: 1;
-      pointer-events: all;
+      pointer-events: auto;
     }
   }
 
@@ -151,7 +151,7 @@ $fgcolor: #fff;
 
     &.active {
       opacity: 1;
-      pointer-events: all;
+      pointer-events: auto;
     }
 
     .LowBatteryText {
@@ -185,7 +185,7 @@ $fgcolor: #fff;
 
     &.active {
       opacity: 1;
-      pointer-events: all;
+      pointer-events: auto;
     }
 
     .ChargingText {

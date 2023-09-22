@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import Desktop from "./Desktop";
-import { store } from "./store";
+import store from "./store";
 import { Provider } from "react-redux";
 
 ReactDOM.createRoot(

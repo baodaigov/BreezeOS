@@ -15,6 +15,7 @@ export default function LockScreen() {
       setTimeout(() => {
         dispatch(setHeaderActive(false));
         dispatch(setDockActive(false));
+        document.getElementsByClassName("DesktopBody")[0].classList.remove("active");
       }, 200);
 
       setTimeout(() => {

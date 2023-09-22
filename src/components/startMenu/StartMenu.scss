@@ -15,7 +15,7 @@ $fgcolor: #e8e8e8;
 
   &.active {
     opacity: 1;
-    pointer-events: all;
+    pointer-events: auto;
   }
 
   .StartMenu {

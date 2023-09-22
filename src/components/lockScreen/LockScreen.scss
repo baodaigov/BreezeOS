@@ -9,12 +9,12 @@ $fgcolor: #e2e2e2;
   position: absolute;
   opacity: 0;
   pointer-events: none;
-  z-index: 1000000;
+  z-index: 10;
   transition: all ease 0.5s;
 
   &.active {
     opacity: 1;
-    pointer-events: all;
+    pointer-events: auto;
   }
 
   .LockScreenWrapper {
@@ -25,166 +25,389 @@ $fgcolor: #e2e2e2;
     width: 100%;
     height: 100%;
     color: $fgcolor;
-    display: flex;
-    justify-content: center;
     opacity: 0;
     pointer-events: none;
     transition: all 0.7s;
-
-    &.active {
-      opacity: 1;
-      pointer-events: all;
-    }
 
     * {
       margin: 0;
     }
 
-    .SplashScreen {
-      margin: 60px 0;
+    &.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .SplashScreenWrapper {
+      position: relative;
       display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
-      text-align: center;
+      justify-content: center;
+      height: 100%;
+      transition: all ease 0.3s;
 
-      .SplashScreenTitle {
-        font-size: 80px;
-        font-weight: 700;
-        margin-bottom: 15px;
+      &.hideInfo {
+        opacity: 0;
+        pointer-events: none;
       }
 
-      .SplashScreenDesc {
-        font-size: 13px;
-        display: flex;
-        justify-content: center;
-
-        .SplashScreenItem {
-          margin-left: 15px;
-          display: flex;
-          align-items: center;
-
-          &::after {
-            content: "";
-            display: block;
-            width: 1px;
-            height: 15px;
-            background: $fgcolor;
-            margin-left: 15px;
-          }
-
-          &:first-child {
-            margin-left: 0;
-          }
-
-          &:last-child:after {
-            content: "";
-            display: none;
-          }
-
-          .SplashScreenIcon {
-            margin-right: 7px;
-          }
-        }
-      }
-
-      .SignInWrapper {
+      .SplashScreen {
+        margin: 60px 0 15px 0;
         display: flex;
         flex-direction: column;
+        justify-content: space-between;
         align-items: center;
+        text-align: center;
 
-        .SignInInfo {
-          display: flex;
-          align-items: center;
-          margin-bottom: 30px;
+        .SplashScreenInfo {
+          width: 600px;
+          padding: 20px 0;
+          border-radius: 20px;
+          transition: all ease 0.3s;
+          border: 4px solid transparent;
 
-          .SignInName {
-            margin-left: 15px;
-            font-weight: 700;
-            font-size: 16px;
+          &.editable {
+            border: 4px solid transparentize($fgcolor, 0.9);
           }
         }
 
-        .SignIn {
+        .SplashScreenTime {
           display: flex;
+          justify-content: center;
           align-items: center;
-          font-size: 12px;
+          font-weight: 700;
+          margin-bottom: 15px;
+          height: 112px;
+          transition: font cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+          letter-spacing: -2px;
+        }
 
-          .SignInPassword {
-            border-radius: 999px;
-            width: 260px;
-            background: transparentize($fgcolor, 0.95);
-            margin-right: 8px;
+        .SplashScreenWidgets {
+          height: 17px;
+          font-size: 14px;
+          display: flex;
+          justify-content: center;
+
+          .SplashScreenItem {
+            margin-left: 20px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
 
-            input {
-              background: transparent;
-              border: none;
-              outline: none;
-              appearance: none;
-              -webkit-appearance: none;
-              font-size: 12px;
-              color: $fgcolor;
-              width: 100%;
-              padding: 10px 16px;
-              padding-right: 0;
-
-              &::placeholder {
-                color: transparentize($fgcolor, 0.85);
-              }
-
-              &::-ms-clear,
-              &::-ms-reveal {
-                display: none;
-              }
+            &:first-child {
+              margin-left: 0;
             }
 
-            .SignInRevealAndClear {
-              margin-left: 8px;
-              border-radius: 999px;
-              color: $fgcolor;
-              font-size: 13px;
-              padding: 10px 16px;
-              padding-left: 0;
+            &:last-child:after {
+              content: "";
+              display: none;
+            }
+
+            .SplashScreenIcon {
+              margin-right: 7px;
+            }
+          }
+        }
+
+        .SignInWrapper {
+          height: 142.5px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: center;
+
+          .SignInInfo {
+            display: flex;
+            align-items: center;
+            border-radius: 999px;
+            transition: all ease 0.3s;
+            padding: 3px;
+
+            .SignInName {
+              margin-left: 15px;
+              font-weight: 700;
+              font-size: 16px;
+            }
+
+            &.expand {
+              padding-right: 15px;
+              background-color: transparentize($fgcolor, 0.95);
+
+              &:active {
+                background-color: transparentize($fgcolor, 0.92);
+                transition: none;
+              }
             }
           }
 
-          .LoginButton {
-            width: 31px;
-            height: 31px;
-            color: $fgcolor;
+          .SignInItem {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 100%;
             display: flex;
+            flex-direction: column;
             justify-content: center;
-            align-items: center;
-            border-radius: 999px;
-            font-size: 14px;
-            transition: all ease 0.1s;
+            transition: all ease 0.3s;
 
             &.disabled {
-              color: transparentize($fgcolor, 0.8);
+              opacity: 0;
               pointer-events: none;
             }
 
-            &:hover {
-              background: $fgcolor;
-              color: darken($fgcolor, 100%);
+            .SignIn {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              font-size: 12px;
+
+              .SignInPassword {
+                border-radius: 999px;
+                width: 260px;
+                height: 37px;
+                background: transparentize($fgcolor, 0.95);
+                margin-right: 8px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                input {
+                  background: transparent;
+                  border: none;
+                  outline: none;
+                  appearance: none;
+                  -webkit-appearance: none;
+                  font-size: 12px;
+                  color: $fgcolor;
+                  width: 100%;
+                  padding: 10px 16px;
+                  padding-right: 0;
+
+                  &::placeholder {
+                    color: transparentize($fgcolor, 0.85);
+                  }
+
+                  &::-ms-clear,
+                  &::-ms-reveal {
+                    display: none;
+                  }
+                }
+
+                .SignInRevealAndClear {
+                  margin-left: 8px;
+                  border-radius: 999px;
+                  color: $fgcolor;
+                  font-size: 13px;
+                  padding: 10px 16px;
+                  padding-left: 0;
+                }
+              }
+
+              .LoginButton {
+                width: 31px;
+                height: 31px;
+                color: $fgcolor;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 999px;
+                font-size: 14px;
+                transition: all ease 0.1s;
+
+                &.disabled {
+                  color: transparentize($fgcolor, 0.8);
+                  pointer-events: none;
+                }
+
+                &:hover {
+                  background: $fgcolor;
+                  color: darken($fgcolor, 100%);
+                }
+
+                &:active {
+                  background: darken($fgcolor, 20%);
+                  transition: none;
+                  color: darken($fgcolor, 100%);
+                }
+              }
             }
 
-            &:active {
-              background: darken($fgcolor, 20%);
-              transition: none;
-              color: darken($fgcolor, 100%);
+            .SignInFailedAttempts {
+              color: #ff9191;
+              font-size: 12px;
+              margin-top: 20px;
+            }
+
+            .PowerMenu {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+
+              .PowerMenuInteractionWrapper {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                margin-right: 40px;
+                color: $fgcolor;
+
+                &:last-child {
+                  margin-right: 0;
+                }
+
+                .PowerMenuInteraction {
+                  width: 34px;
+                  height: 34px;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  font-size: 22px;
+                  border-radius: 999px;
+                  margin-bottom: 10px;
+                }
+
+                .PowerMenuName {
+                  font-size: 13px;
+                }
+
+                &:active {
+                  .PowerMenuInteraction {
+                    background: transparentize($fgcolor, 0.9);
+                  }
+                }
+              }
             }
           }
         }
+      }
+    }
 
-        .SignInFailedAttempts {
-          color: #ff9191;
-          font-weight: 700;
-          font-size: 12px;
-          margin-top: 20px;
+    .OptionsButton {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 31px;
+      height: 31px;
+      color: $fgcolor;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 999px;
+      font-size: 16px;
+      transition: all ease 0.1s;
+
+      &.active {
+        background: $fgcolor;
+        color: darken($fgcolor, 100%);
+      }
+    }
+
+    .EditMenuWrapper {
+      width: 100%;
+      padding: 10px;
+      position: absolute;
+      display: flex;
+      bottom: -375px;
+      justify-content: center;
+      transition: all ease 0.5s;
+
+      &.active {
+        bottom: 0;
+      }
+
+      .EditMenu {
+        width: 510px;
+        background-color: darken($fgcolor, 85%);
+        color: $fgcolor;
+        padding: 18px 25px 30px 25px;
+        border-radius: 15px;
+
+        .CloseButton {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 20px;
+          width: 32px;
+          height: 32px;
+          border-radius: 999px;
+
+          &:active {
+            background-color: transparentize($fgcolor, 0.92);
+          }
+        }
+
+        .EditMenuItem {
+          padding: 0 5px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-top: 30px;
+
+          .EditMenuItemName {
+            font-weight: 700;
+            font-size: 16px;
+          }
+
+          .EditMenuItemSection {
+            font-size: 12px;
+            padding: 7px 12px;
+            background: transparentize($fgcolor, 0.95);
+            text-transform: capitalize;
+            display: flex;
+            justify-content: space-between;
+            width: 220px;
+            align-items: center;
+            border-radius: 7px;
+          }
+
+          .FontWeightBlock {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 90px;
+            height: 90px;
+            border-radius: 20px;
+            border: 3px solid transparent;
+            font-size: 55px;
+            transition: all ease 0.3s;
+            letter-spacing: -2px;
+
+            &.active {
+              border: 3px solid #2563eb;
+            }
+          }
+
+          .ColorBlock {
+            border-radius: 999px;
+            width: 30px;
+            height: 30px;
+            transition: all ease 0.3s;
+
+            &.active {
+              outline: 2px solid #2563eb;
+              outline-offset: 2px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.lightMode {
+  .LockScreen .LockScreenWrapper .EditMenuWrapper {
+    .EditMenu {
+      background-color: lighten($fgcolor, 10%);
+      color: darken($fgcolor, 85%);
+
+      .CloseButton {
+        &:active {
+          background-color: transparentize(darken($fgcolor, 85%), 0.92);
+        }
+      }
+
+      .EditMenuItem {
+        .EditMenuItemSection {
+          background: transparentize(darken($fgcolor, 85%), 0.95);
         }
       }
     }

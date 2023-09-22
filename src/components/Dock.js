@@ -13,19 +13,11 @@ import { TextEditorApp } from "../containers/apps/texteditor";
 import { SoftwareStoreApp } from "../containers/apps/softwarestore";
 import { CalendarApp } from "../containers/apps/calendar";
 import { VSCodeApp } from "../containers/apps/vscode";
-import { setDockActive } from "../reducers/dock";
 
 const Dock = () => {
   const icon = useSelector((state) => state.appearance.iconTheme);
   const shellTheme = useSelector((state) => state.shell.theme);
   const dockActive = useSelector((state) => state.dock.active);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    setTimeout(() => {
-      dispatch(setDockActive(true));
-    }, 1000);
-  }, []);
 
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>

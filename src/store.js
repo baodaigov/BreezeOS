@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+import thunk from "redux-thunk";
 import appearanceReducer from "./reducers/appearance";
 import batteryReducer from "./reducers/battery";
 import headerReducer from "./reducers/header";
@@ -14,6 +15,7 @@ import shellReducer from "./reducers/shell";
 import widgetReducer from "./reducers/widget";
 import surfaceReducer from "./reducers/surface";
 import vscodeReducer from "./reducers/vscode";
+import lockReducer from "./reducers/lock";
 // apps
 import appsSettingsReducer from "./reducers/apps/settings";
 import appsClockReducer from "./reducers/apps/clock";
@@ -27,35 +29,41 @@ import appsTerminalReducer from "./reducers/apps/terminal";
 import appsSoftwareStoreReducer from "./reducers/apps/softwarestore";
 import appsVscodeReducer from "./reducers/apps/vscode";
 
-export const store = configureStore({
-  reducer: {
-    appearance: appearanceReducer,
-    battery: batteryReducer,
-    header: headerReducer,
-    dock: dockReducer,
-    panel: panelReducer,
-    shutdown: shutdownReducer,
-    settings: settingsReducer,
-    wifipassword: wpReducer,
-    newwifi: nwReducer,
-    wallpaper: wallpaperReducer,
-    imgview: imgViewReducer,
-    shell: shellReducer,
-    widget: widgetReducer,
-    surface: surfaceReducer,
-    vscode: vscodeReducer,
+const reducers = {
+  appearance: appearanceReducer,
+  battery: batteryReducer,
+  header: headerReducer,
+  dock: dockReducer,
+  panel: panelReducer,
+  shutdown: shutdownReducer,
+  settings: settingsReducer,
+  wifipassword: wpReducer,
+  newwifi: nwReducer,
+  wallpaper: wallpaperReducer,
+  imgview: imgViewReducer,
+  shell: shellReducer,
+  widget: widgetReducer,
+  surface: surfaceReducer,
+  vscode: vscodeReducer,
+  lock: lockReducer,
 
-    // apps
-    appsSettings: appsSettingsReducer,
-    appsClock: appsClockReducer,
-    appsSurface: appsSurfaceReducer,
-    appsCalendar: appsCalendarReducer,
-    appsCamera: appsCameraReducer,
-    appsFiles: appsFilesReducer,
-    appsCalculator: appsCalculatorReducer,
-    appsTextEditor: appsTextEditorReducer,
-    appsTerminal: appsTerminalReducer,
-    appsSoftwareStore: appsSoftwareStoreReducer,
-    appsVscode: appsVscodeReducer,
-  },
+  // apps
+  appsSettings: appsSettingsReducer,
+  appsClock: appsClockReducer,
+  appsSurface: appsSurfaceReducer,
+  appsCalendar: appsCalendarReducer,
+  appsCamera: appsCameraReducer,
+  appsFiles: appsFilesReducer,
+  appsCalculator: appsCalculatorReducer,
+  appsTextEditor: appsTextEditorReducer,
+  appsTerminal: appsTerminalReducer,
+  appsSoftwareStore: appsSoftwareStoreReducer,
+  appsVscode: appsVscodeReducer,
+};
+
+const store = configureStore({
+  reducer: reducers,
+  middleware: [thunk],
 });
+
+export default store;

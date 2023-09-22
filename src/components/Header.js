@@ -1,13 +1,12 @@
 import { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { activePanel, inactivePanel } from "../reducers/panel";
-import { setHeaderActive, setHeaderType, setWidth } from "../reducers/header";
-import Time from "../header/Time";
+import { setHeaderType, setWidth } from "../reducers/header";
 import Task from "../header/Task";
 import Home from "../header/Home";
 import Panel from "./panel/Panel";
 import { useBattery } from "react-use";
-import DateNTime from "../header/DateNTime";
+import { setActive } from "../reducers/apps/clock";
 import AppMenu from "../header/AppMenu";
 import PanelType from "./panel/PanelType";
 
@@ -27,6 +26,46 @@ const Header = (props) => {
   const [bluetoothPanelActive, setBluetoothPanelActive] = useState(false);
   const [brightnessPanelActive, setBrightnessPanelActive] = useState(false);
   const [volumePanelActive, setVolumePanelActive] = useState(false);
+  const hour12 = useSelector((state) => state.settings.hour12);
+  const [curTime, setCurTime] = useState(null);
+  const [curDate, setCurDate] = useState(null);
+
+  useEffect(() => {
+    if (curTime === null) {
+      setCurTime(
+        new Date().toLocaleString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: hour12,
+        })
+      );
+    } else {
+      setInterval(() => {
+        setCurTime(
+          new Date().toLocaleString("en-US", {
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: hour12,
+          })
+        );
+      }, 1000);
+    }
+    if (curDate === null) {
+      setCurDate(
+        new Date().toLocaleString("en-US", {
+          dateStyle: "medium",
+        })
+      );
+    } else {
+      setInterval(() => {
+        setCurDate(
+          new Date().toLocaleString("en-US", {
+            dateStyle: "medium",
+          })
+        );
+      }, 1000);
+    }
+  }, [curTime, hour12, curDate]);
 
   function useOutsidePanel(ref) {
     useEffect(() => {
@@ -165,10 +204,6 @@ const Header = (props) => {
   let batteryPercent = Math.round(batteryState.level * 100);
 
   useEffect(() => {
-    setTimeout(() => {
-      dispatch(setHeaderActive(true));
-    }, 1000);
-
     if (headerProMode === true) {
       if (batteryChargingStatus) {
         dispatch(setHeaderType(""));
@@ -254,7 +289,16 @@ const Header = (props) => {
       <div className={`default ${headerType === "default" ? "active" : ""}`}>
         <div className="Header-left">
           <Home />
-          {shellTheme !== "WhiteSur" ? <Time /> : ""}
+          {shellTheme !== "WhiteSur" ? (
+            <div
+              className="Time Header-item"
+              onClick={() => dispatch(setActive(true))}
+            >
+              <p>{curTime}</p>
+            </div>
+          ) : (
+            ""
+          )}
           {shellTheme === "WhiteSur" ? <AppMenu /> : ""}
         </div>
         <div className="Header-right">
@@ -398,7 +442,13 @@ const Header = (props) => {
                   style={{ height: "90px", right: "163px" }}
                 />
               </div>
-              <DateNTime />
+              <div
+                className="Header-item DateNTime"
+                onClick={() => dispatch(setActive(true))}
+              >
+                <span style={{ marginRight: "10px" }}>{curDate}</span>
+                <span>{curTime}</span>
+              </div>
             </>
           ) : (
             ""

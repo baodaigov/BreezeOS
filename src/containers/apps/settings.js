@@ -491,19 +491,15 @@ export default function Settings() {
 
     function useOutsideResolutionMenu(ref) {
       useEffect(() => {
-        /**
-         * Alert if clicked on outside of element
-         */
         function handleClickOutside(event) {
           if (ref.current && !ref.current.contains(event.target)) {
             showResolutionMenu(false);
           }
         }
-        // Bind the event listener
+
         document.addEventListener("mousedown", handleClickOutside);
 
         return () => {
-          // Unbind the event listener on clean up
           document.removeEventListener("mousedown", handleClickOutside);
         };
       }, [ref]);
@@ -1421,7 +1417,7 @@ export default function Settings() {
                   >
                     <p className="font-bold">24-hour time</p>
                     <Toggle
-                      active={settingsReducer.hour12}
+                      active={!settingsReducer.hour12}
                       onToggle={() =>
                         dispatch(toggle12Hour(!settingsReducer.hour12))
                       }

@@ -20,7 +20,7 @@ $fbgcolor: #83aaff;
 
   &.active {
     opacity: 1;
-    pointer-events: all;
+    pointer-events: auto;
   }
 
   .PanelTypeContainer {
@@ -39,7 +39,7 @@ $fbgcolor: #83aaff;
 
       &.active {
         opacity: 1;
-        pointer-events: all;
+        pointer-events: auto;
       }
 
       .PanelItem {
@@ -190,7 +190,7 @@ $fbgcolor: #83aaff;
 
       &.active {
         opacity: 1;
-        pointer-events: all;
+        pointer-events: auto;
       }
 
       .PanelItem {
@@ -279,7 +279,7 @@ $fbgcolor: #83aaff;
 
       &.active {
         opacity: 1;
-        pointer-events: all;
+        pointer-events: auto;
         transition: none;
       }
 
@@ -326,7 +326,7 @@ $fbgcolor: #83aaff;
 
       &.active {
         opacity: 1;
-        pointer-events: all;
+        pointer-events: auto;
       }
 
       .PanelItem {

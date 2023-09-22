@@ -1,15 +1,24 @@
 import Wallpaper from "./components/Wallpaper";
 import "./Desktop.scss";
-import Menu from "./components/menu/Menu";
 import TerminalWindow from "./components/utils/window/TerminalDesktop";
 import LockScreen from "./components/lockScreen/LockScreen";
 import StartMenu from "./components/startMenu/StartMenu";
 import Header from "./components/Header";
 import Dock from "./components/Dock";
 import DesktopBody from "./DesktopBody";
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { setLocked } from "./reducers/settings";
 
 const Desktop = () => {
+  const dispatch = useDispatch();
+
+  document.addEventListener("keydown", (e) => {
+    if (e.ctrlKey && e.keyCode === 76) {
+      e.preventDefault();
+      dispatch(setLocked(true));
+    }
+  });
+
   function isMobile() {
     var check = false;
     (function (a) {
@@ -43,7 +52,6 @@ const Desktop = () => {
           ""
         )}
         <LockScreen />
-        <Menu />
         <StartMenu />
         <Header />
         <Wallpaper />

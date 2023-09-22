@@ -2,7 +2,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Optimistic Display";
+  font-family: Optimistic Display;
   font-style: normal;
   font-weight: 200;
   src: url(https://static.xx.fbcdn.net/rsrc.php/yu/r/UwoTM2u9U6b.woff2)
@@ -11,7 +11,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Optimistic Display";
+  font-family: Optimistic Display;
   font-style: normal;
   font-weight: 300;
   src: url(https://static.xx.fbcdn.net/rsrc.php/yJ/r/gJ8wmjmQhMa.woff2)
@@ -20,7 +20,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Optimistic Display";
+  font-family: Optimistic Display;
   font-style: normal;
   font-weight: 500;
   src: url(https://static.xx.fbcdn.net/rsrc.php/yL/r/jfwoHaS3i0K.woff2)
@@ -29,7 +29,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Optimistic Display";
+  font-family: Optimistic Display;
   font-style: normal;
   font-weight: 700;
   src: url(https://static.xx.fbcdn.net/rsrc.php/yU/r/WXBYOaYZuYu.woff2)
@@ -38,7 +38,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: "Optimistic Display";
+  font-family: Optimistic Display;
   font-style: normal;
   font-weight: 800;
   src: url(https://static.xx.fbcdn.net/rsrc.php/yR/r/0wcuDYQ2laN.woff2)
@@ -46,23 +46,80 @@
 }
 
 @font-face {
-  font-family: Cascadia Code;
-  src: url(./fonts/CascadiaCode-Regular-VTT.woff2) format("woff2");
-  font-style: normal;
   font-display: swap;
+  font-family: Cascadia Code;
+  font-style: normal;
+  src: url(./fonts/CascadiaCode-Regular-VTT.woff2) format("woff2");
+}
+@font-face {
+  font-display: swap;
+  font-family: San Francisco;
+  font-style: normal;
+  font-weight: 200;
+  src: url(./fonts/SF200.woff) format("woff");
 }
 
-* ::-webkit-scrollbar {
+@font-face {
+  font-display: swap;
+  font-family: San Francisco;
+  font-style: normal;
+  font-weight: 300;
+  src: url(./fonts/SF300.woff) format("woff");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: San Francisco;
+  font-style: normal;
+  font-weight: 500;
+  src: url(./fonts/SF500.woff) format("woff");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: San Francisco;
+  font-style: normal;
+  font-weight: 700;
+  src: url(./fonts/SF700.woff) format("woff");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: San Francisco;
+  font-style: normal;
+  font-weight: 800;
+  src: url(./fonts/SF800.woff) format("woff");
+}
+
+.OptimisticDisplay *:not(i) {
+  font-family: Optimistic Display, -apple-system, ui-sans-serif, system-ui,
+    BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans,
+    sans-serif, Noto Color Emoji, Apple Color Emoji, Segoe UI Emoji,
+    Segoe UI Symbol;
+}
+
+.SanFrancisco *:not(i) {
+  font-family: San Francisco, -apple-system, ui-sans-serif, system-ui,
+    BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans,
+    sans-serif, Noto Color Emoji, Apple Color Emoji, Segoe UI Emoji,
+    Segoe UI Symbol;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+*::-webkit-scrollbar {
   width: 0;
 }
 
-* ::-webkit-scrollbar-thumb {
+*::-webkit-scrollbar-thumb {
   background: transparent;
 }
 
 body {
   overflow: hidden;
-  background: #2b2b2b;
+  background: #09090b;
 }
 
 a {
@@ -85,41 +142,24 @@ input {
   user-select: none; /* Standard syntax */
 }
 
-.font-extrabold {
-  font-weight: 800;
-}
-
-.font-bold {
-  font-weight: 700;
-}
-
-.font-medium {
-  font-weight: 500;
+.font-light {
+  font-weight: 200;
 }
 
 .font-normal {
   font-weight: 300;
 }
 
-.font-light {
-  font-weight: 200;
+.font-medium {
+  font-weight: 500;
 }
 
-.OptimisticDisplay {
-  *:not(i) {
-    font-family: Optimistic Display, -apple-system, ui-sans-serif, system-ui,
-      BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans,
-      sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol,
-      Noto Color Emoji;
-  }
+.font-bold {
+  font-weight: 700;
 }
 
-.System {
-  *:not(i) {
-    font-family: -apple-system, ui-sans-serif, system-ui, BlinkMacSystemFont,
-      Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
-      Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-  }
+.font-extrabold {
+  font-weight: 800;
 }
 
 .Desktop {
@@ -127,38 +167,32 @@ input {
   width: 100%;
   height: 100vh;
 
-  &.poweroff * {
-    display: none;
+  &.hideCursor * {
     cursor: none !important;
   }
-  &.blackscr * {
-    display: none;
-    cursor: default !important;
-  }
-  &.sleep {
+  &.blackscr {
     background: #000 !important;
+    cursor: none !important;
     * {
       display: none;
-      cursor: none !important;
     }
-  }
-  &.cursorLoad * {
-    display: none;
-    cursor: wait !important;
   }
   &.isBold * {
     font-weight: 700;
   }
 
   .DesktopBody {
-    display: none;
     position: absolute;
     overflow: hidden;
     height: calc(100vh - 105px);
     width: 100vw;
+    opacity: 0;
+    pointer-events: none;
+    transition: all ease 0.3s;
 
     &.active {
-      display: block;
+      opacity: 1;
+      pointer-events: auto;
     }
   }
 

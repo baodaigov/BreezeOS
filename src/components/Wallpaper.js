@@ -1,15 +1,16 @@
 import { useSelector } from "react-redux";
 import "./Wallpaper.scss";
+import { useEffect, useState } from "react";
 
 export default function Wallpaper() {
   const wallpaperImg = useSelector((state) => state.wallpaper.img);
 
-  setTimeout(() => {
-    document
-      .getElementsByClassName("Wallpaper")[0]
-      .classList.remove("activeAnimation");
-    document.getElementsByClassName("Wallpaper")[0].classList.add("active");
-  }, 300);
+  useEffect(() => document.getElementsByClassName("Wallpaper")[0].classList.add("active"), []);
 
-  return <div className='Wallpaper activeAnimation' style={{ backgroundImage: `url(${wallpaperImg})` }}></div>;
+  return (
+    <div
+      className="Wallpaper"
+      style={{ backgroundImage: `url(${wallpaperImg})` }}
+    ></div>
+  );
 }

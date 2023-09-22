@@ -279,7 +279,7 @@ export default function Surface() {
                     className="CloseButton"
                     onClick={() => setSettingsOpened(false)}
                   >
-                    <i class="fa-light fa-xmark"></i>
+                    <i className="fa-light fa-xmark"></i>
                   </div>
                 </div>
                 <div
@@ -327,7 +327,7 @@ export default function Surface() {
                     className="CloseButton"
                     onClick={() => setSupportOpened(false)}
                   >
-                    <i class="fa-light fa-xmark"></i>
+                    <i className="fa-light fa-xmark"></i>
                   </div>
                 </div>
               </div>
