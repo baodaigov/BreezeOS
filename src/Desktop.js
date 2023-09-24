@@ -35,31 +35,30 @@ const Desktop = () => {
     return check;
   }
 
-  setTimeout(() => {
-    document.getElementsByClassName("DesktopBody")[0].classList.add("active");
-  }, 2000);
-
   return (
-    <div className="OptimisticDisplay">
-      <div className="Desktop" onContextMenu={(e) => e.preventDefault()}>
-        <TerminalWindow />
-        {isMobile() ? (
-          <h1 className="error">
+    <>
+      {isMobile() ? (
+        <div className="error OptimisticDisplay">
+          <p style={{ margin: 0 }}>
             Sorry, in order to use the operating system, please switch to the
             desktop.
-          </h1>
-        ) : (
-          ""
-        )}
-        <LockScreen />
-        <StartMenu />
-        <Header />
-        <Wallpaper />
-        <DesktopBody />
-        <Dock />
-      </div>
-      <div id="brightness"></div>
-    </div>
+          </p>
+        </div>
+      ) : (
+        <>
+          <div className="Desktop OptimisticDisplay" onContextMenu={(e) => e.preventDefault()}>
+            <TerminalWindow />
+            <LockScreen />
+            <StartMenu />
+            <Header />
+            <Wallpaper />
+            <DesktopBody />
+            <Dock />
+          </div>
+          <div id="brightness"></div>
+        </>
+      )}
+    </>
   );
 };
 

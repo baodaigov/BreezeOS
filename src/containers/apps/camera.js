@@ -117,22 +117,13 @@ export default function Camera() {
   const dispatch = useDispatch();
 
   const CameraWindow = () => {
+    const isActive = useSelector((state) => state.appsCamera.active);
     const [webcam, setWebcam] = useState(false);
     const [interaction, disableInteraction] = useState("capturing");
     const [img, setImg] = useState(null);
     const [audio, setAudio] = useState(false);
     var countdownSound = new Audio(CountdownSound);
     var cameraShutter = new Audio(CameraShutter);
-
-    useEffect(() => {
-      document.getElementById("camera").onclick = () => {
-        setTimeout(() => {
-          setWebcam(!webcam);
-          disableInteraction("");
-        }, 1000);
-      };
-    }, []);
-
     const videoConstraints = {
       facingMode: "user",
     };
@@ -373,22 +364,28 @@ export default function Camera() {
     const settingsMenuRef = useRef(null);
     useOutsideSettingsMenu(settingsMenuRef);
 
-    const [min, isMin] = useState(false);
+    useEffect(() => {
+      if (isActive) {
+        setTimeout(() => {
+          setWebcam(true);
+          disableInteraction("");
+        }, 1000);
+      } else {
+        setTimeout(() => {
+          setWebcam(false);
+          disableInteraction("capturing");
+          document
+            .getElementsByClassName("CameraRecordTime")[0]
+            .classList.remove("active");
+          isRecording(false);
+          setRunning(false);
+          showSettingsMenu(false);
+          setViewMedia(false);
+        }, 500);
+      }
+    }, [isActive]);
 
-    function close() {
-      dispatch(setActive(false));
-      setTimeout(() => {
-        setWebcam(!webcam);
-        disableInteraction("capturing");
-        document
-          .getElementsByClassName("CameraRecordTime")[0]
-          .classList.remove("active");
-        isRecording(false);
-        setRunning(false);
-        showSettingsMenu(false);
-        setViewMedia(false);
-      }, 300);
-    }
+    const [min, isMin] = useState(false);
 
     function minimize() {
       document.getElementsByClassName("camera")[0].classList.toggle("minimize");
@@ -492,7 +489,10 @@ export default function Camera() {
             onHide={() => dispatch(setHide(true))}
           />
           <TopBarInteraction action={min ? "max" : "min"} onMinMax={minimize} />
-          <TopBarInteraction action="close" onClose={close} />
+          <TopBarInteraction
+            action="close"
+            onClose={() => dispatch(setActive(false))}
+          />
         </TopBar>
         <WindowBody>
           <div className={`Camera ${viewMedia ? "blankscr" : ""}`}>

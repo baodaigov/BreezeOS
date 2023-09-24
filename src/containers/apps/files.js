@@ -102,9 +102,7 @@ export const FilesApp = () => {
               label: isHide ? "Unhide" : "Hide",
               disabled: isActive ? false : true,
               action: () =>
-                isHide
-                  ? dispatch(setHide(false))
-                  : dispatch(setHide(true)),
+                isHide ? dispatch(setHide(false)) : dispatch(setHide(true)),
             },
             {
               label: isActive ? "Quit" : "Open",

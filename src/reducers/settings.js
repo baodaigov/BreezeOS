@@ -64,6 +64,7 @@ const initialState = {
     },
   ],
   isLocked: true,
+  isSleeping: false,
   volume: 100,
   brightness: 100,
   notifications: true,
@@ -101,6 +102,16 @@ export const settingsSlice = createSlice({
     },
     setLocked: (state, action) => {
       state.isLocked = action.payload;
+    },
+    setSleeping: (state, action) => {
+      state.isSleeping = action.payload;
+      if (action.payload === true) {
+        document.getElementsByClassName("Desktop")[0].classList.add("blackscr");
+      } else {
+        document
+          .getElementsByClassName("Desktop")[0]
+          .classList.remove("blackscr");
+      }
     },
     setVolume: (state, action) => {
       state.volume = action.payload;
@@ -149,6 +160,7 @@ export const {
   toggleAirplaneModeOn,
   toggleWifi,
   setLocked,
+  setSleeping,
   setVolume,
   setBrightness,
   toggleNotifications,

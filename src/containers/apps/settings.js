@@ -1078,16 +1078,16 @@ export default function Settings() {
                             onClick={() => changeFont("OptimisticDisplay")}
                           ></ActMenuSelector>
                         )}
-                        {settingsReducer.fontFamily === "System" ? (
+                        {settingsReducer.fontFamily === "SanFrancisco" ? (
                           <ActMenuSelector
-                            title="System"
+                            title="SanFrancisco"
                             active
-                            onClick={() => changeFont("System")}
+                            onClick={() => changeFont("SanFrancisco")}
                           ></ActMenuSelector>
                         ) : (
                           <ActMenuSelector
-                            title="System"
-                            onClick={() => changeFont("System")}
+                            title="SanFrancisco"
+                            onClick={() => changeFont("SanFrancisco")}
                           ></ActMenuSelector>
                         )}
                       </ActMenu>

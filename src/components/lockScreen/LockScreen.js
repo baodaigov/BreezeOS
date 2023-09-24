@@ -36,6 +36,7 @@ export default function LockScreen() {
           .classList.remove("active");
         dispatch(setHeaderActive(true));
         dispatch(setDockActive(true));
+        document.getElementsByClassName("DesktopBody")[0].classList.add("active");
     }
   }, [isLocked]);
 

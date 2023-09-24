@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useBattery } from "react-use";
 import "./LockScreen.scss";
 import { useSelector, useDispatch } from "react-redux";
-import { setLocked } from "../../reducers/settings";
+import { setLocked, setSleeping } from "../../reducers/settings";
 import {
   setFontFamily,
   setFontSize,
@@ -20,6 +20,7 @@ import ActMenu, { ActMenuSelector } from "../utils/menu/index";
 export default function SplashScreen() {
   const dispatch = useDispatch();
   const settings = useSelector((state) => state.settings);
+  const isLocked = useSelector((state) => state.settings.isLocked);
   const lock = useSelector((state) => state.lock);
   const optionsMenuShown = useSelector((state) => state.lock.optionsMenuShown);
   const hour12 = useSelector((state) => state.settings.hour12);
@@ -33,6 +34,25 @@ export default function SplashScreen() {
   const [isEditable, setEditable] = useState(false);
   const [fontFamilyMenu, showFontFamilyMenu] = useState(false);
   const [fontSizeMenu, showFontSizeMenu] = useState(false);
+  const inputFieldRef = useRef(null);
+
+  useEffect(() => {
+    document.addEventListener("keydown", () => {
+      dispatch(setOptionsMenuShown(false));
+      if (
+        isLocked &&
+        !isEditable &&
+        settings.user.password &&
+        !settings.isSleeping
+      ) {
+        inputFieldRef.current.focus();
+      } else {
+        inputFieldRef.current.blur();
+        setPasswordValue("");
+        setPasswordShown(false);
+      }
+    });
+  }, [isLocked, isEditable, settings.user.password, settings.isSleeping]);
 
   function useOutsideFontFamilyMenu(ref) {
     useEffect(() => {
@@ -160,15 +180,13 @@ export default function SplashScreen() {
     }, 50);
 
     setTimeout(() => {
-      document.getElementsByClassName("Desktop")[0].classList.add("blackscr");
+      dispatch(setSleeping(true));
       dispatch(setOptionsMenuShown(false));
     }, 300);
 
     document.addEventListener("keypress", (e) => {
       setTimeout(() => {
-        document
-          .getElementsByClassName("Desktop")[0]
-          .classList.remove("blackscr");
+        dispatch(setSleeping(false));
         document
           .getElementsByClassName("SplashScreenWrapper")[0]
           .classList.remove("hideInfo");
@@ -375,7 +393,8 @@ export default function SplashScreen() {
                                   setPasswordValue(e.target.value)
                                 }
                                 onKeyDown={action}
-                              ></input>
+                                ref={inputFieldRef}
+                              />
                               {passwordValue.length !== 0 && (
                                 <div
                                   className="SignInRevealAndClear"

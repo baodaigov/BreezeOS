@@ -143,23 +143,23 @@ input {
 }
 
 .font-light {
-  font-weight: 200;
+  font-weight: 200 !important;
 }
 
 .font-normal {
-  font-weight: 300;
+  font-weight: 300 !important;
 }
 
 .font-medium {
-  font-weight: 500;
+  font-weight: 500 !important;
 }
 
 .font-bold {
-  font-weight: 700;
+  font-weight: 700 !important;
 }
 
 .font-extrabold {
-  font-weight: 800;
+  font-weight: 800 !important;
 }
 
 .Desktop {
@@ -206,7 +206,7 @@ input {
     height: 100%;
     width: 100%;
     z-index: 99999999999;
-    background: #ffbf0049;
+    background: #b1730038;
     pointer-events: none;
     transition: all 2s ease;
   }
@@ -237,7 +237,7 @@ input {
   color: #fff;
   background: #000;
   margin: 0;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   position: absolute;
   z-index: 1000000000000;

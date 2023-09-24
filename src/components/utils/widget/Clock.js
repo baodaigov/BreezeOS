@@ -14,11 +14,17 @@ const Clock = () => {
   const clock = useSelector((state) => state.widget.clock);
 
   useEffect(() => {
-    setInterval(() => {
+    if ((hour, min, sec === null)) {
       setHour(new Date().getHours() * 30);
       setMin(new Date().getMinutes() * 6);
       setSec(new Date().getSeconds() * 6);
-    }, 1000);
+    } else {
+      setInterval(() => {
+        setHour(new Date().getHours() * 30);
+        setMin(new Date().getMinutes() * 6);
+        setSec(new Date().getSeconds() * 6);
+      }, 1000);
+    }
   }, [hour, min, sec]);
 
   function useOutsideMenu(ref) {
@@ -59,17 +65,18 @@ const Clock = () => {
   }
 
   return (
-    <Draggable>
+    <Draggable handle=".CloseWidgetContainer">
       <div
         className={`ClockWidget ${clock.active ? "active" : ""} ${clock.style}`}
         onContextMenu={onContextMenu}
       >
         <ActMenu
           style={{
-            position: "relative",
+            position: "absolute",
             zIndex: "10001",
-            top: "100px",
+            top: "80px",
             right: "100px",
+            width: "200px",
           }}
           className={contextMenuEnabled ? "active" : ""}
           ref={contextMenuRef}
@@ -94,28 +101,30 @@ const Clock = () => {
         <div className="Close" onClick={() => dispatch(removeClock())}>
           <i className="fa-solid fa-xmark"></i>
         </div>
-        <div
-          className="Hour"
-          style={{
-            transform: `rotateZ(${hour}deg)`,
-          }}
-        />
-        <div
-          className="Min"
-          style={{
-            transform: `rotateZ(${min}deg)`,
-          }}
-        />
-        <div
-          className={`Sec ${clock.seconds ? "active" : ""}`}
-          style={{
-            transform: `rotateZ(${sec}deg)`,
-          }}
-        />
-        <span className="Number twelve"></span>
-        <span className="Number three"></span>
-        <span className="Number six"></span>
-        <span className="Number nine"></span>
+        <div className="CloseWidgetContainer">
+          <div
+            className="Hour"
+            style={{
+              transform: `rotateZ(${hour}deg)`,
+            }}
+          />
+          <div
+            className="Min"
+            style={{
+              transform: `rotateZ(${min}deg)`,
+            }}
+          />
+          <div
+            className={`Sec ${clock.seconds ? "active" : ""}`}
+            style={{
+              transform: `rotateZ(${sec}deg)`,
+            }}
+          />
+          <span className="Number twelve"></span>
+          <span className="Number three"></span>
+          <span className="Number six"></span>
+          <span className="Number nine"></span>
+        </div>
       </div>
     </Draggable>
   );

@@ -1,8 +1,4 @@
 .ClockWidget {
-  width: 200px;
-  height: 200px;
-  overflow: hidden;
-  border-radius: 999px;
   display: none;
 
   &.active {
@@ -33,113 +29,125 @@
     }
   }
 
-  .Hour {
-    position: absolute;
-    width: 10px;
-    height: 75px;
+  .CloseWidgetContainer {
+    position: relative;
     border-radius: 999px;
-    top: 25px;
-    left: 93px;
-    transform-origin: bottom;
-    z-index: 10000;
-  }
+    overflow: hidden;
+    width: 200px;
+    height: 200px;
 
-  .Min {
-    position: absolute;
-    width: 10px;
-    height: 90px;
-    border-radius: 999px;
-    top: 10px;
-    left: 47%;
-    transform-origin: bottom;
-    z-index: 10000;
-  }
-
-  .Sec {
-    &.active {
-      display: block;
+    .Hour {
+      position: absolute;
+      width: 10px;
+      height: 75px;
+      border-radius: 999px;
+      top: 25px;
+      left: 93px;
+      transform-origin: bottom;
+      z-index: 10000;
     }
-    display: none;
-    position: absolute;
-    width: 10px;
-    height: 95px;
-    border-radius: 999px;
-    top: 7px;
-    left: 46%;
-    transform-origin: bottom;
-    z-index: 10000;
-  }
 
-  .Number {
-    font-weight: 800;
-    text-align: center;
-    letter-spacing: -3px;
-    position: absolute;
-    font-size: 115px;
-    letter-spacing: -15px;
+    .Min {
+      position: absolute;
+      width: 10px;
+      height: 90px;
+      border-radius: 999px;
+      top: 10px;
+      left: 47%;
+      transform-origin: bottom;
+      z-index: 10000;
+    }
 
-    &.twelve {
-      top: -45px;
-      left: 39px;
-
-      &::before {
-        content: "12";
+    .Sec {
+      &.active {
+        display: block;
       }
+      display: none;
+      position: absolute;
+      width: 10px;
+      height: 95px;
+      border-radius: 999px;
+      top: 7px;
+      left: 46%;
+      transform-origin: bottom;
+      z-index: 10000;
     }
 
-    &.three {
-      right: 0;
-      top: 40px;
+    .Number {
+      font-weight: 800;
+      text-align: center;
+      letter-spacing: -3px;
+      position: absolute;
+      font-size: 115px;
+      letter-spacing: -15px;
 
-      &::before {
-        content: "3";
+      &.twelve {
+        top: -45px;
+        left: 39px;
+
+        &::before {
+          content: "12";
+        }
       }
-    }
 
-    &.six {
-      bottom: -50px;
-      left: 64px;
+      &.three {
+        right: 0;
+        top: 40px;
 
-      &::before {
-        content: "6";
+        &::before {
+          content: "3";
+        }
       }
-    }
 
-    &.nine {
-      left: -8px;
-      top: 40px;
+      &.six {
+        bottom: -50px;
+        left: 64px;
 
-      &::before {
-        content: "9";
+        &::before {
+          content: "6";
+        }
+      }
+
+      &.nine {
+        left: -8px;
+        top: 40px;
+
+        &::before {
+          content: "9";
+        }
       }
     }
   }
 
   &.default {
-    background: #d3e1ff;
+    .CloseWidgetContainer {
+      background: #d3e1ff;
 
-    .Hour,
-    .Min,
-    .Sec {
-      background: #222;
-    }
+      .Hour,
+      .Min,
+      .Sec {
+        background: #222;
+      }
 
-    .Number {
-      color: darken(#d5e3ff, 10%);
+      .Number {
+        color: darken(#d5e3ff, 10%);
+      }
     }
   }
 
   &.matcha {
-    background: #ddffe0;
+    .CloseWidgetContainer {
+      background: #ddffe0;
 
-    .Hour,
-    .Min,
-    .Sec {
-      background: #222;
-    }
+      .Hour,
+      .Min,
+      .Sec {
+        background: #222;
+      }
 
-    .Number {
-      color: darken(#d5ffd9, 10%);
+      .Number {
+        color: darken(#d5ffd9, 10%);
+      }
     }
   }
 }
