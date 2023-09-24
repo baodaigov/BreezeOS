@@ -9,6 +9,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@types/react-hammerjs": "^1.0.4",
+    "caniuse-lite": "^1.0.30001538",
     "dayjs": "^1.11.7",
     "lodash-es": "^4.17.21",
     "node-sass": "^7.0.3",
