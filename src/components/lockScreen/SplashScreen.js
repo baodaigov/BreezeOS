@@ -34,25 +34,6 @@ export default function SplashScreen() {
   const [isEditable, setEditable] = useState(false);
   const [fontFamilyMenu, showFontFamilyMenu] = useState(false);
   const [fontSizeMenu, showFontSizeMenu] = useState(false);
-  const inputFieldRef = useRef(null);
-
-  useEffect(() => {
-    document.addEventListener("keydown", () => {
-      dispatch(setOptionsMenuShown(false));
-      if (
-        isLocked &&
-        !isEditable &&
-        settings.user.password &&
-        !settings.isSleeping
-      ) {
-        inputFieldRef.current.focus();
-      } else {
-        inputFieldRef.current.blur();
-        setPasswordValue("");
-        setPasswordShown(false);
-      }
-    });
-  }, [isLocked, isEditable, settings.user.password, settings.isSleeping]);
 
   function useOutsideFontFamilyMenu(ref) {
     useEffect(() => {
@@ -393,7 +374,6 @@ export default function SplashScreen() {
                                   setPasswordValue(e.target.value)
                                 }
                                 onKeyDown={action}
-                                ref={inputFieldRef}
                               />
                               {passwordValue.length !== 0 && (
                                 <div

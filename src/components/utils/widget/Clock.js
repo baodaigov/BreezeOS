@@ -3,7 +3,11 @@ import "./Clock.scss";
 import Draggable from "react-draggable";
 import ActMenu, { ActMenuSelector } from "../menu";
 import { useSelector, useDispatch } from "react-redux";
-import { removeClock, displaySeconds } from "../../../reducers/widget";
+import {
+  removeClock,
+  displaySeconds,
+  changeClockStyle,
+} from "../../../reducers/widget";
 
 const Clock = () => {
   const [hour, setHour] = useState(null);
@@ -60,12 +64,13 @@ const Clock = () => {
     dispatch(displaySeconds(!clock.seconds));
   }
 
-  function changeStyle() {
+  function changeStyle(style) {
     setContextMenuEnabled(false);
+    dispatch(changeClockStyle(style));
   }
 
   return (
-    <Draggable handle=".CloseWidgetContainer">
+    <Draggable handle=".ClockWidgetContainer">
       <div
         className={`ClockWidget ${clock.active ? "active" : ""} ${clock.style}`}
         onContextMenu={onContextMenu}
@@ -74,17 +79,41 @@ const Clock = () => {
           style={{
             position: "absolute",
             zIndex: "10001",
-            top: "80px",
+            top: "100px",
             right: "100px",
             width: "200px",
           }}
           className={contextMenuEnabled ? "active" : ""}
           ref={contextMenuRef}
         >
-          <ActMenuSelector
+          {/* <ActMenuSelector
             title="Change style"
             onClick={changeStyle}
-          ></ActMenuSelector>
+          ></ActMenuSelector> */}
+          {clock.style === "default" ? (
+            <ActMenuSelector
+              title="Default"
+              onClick={() => changeStyle("default")}
+              active
+            ></ActMenuSelector>
+          ) : (
+            <ActMenuSelector
+              title="Default"
+              onClick={() => changeStyle("default")}
+            ></ActMenuSelector>
+          )}
+          {clock.style === "matcha" ? (
+            <ActMenuSelector
+              title="Matcha"
+              onClick={() => changeStyle("matcha")}
+              active
+            ></ActMenuSelector>
+          ) : (
+            <ActMenuSelector
+              title="Matcha"
+              onClick={() => changeStyle("matcha")}
+            ></ActMenuSelector>
+          )}
           {clock.seconds ? (
             <ActMenuSelector
               title="Display seconds"
@@ -98,10 +127,15 @@ const Clock = () => {
             ></ActMenuSelector>
           )}
         </ActMenu>
-        <div className="Close" onClick={() => dispatch(removeClock())}>
-          <i className="fa-solid fa-xmark"></i>
+        <div className="CloseButtonContainer">
+          <div
+            className="CloseButton"
+            onClick={() => setTimeout(() => dispatch(removeClock()), 150)}
+          >
+            <i className="fa-regular fa-xmark"></i>
+          </div>
         </div>
-        <div className="CloseWidgetContainer">
+        <div className="ClockWidgetContainer">
           <div
             className="Hour"
             style={{

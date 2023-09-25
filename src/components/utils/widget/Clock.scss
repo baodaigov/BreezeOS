@@ -1,40 +1,78 @@
 .ClockWidget {
-  display: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity ease 0.3s;
 
   &.active {
-    display: block;
+    opacity: 1;
+    pointer-events: auto;
+
+    .ClockWidgetContainer {
+      width: 200px;
+      height: 200px;
+
+      * {
+        opacity: 1;
+        pointer-events: auto;
+      }
+    }
   }
 
-  .Close {
-    width: 31px;
-    height: 31px;
-    background: #f7f7f7;
+  .CloseButtonContainer {
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    opacity: 0;
+    z-index: 1;
     border-radius: 999px;
-    font-size: 14px;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    top: -5px;
-    right: 0;
-    opacity: 0;
-    z-index: 1;
 
     &:hover {
       opacity: 1;
     }
 
-    i {
-      color: #ababab;
+    .CloseButton {
+      width: 32px;
+      height: 32px;
+      background: #f7f7f7;
+      font-size: 16px;
+      display: flex;
+      border-radius: 999px;
+      justify-content: center;
+      align-items: center;
+      transition: all ease 0.3s;
+
+      &:active {
+        background: darken(#f7f7f7, 12%);
+        width: 30px;
+        height: 30px;
+        font-size: 15px;
+        transition: none;
+      }
+
+      i {
+        color: #202023;
+      }
     }
   }
 
-  .CloseWidgetContainer {
+  .ClockWidgetContainer {
     position: relative;
     border-radius: 999px;
     overflow: hidden;
-    width: 200px;
-    height: 200px;
+    width: 120px;
+    height: 120px;
+    transition: all ease 0.3s;
+
+    * {
+      opacity: 0;
+      pointer-events: none;
+      transition: all ease 0.3s;
+    }
 
     .Hour {
       position: absolute;
@@ -120,7 +158,7 @@
   }
 
   &.default {
-    .CloseWidgetContainer {
+    .ClockWidgetContainer {
       background: #d3e1ff;
 
       .Hour,
@@ -136,8 +174,8 @@
   }
 
   &.matcha {
-    .CloseWidgetContainer {
-      background: #ddffe0;
+    .ClockWidgetContainer {
+      background: #d8ffdc;
 
       .Hour,
       .Min,
@@ -146,7 +184,7 @@
       }
 
       .Number {
-        color: darken(#d5ffd9, 10%);
+        color: darken(#d5ffd9, 13%);
       }
     }
   }

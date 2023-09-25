@@ -150,12 +150,9 @@ $fgcolor: #e2e2e2;
           }
 
           &.today {
-            background: #8fb6ff;
+            background: $fgcolor;
             color: $bgcolor;
-
-            &:hover {
-              background: #7b9cd9;
-            }
+            font-weight: 700;
           }
         }
       }
@@ -213,8 +210,13 @@ $fgcolor: #e2e2e2;
       justify-content: space-between;
 
       .CalendarDateCell p {
-        &:hover {
-          background: transparentize($bgcolor, 0.79);
+        &.fade {
+          color: transparentize($bgcolor, 0.75);
+        }
+
+        &.today {
+          background: $bgcolor;
+          color: $fgcolor;
         }
       }
     }
