@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/BreezeOS/static/css/main.5bf63a53.css",
-    "main.js": "/BreezeOS/static/js/main.06edfd0d.js",
+    "main.css": "/BreezeOS/static/css/main.aeb6647f.css",
+    "main.js": "/BreezeOS/static/js/main.6f01bd01.js",
     "static/media/dark.png": "/BreezeOS/static/media/dark.6234c8ee9fb7421f25c8.png",
     "static/media/52496.jpg": "/BreezeOS/static/media/52496.d0aca8ed79fb92a3f932.jpg",
     "static/media/52791.jpg": "/BreezeOS/static/media/52791.2a35203ad57d4fa40bb5.jpg",
@@ -34,11 +34,11 @@
     "static/media/surface-private.svg": "/BreezeOS/static/media/surface-private.0e4a8432dfa45bf2a94b5b8a31cad95a.svg",
     "static/media/surface.svg": "/BreezeOS/static/media/surface.b74420142de514461d723e4a737e5710.svg",
     "index.html": "/BreezeOS/index.html",
-    "main.5bf63a53.css.map": "/BreezeOS/static/css/main.5bf63a53.css.map",
-    "main.06edfd0d.js.map": "/BreezeOS/static/js/main.06edfd0d.js.map"
+    "main.aeb6647f.css.map": "/BreezeOS/static/css/main.aeb6647f.css.map",
+    "main.6f01bd01.js.map": "/BreezeOS/static/js/main.6f01bd01.js.map"
   },
   "entrypoints": [
-    "static/css/main.5bf63a53.css",
-    "static/js/main.06edfd0d.js"
+    "static/css/main.aeb6647f.css",
+    "static/js/main.6f01bd01.js"
   ]
 }
