@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../../components/utils/window/Window.scss";
 import TopBar from "../../components/utils/window/TopBar";
 import WindowBodyDefault from "../../components/utils/window/WindowBodyDefault";
@@ -11,7 +11,7 @@ import { setActive } from "../../reducers/apps/settings";
 
 export default function MissingPermissionCamera() {
   const dispatch = useDispatch();
-  const [isActive, setIsActive] = useState(true);
+  const [isActive, setIsActive] = useState(false);
 
   return (
     <Draggable handle=".TopBar">
