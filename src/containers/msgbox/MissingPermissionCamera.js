@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../../components/utils/window/Window.scss";
 import TopBar from "../../components/utils/window/TopBar";
 import WindowBodyDefault from "../../components/utils/window/WindowBodyDefault";
@@ -6,23 +6,24 @@ import WindowBodyButton from "../../components/utils/window/WindowBodyButton";
 import TopBarInteraction from "../../components/utils/window/TopBarInteraction";
 import "./assets/index.scss";
 import Draggable from "react-draggable";
+import { useDispatch } from "react-redux";
+import { setActive } from "../../reducers/apps/settings";
 
 export default function MissingPermissionCamera() {
+  const dispatch = useDispatch();
+  const [isActive, setIsActive] = useState(true);
+
   return (
     <Draggable handle=".TopBar">
       <div
-        className="Window MissingPermissionCamera active"
+        className={`Window MissingPermissionCamera ${isActive && "active"}`}
         style={{ width: "450px" }}
         key={Math.random()}
       >
         <TopBar>
           <TopBarInteraction
             action="close"
-            onClose={() =>
-              document
-                .getElementsByClassName("MissingPermissionCamera")[0]
-                .classList.remove("active")
-            }
+            onClose={() => setIsActive(false)}
           />
         </TopBar>
         <WindowBodyDefault
@@ -31,17 +32,20 @@ export default function MissingPermissionCamera() {
           content="Please grant permission in order to take photos and videos."
         >
           <WindowBodyButton>
-            <button className="Button" key={Math.random()}>
+            <button
+              className="Button"
+              onClick={() => {
+                setIsActive(false);
+                dispatch(setActive(true));
+              }}
+              key={Math.random()}
+            >
               Open Settings...
             </button>
             <button
               className="Button"
               key={Math.random()}
-              onClick={() =>
-                document
-                  .getElementsByClassName("MissingPermissionCamera")[0]
-                  .classList.remove("active")
-              }
+              onClick={() => setIsActive(false)}
             >
               OK
             </button>

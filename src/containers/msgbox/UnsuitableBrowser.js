@@ -9,7 +9,7 @@ import "./assets/index.scss";
 import Draggable from "react-draggable";
 
 export default function UnsuitableBrowser() {
-  const [active, setActive] = useState(false);
+  const [isActive, setIsActive] = useState(false);
 
   const batteryState = useBattery();
 
@@ -17,21 +17,24 @@ export default function UnsuitableBrowser() {
 
   useEffect(() => {
     if (isNaN(batteryPercent)) {
-      setActive(true);
+      setIsActive(true);
     } else {
-      setActive(false);
+      setIsActive(false);
     }
   }, [batteryPercent]);
 
   return (
     <Draggable handle=".TopBar">
       <div
-        className={`Window UnsuitableBrowser ${active ? "active" : ""}`}
+        className={`Window UnsuitableBrowser ${isActive ? "isActive" : ""}`}
         style={{ width: "550px" }}
         key={Math.random()}
       >
         <TopBar>
-          <TopBarInteraction action="close" onClose={() => setActive(false)} />
+          <TopBarInteraction
+            action="close"
+            onClose={() => setIsActive(false)}
+          />
         </TopBar>
         <WindowBodyDefault
           type="exclamation"
@@ -42,7 +45,7 @@ export default function UnsuitableBrowser() {
             <button
               className="Button"
               key={Math.random()}
-              onClick={() => setActive(false)}
+              onClick={() => setIsActive(false)}
             >
               OK
             </button>
