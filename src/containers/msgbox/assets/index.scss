@@ -1,34 +1,4 @@
-.BatteryLow {
-  opacity: 0;
-  pointer-events: none;
-
-  &.active {
-    opacity: 1;
-    pointer-events: auto;
-  }
-}
-
-.UnsuitableBrowser {
-  opacity: 0;
-  pointer-events: none;
-
-  &.active {
-    opacity: 1;
-    pointer-events: auto;
-  }
-}
-
-.PermanentlyDeleteMedia {
-  opacity: 0;
-  pointer-events: none;
-
-  &.active {
-    opacity: 1;
-    pointer-events: auto;
-  }
-}
-
-.MissingPermissionCamera {
+.Window {
   opacity: 0;
   pointer-events: none;
 

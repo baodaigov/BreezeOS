@@ -10,7 +10,11 @@ import Draggable from "react-draggable";
 export default function MissingPermissionCamera() {
   return (
     <Draggable handle=".TopBar">
-      <div className={"Window MissingPermissionCamera"} key={Math.random()}>
+      <div
+        className="Window MissingPermissionCamera active"
+        style={{ width: "450px" }}
+        key={Math.random()}
+      >
         <TopBar>
           <TopBarInteraction
             action="close"
