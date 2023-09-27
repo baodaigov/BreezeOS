@@ -102,16 +102,28 @@ const Clock = () => {
               onClick={() => changeStyle("default")}
             ></ActMenuSelector>
           )}
-          {clock.style === "matcha" ? (
+          {clock.style === "latte" ? (
             <ActMenuSelector
-              title="Matcha"
-              onClick={() => changeStyle("matcha")}
+              title="Latte"
+              onClick={() => changeStyle("latte")}
               active
             ></ActMenuSelector>
           ) : (
             <ActMenuSelector
-              title="Matcha"
-              onClick={() => changeStyle("matcha")}
+              title="Latte"
+              onClick={() => changeStyle("latte")}
+            ></ActMenuSelector>
+          )}
+          {clock.style === "nautilus" ? (
+            <ActMenuSelector
+              title="Nautilus"
+              onClick={() => changeStyle("nautilus")}
+              active
+            ></ActMenuSelector>
+          ) : (
+            <ActMenuSelector
+              title="Nautilus"
+              onClick={() => changeStyle("nautilus")}
             ></ActMenuSelector>
           )}
           {clock.seconds ? (
@@ -154,6 +166,13 @@ const Clock = () => {
               transform: `rotateZ(${sec}deg)`,
             }}
           />
+          <div className="Time">
+            <span>{hour / 30}</span>
+            <span className="TimeSeparator"></span>
+            <span>{min / 6}</span>
+            {clock.seconds && 
+                <span className="TimeSec">{sec / 6 < 10 && "0"}{sec / 6}</span>}
+          </div>
           <span className="Number twelve"></span>
           <span className="Number three"></span>
           <span className="Number six"></span>

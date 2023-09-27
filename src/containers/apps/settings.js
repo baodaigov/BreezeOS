@@ -1195,24 +1195,33 @@ export default function Settings() {
                   <div style={{ width: "649.516px", display: "flex" }}>
                     <div className="WidgetsContainer">
                       <div
-                        className={`ClockWidget active ${widget.clock.style}`}
+                        className={`ClockWidget ${
+                          widget.clock.active ? "active" : ""
+                        } ${widget.clock.style}`}
                       >
-                        <div
-                          className="Hour"
-                          style={{
-                            transform: "rotateZ(300deg)",
-                          }}
-                        />
-                        <div
-                          className="Min"
-                          style={{
-                            transform: "rotateZ(60deg)",
-                          }}
-                        />
-                        <span className="Number twelve"></span>
-                        <span className="Number three"></span>
-                        <span className="Number six"></span>
-                        <span className="Number nine"></span>
+                        <div className="ClockWidgetContainer">
+                          <div
+                            className="Hour"
+                            style={{
+                              transform: `rotateZ(300deg)`,
+                            }}
+                          />
+                          <div
+                            className="Min"
+                            style={{
+                              transform: `rotateZ(60deg)`,
+                            }}
+                          />
+                          <div className="Time">
+                            <span>10</span>
+                            <span className="TimeSeparator"></span>
+                            <span>10</span>
+                          </div>
+                          <span className="Number twelve"></span>
+                          <span className="Number three"></span>
+                          <span className="Number six"></span>
+                          <span className="Number nine"></span>
+                        </div>
                       </div>
                     </div>
                   </div>

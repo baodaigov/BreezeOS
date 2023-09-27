@@ -20,7 +20,6 @@ import ActMenu, { ActMenuSelector } from "../utils/menu/index";
 export default function SplashScreen() {
   const dispatch = useDispatch();
   const settings = useSelector((state) => state.settings);
-  const isLocked = useSelector((state) => state.settings.isLocked);
   const lock = useSelector((state) => state.lock);
   const optionsMenuShown = useSelector((state) => state.lock.optionsMenuShown);
   const hour12 = useSelector((state) => state.settings.hour12);
@@ -34,6 +33,7 @@ export default function SplashScreen() {
   const [isEditable, setEditable] = useState(false);
   const [fontFamilyMenu, showFontFamilyMenu] = useState(false);
   const [fontSizeMenu, showFontSizeMenu] = useState(false);
+  const inputFieldRef = useRef(null);
 
   function useOutsideFontFamilyMenu(ref) {
     useEffect(() => {
@@ -129,6 +129,7 @@ export default function SplashScreen() {
     dispatch(setLocked(false));
     setInvalidCount(0);
     setPasswordValue("");
+    inputFieldRef.current.blur();
   }
 
   function wrongPassword() {
@@ -374,6 +375,7 @@ export default function SplashScreen() {
                                   setPasswordValue(e.target.value)
                                 }
                                 onKeyDown={action}
+                                ref={inputFieldRef}
                               />
                               {passwordValue.length !== 0 && (
                                 <div

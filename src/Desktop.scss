@@ -49,14 +49,15 @@
   font-display: swap;
   font-family: Cascadia Code;
   font-style: normal;
-  src: url(./fonts/CascadiaCode-Regular-VTT.woff2) format("woff2");
+  src: url(./fonts/CascadiaCode/CascadiaCode-Regular-VTT.woff2) format("woff2");
 }
+
 @font-face {
   font-display: swap;
   font-family: San Francisco;
   font-style: normal;
   font-weight: 200;
-  src: url(./fonts/SF200.woff) format("woff");
+  src: url(./fonts/SanFrancisco/SF200.woff) format("woff");
 }
 
 @font-face {
@@ -64,7 +65,7 @@
   font-family: San Francisco;
   font-style: normal;
   font-weight: 300;
-  src: url(./fonts/SF300.woff) format("woff");
+  src: url(./fonts/SanFrancisco/SF300.woff) format("woff");
 }
 
 @font-face {
@@ -72,7 +73,7 @@
   font-family: San Francisco;
   font-style: normal;
   font-weight: 500;
-  src: url(./fonts/SF500.woff) format("woff");
+  src: url(./fonts/SanFrancisco/SF500.woff) format("woff");
 }
 
 @font-face {
@@ -80,7 +81,7 @@
   font-family: San Francisco;
   font-style: normal;
   font-weight: 700;
-  src: url(./fonts/SF700.woff) format("woff");
+  src: url(./fonts/SanFrancisco/SF700.woff) format("woff");
 }
 
 @font-face {
@@ -88,7 +89,47 @@
   font-family: San Francisco;
   font-style: normal;
   font-weight: 800;
-  src: url(./fonts/SF800.woff) format("woff");
+  src: url(./fonts/SanFrancisco/SF800.woff) format("woff");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: JetBrains Mono;
+  font-style: normal;
+  font-weight: 200;
+  src: url(./fonts/JetBrainsMono/JetBrainsMono-Light.woff2) format("woff2");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: JetBrains Mono;
+  font-style: normal;
+  font-weight: 300;
+  src: url(./fonts/JetBrainsMono/JetBrainsMono-Regular.woff2) format("woff2");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: JetBrains Mono;
+  font-style: normal;
+  font-weight: 500;
+  src: url(./fonts/JetBrainsMono/JetBrainsMono-Medium.woff2) format("woff2");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: JetBrains Mono;
+  font-style: normal;
+  font-weight: 700;
+  src: url(./fonts/JetBrainsMono/JetBrainsMono-Bold.woff2) format("woff2");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: JetBrains Mono;
+  font-style: normal;
+  font-weight: 800;
+  src: url(./fonts/JetBrainsMono/JetBrainsMono-ExtraBold.woff2) format("woff2");
 }
 
 .OptimisticDisplay *:not(i) {
@@ -100,6 +141,17 @@
 
 .SanFrancisco *:not(i) {
   font-family: San Francisco, -apple-system, ui-sans-serif, system-ui,
+    BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans,
+    sans-serif, Noto Color Emoji, Apple Color Emoji, Segoe UI Emoji,
+    Segoe UI Symbol;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+.JetBrainsMono *:not(i) {
+  font-family: JetBrains Mono, -apple-system, ui-sans-serif, system-ui,
     BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans,
     sans-serif, Noto Color Emoji, Apple Color Emoji, Segoe UI Emoji,
     Segoe UI Symbol;

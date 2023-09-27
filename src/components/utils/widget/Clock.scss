@@ -71,29 +71,31 @@
     * {
       opacity: 0;
       pointer-events: none;
-      transition: all ease 0.3s;
+    }
+
+    .Hour,
+    .Min,
+    .Sec {
+      position: absolute;
+      border-radius: 999px;
+      opacity: 1;
+      transition: opacity ease 0.3s;
+      transform-origin: bottom;
+      z-index: 10000;
     }
 
     .Hour {
-      position: absolute;
       width: 10px;
       height: 75px;
-      border-radius: 999px;
       top: 25px;
       left: 93px;
-      transform-origin: bottom;
-      z-index: 10000;
     }
 
     .Min {
-      position: absolute;
       width: 10px;
       height: 90px;
-      border-radius: 999px;
       top: 10px;
       left: 47%;
-      transform-origin: bottom;
-      z-index: 10000;
     }
 
     .Sec {
@@ -101,14 +103,21 @@
         display: block;
       }
       display: none;
-      position: absolute;
       width: 10px;
       height: 95px;
-      border-radius: 999px;
       top: 7px;
       left: 46%;
-      transform-origin: bottom;
-      z-index: 10000;
+    }
+
+    .Time {
+      position: absolute;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: opacity ease 0.3s;
     }
 
     .Number {
@@ -118,6 +127,7 @@
       position: absolute;
       font-size: 115px;
       letter-spacing: -15px;
+      transition: all ease 0.3s;
 
       &.twelve {
         top: -45px;
@@ -160,11 +170,12 @@
   &.default {
     .ClockWidgetContainer {
       background: #d3e1ff;
+      outline: 0px solid transparent;
 
       .Hour,
       .Min,
       .Sec {
-        background: #222;
+        background: #09090b;
       }
 
       .Number {
@@ -173,18 +184,98 @@
     }
   }
 
-  &.matcha {
+  &.latte {
     .ClockWidgetContainer {
-      background: #d8ffdc;
+      background: #fed7aa;
+      outline: 0px solid transparent;
 
       .Hour,
       .Min,
       .Sec {
-        background: #222;
+        background: #09090b;
       }
 
       .Number {
-        color: darken(#d5ffd9, 13%);
+        &.twelve {
+          color: darken(#fed7aa, 10%);
+        }
+
+        &.three {
+          color: lighten(#fed7aa, 10%);
+        }
+
+        &.six {
+          color: darken(#fed7aa, 22%);
+        }
+
+        &.nine {
+          color: darken(#fed7aa, 70%);
+        }
+      }
+    }
+  }
+
+  &.nautilus {
+    .ClockWidgetContainer {
+      background: #171717;
+      outline: 4px solid #facc15;
+      width: 330px;
+      height: 140px;
+
+      .Hour,
+      .Min,
+      .Sec {
+        opacity: 0;
+      }
+
+      .Time {
+        opacity: 1;
+        color: #facc15;
+        font-size: 65px;
+        letter-spacing: -2px;
+
+        span {
+          font-family: JetBrains Mono;
+        }
+
+        .TimeSeparator {
+          width: 1px;
+          height: 60px;
+          background-color: #facc1520;
+          margin: 0 20px;
+        }
+
+        .TimeSec {
+          font-size: 25px;
+          margin-left: 15px;
+          letter-spacing: -1px;
+        }
+      }
+
+      .Number {
+        color: #facc1507;
+        font-size: 170px;
+        letter-spacing: -25px;
+
+        &.twelve {
+          top: -115px;
+          left: 65px;
+        }
+
+        &.three {
+          right: -15px;
+          top: -40px;
+        }
+
+        &.six {
+          top: 35px;
+          left: 105px;
+        }
+
+        &.nine {
+          left: -40px;
+          top: -40px;
+        }
       }
     }
   }
