@@ -279,4 +279,76 @@
       }
     }
   }
+
+  &.classic {
+    .ClockWidgetContainer {
+      background: #fafafa;
+      outline: 0px solid transparent;
+
+      .Hour,
+      .Min,
+      .Sec {
+        background: #09090b;
+        width: 7px;
+      }
+
+      .Sec {
+        background-color: #ef4444;
+      }
+
+      .Number {
+        color: #09090b25;
+        font-family: Regattia Stencil;
+        letter-spacing: -5px;
+
+        &.active {
+          color: #09090b;
+        }
+
+        &.three {
+          right: -5px;
+        }
+
+        &.six {
+          right: 65px;
+        }
+      }
+    }
+  }
+
+  &.darkclassic {
+    .ClockWidgetContainer {
+      background: #0a0a0a;
+      outline: 0px solid transparent;
+
+      .Hour,
+      .Min,
+      .Sec {
+        background: #fafafa;
+        width: 7px;
+      }
+
+      .Sec {
+        background-color: #ef4444;
+      }
+
+      .Number {
+        color: #fafafa25;
+        font-family: Regattia Stencil;
+        letter-spacing: -5px;
+
+        &.active {
+          color: #fafafa;
+        }
+
+        &.three {
+          right: -5px;
+        }
+
+        &.six {
+          right: 65px;
+        }
+      }
+    }
+  }
 }

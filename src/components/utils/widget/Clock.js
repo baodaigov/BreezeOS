@@ -126,6 +126,30 @@ const Clock = () => {
               onClick={() => changeStyle("nautilus")}
             ></ActMenuSelector>
           )}
+          {clock.style === "classic" ? (
+            <ActMenuSelector
+              title="Classic"
+              onClick={() => changeStyle("classic")}
+              active
+            ></ActMenuSelector>
+          ) : (
+            <ActMenuSelector
+              title="Classic"
+              onClick={() => changeStyle("classic")}
+            ></ActMenuSelector>
+          )}
+          {clock.style === "darkclassic" ? (
+            <ActMenuSelector
+              title="Dark Classic"
+              onClick={() => changeStyle("darkclassic")}
+              active
+            ></ActMenuSelector>
+          ) : (
+            <ActMenuSelector
+              title="Dark Classic"
+              onClick={() => changeStyle("darkclassic")}
+            ></ActMenuSelector>
+          )}
           {clock.seconds ? (
             <ActMenuSelector
               title="Display seconds"
@@ -167,16 +191,26 @@ const Clock = () => {
             }}
           />
           <div className="Time">
-            <span>{hour / 30}</span>
+            <span>
+              {hour / 30 < 10 && "0"}
+              {hour / 30}
+            </span>
             <span className="TimeSeparator"></span>
-            <span>{min / 6}</span>
-            {clock.seconds && 
-                <span className="TimeSec">{sec / 6 < 10 && "0"}{sec / 6}</span>}
+            <span>
+              {min / 6 < 10 && "0"}
+              {min / 6}
+            </span>
+            {clock.seconds && (
+              <span className="TimeSec">
+                {sec / 6 < 10 && "0"}
+                {sec / 6}
+              </span>
+            )}
           </div>
-          <span className="Number twelve"></span>
-          <span className="Number three"></span>
-          <span className="Number six"></span>
-          <span className="Number nine"></span>
+          <span className={`Number twelve ${hour === 360 && "active"}`}></span>
+          <span className={`Number three ${hour === 450 && "active"}`}></span>
+          <span className={`Number six ${hour === 540 && "active"}`}></span>
+          <span className={`Number nine ${hour === 630 && "active"}`}></span>
         </div>
       </div>
     </Draggable>

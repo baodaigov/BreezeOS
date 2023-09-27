@@ -1220,7 +1220,7 @@ export default function Settings() {
                           <span className="Number twelve"></span>
                           <span className="Number three"></span>
                           <span className="Number six"></span>
-                          <span className="Number nine"></span>
+                          <span className="Number nine active"></span>
                         </div>
                       </div>
                     </div>

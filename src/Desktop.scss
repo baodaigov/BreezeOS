@@ -132,6 +132,14 @@
   src: url(./fonts/JetBrainsMono/JetBrainsMono-ExtraBold.woff2) format("woff2");
 }
 
+@font-face {
+  font-display: swap;
+  font-family: Regattia Stencil;
+  font-style: normal;
+  font-weight: 700;
+  src: url(./fonts/RegattiaStencil/RS700.woff2) format("woff2");
+}
+
 .OptimisticDisplay *:not(i) {
   font-family: Optimistic Display, -apple-system, ui-sans-serif, system-ui,
     BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans,
@@ -141,17 +149,6 @@
 
 .SanFrancisco *:not(i) {
   font-family: San Francisco, -apple-system, ui-sans-serif, system-ui,
-    BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans,
-    sans-serif, Noto Color Emoji, Apple Color Emoji, Segoe UI Emoji,
-    Segoe UI Symbol;
-
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-}
-
-.JetBrainsMono *:not(i) {
-  font-family: JetBrains Mono, -apple-system, ui-sans-serif, system-ui,
     BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans,
     sans-serif, Noto Color Emoji, Apple Color Emoji, Segoe UI Emoji,
     Segoe UI Symbol;
