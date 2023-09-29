@@ -162,8 +162,11 @@ $fgcolor: #e2e2e2;
   }
 
   .Surface {
-    background: #202023;
+    background: $bgcolor;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
     height: 100%;
+    padding: 5px;
     position: relative;
 
     & > * {
@@ -172,197 +175,204 @@ $fgcolor: #e2e2e2;
       margin: 0;
     }
 
-    .Settings,
-    .Support {
-      position: absolute;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      width: 100%;
-      height: 100%;
-      background: #09090b;
-      color: #f4f4f5;
-      z-index: 1;
-      padding: 30px 0;
-      opacity: 0;
-      pointer-events: none;
+    .SurfaceContentContainer {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
 
-      &.active {
-        opacity: 1;
-        pointer-events: auto;
-      }
-
-      .CloseButton {
-        background: transparentize($fgcolor, 0.95);
-        border-radius: 999px;
-        width: 42px;
-        height: 42px;
-        font-size: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: $fgcolor;
-
-        &:active {
-          background: transparentize($fgcolor, 0.9);
-          transition: none;
+      .Settings,
+      .Support {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        background: #09090b;
+        color: #f4f4f5;
+        z-index: 1;
+        padding: 30px 0;
+        opacity: 0;
+        pointer-events: none;
+  
+        &.active {
+          opacity: 1;
+          pointer-events: auto;
         }
-      }
-    }
-
-    .Settings {
-      .SettingsItem {
-        border-radius: 999px;
-        margin-bottom: 10px;
-        padding: 30px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        .SettingsName {
-          font-weight: 700;
-          font-size: 18px;
-          margin: 0;
-        }
-
-        .SettingsValue {
-          font-size: 15px;
-          margin: 0 8px 0 0;
-        }
-
-        .SettingsChevron {
-          font-size: 14px;
-        }
-
-        .SettingsValue,
-        .SettingsChevron {
-          color: transparentize($fgcolor, 0.8);
-        }
-
-        &.allowClicking {
+  
+        .CloseButton {
+          background: transparentize($fgcolor, 0.95);
+          border-radius: 999px;
+          width: 42px;
+          height: 42px;
+          font-size: 20px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: $fgcolor;
+  
           &:active {
-            background: #f4f4f50c;
+            background: transparentize($fgcolor, 0.9);
             transition: none;
           }
         }
       }
-    }
-
-    .Support {
-      .SupportDesc {
-        font-size: 14px;
-      }
-    }
-
-    .SplashScreen {
-      position: absolute;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      margin: auto;
-      width: 100%;
-      height: 100%;
-      background: #2563eb;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: all cubic-bezier(0.4, 0, 0.2, 1) 0.7s;
-
-      .SplashScreenIcon {
-        width: 200px;
-        height: 200px;
-      }
-
-      &.private {
-        background: #09090b;
-      }
-
-      &.disabled {
-        border-radius: 999px;
-        width: 120px;
-        height: 120px;
-        bottom: 100px;
-        .SplashScreenIcon {
-          width: 130px;
-          height: 130px;
-        }
-      }
-    }
-
-    .MainScreen {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      height: 100%;
-      transition: none;
-
-      .Main {
-        max-width: 600px;
-        padding: 30px 20px;
-
-        .NonCollapsibleSection {
-          padding: 0 25px;
-
-          .SearchWrapper {
-            padding: 34px 0 38px;
-
-            .Text {
-              margin-top: 140px;
-              margin-bottom: 0;
-              font-size: 22px;
-              color: $fgcolor;
-              text-align: center;
+  
+      .Settings {
+        .SettingsItem {
+          border-radius: 999px;
+          margin-bottom: 10px;
+          padding: 30px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+  
+          .SettingsName {
+            font-weight: 700;
+            font-size: 18px;
+            margin: 0;
+          }
+  
+          .SettingsValue {
+            font-size: 15px;
+            margin: 0 8px 0 0;
+          }
+  
+          .SettingsChevron {
+            font-size: 14px;
+          }
+  
+          .SettingsValue,
+          .SettingsChevron {
+            color: transparentize($fgcolor, 0.8);
+          }
+  
+          &.allowClicking {
+            &:active {
+              background: #f4f4f50c;
+              transition: none;
             }
           }
         }
       }
-    }
-
-    .CantBeReached {
-      width: 100%;
-      height: 100%;
-      background: transparent;
-      padding: 50px 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      text-align: center;
-      max-width: 65%;
-      margin: 0 auto;
-      color: $fgcolor;
-      transition: none;
-
-      .CantBeReachedText {
-        font-weight: 700;
-        font-size: 40px;
-        margin-bottom: 10px;
+  
+      .Support {
+        .SupportDesc {
+          font-size: 14px;
+        }
       }
-
-      .Description {
-        font-size: 14px;
-        line-height: 1.8;
-
-        .ButtonContainer {
-          margin: 40px 0;
-
-          .Button {
-            appearance: none;
-            border: none;
-            border-radius: 999px;
-            outline: none;
-            padding: 12px 24px;
-            background: #0061df;
-            font-size: 14px;
-            font-weight: 700;
-            transition: all ease 0.3s;
-            color: $fgcolor;
-
-            &:active {
-              transition: none;
-              background: darken(#0061df, 10%);
+  
+      .SplashScreen {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        margin: auto;
+        width: 100%;
+        height: 100%;
+        background: #2563eb;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all cubic-bezier(0.4, 0, 0.2, 1) 0.7s;
+  
+        .SplashScreenIcon {
+          width: 200px;
+          height: 200px;
+        }
+  
+        &.private {
+          background: #09090b;
+        }
+  
+        &.disabled {
+          border-radius: 999px;
+          width: 120px;
+          height: 120px;
+          bottom: 100px;
+          .SplashScreenIcon {
+            width: 130px;
+            height: 130px;
+          }
+        }
+      }
+  
+      .MainScreen {
+        background-color: #202023;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        transition: none;
+  
+        .Main {
+          max-width: 600px;
+          padding: 30px 20px;
+  
+          .NonCollapsibleSection {
+            padding: 0 25px;
+  
+            .SearchWrapper {
+              padding: 34px 0 38px;
+  
+              .Text {
+                margin-top: 140px;
+                margin-bottom: 0;
+                font-size: 22px;
+                color: $fgcolor;
+                text-align: center;
+              }
+            }
+          }
+        }
+      }
+  
+      .CantBeReached {
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        padding: 50px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        max-width: 65%;
+        margin: 0 auto;
+        color: $fgcolor;
+        transition: none;
+  
+        .CantBeReachedText {
+          font-weight: 700;
+          font-size: 40px;
+          margin-bottom: 10px;
+        }
+  
+        .Description {
+          font-size: 14px;
+          line-height: 1.8;
+  
+          .ButtonContainer {
+            margin: 40px 0;
+  
+            .Button {
+              appearance: none;
+              border: none;
+              border-radius: 999px;
+              outline: none;
+              padding: 12px 24px;
+              background: #0061df;
+              font-size: 14px;
+              font-weight: 700;
+              transition: all ease 0.3s;
+              color: $fgcolor;
+  
+              &:active {
+                transition: none;
+                background: darken(#0061df, 10%);
+              }
             }
           }
         }

@@ -262,134 +262,136 @@ export default function Surface() {
         </TopBar>
         <WindowBody>
           <div className="Surface">
-            <div className={`Settings ${settingsOpened && "active"}`}>
-              <div
-                style={{
-                  maxWidth: "840px",
-                  margin: "0 auto",
-                }}
-              >
+            <div className="SurfaceContentContainer">
+              <div className={`Settings ${settingsOpened && "active"}`}>
                 <div
                   style={{
-                    display: "flex",
-                    flexDirection: "row-reverse",
-                  }}
-                >
-                  <div
-                    className="CloseButton"
-                    onClick={() => setSettingsOpened(false)}
-                  >
-                    <i className="fa-light fa-xmark"></i>
-                  </div>
-                </div>
-                <div
-                  style={{
-                    maxWidth: "600px",
+                    maxWidth: "840px",
                     margin: "0 auto",
                   }}
                 >
-                  <div className="SettingsItem">
-                    <p className="SettingsName">Private mode</p>
-                    <Toggle
-                      active={isPrivate}
-                      onToggle={() => dispatch(setPrivate(!isPrivate))}
-                    />
-                  </div>
-                  <div className="SettingsItem allowClicking">
-                    <p className="SettingsName">Search engine</p>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row-reverse",
+                    }}
+                  >
                     <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                      }}
+                      className="CloseButton"
+                      onClick={() => setSettingsOpened(false)}
                     >
-                      <p className="SettingsValue">Bing</p>
-                      <i className="fa-regular fa-chevron-right SettingsChevron"></i>
+                      <i className="fa-light fa-xmark"></i>
+                    </div>
+                  </div>
+                  <div
+                    style={{
+                      maxWidth: "600px",
+                      margin: "0 auto",
+                    }}
+                  >
+                    <div className="SettingsItem">
+                      <p className="SettingsName">Private mode</p>
+                      <Toggle
+                        active={isPrivate}
+                        onToggle={() => dispatch(setPrivate(!isPrivate))}
+                      />
+                    </div>
+                    <div className="SettingsItem allowClicking">
+                      <p className="SettingsName">Search engine</p>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                        }}
+                      >
+                        <p className="SettingsValue">Bing</p>
+                        <i className="fa-regular fa-chevron-right SettingsChevron"></i>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className={`Support ${supportOpened && "active"}`}>
-              <div
-                style={{
-                  maxWidth: "840px",
-                  margin: "0 auto",
-                }}
-              >
+              <div className={`Support ${supportOpened && "active"}`}>
                 <div
                   style={{
-                    display: "flex",
-                    flexDirection: "row-reverse",
+                    maxWidth: "840px",
+                    margin: "0 auto",
                   }}
                 >
                   <div
-                    className="CloseButton"
-                    onClick={() => setSupportOpened(false)}
+                    style={{
+                      display: "flex",
+                      flexDirection: "row-reverse",
+                    }}
                   >
-                    <i className="fa-light fa-xmark"></i>
+                    <div
+                      className="CloseButton"
+                      onClick={() => setSupportOpened(false)}
+                    >
+                      <i className="fa-light fa-xmark"></i>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            {url === "" ? (
-              <>
-                <div
-                  className={`SplashScreen ${isPrivate && "private"} ${
-                    !splashScreen && "disabled"
-                  }`}
-                >
-                  {isPrivate ? (
-                    <img
-                      className="SplashScreenIcon"
-                      src={SurfacePrivateIcon}
+              {url === "" ? (
+                <>
+                  <div
+                    className={`SplashScreen ${isPrivate && "private"} ${
+                      !splashScreen && "disabled"
+                    }`}
+                  >
+                    {isPrivate ? (
+                      <img
+                        className="SplashScreenIcon"
+                        src={SurfacePrivateIcon}
+                      />
+                    ) : (
+                      <img className="SplashScreenIcon" src={SurfaceIcon} />
+                    )}
+                  </div>
+                  <div className="MainScreen">
+                    <div className="Main">
+                      <div className="NonCollapsibleSection">
+                        <div className="SearchWrapper">
+                          <p className="Text">
+                            Search with Bing or enter address, or leave blank to
+                            get redirected to BreezeOS official website.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  {wifi ? (
+                    <iframe
+                      id="iFrameFF"
+                      className="iFrameFF"
+                      src={url}
+                      title="New Tab"
+                      frameBorder="0"
+                      allowFullScreen={true}
                     />
                   ) : (
-                    <img className="SplashScreenIcon" src={SurfaceIcon} />
-                  )}
-                </div>
-                <div className="MainScreen">
-                  <div className="Main">
-                    <div className="NonCollapsibleSection">
-                      <div className="SearchWrapper">
-                        <p className="Text">
-                          Search with Bing or enter address, or leave blank to
-                          get redirected to BreezeOS official website.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </>
-            ) : (
-              <>
-                {wifi ? (
-                  <iframe
-                    id="iFrameFF"
-                    className="iFrameFF"
-                    src={url}
-                    title="New Tab"
-                    frameBorder="0"
-                    allowFullScreen={true}
-                  />
-                ) : (
-                  <div className="CantBeReached">
-                    <p className="CantBeReachedText">
-                      Internet is not enabled.
-                    </p>
-                    <div className="Description">
-                      <p>
-                        You need Internet connection in order to connect to this
-                        website.
+                    <div className="CantBeReached">
+                      <p className="CantBeReachedText">
+                        Internet is not enabled.
                       </p>
-                      <div className="ButtonContainer">
-                        <button className="Button">Reload</button>
+                      <div className="Description">
+                        <p>
+                          You need Internet connection in order to connect to
+                          this website.
+                        </p>
+                        <div className="ButtonContainer">
+                          <button className="Button">Reload</button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                )}
-              </>
-            )}
+                  )}
+                </>
+              )}
+            </div>
           </div>
         </WindowBody>
       </>
