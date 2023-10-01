@@ -4,7 +4,7 @@ const initialState = {
   user: {
     name: "user",
     role: "administrator",
-    password: "",
+    password: "123456",
     image: null,
   },
   deviceName: "breezeos",
