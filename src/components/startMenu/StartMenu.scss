@@ -4,6 +4,7 @@ $fgcolor: #e8e8e8;
   position: absolute;
   width: 100%;
   height: 100vh;
+  background: #00000065;
   backdrop-filter: blur(30px);
   -webkit-backdrop-filter: blur(30px);
   display: flex;
@@ -11,7 +12,7 @@ $fgcolor: #e8e8e8;
   opacity: 0;
   pointer-events: none;
   transition: all ease 0.3s;
-  z-index: 1;
+  z-index: 2;
 
   &.active {
     opacity: 1;
@@ -54,24 +55,19 @@ $fgcolor: #e8e8e8;
     padding: 5px 25px;
     display: flex;
     justify-content: center;
+
     .SearchInput {
       appearance: none;
       -webkit-appearance: none;
       outline: none;
       border: none;
-      background: #a5a5a512;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      background: transparentize($fgcolor, 0.93);
       padding: 10px 20px;
-      width: 200px;
+      width: 250px;
       border-radius: 999px;
       color: $fgcolor;
       font-size: 12px;
       transition: all ease 0.3s;
-
-      &:active {
-        background: darken(#a5a5a512, 11%);
-      }
 
       &:empty::before {
         content: "Search...";
@@ -80,7 +76,7 @@ $fgcolor: #e8e8e8;
       }
 
       &:focus {
-        width: 260px;
+        width: 310px;
       }
     }
   }

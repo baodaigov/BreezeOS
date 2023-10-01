@@ -10,7 +10,7 @@ import TopBarInteraction from "../../components/utils/window/TopBarInteraction";
 import StartApp from "../../components/startMenu/StartApp";
 import dayjs from "dayjs";
 import range from "lodash-es/range";
-import { setHeaderActive } from "../../reducers/header";
+import { setHeaderActive, setHeaderHide } from "../../reducers/header";
 
 export const CalendarApp = () => {
   const isActive = useSelector((state) => state.appsCalendar.active);
@@ -94,7 +94,7 @@ export const CalendarStartApp = () => {
     document
       .getElementsByClassName("StartMenuWrapper")[0]
       .classList.remove("active");
-    dispatch(setHeaderActive(true));
+    dispatch(setHeaderHide(false));
     document.getElementsByClassName("DesktopBody")[0].classList.add("active");
     if (isHide) {
       dispatch(setHide(false));

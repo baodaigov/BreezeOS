@@ -18,13 +18,14 @@ const Dock = () => {
   const icon = useSelector((state) => state.appearance.iconTheme);
   const shellTheme = useSelector((state) => state.shell.theme);
   const dockActive = useSelector((state) => state.dock.active);
+  const dockHide = useSelector((state) => state.dock.hide);
 
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <div
         className={`Dock ${shellTheme === "WhiteSur" ? "whitesur" : ""} ${
-          dockActive ? "active" : ""
-        }`}
+          dockActive && "active"
+        } ${dockHide && "hide"}`}
       >
         <SurfaceApp />
         <CalendarApp />

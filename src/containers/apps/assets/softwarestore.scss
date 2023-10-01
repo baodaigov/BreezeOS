@@ -274,7 +274,7 @@ $fgcolor: #e2e2e2;
             animation: searchbar 0.3s;
 
             &:focus {
-              border: 1px solid #8fb6ff;
+              border: 1px solid #60a5fa;
               width: 600px;
             }
 
@@ -365,8 +365,8 @@ $fgcolor: #e2e2e2;
 
             .ApplicationInstallButton {
               border-radius: 999px;
-              background: #8fb6ff53;
-              color: #8fb6ff;
+              background: #60a5fa53;
+              color: #60a5fa;
               margin-top: 10px;
               font-size: 11px;
               font-weight: 700;
@@ -375,7 +375,7 @@ $fgcolor: #e2e2e2;
               float: right;
 
               &:hover {
-                background: #8fb6ff6b;
+                background: #60a5fa6b;
               }
 
               &.installed {

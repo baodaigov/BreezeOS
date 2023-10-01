@@ -3,6 +3,7 @@ import W1 from "../components/default.jpg";
 
 const initialState = {
   img: W1,
+  allowSwitchWorkspace: false,
 };
 
 export const wallpaperSlice = createSlice({
@@ -12,9 +13,13 @@ export const wallpaperSlice = createSlice({
     changeWallpaper: (state, action) => {
       state.img = action.payload;
     },
+    setAllowSwitchWorkspace: (state, action) => {
+      state.allowSwitchWorkspace = action.payload;
+    },
   },
 });
 
-export const { changeWallpaper } = wallpaperSlice.actions;
+export const { changeWallpaper, setAllowSwitchWorkspace } =
+  wallpaperSlice.actions;
 
 export default wallpaperSlice.reducer;

@@ -12,7 +12,7 @@ import Webcam from "react-webcam";
 import ActMenu, { ActMenuSelector } from "../../components/utils/menu/index";
 import CountdownSound from "../../sounds/mixkit-clock-countdown-bleeps-916_Bq9La32i.wav";
 import CameraShutter from "../../sounds/camera_shutter.mp3";
-import { setHeaderActive } from "../../reducers/header";
+import { setHeaderActive, setHeaderHide } from "../../reducers/header";
 
 export const CameraApp = () => {
   const isActive = useSelector((state) => state.appsCamera.active);
@@ -90,7 +90,7 @@ export const CameraStartApp = () => {
     document
       .getElementsByClassName("StartMenuWrapper")[0]
       .classList.remove("active");
-    dispatch(setHeaderActive(true));
+    dispatch(setHeaderHide(false));
     document.getElementsByClassName("DesktopBody")[0].classList.add("active");
     if (isHide) {
       dispatch(setHide(false));

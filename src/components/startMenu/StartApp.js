@@ -1,11 +1,15 @@
 import React from "react";
 import "./StartMenu.scss";
 
-export default function StartApp(props) {
+export default function StartApp({
+  name,
+  icon,
+  onClick
+}) {
   return (
-    <div className="StartApp" onClick={props.onClick}>
-      <img src={props.icon} className="StartIcon" width="75px" height="75px" />
-      <p className="StartAppTitle">{props.name}</p>
+    <div className="StartApp" onClick={onClick}>
+      <img src={icon} className="StartIcon" width="75px" height="75px" />
+      <p className="StartAppTitle">{name}</p>
     </div>
   );
 }

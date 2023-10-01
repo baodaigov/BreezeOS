@@ -13,14 +13,13 @@ import { TextEditorStartApp } from "../../containers/apps/texteditor";
 import { SoftwareStoreStartApp } from "../../containers/apps/softwarestore";
 import { CalendarStartApp } from "../../containers/apps/calendar";
 import { VSCodeStartApp } from "../../containers/apps/vscode";
-import { setHeaderActive } from "../../reducers/header";
-import { setDockActive } from "../../reducers/dock";
+import { setHeaderHide } from "../../reducers/header";
 
 export default function StartMenu() {
   const icon = useSelector((state) => state.appearance.iconTheme);
   const dispatch = useDispatch();
 
-  function useOutsideAlerter(ref) {
+  function useOutsideStartMenu(ref) {
     useEffect(() => {
       /**
        * Alert if clicked on outside of element
@@ -30,8 +29,7 @@ export default function StartMenu() {
           document
             .getElementsByClassName("StartMenuWrapper")[0]
             .classList.remove("active");
-          dispatch(setHeaderActive(true));
-          dispatch(setDockActive(true));
+          dispatch(setHeaderHide(false));
           document
             .getElementsByClassName("DesktopBody")[0]
             .classList.add("active");
@@ -75,36 +73,30 @@ export default function StartMenu() {
   ];
 
   const startRef = useRef(null);
-  useOutsideAlerter(startRef);
+  useOutsideStartMenu(startRef);
 
-  const [name, setName] = useState("");
+  const [searchValue, setSearchValue] = useState("");
 
   function search(e) {
-    let val = e.target.innerText.toLowerCase();
+    let val = searchValue.toLowerCase();
     let matches = items.filter((v) => v.name.toLowerCase().includes(val));
     console.log(matches);
   }
-
-  document.addEventListener("keydown", (e) => {
-    if (e.keyCode === 13) {
-      e.preventDefault();
-    }
-  });
 
   return (
     <div className="StartMenuWrapper">
       <div className="StartMenu">
         <div ref={startRef}>
           <div className="SearchMenu">
-            <div
+            <input
+              value={searchValue}
+              placeholder="Search..."
               className="SearchInput"
-              contentEditable
-              onKeyUp={search}
-              onChange={(e) => setName(e.target.innerText)}
+              onKeyDown={search}
+              onInput={(e) => setSearchValue(e.target.value)}
               spellCheck="false"
-            >
-              {name}
-            </div>
+              autoCorrect="false"
+            />
           </div>
           <div className="StartApps">
             <SurfaceStartApp />

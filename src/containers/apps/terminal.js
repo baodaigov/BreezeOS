@@ -8,7 +8,7 @@ import DockItem from "../../components/DockItem";
 import "./assets/terminal.scss";
 import TopBarInteraction from "../../components/utils/window/TopBarInteraction";
 import StartApp from "../../components/startMenu/StartApp";
-import { setHeaderActive } from "../../reducers/header";
+import { setHeaderActive, setHeaderHide } from "../../reducers/header";
 
 export const TerminalApp = () => {
   const isActive = useSelector((state) => state.appsTerminal.active);
@@ -92,7 +92,7 @@ export const TerminalStartApp = () => {
     document
       .getElementsByClassName("StartMenuWrapper")[0]
       .classList.remove("active");
-    dispatch(setHeaderActive(true));
+    dispatch(setHeaderHide(false));
     document.getElementsByClassName("DesktopBody")[0].classList.add("active");
     if (isHide) {
       dispatch(setHide(false));

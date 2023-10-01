@@ -9,7 +9,7 @@ import "./assets/texteditor.scss";
 import TopBarInteraction from "../../components/utils/window/TopBarInteraction";
 import StartApp from "../../components/startMenu/StartApp";
 import Sound1 from "../../sounds/Oxygen-Sys-App-Error-Critical.mp3";
-import { setHeaderActive } from "../../reducers/header";
+import { setHeaderActive, setHeaderHide } from "../../reducers/header";
 
 export const TextEditorApp = () => {
   const isActive = useSelector((state) => state.appsTextEditor.active);
@@ -95,7 +95,7 @@ export const TextEditorStartApp = () => {
     document
       .getElementsByClassName("StartMenuWrapper")[0]
       .classList.remove("active");
-    dispatch(setHeaderActive(true));
+    dispatch(setHeaderHide(false));
     document.getElementsByClassName("DesktopBody")[0].classList.add("active");
     if (isHide) {
       dispatch(setHide(false));

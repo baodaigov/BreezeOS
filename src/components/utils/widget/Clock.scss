@@ -169,7 +169,7 @@
 
   &.default {
     .ClockWidgetContainer {
-      background: #d3e1ff;
+      background: #bfdbfe;
       outline: 0px solid transparent;
 
       .Hour,
@@ -179,7 +179,7 @@
       }
 
       .Number {
-        color: darken(#d5e3ff, 10%);
+        color: darken(#93c5fd, 10%);
       }
     }
   }

@@ -4,18 +4,23 @@ $fgcolor: #fff;
 .Header {
   position: relative;
   top: -50px;
-  z-index: 2;
+  z-index: 1;
   display: flex;
   background: $bgcolor;
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
   padding: 3px 4px;
-  transition: all 0.3s;
+  transition: all ease 0.3s;
   margin: 5px auto;
   border-radius: 999px;
 
   &.active {
     top: 0;
+  }
+
+  &.hide {
+    opacity: 0;
+    pointer-events: none;
   }
 
   * {

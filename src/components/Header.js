@@ -13,6 +13,7 @@ import PanelType from "./panel/PanelType";
 const Header = (props) => {
   const dispatch = useDispatch();
   const headerActive = useSelector((state) => state.header.active);
+  const headerHide = useSelector((state) => state.header.hide);
   const headerProMode = useSelector((state) => state.header.proMode);
   const headerType = useSelector((state) => state.header.type);
   const headerWidth = useSelector((state) => state.header.width);
@@ -241,6 +242,8 @@ const Header = (props) => {
     <div
       className={`Header ${shellTheme === "WhiteSur" ? "whitesur" : ""} ${
         headerActive ? "active" : ""
+      } ${
+        headerHide ? "hide" : ""
       }`}
       style={{ width: `${headerWidth}px` }}
     >

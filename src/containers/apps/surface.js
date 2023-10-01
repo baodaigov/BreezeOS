@@ -9,7 +9,7 @@ import DockItem from "../../components/DockItem";
 import "./assets/surface.scss";
 import TopBarInteraction from "../../components/utils/window/TopBarInteraction";
 import StartApp from "../../components/startMenu/StartApp";
-import { setHeaderActive } from "../../reducers/header";
+import { setHeaderActive, setHeaderHide } from "../../reducers/header";
 import SurfaceIcon from "../../icons/surface.svg";
 import SurfacePrivateIcon from "../../icons/surface-private.svg";
 import Toggle from "../../components/utils/toggle/Toggle";
@@ -101,7 +101,7 @@ export const SurfaceStartApp = () => {
     document
       .getElementsByClassName("StartMenuWrapper")[0]
       .classList.remove("active");
-    dispatch(setHeaderActive(true));
+    dispatch(setHeaderHide(false));
     document.getElementsByClassName("DesktopBody")[0].classList.add("active");
     if (isHide) {
       dispatch(setHide(false));

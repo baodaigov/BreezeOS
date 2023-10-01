@@ -16,7 +16,7 @@ import Image3 from "./assets/dark.png";
 import Image4 from "./assets/light.png";
 import Image5 from "./assets/logo-d.png";
 import Image6 from "./assets/logo-l.png";
-import { setHeaderActive } from "../../reducers/header";
+import { setHeaderActive, setHeaderHide } from "../../reducers/header";
 
 export const FilesApp = () => {
   const isActive = useSelector((state) => state.appsFiles.active);
@@ -130,7 +130,7 @@ export const FilesStartApp = () => {
     document
       .getElementsByClassName("StartMenuWrapper")[0]
       .classList.remove("active");
-    dispatch(setHeaderActive(true));
+    dispatch(setHeaderHide(false));
     document.getElementsByClassName("DesktopBody")[0].classList.add("active");
     if (isHide) {
       dispatch(setHide(false));

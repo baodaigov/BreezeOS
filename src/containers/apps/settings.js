@@ -53,6 +53,7 @@ import Wifi1 from "./assets/BreezeOS-WiFi.png";
 import { changeShell } from "../../reducers/shell";
 import {
   setHeaderActive,
+  setHeaderHide,
   setHeaderType,
   setProMode,
   setWidth,
@@ -146,7 +147,7 @@ export const SettingsStartApp = () => {
     document
       .getElementsByClassName("StartMenuWrapper")[0]
       .classList.remove("active");
-    dispatch(setHeaderActive(true));
+    dispatch(setHeaderHide(false));
     document.getElementsByClassName("DesktopBody")[0].classList.add("active");
     if (isHide) {
       dispatch(setHide(false));

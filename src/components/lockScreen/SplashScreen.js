@@ -127,9 +127,11 @@ export default function SplashScreen() {
 
   function login() {
     dispatch(setLocked(false));
-    setInvalidCount(0);
-    setPasswordValue("");
-    inputFieldRef.current.blur();
+    if(settings.user.password !== ""){
+      setInvalidCount(0);
+      setPasswordValue("");
+      inputFieldRef.current.blur();
+    }
   }
 
   function wrongPassword() {
@@ -285,7 +287,7 @@ export default function SplashScreen() {
       document
         .getElementsByClassName("TerminalWindow")[0]
         .classList.remove("active");
-      document.getElementsByClassName("Wallpaper")[0].classList.add("active");
+      document.getElementsByClassName("WallpaperWrapper")[0].classList.add("active");
       dispatch(setLocked(true));
       document
         .getElementsByClassName("SplashScreenWrapper")[0]

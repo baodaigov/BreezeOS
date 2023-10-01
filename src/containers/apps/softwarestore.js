@@ -9,7 +9,7 @@ import "./assets/softwarestore.scss";
 import TopBarInteraction from "../../components/utils/window/TopBarInteraction";
 import StartApp from "../../components/startMenu/StartApp";
 import SurfaceIcon from "../../icons/surface.svg";
-import { setHeaderActive } from "../../reducers/header";
+import { setHeaderActive, setHeaderHide } from "../../reducers/header";
 
 export const SoftwareStoreApp = () => {
   const isActive = useSelector((state) => state.appsSoftwareStore.active);
@@ -99,7 +99,7 @@ export const SoftwareStoreStartApp = () => {
     document
       .getElementsByClassName("StartMenuWrapper")[0]
       .classList.remove("active");
-    dispatch(setHeaderActive(true));
+    dispatch(setHeaderHide(false));
     document.getElementsByClassName("DesktopBody")[0].classList.add("active");
     if (isHide) {
       dispatch(setHide(false));
