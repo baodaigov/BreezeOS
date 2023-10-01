@@ -290,11 +290,11 @@ export default function SoftwareStore() {
                       >
                         <p className="ApplicationTitle">Blender</p>
                         <div className="ApplicationRating">
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-regular fa-star-sharp-half-stroke"></i>
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-regular fa-star-sharp-half-stroke" />
                         </div>
                       </div>
                       <p className="ApplicationDesc">Graphics & Design</p>
@@ -322,11 +322,11 @@ export default function SoftwareStore() {
                       >
                         <p className="ApplicationTitle">GIMP</p>
                         <div className="ApplicationRating">
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-regular fa-star-sharp"></i>
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-regular fa-star-sharp" />
                         </div>
                       </div>
                       <p className="ApplicationDesc">Graphics & Design</p>
@@ -354,11 +354,11 @@ export default function SoftwareStore() {
                       >
                         <p className="ApplicationTitle">LibreOffice</p>
                         <div className="ApplicationRating">
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-regular fa-star-sharp-half-stroke"></i>
-                          <i className="fa-regular fa-star-sharp"></i>
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-regular fa-star-sharp-half-stroke" />
+                          <i className="fa-regular fa-star-sharp" />
                         </div>
                       </div>
                       <p className="ApplicationDesc">Efficient</p>
@@ -388,11 +388,11 @@ export default function SoftwareStore() {
                       >
                         <p className="ApplicationTitle">Inkscape</p>
                         <div className="ApplicationRating">
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
                         </div>
                       </div>
                       <p className="ApplicationDesc">Graphics & Design</p>
@@ -420,11 +420,11 @@ export default function SoftwareStore() {
                       >
                         <p className="ApplicationTitle">Brave</p>
                         <div className="ApplicationRating">
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-regular fa-star-sharp"></i>
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-regular fa-star-sharp" />
                         </div>
                       </div>
                       <p className="ApplicationDesc">Utilities</p>
@@ -452,11 +452,11 @@ export default function SoftwareStore() {
                       >
                         <p className="ApplicationTitle">Spotify</p>
                         <div className="ApplicationRating">
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-regular fa-star-sharp"></i>
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-regular fa-star-sharp" />
                         </div>
                       </div>
                       <p className="ApplicationDesc">Music</p>
@@ -489,11 +489,11 @@ export default function SoftwareStore() {
                       >
                         <p className="ApplicationTitle">Audacity</p>
                         <div className="ApplicationRating">
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-regular fa-star-sharp-half-stroke"></i>
-                          <i className="fa-regular fa-star-sharp"></i>
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-regular fa-star-sharp-half-stroke" />
+                          <i className="fa-regular fa-star-sharp" />
                         </div>
                       </div>
                       <p className="ApplicationDesc">Music</p>
@@ -521,11 +521,11 @@ export default function SoftwareStore() {
                       >
                         <p className="ApplicationTitle">Telegram</p>
                         <div className="ApplicationRating">
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-regular fa-star-sharp"></i>
-                          <i className="fa-regular fa-star-sharp"></i>
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-regular fa-star-sharp" />
+                          <i className="fa-regular fa-star-sharp" />
                         </div>
                       </div>
                       <p className="ApplicationDesc">Social Media</p>
@@ -553,11 +553,11 @@ export default function SoftwareStore() {
                       >
                         <p className="ApplicationTitle">Discord</p>
                         <div className="ApplicationRating">
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-regular fa-star-sharp"></i>
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-regular fa-star-sharp" />
                         </div>
                       </div>
                       <p className="ApplicationDesc">Social Media</p>
@@ -581,11 +581,11 @@ export default function SoftwareStore() {
                       >
                         <p className="ApplicationTitle">Caprine</p>
                         <div className="ApplicationRating">
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-regular fa-star-sharp"></i>
-                          <i className="fa-regular fa-star-sharp"></i>
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-regular fa-star-sharp" />
+                          <i className="fa-regular fa-star-sharp" />
                         </div>
                       </div>
                       <p className="ApplicationDesc">Social Media</p>
@@ -613,11 +613,11 @@ export default function SoftwareStore() {
                       >
                         <p className="ApplicationTitle">Visual Studio Code</p>
                         <div className="ApplicationRating">
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-regular fa-star-sharp"></i>
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-regular fa-star-sharp" />
                         </div>
                       </div>
                       <p className="ApplicationDesc">Developer Tools</p>
@@ -647,11 +647,11 @@ export default function SoftwareStore() {
                       >
                         <p className="ApplicationTitle">Sublime Text</p>
                         <div className="ApplicationRating">
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-regular fa-star-sharp-half-stroke"></i>
-                          <i className="fa-regular fa-star-sharp"></i>
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-regular fa-star-sharp-half-stroke" />
+                          <i className="fa-regular fa-star-sharp" />
                         </div>
                       </div>
                       <p className="ApplicationDesc">Developer Tools</p>
@@ -679,11 +679,11 @@ export default function SoftwareStore() {
                       >
                         <p className="ApplicationTitle">GitHub Desktop</p>
                         <div className="ApplicationRating">
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-regular fa-star-sharp"></i>
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-regular fa-star-sharp" />
                         </div>
                       </div>
                       <p className="ApplicationDesc">Developer Tools</p>
@@ -713,11 +713,11 @@ export default function SoftwareStore() {
                       >
                         <p className="ApplicationTitle">Vim</p>
                         <div className="ApplicationRating">
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-regular fa-star-sharp-half-stroke"></i>
-                          <i className="fa-regular fa-star-sharp"></i>
-                          <i className="fa-regular fa-star-sharp"></i>
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-regular fa-star-sharp-half-stroke" />
+                          <i className="fa-regular fa-star-sharp" />
+                          <i className="fa-regular fa-star-sharp" />
                         </div>
                       </div>
                       <p className="ApplicationDesc">Developer Tools</p>
@@ -747,11 +747,11 @@ export default function SoftwareStore() {
                       >
                         <p className="ApplicationTitle">VLC</p>
                         <div className="ApplicationRating">
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-regular fa-star-sharp"></i>
-                          <i className="fa-regular fa-star-sharp"></i>
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-regular fa-star-sharp" />
+                          <i className="fa-regular fa-star-sharp" />
                         </div>
                       </div>
                       <p className="ApplicationDesc">Media</p>
@@ -779,11 +779,11 @@ export default function SoftwareStore() {
                       >
                         <p className="ApplicationTitle">Brave</p>
                         <div className="ApplicationRating">
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-regular fa-star-sharp"></i>
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-regular fa-star-sharp" />
                         </div>
                       </div>
                       <p className="ApplicationDesc">Utilities</p>
@@ -807,11 +807,11 @@ export default function SoftwareStore() {
                       >
                         <p className="ApplicationTitle">Surface</p>
                         <div className="ApplicationRating">
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-regular fa-star-sharp"></i>
-                          <i className="fa-regular fa-star-sharp"></i>
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-regular fa-star-sharp" />
+                          <i className="fa-regular fa-star-sharp" />
                         </div>
                       </div>
                       <p className="ApplicationDesc">Utilities</p>
@@ -841,11 +841,11 @@ export default function SoftwareStore() {
                       >
                         <p className="ApplicationTitle">Google Chrome</p>
                         <div className="ApplicationRating">
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp-half-stroke"></i>
-                          <i className="fa-regular fa-star-sharp"></i>
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp-half-stroke" />
+                          <i className="fa-regular fa-star-sharp" />
                         </div>
                       </div>
                       <p className="ApplicationDesc">Utilities</p>
@@ -873,11 +873,11 @@ export default function SoftwareStore() {
                       >
                         <p className="ApplicationTitle">Opera</p>
                         <div className="ApplicationRating">
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp-half-stroke"></i>
-                          <i className="fa-regular fa-star-sharp"></i>
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp-half-stroke" />
+                          <i className="fa-regular fa-star-sharp" />
                         </div>
                       </div>
                       <p className="ApplicationDesc">Utilities</p>
@@ -905,11 +905,11 @@ export default function SoftwareStore() {
                       >
                         <p className="ApplicationTitle">Thunderbird</p>
                         <div className="ApplicationRating">
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp-half-stroke"></i>
-                          <i className="fa-regular fa-star-sharp"></i>
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp-half-stroke" />
+                          <i className="fa-regular fa-star-sharp" />
                         </div>
                       </div>
                       <p className="ApplicationDesc">Efficient</p>
@@ -939,11 +939,11 @@ export default function SoftwareStore() {
                       >
                         <p className="ApplicationTitle">2048</p>
                         <div className="ApplicationRating">
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-regular fa-star-sharp-half-stroke"></i>
-                          <i className="fa-regular fa-star-sharp"></i>
-                          <i className="fa-regular fa-star-sharp"></i>
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-regular fa-star-sharp-half-stroke" />
+                          <i className="fa-regular fa-star-sharp" />
+                          <i className="fa-regular fa-star-sharp" />
                         </div>
                       </div>
                       <p className="ApplicationDesc">Games</p>
@@ -971,11 +971,11 @@ export default function SoftwareStore() {
                       >
                         <p className="ApplicationTitle">Mahjongg</p>
                         <div className="ApplicationRating">
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-regular fa-star-sharp"></i>
-                          <i className="fa-regular fa-star-sharp"></i>
-                          <i className="fa-regular fa-star-sharp"></i>
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-regular fa-star-sharp" />
+                          <i className="fa-regular fa-star-sharp" />
+                          <i className="fa-regular fa-star-sharp" />
                         </div>
                       </div>
                       <p className="ApplicationDesc">Games</p>
@@ -1003,11 +1003,11 @@ export default function SoftwareStore() {
                       >
                         <p className="ApplicationTitle">Chess</p>
                         <div className="ApplicationRating">
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-regular fa-star-sharp"></i>
-                          <i className="fa-regular fa-star-sharp"></i>
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-regular fa-star-sharp" />
+                          <i className="fa-regular fa-star-sharp" />
                         </div>
                       </div>
                       <p className="ApplicationDesc">Games</p>
@@ -1035,11 +1035,11 @@ export default function SoftwareStore() {
                       >
                         <p className="ApplicationTitle">Sudoku</p>
                         <div className="ApplicationRating">
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp-half-stroke"></i>
-                          <i className="fa-regular fa-star-sharp"></i>
-                          <i className="fa-regular fa-star-sharp"></i>
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp-half-stroke" />
+                          <i className="fa-regular fa-star-sharp" />
+                          <i className="fa-regular fa-star-sharp" />
                         </div>
                       </div>
                       <p className="ApplicationDesc">Games</p>
@@ -1067,11 +1067,11 @@ export default function SoftwareStore() {
                       >
                         <p className="ApplicationTitle">Othello</p>
                         <div className="ApplicationRating">
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-solid fa-star-sharp"></i>
-                          <i className="fa-regular fa-star-sharp-half-stroke"></i>
-                          <i className="fa-regular fa-star-sharp"></i>
-                          <i className="fa-regular fa-star-sharp"></i>
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-solid fa-star-sharp" />
+                          <i className="fa-regular fa-star-sharp-half-stroke" />
+                          <i className="fa-regular fa-star-sharp" />
+                          <i className="fa-regular fa-star-sharp" />
                         </div>
                       </div>
                       <p className="ApplicationDesc">Games</p>
@@ -1104,7 +1104,7 @@ export default function SoftwareStore() {
                   >
                     <p className="ApplicationTitle">Surface</p>
                     <div className="ApplicationInstallButton">
-                      <i className="fa-regular fa-trash"></i>
+                      <i className="fa-regular fa-trash" />
                     </div>
                   </div>
                 </div>
@@ -1130,7 +1130,7 @@ export default function SoftwareStore() {
                   >
                     <p className="ApplicationTitle">Clock</p>
                     <div className="ApplicationInstallButton">
-                      <i className="fa-regular fa-trash"></i>
+                      <i className="fa-regular fa-trash" />
                     </div>
                   </div>
                 </div>
@@ -1156,7 +1156,7 @@ export default function SoftwareStore() {
                   >
                     <p className="ApplicationTitle">Camera</p>
                     <div className="ApplicationInstallButton">
-                      <i className="fa-regular fa-trash"></i>
+                      <i className="fa-regular fa-trash" />
                     </div>
                   </div>
                 </div>
@@ -1182,7 +1182,7 @@ export default function SoftwareStore() {
                   >
                     <p className="ApplicationTitle">Calculator</p>
                     <div className="ApplicationInstallButton">
-                      <i className="fa-regular fa-trash"></i>
+                      <i className="fa-regular fa-trash" />
                     </div>
                   </div>
                 </div>
@@ -1208,7 +1208,7 @@ export default function SoftwareStore() {
                   >
                     <p className="ApplicationTitle">Text Editor</p>
                     <div className="ApplicationInstallButton">
-                      <i className="fa-regular fa-trash"></i>
+                      <i className="fa-regular fa-trash" />
                     </div>
                   </div>
                 </div>
@@ -1234,7 +1234,7 @@ export default function SoftwareStore() {
                   >
                     <p className="ApplicationTitle">Calendar</p>
                     <div className="ApplicationInstallButton">
-                      <i className="fa-regular fa-trash"></i>
+                      <i className="fa-regular fa-trash" />
                     </div>
                   </div>
                 </div>
@@ -1260,7 +1260,7 @@ export default function SoftwareStore() {
                   >
                     <p className="ApplicationTitle">Terminal</p>
                     <div className="ApplicationInstallButton">
-                      <i className="fa-regular fa-trash"></i>
+                      <i className="fa-regular fa-trash" />
                     </div>
                   </div>
                 </div>
@@ -1286,7 +1286,7 @@ export default function SoftwareStore() {
                   >
                     <p className="ApplicationTitle">Thunderbird</p>
                     <div className="ApplicationInstallButton">
-                      <i className="fa-regular fa-trash"></i>
+                      <i className="fa-regular fa-trash" />
                     </div>
                   </div>
                 </div>
@@ -1312,7 +1312,7 @@ export default function SoftwareStore() {
                   >
                     <p className="ApplicationTitle">GitHub Desktop</p>
                     <div className="ApplicationInstallButton">
-                      <i className="fa-regular fa-trash"></i>
+                      <i className="fa-regular fa-trash" />
                     </div>
                   </div>
                 </div>
@@ -1338,7 +1338,7 @@ export default function SoftwareStore() {
                   >
                     <p className="ApplicationTitle">Visual Studio Code</p>
                     <div className="ApplicationInstallButton">
-                      <i className="fa-regular fa-trash"></i>
+                      <i className="fa-regular fa-trash" />
                     </div>
                   </div>
                 </div>
@@ -1364,7 +1364,7 @@ export default function SoftwareStore() {
                   >
                     <p className="ApplicationTitle">Vim</p>
                     <div className="ApplicationInstallButton">
-                      <i className="fa-regular fa-trash"></i>
+                      <i className="fa-regular fa-trash" />
                     </div>
                   </div>
                 </div>
@@ -1377,7 +1377,7 @@ export default function SoftwareStore() {
               <i
                 className="fa-solid fa-circle-check"
                 style={{ fontSize: "80px" }}
-              ></i>
+              />
               <div style={{ marginTop: "20px", textAlign: "center" }}>
                 <h1>Up to Date</h1>
                 <p className="font-normal">Last checked: Just now</p>
@@ -1402,7 +1402,7 @@ export default function SoftwareStore() {
             <i
               className="fa-light fa-table-layout SoftwareTableLayout"
               onClick={() => setTabLayout(!tabLayout)}
-            ></i>
+            />
             <div className={`NavPanel ${tabLayout ? "" : "inactive"}`}>
               <div className="Category">
                 <h2 className="CategoryTitle">Categories</h2>
@@ -1411,42 +1411,42 @@ export default function SoftwareStore() {
                     <i
                       className="fa-regular fa-pen-to-square fa-sm"
                       style={{ marginRight: "7px" }}
-                    ></i>
+                    />
                     <p className="font-bold">Create</p>
                   </div>
                   <div className="CategoryItem work">
                     <i
                       className="fa-regular fa-list-check"
                       style={{ marginRight: "7px" }}
-                    ></i>
+                    />
                     <p className="font-bold">Work</p>
                   </div>
                   <div className="CategoryItem play">
                     <i
                       className="fa-regular fa-gamepad-modern"
                       style={{ marginRight: "7px" }}
-                    ></i>
+                    />
                     <p className="font-bold">Play</p>
                   </div>
                   <div className="CategoryItem socialize">
                     <i
                       className="fa-regular fa-globe"
                       style={{ marginRight: "7px" }}
-                    ></i>
+                    />
                     <p className="font-bold">Socialize</p>
                   </div>
                   <div className="CategoryItem learn">
                     <i
                       className="fa-regular fa-chalkboard-user"
                       style={{ marginRight: "7px" }}
-                    ></i>
+                    />
                     <p className="font-bold">Learn</p>
                   </div>
                   <div className="CategoryItem develop">
                     <i
                       className="fa-regular fa-laptop-code"
                       style={{ marginRight: "7px" }}
-                    ></i>
+                    />
                     <p className="font-bold">Develop</p>
                   </div>
                 </div>
@@ -1466,7 +1466,7 @@ export default function SoftwareStore() {
                     <i
                       className="fa-regular fa-xmark CloseSearchbar"
                       onClick={() => onSearch(!search)}
-                    ></i>
+                    />
                   </div>
                 ) : (
                   <div className="SoftwareNav" value={value}>
@@ -1477,8 +1477,8 @@ export default function SoftwareStore() {
                       <i
                         className="fa-regular fa-burst"
                         style={{ marginRight: "7px" }}
-                      ></i>
-                      <p className="font-bold">Explorer</p>
+                      />
+                      <p>Explorer</p>
                     </div>
                     <div
                       className="SoftwareNavItem installed"
@@ -1487,8 +1487,8 @@ export default function SoftwareStore() {
                       <i
                         className="fa-regular fa-circle-check"
                         style={{ marginRight: "7px" }}
-                      ></i>
-                      <p className="font-bold">Installed</p>
+                      />
+                      <p>Installed</p>
                     </div>
                     <div
                       className="SoftwareNavItem updates"
@@ -1497,15 +1497,15 @@ export default function SoftwareStore() {
                       <i
                         className="fa-regular fa-rotate"
                         style={{ marginRight: "7px" }}
-                      ></i>
-                      <p className="font-bold">Updates</p>
+                      />
+                      <p>Updates</p>
                     </div>
                   </div>
                 )}
                 <i
                   className="fa-regular fa-magnifying-glass SoftwareSearch"
                   onClick={() => onSearch(!search)}
-                ></i>
+                />
               </div>
               <div
                 style={{ position: "relative", width: "100%", height: "100%" }}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setActive, setHide, setPrivate } from "../../reducers/apps/surface";
 import { openUrl, closeUrl } from "../../reducers/surface";
@@ -161,10 +161,7 @@ export default function Surface() {
       }
     };
 
-    function reload() {
-      document.getElementById("iFrameFF").src =
-        document.getElementById("iFrameFF").src;
-    }
+    const iFrameRef = useRef(null);
 
     const [min, isMin] = useState(false);
 
@@ -189,7 +186,7 @@ export default function Surface() {
                   className="CloseButton"
                   onClick={() => dispatch(setActive(false))}
                 >
-                  <i className="fa-regular fa-xmark"></i>
+                  <i className="fa-regular fa-xmark" />
                 </div>
               </div>
             </div>
@@ -203,18 +200,20 @@ export default function Surface() {
                 <i
                   className="fa-regular fa-chevron-left"
                   onClick={() => dispatch(openUrl(hist[0]))}
-                ></i>
+                />
                 <i
                   className="fa-regular fa-chevron-right"
                   onClick={() => dispatch(openUrl(hist[1]))}
-                ></i>
+                />
                 {url === "" || !wifi ? (
-                  <i className="fa-regular fa-rotate-right"></i>
+                  <i className="fa-regular fa-rotate-right" />
                 ) : (
                   <i
                     className="fa-regular fa-rotate-right"
-                    onClick={reload}
-                  ></i>
+                    onClick={() =>
+                      (iFrameRef.current.src = iFrameRef.current.src)
+                    }
+                  />
                 )}
               </div>
               <input
@@ -233,7 +232,7 @@ export default function Surface() {
                 <i
                   className={`fa-regular fa-gear ${settingsOpened && "active"}`}
                   onMouseDown={() => setSettingsOpened(!settingsOpened)}
-                ></i>
+                />
               </div>
               <div className="TabBarInteraction">
                 <i
@@ -241,7 +240,7 @@ export default function Surface() {
                     supportOpened && "active"
                   }`}
                   onMouseDown={() => setSupportOpened(!supportOpened)}
-                ></i>
+                />
               </div>
             </div>
           </div>
@@ -280,7 +279,7 @@ export default function Surface() {
                       className="CloseButton"
                       onClick={() => setSettingsOpened(false)}
                     >
-                      <i className="fa-light fa-xmark"></i>
+                      <i className="fa-light fa-xmark" />
                     </div>
                   </div>
                   <div
@@ -305,7 +304,7 @@ export default function Surface() {
                         }}
                       >
                         <p className="SettingsValue">Bing</p>
-                        <i className="fa-regular fa-chevron-right SettingsChevron"></i>
+                        <i className="fa-regular fa-chevron-right SettingsChevron" />
                       </div>
                     </div>
                   </div>
@@ -328,7 +327,7 @@ export default function Surface() {
                       className="CloseButton"
                       onClick={() => setSupportOpened(false)}
                     >
-                      <i className="fa-light fa-xmark"></i>
+                      <i className="fa-light fa-xmark" />
                     </div>
                   </div>
                 </div>
@@ -366,8 +365,7 @@ export default function Surface() {
                 <>
                   {wifi ? (
                     <iframe
-                      id="iFrameFF"
-                      className="iFrameFF"
+                      className="iFrame"
                       src={url}
                       title="New Tab"
                       frameBorder="0"

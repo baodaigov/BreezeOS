@@ -16,7 +16,7 @@ import Image3 from "./assets/dark.png";
 import Image4 from "./assets/light.png";
 import Image5 from "./assets/logo-d.png";
 import Image6 from "./assets/logo-l.png";
-import { setHeaderActive, setHeaderHide } from "../../reducers/header";
+import { setHeaderHide } from "../../reducers/header";
 
 export const FilesApp = () => {
   const isActive = useSelector((state) => state.appsFiles.active);
@@ -54,70 +54,66 @@ export const FilesApp = () => {
   }, [isActive, isHide]);
 
   return (
-    <>
-      <DockItem
-        id="files"
-        className="FilesApp"
-        title="Files"
-        icon={
-          icon === "WhiteSur-icon-theme"
-            ? "https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/original/file-manager.svg"
-            : "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg"
-        }
-        menu={[
-          [
-            {
-              label: "Recent",
-            },
-            {
-              label: "Starred",
-            },
-            {
-              label: "Home",
-            },
-            {
-              label: "Desktop",
-            },
-            {
-              label: "Documents",
-            },
-            {
-              label: "Downloads",
-            },
-            {
-              label: "Music",
-            },
-            {
-              label: "Pictures",
-            },
-            {
-              label: "Videos",
-            },
-            {
-              label: "Trash",
-            },
-          ],
-          [
-            {
-              label: isHide ? "Unhide" : "Hide",
-              disabled: isActive ? false : true,
-              action: () =>
-                isHide ? dispatch(setHide(false)) : dispatch(setHide(true)),
-            },
-            {
-              label: isActive ? "Quit" : "Open",
-              action: () =>
-                isActive
-                  ? dispatch(setActive(false))
-                  : dispatch(setActive(true)),
-            },
-          ],
-        ]}
-        onClick={() =>
-          isHide ? dispatch(setHide(false)) : dispatch(setActive(true))
-        }
-      />
-    </>
+    <DockItem
+      id="files"
+      className="FilesApp"
+      title="Files"
+      icon={
+        icon === "WhiteSur-icon-theme"
+          ? "https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/original/file-manager.svg"
+          : "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg"
+      }
+      menu={[
+        [
+          {
+            label: "Recent",
+          },
+          {
+            label: "Starred",
+          },
+          {
+            label: "Home",
+          },
+          {
+            label: "Desktop",
+          },
+          {
+            label: "Documents",
+          },
+          {
+            label: "Downloads",
+          },
+          {
+            label: "Music",
+          },
+          {
+            label: "Pictures",
+          },
+          {
+            label: "Videos",
+          },
+          {
+            label: "Trash",
+          },
+        ],
+        [
+          {
+            label: isHide ? "Unhide" : "Hide",
+            disabled: isActive ? false : true,
+            action: () =>
+              isHide ? dispatch(setHide(false)) : dispatch(setHide(true)),
+          },
+          {
+            label: isActive ? "Quit" : "Open",
+            action: () =>
+              isActive ? dispatch(setActive(false)) : dispatch(setActive(true)),
+          },
+        ],
+      ]}
+      onClick={() =>
+        isHide ? dispatch(setHide(false)) : dispatch(setActive(true))
+      }
+    />
   );
 };
 
@@ -3771,7 +3767,7 @@ export default function Files() {
         default:
           return (
             <div className="NoFiles">
-              <p className="font-bold">Empty Folder</p>
+              <p>Empty Folder</p>
             </div>
           );
       }
@@ -3792,13 +3788,13 @@ export default function Files() {
                     iconSize === 145 ? "disabled" : ""
                   }`}
                   onClick={() => setIconSize((prev) => prev + 25)}
-                ></i>
+                />
                 <i
                   className={`fa-regular fa-minus ActMenuInteraction ${
                     iconSize === 20 ? "disabled" : ""
                   }`}
                   onClick={() => setIconSize((prev) => prev - 25)}
-                ></i>
+                />
               </div>
             </ActMenuSelector>
           </div>
@@ -3811,8 +3807,8 @@ export default function Files() {
             >
               <div className="TabBarItem">
                 <div className="TabBarInteraction">
-                  <i className="fa-regular fa-chevron-left"></i>
-                  <i className="fa-regular fa-chevron-right"></i>
+                  <i className="fa-regular fa-chevron-left" />
+                  <i className="fa-regular fa-chevron-right" />
                 </div>
               </div>
               <div style={{ display: "flex" }}>
@@ -3839,16 +3835,16 @@ export default function Files() {
                           : "fa-folder"
                       }`}
                       style={{ marginRight: "5px" }}
-                    ></i>
+                    />
                     <p>{directory}</p>
                   </div>
                   <div className="TabBarInteraction">
-                    <i className="fa-regular fa-ellipsis-vertical"></i>
+                    <i className="fa-regular fa-ellipsis-vertical" />
                   </div>
                 </div>
                 <div className="TabBarItem">
                   <div className="TabBarInteraction">
-                    <i className="fa-regular fa-magnifying-glass"></i>
+                    <i className="fa-regular fa-magnifying-glass" />
                   </div>
                 </div>
               </div>
@@ -3857,18 +3853,18 @@ export default function Files() {
                   className="TabBarInteraction"
                   style={{ marginRight: "20px" }}
                 >
-                  <i className="fa-regular fa-grid-2"></i>
+                  <i className="fa-regular fa-grid-2" />
                   <div className="TabSeparator"></div>
                   <i
                     className="fa-regular fa-chevron-down"
                     style={{ marginLeft: "3px" }}
-                  ></i>
+                  />
                 </div>
                 <div
                   className="TabBarInteraction"
                   onClick={() => showSettingsMenu(!settingsMenu)}
                 >
-                  <i className="fa-regular fa-bars"></i>
+                  <i className="fa-regular fa-bars" />
                 </div>
               </div>
             </div>
@@ -3898,7 +3894,7 @@ export default function Files() {
                         className={`DropdownMenu ${i.active && "active"}`}
                         onMouseDown={i.onClick}
                       >
-                        <i className={`fa-regular fa-${i.icon}`}></i>
+                        <i className={`fa-regular fa-${i.icon}`} />
                         <p className="DropdownTitle">{i.title}</p>
                       </div>
                     ))}

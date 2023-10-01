@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setActive, setHide } from "../../reducers/apps/texteditor";
 import "../../components/utils/window/Window.scss";
@@ -119,6 +119,7 @@ export const TextEditorStartApp = () => {
 };
 
 export default function TextEditor() {
+  const textEditorRef = useRef(null);
   const dispatch = useDispatch();
 
   const TextEditorWindow = () => {
@@ -152,7 +153,7 @@ export default function TextEditor() {
     }
 
     useEffect(() => {
-      document.getElementById("textEditor").addEventListener("input", (e) => {
+      textEditorRef.current.addEventListener("input", (e) => {
         saveChanges(false);
 
         if (
@@ -175,7 +176,7 @@ export default function TextEditor() {
                 className="WindowTopBarInteraction close"
                 onClick={() => displayMsgBoxChanges(false)}
               >
-                <i className="fa-solid fa-xmark fa-lg"></i>
+                <i className="fa-solid fa-xmark fa-lg" />
               </div>
             </div>
           </div>
@@ -214,13 +215,13 @@ export default function TextEditor() {
             >
               <div className="TabBarItem">
                 <div className="TabBarInteraction">
-                  <i className="fa-regular fa-bars"></i>
+                  <i className="fa-regular fa-bars" />
                 </div>
                 <div
                   className="TabBarInteraction"
                   style={{ marginLeft: "10px" }}
                 >
-                  <i className="fa-regular fa-magnifying-glass"></i>
+                  <i className="fa-regular fa-magnifying-glass" />
                 </div>
               </div>
             </div>
@@ -322,7 +323,11 @@ export default function TextEditor() {
 
   return (
     <div className="TextEditorWindow">
-      <div className="Window texteditor" id="textEditor" key={Math.random()}>
+      <div
+        className="Window texteditor"
+        ref={textEditorRef}
+        key={Math.random()}
+      >
         <TextEditorWindow />
       </div>
     </div>

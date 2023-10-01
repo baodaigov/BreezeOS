@@ -14,7 +14,7 @@ export default function WindowBodyDefault(props) {
         >
           <div style={{ display: "flex" }}>
             <div className="WindowBodyIcon critical">
-              <i className="fa-regular fa-xmark"></i>
+              <i className="fa-regular fa-xmark" />
             </div>
             <div className="WindowBodyRight" style={{ marginLeft: "10px" }}>
               <p className="WindowBodyTitle">{props.title}</p>
@@ -33,7 +33,7 @@ export default function WindowBodyDefault(props) {
         >
           <div style={{ display: "flex" }}>
             <div className="WindowBodyIcon exclamation">
-              <i className="fa-solid fa-exclamation"></i>
+              <i className="fa-solid fa-exclamation" />
             </div>
             <div className="WindowBodyRight" style={{ marginLeft: "10px" }}>
               <p className="WindowBodyTitle">{props.title}</p>
@@ -52,7 +52,7 @@ export default function WindowBodyDefault(props) {
         >
           <div style={{ display: "flex" }}>
             <div className="WindowBodyIcon">
-              <i className={`fa-regular ${props.icon}`}></i>
+              <i className={`fa-regular ${props.icon}`} />
             </div>
             <div className="WindowBodyRight" style={{ marginLeft: "10px" }}>
               <p className="WindowBodyTitle">{props.title}</p>

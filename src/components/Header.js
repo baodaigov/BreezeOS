@@ -242,9 +242,7 @@ const Header = (props) => {
     <div
       className={`Header ${shellTheme === "WhiteSur" ? "whitesur" : ""} ${
         headerActive ? "active" : ""
-      } ${
-        headerHide ? "hide" : ""
-      }`}
+      } ${headerHide ? "hide" : ""}`}
       style={{ width: `${headerWidth}px` }}
     >
       <div
@@ -254,9 +252,9 @@ const Header = (props) => {
       >
         <div className="Icon">
           {settingsReducer.notifications ? (
-            <i className="fa-solid fa-bell-slash"></i>
+            <i className="fa-solid fa-bell-slash" />
           ) : (
-            <i className="fa-solid fa-bell"></i>
+            <i className="fa-solid fa-bell" />
           )}
         </div>
         <div className="Text">
@@ -321,16 +319,16 @@ const Header = (props) => {
                 </p>
               </div>
               {settingsReducer.airplaneMode ? (
-                <i key={Math.random()} className="fa-solid fa-plane"></i>
+                <i key={Math.random()} className="fa-solid fa-plane" />
               ) : (
                 ""
               )}
               {settingsReducer.wifi ? (
-                <i key={Math.random()} className="fa-solid fa-wifi"></i>
+                <i key={Math.random()} className="fa-solid fa-wifi" />
               ) : (
                 ""
               )}
-              <i key={Math.random()} className="fa-solid fa-volume"></i>
+              <i key={Math.random()} className="fa-solid fa-volume" />
             </Task>
           ) : (
             ""
@@ -342,7 +340,7 @@ const Header = (props) => {
                 onMouseDown={() => (panelActive ? "" : dispatch(activePanel()))}
                 ref={panelRef}
               >
-                <i className="fa-regular fa-chevron-down"></i>
+                <i className="fa-regular fa-chevron-down" />
                 <Panel
                   style={{
                     height:
@@ -365,7 +363,7 @@ const Header = (props) => {
                 }
                 ref={bluetoothPanelRef}
               >
-                <i className="fa-regular fa-bluetooth"></i>
+                <i className="fa-regular fa-bluetooth" />
                 <PanelType
                   type="bluetooth"
                   onActive={bluetoothPanelActive ? true : false}
@@ -380,14 +378,14 @@ const Header = (props) => {
                 ref={batteryPanelRef}
               >
                 {batteryChargingStatus ? (
-                  <i className="fa-regular fa-battery-bolt"></i>
+                  <i className="fa-regular fa-battery-bolt" />
                 ) : batteryPercent <= 10 ? (
                   <i
                     className="fa-regular fa-battery-exclamation"
                     style={{ color: "#bd3a35" }}
-                  ></i>
+                  />
                 ) : (
-                  <i className="fa-regular fa-battery-full"></i>
+                  <i className="fa-regular fa-battery-full" />
                 )}
                 <PanelType
                   type="battery"
@@ -405,9 +403,9 @@ const Header = (props) => {
                 ref={wifiPanelRef}
               >
                 {settingsReducer.wifi ? (
-                  <i className="fa-regular fa-wifi"></i>
+                  <i className="fa-regular fa-wifi" />
                 ) : (
-                  <i className="fa-regular fa-wifi-slash"></i>
+                  <i className="fa-regular fa-wifi-slash" />
                 )}
                 <PanelType
                   type="wifi"
@@ -424,7 +422,7 @@ const Header = (props) => {
                 }
                 ref={brightnessPanelRef}
               >
-                <i className="fa-regular fa-brightness"></i>
+                <i className="fa-regular fa-brightness" />
                 <PanelType
                   type="brightness"
                   onActive={brightnessPanelActive ? true : false}
@@ -438,7 +436,7 @@ const Header = (props) => {
                 }
                 ref={volumePanelRef}
               >
-                <i className="fa-regular fa-volume"></i>
+                <i className="fa-regular fa-volume" />
                 <PanelType
                   type="volume"
                   onActive={volumePanelActive ? true : false}

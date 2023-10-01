@@ -7,6 +7,7 @@ $fgcolor: #e2e2e2;
   }
   .Window .TopBar {
     padding: 4px 8px;
+
     .TopBarInteractionContainer {
       display: flex;
       width: 100vw;
@@ -166,7 +167,7 @@ $fgcolor: #e2e2e2;
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     height: 100%;
-    padding: 5px;
+    padding: 0 5px 5px 5px;
     position: relative;
 
     & > * {
@@ -177,7 +178,7 @@ $fgcolor: #e2e2e2;
 
     .SurfaceContentContainer {
       position: relative;
-      border-radius: 10px;
+      border-radius: 6px;
       overflow: hidden;
 
       .Settings,
@@ -195,12 +196,12 @@ $fgcolor: #e2e2e2;
         padding: 30px 0;
         opacity: 0;
         pointer-events: none;
-  
+
         &.active {
           opacity: 1;
           pointer-events: auto;
         }
-  
+
         .CloseButton {
           background: transparentize($fgcolor, 0.95);
           border-radius: 999px;
@@ -211,14 +212,14 @@ $fgcolor: #e2e2e2;
           justify-content: center;
           align-items: center;
           color: $fgcolor;
-  
+
           &:active {
             background: transparentize($fgcolor, 0.9);
             transition: none;
           }
         }
       }
-  
+
       .Settings {
         .SettingsItem {
           border-radius: 999px;
@@ -227,27 +228,27 @@ $fgcolor: #e2e2e2;
           display: flex;
           justify-content: space-between;
           align-items: center;
-  
+
           .SettingsName {
             font-weight: 700;
             font-size: 18px;
             margin: 0;
           }
-  
+
           .SettingsValue {
             font-size: 15px;
             margin: 0 8px 0 0;
           }
-  
+
           .SettingsChevron {
             font-size: 14px;
           }
-  
+
           .SettingsValue,
           .SettingsChevron {
             color: transparentize($fgcolor, 0.8);
           }
-  
+
           &.allowClicking {
             &:active {
               background: #f4f4f50c;
@@ -256,13 +257,13 @@ $fgcolor: #e2e2e2;
           }
         }
       }
-  
+
       .Support {
         .SupportDesc {
           font-size: 14px;
         }
       }
-  
+
       .SplashScreen {
         position: absolute;
         top: 0;
@@ -277,16 +278,16 @@ $fgcolor: #e2e2e2;
         justify-content: center;
         align-items: center;
         transition: all cubic-bezier(0.4, 0, 0.2, 1) 0.7s;
-  
+
         .SplashScreenIcon {
           width: 200px;
           height: 200px;
         }
-  
+
         &.private {
           background: #09090b;
         }
-  
+
         &.disabled {
           border-radius: 999px;
           width: 120px;
@@ -298,7 +299,7 @@ $fgcolor: #e2e2e2;
           }
         }
       }
-  
+
       .MainScreen {
         background-color: #202023;
         display: flex;
@@ -307,17 +308,17 @@ $fgcolor: #e2e2e2;
         width: 100%;
         height: 100%;
         transition: none;
-  
+
         .Main {
           max-width: 600px;
           padding: 30px 20px;
-  
+
           .NonCollapsibleSection {
             padding: 0 25px;
-  
+
             .SearchWrapper {
               padding: 34px 0 38px;
-  
+
               .Text {
                 margin-top: 140px;
                 margin-bottom: 0;
@@ -329,7 +330,7 @@ $fgcolor: #e2e2e2;
           }
         }
       }
-  
+
       .CantBeReached {
         width: 100%;
         height: 100%;
@@ -343,20 +344,20 @@ $fgcolor: #e2e2e2;
         margin: 0 auto;
         color: $fgcolor;
         transition: none;
-  
+
         .CantBeReachedText {
           font-weight: 700;
           font-size: 40px;
           margin-bottom: 10px;
         }
-  
+
         .Description {
           font-size: 14px;
           line-height: 1.8;
-  
+
           .ButtonContainer {
             margin: 40px 0;
-  
+
             .Button {
               appearance: none;
               border: none;
@@ -368,7 +369,7 @@ $fgcolor: #e2e2e2;
               font-weight: 700;
               transition: all ease 0.3s;
               color: $fgcolor;
-  
+
               &:active {
                 transition: none;
                 background: darken(#0061df, 10%);
@@ -376,6 +377,11 @@ $fgcolor: #e2e2e2;
             }
           }
         }
+      }
+
+      .iFrame {
+        width: 100%;
+        height: 100%;
       }
     }
   }

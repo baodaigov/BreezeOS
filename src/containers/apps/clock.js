@@ -293,11 +293,11 @@ export default function Clock() {
                       <div className="AlarmContainerItem">
                         {settings ? (
                           <div className="AlarmSettings">
-                            <i className="fa-regular fa-bars reorder"></i>
+                            <i className="fa-regular fa-bars reorder" />
                             <i
                               className="fa-regular fa-dash delete"
                               onClick={() => removeAlarm(index)}
-                            ></i>
+                            />
                           </div>
                         ) : (
                           ""
@@ -321,7 +321,7 @@ export default function Clock() {
                     <i
                       className="fa-regular fa-alarm-clock"
                       style={{ fontSize: "80px", margin: "20px" }}
-                    ></i>
+                    />
                     <p style={{ fontWeight: "700", fontSize: "20px" }}>
                       No Alarm
                     </p>
@@ -333,7 +333,7 @@ export default function Clock() {
                       className="AlarmItem showSettings"
                       onMouseUp={() => showAlarmSettings(false)}
                     >
-                      <i className="fa-regular fa-xmark"></i>
+                      <i className="fa-regular fa-xmark" />
                     </div>
                     <div
                       className={`AlarmItem ${
@@ -342,14 +342,14 @@ export default function Clock() {
                       onMouseUp={editAlarm}
                     >
                       <p className="AlarmItemTitle">Edit</p>
-                      <i className="fa-regular fa-pen"></i>
+                      <i className="fa-regular fa-pen" />
                     </div>
                     <div
                       className="AlarmItem settings"
                       onMouseUp={() => showAlarmSettings(false)}
                     >
                       <p className="AlarmItemTitle">Settings</p>
-                      <i className="fa-regular fa-gear"></i>
+                      <i className="fa-regular fa-gear" />
                     </div>
                   </>
                 ) : settings ? (
@@ -357,7 +357,7 @@ export default function Clock() {
                     className="AlarmItem done"
                     onMouseUp={() => allowSettings(false)}
                   >
-                    <i className="fa-regular fa-check"></i>
+                    <i className="fa-regular fa-check" />
                   </div>
                 ) : (
                   <div
@@ -365,7 +365,7 @@ export default function Clock() {
                     onMouseDown={mouseDown}
                     onMouseUp={mouseUp}
                   >
-                    <i className="fa-regular fa-plus"></i>
+                    <i className="fa-regular fa-plus" />
                   </div>
                 )}
               </div>
@@ -444,19 +444,19 @@ export default function Clock() {
                   className="ClockMenuItem world-clock"
                   onClick={worldClockTab}
                 >
-                  <i className="fa-regular fa-globe"></i>
+                  <i className="fa-regular fa-globe" />
                   <p>World Clock</p>
                 </div>
                 <div className="ClockMenuItem alarm-clock" onClick={alarmTab}>
-                  <i className="fa-regular fa-alarm-clock"></i>
+                  <i className="fa-regular fa-alarm-clock" />
                   <p>Alarm</p>
                 </div>
                 <div className="ClockMenuItem stopwatch" onClick={stopwatchTab}>
-                  <i className="fa-regular fa-stopwatch"></i>
+                  <i className="fa-regular fa-stopwatch" />
                   <p>Stopwatch</p>
                 </div>
                 <div className="ClockMenuItem timer" onClick={timerTab}>
-                  <i className="fa-regular fa-timer"></i>
+                  <i className="fa-regular fa-timer" />
                   <p>Timer</p>
                 </div>
                 <div

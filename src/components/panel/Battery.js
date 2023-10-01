@@ -1,27 +1,33 @@
-import {useEffect} from 'react';
+import { useEffect } from "react";
 import { useBattery } from "react-use";
-import { useSelector, useDispatch } from 'react-redux';
-import { setCharging } from '../../reducers/battery';
-import './Panel.scss';
+import { useSelector, useDispatch } from "react-redux";
+import { setCharging } from "../../reducers/battery";
+import "./Panel.scss";
 
-export default function Battery(){
-    const batteryChargingStatus = useSelector(state => state.battery.charging);
-    const dispatch = useDispatch();
+export default function Battery() {
+  const batteryChargingStatus = useSelector((state) => state.battery.charging);
+  const dispatch = useDispatch();
 
-    const batteryState = useBattery();
+  const batteryState = useBattery();
 
-    let batteryPercent = Math.round(batteryState.level * 100);
+  let batteryPercent = Math.round(batteryState.level * 100);
 
-    if(batteryState.charging){
-        dispatch(setCharging(true));
-    } else {
-        dispatch(setCharging(false));
-    }
+  if (batteryState.charging) {
+    dispatch(setCharging(true));
+  } else {
+    dispatch(setCharging(false));
+  }
 
-    return (
-        <div className='PanelItem font-bold'>
-            {batteryChargingStatus ? <i className='fa-regular fa-battery-bolt'></i> : <i className='fa-regular fa-battery-full'></i>}
-            <p className='PanelBatteryLevel'>{isNaN(batteryPercent) ? '-' : batteryPercent + '%'}</p>
-        </div>
-    )
+  return (
+    <div className="PanelItem font-bold">
+      {batteryChargingStatus ? (
+        <i className="fa-regular fa-battery-bolt" />
+      ) : (
+        <i className="fa-regular fa-battery-full" />
+      )}
+      <p className="PanelBatteryLevel">
+        {isNaN(batteryPercent) ? "-" : batteryPercent + "%"}
+      </p>
+    </div>
+  );
 }

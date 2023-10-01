@@ -405,7 +405,7 @@ export default function Camera() {
                 className="WindowTopBarInteraction close"
                 onClick={closeMsgBoxDelete}
               >
-                <i className="fa-solid fa-xmark fa-lg"></i>
+                <i className="fa-solid fa-xmark fa-lg" />
               </div>
             </div>
           </div>
@@ -425,7 +425,7 @@ export default function Camera() {
                 className="WindowTopBarInteraction close"
                 onClick={closeMsgBoxDelete}
               >
-                <i className="fa-solid fa-xmark fa-lg"></i>
+                <i className="fa-solid fa-xmark fa-lg" />
               </div>
             </div>
           </div>
@@ -479,7 +479,7 @@ export default function Camera() {
                   <i
                     className="fa-regular fa-gear"
                     onClick={() => showSettingsMenu(!settingsMenu)}
-                  ></i>
+                  />
                 </div>
               </div>
             </div>
@@ -514,7 +514,7 @@ export default function Camera() {
                     className="GoBackBtn"
                     onClick={() => setViewMedia(!viewMedia)}
                   >
-                    <i className="fa-regular fa-arrow-left"></i>
+                    <i className="fa-regular fa-arrow-left" />
                   </div>
                   {img != null ? (
                     <div style={{ display: "flex" }}>
@@ -567,14 +567,14 @@ export default function Camera() {
                 />
               ) : (
                 <div className="WebcamDisabled">
-                  <i className="fa-regular fa-camera-slash disableWebcam"></i>
+                  <i className="fa-regular fa-camera-slash disableWebcam" />
                 </div>
               )}
               <div className={`CameraInteraction ${interaction}`}>
                 <div className="CameraAct" onClick={() => swapItem(!item)}>
                   <i
                     className={`fa-light ${item ? "fa-camera" : "fa-video"}`}
-                  ></i>
+                  />
                 </div>
                 {item ? (
                   <div
@@ -584,14 +584,14 @@ export default function Camera() {
                     onClick={recording ? stopRecord : record}
                   >
                     {recording ? (
-                      <i className="fa-solid fa-square"></i>
+                      <i className="fa-solid fa-square" />
                     ) : (
-                      <i className="fa-light fa-video"></i>
+                      <i className="fa-light fa-video" />
                     )}
                   </div>
                 ) : (
                   <div className="CameraCapture" onClick={capture}>
-                    <i className="fa-light fa-camera"></i>
+                    <i className="fa-light fa-camera" />
                   </div>
                 )}
                 <div

@@ -168,7 +168,7 @@ const Clock = () => {
             className="CloseButton"
             onClick={() => setTimeout(() => dispatch(removeClock()), 150)}
           >
-            <i className="fa-regular fa-xmark"></i>
+            <i className="fa-regular fa-xmark" />
           </div>
         </div>
         <div className="ClockWidgetContainer">

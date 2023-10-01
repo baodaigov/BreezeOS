@@ -1,7 +1,16 @@
 import { useEffect, useRef, useState } from "react";
+import Hammer from "react-hammerjs";
 import "./Dock.scss";
 
-export default function DockItem(props) {
+export default function DockItem({
+  className,
+  id,
+  redirectTo,
+  menu,
+  title,
+  icon,
+  onClick,
+}) {
   const [contextMenuDisplayed, setDisplayContextMenu] = useState(false);
 
   function useOutsideMenu(ref) {
@@ -29,21 +38,23 @@ export default function DockItem(props) {
   return (
     <div className="DockItemContainer">
       <div
-        className={`DockItem ${props.className}`}
-        id={props.id}
-        key={props.id}
-        onClick={() =>
-          props.redirectTo ? (window.location.href = props.redirectTo) : ""
-        }
+        className={`DockItem ${className}`}
+        id={id}
+        key={id}
+        onClick={() => (redirectTo ? (window.location.href = redirectTo) : "")}
       >
         <div
           className={`ContextMenu ${contextMenuDisplayed && "active"}`}
           ref={menuRef}
         >
-          {props.menu?.map((i) => (
+          {menu?.map((i) => (
             <div className="ContextMenuItemContainer">
               {i.map((j) => (
-                <div className={`ContextMenuItem ${j.disabled && "disabled"}`} onMouseUp={() => setDisplayContextMenu(false)} onClick={j.action}>
+                <div
+                  className={`ContextMenuItem ${j.disabled && "disabled"}`}
+                  onMouseUp={() => setDisplayContextMenu(false)}
+                  onClick={j.action}
+                >
                   <p>{j.label}</p>
                   <p className="Description">{j.description}</p>
                 </div>
@@ -51,14 +62,25 @@ export default function DockItem(props) {
             </div>
           ))}
         </div>
-        {!contextMenuDisplayed && <p className="DockItemTitle">{props.title}</p>}
-        <img
-          src={props.icon}
-          width={37}
-          height={37}
-          onClick={props.onClick}
-          onContextMenu={() => setDisplayContextMenu(!contextMenuDisplayed)}
-        />
+        {!contextMenuDisplayed && <p className="DockItemTitle">{title}</p>}
+        <Hammer
+          onTap={onClick}
+          onPress={() => setDisplayContextMenu(!contextMenuDisplayed)}
+          options={{
+            recognizers: {
+              press: {
+                time: 350,
+              },
+            },
+          }}
+        >
+          <img
+            src={icon}
+            width={37}
+            height={37}
+            onContextMenu={() => setDisplayContextMenu(!contextMenuDisplayed)}
+          />
+        </Hammer>
       </div>
     </div>
   );

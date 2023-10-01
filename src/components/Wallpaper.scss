@@ -28,10 +28,13 @@
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
 
+    p {
+      pointer-events: none;
+    }
+
     .Title {
-      margin-top: 30px;
+      margin: 100px 0 0 0;
       font-size: 30px;
-      margin: 0;
       color: #e2e2e2;
     }
 
@@ -49,12 +52,95 @@
       margin: auto;
       transition: all ease 0.3s;
 
+      .Label {
+        width: fit-content;
+        padding: 8px 14px;
+        border-radius: 999px;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -50px;
+        font-size: 15px;
+        margin: auto;
+        border-radius: 999px;
+        color: #e2e2e2;
+        transition: all ease 0.3s;
+        opacity: 0;
+      }
+
       &.minimize {
         width: 65%;
-        height: 65%;
+        height: 60%;
         transform: translateY(40px);
         border-radius: 20px;
         box-shadow: 0px 0 20px #00000062;
+
+        .Label {
+          opacity: 1;
+        }
+
+        &:hover {
+          width: 67%;
+          height: 62%;
+
+          .Label {
+            background-color: #e2e2e2;
+            color: darken(#e2e2e2, 100%);
+            bottom: -52px;
+            font-size: 15.7px;
+          }
+        }
+      }
+    }
+
+    .AddWorkspaceWrapper {
+      position: absolute;
+      right: 0;
+      height: 100%;
+      width: 100px;
+      display: none;
+
+      &.active {
+        display: block;
+      }
+
+      .AddWorkspace {
+        position: absolute;
+        right: -100px;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all ease 0.2s;
+
+        .AddWorkspaceButton {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 999px;
+          width: 50px;
+          height: 50px;
+          color: #e2e2e2;
+          font-size: 25px;
+          transition: all ease 0.2s;
+
+          &:hover {
+            background-color: #e2e2e2;
+            color: darken(#e2e2e2, 100%);
+          }
+
+          &:active {
+            background-color: darken(#e2e2e2, 15%);
+            transition: none;
+          }
+        }
+      }
+
+      &:hover {
+        .AddWorkspace {
+          right: 0px;
+        }
       }
     }
   }

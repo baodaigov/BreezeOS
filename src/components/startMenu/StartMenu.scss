@@ -12,7 +12,7 @@ $fgcolor: #e8e8e8;
   opacity: 0;
   pointer-events: none;
   transition: all ease 0.3s;
-  z-index: 2;
+  z-index: 3;
 
   &.active {
     opacity: 1;

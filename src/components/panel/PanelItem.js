@@ -23,7 +23,7 @@ const PanelItem = (props) => {
           className="PanelItem PanelItemInteraction"
           onClick={showShutdownMenu}
         >
-          <i className="fa-solid fa-power-off" style={{ marginRight: "0" }}></i>
+          <i className="fa-solid fa-power-off" style={{ marginRight: "0" }} />
         </div>
       );
     default:

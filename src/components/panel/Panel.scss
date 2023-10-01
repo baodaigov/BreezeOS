@@ -4,6 +4,7 @@ $fbgcolor: #60a5fa;
 
 .Panel {
   position: absolute;
+  z-index: 2;
   top: 40px;
   right: 0;
   background: $bgcolor;

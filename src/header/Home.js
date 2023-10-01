@@ -29,12 +29,12 @@ export default function Home() {
   }
 
   return (
-    <Hammer onTap={startMenu} onPressUp={switchWorkspace}>
+    <Hammer onTap={startMenu} onPress={switchWorkspace}>
       <div className="Home Header-item">
         {shellTheme === "WhiteSur" ? (
-          <i className="fa-brands fa-apple Apple"></i>
+          <i className="fa-brands fa-apple Apple" />
         ) : (
-          <i className="fa-regular fa-circle"></i>
+          <i className="fa-regular fa-circle" />
         )}
       </div>
     </Hammer>

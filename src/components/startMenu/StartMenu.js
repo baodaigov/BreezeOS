@@ -19,28 +19,15 @@ export default function StartMenu() {
   const icon = useSelector((state) => state.appearance.iconTheme);
   const dispatch = useDispatch();
 
-  function useOutsideStartMenu(ref) {
-    useEffect(() => {
-      /**
-       * Alert if clicked on outside of element
-       */
-      function handleClickOutside(event) {
-        if (ref.current && !ref.current.contains(event.target)) {
-          document
-            .getElementsByClassName("StartMenuWrapper")[0]
-            .classList.remove("active");
-          dispatch(setHeaderHide(false));
-          document
-            .getElementsByClassName("DesktopBody")[0]
-            .classList.add("active");
-        }
-      }
-      document.addEventListener("mousedown", handleClickOutside);
-      return () => {
-        document.removeEventListener("mousedown", handleClickOutside);
-      };
-    }, [ref]);
-  }
+  document.addEventListener("keydown", (e) => {
+    if (e.keyCode === 27) {
+      document
+        .getElementsByClassName("StartMenuWrapper")[0]
+        .classList.remove("active");
+      dispatch(setHeaderHide(false));
+      document.getElementsByClassName("DesktopBody")[0].classList.add("active");
+    }
+  });
 
   const items = [
     {
@@ -72,9 +59,6 @@ export default function StartMenu() {
     },
   ];
 
-  const startRef = useRef(null);
-  useOutsideStartMenu(startRef);
-
   const [searchValue, setSearchValue] = useState("");
 
   function search(e) {
@@ -86,34 +70,32 @@ export default function StartMenu() {
   return (
     <div className="StartMenuWrapper">
       <div className="StartMenu">
-        <div ref={startRef}>
-          <div className="SearchMenu">
-            <input
-              value={searchValue}
-              placeholder="Search..."
-              className="SearchInput"
-              onKeyDown={search}
-              onInput={(e) => setSearchValue(e.target.value)}
-              spellCheck="false"
-              autoCorrect="false"
-            />
-          </div>
-          <div className="StartApps">
-            <SurfaceStartApp />
-            <CalendarStartApp />
-            <SettingsStartApp />
-            <ClockStartApp />
-            <CameraStartApp />
-            <FilesStartApp />
-            <CalculatorStartApp />
-            <TextEditorStartApp />
-            <TerminalStartApp />
-            <SoftwareStoreStartApp />
-            <VSCodeStartApp />
-            {items.map((i) => (
-              <StartApp key={i.id} icon={i.icon} name={i.name} />
-            ))}
-          </div>
+        <div className="SearchMenu">
+          <input
+            value={searchValue}
+            placeholder="Search..."
+            className="SearchInput"
+            onKeyDown={search}
+            onInput={(e) => setSearchValue(e.target.value)}
+            spellCheck="false"
+            autoCorrect="false"
+          />
+        </div>
+        <div className="StartApps">
+          <SurfaceStartApp />
+          <CalendarStartApp />
+          <SettingsStartApp />
+          <ClockStartApp />
+          <CameraStartApp />
+          <FilesStartApp />
+          <CalculatorStartApp />
+          <TextEditorStartApp />
+          <TerminalStartApp />
+          <SoftwareStoreStartApp />
+          <VSCodeStartApp />
+          {items.map((i) => (
+            <StartApp key={i.id} icon={i.icon} name={i.name} />
+          ))}
         </div>
       </div>
     </div>

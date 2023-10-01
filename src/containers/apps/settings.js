@@ -683,21 +683,21 @@ export default function Settings() {
                                   <p>{i.name}</p>
                                   <div className="VisibleNetworksIcon">
                                     {i.connected ? (
-                                      <i className="fa-solid fa-check"></i>
+                                      <i className="fa-solid fa-check" />
                                     ) : (
                                       ""
                                     )}
                                     {i.private ? (
-                                      <i className="fa-solid fa-lock"></i>
+                                      <i className="fa-solid fa-lock" />
                                     ) : (
                                       ""
                                     )}
                                     {i.status === "good" ? (
-                                      <i className="fa-solid fa-wifi"></i>
+                                      <i className="fa-solid fa-wifi" />
                                     ) : i.status === "fair" ? (
-                                      <i className="fa-duotone fa-wifi-fair"></i>
+                                      <i className="fa-duotone fa-wifi-fair" />
                                     ) : i.status === "weak" ? (
-                                      <i className="fa-duotone fa-wifi-weak"></i>
+                                      <i className="fa-duotone fa-wifi-weak" />
                                     ) : (
                                       ""
                                     )}
@@ -714,21 +714,21 @@ export default function Settings() {
                                     <p>{i.name}</p>
                                     <div className="VisibleNetworksIcon">
                                       {i.connected ? (
-                                        <i className="fa-solid fa-check"></i>
+                                        <i className="fa-solid fa-check" />
                                       ) : (
                                         ""
                                       )}
                                       {i.private ? (
-                                        <i className="fa-solid fa-lock"></i>
+                                        <i className="fa-solid fa-lock" />
                                       ) : (
                                         ""
                                       )}
                                       {i.status === "good" ? (
-                                        <i className="fa-solid fa-wifi"></i>
+                                        <i className="fa-solid fa-wifi" />
                                       ) : i.status === "fair" ? (
-                                        <i className="fa-duotone fa-wifi-fair"></i>
+                                        <i className="fa-duotone fa-wifi-fair" />
                                       ) : i.status === "weak" ? (
-                                        <i className="fa-duotone fa-wifi-weak"></i>
+                                        <i className="fa-duotone fa-wifi-weak" />
                                       ) : (
                                         ""
                                       )}
@@ -748,7 +748,7 @@ export default function Settings() {
                       </>
                     ) : (
                       <div className="StatusWifiFalse">
-                        <i className="fa-solid fa-wifi-slash"></i>
+                        <i className="fa-solid fa-wifi-slash" />
                         <p className="Title font-bold">Wi-Fi Has Turned Off</p>
                         <p className="Description">
                           To get access to Internet connection, please turn on
@@ -790,7 +790,7 @@ export default function Settings() {
                       </div>
                     ) : (
                       <div className="StatusBluetoothFalse">
-                        <i className="fa-solid fa-bluetooth"></i>
+                        <i className="fa-solid fa-bluetooth" />
                         <p className="Title font-bold">
                           Bluetooth Has Turned Off
                         </p>
@@ -901,7 +901,7 @@ export default function Settings() {
                             className="CloseButton"
                             onClick={() => setWallpaperInput(null)}
                           >
-                            <i className="fa-regular fa-xmark"></i>
+                            <i className="fa-regular fa-xmark" />
                           </button>
                         </div>
                       ) : (
@@ -910,7 +910,7 @@ export default function Settings() {
                             <i
                               className="fa-regular fa-plus"
                               style={{ fontSize: "35px", marginBottom: "20px" }}
-                            ></i>
+                            />
                             <p className="font-bold">Add wallpaper</p>
                           </div>
                           <input
@@ -963,7 +963,7 @@ export default function Settings() {
                         <i
                           className="fa-regular fa-arrow-pointer"
                           style={{ marginRight: "7px" }}
-                        ></i>
+                        />
                         <p>Cursor</p>
                       </div>
                       <div
@@ -971,7 +971,7 @@ export default function Settings() {
                         onClick={() => showCursorMenu(true)}
                       >
                         <p style={{ marginRight: "7px" }}>Default</p>
-                        <i className="fa-regular fa-chevron-down"></i>
+                        <i className="fa-regular fa-chevron-down" />
                       </div>
                       <ActMenu
                         style={{
@@ -993,7 +993,7 @@ export default function Settings() {
                         <i
                           className="fa-regular fa-icons"
                           style={{ marginRight: "7px" }}
-                        ></i>
+                        />
                         <p>Icons</p>
                       </div>
                       <div
@@ -1003,7 +1003,7 @@ export default function Settings() {
                         <p style={{ marginRight: "7px" }}>
                           {appearanceReducer.iconTheme}
                         </p>
-                        <i className="fa-regular fa-chevron-down"></i>
+                        <i className="fa-regular fa-chevron-down" />
                       </div>
                       <ActMenu
                         style={{
@@ -1046,7 +1046,7 @@ export default function Settings() {
                         <i
                           className="fa-solid fa-font-case"
                           style={{ marginRight: "7px" }}
-                        ></i>
+                        />
                         <p>Fonts</p>
                       </div>
                       <div
@@ -1056,7 +1056,7 @@ export default function Settings() {
                         <p style={{ marginRight: "7px" }}>
                           {settingsReducer.fontFamily}
                         </p>
-                        <i className="fa-regular fa-chevron-down"></i>
+                        <i className="fa-regular fa-chevron-down" />
                       </div>
                       <ActMenu
                         style={{
@@ -1098,7 +1098,7 @@ export default function Settings() {
                         <i
                           className="fa-solid fa-browser"
                           style={{ marginRight: "7px" }}
-                        ></i>
+                        />
                         <p>Shell</p>
                       </div>
                       <div
@@ -1106,7 +1106,7 @@ export default function Settings() {
                         onClick={() => showShellMenu(true)}
                       >
                         <p style={{ marginRight: "7px" }}>{shellTheme}</p>
-                        <i className="fa-regular fa-chevron-down"></i>
+                        <i className="fa-regular fa-chevron-down" />
                       </div>
                       <ActMenu
                         style={{
@@ -1148,7 +1148,7 @@ export default function Settings() {
                         <i
                           className="fa-regular fa-volume"
                           style={{ marginRight: "7px" }}
-                        ></i>
+                        />
                         <p>Sound</p>
                       </div>
                       <div
@@ -1156,7 +1156,7 @@ export default function Settings() {
                         onClick={() => showSoundMenu(true)}
                       >
                         <p style={{ marginRight: "7px" }}>Oxygen</p>
-                        <i className="fa-regular fa-chevron-down"></i>
+                        <i className="fa-regular fa-chevron-down" />
                       </div>
                       <ActMenu
                         style={{
@@ -1191,7 +1191,7 @@ export default function Settings() {
                     }}
                   >
                     <p className="font-bold">Current widgets</p>
-                    <i className="fa-regular fa-plus WidgetsButton"></i>
+                    <i className="fa-regular fa-plus WidgetsButton" />
                   </div>
                   <div style={{ width: "649.516px", display: "flex" }}>
                     <div className="WidgetsContainer">
@@ -1272,7 +1272,7 @@ export default function Settings() {
                         <i
                           className="fa-regular fa-image-landscape"
                           style={{ marginRight: "7px" }}
-                        ></i>
+                        />
                         <p>Orientation</p>
                       </div>
                       <div
@@ -1280,7 +1280,7 @@ export default function Settings() {
                         onClick={() => showOrientationMenu(true)}
                       >
                         <p style={{ marginRight: "7px" }}>Landscape</p>
-                        <i className="fa-regular fa-chevron-down"></i>
+                        <i className="fa-regular fa-chevron-down" />
                       </div>
                       <ActMenu
                         style={{
@@ -1303,7 +1303,7 @@ export default function Settings() {
                         <i
                           className="fa-regular fa-expand-wide"
                           style={{ marginRight: "7px" }}
-                        ></i>
+                        />
                         <p>Resolution</p>
                       </div>
                       <div
@@ -1314,7 +1314,7 @@ export default function Settings() {
                           {window.screen.width} &times; {window.screen.height}{" "}
                           &#40;16:9&#41;
                         </p>
-                        <i className="fa-regular fa-chevron-down"></i>
+                        <i className="fa-regular fa-chevron-down" />
                       </div>
                       <ActMenu
                         style={{
@@ -1336,7 +1336,7 @@ export default function Settings() {
                         <i
                           className="fa-regular fa-arrows-rotate"
                           style={{ marginRight: "7px" }}
-                        ></i>
+                        />
                         <p>Refresh Rate</p>
                       </div>
                       <div
@@ -1344,7 +1344,7 @@ export default function Settings() {
                         onClick={() => showRefreshRateMenu(true)}
                       >
                         <p style={{ marginRight: "7px" }}>60.00 Hz</p>
-                        <i className="fa-regular fa-chevron-down"></i>
+                        <i className="fa-regular fa-chevron-down" />
                       </div>
                       <ActMenu
                         style={{
@@ -1394,20 +1394,20 @@ export default function Settings() {
                     onClick={() => setUsersTab("general")}
                   >
                     <div style={{ display: "flex", alignItems: "center" }}>
-                      <i className="fa-regular fa-gear UserIcon"></i>
+                      <i className="fa-regular fa-gear UserIcon" />
                       <p>General</p>
                     </div>
-                    <i className="fa-regular fa-chevron-right"></i>
+                    <i className="fa-regular fa-chevron-right" />
                   </div>
                   <div
                     className="UserItem"
                     onClick={() => setUsersTab("security")}
                   >
                     <div style={{ display: "flex", alignItems: "center" }}>
-                      <i className="fa-regular fa-lock UserIcon"></i>
+                      <i className="fa-regular fa-lock UserIcon" />
                       <p>Security</p>
                     </div>
-                    <i className="fa-regular fa-chevron-right"></i>
+                    <i className="fa-regular fa-chevron-right" />
                   </div>
                 </div>
               </div>
@@ -1483,7 +1483,7 @@ export default function Settings() {
                           className={`fa-regular fa-chevron-right ${
                             editDeviceName ? "rotated" : ""
                           }`}
-                        ></i>
+                        />
                       </div>
                     </div>
                     <div
@@ -1626,7 +1626,7 @@ export default function Settings() {
                   className="WindowTopBarInteraction close"
                   onClick={() => displayMaximumExceeded(false)}
                 >
-                  <i className="fa-solid fa-xmark fa-lg"></i>
+                  <i className="fa-solid fa-xmark fa-lg" />
                 </div>
               </div>
             </div>
@@ -1656,7 +1656,7 @@ export default function Settings() {
                 style={{ width: "200px", flexDirection: "row-reverse" }}
               >
                 <div className="TabBarInteraction">
-                  <i className="fa-regular fa-magnifying-glass"></i>
+                  <i className="fa-regular fa-magnifying-glass" />
                 </div>
               </div>
               <div
@@ -1736,7 +1736,7 @@ export default function Settings() {
                     className="WindowTopBarInteraction close"
                     onClick={() => setShareWifi(false)}
                   >
-                    <i className="fa-solid fa-xmark fa-lg"></i>
+                    <i className="fa-solid fa-xmark fa-lg" />
                   </div>
                 </div>
               </div>
@@ -1759,7 +1759,7 @@ export default function Settings() {
               <div className="WindowBodyDefault">
                 <div className="WindowBodyContent">
                   <div className="WindowBodyIcon">
-                    <i className="fa-regular fa-key"></i>
+                    <i className="fa-regular fa-key" />
                   </div>
                   <div style={{ marginLeft: "10px", width: "100%" }}>
                     <p className="font-bold" style={{ fontSize: "17px" }}>
@@ -1793,7 +1793,7 @@ export default function Settings() {
                             ? dispatch(displayPassword(false))
                             : dispatch(displayPassword(true))
                         }
-                      ></i>
+                      />
                     </div>
                   </div>
                 </div>
@@ -1825,7 +1825,7 @@ export default function Settings() {
               <div className="WindowBodyDefault">
                 <div className="WindowBodyContent">
                   <div className="WindowBodyIcon">
-                    <i className="fa-regular fa-wifi"></i>
+                    <i className="fa-regular fa-wifi" />
                   </div>
                   <div style={{ marginLeft: "10px", width: "100%" }}>
                     <p className="font-bold" style={{ fontSize: "17px" }}>
@@ -1860,7 +1860,7 @@ export default function Settings() {
                         onClick={() => showSecurityMenu(true)}
                       >
                         <p>Security: {nw.security}</p>
-                        <i className="fa-regular fa-chevron-down"></i>
+                        <i className="fa-regular fa-chevron-down" />
                         <ActMenu
                           style={{
                             zIndex: "1",
@@ -1984,7 +1984,7 @@ export default function Settings() {
                               ? dispatch(displayPassword(false))
                               : dispatch(displayPassword(true))
                           }
-                        ></i>
+                        />
                       </div>
                     </div>
                   </div>
@@ -2021,7 +2021,7 @@ export default function Settings() {
                     className="WindowTopBarInteraction close"
                     onClick={() => setUsersTab("")}
                   >
-                    <i className="fa-solid fa-xmark fa-lg"></i>
+                    <i className="fa-solid fa-xmark fa-lg" />
                   </div>
                 </div>
               </div>
@@ -2059,7 +2059,7 @@ export default function Settings() {
                             className={`DropdownMenu ${i.active && "active"}`}
                             onMouseDown={i.onClick}
                           >
-                            <i className={i.icon}></i>
+                            <i className={i.icon} />
                             <p className="DropdownTitle">{i.name}</p>
                           </div>
                         ))}

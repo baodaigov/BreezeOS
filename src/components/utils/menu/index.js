@@ -12,7 +12,7 @@ export const ActMenuSelector = ({
   return (
     <div className="ActMenuSelector" style={style} onClick={onClick}>
       <p>{title}</p>
-      <i className={`fa-regular fa-check ${active ? "active" : ""}`}></i>
+      <i className={`fa-regular fa-check ${active ? "active" : ""}`} />
       {children}
     </div>
   );

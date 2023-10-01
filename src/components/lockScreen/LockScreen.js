@@ -15,7 +15,9 @@ export default function LockScreen() {
       setTimeout(() => {
         dispatch(setHeaderActive(false));
         dispatch(setDockActive(false));
-        document.getElementsByClassName("DesktopBody")[0].classList.remove("active");
+        document
+          .getElementsByClassName("DesktopBody")[0]
+          .classList.remove("active");
       }, 200);
 
       setTimeout(() => {
@@ -30,18 +32,23 @@ export default function LockScreen() {
           .classList.add("active");
       }, 500);
     } else {
-        document.getElementsByClassName("LockScreen")[0].classList.remove("active");
-        document
-          .getElementsByClassName("LockScreenWrapper")[0]
-          .classList.remove("active");
-        dispatch(setHeaderActive(true));
-        dispatch(setDockActive(true));
-        document.getElementsByClassName("DesktopBody")[0].classList.add("active");
+      document
+        .getElementsByClassName("LockScreen")[0]
+        .classList.remove("active");
+      document
+        .getElementsByClassName("LockScreenWrapper")[0]
+        .classList.remove("active");
+      dispatch(setHeaderActive(true));
+      dispatch(setDockActive(true));
+      document.getElementsByClassName("DesktopBody")[0].classList.add("active");
     }
   }, [isLocked]);
 
   return (
-    <div className='LockScreen' style={{ backgroundImage: `url(${wallpaperImg})` }}>
+    <div
+      className="LockScreen"
+      style={{ backgroundImage: `url(${wallpaperImg})` }}
+    >
       <div className="LockScreenWrapper">
         <SplashScreen />
       </div>

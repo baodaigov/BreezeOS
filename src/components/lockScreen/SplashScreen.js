@@ -12,10 +12,11 @@ import {
 } from "../../reducers/lock";
 import Avatar from "../Avatar";
 import useCountdown from "../../hooks/useCountdown";
-import { setHeaderActive } from "../../reducers/header";
-import { setDockActive } from "../../reducers/dock";
+import { setHeaderActive, setHeaderHide } from "../../reducers/header";
+import { setDockActive, setDockHide } from "../../reducers/dock";
 import { pushItem, clearItem } from "../../reducers/shutdown";
 import ActMenu, { ActMenuSelector } from "../utils/menu/index";
+import { setAllowSwitchWorkspace } from "../../reducers/wallpaper";
 
 export default function SplashScreen() {
   const dispatch = useDispatch();
@@ -23,6 +24,9 @@ export default function SplashScreen() {
   const lock = useSelector((state) => state.lock);
   const optionsMenuShown = useSelector((state) => state.lock.optionsMenuShown);
   const hour12 = useSelector((state) => state.settings.hour12);
+  const allowSwitchWorkspace = useSelector(
+    (state) => state.wallpaper.allowSwitchWorkspace
+  );
   const { secondsLeft, start } = useCountdown();
   const [curTime, setCurTime] = useState(null);
   const [curDate, setCurDate] = useState(null);
@@ -119,6 +123,10 @@ export default function SplashScreen() {
     }
   }, [curTime, hour12, curDate]);
 
+  document.addEventListener("keydown", (e) => {
+    if (e.keyCode === 27) dispatch(setOptionsMenuShown(false));
+  });
+
   useEffect(() => {
     if (secondsLeft <= 0) {
       setInvalidCount(0);
@@ -127,10 +135,15 @@ export default function SplashScreen() {
 
   function login() {
     dispatch(setLocked(false));
-    if(settings.user.password !== ""){
+    if (settings.user.password !== "") {
       setInvalidCount(0);
       setPasswordValue("");
       inputFieldRef.current.blur();
+    }
+    if (allowSwitchWorkspace) {
+      dispatch(setAllowSwitchWorkspace(false));
+      dispatch(setHeaderHide(false));
+      dispatch(setDockHide(false));
     }
   }
 
@@ -287,7 +300,9 @@ export default function SplashScreen() {
       document
         .getElementsByClassName("TerminalWindow")[0]
         .classList.remove("active");
-      document.getElementsByClassName("WallpaperWrapper")[0].classList.add("active");
+      document
+        .getElementsByClassName("WallpaperWrapper")[0]
+        .classList.add("active");
       dispatch(setLocked(true));
       document
         .getElementsByClassName("SplashScreenWrapper")[0]
@@ -337,7 +352,7 @@ export default function SplashScreen() {
                   <p className="SplashScreenDare">{curDate}</p>
                 </div>
                 <div className="SplashScreenItem">
-                  <i className={`${batteryIcon.icon} SplashScreenIcon`}></i>
+                  <i className={`${batteryIcon.icon} SplashScreenIcon`} />
                   {isNaN(batteryPercent) ? "-" : batteryPercent + "%"}
                 </div>
               </div>
@@ -392,7 +407,7 @@ export default function SplashScreen() {
                                     className={`fa-regular ${
                                       passwordShown ? "fa-eye-slash" : "fa-eye"
                                     }`}
-                                  ></i>
+                                  />
                                 </div>
                               )}
                             </div>
@@ -406,14 +421,14 @@ export default function SplashScreen() {
                                   : login
                               }
                             >
-                              <i className="fa-regular fa-arrow-right SplashScreenIcon"></i>
+                              <i className="fa-regular fa-arrow-right SplashScreenIcon" />
                             </div>
                           </>
                         )}
                       </>
                     ) : (
                       <div className="LoginButton" onClick={login}>
-                        <i className="fa-regular fa-arrow-right SplashScreenIcon"></i>
+                        <i className="fa-regular fa-arrow-right SplashScreenIcon" />
                       </div>
                     )}
                   </div>
@@ -437,7 +452,7 @@ export default function SplashScreen() {
                         onClick={sleep}
                       >
                         <div className="PowerMenuInteraction">
-                          <i className="fa-light fa-moon"></i>
+                          <i className="fa-light fa-moon" />
                         </div>
                         <p className="PowerMenuName">Sleep</p>
                       </div>
@@ -446,7 +461,7 @@ export default function SplashScreen() {
                         onClick={() => dispatch(setOptionsMenuShown(false))}
                       >
                         <div className="PowerMenuInteraction">
-                          <i className="fa-light fa-lock"></i>
+                          <i className="fa-light fa-lock" />
                         </div>
                         <p className="PowerMenuName">Lock</p>
                       </div>
@@ -455,7 +470,7 @@ export default function SplashScreen() {
                         onClick={shutdown}
                       >
                         <div className="PowerMenuInteraction">
-                          <i className="fa-light fa-power-off"></i>
+                          <i className="fa-light fa-power-off" />
                         </div>
                         <p className="PowerMenuName">Shutdown</p>
                       </div>
@@ -464,7 +479,7 @@ export default function SplashScreen() {
                         onClick={restart}
                       >
                         <div className="PowerMenuInteraction">
-                          <i className="fa-light fa-rotate-left"></i>
+                          <i className="fa-light fa-rotate-left" />
                         </div>
                         <p className="PowerMenuName">Restart</p>
                       </div>
@@ -479,7 +494,7 @@ export default function SplashScreen() {
               className={`OptionsButton ${optionsMenuShown && "active"}`}
               onClick={() => dispatch(setOptionsMenuShown(!optionsMenuShown))}
             >
-              <i class="fa-regular fa-ellipsis"></i>
+              <i class="fa-regular fa-ellipsis" />
             </div>
           )}
         </div>
@@ -494,7 +509,7 @@ export default function SplashScreen() {
             }}
           >
             <div className="CloseButton" onClick={() => setEditable(false)}>
-              <i className="fa-regular fa-xmark"></i>
+              <i className="fa-regular fa-xmark" />
             </div>
           </div>
           <div className="EditMenuItem" style={{ margin: 0 }}>
@@ -504,7 +519,7 @@ export default function SplashScreen() {
               onClick={() => showFontFamilyMenu(true)}
             >
               <p style={{ marginRight: "7px" }}>{lock.fontFamily}</p>
-              <i className="fa-regular fa-chevron-down"></i>
+              <i className="fa-regular fa-chevron-down" />
             </div>
             <ActMenu
               style={{
@@ -560,7 +575,7 @@ export default function SplashScreen() {
               onClick={() => showFontSizeMenu(true)}
             >
               <p style={{ marginRight: "7px" }}>{lock.fontSize}</p>
-              <i className="fa-regular fa-chevron-down"></i>
+              <i className="fa-regular fa-chevron-down" />
             </div>
             <ActMenu
               style={{

@@ -83,18 +83,18 @@ const PanelType = (props) => {
                           <div className="WifiListItem">
                             <p className="WifiName">{i.name}</p>
                             <div className="WifiListIcon">
-                              <i className="fa-solid fa-check"></i>
+                              <i className="fa-solid fa-check" />
                               {i.private ? (
-                                <i className="fa-solid fa-lock"></i>
+                                <i className="fa-solid fa-lock" />
                               ) : (
                                 ""
                               )}
                               {i.status === "good" ? (
-                                <i className="fa-solid fa-wifi"></i>
+                                <i className="fa-solid fa-wifi" />
                               ) : i.status === "fair" ? (
-                                <i className="fa-duotone fa-wifi-fair"></i>
+                                <i className="fa-duotone fa-wifi-fair" />
                               ) : i.status === "weak" ? (
-                                <i className="fa-duotone fa-wifi-weak"></i>
+                                <i className="fa-duotone fa-wifi-weak" />
                               ) : (
                                 ""
                               )}
@@ -108,16 +108,16 @@ const PanelType = (props) => {
                             <p className="WifiName">{i.name}</p>
                             <div className="WifiListIcon">
                               {i.private ? (
-                                <i className="fa-solid fa-lock"></i>
+                                <i className="fa-solid fa-lock" />
                               ) : (
                                 ""
                               )}
                               {i.status === "good" ? (
-                                <i className="fa-solid fa-wifi"></i>
+                                <i className="fa-solid fa-wifi" />
                               ) : i.status === "fair" ? (
-                                <i className="fa-duotone fa-wifi-fair"></i>
+                                <i className="fa-duotone fa-wifi-fair" />
                               ) : i.status === "weak" ? (
-                                <i className="fa-duotone fa-wifi-weak"></i>
+                                <i className="fa-duotone fa-wifi-weak" />
                               ) : (
                                 ""
                               )}
@@ -141,7 +141,7 @@ const PanelType = (props) => {
                   </div>
                 ) : (
                   <div className="WifiStatusFalse">
-                    <i className="fa-solid fa-wifi-slash"></i>
+                    <i className="fa-solid fa-wifi-slash" />
                     <p className="Title font-bold">Wi-Fi Has Turned Off</p>
                   </div>
                 )}
@@ -223,7 +223,7 @@ const PanelType = (props) => {
                   </p>
                 ) : (
                   <div className="BluetoothStatusFalse">
-                    <i className="fa-solid fa-bluetooth"></i>
+                    <i className="fa-solid fa-bluetooth" />
                     <p className="Title font-bold">Bluetooth Has Turned Off</p>
                   </div>
                 )}

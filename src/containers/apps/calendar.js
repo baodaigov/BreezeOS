@@ -167,7 +167,7 @@ export default function Calendar() {
                   <i
                     className="fa-regular fa-chevron-left"
                     onClick={handlePrev}
-                  ></i>
+                  />
                 </div>
                 <p>{dayObj.format("MMM DD, YYYY")}</p>
                 <div
@@ -177,7 +177,7 @@ export default function Calendar() {
                   <i
                     className="fa-regular fa-chevron-right"
                     onClick={handleNext}
-                  ></i>
+                  />
                 </div>
               </div>
             </div>

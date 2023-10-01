@@ -21,7 +21,7 @@ export default function Avatar({ size, image }) {
             fontSize: `${size - 20}px`,
           }}
         >
-          <i className="fa-solid fa-user"></i>
+          <i className="fa-solid fa-user" />
         </div>
       )}
     </>
