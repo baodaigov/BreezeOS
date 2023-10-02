@@ -11,6 +11,7 @@
     "@types/react-hammerjs": "^1.0.4",
     "caniuse-lite": "^1.0.30001538",
     "dayjs": "^1.11.7",
+    "i18next-http-backend": "^2.2.2",
     "lodash-es": "^4.17.21",
     "os-browserify": "^0.3.0",
     "prop-types": "^15.8.1",

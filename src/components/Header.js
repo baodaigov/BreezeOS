@@ -10,6 +10,7 @@ import { setActive, setSettings } from "../reducers/apps/settings";
 import AppMenu from "../header/AppMenu";
 import PanelType from "./panel/PanelType";
 import useTime from "../hooks/useTime";
+import { useTranslation } from "react-i18next";
 
 const Header = (props) => {
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ const Header = (props) => {
     })
   );
   const { timeFormat } = useTime();
+  const { t } = useTranslation();
 
   useEffect(() => {
     setInterval(() => {
@@ -236,7 +238,9 @@ const Header = (props) => {
         </div>
         <div className="Text">
           <p className="font-bold">
-            {settingsReducer.notifications ? "Off" : "On"}
+            {settingsReducer.notifications
+              ? t("header.notifications.off")
+              : t("header.notifications.on")}
           </p>
         </div>
       </div>
@@ -244,7 +248,7 @@ const Header = (props) => {
         className={`lowbattery ${headerType === "lowbattery" ? "active" : ""}`}
       >
         <div className="LowBatteryText">
-          <p className="font-bold">Low Battery</p>
+          <p className="font-bold">{t("header.lowBattery")}</p>
         </div>
         <div className="BatteryLevel">
           <p className="BatteryLevelText font-bold">
@@ -255,7 +259,7 @@ const Header = (props) => {
       <div className={`charging ${headerType === "charging" ? "active" : ""}`}>
         <div className="ChargingText">
           <p className="font-bold">
-            {batteryPercent === 100 ? "Fully Charged" : "Charging"}
+            {batteryPercent === 100 ? t("header.fullyCharged") : t("header.charging")}
           </p>
         </div>
         <div className="BatteryLevel">

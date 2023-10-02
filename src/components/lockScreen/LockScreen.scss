@@ -132,7 +132,7 @@ $fgcolor: #e2e2e2;
               background-color: transparentize($fgcolor, 0.95);
 
               &:active {
-                background-color: transparentize($fgcolor, 0.92);
+                background-color: transparentize($fgcolor, 0.9);
                 transition: none;
               }
             }

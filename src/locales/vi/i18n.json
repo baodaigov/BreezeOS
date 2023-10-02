@@ -1,0 +1,41 @@
+{
+  "lockScreen": {
+    "passwordPlaceholder": "Mật khẩu...",
+    "incorrectPassword": "lần sai mật khẩu",
+    "incorrectPasswordPlural": "lần sai mật khẩu",
+    "locked": "lần sai mật khẩu. Thử lại sau",
+    "lockedSecond": "giây",
+    "lockedSeconds": "giây",
+    "interactions": {
+      "sleep": "Ngủ",
+      "lock": "Khoá",
+      "shutdown": "Tắt máy",
+      "restart": "Khởi động"
+    },
+    "editMenu": {
+      "fontFamily": "Phông chữ",
+      "fontSize": {
+        "name": "Cỡ chữ",
+        "medium": "Trung bình",
+        "large": "Lớn"
+      }
+    }
+  },
+  "header": {
+    "notifications": {
+      "off": "Tắt",
+      "on": "Bật"
+    },
+    "lowBattery": "Pin yếu",
+    "charging": "Đang sạc",
+    "fullyCharged": "Đã sạc đầy"
+  },
+  "panel": {
+    "volume": "Âm lượng",
+    "brightness": "Độ sáng",
+    "darkMode": "Chế độ Tối",
+    "airplaneMode": "C.độ Máy bay",
+    "nightLight": "Ánh sáng Đêm",
+    "boldText": "Chữ Đậm"
+  }
+}

@@ -7,6 +7,7 @@ class PanelTop extends Component {
 	showShutdownMenu(){
 		document.getElementsByClassName('Panel')[0].classList.remove('active');
 	}
+	
 	render(){
 		return (
     		<div className='PanelTop'>

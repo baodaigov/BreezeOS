@@ -1,0 +1,41 @@
+{
+  "lockScreen": {
+    "passwordPlaceholder": "Password...",
+    "incorrectPassword": "failed attempt",
+    "incorrectPasswordPlural": "failed attempts",
+    "locked": "failed attempts. Try again for",
+    "lockedSecond": "second",
+    "lockedSeconds": "seconds",
+    "interactions": {
+      "sleep": "Sleep",
+      "lock": "Lock",
+      "shutdown": "Shutdown",
+      "restart": "Restart"
+    },
+    "editMenu": {
+      "fontFamily": "Font family",
+      "fontSize": {
+        "name": "Font size",
+        "medium": "Medium",
+        "large": "Large"
+      }
+    }
+  },
+  "header": {
+    "notifications": {
+      "off": "Off",
+      "on": "On"
+    },
+    "lowBattery": "Low Battery",
+    "charging": "Charging",
+    "fullyCharged": "Fully Charged"
+  },
+  "panel": {
+    "volume": "Volume",
+    "brightness": "Brightness",
+    "darkMode": "Dark Mode",
+    "airplaneMode": "Airplane Mode",
+    "nightLight": "Night Light",
+    "boldText": "Bold Text"
+  }
+}

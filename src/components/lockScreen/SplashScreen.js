@@ -18,9 +18,11 @@ import { pushItem, clearItem } from "../../reducers/shutdown";
 import ActMenu, { ActMenuSelector } from "../utils/menu/index";
 import { setAllowSwitchWorkspace } from "../../reducers/wallpaper";
 import useTime from "../../hooks/useTime";
+import { useTranslation } from "react-i18next";
 
 export default function SplashScreen() {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const settings = useSelector((state) => state.settings);
   const lock = useSelector((state) => state.lock);
   const optionsMenuShown = useSelector((state) => state.lock.optionsMenuShown);
@@ -353,9 +355,12 @@ export default function SplashScreen() {
                       <>
                         {invalidCount === invalidLimit ? (
                           <p>
-                            {invalidLimit} invalid times. Try again for{" "}
+                            {invalidLimit} {t("lockScreen.locked")}{" "}
                             {secondsLeft}{" "}
-                            {secondsLeft === 1 ? "second" : "seconds"}.
+                            {secondsLeft === 1
+                              ? t("lockScreen.lockedSecond")
+                              : t("lockScreen.lockedSeconds")}
+                            .
                           </p>
                         ) : (
                           <>
@@ -363,7 +368,9 @@ export default function SplashScreen() {
                               <input
                                 type={passwordShown ? "text" : "password"}
                                 value={passwordValue}
-                                placeholder="Password..."
+                                placeholder={t(
+                                  "lockScreen.passwordPlaceholder"
+                                )}
                                 onInput={(e) =>
                                   setPasswordValue(e.target.value)
                                 }
@@ -413,8 +420,10 @@ export default function SplashScreen() {
                       className="SignInFailedAttempts"
                       style={{ opacity: invalidCount ? "1" : "0" }}
                     >
-                      {invalidCount} failed{" "}
-                      {invalidCount > 1 ? "attempts" : "attempt"}
+                      {invalidCount}{" "}
+                      {invalidCount > 1
+                        ? t("lockScreen.incorrectPasswordPlural")
+                        : t("lockScreen.incorrectPassword")}
                     </p>
                   )}
                 </div>
@@ -430,7 +439,9 @@ export default function SplashScreen() {
                         <div className="PowerMenuInteraction">
                           <i className="fa-light fa-moon" />
                         </div>
-                        <p className="PowerMenuName">Sleep</p>
+                        <p className="PowerMenuName">
+                          {t("lockScreen.interactions.sleep")}
+                        </p>
                       </div>
                       <div
                         className="PowerMenuInteractionWrapper"
@@ -439,7 +450,9 @@ export default function SplashScreen() {
                         <div className="PowerMenuInteraction">
                           <i className="fa-light fa-lock" />
                         </div>
-                        <p className="PowerMenuName">Lock</p>
+                        <p className="PowerMenuName">
+                          {t("lockScreen.interactions.lock")}
+                        </p>
                       </div>
                       <div
                         className="PowerMenuInteractionWrapper"
@@ -448,7 +461,9 @@ export default function SplashScreen() {
                         <div className="PowerMenuInteraction">
                           <i className="fa-light fa-power-off" />
                         </div>
-                        <p className="PowerMenuName">Shutdown</p>
+                        <p className="PowerMenuName">
+                          {t("lockScreen.interactions.shutdown")}
+                        </p>
                       </div>
                       <div
                         className="PowerMenuInteractionWrapper"
@@ -457,7 +472,9 @@ export default function SplashScreen() {
                         <div className="PowerMenuInteraction">
                           <i className="fa-light fa-rotate-left" />
                         </div>
-                        <p className="PowerMenuName">Restart</p>
+                        <p className="PowerMenuName">
+                          {t("lockScreen.interactions.restart")}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -489,7 +506,9 @@ export default function SplashScreen() {
             </div>
           </div>
           <div className="EditMenuItem" style={{ margin: 0 }}>
-            <p className="EditMenuItemName">Font family</p>
+            <p className="EditMenuItemName">
+              {t("lockScreen.editMenu.fontFamily")}
+            </p>
             <div
               className="EditMenuItemSection"
               onClick={() => showFontFamilyMenu(true)}
@@ -545,7 +564,9 @@ export default function SplashScreen() {
             </ActMenu>
           </div>
           <div className="EditMenuItem">
-            <p className="EditMenuItemName">Font size</p>
+            <p className="EditMenuItemName">
+              {t("lockScreen.editMenu.fontSize.name")}
+            </p>
             <div
               className="EditMenuItemSection"
               onClick={() => showFontSizeMenu(true)}
@@ -564,7 +585,7 @@ export default function SplashScreen() {
             >
               {lock.fontSize === "medium" ? (
                 <ActMenuSelector
-                  title="Medium"
+                  title={t("lockScreen.editMenu.fontSize.medium")}
                   onClick={() => {
                     dispatch(setFontSize("medium"));
                     showFontSizeMenu(false);
@@ -573,7 +594,7 @@ export default function SplashScreen() {
                 ></ActMenuSelector>
               ) : (
                 <ActMenuSelector
-                  title="Medium"
+                  title={t("lockScreen.editMenu.fontSize.medium")}
                   onClick={() => {
                     dispatch(setFontSize("medium"));
                     showFontSizeMenu(false);
@@ -582,7 +603,7 @@ export default function SplashScreen() {
               )}
               {lock.fontSize === "large" ? (
                 <ActMenuSelector
-                  title="Large"
+                  title={t("lockScreen.editMenu.fontSize.large")}
                   onClick={() => {
                     dispatch(setFontSize("large"));
                     showFontSizeMenu(false);
@@ -591,7 +612,7 @@ export default function SplashScreen() {
                 ></ActMenuSelector>
               ) : (
                 <ActMenuSelector
-                  title="Large"
+                  title={t("lockScreen.editMenu.fontSize.large")}
                   onClick={() => {
                     dispatch(setFontSize("large"));
                     showFontSizeMenu(false);
