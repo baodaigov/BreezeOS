@@ -110,7 +110,7 @@ export const ClockStartApp = () => {
 };
 
 export default function Clock() {
-  const hour12 = useSelector((state) => state.settings.hour12);
+  const hour12 = useSelector((state) => state.time.hour12);
   const dispatch = useDispatch();
 
   const ClockWindow = () => {

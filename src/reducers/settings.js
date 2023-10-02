@@ -71,7 +71,6 @@ const initialState = {
   bluetooth: false,
   themeLight: false,
   boldText: false,
-  hour12: true,
   fontFamily: "OptimisticDisplay",
 };
 
@@ -143,9 +142,6 @@ export const settingsSlice = createSlice({
       state.boldText = false;
       document.getElementsByClassName("Desktop")[0].classList.remove("isBold");
     },
-    toggle12Hour: (state, action) => {
-      state.hour12 = action.payload;
-    },
     setFontFamily: (state, action) => {
       state.fontFamily = action.payload;
     },
@@ -169,7 +165,6 @@ export const {
   toggleDarkMode,
   enableBoldText,
   disableBoldText,
-  toggle12Hour,
   setFontFamily,
 } = settingsSlice.actions;
 

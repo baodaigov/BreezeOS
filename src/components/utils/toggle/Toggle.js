@@ -5,7 +5,7 @@ export default function Toggle({ active, disabled, onToggle }) {
   return (
     <>
       {active ? (
-        <Hammer onTap={onToggle} onSwipeLeft={onToggle}>
+        <Hammer onTap={onToggle} onPressUp={onToggle} onSwipeLeft={onToggle}>
           <div
             className={`Toggle ${active && "active"} ${disabled && "disabled"}`}
           >
@@ -13,7 +13,7 @@ export default function Toggle({ active, disabled, onToggle }) {
           </div>
         </Hammer>
       ) : (
-        <Hammer onTap={onToggle} onSwipeRight={onToggle}>
+        <Hammer onTap={onToggle} onPressUp={onToggle} onSwipeRight={onToggle}>
           <div
             className={`Toggle ${active && "active"} ${disabled && "disabled"}`}
           >

@@ -28,7 +28,6 @@ const Header = (props) => {
   const [bluetoothPanelActive, setBluetoothPanelActive] = useState(false);
   const [brightnessPanelActive, setBrightnessPanelActive] = useState(false);
   const [volumePanelActive, setVolumePanelActive] = useState(false);
-  const hour12 = useSelector((state) => state.settings.hour12);
   const [curDate, setCurDate] = useState(
     new Date().toLocaleString("en-US", {
       dateStyle: "medium",

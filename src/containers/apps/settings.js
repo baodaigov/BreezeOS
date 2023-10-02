@@ -25,10 +25,10 @@ import {
   toggleNotifications,
   toggleBluetooth,
   setDeviceName,
-  toggle12Hour,
   setFontFamily,
   setName,
 } from "../../reducers/settings";
+import { toggle12Hour, setSeconds } from "../../reducers/time";
 import { changeWallpaper } from "../../reducers/wallpaper";
 import "../../components/utils/window/Window.scss";
 import TopBar from "../../components/utils/window/TopBar";
@@ -173,6 +173,8 @@ export const SettingsStartApp = () => {
 export default function Settings() {
   const SettingsWindow = () => {
     const settingsReducer = useSelector((state) => state.settings);
+    const isHour12 = useSelector((state) => state.time.hour12);
+    const isSecondsEnabled = useSelector((state) => state.time.seconds);
     const shellTheme = useSelector((state) => state.shell.theme);
     const wifis = useSelector((state) => state.settings.wifiList);
     const settings = useSelector((state) => state.appsSettings.settings);
@@ -358,18 +360,14 @@ export default function Settings() {
 
     function useOutsideCursorMenu(ref) {
       useEffect(() => {
-        /**
-         * Alert if clicked on outside of element
-         */
         function handleClickOutside(event) {
           if (ref.current && !ref.current.contains(event.target)) {
             showCursorMenu(false);
           }
         }
-        // Bind the event listener
+
         document.addEventListener("mousedown", handleClickOutside);
         return () => {
-          // Unbind the event listener on clean up
           document.removeEventListener("mousedown", handleClickOutside);
         };
       }, [ref]);
@@ -380,18 +378,14 @@ export default function Settings() {
 
     function useOutsideIconsMenu(ref) {
       useEffect(() => {
-        /**
-         * Alert if clicked on outside of element
-         */
         function handleClickOutside(event) {
           if (ref.current && !ref.current.contains(event.target)) {
             showIconsMenu(false);
           }
         }
-        // Bind the event listener
+
         document.addEventListener("mousedown", handleClickOutside);
         return () => {
-          // Unbind the event listener on clean up
           document.removeEventListener("mousedown", handleClickOutside);
         };
       }, [ref]);
@@ -402,18 +396,14 @@ export default function Settings() {
 
     function useOutsideShellMenu(ref) {
       useEffect(() => {
-        /**
-         * Alert if clicked on outside of element
-         */
         function handleClickOutside(event) {
           if (ref.current && !ref.current.contains(event.target)) {
             showShellMenu(false);
           }
         }
-        // Bind the event listener
+
         document.addEventListener("mousedown", handleClickOutside);
         return () => {
-          // Unbind the event listener on clean up
           document.removeEventListener("mousedown", handleClickOutside);
         };
       }, [ref]);
@@ -424,18 +414,14 @@ export default function Settings() {
 
     function useOutsideSoundMenu(ref) {
       useEffect(() => {
-        /**
-         * Alert if clicked on outside of element
-         */
         function handleClickOutside(event) {
           if (ref.current && !ref.current.contains(event.target)) {
             showSoundMenu(false);
           }
         }
-        // Bind the event listener
+
         document.addEventListener("mousedown", handleClickOutside);
         return () => {
-          // Unbind the event listener on clean up
           document.removeEventListener("mousedown", handleClickOutside);
         };
       }, [ref]);
@@ -446,19 +432,15 @@ export default function Settings() {
 
     function useOutsideFontsMenu(ref) {
       useEffect(() => {
-        /**
-         * Alert if clicked on outside of element
-         */
         function handleClickOutside(event) {
           if (ref.current && !ref.current.contains(event.target)) {
             showFontsMenu(false);
           }
         }
-        // Bind the event listener
+
         document.addEventListener("mousedown", handleClickOutside);
 
         return () => {
-          // Unbind the event listener on clean up
           document.removeEventListener("mousedown", handleClickOutside);
         };
       }, [ref]);
@@ -469,19 +451,15 @@ export default function Settings() {
 
     function useOutsideOrientationMenu(ref) {
       useEffect(() => {
-        /**
-         * Alert if clicked on outside of element
-         */
         function handleClickOutside(event) {
           if (ref.current && !ref.current.contains(event.target)) {
             showOrientationMenu(false);
           }
         }
-        // Bind the event listener
+
         document.addEventListener("mousedown", handleClickOutside);
 
         return () => {
-          // Unbind the event listener on clean up
           document.removeEventListener("mousedown", handleClickOutside);
         };
       }, [ref]);
@@ -511,19 +489,15 @@ export default function Settings() {
 
     function useOutsideRRMenu(ref) {
       useEffect(() => {
-        /**
-         * Alert if clicked on outside of element
-         */
         function handleClickOutside(event) {
           if (ref.current && !ref.current.contains(event.target)) {
             showRefreshRateMenu(false);
           }
         }
-        // Bind the event listener
+
         document.addEventListener("mousedown", handleClickOutside);
 
         return () => {
-          // Unbind the event listener on clean up
           document.removeEventListener("mousedown", handleClickOutside);
         };
       }, [ref]);
@@ -534,18 +508,14 @@ export default function Settings() {
 
     function useOutsideSecurityMenu(ref) {
       useEffect(() => {
-        /**
-         * Alert if clicked on outside of element
-         */
         function handleClickOutside(event) {
           if (ref.current && !ref.current.contains(event.target)) {
             showSecurityMenu(false);
           }
         }
-        // Bind the event listener
+
         document.addEventListener("mousedown", handleClickOutside);
         return () => {
-          // Unbind the event listener on clean up
           document.removeEventListener("mousedown", handleClickOutside);
         };
       }, [ref]);
@@ -890,19 +860,26 @@ export default function Settings() {
                       }}
                     >
                       {wallpaperInput ? (
-                        <div
-                          className="WallpaperImage"
-                          style={{ backgroundImage: `url(${wallpaperInput})` }}
-                          onClick={() =>
-                            dispatch(changeWallpaper(wallpaperInput))
-                          }
-                        >
+                        <div className="WallpaperBg">
                           <button
                             className="CloseButton"
                             onClick={() => setWallpaperInput(null)}
                           >
                             <i className="fa-regular fa-xmark" />
                           </button>
+                          <div
+                            className="WallpaperImageWrapper"
+                            onClick={() =>
+                              dispatch(changeWallpaper(wallpaperInput))
+                            }
+                          >
+                            <div
+                              className="WallpaperImage"
+                              style={{
+                                backgroundImage: `url(${wallpaperInput})`,
+                              }}
+                            />
+                          </div>
                         </div>
                       ) : (
                         <>
@@ -1427,10 +1404,21 @@ export default function Settings() {
                   >
                     <p className="font-bold">24-hour time</p>
                     <Toggle
-                      active={!settingsReducer.hour12}
-                      onToggle={() =>
-                        dispatch(toggle12Hour(!settingsReducer.hour12))
-                      }
+                      active={!isHour12}
+                      onToggle={() => dispatch(toggle12Hour(!isHour12))}
+                    />
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      marginBottom: "40px",
+                    }}
+                  >
+                    <p className="font-bold">Display seconds</p>
+                    <Toggle
+                      active={isSecondsEnabled}
+                      onToggle={() => dispatch(setSeconds(!isSecondsEnabled))}
                     />
                   </div>
                 </div>

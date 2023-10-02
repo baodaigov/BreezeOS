@@ -9,10 +9,11 @@ import DockItem from "../../components/DockItem";
 import "./assets/surface.scss";
 import TopBarInteraction from "../../components/utils/window/TopBarInteraction";
 import StartApp from "../../components/startMenu/StartApp";
-import { setHeaderActive, setHeaderHide } from "../../reducers/header";
+import { setHeaderHide } from "../../reducers/header";
 import SurfaceIcon from "../../icons/surface.svg";
 import SurfacePrivateIcon from "../../icons/surface-private.svg";
 import Toggle from "../../components/utils/toggle/Toggle";
+import ActMenu, { ActMenuSelector } from "../../components/utils/menu/index";
 
 export const SurfaceApp = () => {
   const isActive = useSelector((state) => state.appsSurface.active);
@@ -122,6 +123,7 @@ export const SurfaceStartApp = () => {
 
 export default function Surface() {
   const SurfaceWindow = () => {
+    const iFrameRef = useRef(null);
     const isActive = useSelector((state) => state.appsSurface.active);
     const isPrivate = useSelector((state) => state.appsSurface.private);
     const url = useSelector((state) => state.surface.url);
@@ -132,6 +134,7 @@ export default function Surface() {
     const [hist, setHist] = useState(["", ""]);
     const [settingsOpened, setSettingsOpened] = useState(false);
     const [supportOpened, setSupportOpened] = useState(false);
+    const [searchEngineMenu, showSearchEngineMenu] = useState(false);
     isActive && setTimeout(() => setSplashScreen(false), 5000);
 
     const isValidURL = (string) => {
@@ -161,7 +164,24 @@ export default function Surface() {
       }
     };
 
-    const iFrameRef = useRef(null);
+    function useOutsideSearchEngineMenu(ref) {
+      useEffect(() => {
+        function handleClickOutside(event) {
+          if (ref.current && !ref.current.contains(event.target)) {
+            showSearchEngineMenu(false);
+          }
+        }
+
+        document.addEventListener("mousedown", handleClickOutside);
+
+        return () => {
+          document.removeEventListener("mousedown", handleClickOutside);
+        };
+      }, [ref]);
+    }
+
+    const searchEngineMenuRef = useRef(null);
+    useOutsideSearchEngineMenu(searchEngineMenuRef);
 
     const [min, isMin] = useState(false);
 
@@ -295,17 +315,50 @@ export default function Surface() {
                         onToggle={() => dispatch(setPrivate(!isPrivate))}
                       />
                     </div>
-                    <div className="SettingsItem allowClicking">
+                    <div className="SettingsItem">
                       <p className="SettingsName">Search engine</p>
                       <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                        }}
+                        className="SettingsMenuSection"
+                        onClick={() => showSearchEngineMenu(true)}
                       >
-                        <p className="SettingsValue">Bing</p>
-                        <i className="fa-regular fa-chevron-right SettingsChevron" />
+                        <p style={{ marginRight: "7px" }}>Bing</p>
+                        <i className="fa-regular fa-chevron-down" />
                       </div>
+                      <ActMenu
+                        style={{
+                          zIndex: "1",
+                          width: "200px",
+                          transform: "translate(340px, 44px)",
+                        }}
+                        className={searchEngineMenu ? "active" : ""}
+                        ref={searchEngineMenuRef}
+                      >
+                        <ActMenuSelector
+                          title="Bing"
+                          onClick={() => {
+                            showSearchEngineMenu(false);
+                          }}
+                          active
+                        ></ActMenuSelector>
+                        <ActMenuSelector
+                          title="Google"
+                          onClick={() => {
+                            showSearchEngineMenu(false);
+                          }}
+                        ></ActMenuSelector>
+                        <ActMenuSelector
+                          title="DuckDuckGo"
+                          onClick={() => {
+                            showSearchEngineMenu(false);
+                          }}
+                        ></ActMenuSelector>
+                        <ActMenuSelector
+                          title="Yahoo Search"
+                          onClick={() => {
+                            showSearchEngineMenu(false);
+                          }}
+                        ></ActMenuSelector>
+                      </ActMenu>
                     </div>
                   </div>
                 </div>
@@ -330,6 +383,19 @@ export default function Surface() {
                       <i className="fa-light fa-xmark" />
                     </div>
                   </div>
+                </div>
+                {/* <iframe
+                  className="SupportFrame"
+                  src="https://breezeos.github.io"
+                /> */}
+                <div style={{
+                  width: "100%",
+                  height: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center"
+                }}>
+                  <p>iFrame is not available for this dialog.</p>
                 </div>
               </div>
               {url === "" ? (
@@ -365,10 +431,10 @@ export default function Surface() {
                 <>
                   {wifi ? (
                     <iframe
+                      ref={iFrameRef}
                       className="iFrame"
                       src={url}
                       title="New Tab"
-                      frameBorder="0"
                       allowFullScreen={true}
                     />
                   ) : (

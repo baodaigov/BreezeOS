@@ -14,6 +14,7 @@ import imgViewReducer from "./reducers/imgview";
 import shellReducer from "./reducers/shell";
 import widgetReducer from "./reducers/widget";
 import surfaceReducer from "./reducers/surface";
+import timeReducer from "./reducers/time";
 import vscodeReducer from "./reducers/vscode";
 import lockReducer from "./reducers/lock";
 // apps
@@ -44,6 +45,7 @@ const reducers = {
   shell: shellReducer,
   widget: widgetReducer,
   surface: surfaceReducer,
+  time: timeReducer,
   vscode: vscodeReducer,
   lock: lockReducer,
 

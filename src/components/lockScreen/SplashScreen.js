@@ -24,7 +24,6 @@ export default function SplashScreen() {
   const settings = useSelector((state) => state.settings);
   const lock = useSelector((state) => state.lock);
   const optionsMenuShown = useSelector((state) => state.lock.optionsMenuShown);
-  const hour12 = useSelector((state) => state.settings.hour12);
   const allowSwitchWorkspace = useSelector(
     (state) => state.wallpaper.allowSwitchWorkspace
   );

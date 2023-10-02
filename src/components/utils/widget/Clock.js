@@ -8,28 +8,16 @@ import {
   displaySeconds,
   changeClockStyle,
 } from "../../../reducers/widget";
+import useTime from "../../../hooks/useTime";
 
 const Clock = () => {
-  const [hour, setHour] = useState(null);
-  const [min, setMin] = useState(null);
-  const [sec, setSec] = useState(null);
+  const { fullHour, hour, fullMin, min, fullSec, sec } = useTime();
+  const hourDeg = hour * 30;
+  const minDeg = min * 6;
+  const secDeg = sec * 6;
   const [contextMenuEnabled, setContextMenuEnabled] = useState(false);
   const dispatch = useDispatch();
   const clock = useSelector((state) => state.widget.clock);
-
-  useEffect(() => {
-    if ((hour, min, sec === null)) {
-      setHour(new Date().getHours() * 30);
-      setMin(new Date().getMinutes() * 6);
-      setSec(new Date().getSeconds() * 6);
-    } else {
-      setInterval(() => {
-        setHour(new Date().getHours() * 30);
-        setMin(new Date().getMinutes() * 6);
-        setSec(new Date().getSeconds() * 6);
-      }, 1000);
-    }
-  }, [hour, min, sec]);
 
   function useOutsideMenu(ref) {
     useEffect(() => {
@@ -175,42 +163,35 @@ const Clock = () => {
           <div
             className="Hour"
             style={{
-              transform: `rotateZ(${hour}deg)`,
+              transform: `rotateZ(${hourDeg}deg)`,
             }}
           />
           <div
             className="Min"
             style={{
-              transform: `rotateZ(${min}deg)`,
+              transform: `rotateZ(${minDeg}deg)`,
             }}
           />
           <div
             className={`Sec ${clock.seconds ? "active" : ""}`}
             style={{
-              transform: `rotateZ(${sec}deg)`,
+              transform: `rotateZ(${secDeg}deg)`,
             }}
           />
           <div className="Time">
-            <span>
-              {hour / 30 < 10 && "0"}
-              {hour / 30}
-            </span>
+            <span>{fullHour}</span>
             <span className="TimeSeparator"></span>
-            <span>
-              {min / 6 < 10 && "0"}
-              {min / 6}
-            </span>
-            {clock.seconds && (
-              <span className="TimeSec">
-                {sec / 6 < 10 && "0"}
-                {sec / 6}
-              </span>
-            )}
+            <span>{fullMin}</span>
+            {clock.seconds && <span className="TimeSec">{fullSec}</span>}
           </div>
-          <span className={`Number twelve ${hour === 360 && "active"}`}></span>
-          <span className={`Number three ${hour === 450 && "active"}`}></span>
-          <span className={`Number six ${hour === 540 && "active"}`}></span>
-          <span className={`Number nine ${hour === 630 && "active"}`}></span>
+          <span
+            className={`Number twelve ${hourDeg === 360 && "active"}`}
+          ></span>
+          <span
+            className={`Number three ${hourDeg === 450 && "active"}`}
+          ></span>
+          <span className={`Number six ${hourDeg === 540 && "active"}`}></span>
+          <span className={`Number nine ${hourDeg === 630 && "active"}`}></span>
         </div>
       </div>
     </Draggable>

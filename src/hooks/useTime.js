@@ -2,16 +2,20 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 export default function useTime() {
-  const is12Hour = useSelector((state) => state.settings.hour12);
+  const is12Hour = useSelector((state) => state.time.hour12);
+  const secEnabled = useSelector((state) => state.time.seconds);
   const [hour, setHour] = useState(new Date().getHours());
   const [min, setMin] = useState(new Date().getMinutes());
   const [sec, setSec] = useState(new Date().getSeconds());
-  const [secEnabled, setSecEnabled] = useState(false);
-  const timeFormat = `${
+  const fullHour = `${
     is12Hour && hour > 12 ? addZero(hour - 12) : addZero(hour)
-  }:${addZero(min)}${secEnabled ? `:${addZero(sec)}` : ""} ${
-    is12Hour ? (hour >= 12 ? "PM" : "AM") : ""
   }`;
+  const fullMin = addZero(min);
+  const fullSec = `${secEnabled ? addZero(sec) : ""}`;
+  const amPm = `${is12Hour ? (hour >= 12 ? "PM" : "AM") : ""}`;
+  const timeFormat = `${fullHour}:${fullMin}${
+    secEnabled ? `:` : ""
+  }${fullSec} ${amPm}`;
 
   function addZero(i) {
     if (i < 10) {
@@ -28,5 +32,13 @@ export default function useTime() {
     }, 1000);
   }, []);
 
-  return { timeFormat, setSecEnabled };
+  return {
+    timeFormat,
+    hour,
+    fullHour,
+    min,
+    fullMin,
+    sec,
+    fullSec,
+  };
 }
