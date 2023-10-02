@@ -17,6 +17,7 @@ import { setDockActive, setDockHide } from "../../reducers/dock";
 import { pushItem, clearItem } from "../../reducers/shutdown";
 import ActMenu, { ActMenuSelector } from "../utils/menu/index";
 import { setAllowSwitchWorkspace } from "../../reducers/wallpaper";
+import useTime from "../../hooks/useTime";
 
 export default function SplashScreen() {
   const dispatch = useDispatch();
@@ -28,8 +29,11 @@ export default function SplashScreen() {
     (state) => state.wallpaper.allowSwitchWorkspace
   );
   const { secondsLeft, start } = useCountdown();
-  const [curTime, setCurTime] = useState(null);
-  const [curDate, setCurDate] = useState(null);
+  const [curDate, setCurDate] = useState(
+    new Date().toLocaleString("en-US", {
+      dateStyle: "medium",
+    })
+  );
   const [passwordShown, setPasswordShown] = useState(false);
   const [passwordValue, setPasswordValue] = useState("");
   const [invalidCount, setInvalidCount] = useState(0);
@@ -37,6 +41,7 @@ export default function SplashScreen() {
   const [isEditable, setEditable] = useState(false);
   const [fontFamilyMenu, showFontFamilyMenu] = useState(false);
   const [fontSizeMenu, showFontSizeMenu] = useState(false);
+  const { timeFormat } = useTime();
   const inputFieldRef = useRef(null);
 
   function useOutsideFontFamilyMenu(ref) {
@@ -86,42 +91,14 @@ export default function SplashScreen() {
   useOutsideFontSizeMenu(fontSizeMenuRef);
 
   useEffect(() => {
-    if (curTime === null) {
-      setCurTime(
-        new Date().toLocaleString("en-US", {
-          hour: "2-digit",
-          minute: "2-digit",
-          hour12: hour12,
-        })
-      );
-    } else {
-      setInterval(() => {
-        setCurTime(
-          new Date().toLocaleString("en-US", {
-            hour: "2-digit",
-            minute: "2-digit",
-            hour12: hour12,
-          })
-        );
-      }, 1000);
-    }
-
-    if (curDate === null) {
+    setInterval(() => {
       setCurDate(
         new Date().toLocaleString("en-US", {
           dateStyle: "medium",
         })
       );
-    } else {
-      setInterval(() => {
-        setCurDate(
-          new Date().toLocaleString("en-US", {
-            dateStyle: "medium",
-          })
-        );
-      }, 1000);
-    }
-  }, [curTime, hour12, curDate]);
+    }, 1000);
+  }, []);
 
   document.addEventListener("keydown", (e) => {
     if (e.keyCode === 27) dispatch(setOptionsMenuShown(false));
@@ -345,7 +322,7 @@ export default function SplashScreen() {
                   fontSize: lock.fontSize === "large" ? "99px" : "90px",
                 }}
               >
-                {curTime}
+                {timeFormat}
               </p>
               <div className="SplashScreenWidgets">
                 <div className="SplashScreenItem">

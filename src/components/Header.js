@@ -6,9 +6,10 @@ import Task from "../header/Task";
 import Home from "../header/Home";
 import Panel from "./panel/Panel";
 import { useBattery } from "react-use";
-import { setActive } from "../reducers/apps/clock";
+import { setActive, setSettings } from "../reducers/apps/settings";
 import AppMenu from "../header/AppMenu";
 import PanelType from "./panel/PanelType";
+import useTime from "../hooks/useTime";
 
 const Header = (props) => {
   const dispatch = useDispatch();
@@ -28,45 +29,22 @@ const Header = (props) => {
   const [brightnessPanelActive, setBrightnessPanelActive] = useState(false);
   const [volumePanelActive, setVolumePanelActive] = useState(false);
   const hour12 = useSelector((state) => state.settings.hour12);
-  const [curTime, setCurTime] = useState(null);
-  const [curDate, setCurDate] = useState(null);
+  const [curDate, setCurDate] = useState(
+    new Date().toLocaleString("en-US", {
+      dateStyle: "medium",
+    })
+  );
+  const { timeFormat } = useTime();
 
   useEffect(() => {
-    if (curTime === null) {
-      setCurTime(
-        new Date().toLocaleString("en-US", {
-          hour: "2-digit",
-          minute: "2-digit",
-          hour12: hour12,
-        })
-      );
-    } else {
-      setInterval(() => {
-        setCurTime(
-          new Date().toLocaleString("en-US", {
-            hour: "2-digit",
-            minute: "2-digit",
-            hour12: hour12,
-          })
-        );
-      }, 1000);
-    }
-    if (curDate === null) {
+    setInterval(() => {
       setCurDate(
         new Date().toLocaleString("en-US", {
           dateStyle: "medium",
         })
       );
-    } else {
-      setInterval(() => {
-        setCurDate(
-          new Date().toLocaleString("en-US", {
-            dateStyle: "medium",
-          })
-        );
-      }, 1000);
-    }
-  }, [curTime, hour12, curDate]);
+    }, 1000);
+  }, []);
 
   function useOutsidePanel(ref) {
     useEffect(() => {
@@ -293,9 +271,12 @@ const Header = (props) => {
           {shellTheme !== "WhiteSur" ? (
             <div
               className="Time Header-item"
-              onClick={() => dispatch(setActive(true))}
+              onClick={() => {
+                dispatch(setActive(true));
+                dispatch(setSettings("Date & Time"));
+              }}
             >
-              <p>{curTime}</p>
+              <p>{timeFormat}</p>
             </div>
           ) : (
             ""
@@ -448,7 +429,7 @@ const Header = (props) => {
                 onClick={() => dispatch(setActive(true))}
               >
                 <span style={{ marginRight: "10px" }}>{curDate}</span>
-                <span>{curTime}</span>
+                <span>{timeFormat}</span>
               </div>
             </>
           ) : (
