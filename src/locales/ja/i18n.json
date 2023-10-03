@@ -1,0 +1,41 @@
+{
+  "lockScreen": {
+    "passwordPlaceholder": "パスワード...",
+    "incorrectPassword": "回失敗しました",
+    "incorrectPasswordPlural": "回失敗しました",
+    "locked": "回失敗しました。",
+    "lockedSecond": "秒間もう一度試してください。",
+    "lockedSeconds": "秒間もう一度試してください。",
+    "interactions": {
+      "sleep": "寝る",
+      "lock": "ロック",
+      "shutdown": "シャットダウン",
+      "restart": "再起動"
+    },
+    "editMenu": {
+      "fontFamily": "フォント",
+      "fontSize": {
+        "name": "フォントサイズ",
+        "medium": "中くらい",
+        "large": "大きい"
+      }
+    }
+  },
+  "header": {
+    "notifications": {
+      "off": "消す",
+      "on": "オンにする"
+    },
+    "lowBattery": "バッテリー残量低下",
+    "charging": "充電",
+    "fullyCharged": "フル充電済み"
+  },
+  "panel": {
+    "volume": "音量",
+    "brightness": "輝度",
+    "darkMode": "ダークモード",
+    "airplaneMode": "機内モード",
+    "nightLight": "夜の光",
+    "boldText": "太字"
+  }
+}

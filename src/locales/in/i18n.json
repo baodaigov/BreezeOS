@@ -1,0 +1,41 @@
+{
+  "lockScreen": {
+    "passwordPlaceholder": "Kata sandi...",
+    "incorrectPassword": "upaya gagal",
+    "incorrectPasswordPlural": "upaya gagal",
+    "locked": "upaya gagal. Coba lagi selama",
+    "lockedSecond": "detik.",
+    "lockedSeconds": "detik.",
+    "interactions": {
+      "sleep": "Tidur",
+      "lock": "Kunci",
+      "shutdown": "Matikan",
+      "restart": "Mengulang kembali"
+    },
+    "editMenu": {
+      "fontFamily": "Font",
+      "fontSize": {
+        "name": "Ukuran huruf",
+        "medium": "Sedang",
+        "large": "Besar"
+      }
+    }
+  },
+  "header": {
+    "notifications": {
+      "off": "Matikan",
+      "on": "Menyalakan"
+    },
+    "lowBattery": "Baterai lemah",
+    "charging": "Mengisi daya",
+    "fullyCharged": "Terisi penuh"
+  },
+  "panel": {
+    "volume": "Volume",
+    "brightness": "Kecerahan",
+    "darkMode": "Mode Gelap",
+    "airplaneMode": "Mode pesawat",
+    "nightLight": "Cahaya malam",
+    "boldText": "Teks tebal"
+  }
+}

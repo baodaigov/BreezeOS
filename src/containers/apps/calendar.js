@@ -10,9 +10,11 @@ import TopBarInteraction from "../../components/utils/window/TopBarInteraction";
 import StartApp from "../../components/startMenu/StartApp";
 import dayjs from "dayjs";
 import range from "lodash-es/range";
-import { setHeaderActive, setHeaderHide } from "../../reducers/header";
+import { setHeaderHide } from "../../reducers/header";
+import { useTranslation } from "react-i18next";
 
 export const CalendarApp = () => {
+  const { t } = useTranslation();
   const isActive = useSelector((state) => state.appsCalendar.active);
   const isHide = useSelector((state) => state.appsCalendar.hide);
   const dispatch = useDispatch();
@@ -57,7 +59,7 @@ export const CalendarApp = () => {
     <DockItem
       id="calendar"
       className="CalendarApp"
-      title="Calendar"
+      title={t("apps.calendar.name")}
       icon={
         icon === "WhiteSur-icon-theme"
           ? "https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/original/calendar.svg"
@@ -66,13 +68,13 @@ export const CalendarApp = () => {
       menu={[
         [
           {
-            label: isHide ? "Unhide" : "Hide",
+            label: isHide ? t("apps.unhide") : t("apps.hide"),
             disabled: isActive ? false : true,
             action: () =>
               isHide ? dispatch(setHide(false)) : dispatch(setHide(true)),
           },
           {
-            label: isActive ? "Quit" : "Open",
+            label: isActive ? t("apps.quit") : t("apps.open"),
             action: () =>
               isActive ? dispatch(setActive(false)) : dispatch(setActive(true)),
           },
@@ -86,6 +88,7 @@ export const CalendarApp = () => {
 };
 
 export const CalendarStartApp = () => {
+  const { t } = useTranslation();
   const isHide = useSelector((state) => state.appsCalendar.hide);
   const dispatch = useDispatch();
   const icon = useSelector((state) => state.appearance.iconTheme);
@@ -111,7 +114,7 @@ export const CalendarStartApp = () => {
           ? "https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/original/calendar.svg"
           : "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/calendar.svg"
       }
-      name="Calendar"
+      name={t("apps.calendar.name")}
       onClick={toggle}
     />
   );

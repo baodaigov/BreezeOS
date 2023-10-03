@@ -1,0 +1,41 @@
+{
+  "lockScreen": {
+    "passwordPlaceholder": "รหัสผ่าน",
+    "incorrectPassword": "ความพยายามล้มเหลว ครั้ง",
+    "incorrectPasswordPlural": "ความพยายามล้มเหลว ครั้ง",
+    "locked": "ความพยายามล้มเหลว ครั้ง ลองอีกครั้งเป็นเวลา",
+    "lockedSecond": "วินาที",
+    "lockedSeconds": "วินาที",
+    "interactions": {
+      "sleep": "นอน",
+      "lock": "ล็อค",
+      "shutdown": "ปิดตัวลง",
+      "restart": "เริ่มต้นใหม่"
+    },
+    "editMenu": {
+      "fontFamily": "แบบอักษร",
+      "fontSize": {
+        "name": "ขนาดตัวอักษร",
+        "medium": "ปานกลาง",
+        "large": "ใหญ่"
+      }
+    }
+  },
+  "header": {
+    "notifications": {
+      "off": "ปิด",
+      "on": "เปิด"
+    },
+    "lowBattery": "แบตเตอร์รี่ต่ำ",
+    "charging": "กำลังชาร์จ",
+    "fullyCharged": "ชาร์จเต็มแล้ว"
+  },
+  "panel": {
+    "volume": "ปริมาณ",
+    "brightness": "ความสว่าง",
+    "darkMode": "โหมดมืด",
+    "airplaneMode": "โหมดเครื่องบิน",
+    "nightLight": "แสงกลางคืน",
+    "boldText": "ข้อความตัวหนา"
+  }
+}

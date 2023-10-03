@@ -360,7 +360,6 @@ export default function SplashScreen() {
                             {secondsLeft === 1
                               ? t("lockScreen.lockedSecond")
                               : t("lockScreen.lockedSeconds")}
-                            .
                           </p>
                         ) : (
                           <>

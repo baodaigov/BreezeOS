@@ -1,0 +1,41 @@
+{
+  "lockScreen": {
+    "passwordPlaceholder": "Пароль...",
+    "incorrectPassword": "неудачная попытка",
+    "incorrectPasswordPlural": "неудачные попытки",
+    "locked": "неудачных попыток. Попробуйте еще раз в течение",
+    "lockedSecond": "секунд.",
+    "lockedSeconds": "секунды.",
+    "interactions": {
+      "sleep": "Спать",
+      "lock": "Замок",
+      "shutdown": "Неисправность",
+      "restart": "Перезапуск"
+    },
+    "editMenu": {
+      "fontFamily": "Шрифт",
+      "fontSize": {
+        "name": "Размер шрифта",
+        "medium": "Середина",
+        "large": "Большой"
+      }
+    }
+  },
+  "header": {
+    "notifications": {
+      "off": "Выключать",
+      "on": "Включать"
+    },
+    "lowBattery": "Низкий заряд батареи",
+    "charging": "Зарядка",
+    "fullyCharged": "Полностью заряжен"
+  },
+  "panel": {
+    "volume": "Объем",
+    "brightness": "Яркость",
+    "darkMode": "Темныйрежим",
+    "airplaneMode": "Авиарежим",
+    "nightLight": "Ночной свет",
+    "boldText": "Жирный текст"
+  }
+}

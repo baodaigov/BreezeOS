@@ -1,0 +1,41 @@
+{
+  "lockScreen": {
+    "passwordPlaceholder": "비밀번호...",
+    "incorrectPassword": "회 시도 실패",
+    "incorrectPasswordPlural": "번의 시도 실패",
+    "locked": "번의 시도 실패.",
+    "lockedSecond": "초 동안 다시 시도하세요.",
+    "lockedSeconds": "초 동안 다시 시도하세요.",
+    "interactions": {
+      "sleep": "잠",
+      "lock": "잠그다",
+      "shutdown": "일시 휴업",
+      "restart": "재시작"
+    },
+    "editMenu": {
+      "fontFamily": "폰트",
+      "fontSize": {
+        "name": "글꼴 크기",
+        "medium": "중간",
+        "large": "크기가 큰"
+      }
+    }
+  },
+  "header": {
+    "notifications": {
+      "off": "끄다",
+      "on": "켜다"
+    },
+    "lowBattery": "배터리 부족",
+    "charging": "충전 중",
+    "fullyCharged": "완전히 충전됨"
+  },
+  "panel": {
+    "volume": "용량",
+    "brightness": "명도",
+    "darkMode": "다크 모드",
+    "airplaneMode": "비행기 모드",
+    "nightLight": "야간 조명",
+    "boldText": "굵은 텍스트"
+  }
+}

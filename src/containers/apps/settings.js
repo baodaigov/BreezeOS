@@ -60,8 +60,10 @@ import {
 } from "../../reducers/header";
 import Avatar from "../../components/Avatar";
 import Toggle from "../../components/utils/toggle/Toggle";
+import { useTranslation } from "react-i18next";
 
 export const SettingsApp = () => {
+  const { t } = useTranslation();
   const isActive = useSelector((state) => state.appsSettings.active);
   const isHide = useSelector((state) => state.appsSettings.hide);
   const dispatch = useDispatch();
@@ -107,7 +109,7 @@ export const SettingsApp = () => {
       <DockItem
         id="settings"
         className="SettingsApp"
-        title="Settings"
+        title={t("apps.settings.name")}
         icon={
           icon === "WhiteSur-icon-theme"
             ? "https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/original/applications-system.svg"
@@ -116,13 +118,13 @@ export const SettingsApp = () => {
         menu={[
           [
             {
-              label: isHide ? "Unhide" : "Hide",
+              label: isHide ? t("apps.unhide") : t("apps.hide"),
               disabled: isActive ? false : true,
               action: () =>
                 isHide ? dispatch(setHide(false)) : dispatch(setHide(true)),
             },
             {
-              label: isActive ? "Quit" : "Open",
+              label: isActive ? t("apps.quit") : t("apps.open"),
               action: () =>
                 isActive
                   ? dispatch(setActive(false))
@@ -139,6 +141,7 @@ export const SettingsApp = () => {
 };
 
 export const SettingsStartApp = () => {
+  const { t } = useTranslation();
   const isHide = useSelector((state) => state.appsSettings.hide);
   const dispatch = useDispatch();
   const icon = useSelector((state) => state.appearance.iconTheme);
@@ -164,7 +167,7 @@ export const SettingsStartApp = () => {
           ? "https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/original/applications-system.svg"
           : "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/applications-system.svg"
       }
-      name="Settings"
+      name={t("apps.settings.name")}
       onClick={toggle}
     />
   );
@@ -172,6 +175,7 @@ export const SettingsStartApp = () => {
 
 export default function Settings() {
   const SettingsWindow = () => {
+    const [t, i18n] = useTranslation();
     const settingsReducer = useSelector((state) => state.settings);
     const isHour12 = useSelector((state) => state.time.hour12);
     const isSecondsEnabled = useSelector((state) => state.time.seconds);
@@ -355,6 +359,7 @@ export default function Settings() {
     const [orientationMenu, showOrientationMenu] = useState(false);
     const [resolutionMenu, showResolutionMenu] = useState(false);
     const [refreshRateMenu, showRefreshRateMenu] = useState(false);
+    const [languageMenu, showLanguageMenu] = useState(false);
     const [securityMenu, showSecurityMenu] = useState(false);
     const [editDeviceName, allowEditDeviceName] = useState(false);
 
@@ -506,6 +511,25 @@ export default function Settings() {
     const refreshRateMenuRef = useRef(null);
     useOutsideRRMenu(refreshRateMenuRef);
 
+    function useOutsideLanguageMenu(ref) {
+      useEffect(() => {
+        function handleClickOutside(event) {
+          if (ref.current && !ref.current.contains(event.target)) {
+            showLanguageMenu(false);
+          }
+        }
+
+        document.addEventListener("mousedown", handleClickOutside);
+
+        return () => {
+          document.removeEventListener("mousedown", handleClickOutside);
+        };
+      }, [ref]);
+    }
+
+    const languageMenuRef = useRef(null);
+    useOutsideLanguageMenu(languageMenuRef);
+
     function useOutsideSecurityMenu(ref) {
       useEffect(() => {
         function handleClickOutside(event) {
@@ -596,6 +620,12 @@ export default function Settings() {
       setTimeout(() => {
         dispatch(setHeaderType("default"));
       }, 2500);
+    }
+
+    function switchLanguage(i) {
+      i18n.changeLanguage(i);
+      console.log(i18n.language);
+      showLanguageMenu(false);
     }
 
     function switchTab() {
@@ -944,7 +974,7 @@ export default function Settings() {
                         <p>Cursor</p>
                       </div>
                       <div
-                        className="ThemesMenuSection"
+                        className="MenuSection"
                         onClick={() => showCursorMenu(true)}
                       >
                         <p style={{ marginRight: "7px" }}>Default</p>
@@ -954,7 +984,7 @@ export default function Settings() {
                         style={{
                           zIndex: "1",
                           width: "200px",
-                          transform: "translate(450px, 30px)",
+                          transform: "translate(450px, 0px)",
                         }}
                         className={cursorMenu ? "active" : ""}
                         ref={cursorMenuRef}
@@ -974,7 +1004,7 @@ export default function Settings() {
                         <p>Icons</p>
                       </div>
                       <div
-                        className="ThemesMenuSection"
+                        className="MenuSection"
                         onClick={() => showIconsMenu(true)}
                       >
                         <p style={{ marginRight: "7px" }}>
@@ -986,7 +1016,7 @@ export default function Settings() {
                         style={{
                           zIndex: "1",
                           width: "200px",
-                          transform: "translate(450px, 30px)",
+                          transform: "translate(450px, 0px)",
                         }}
                         className={iconsMenu ? "active" : ""}
                         ref={iconsMenuRef}
@@ -1027,7 +1057,7 @@ export default function Settings() {
                         <p>Fonts</p>
                       </div>
                       <div
-                        className="ThemesMenuSection"
+                        className="MenuSection"
                         onClick={() => showFontsMenu(true)}
                       >
                         <p style={{ marginRight: "7px" }}>
@@ -1039,7 +1069,7 @@ export default function Settings() {
                         style={{
                           zIndex: "1",
                           width: "200px",
-                          transform: "translate(450px, 30px)",
+                          transform: "translate(450px, 0px)",
                         }}
                         className={fontsMenu ? "active" : ""}
                         ref={fontsMenuRef}
@@ -1079,7 +1109,7 @@ export default function Settings() {
                         <p>Shell</p>
                       </div>
                       <div
-                        className="ThemesMenuSection"
+                        className="MenuSection"
                         onClick={() => showShellMenu(true)}
                       >
                         <p style={{ marginRight: "7px" }}>{shellTheme}</p>
@@ -1089,7 +1119,7 @@ export default function Settings() {
                         style={{
                           zIndex: "1",
                           width: "200px",
-                          transform: "translate(450px, 30px)",
+                          transform: "translate(450px, 0px)",
                         }}
                         className={shellMenu ? "active" : ""}
                         ref={shellMenuRef}
@@ -1129,7 +1159,7 @@ export default function Settings() {
                         <p>Sound</p>
                       </div>
                       <div
-                        className="ThemesMenuSection"
+                        className="MenuSection"
                         onClick={() => showSoundMenu(true)}
                       >
                         <p style={{ marginRight: "7px" }}>Oxygen</p>
@@ -1139,7 +1169,7 @@ export default function Settings() {
                         style={{
                           zIndex: "1",
                           width: "200px",
-                          transform: "translate(450px, 30px)",
+                          transform: "translate(450px, 0px)",
                         }}
                         className={soundMenu ? "active" : ""}
                         ref={soundMenuRef}
@@ -1253,7 +1283,7 @@ export default function Settings() {
                         <p>Orientation</p>
                       </div>
                       <div
-                        className="BiDMenuSection"
+                        className="MenuSection"
                         onClick={() => showOrientationMenu(true)}
                       >
                         <p style={{ marginRight: "7px" }}>Landscape</p>
@@ -1263,7 +1293,7 @@ export default function Settings() {
                         style={{
                           zIndex: "1",
                           width: "200px",
-                          transform: "translate(450px, 30px)",
+                          transform: "translate(450px, 0px)",
                         }}
                         className={orientationMenu ? "active" : ""}
                         ref={orientationMenuRef}
@@ -1284,7 +1314,7 @@ export default function Settings() {
                         <p>Resolution</p>
                       </div>
                       <div
-                        className="BiDMenuSection"
+                        className="MenuSection"
                         onClick={() => showResolutionMenu(true)}
                       >
                         <p style={{ marginRight: "7px" }}>
@@ -1297,7 +1327,7 @@ export default function Settings() {
                         style={{
                           zIndex: "1",
                           width: "200px",
-                          transform: "translate(450px, 30px)",
+                          transform: "translate(450px, 0px)",
                         }}
                         className={resolutionMenu ? "active" : ""}
                         ref={resolutionMenuRef}
@@ -1317,7 +1347,7 @@ export default function Settings() {
                         <p>Refresh Rate</p>
                       </div>
                       <div
-                        className="BiDMenuSection"
+                        className="MenuSection"
                         onClick={() => showRefreshRateMenu(true)}
                       >
                         <p style={{ marginRight: "7px" }}>60.00 Hz</p>
@@ -1327,7 +1357,7 @@ export default function Settings() {
                         style={{
                           zIndex: "1",
                           width: "200px",
-                          transform: "translate(450px, 30px)",
+                          transform: "translate(450px, 0px)",
                         }}
                         className={refreshRateMenu ? "active" : ""}
                         ref={refreshRateMenuRef}
@@ -1341,6 +1371,111 @@ export default function Settings() {
                         <ActMenuSelector title="30.00 Hz"></ActMenuSelector>
                       </ActMenu>
                     </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        case "Region & Language":
+          return (
+            <div className="RegionNLanguageWrapper">
+              <div className="RegionNLanguage">
+                <div style={{ width: "649.516px" }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      marginBottom: "40px",
+                    }}
+                  >
+                    <p className="font-bold">Language</p>
+                    <div
+                      className="MenuSection"
+                      onClick={() => showLanguageMenu(true)}
+                    >
+                      <p style={{ marginRight: "7px" }}>{i18n.language}</p>
+                      <i className="fa-regular fa-chevron-down" />
+                    </div>
+                    <ActMenu
+                      style={{
+                        zIndex: "1",
+                        width: "200px",
+                        transform: "translate(450px, 0px)",
+                      }}
+                      className={languageMenu ? "active" : ""}
+                      ref={languageMenuRef}
+                    >
+                      <ActMenuSelector
+                        title="Deutsch"
+                        onClick={() => switchLanguage("Deutsch")}
+                        active={i18n.language === "Deutsch"}
+                      ></ActMenuSelector>
+                      <ActMenuSelector
+                        title="English (US)"
+                        onClick={() => switchLanguage("English (US)")}
+                        active={i18n.language === "English (US)"}
+                      ></ActMenuSelector>
+                      <ActMenuSelector
+                        title="Español"
+                        onClick={() => switchLanguage("Español")}
+                        active={i18n.language === "Español"}
+                      ></ActMenuSelector>
+                      <ActMenuSelector
+                        title="Français"
+                        onClick={() => switchLanguage("Français")}
+                        active={i18n.language === "Français"}
+                      ></ActMenuSelector>
+                      <ActMenuSelector
+                        title="Bahasa Indonesia"
+                        onClick={() => switchLanguage("Bahasa Indonesia")}
+                        active={i18n.language === "Bahasa Indonesia"}
+                      ></ActMenuSelector>
+                      <ActMenuSelector
+                        title="Italiano"
+                        onClick={() => switchLanguage("Italiano")}
+                        active={i18n.language === "Italiano"}
+                      ></ActMenuSelector>
+                      <ActMenuSelector
+                        title="日本語"
+                        onClick={() => switchLanguage("日本語")}
+                        active={i18n.language === "日本語"}
+                      ></ActMenuSelector>
+                      <ActMenuSelector
+                        title="한국어"
+                        onClick={() => switchLanguage("한국어")}
+                        active={i18n.language === "한국어"}
+                      ></ActMenuSelector>
+                      <ActMenuSelector
+                        title="Русский"
+                        onClick={() => switchLanguage("Русский")}
+                        active={i18n.language === "Русский"}
+                      ></ActMenuSelector>
+                      <ActMenuSelector
+                        title="แบบไทย"
+                        onClick={() => switchLanguage("แบบไทย")}
+                        active={i18n.language === "แบบไทย"}
+                      ></ActMenuSelector>
+                      <ActMenuSelector
+                        title="Український"
+                        onClick={() => switchLanguage("Український")}
+                        active={i18n.language === "Український"}
+                      ></ActMenuSelector>
+                      <ActMenuSelector
+                        title="Tiếng Việt"
+                        onClick={() => switchLanguage("Tiếng Việt")}
+                        active={i18n.language === "Tiếng Việt"}
+                      ></ActMenuSelector>
+                      <ActMenuSelector
+                        title="中文 (简体)"
+                        onClick={() => switchLanguage("中文 (简体)")}
+                        active={i18n.language === "中文 (简体)"}
+                      ></ActMenuSelector>
+                      <ActMenuSelector
+                        title="中文 (繁體)"
+                        onClick={() => switchLanguage("中文 (繁體)")}
+                        active={i18n.language === "中文 (繁體)"}
+                      ></ActMenuSelector>
+                    </ActMenu>
                   </div>
                 </div>
               </div>

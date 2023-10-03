@@ -4,8 +4,8 @@
     "incorrectPassword": "lần sai mật khẩu",
     "incorrectPasswordPlural": "lần sai mật khẩu",
     "locked": "lần sai mật khẩu. Thử lại sau",
-    "lockedSecond": "giây",
-    "lockedSeconds": "giây",
+    "lockedSecond": "giây.",
+    "lockedSeconds": "giây.",
     "interactions": {
       "sleep": "Ngủ",
       "lock": "Khoá",
@@ -37,5 +37,48 @@
     "airplaneMode": "C.độ Máy bay",
     "nightLight": "Ánh sáng Đêm",
     "boldText": "Chữ Đậm"
+  },
+  "apps": {
+    "open": "Mở",
+    "quit": "Thoát",
+    "hide": "Ẩn",
+    "unhide": "Bỏ ẩn",
+    "surface": {
+      "newTab": "Tab mới",
+      "newPrivateTab": "Tab Ẩn danh mới",
+      "turnPrivateOff": "Tắt chế độ riêng tư",
+      "turnPrivateOn": "Bật chế độ riêng tư"
+    },
+    "calendar": {
+      "name": "Lịch"
+    },
+    "settings": {
+      "name": "Cài đặt"
+    },
+    "clock": {
+      "name": "Đồng hồ"
+    },
+    "camera": {
+      "name": "Máy ảnh"
+    },
+    "files": {
+      "name": "Thư mục"
+    },
+    "calculator": {
+      "name": "Máy tính",
+      "recentResult": "Recent Result"
+    },
+    "terminal": {
+      "name": "T.bị đầu cuối"
+    },
+    "textEditor": {
+      "name": "S.thảo văn bản"
+    },
+    "softwareStore": {
+      "name": "C.hàng ứng dụng"
+    },
+    "imgview": {
+      "name": "Trình xem ảnh"
+    }
   }
 }

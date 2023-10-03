@@ -1,0 +1,41 @@
+{
+  "lockScreen": {
+    "passwordPlaceholder": "Mot de passe...",
+    "incorrectPassword": "tentative ratée",
+    "incorrectPasswordPlural": "tentatives ratées",
+    "locked": "tentatives ratées. Réessayez pendant",
+    "lockedSecond": "seconde.",
+    "lockedSeconds": "secondes.",
+    "interactions": {
+      "sleep": "Dormir",
+      "lock": "Verrouillage",
+      "shutdown": "Fermer",
+      "restart": "Redémarrage"
+    },
+    "editMenu": {
+      "fontFamily": "Polices",
+      "fontSize": {
+        "name": "Taille de police",
+        "medium": "Moyen",
+        "large": "Grand"
+      }
+    }
+  },
+  "header": {
+    "notifications": {
+      "off": "Éteindre",
+      "on": "Allumer"
+    },
+    "lowBattery": "Batterie faible",
+    "charging": "Mise en charge",
+    "fullyCharged": "Complètement chargé"
+  },
+  "panel": {
+    "volume": "Volume",
+    "brightness": "Luminosité",
+    "darkMode": "Mode sombre",
+    "airplaneMode": "Mode avion",
+    "nightLight": "Veilleuse",
+    "boldText": "Texte en gras"
+  }
+}

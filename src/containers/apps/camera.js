@@ -12,9 +12,11 @@ import Webcam from "react-webcam";
 import ActMenu, { ActMenuSelector } from "../../components/utils/menu/index";
 import CountdownSound from "../../sounds/mixkit-clock-countdown-bleeps-916_Bq9La32i.wav";
 import CameraShutter from "../../sounds/camera_shutter.mp3";
-import { setHeaderActive, setHeaderHide } from "../../reducers/header";
+import { setHeaderHide } from "../../reducers/header";
+import { useTranslation } from "react-i18next";
 
 export const CameraApp = () => {
+  const { t } = useTranslation();
   const isActive = useSelector((state) => state.appsCamera.active);
   const isHide = useSelector((state) => state.appsCamera.hide);
   const dispatch = useDispatch();
@@ -53,7 +55,7 @@ export const CameraApp = () => {
     <DockItem
       id="camera"
       className="CameraApp"
-      title="Camera"
+      title={t("apps.camera.name")}
       icon={
         icon === "WhiteSur-icon-theme"
           ? "https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/original/cheese.svg"
@@ -62,13 +64,13 @@ export const CameraApp = () => {
       menu={[
         [
           {
-            label: isHide ? "Unhide" : "Hide",
+            label: isHide ? t("apps.unhide") : t("apps.hide"),
             disabled: isActive ? false : true,
             action: () =>
               isHide ? dispatch(setHide(false)) : dispatch(setHide(true)),
           },
           {
-            label: isActive ? "Quit" : "Open",
+            label: isActive ? t("apps.quit") : t("apps.open"),
             action: () =>
               isActive ? dispatch(setActive(false)) : dispatch(setActive(true)),
           },
@@ -82,6 +84,7 @@ export const CameraApp = () => {
 };
 
 export const CameraStartApp = () => {
+  const { t } = useTranslation();
   const isHide = useSelector((state) => state.appsCamera.hide);
   const dispatch = useDispatch();
   const icon = useSelector((state) => state.appearance.iconTheme);
@@ -107,7 +110,7 @@ export const CameraStartApp = () => {
           ? "https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/original/cheese.svg"
           : "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/accessories-camera.svg"
       }
-      name="Camera"
+      name={t("apps.camera.name")}
       onClick={toggle}
     />
   );

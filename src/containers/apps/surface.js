@@ -14,8 +14,10 @@ import SurfaceIcon from "../../icons/surface.svg";
 import SurfacePrivateIcon from "../../icons/surface-private.svg";
 import Toggle from "../../components/utils/toggle/Toggle";
 import ActMenu, { ActMenuSelector } from "../../components/utils/menu/index";
+import { useTranslation } from "react-i18next";
 
 export const SurfaceApp = () => {
+  const { t } = useTranslation();
   const isActive = useSelector((state) => state.appsSurface.active);
   const isHide = useSelector((state) => state.appsSurface.hide);
   const isPrivate = useSelector((state) => state.appsSurface.private);
@@ -61,11 +63,13 @@ export const SurfaceApp = () => {
       menu={[
         [
           {
-            label: "New Tab",
+            label: t("apps.surface.newTab"),
             action: () => dispatch(setActive(true)),
           },
           {
-            label: isPrivate ? "Turn off private mode" : "Turn on private mode",
+            label: isPrivate
+              ? t("apps.surface.turnPrivateOff")
+              : t("apps.surface.turnPrivateOn"),
             disabled: isActive ? false : true,
             action: () =>
               isPrivate
@@ -75,13 +79,13 @@ export const SurfaceApp = () => {
         ],
         [
           {
-            label: isHide ? "Unhide" : "Hide",
+            label: isHide ? t("apps.unhide") : t("apps.hide"),
             disabled: isActive ? false : true,
             action: () =>
               isHide ? dispatch(setHide(false)) : dispatch(setHide(true)),
           },
           {
-            label: isActive ? "Quit" : "Open",
+            label: isActive ? t("apps.quit") : t("apps.open"),
             action: () =>
               isActive ? dispatch(setActive(false)) : dispatch(setActive(true)),
           },
@@ -123,6 +127,7 @@ export const SurfaceStartApp = () => {
 
 export default function Surface() {
   const SurfaceWindow = () => {
+    const { t } = useTranslation();
     const iFrameRef = useRef(null);
     const isActive = useSelector((state) => state.appsSurface.active);
     const isPrivate = useSelector((state) => state.appsSurface.private);
@@ -201,7 +206,11 @@ export default function Surface() {
                 className="TabBarItem TabSearchItem"
                 style={{ justifyContent: "space-between" }}
               >
-                <p>{isPrivate ? "New Private Tab" : "New Tab"}</p>
+                <p>
+                  {isPrivate
+                    ? t("apps.surface.newTab")
+                    : t("apps.surface.newPrivateTab")}
+                </p>
                 <div
                   className="CloseButton"
                   onClick={() => dispatch(setActive(false))}
@@ -388,13 +397,15 @@ export default function Surface() {
                   className="SupportFrame"
                   src="https://breezeos.github.io"
                 /> */}
-                <div style={{
-                  width: "100%",
-                  height: "100%",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center"
-                }}>
+                <div
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
                   <p>iFrame is not available for this dialog.</p>
                 </div>
               </div>
@@ -434,7 +445,7 @@ export default function Surface() {
                       ref={iFrameRef}
                       className="iFrame"
                       src={url}
-                      title="New Tab"
+                      title={t("apps.surface.newTab")}
                       allowFullScreen={true}
                     />
                   ) : (

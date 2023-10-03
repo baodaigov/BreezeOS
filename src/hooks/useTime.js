@@ -33,12 +33,12 @@ export default function useTime() {
   }, []);
 
   return {
-    timeFormat,
     hour,
     fullHour,
     min,
     fullMin,
     sec,
     fullSec,
+    timeFormat,
   };
 }

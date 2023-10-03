@@ -9,9 +9,11 @@ import "./assets/softwarestore.scss";
 import TopBarInteraction from "../../components/utils/window/TopBarInteraction";
 import StartApp from "../../components/startMenu/StartApp";
 import SurfaceIcon from "../../icons/surface.svg";
-import { setHeaderActive, setHeaderHide } from "../../reducers/header";
+import { setHeaderHide } from "../../reducers/header";
+import { useTranslation } from "react-i18next";
 
 export const SoftwareStoreApp = () => {
+  const { t } = useTranslation();
   const isActive = useSelector((state) => state.appsSoftwareStore.active);
   const isHide = useSelector((state) => state.appsSoftwareStore.hide);
   const dispatch = useDispatch();
@@ -62,7 +64,7 @@ export const SoftwareStoreApp = () => {
     <DockItem
       id="softwarestore"
       className="SoftwareStoreApp"
-      title="Software Store"
+      title={t("apps.softwareStore.name")}
       icon={
         icon === "WhiteSur-icon-theme"
           ? "https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/original/softwarecenter.svg"
@@ -71,13 +73,13 @@ export const SoftwareStoreApp = () => {
       menu={[
         [
           {
-            label: isHide ? "Unhide" : "Hide",
+            label: isHide ? t("apps.unhide") : t("apps.hide"),
             disabled: isActive ? false : true,
             action: () =>
               isHide ? dispatch(setHide(false)) : dispatch(setHide(true)),
           },
           {
-            label: isActive ? "Quit" : "Open",
+            label: isActive ? t("apps.quit") : t("apps.open"),
             action: () =>
               isActive ? dispatch(setActive(false)) : dispatch(setActive(true)),
           },
@@ -91,6 +93,7 @@ export const SoftwareStoreApp = () => {
 };
 
 export const SoftwareStoreStartApp = () => {
+  const { t } = useTranslation();
   const isHide = useSelector((state) => state.appsSoftwareStore.hide);
   const dispatch = useDispatch();
   const icon = useSelector((state) => state.appearance.iconTheme);
@@ -116,7 +119,7 @@ export const SoftwareStoreStartApp = () => {
           ? "https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/original/softwarecenter.svg"
           : "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/software-store.svg"
       }
-      name="Software Store"
+      name={t("apps.softwareStore.name")}
       onClick={toggle}
     />
   );

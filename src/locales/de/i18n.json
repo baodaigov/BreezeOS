@@ -1,0 +1,41 @@
+{
+  "lockScreen": {
+    "passwordPlaceholder": "Passwort...",
+    "incorrectPassword": "Fehlversuch",
+    "incorrectPasswordPlural": "Fehlversuch",
+    "locked": "7 Fehlversuche. Versuchen Sie es erneut für",
+    "lockedSecond": "Sekunden lang.",
+    "lockedSeconds": "Sekunden lang.",
+    "interactions": {
+      "sleep": "Schlafen",
+      "lock": "Sperren",
+      "shutdown": "Abschalten",
+      "restart": "Neu starten"
+    },
+    "editMenu": {
+      "fontFamily": "Schriftarten",
+      "fontSize": {
+        "name": "Schriftgröße",
+        "medium": "Mittel",
+        "large": "Groß"
+      }
+    }
+  },
+  "header": {
+    "notifications": {
+      "off": "Abschalten",
+      "on": "Anmachen"
+    },
+    "lowBattery": "Niedriger Batteriestatus",
+    "charging": "Aufladen",
+    "fullyCharged": "Voll aufgeladen"
+  },
+  "panel": {
+    "volume": "Volumen",
+    "brightness": "Helligkeit",
+    "darkMode": "Dunkler Modus",
+    "airplaneMode": "Flugzeug-Modus",
+    "nightLight": "Nachtlicht",
+    "boldText": "Fetter Text"
+  }
+}

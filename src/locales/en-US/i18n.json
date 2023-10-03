@@ -4,8 +4,8 @@
     "incorrectPassword": "failed attempt",
     "incorrectPasswordPlural": "failed attempts",
     "locked": "failed attempts. Try again for",
-    "lockedSecond": "second",
-    "lockedSeconds": "seconds",
+    "lockedSecond": "second.",
+    "lockedSeconds": "seconds.",
     "interactions": {
       "sleep": "Sleep",
       "lock": "Lock",
@@ -13,7 +13,7 @@
       "restart": "Restart"
     },
     "editMenu": {
-      "fontFamily": "Font family",
+      "fontFamily": "Fonts",
       "fontSize": {
         "name": "Font size",
         "medium": "Medium",
@@ -37,5 +37,48 @@
     "airplaneMode": "Airplane Mode",
     "nightLight": "Night Light",
     "boldText": "Bold Text"
+  },
+  "apps": {
+    "open": "Open",
+    "quit": "Quit",
+    "hide": "Hide",
+    "unhide": "Unhide",
+    "surface": {
+      "newTab": "New Tab",
+      "newPrivateTab": "New Private Tab",
+      "turnPrivateOff": "Turn off private mode",
+      "turnPrivateOn": "Turn on private mode"
+    },
+    "calendar": {
+      "name": "Calendar"
+    },
+    "settings": {
+      "name": "Settings"
+    },
+    "clock": {
+      "name": "Clock"
+    },
+    "camera": {
+      "name": "Camera"
+    },
+    "files": {
+      "name": "Files"
+    },
+    "calculator": {
+      "name": "Calculator",
+      "recentResult": "Recent Result"
+    },
+    "terminal": {
+      "name": "Terminal"
+    },
+    "textEditor": {
+      "name": "Text Editor"
+    },
+    "softwareStore": {
+      "name": "Software Store"
+    },
+    "imgview": {
+      "name": "Image Viewer"
+    }
   }
 }

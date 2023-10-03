@@ -1,0 +1,41 @@
+{
+  "lockScreen": {
+    "passwordPlaceholder": "密碼...",
+    "incorrectPassword": "次嘗試失敗",
+    "incorrectPasswordPlural": "次嘗試失敗",
+    "locked": "次嘗試失敗。",
+    "lockedSecond": "秒後重試。",
+    "lockedSeconds": "秒後重試。",
+    "interactions": {
+      "sleep": "睡覺",
+      "lock": "鎖",
+      "shutdown": "關閉",
+      "restart": "重啟"
+    },
+    "editMenu": {
+      "fontFamily": "字體",
+      "fontSize": {
+        "name": "字體大小",
+        "medium": "中等的",
+        "large": "大的"
+      }
+    }
+  },
+  "header": {
+    "notifications": {
+      "off": "關",
+      "on": "打開"
+    },
+    "lowBattery": "低電量",
+    "charging": "收費",
+    "fullyCharged": "充滿電"
+  },
+  "panel": {
+    "volume": "體積",
+    "brightness": "亮度",
+    "darkMode": "深色模式",
+    "airplaneMode": "飛航模式",
+    "nightLight": "小夜燈",
+    "boldText": "加粗字體"
+  }
+}

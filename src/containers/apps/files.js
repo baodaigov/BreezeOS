@@ -17,8 +17,10 @@ import Image4 from "./assets/light.png";
 import Image5 from "./assets/logo-d.png";
 import Image6 from "./assets/logo-l.png";
 import { setHeaderHide } from "../../reducers/header";
+import { useTranslation } from "react-i18next";
 
 export const FilesApp = () => {
+  const { t } = useTranslation();
   const isActive = useSelector((state) => state.appsFiles.active);
   const isHide = useSelector((state) => state.appsFiles.hide);
   const dispatch = useDispatch();
@@ -57,7 +59,7 @@ export const FilesApp = () => {
     <DockItem
       id="files"
       className="FilesApp"
-      title="Files"
+      title={t("apps.files.name")}
       icon={
         icon === "WhiteSur-icon-theme"
           ? "https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/original/file-manager.svg"
@@ -98,13 +100,13 @@ export const FilesApp = () => {
         ],
         [
           {
-            label: isHide ? "Unhide" : "Hide",
+            label: isHide ? t("apps.unhide") : t("apps.hide"),
             disabled: isActive ? false : true,
             action: () =>
               isHide ? dispatch(setHide(false)) : dispatch(setHide(true)),
           },
           {
-            label: isActive ? "Quit" : "Open",
+            label: isActive ? t("apps.quit") : t("apps.open"),
             action: () =>
               isActive ? dispatch(setActive(false)) : dispatch(setActive(true)),
           },
@@ -118,6 +120,7 @@ export const FilesApp = () => {
 };
 
 export const FilesStartApp = () => {
+  const { t } = useTranslation();
   const isHide = useSelector((state) => state.appsFiles.hide);
   const dispatch = useDispatch();
   const icon = useSelector((state) => state.appearance.iconTheme);
@@ -143,7 +146,7 @@ export const FilesStartApp = () => {
           ? "https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/original/file-manager.svg"
           : "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg"
       }
-      name="Files"
+      name={t("apps.files.name")}
       onClick={toggle}
     />
   );

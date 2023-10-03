@@ -12,9 +12,11 @@ import DockItem from "../../components/DockItem";
 import "./assets/calculator.scss";
 import TopBarInteraction from "../../components/utils/window/TopBarInteraction";
 import StartApp from "../../components/startMenu/StartApp";
-import { setHeaderActive, setHeaderHide } from "../../reducers/header";
+import { setHeaderHide } from "../../reducers/header";
+import { useTranslation } from "react-i18next";
 
 export const CalculatorApp = () => {
+  const { t } = useTranslation();
   const isActive = useSelector((state) => state.appsCalculator.active);
   const isHide = useSelector((state) => state.appsCalculator.hide);
   const recentResult = useSelector(
@@ -64,7 +66,7 @@ export const CalculatorApp = () => {
     <DockItem
       id="calculator"
       className="CalculatorApp"
-      title="Calculator"
+      title={t("apps.calculator.name")}
       icon={
         icon === "WhiteSur-icon-theme"
           ? "https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/original/calc.svg"
@@ -73,19 +75,19 @@ export const CalculatorApp = () => {
       menu={[
         [
           {
-            label: "Recent Result",
+            label: t("apps.calculator.recentResult"),
             description: recentResult,
             disabled: !recentResult,
             action: () => navigator.clipboard.writeText(recentResult),
           },
           {
-            label: isHide ? "Unhide" : "Hide",
+            label: isHide ? t("apps.unhide") : t("apps.hide"),
             disabled: isActive ? false : true,
             action: () =>
               isHide ? dispatch(setHide(false)) : dispatch(setHide(true)),
           },
           {
-            label: isActive ? "Quit" : "Open",
+            label: isActive ? t("apps.quit") : t("apps.open"),
             action: () =>
               isActive ? dispatch(setActive(false)) : dispatch(setActive(true)),
           },
@@ -99,6 +101,7 @@ export const CalculatorApp = () => {
 };
 
 export const CalculatorStartApp = () => {
+  const { t } = useTranslation();
   const isHide = useSelector((state) => state.appsCalculator.hide);
   const dispatch = useDispatch();
   const icon = useSelector((state) => state.appearance.iconTheme);
@@ -124,7 +127,7 @@ export const CalculatorStartApp = () => {
           ? "https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/original/calc.svg"
           : "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/accessories-calculator.svg"
       }
-      name="Calculator"
+      name={t("apps.calculator.name")}
       onClick={toggle}
     />
   );

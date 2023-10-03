@@ -9,9 +9,11 @@ import DockItem from "../../components/DockItem";
 import "./assets/vscode.scss";
 import TopBarInteraction from "../../components/utils/window/TopBarInteraction";
 import StartApp from "../../components/startMenu/StartApp";
-import { setHeaderActive, setHeaderHide } from "../../reducers/header";
+import { setHeaderHide } from "../../reducers/header";
+import { useTranslation } from "react-i18next";
 
 export const VSCodeApp = () => {
+  const { t } = useTranslation();
   const isActive = useSelector((state) => state.appsVscode.active);
   const isHide = useSelector((state) => state.appsVscode.hide);
   const dispatch = useDispatch();
@@ -52,13 +54,13 @@ export const VSCodeApp = () => {
       menu={[
         [
           {
-            label: isHide ? "Unhide" : "Hide",
+            label: isHide ? t("apps.unhide") : t("apps.hide"),
             disabled: isActive ? false : true,
             action: () =>
               isHide ? dispatch(setHide(false)) : dispatch(setHide(true)),
           },
           {
-            label: isActive ? "Quit" : "Open",
+            label: isActive ? t("apps.quit") : t("apps.open"),
             action: () =>
               isActive ? dispatch(setActive(false)) : dispatch(setActive(true)),
           },

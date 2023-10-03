@@ -8,9 +8,11 @@ import DockItem from "../../components/DockItem";
 import "./assets/terminal.scss";
 import TopBarInteraction from "../../components/utils/window/TopBarInteraction";
 import StartApp from "../../components/startMenu/StartApp";
-import { setHeaderActive, setHeaderHide } from "../../reducers/header";
+import { setHeaderHide } from "../../reducers/header";
+import { useTranslation } from "react-i18next";
 
 export const TerminalApp = () => {
+  const { t } = useTranslation();
   const isActive = useSelector((state) => state.appsTerminal.active);
   const isHide = useSelector((state) => state.appsTerminal.hide);
   const dispatch = useDispatch();
@@ -55,7 +57,7 @@ export const TerminalApp = () => {
     <DockItem
       id="terminal"
       className="TerminalApp"
-      title="Terminal"
+      title={t("apps.terminal.name")}
       icon={
         icon === "WhiteSur-icon-theme"
           ? "https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/original/terminal.svg"
@@ -64,13 +66,13 @@ export const TerminalApp = () => {
       menu={[
         [
           {
-            label: isHide ? "Unhide" : "Hide",
+            label: isHide ? t("apps.unhide") : t("apps.hide"),
             disabled: isActive ? false : true,
             action: () =>
               isHide ? dispatch(setHide(false)) : dispatch(setHide(true)),
           },
           {
-            label: isActive ? "Quit" : "Open",
+            label: isActive ? t("apps.quit") : t("apps.open"),
             action: () =>
               isActive ? dispatch(setActive(false)) : dispatch(setActive(true)),
           },
@@ -84,6 +86,7 @@ export const TerminalApp = () => {
 };
 
 export const TerminalStartApp = () => {
+  const { t } = useTranslation();
   const isHide = useSelector((state) => state.appsTerminal.hide);
   const dispatch = useDispatch();
   const icon = useSelector((state) => state.appearance.iconTheme);
@@ -109,7 +112,7 @@ export const TerminalStartApp = () => {
           ? "https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/original/terminal.svg"
           : "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/utilities-x-terminal.svg"
       }
-      name="Terminal"
+      name={t("apps.terminal.name")}
       onClick={toggle}
     />
   );

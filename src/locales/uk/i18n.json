@@ -1,0 +1,41 @@
+{
+  "lockScreen": {
+    "passwordPlaceholder": "Пароль...",
+    "incorrectPassword": "невдала спроба",
+    "incorrectPasswordPlural": "невдалі спроби",
+    "locked": "невдалих спроб. Спробуйте ще раз протягом",
+    "lockedSecond": "секунди.",
+    "lockedSeconds": "секунд.",
+    "interactions": {
+      "sleep": "Спати",
+      "lock": "Замок",
+      "shutdown": "Несправність",
+      "restart": "Перезапуск"
+    },
+    "editMenu": {
+      "fontFamily": "Шрифт",
+      "fontSize": {
+        "name": "Розмір шрифту",
+        "medium": "Середина",
+        "large": "Великий"
+      }
+    }
+  },
+  "header": {
+    "notifications": {
+      "off": "Вимикати",
+      "on": "Вмикати"
+    },
+    "lowBattery": "Низький заряд батареї",
+    "charging": "Заряджання",
+    "fullyCharged": "Повністю заряджений"
+  },
+  "panel": {
+    "volume": "Об`єм",
+    "brightness": "Яскравість",
+    "darkMode": "Темний режим",
+    "airplaneMode": "Авіарежим",
+    "nightLight": "Нічне світло",
+    "boldText": "Жирний текст"
+  }
+}

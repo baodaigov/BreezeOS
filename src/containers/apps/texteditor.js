@@ -9,9 +9,11 @@ import "./assets/texteditor.scss";
 import TopBarInteraction from "../../components/utils/window/TopBarInteraction";
 import StartApp from "../../components/startMenu/StartApp";
 import Sound1 from "../../sounds/Oxygen-Sys-App-Error-Critical.mp3";
-import { setHeaderActive, setHeaderHide } from "../../reducers/header";
+import { setHeaderHide } from "../../reducers/header";
+import { useTranslation } from "react-i18next";
 
 export const TextEditorApp = () => {
+  const { t } = useTranslation();
   const isActive = useSelector((state) => state.appsTextEditor.active);
   const isHide = useSelector((state) => state.appsTextEditor.hide);
   const dispatch = useDispatch();
@@ -58,7 +60,7 @@ export const TextEditorApp = () => {
     <DockItem
       id="texteditor"
       className="TextEditorApp"
-      title="Text Editor"
+      title={t("apps.textEditor.name")}
       icon={
         icon === "WhiteSur-icon-theme"
           ? "https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/text-editor.svg"
@@ -67,13 +69,13 @@ export const TextEditorApp = () => {
       menu={[
         [
           {
-            label: isHide ? "Unhide" : "Hide",
+            label: isHide ? t("apps.unhide") : t("apps.hide"),
             disabled: isActive ? false : true,
             action: () =>
               isHide ? dispatch(setHide(false)) : dispatch(setHide(true)),
           },
           {
-            label: isActive ? "Quit" : "Open",
+            label: isActive ? t("apps.quit") : t("apps.open"),
             action: () =>
               isActive ? dispatch(setActive(false)) : dispatch(setActive(true)),
           },
@@ -87,6 +89,7 @@ export const TextEditorApp = () => {
 };
 
 export const TextEditorStartApp = () => {
+  const { t } = useTranslation();
   const isHide = useSelector((state) => state.appsTextEditor.hide);
   const dispatch = useDispatch();
   const icon = useSelector((state) => state.appearance.iconTheme);
@@ -112,7 +115,7 @@ export const TextEditorStartApp = () => {
           ? "https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/text-editor.svg"
           : "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/accessories-text-editor.svg"
       }
-      name="Text Editor"
+      name={t("apps.textEditor.name")}
       onClick={toggle}
     />
   );
