@@ -137,6 +137,7 @@ export default function Calculator() {
   const dispatch = useDispatch();
 
   const CalculatorWindow = () => {
+    const { t } = useTranslation();
     const btnValues = [
       ["C", "+-", "%", "÷"],
       [7, 8, 9, "×"],
@@ -276,7 +277,7 @@ export default function Calculator() {
 
     return (
       <>
-        <TopBar title="Calculator">
+        <TopBar title={t("apps.calculator.name")}>
           <TopBarInteraction
             action="hide"
             onHide={() => dispatch(setHide(true))}

@@ -208,8 +208,8 @@ export default function Surface() {
               >
                 <p>
                   {isPrivate
-                    ? t("apps.surface.newTab")
-                    : t("apps.surface.newPrivateTab")}
+                    ? t("apps.surface.newPrivateTab")
+                    : t("apps.surface.newTab")}
                 </p>
                 <div
                   className="CloseButton"
@@ -250,7 +250,7 @@ export default function Surface() {
                 type="text"
                 spellCheck="false"
                 autoComplete="0"
-                placeholder="Search with Bing or enter address"
+                placeholder={t("apps.surface.searchPlaceholder")}
                 onInput={(e) => setSearchValue(e.target.value)}
                 value={searchValue}
                 onKeyDown={action}
@@ -318,14 +318,18 @@ export default function Surface() {
                     }}
                   >
                     <div className="SettingsItem">
-                      <p className="SettingsName">Private mode</p>
+                      <p className="SettingsName">
+                        {t("apps.surface.settings.privateMode")}
+                      </p>
                       <Toggle
                         active={isPrivate}
                         onToggle={() => dispatch(setPrivate(!isPrivate))}
                       />
                     </div>
                     <div className="SettingsItem">
-                      <p className="SettingsName">Search engine</p>
+                      <p className="SettingsName">
+                        {t("apps.surface.settings.searchEngine")}
+                      </p>
                       <div
                         className="SettingsMenuSection"
                         onClick={() => showSearchEngineMenu(true)}
@@ -430,8 +434,7 @@ export default function Surface() {
                       <div className="NonCollapsibleSection">
                         <div className="SearchWrapper">
                           <p className="Text">
-                            Search with Bing or enter address, or leave blank to
-                            get redirected to BreezeOS official website.
+                            {t("apps.surface.startupTitle")}
                           </p>
                         </div>
                       </div>
@@ -451,15 +454,14 @@ export default function Surface() {
                   ) : (
                     <div className="CantBeReached">
                       <p className="CantBeReachedText">
-                        Internet is not enabled.
+                        {t("apps.surface.internetUnabled")}
                       </p>
                       <div className="Description">
-                        <p>
-                          You need Internet connection in order to connect to
-                          this website.
-                        </p>
+                        <p>{t("apps.surface.internetUnabledDesc")}</p>
                         <div className="ButtonContainer">
-                          <button className="Button">Reload</button>
+                          <button className="Button">
+                            {t("apps.surface.internatUnabledReload")}
+                          </button>
                         </div>
                       </div>
                     </div>

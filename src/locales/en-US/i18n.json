@@ -47,7 +47,16 @@
       "newTab": "New Tab",
       "newPrivateTab": "New Private Tab",
       "turnPrivateOff": "Turn off private mode",
-      "turnPrivateOn": "Turn on private mode"
+      "turnPrivateOn": "Turn on private mode",
+      "searchPlaceholder": "Search with Bing or enter address...",
+      "internetUnabled": "Internet is not enabled.",
+      "internetUnabledDesc": "You need Internet connection in order to connect to this website.",
+      "internatUnabledReload": "Reload",
+      "startupTitle": "Search with Bing or enter address, or leave blank to get redirected to BreezeOS official website.",
+      "settings": {
+        "privateMode": "Private mode",
+        "searchEngine": "Search engine"
+      }
     },
     "calendar": {
       "name": "Calendar"

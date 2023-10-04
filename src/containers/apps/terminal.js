@@ -121,6 +121,7 @@ export const TerminalStartApp = () => {
 export default function Terminal() {
   const dispatch = useDispatch();
   const TerminalWindow = () => {
+    const { t } = useTranslation();
     const [min, isMin] = useState(true);
 
     function minimize() {
@@ -132,7 +133,7 @@ export default function Terminal() {
 
     return (
       <>
-        <TopBar title="Terminal" onDblClick={minimize}>
+        <TopBar title={t("apps.terminal.name")} onDblClick={minimize}>
           <TopBarInteraction
             action="hide"
             onHide={() => dispatch(setHide(true))}

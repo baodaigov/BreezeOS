@@ -120,6 +120,7 @@ export default function Camera() {
   const dispatch = useDispatch();
 
   const CameraWindow = () => {
+    const { t } = useTranslation();
     const isActive = useSelector((state) => state.appsCamera.active);
     const [webcam, setWebcam] = useState(false);
     const [interaction, disableInteraction] = useState("capturing");
@@ -470,7 +471,7 @@ export default function Camera() {
             ></ActMenuSelector>
           )}
         </ActMenu>
-        <TopBar title="Camera" onDblClick={minimize}>
+        <TopBar title={t("apps.camera.name")} onDblClick={minimize}>
           <div className="TabBarWrapper" style={{ width: "100%" }}>
             <div className="TabBar" style={{ display: "block" }}>
               <div className="TabBarItem" style={{ float: "right" }}>

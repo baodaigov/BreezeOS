@@ -1768,7 +1768,7 @@ export default function Settings() {
         ) : (
           ""
         )}
-        <TopBar title="Settings" onDblClick={minimize}>
+        <TopBar title={t("apps.settings.name")} onDblClick={minimize}>
           <div className="TabBarWrapper" style={{ width: "100%" }}>
             <div
               className="TabBar"
@@ -1776,7 +1776,13 @@ export default function Settings() {
             >
               <div
                 className="TabBarItem"
-                style={{ width: "200px", flexDirection: "row-reverse" }}
+                style={{
+                  width: min ? "120px" : "80px",
+                  paddingLeft: 0,
+                  paddingRight: 0,
+                  flexDirection: "row-reverse",
+                  transition: "all ease .3s",
+                }}
               >
                 <div className="TabBarInteraction">
                   <i className="fa-regular fa-magnifying-glass" />

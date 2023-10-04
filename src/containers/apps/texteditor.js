@@ -126,6 +126,7 @@ export default function TextEditor() {
   const dispatch = useDispatch();
 
   const TextEditorWindow = () => {
+    const { t } = useTranslation();
     const [changes, saveChanges] = useState(true);
     const [min, isMin] = useState(false);
     const [msgboxChanges, displayMsgBoxChanges] = useState(false);
@@ -204,7 +205,9 @@ export default function TextEditor() {
           </div>
         </div>
         <TopBar
-          title={`${changes ? "" : "*"}hello.cpp – Text Editor`}
+          title={`${changes ? "" : "*"}hello.cpp – ${t(
+            "apps.textEditor.name"
+          )}`}
           onDblClick={minimize}
         >
           <div className="TabBarWrapper">

@@ -128,6 +128,7 @@ export const SoftwareStoreStartApp = () => {
 export default function SoftwareStore() {
   const dispatch = useDispatch();
   const SoftwareStoreWindow = () => {
+    const { t } = useTranslation();
     const icon = useSelector((state) => state.appearance.iconTheme);
     const [min, isMin] = useState(false);
     const [tabLayout, setTabLayout] = useState(true);
@@ -1392,7 +1393,7 @@ export default function SoftwareStore() {
 
     return (
       <>
-        <TopBar title="Software Store" onDblClick={minimize}>
+        <TopBar title={t("apps.softwareStore.name")} onDblClick={minimize}>
           <TopBarInteraction
             action="hide"
             onHide={() => dispatch(setHide(true))}

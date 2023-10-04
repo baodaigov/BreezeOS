@@ -47,7 +47,16 @@
       "newTab": "Tab mới",
       "newPrivateTab": "Tab Ẩn danh mới",
       "turnPrivateOff": "Tắt chế độ riêng tư",
-      "turnPrivateOn": "Bật chế độ riêng tư"
+      "turnPrivateOn": "Bật chế độ riêng tư",
+      "searchPlaceholder": "Tìm kiếm bằng Bing hoặc nhập địa chỉ...",
+      "internetUnabled": "Internet chưa được kích hoạt.",
+      "internetUnabledDesc": "Bạn cần kết nối Internet để có thể kết nối tới trang này.",
+      "internatUnabledReload": "Tải lại",
+      "startupTitle": "Tìm kiếm bằng Bing hoặc nhập địa chỉ hoặc để trống để chuyển hướng đến trang web chính thức của BreezeOS.",
+      "settings": {
+        "privateMode": "Chế độ riêng tư",
+        "searchEngine": "Công cụ tìm kiếm"
+      }
     },
     "calendar": {
       "name": "Lịch"
@@ -66,7 +75,7 @@
     },
     "calculator": {
       "name": "Máy tính",
-      "recentResult": "Recent Result"
+      "recentResult": "Kết quả gần đây"
     },
     "terminal": {
       "name": "T.bị đầu cuối"

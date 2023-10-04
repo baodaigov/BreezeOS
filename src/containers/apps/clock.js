@@ -117,6 +117,7 @@ export default function Clock() {
   const dispatch = useDispatch();
 
   const ClockWindow = () => {
+    const { t } = useTranslation();
     const [min, isMin] = useState(false);
     const [tab, setTab] = useState("worldclock");
     const [translateX, setTranslateX] = useState("");
@@ -430,7 +431,7 @@ export default function Clock() {
 
     return (
       <>
-        <TopBar title="Clock" onDblClick={minimize}>
+        <TopBar title={t("apps.clock.name")} onDblClick={minimize}>
           <TopBarInteraction
             action="hide"
             onHide={() => dispatch(setHide(true))}

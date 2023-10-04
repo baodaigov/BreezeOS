@@ -37,5 +37,57 @@
     "airplaneMode": "飛航模式",
     "nightLight": "小夜燈",
     "boldText": "加粗字體"
+  },
+  "apps": {
+    "open": "打開",
+    "quit": "辭職",
+    "hide": "隱藏",
+    "unhide": "取消隱藏",
+    "surface": {
+      "newTab": "新標籤",
+      "newPrivateTab": "新的私人標籤",
+      "turnPrivateOff": "關閉私密模式",
+      "turnPrivateOn": "開啟私密模式",
+      "searchPlaceholder": "使用 Bing 搜尋或輸入地址...",
+      "internetUnabled": "網際網路未啟用。",
+      "internetUnabledDesc": "您需要網路連線才能連接到該網站。",
+      "internatUnabledReload": "重新載入",
+      "startupTitle": "使用 Bing 搜尋或輸入地址，或留空以重定向至 BreezeOS 官方網站。",
+      "settings": {
+        "privateMode": "私人模式",
+        "searchEngine": "搜尋引擎"
+      }
+    },
+    "calendar": {
+      "name": "日曆"
+    },
+    "settings": {
+      "name": "設定"
+    },
+    "clock": {
+      "name": "鐘"
+    },
+    "camera": {
+      "name": "相機"
+    },
+    "files": {
+      "name": "文件"
+    },
+    "calculator": {
+      "name": "計算機",
+      "recentResult": "最近的結果"
+    },
+    "terminal": {
+      "name": "終端"
+    },
+    "textEditor": {
+      "name": "文字編輯器"
+    },
+    "softwareStore": {
+      "name": "軟體商店"
+    },
+    "imgview": {
+      "name": "圖片瀏覽器"
+    }
   }
 }

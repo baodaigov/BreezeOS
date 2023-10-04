@@ -156,6 +156,7 @@ export default function Files() {
   const dispatch = useDispatch();
 
   const FilesWindow = () => {
+    const { t } = useTranslation();
     const dispatch = useDispatch();
     const shellTheme = useSelector((state) => state.shell.theme);
     const settings = useSelector((state) => state.settings);
@@ -3798,13 +3799,13 @@ export default function Files() {
             </ActMenuSelector>
           </div>
         </ActMenu>
-        <TopBar title="Files" onDblClick={minimize}>
+        <TopBar title={t("apps.files.name")} onDblClick={minimize}>
           <div className="TabBarWrapper" style={{ width: "100%" }}>
             <div
               className="TabBar"
               style={{ display: "flex", justifyContent: "space-between" }}
             >
-              <div className="TabBarItem">
+              <div className="TabBarItem" style={{ paddingLeft: 0 }}>
                 <div className="TabBarInteraction">
                   <i className="fa-regular fa-chevron-left" />
                   <i className="fa-regular fa-chevron-right" />

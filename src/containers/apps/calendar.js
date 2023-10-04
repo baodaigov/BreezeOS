@@ -124,6 +124,7 @@ export default function Calendar() {
   const dispatch = useDispatch();
 
   const CalendarWindow = () => {
+    const { t } = useTranslation();
     const [min, isMin] = useState(false);
     const shellTheme = useSelector((state) => state.shell.theme);
 
@@ -159,7 +160,7 @@ export default function Calendar() {
 
     return (
       <>
-        <TopBar title="Calendar" onDblClick={minimize}>
+        <TopBar title={t("apps.calendar.name")} onDblClick={minimize}>
           <div className="TabBarWrapper">
             <div className="TabBar">
               <div className="TabBarItem">
