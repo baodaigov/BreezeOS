@@ -51,7 +51,7 @@
       "searchPlaceholder": "Tìm kiếm bằng Bing hoặc nhập địa chỉ...",
       "internetUnabled": "Internet chưa được kích hoạt.",
       "internetUnabledDesc": "Bạn cần kết nối Internet để có thể kết nối tới trang này.",
-      "internatUnabledReload": "Tải lại",
+      "internetUnabledReload": "Tải lại",
       "startupTitle": "Tìm kiếm bằng Bing hoặc nhập địa chỉ hoặc để trống để chuyển hướng đến trang web chính thức của BreezeOS.",
       "settings": {
         "privateMode": "Chế độ riêng tư",
@@ -59,7 +59,16 @@
       }
     },
     "calendar": {
-      "name": "Lịch"
+      "name": "Lịch",
+      "weekDays": {
+        "sunday": "CN",
+        "monday": "T2",
+        "tuesday": "T3",
+        "wednesday": "T4",
+        "thursday": "T5",
+        "friday": "T6",
+        "saturday": "T7"
+      }
     },
     "settings": {
       "name": "Cài đặt"

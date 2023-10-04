@@ -460,7 +460,7 @@ export default function Surface() {
                         <p>{t("apps.surface.internetUnabledDesc")}</p>
                         <div className="ButtonContainer">
                           <button className="Button">
-                            {t("apps.surface.internatUnabledReload")}
+                            {t("apps.surface.internetUnabledReload")}
                           </button>
                         </div>
                       </div>

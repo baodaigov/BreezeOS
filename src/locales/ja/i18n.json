@@ -37,5 +37,57 @@
     "airplaneMode": "機内モード",
     "nightLight": "夜の光",
     "boldText": "太字"
+  },
+  "apps": {
+    "open": "開く",
+    "quit": "やめる",
+    "hide": "隠す",
+    "unhide": "再表示",
+    "surface": {
+      "newTab": "新しいタブ",
+      "newPrivateTab": "新しいプライベート タブ",
+      "turnPrivateOff": "プライベート モードをオフにする",
+      "turnPrivateOn": "プライベート モードをオンにする",
+      "searchPlaceholder": "Bing で検索するか、アドレスを入力してください...",
+      "internetUnabled": "インターネットが有効になっていません。",
+      "internetUnabledDesc": "この Web サイトに接続するには、インターネット接続が必要です。",
+      "internetUnabledReload": "リロード",
+      "startupTitle": "Bing で検索するか、アドレスを入力するか、空白のままにすると、BreezeOS 公式 Web サイトにリダイレクトされます。",
+      "settings": {
+        "privateMode": "プライベートモード",
+        "searchEngine": "検索エンジン"
+      }
+    },
+    "calendar": {
+      "name": "カレンダー"
+    },
+    "settings": {
+      "name": "設定"
+    },
+    "clock": {
+      "name": "時計"
+    },
+    "camera": {
+      "name": "カメラ"
+    },
+    "files": {
+      "name": "ファイル"
+    },
+    "calculator": {
+      "name": "電卓",
+      "recentResult": "最近の結果"
+    },
+    "terminal": {
+      "name": "ターミナル"
+    },
+    "textEditor": {
+      "name": "テキストエディタ"
+    },
+    "softwareStore": {
+      "name": "ソフトウェア"
+    },
+    "imgview": {
+      "name": "画像ビューア"
+    }
   }
 }

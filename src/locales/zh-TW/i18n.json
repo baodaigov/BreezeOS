@@ -51,7 +51,7 @@
       "searchPlaceholder": "使用 Bing 搜尋或輸入地址...",
       "internetUnabled": "網際網路未啟用。",
       "internetUnabledDesc": "您需要網路連線才能連接到該網站。",
-      "internatUnabledReload": "重新載入",
+      "internetUnabledReload": "重新載入",
       "startupTitle": "使用 Bing 搜尋或輸入地址，或留空以重定向至 BreezeOS 官方網站。",
       "settings": {
         "privateMode": "私人模式",

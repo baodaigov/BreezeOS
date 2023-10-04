@@ -37,5 +37,57 @@
     "airplaneMode": "Modalità aereo",
     "nightLight": "Luce notturna",
     "boldText": "Testo grassetto"
+  },
+  "apps": {
+    "open": "Apri",
+    "quit": "Esci",
+    "hide": "Nascondi",
+    "unhide": "Scopri",
+    "surface": {
+      "newTab": "Nuova scheda",
+      "newPrivateTab": "Nuova scheda privata",
+      "turnPrivateOff": "Disattiva la modalità privata",
+      "turnPrivateOn": "Attiva la modalità privata",
+      "searchPlaceholder": "Cerca con Bing o inserisci l'indirizzo...",
+      "internetUnabled": "Internet non è abilitato.",
+      "internetUnabledDesc": "È necessaria una connessione Internet per connettersi a questo sito web.",
+      "internetUnabledReload": "Ricarica",
+      "startupTitle": "Cerca con Bing o inserisci l'indirizzo, oppure lascia vuoto per essere reindirizzato al sito ufficiale di BreezeOS.",
+      "settings": {
+        "privateMode": "Modalità privata",
+        "searchEngine": "Motore di ricerca"
+      }
+    },
+    "calendar": {
+      "name": "Calendario"
+    },
+    "settings": {
+      "name": "Impostazioni"
+    },
+    "clock": {
+      "name": "Orologio"
+    },
+    "camera": {
+      "name": "Fotocamera"
+    },
+    "files": {
+      "name": "File"
+    },
+    "calculator": {
+      "name": "Calcolatrice",
+      "recentResult": "Risultato recente"
+    },
+    "terminal": {
+      "name": "Terminale"
+    },
+    "textEditor": {
+      "name": "Editor di Testo"
+    },
+    "softwareStore": {
+      "name": "Negozio di Software"
+    },
+    "imgview": {
+      "name": "Visualizzatore di Immagini"
+    }
   }
 }

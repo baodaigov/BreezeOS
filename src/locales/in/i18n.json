@@ -37,5 +37,57 @@
     "airplaneMode": "Mode pesawat",
     "nightLight": "Cahaya malam",
     "boldText": "Teks tebal"
+  },
+  "apps": {
+    "open": "Buka",
+    "quit": "Keluar",
+    "hide": "Sembunyikan",
+    "unhide": "Perlihatkan",
+    "surface": {
+      "newTab": "Tab Baru",
+      "newPrivateTab": "Tab Pribadi Baru",
+      "turnPrivateOff": "Matikan mode pribadi",
+      "turnPrivateOn": "Aktifkan mode pribadi",
+      "searchPlaceholder": "Cari dengan Bing atau masukkan alamat...",
+      "internetUnabled": "Internet tidak diaktifkan.",
+      "internetUnabledDesc": "Anda memerlukan koneksi Internet untuk terhubung ke situs web ini.",
+      "internetUnabledReload": "Muat ulang",
+      "startupTitle": "Cari dengan Bing atau masukkan alamat, atau biarkan kosong untuk dialihkan ke situs web resmi BreezeOS.",
+      "settings": {
+        "privateMode": "Mode pribadi",
+        "searchEngine": "Mesin pencari"
+      }
+    },
+    "calendar": {
+      "name": "Kalender"
+    },
+    "settings": {
+      "name": "Pengaturan"
+    },
+    "clock": {
+      "name": "Jam"
+    },
+    "camera": {
+      "name": "Kamera"
+    },
+    "files": {
+      "name": "Files"
+    },
+    "calculator": {
+      "name": "Kalkulator",
+      "recentResult": "Hasil Terbaru"
+    },
+    "terminal": {
+      "name": "Terminal"
+    },
+    "textEditor": {
+      "name": "Editor Teks"
+    },
+    "softwareStore": {
+      "name": "Toko Perangkat Lunak"
+    },
+    "imgview": {
+      "name": "Penampil Gambar"
+    }
   }
 }

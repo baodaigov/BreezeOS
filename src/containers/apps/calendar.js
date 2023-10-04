@@ -128,7 +128,15 @@ export default function Calendar() {
     const [min, isMin] = useState(false);
     const shellTheme = useSelector((state) => state.shell.theme);
 
-    const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const weekDays = [
+      t("apps.calendar.weekDays.sunday"),
+      t("apps.calendar.weekDays.monday"),
+      t("apps.calendar.weekDays.tuesday"),
+      t("apps.calendar.weekDays.wednesday"),
+      t("apps.calendar.weekDays.thursday"),
+      t("apps.calendar.weekDays.friday"),
+      t("apps.calendar.weekDays.saturday"),
+    ];
     const todayObj = dayjs();
 
     const [dayObj, setDayObj] = useState(dayjs());
@@ -142,14 +150,6 @@ export default function Calendar() {
 
     const dayObjOfLast = dayjs(`${thisYear}-${thisMonth + 1}-${daysInMonth}`);
     const weekDayOfLast = dayObjOfLast.day();
-
-    const handlePrev = () => {
-      setDayObj(dayObj.subtract(1, "month"));
-    };
-
-    const handleNext = () => {
-      setDayObj(dayObj.add(1, "month"));
-    };
 
     function minimize() {
       document
@@ -170,7 +170,7 @@ export default function Calendar() {
                 >
                   <i
                     className="fa-regular fa-chevron-left"
-                    onClick={handlePrev}
+                    onClick={() => setDayObj(dayObj.subtract(1, "month"))}
                   />
                 </div>
                 <p>{dayObj.format("MMM DD, YYYY")}</p>
@@ -180,7 +180,7 @@ export default function Calendar() {
                 >
                   <i
                     className="fa-regular fa-chevron-right"
-                    onClick={handleNext}
+                    onClick={() => setDayObj(dayObj.add(1, "month"))}
                   />
                 </div>
               </div>

@@ -37,5 +37,57 @@
     "airplaneMode": "飞行模式",
     "nightLight": "小夜灯",
     "boldText": "加粗字体"
+  },
+  "apps": {
+    "open": "打开",
+    "quit": "辞职",
+    "hide": "隐藏",
+    "unhide": "取消隐藏",
+    "surface": {
+      "newTab": "新标签",
+      "newPrivateTab": "新的私人标签",
+      "turnPrivateOff": "关闭私密模式",
+      "turnPrivateOn": "开启私密模式",
+      "searchPlaceholder": "使用 Bing 搜索或输入地址...",
+      "internetUnabled": "互联网未启用。",
+      "internetUnabledDesc": "您需要互联网连接才能连接到该网站。",
+      "internetUnabledReload": "重新加载",
+      "startupTitle": "使用 Bing 搜索或输入地址，或留空以重定向至 BreezeOS 官方网站。",
+      "settings": {
+        "privateMode": "私人模式",
+        "searchEngine": "搜索引擎"
+      }
+    },
+    "calendar": {
+      "name": "日历"
+    },
+    "settings": {
+      "name": "设置"
+    },
+    "clock": {
+      "name": "钟"
+    },
+    "camera": {
+      "name": "相机"
+    },
+    "files": {
+      "name": "文件"
+    },
+    "calculator": {
+      "name": "计算器",
+      "recentResult": "最近的结果"
+    },
+    "terminal": {
+      "name": "终端"
+    },
+    "textEditor": {
+      "name": "文本编辑器"
+    },
+    "softwareStore": {
+      "name": "软件商店"
+    },
+    "imgview": {
+      "name": "图片浏览器"
+    }
   }
 }

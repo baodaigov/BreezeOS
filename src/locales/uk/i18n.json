@@ -37,5 +37,57 @@
     "airplaneMode": "Авіарежим",
     "nightLight": "Нічне світло",
     "boldText": "Жирний текст"
+  },
+  "apps": {
+    "open": "Відкрити",
+    "quit": "Вийти",
+    "hide": "Приховати",
+    "unhide": "Показати",
+    "surface": {
+      "newTab": "Нова вкладка",
+      "newPrivateTab": "Нова приватна вкладка",
+      "turnPrivateOff": "Вимкнути приватний режим",
+      "turnPrivateOn": "Увімкнути приватний режим",
+      "searchPlaceholder": "Шукати за допомогою Bing або ввести адресу...",
+      "internetUnabled": "Інтернет не ввімкнено.",
+      "internetUnabledDesc": "Вам потрібне підключення до Інтернету, щоб підключитися до цього веб-сайту.",
+      "internetUnabledReload": "Перезавантажити",
+      "startupTitle": "Шукайте за допомогою Bing або введіть адресу, або залиште поле пустим, щоб вас було перенаправлено на офіційний веб-сайт BreezeOS.",
+      "settings": {
+        "privateMode": "Приватний режим",
+        "searchEngine": "Пошукова система"
+      }
+    },
+    "calendar": {
+      "name": "Календар"
+    },
+    "settings": {
+      "name": "Налаштування"
+    },
+    "clock": {
+      "name": "Годинник"
+    },
+    "camera": {
+      "name": "Камера"
+    },
+    "files": {
+      "name": "Файли"
+    },
+    "calculator": {
+      "name": "Калькулятор",
+      "recentResult": "Останній результат"
+    },
+    "terminal": {
+      "name": "Термінал"
+    },
+    "textEditor": {
+      "name": "Текстовий редактор"
+    },
+    "softwareStore": {
+      "name": "Магазин програмного забезпечення"
+    },
+    "imgview": {
+      "name": "Перегляд зображень"
+    }
   }
 }

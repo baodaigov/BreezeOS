@@ -37,5 +37,57 @@
     "airplaneMode": "Авиарежим",
     "nightLight": "Ночной свет",
     "boldText": "Жирный текст"
+  },
+  "apps": {
+    "open": "Открыть",
+    "quit": "Выйти",
+    "hide": "Скрыть",
+    "unhide": "Показать",
+    "surface": {
+      "newTab": "Новая вкладка",
+      "newPrivateTab": "Новая приватная вкладка",
+      "turnPrivateOff": "Отключить приватный режим",
+      "turnPrivateOn": "Включить приватный режим",
+      "searchPlaceholder": "Выполните поиск с помощью Bing или введите адрес...",
+      "internetUnabled": "Интернет не включен.",
+      "internetUnabledDesc": "Чтобы подключиться к этому сайту, вам необходимо подключение к Интернету.",
+      "internetUnabledReload": "Перезагрузить",
+      "startupTitle": "Выполните поиск с помощью Bing или введите адрес или оставьте поле пустым, чтобы перейти на официальный сайт BreezeOS.",
+      "settings": {
+        "privateMode": "Частный режим",
+        "searchEngine": "Поисковая система"
+      }
+    },
+    "calendar": {
+      "name": "Календарь"
+    },
+    "settings": {
+      "name": "Настройки"
+    },
+    "clock": {
+      "name": "Часы"
+    },
+    "camera": {
+      "name": "Камера"
+    },
+    "files": {
+      "name": "Файлы"
+    },
+    "calculator": {
+      "name": "Калькулятор",
+      "recentResult": "Последний результат"
+    },
+    "terminal": {
+      "name": "Терминал"
+    },
+    "textEditor": {
+      "name": "Текстовый редактор"
+    },
+    "softwareStore": {
+      "name": "Магазин программного обеспечения"
+    },
+    "imgview": {
+      "name": "Просмотр изображений"
+    }
   }
 }

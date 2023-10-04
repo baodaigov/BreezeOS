@@ -37,5 +37,57 @@
     "airplaneMode": "비행기 모드",
     "nightLight": "야간 조명",
     "boldText": "굵은 텍스트"
+  },
+  "apps": {
+    "open": "열다",
+    "quit": "종료",
+    "hide": "숨기기",
+    "unhide": "숨기기 해제",
+    "surface": {
+      "newTab": "새 탭",
+      "newPrivateTab": "새 비공개 탭",
+      "turnPrivateOff": "비공개 모드 끄기",
+      "turnPrivateOn": "비공개 모드 켜기",
+      "searchPlaceholder": "Bing으로 검색하거나 주소를 입력하세요...",
+      "internetUnabled": "인터넷이 활성화되어 있지 않습니다.",
+      "internetUnabledDesc": "이 웹사이트에 연결하려면 인터넷 연결이 필요합니다.",
+      "internetUnabledReload": "다시 로드",
+      "startupTitle": "Bing으로 검색하거나 주소를 입력하거나, BreezeOS 공식 웹사이트로 리디렉션되도록 비워 두세요.",
+      "settings": {
+        "privateMode": "비공개 모드",
+        "searchEngine": "검색 엔진"
+      }
+    },
+    "calendar": {
+      "name": "캘린더"
+    },
+    "settings": {
+      "name": "설정"
+    },
+    "clock": {
+      "name": "시계"
+    },
+    "camera": {
+      "name": "카메라"
+    },
+    "files": {
+      "name": "파일"
+    },
+    "calculator": {
+      "name": "계산기",
+      "recentResult": "최근 결과"
+    },
+    "terminal": {
+      "name": "터미널"
+    },
+    "textEditor": {
+      "name": "텍스트 편집기"
+    },
+    "softwareStore": {
+      "name": "소프트웨어 상점"
+    },
+    "imgview": {
+      "name": "이미지 뷰어"
+    }
   }
 }

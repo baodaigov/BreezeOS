@@ -37,5 +37,57 @@
     "airplaneMode": "โหมดเครื่องบิน",
     "nightLight": "แสงกลางคืน",
     "boldText": "ข้อความตัวหนา"
+  },
+  "apps": {
+    "open": "เปิด",
+    "quit": "เลิก",
+    "hide": "ซ่อน",
+    "unhide": "ยกเลิกการซ่อน",
+    "surface": {
+      "newTab": "แท็บใหม่",
+      "newPrivateTab": "แท็บส่วนตัวใหม่",
+      "turnPrivateOff": "ปิดโหมดส่วนตัว",
+      "turnPrivateOn": "เปิดโหมดส่วนตัว",
+      "searchPlaceholder": "ค้นหาด้วย Bing หรือป้อนที่อยู่...",
+      "internetUnabled": "ไม่ได้เปิดใช้งานอินเทอร์เน็ต",
+      "internetUnabledDesc": "คุณต้องเชื่อมต่ออินเทอร์เน็ตเพื่อเชื่อมต่อกับเว็บไซต์นี้",
+      "internetUnabledReload": "โหลดซ้ำ",
+      "startupTitle": "ค้นหาด้วย Bing หรือป้อนที่อยู่ หรือเว้นว่างไว้เพื่อเปลี่ยนเส้นทางไปยังเว็บไซต์อย่างเป็นทางการของ BreezeOS",
+      "settings": {
+        "privateMode": "โหมดส่วนตัว",
+        "searchEngine": "เครื่องมือค้นหา"
+      }
+    },
+    "calendar": {
+      "name": "ปฏิทิน"
+    },
+    "settings": {
+      "name": "การตั้งค่า"
+    },
+    "clock": {
+      "name": "นาฬิกา"
+    },
+    "camera": {
+      "name": "กล้อง"
+    },
+    "files": {
+      "name": "ไฟล์"
+    },
+    "calculator": {
+      "name": "เครื่องคิดเลข",
+      "recentResult": "ผลลัพธ์ล่าสุด"
+    },
+    "terminal": {
+      "name": "เทอร์มินัล"
+    },
+    "textEditor": {
+      "name": "ตัวแก้ไขข้อความ"
+    },
+    "softwareStore": {
+      "name": "ร้านซอฟต์แวร์"
+    },
+    "imgview": {
+      "name": "โปรแกรมดูรูปภาพ"
+    }
   }
 }

@@ -51,7 +51,7 @@
       "searchPlaceholder": "Search with Bing or enter address...",
       "internetUnabled": "Internet is not enabled.",
       "internetUnabledDesc": "You need Internet connection in order to connect to this website.",
-      "internatUnabledReload": "Reload",
+      "internetUnabledReload": "Reload",
       "startupTitle": "Search with Bing or enter address, or leave blank to get redirected to BreezeOS official website.",
       "settings": {
         "privateMode": "Private mode",
@@ -59,7 +59,16 @@
       }
     },
     "calendar": {
-      "name": "Calendar"
+      "name": "Calendar",
+      "weekDays": {
+        "sunday": "Sun",
+        "monday": "Mon",
+        "tuesday": "Tue",
+        "wednesday": "Wed",
+        "thursday": "Thu",
+        "friday": "Fri",
+        "saturday": "Sat"
+      }
     },
     "settings": {
       "name": "Settings"
