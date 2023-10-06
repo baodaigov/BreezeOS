@@ -46,98 +46,102 @@ $fgcolor: #e2e2e2;
       }
     }
 
-    .SaveChanges {
+    .SaveChangesWrapper {
       position: absolute;
+      width: 100%;
+      height: 100%;
       display: flex;
-      flex-direction: column;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      border-radius: 5px;
-      overflow: hidden;
-      z-index: 10000;
+      justify-content: center;
+      align-items: center;
+      transition: none;
       opacity: 0;
       pointer-events: none;
-      transition: none;
-      width: 400px;
-      box-shadow: 0px 0 20px #00000089;
+      z-index: 1;
 
       &.active {
         opacity: 1;
         pointer-events: auto;
       }
 
-      .WindowTopBar {
-        background: $bgcolor;
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-        padding: 7px 10px;
-        display: flex;
-        align-items: center;
-        transition: all ease 0.3s;
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
+      .SaveChanges {
+        border-radius: 5px;
+        overflow: hidden;
+        z-index: 10000;
+        width: 400px;
+        box-shadow: 0px 0 20px #00000089;
 
-        .WindowTopBarTitle {
-          color: $fgcolor;
-          font-size: 12px;
-          margin: 0;
-          width: 100%;
-        }
-
-        .WindowTopBarInteractionContainer {
+        .WindowTopBar {
+          background: $bgcolor;
+          backdrop-filter: blur(15px);
+          -webkit-backdrop-filter: blur(15px);
+          padding: 7px 10px;
           display: flex;
+          align-items: center;
+          transition: all ease 0.3s;
+          border-top-left-radius: 5px;
+          border-top-right-radius: 5px;
 
-          .WindowTopBarInteraction {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-left: 7px;
-            border-radius: 9999px;
-            width: 20px;
-            height: 20px;
-            font-size: 11px;
+          .WindowTopBarTitle {
             color: $fgcolor;
+            font-size: 12px;
+            margin: 0;
+            width: 100%;
+          }
 
-            &:hover {
-              background: #3b3b3f;
-            }
+          .WindowTopBarInteractionContainer {
+            display: flex;
 
-            &.close:hover {
-              background: #ff5252;
+            .WindowTopBarInteraction {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              margin-left: 7px;
+              border-radius: 9999px;
+              width: 20px;
+              height: 20px;
+              font-size: 11px;
+              color: $fgcolor;
+
+              &:hover {
+                background: #3b3b3f;
+              }
+
+              &.close:hover {
+                background: #ff5252;
+              }
             }
           }
         }
-      }
 
-      .WindowBodyDefault {
-        background: $bgcolor;
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-        border-bottom-left-radius: 5px;
-        border-bottom-right-radius: 5px;
-        padding: 10px 15px;
-        color: $fgcolor;
-      }
-
-      .WindowBodyButton {
-        display: flex;
-        flex-direction: row-reverse;
-        margin: 15px 0;
-        margin-bottom: 0;
-
-        .Button {
-          border: none;
-          outline: none;
-          background: #ffffff10;
+        .WindowBodyDefault {
+          background: $bgcolor;
+          backdrop-filter: blur(15px);
+          -webkit-backdrop-filter: blur(15px);
+          border-bottom-left-radius: 5px;
+          border-bottom-right-radius: 5px;
+          padding: 10px 15px;
           color: $fgcolor;
-          font-size: 12px;
-          padding: 7px 20px;
-          border-radius: 5px;
-          margin-left: 5px;
+        }
 
-          &:hover {
-            background: #ffffff20;
+        .WindowBodyButton {
+          display: flex;
+          flex-direction: row-reverse;
+          margin: 15px 0;
+          margin-bottom: 0;
+
+          .Button {
+            border: none;
+            outline: none;
+            background: #ffffff10;
+            color: $fgcolor;
+            font-size: 12px;
+            padding: 7px 20px;
+            border-radius: 5px;
+            margin-left: 5px;
+
+            &:hover {
+              background: #ffffff20;
+            }
           }
         }
       }
@@ -201,92 +205,30 @@ $fgcolor: #e2e2e2;
     width: 100%;
     height: 100%;
     color: $fgcolor;
-    display: flex;
 
     * {
       margin: 0;
     }
 
-    .TextLineNumber {
-      padding: 15px 30px;
-      text-align: center;
-      color: transparentize($fgcolor, 0.65);
-      border-right: 1px solid #ffffff12;
-
-      p {
-        font-family: Cascadia Code;
-        padding-bottom: 9px;
-      }
-    }
-
-    .Textarea {
-      padding: 17px 25px;
+    .TextArea {
       width: 100%;
       height: 100%;
-      transition: none;
-      overflow-y: auto;
+      background-color: transparent;
+      border: none;
+      outline: none;
+      color: $fgcolor;
+      font-size: 16px;
+      padding: 20px;
+      line-height: 1.5;
       resize: none;
-      display: flex;
-      flex-direction: column;
 
-      .TextArea {
-        border: none;
-        outline: none;
-        background: transparent;
-        color: inherit;
-        font-size: 15px;
-        padding-bottom: 10px;
-        font-family: Cascadia Code;
-        transition: none;
+      &::-webkit-scrollbar {
+        width: 4px;
+      }
 
-        * {
-          font-family: Cascadia Code;
-          transition: none;
-        }
-
-        &::selection {
-          background: #60a5fa76;
-          color: inherit;
-        }
-
-        .col1 {
-          color: #f92672;
-        }
-
-        .col1a {
-          color: #66d9ef;
-          font-style: italic;
-        }
-
-        .col2 {
-          color: #e6db74;
-        }
-
-        .col2a {
-          color: #a6e22e;
-        }
-
-        .col3 {
-          color: #ffd700;
-        }
-
-        .col4 {
-          color: #3c3b37;
-        }
-
-        .col4a {
-          color: #a6e22e;
-          text-decoration: underline;
-          text-underline-position: under;
-        }
-
-        .col4b {
-          color: #f92672;
-        }
-
-        .col5 {
-          color: #ae81ff;
-        }
+      &::-webkit-scrollbar-thumb {
+        background-color: $fgcolor;
+        border-radius: 999px;
       }
     }
   }
@@ -358,44 +300,11 @@ $fgcolor: #e2e2e2;
     background: $fgcolor;
     color: $bgcolor;
 
-    .TextLineNumber {
-      color: transparentize($bgcolor, 0.65);
-      border-right: 1px solid #00000012;
-    }
+    .TextArea {
+      color: $bgcolor;
 
-    .Textarea .TextArea {
-      .col1 {
-        color: #0000ff;
-        font-style: normal;
-      }
-
-      .col2 {
-        color: #a31515;
-      }
-
-      .col2a {
-        color: inherit;
-      }
-
-      .col3 {
-        color: #0431fa;
-      }
-
-      .col4 {
-        color: #008000;
-      }
-
-      .col4a {
-        color: inherit;
-        text-decoration: none;
-      }
-
-      .col4b {
-        color: inherit;
-      }
-
-      .col5 {
-        color: #098658;
+      &::-webkit-scrollbar-thumb {
+        background-color: $bgcolor;
       }
     }
   }

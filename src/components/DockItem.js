@@ -51,7 +51,9 @@ export default function DockItem({
             <div className="ContextMenuItemContainer">
               {i.map((j) => (
                 <div
-                  className={`ContextMenuItem ${j.disabled && "disabled"}`}
+                  className={`ContextMenuItem ${j.description && "expand"} ${
+                    j.disabled && "disabled"
+                  }`}
                   onMouseUp={() => setDisplayContextMenu(false)}
                   onClick={j.action}
                 >

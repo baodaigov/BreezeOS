@@ -6,14 +6,13 @@ $fgcolor: #e2e2e2;
     transition: all ease 0.3s;
   }
   .Window .TopBar {
-    padding: 4px 8px;
     .TopBarInteractionContainer {
       display: flex;
     }
   }
 
   .calculator {
-    width: 280px;
+    width: 658px;
     height: 480px;
     transform: scale(0.92);
     opacity: 0;
@@ -32,8 +31,8 @@ $fgcolor: #e2e2e2;
     }
 
     &.minimize {
-      width: 1000px;
-      height: 600px;
+      width: 280px;
+      height: 480px;
     }
   }
 
@@ -43,58 +42,98 @@ $fgcolor: #e2e2e2;
     -webkit-backdrop-filter: blur(15px);
     height: 100%;
     color: $fgcolor;
-    display: flex;
-    flex-direction: column;
 
     * {
       margin: 0;
     }
 
     .CalculatorScreen {
+      padding: 13px 15px;
       width: 100%;
-      height: 120px;
-      font-weight: 700;
-      font-size: 50px;
 
       p {
-        position: absolute;
-        right: 0;
-        margin: 15px;
-        transition: none;
         text-align: right;
+        font-weight: 200;
+        font-size: 54px;
       }
     }
 
-    .CalculatorSection {
-      width: 100%;
-      height: 100%;
-      padding: 0 15px;
+    .CalculatorWrapper {
       display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
+      height: 352px;
 
-      .CalculatorButton {
-        color: $fgcolor;
-        border-radius: 999px;
-        font-size: 20px;
+      .CalculatorSection {
+        width: 100%;
+        height: 100%;
+        padding: 0 15px;
         display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 52px;
-        height: 52px;
+        justify-content: space-between;
+        flex-wrap: wrap;
 
-        &:hover {
-          background: transparentize($fgcolor, 0.95);
-        }
-
-        &.equals {
-          background: #60a5fa;
-          color: $bgcolor;
-          width: 118px;
+        .CalculatorButton {
+          color: $fgcolor;
+          border-radius: 999px;
+          font-size: 20px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 52px;
+          height: 52px;
 
           &:hover {
-            background: lighten(#60a5fa, 5%);
+            background: transparentize($fgcolor, 0.95);
           }
+
+          &.shift {
+            font-size: 16px;
+
+            &.active {
+              background: transparentize($fgcolor, 0.9);
+              transition: none;
+            }
+          }
+
+          &.rad {
+            &.active {
+              background: transparentize($fgcolor, 0.9);
+              transition: none;
+            }
+          }
+
+          &.equals {
+            background: #60a5fa;
+            color: $bgcolor;
+            width: 118px;
+
+            &:hover {
+              background: lighten(#60a5fa, 5%);
+            }
+          }
+        }
+      }
+
+      .CalculatorBasic {
+        display: flex;
+        flex-direction: column;
+        width: 280px;
+        height: 100%;
+      }
+
+      .CalculatorAdvanced {
+        width: 0;
+        height: 0;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        transition: all ease 0.3s;
+        opacity: 0;
+        pointer-events: none;
+
+        &.expand {
+          width: 378px;
+          height: 100%;
+          opacity: 1;
+          pointer-events: auto;
         }
       }
     }

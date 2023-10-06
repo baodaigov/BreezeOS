@@ -37,5 +37,57 @@
     "airplaneMode": "Flugzeug-Modus",
     "nightLight": "Nachtlicht",
     "boldText": "Fetter Text"
+  },
+  "apps": {
+    "open": "Offen",
+    "quit": "Beenden",
+    "hide": "Verstecken",
+    "unhide": "Einblenden",
+    "surface": {
+      "newTab": "Neuer Tab",
+      "newPrivateTab": "Neuer privater Tab",
+      "turnPrivateOff": "Privaten Modus ausschalten",
+      "turnPrivateOn": "Privaten Modus einschalten",
+      "searchPlaceholder": "Mit Bing suchen oder Adresse eingeben…",
+      "internetUnabled": "Internet ist nicht aktiviert.",
+      "internetUnabledDesc": "Sie benötigen eine Internetverbindung, um eine Verbindung zu dieser Website herzustellen.",
+      "internetUnabledReload": "Neu laden",
+      "startupTitle": "Suchen Sie mit Bing oder geben Sie eine Adresse ein oder lassen Sie das Feld leer, um zur offiziellen Website von BreezeOS weitergeleitet zu werden.",
+      "settings": {
+        "privateMode": "Privatmodus",
+        "searchEngine": "Suchmaschine"
+      }
+    },
+    "calendar": {
+      "name": "Kalender"
+    },
+    "settings": {
+      "name": "Einstellungen"
+    },
+    "clock": {
+      "name": "Uhr"
+    },
+    "camera": {
+      "name": "Kamera"
+    },
+    "files": {
+      "name": "Dateien"
+    },
+    "calculator": {
+      "name": "Rechner",
+      "recentResult": "Aktuelles Ergebnis"
+    },
+    "terminal": {
+      "name": "Terminal"
+    },
+    "textEditor": {
+      "name": "Texteditor"
+    },
+    "softwareStore": {
+      "name": "Software-Store"
+    },
+    "imgview": {
+      "name": "Bildbetrachter"
+    }
   }
 }

@@ -143,6 +143,10 @@ $fgcolor: #e2e2e2;
             &.disabled {
               display: none;
             }
+
+            &.expand {
+              height: 36.5px;
+            }
           }
         }
       }

@@ -128,9 +128,19 @@ export default function TextEditor() {
   const TextEditorWindow = () => {
     const { t } = useTranslation();
     const [changes, saveChanges] = useState(true);
+    const isActive = useSelector((state) => state.appsTextEditor.active);
     const [min, isMin] = useState(false);
     const [msgboxChanges, displayMsgBoxChanges] = useState(false);
     const sound1 = new Audio(Sound1);
+    const textAreaRef = useRef(null);
+
+    useEffect(() => {
+      if (isActive) {
+        textAreaRef.current.focus();
+      } else {
+        textAreaRef.current.blur();
+      }
+    }, [isActive]);
 
     function minimize() {
       document
@@ -172,48 +182,50 @@ export default function TextEditor() {
 
     return (
       <>
-        <div className={`SaveChanges ${msgboxChanges ? "active" : ""}`}>
-          <div className="WindowTopBar">
-            <p className="WindowTopBarTitle">Save & Exit</p>
-            <div className="WindowTopBarInteractionContainer">
-              <div
-                className="WindowTopBarInteraction close"
-                onClick={() => displayMsgBoxChanges(false)}
-              >
-                <i className="fa-solid fa-xmark fa-lg" />
+        <div className={`SaveChangesWrapper ${msgboxChanges ? "active" : ""}`}>
+          <div className="SaveChanges">
+            <div className="WindowTopBar">
+              <p className="WindowTopBarTitle">Save & Exit</p>
+              <div className="WindowTopBarInteractionContainer">
+                <div
+                  className="WindowTopBarInteraction close"
+                  onClick={() => displayMsgBoxChanges(false)}
+                >
+                  <i className="fa-solid fa-xmark fa-lg" />
+                </div>
               </div>
             </div>
-          </div>
-          <div className="WindowBodyDefault">
-            <div style={{ display: "flex" }}>
-              <img
-                className="WindowBodyIcon"
-                src="https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/master/src/32/status/dialog-question.svg"
-              />
-              <div className="WindowBodyRight">
-                <p className="WindowBodyTitle">
-                  Save changes to hello.cpp and exit?
-                </p>
+            <div className="WindowBodyDefault">
+              <div style={{ display: "flex" }}>
+                <img
+                  className="WindowBodyIcon"
+                  src="https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/master/src/32/status/dialog-question.svg"
+                />
+                <div className="WindowBodyRight">
+                  <p className="WindowBodyTitle">
+                    Save changes to Untitled-1.txt and exit?
+                  </p>
+                </div>
               </div>
-            </div>
-            <div className="WindowBodyButton">
-              <button
-                className="Button"
-                onClick={() => displayMsgBoxChanges(false)}
-              >
-                Cancel
-              </button>
-              <button className="Button" onClick={dontSaveChangesAndExit}>
-                No
-              </button>
-              <button className="Button" onClick={saveChangesAndExit}>
-                Yes
-              </button>
+              <div className="WindowBodyButton">
+                <button
+                  className="Button"
+                  onClick={() => displayMsgBoxChanges(false)}
+                >
+                  Cancel
+                </button>
+                <button className="Button" onClick={dontSaveChangesAndExit}>
+                  No
+                </button>
+                <button className="Button" onClick={saveChangesAndExit}>
+                  Yes
+                </button>
+              </div>
             </div>
           </div>
         </div>
         <TopBar
-          title={`${changes ? "" : "*"}hello.cpp – ${t(
+          title={`${changes ? "" : "*"}Untitled-1.txt – ${t(
             "apps.textEditor.name"
           )}`}
           onDblClick={minimize}
@@ -229,11 +241,11 @@ export default function TextEditor() {
             >
               <div className="TabBarItem">
                 <div className="TabBarInteraction">
-                  <i className="fa-regular fa-bars" />
+                  <i className="fa-regular fa-gear" />
                 </div>
                 <div
                   className="TabBarInteraction"
-                  style={{ marginLeft: "10px" }}
+                  style={{ marginLeft: "8px" }}
                 >
                   <i className="fa-regular fa-magnifying-glass" />
                 </div>
@@ -261,74 +273,11 @@ export default function TextEditor() {
         </TopBar>
         <WindowBody>
           <div className="TextEditor">
-            <div className="TextLineNumber">
-              <p>1</p>
-              <p>2</p>
-              <p>3</p>
-              <p>4</p>
-              <p>5</p>
-              <p>6</p>
-              <p>7</p>
-            </div>
-            <div className="Textarea" id="textarea">
-              <div
-                className="TextArea"
-                contentEditable={true}
-                spellCheck={false}
-              >
-                <span className="col1">#include</span>&nbsp;
-                <span className="col2">&lt;iostream&gt;</span>
-              </div>
-              <div
-                className="TextArea"
-                contentEditable={true}
-                spellCheck={false}
-              ></div>
-              <div
-                className="TextArea"
-                contentEditable={true}
-                spellCheck={false}
-              >
-                <span className="col1 col1a">int</span>&nbsp;
-                <span className="col2a">main</span>
-                <span className="col3">&#40;&#41;&#123;</span>
-              </div>
-              <div
-                className="TextArea"
-                contentEditable={true}
-                spellCheck={false}
-              >
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <span className="col4">// This is a comment</span>
-              </div>
-              <div
-                className="TextArea"
-                contentEditable={true}
-                spellCheck={false}
-              >
-                &nbsp;&nbsp;&nbsp;&nbsp;<span className="col4a">std</span>
-                ::cout&nbsp;<span className="col4b">&lt;&lt;</span>&nbsp;
-                <span className="col2">"Welcome to BreezeOS!"</span>&nbsp;
-                <span className="col4b">&lt;&lt;</span>&nbsp;
-                <span className="col4a">std</span>::endl;
-              </div>
-              <div
-                className="TextArea"
-                contentEditable={true}
-                spellCheck={false}
-              >
-                &nbsp;&nbsp;&nbsp;&nbsp;<span className="col1">return</span>
-                &nbsp;<span className="col5">0</span>;
-              </div>
-              <div
-                className="TextArea"
-                contentEditable={true}
-                spellCheck={false}
-                style={{ height: "100%" }}
-              >
-                <span className="col3">&#125;</span>
-              </div>
-            </div>
+            <textarea
+              className="TextArea"
+              spellCheck={false}
+              ref={textAreaRef}
+            />
           </div>
         </WindowBody>
       </>
