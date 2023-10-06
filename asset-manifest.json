@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/BreezeOS/static/css/main.1207c4fe.css",
-    "main.js": "/BreezeOS/static/js/main.ab59c915.js",
+    "main.css": "/BreezeOS/static/css/main.88d21dd1.css",
+    "main.js": "/BreezeOS/static/js/main.924190a6.js",
     "static/media/dark.png": "/BreezeOS/static/media/dark.6234c8ee9fb7421f25c8.png",
     "static/media/52496.jpg": "/BreezeOS/static/media/52496.d0aca8ed79fb92a3f932.jpg",
     "static/media/52791.jpg": "/BreezeOS/static/media/52791.2a35203ad57d4fa40bb5.jpg",
@@ -11,8 +11,6 @@
     "static/media/52544.jpg": "/BreezeOS/static/media/52544.6d2fe04c10abd791ddb4.jpg",
     "static/media/Screenshot from 2022-09-10 20-41-45.png": "/BreezeOS/static/media/Screenshot from 2022-09-10 20-41-45.a9dd0dd0adcef52a8203.png",
     "static/media/mixkit-clock-countdown-bleeps-916_Bq9La32i.wav": "/BreezeOS/static/media/mixkit-clock-countdown-bleeps-916_Bq9La32i.5fb91f472e300e055c3f.wav",
-    "static/media/logo-d.png": "/BreezeOS/static/media/logo-d.99175ccae1cd34a7c319.png",
-    "static/media/logo-l.png": "/BreezeOS/static/media/logo-l.ac02b99fc4a555d75f8b.png",
     "static/media/JetBrainsMono-Bold.woff2": "/BreezeOS/static/media/JetBrainsMono-Bold.75885bf04057d4697ae5.woff2",
     "static/media/JetBrainsMono-Light.woff2": "/BreezeOS/static/media/JetBrainsMono-Light.9427af7e275ab9f115cf.woff2",
     "static/media/JetBrainsMono-Medium.woff2": "/BreezeOS/static/media/JetBrainsMono-Medium.065ee491488865d52b60.woff2",
@@ -28,6 +26,8 @@
     "static/media/Oxygen-Sys-App-Error-Critical.mp3": "/BreezeOS/static/media/Oxygen-Sys-App-Error-Critical.7cb1c49a51ddd753fad6.mp3",
     "static/media/RS700.woff2": "/BreezeOS/static/media/RS700.d24eb651efabc5d72a9c.woff2",
     "static/media/BreezeOS-WiFi.png": "/BreezeOS/static/media/BreezeOS-WiFi.b8315658038bd479afdc.png",
+    "static/media/logo-d.png": "/BreezeOS/static/media/logo-d.7168ef8d20b045fbd20a.png",
+    "static/media/logo-l.png": "/BreezeOS/static/media/logo-l.d56827317eae4460c093.png",
     "static/media/favicon.ico": "/BreezeOS/static/media/favicon.d7d92c5cee20556182aa.ico",
     "static/media/Oxygen-Sys-Special.mp3": "/BreezeOS/static/media/Oxygen-Sys-Special.a1b6fcd2784a78d37e48.mp3",
     "static/media/camera_shutter.mp3": "/BreezeOS/static/media/camera_shutter.51584e05de2aa9b91978.mp3",
@@ -35,11 +35,11 @@
     "static/media/surface.svg": "/BreezeOS/static/media/surface.b74420142de514461d723e4a737e5710.svg",
     "index.html": "/BreezeOS/index.html",
     "static/media/getFetch.cjs": "/BreezeOS/static/media/getFetch.40f37ddea2378391108f.cjs",
-    "main.1207c4fe.css.map": "/BreezeOS/static/css/main.1207c4fe.css.map",
-    "main.ab59c915.js.map": "/BreezeOS/static/js/main.ab59c915.js.map"
+    "main.88d21dd1.css.map": "/BreezeOS/static/css/main.88d21dd1.css.map",
+    "main.924190a6.js.map": "/BreezeOS/static/js/main.924190a6.js.map"
   },
   "entrypoints": [
-    "static/css/main.1207c4fe.css",
-    "static/js/main.ab59c915.js"
+    "static/css/main.88d21dd1.css",
+    "static/js/main.924190a6.js"
   ]
 }
