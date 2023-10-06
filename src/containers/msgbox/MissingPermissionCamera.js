@@ -11,7 +11,7 @@ import { setActive } from "../../reducers/apps/settings";
 
 export default function MissingPermissionCamera() {
   const dispatch = useDispatch();
-  const [isActive, setIsActive] = useState(false);
+  const [isActive, setIsActive] = useState(true);
 
   return (
     <Draggable handle=".TopBar">

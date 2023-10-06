@@ -19,17 +19,17 @@ $fgcolor: #e2e2e2;
   }
 
   .texteditor {
-    width: 93vw;
-    height: 93%;
+    width: 100vw;
+    height: 100%;
+    transform: scale(0.92);
     opacity: 0;
     pointer-events: none;
     transition: all ease 0.3s;
 
     &.active {
+      transform: scale(1);
       opacity: 1;
       pointer-events: auto;
-      width: 100vw;
-      height: 100%;
     }
 
     &.hide {
@@ -118,20 +118,6 @@ $fgcolor: #e2e2e2;
         border-bottom-right-radius: 5px;
         padding: 10px 15px;
         color: $fgcolor;
-
-        * {
-          margin: 0;
-        }
-
-        .WindowBodyTitle {
-          font-size: 17px;
-          margin-bottom: 10px;
-          font-weight: 700;
-        }
-
-        .WindowBodyContent {
-          font-size: 12px;
-        }
       }
 
       .WindowBodyButton {

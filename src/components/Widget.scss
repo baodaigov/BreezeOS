@@ -4,6 +4,7 @@
     right: 15px;
     display: flex;
     flex-direction: column;
+    pointer-events: none;
 
     & > * {margin-bottom:20px}
 }

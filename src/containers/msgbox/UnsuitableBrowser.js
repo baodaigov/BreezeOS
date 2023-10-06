@@ -26,7 +26,7 @@ export default function UnsuitableBrowser() {
   return (
     <Draggable handle=".TopBar">
       <div
-        className={`Window UnsuitableBrowser ${isActive ? "isActive" : ""}`}
+        className={`Window UnsuitableBrowser ${isActive && "active"}`}
         style={{ width: "550px" }}
         key={Math.random()}
       >

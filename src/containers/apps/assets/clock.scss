@@ -7,17 +7,17 @@ $fgcolor: #e2e2e2;
   }
 
   .clock {
-    width: 93vw;
-    height: 93%;
+    width: 100vw;
+    height: 100%;
+    transform: scale(0.92);
     opacity: 0;
     pointer-events: none;
     transition: all ease 0.3s;
 
     &.active {
+      transform: scale(1);
       opacity: 1;
       pointer-events: auto;
-      width: 100vw;
-      height: 100%;
     }
 
     &.hide {

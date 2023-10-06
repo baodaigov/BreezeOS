@@ -1,10 +1,16 @@
 import { useSelector } from "react-redux";
 import "./Window.scss";
 
-export default function WindowBodyDefault(props) {
+export default function WindowBodyDefault({
+  type,
+  icon,
+  title,
+  content,
+  children,
+}) {
   const shellTheme = useSelector((state) => state.shell.theme);
 
-  switch (props.type) {
+  switch (type) {
     case "critical":
       return (
         <div
@@ -13,15 +19,16 @@ export default function WindowBodyDefault(props) {
           }}`}
         >
           <div style={{ display: "flex" }}>
-            <div className="WindowBodyIcon critical">
-              <i className="fa-regular fa-xmark" />
-            </div>
-            <div className="WindowBodyRight" style={{ marginLeft: "10px" }}>
-              <p className="WindowBodyTitle">{props.title}</p>
-              <p className="WindowBodyContent">{props.content}</p>
+            <img
+              className="WindowBodyIcon"
+              src="https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/master/src/32/status/dialog-error.svg"
+            />
+            <div className="WindowBodyRight">
+              <p className="WindowBodyTitle">{title}</p>
+              <p className="WindowBodyContent">{content}</p>
             </div>
           </div>
-          {props.children}
+          {children}
         </div>
       );
     case "exclamation":
@@ -32,15 +39,16 @@ export default function WindowBodyDefault(props) {
           }`}
         >
           <div style={{ display: "flex" }}>
-            <div className="WindowBodyIcon exclamation">
-              <i className="fa-solid fa-exclamation" />
-            </div>
-            <div className="WindowBodyRight" style={{ marginLeft: "10px" }}>
-              <p className="WindowBodyTitle">{props.title}</p>
-              <p className="WindowBodyContent">{props.content}</p>
+            <img
+              className="WindowBodyIcon"
+              src="https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/master/src/32/status/dialog-warning.svg"
+            />
+            <div className="WindowBodyRight">
+              <p className="WindowBodyTitle">{title}</p>
+              <p className="WindowBodyContent">{content}</p>
             </div>
           </div>
-          {props.children}
+          {children}
         </div>
       );
     default:
@@ -51,15 +59,13 @@ export default function WindowBodyDefault(props) {
           }`}
         >
           <div style={{ display: "flex" }}>
-            <div className="WindowBodyIcon">
-              <i className={`fa-regular ${props.icon}`} />
-            </div>
-            <div className="WindowBodyRight" style={{ marginLeft: "10px" }}>
-              <p className="WindowBodyTitle">{props.title}</p>
-              <p className="WindowBodyContent">{props.content}</p>
+            <img className="WindowBodyIcon" src={icon} />
+            <div className="WindowBodyRight">
+              <p className="WindowBodyTitle">{title}</p>
+              <p className="WindowBodyContent">{content}</p>
             </div>
           </div>
-          {props.children}
+          {children}
         </div>
       );
   }

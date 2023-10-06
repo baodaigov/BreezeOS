@@ -185,9 +185,17 @@ export default function TextEditor() {
             </div>
           </div>
           <div className="WindowBodyDefault">
-            <p className="WindowBodyContent">
-              Save changes to hello.cpp and exit?
-            </p>
+            <div style={{ display: "flex" }}>
+              <img
+                className="WindowBodyIcon"
+                src="https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/master/src/32/status/dialog-question.svg"
+              />
+              <div className="WindowBodyRight">
+                <p className="WindowBodyTitle">
+                  Save changes to hello.cpp and exit?
+                </p>
+              </div>
+            </div>
             <div className="WindowBodyButton">
               <button
                 className="Button"

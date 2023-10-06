@@ -5,9 +5,11 @@ $fgcolor: #e2e2e2;
   position: absolute;
   display: flex;
   flex-direction: column;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
   border-radius: 6px;
   box-shadow: 0px 0 15px 0 transparentize($bgcolor, 0.2);
   overflow: hidden;
@@ -152,37 +154,26 @@ $fgcolor: #e2e2e2;
       margin: 0;
     }
 
-    .critical {
-      height: 25px;
-      width: 25px;
-      background: #ff6161;
-      border-radius: 999px;
-      font-size: 18px;
+    .WindowBodyIcon {
+      width: 32px;
+      height: 32px;
+    }
+
+    .WindowBodyRight {
+      margin-left: 10px;
       display: flex;
+      flex-direction: column;
       justify-content: center;
-      align-items: center;
-    }
 
-    .exclamation {
-      height: 25px;
-      width: 25px;
-      background: #fcff61;
-      color: #212121;
-      border-radius: 999px;
-      font-size: 15px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+      .WindowBodyTitle {
+        font-size: 17px;
+        font-weight: 700;
+      }
 
-    .WindowBodyTitle {
-      font-size: 17px;
-      margin-bottom: 10px;
-      font-weight: 700;
-    }
-
-    .WindowBodyContent {
-      font-size: 12px;
+      .WindowBodyContent {
+        font-size: 12px;
+        margin-top: 10px;
+      }
     }
 
     &.whitesur {
@@ -206,9 +197,9 @@ $fgcolor: #e2e2e2;
       background: #ffffff10;
       color: $fgcolor;
       font-size: 12px;
-      padding: 7px 20px;
+      padding: 7px 18px;
       border-radius: 5px;
-      margin-left: 5px;
+      margin-left: 6px;
 
       &:hover {
         background: #ffffff20;
@@ -220,9 +211,11 @@ $fgcolor: #e2e2e2;
 .WindowDefaultContainer {
   .Window {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
   }
 }
 
@@ -256,10 +249,6 @@ $fgcolor: #e2e2e2;
   .WindowBodyDefault {
     background: $fgcolor;
     color: $bgcolor;
-
-    .critical {
-      color: #212121;
-    }
 
     .WindowBodyButton .Button {
       background: #00000010;
