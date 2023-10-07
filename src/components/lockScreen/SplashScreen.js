@@ -15,6 +15,7 @@ import useCountdown from "../../hooks/useCountdown";
 import { setHeaderActive, setHeaderHide } from "../../reducers/header";
 import { setDockActive, setDockHide } from "../../reducers/dock";
 import { pushItem, clearItem } from "../../reducers/shutdown";
+import LogoD from "../../images/logo-d.svg";
 import ActMenu, { ActMenuSelector } from "../utils/menu/index";
 import { setAllowSwitchWorkspace } from "../../reducers/wallpaper";
 import useTime from "../../hooks/useTime";
@@ -213,7 +214,7 @@ export default function SplashScreen() {
       dispatch(
         pushItem(
           <div className="BootSplash">
-            <p className="font-bold">BreezeOS</p>
+            <img src={LogoD} width={431} height={240} />
           </div>
         )
       );
@@ -263,7 +264,7 @@ export default function SplashScreen() {
       dispatch(
         pushItem(
           <div className="BootSplash">
-            <p className="font-bold">BreezeOS</p>
+            <img src={LogoD} width={431} height={240} />
           </div>
         )
       );

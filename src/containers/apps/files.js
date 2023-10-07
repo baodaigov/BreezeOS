@@ -14,8 +14,8 @@ import Image1 from "./assets/Screenshot from 2022-09-10 20-41-45.png";
 import Image2 from "./assets/favicon.ico";
 import Image3 from "./assets/dark.png";
 import Image4 from "./assets/light.png";
-import Image5 from "./assets/logo-d.png";
-import Image6 from "./assets/logo-l.png";
+import Image5 from "../../images/logo-d.svg";
+import Image6 from "../../images/logo-l.svg";
 import { setHeaderHide } from "../../reducers/header";
 import { useTranslation } from "react-i18next";
 
@@ -1440,7 +1440,7 @@ export default function Files() {
               <div
                 className="FilesItem"
                 onDoubleClick={() =>
-                  openPicture("/usr/share/pixmaps/logo-d.png", Image5)
+                  openPicture("/usr/share/pixmaps/logo-d.svg", Image5)
                 }
               >
                 <img
@@ -1449,12 +1449,12 @@ export default function Files() {
                   width="auto"
                   height={iconSize}
                 />
-                <p className="FilesName">logo-d.png</p>
+                <p className="FilesName">logo-d.svg</p>
               </div>
               <div
                 className="FilesItem"
                 onDoubleClick={() =>
-                  openPicture("/usr/share/pixmaps/logo-l.png", Image6)
+                  openPicture("/usr/share/pixmaps/logo-l.svg", Image6)
                 }
               >
                 <img
@@ -1463,7 +1463,7 @@ export default function Files() {
                   width="auto"
                   height={iconSize}
                 />
-                <p className="FilesName">logo-l.png</p>
+                <p className="FilesName">logo-l.svg</p>
               </div>
             </div>
           );

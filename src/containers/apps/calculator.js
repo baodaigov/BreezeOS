@@ -431,6 +431,42 @@ export default function Calculator() {
       });
     };
 
+    const arcsinClickHandler = () => {
+      let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
+      let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
+
+      setCalc({
+        ...calc,
+        num: isRad ? Math.asin(num) : Math.asin(num * (Math.PI / 180)),
+        res: isRad ? Math.asin(res) : Math.asin(res * (Math.PI / 180)),
+        sign: "",
+      });
+    };
+
+    const arccosClickHandler = () => {
+      let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
+      let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
+
+      setCalc({
+        ...calc,
+        num: isRad ? Math.acos(num) : Math.acos(num * (Math.PI / 180)),
+        res: isRad ? Math.acos(res) : Math.acos(res * (Math.PI / 180)),
+        sign: "",
+      });
+    };
+
+    const arctanClickHandler = () => {
+      let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
+      let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
+
+      setCalc({
+        ...calc,
+        num: isRad ? Math.atan(num) : Math.atan(num * (Math.PI / 180)),
+        res: isRad ? Math.atan(res) : Math.atan(res * (Math.PI / 180)),
+        sign: "",
+      });
+    };
+
     const sinhClickHandler = () => {
       let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
       let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
@@ -463,6 +499,42 @@ export default function Calculator() {
         ...calc,
         num: Math.tanh(num),
         res: Math.tanh(res),
+        sign: "",
+      });
+    };
+
+    const arcsinhClickHandler = () => {
+      let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
+      let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
+
+      setCalc({
+        ...calc,
+        num: Math.asinh(num),
+        res: Math.asinh(res),
+        sign: "",
+      });
+    };
+
+    const arccoshClickHandler = () => {
+      let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
+      let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
+
+      setCalc({
+        ...calc,
+        num: Math.acosh(num),
+        res: Math.acosh(res),
+        sign: "",
+      });
+    };
+
+    const arctanhClickHandler = () => {
+      let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
+      let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
+
+      setCalc({
+        ...calc,
+        num: Math.atanh(num),
+        res: Math.atanh(res),
         sign: "",
       });
     };
@@ -597,6 +669,18 @@ export default function Calculator() {
                             ? coshClickHandler
                             : btn === "tanh"
                             ? tanhClickHandler
+                            : btn === "sin⁻¹"
+                            ? arcsinClickHandler
+                            : btn === "cos⁻¹"
+                            ? arccosClickHandler
+                            : btn === "tan⁻¹"
+                            ? arctanClickHandler
+                            : btn === "sinh⁻¹"
+                            ? arcsinhClickHandler
+                            : btn === "cosh⁻¹"
+                            ? arccoshClickHandler
+                            : btn === "tanh⁻¹"
+                            ? arctanhClickHandler
                             : btn === "e"
                             ? equationClickHandler
                             : btn === "x!"
