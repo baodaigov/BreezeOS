@@ -49,7 +49,8 @@ import W3 from "../../components/52496.jpg";
 import W4 from "../../components/52791.jpg";
 import W5 from "../../components/52532.jpg";
 import W6 from "../../components/52544.jpg";
-import Wifi1 from "./assets/BreezeOS-WiFi.png";
+import QRD from "./assets/qr-d.png";
+import QRL from "./assets/qr-l.png";
 import { changeShell } from "../../reducers/shell";
 import {
   setHeaderActive,
@@ -1874,7 +1875,11 @@ export default function Settings() {
                   <p style={{ marginBottom: "30px" }} className="font-bold">
                     BreezeOS
                   </p>
-                  <img width="auto" height={300} src={Wifi1} />
+                  {settingsReducer.themeLight ? (
+                    <img width="auto" height={300} src={QRL} />
+                  ) : (
+                    <img width="auto" height={300} src={QRD} />
+                  )}
                 </div>
               </div>
             </div>
