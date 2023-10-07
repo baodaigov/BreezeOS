@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/BreezeOS/static/css/main.a33a8e1b.css",
-    "main.js": "/BreezeOS/static/js/main.e57052c9.js",
+    "main.js": "/BreezeOS/static/js/main.bcde99d0.js",
     "static/media/dark.png": "/BreezeOS/static/media/dark.6234c8ee9fb7421f25c8.png",
     "static/media/52496.jpg": "/BreezeOS/static/media/52496.d0aca8ed79fb92a3f932.jpg",
     "static/media/52791.jpg": "/BreezeOS/static/media/52791.2a35203ad57d4fa40bb5.jpg",
@@ -37,10 +37,10 @@
     "index.html": "/BreezeOS/index.html",
     "static/media/getFetch.cjs": "/BreezeOS/static/media/getFetch.40f37ddea2378391108f.cjs",
     "main.a33a8e1b.css.map": "/BreezeOS/static/css/main.a33a8e1b.css.map",
-    "main.e57052c9.js.map": "/BreezeOS/static/js/main.e57052c9.js.map"
+    "main.bcde99d0.js.map": "/BreezeOS/static/js/main.bcde99d0.js.map"
   },
   "entrypoints": [
     "static/css/main.a33a8e1b.css",
-    "static/js/main.e57052c9.js"
+    "static/js/main.bcde99d0.js"
   ]
 }
