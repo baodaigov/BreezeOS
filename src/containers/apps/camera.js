@@ -543,7 +543,6 @@ export default function Camera() {
                       <div
                         className="CameraButton"
                         onClick={() => displayMsgboxDelete(true)}
-                        onDoubleClick={deleteImage}
                       >
                         <p>Delete</p>
                       </div>
