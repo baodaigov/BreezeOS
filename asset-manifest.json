@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/BreezeOS/static/css/main.a45e3135.css",
-    "main.js": "/BreezeOS/static/js/main.300754e4.js",
+    "main.js": "/BreezeOS/static/js/main.ba8d707f.js",
     "static/media/dark.png": "/BreezeOS/static/media/dark.6234c8ee9fb7421f25c8.png",
     "static/media/52496.jpg": "/BreezeOS/static/media/52496.d0aca8ed79fb92a3f932.jpg",
     "static/media/52791.jpg": "/BreezeOS/static/media/52791.2a35203ad57d4fa40bb5.jpg",
@@ -25,7 +25,8 @@
     "static/media/default.jpg": "/BreezeOS/static/media/default.557ec81467de22ddd91a.jpg",
     "static/media/Oxygen-Sys-App-Error-Critical.mp3": "/BreezeOS/static/media/Oxygen-Sys-App-Error-Critical.7cb1c49a51ddd753fad6.mp3",
     "static/media/RS700.woff2": "/BreezeOS/static/media/RS700.d24eb651efabc5d72a9c.woff2",
-    "static/media/BreezeOS-WiFi.png": "/BreezeOS/static/media/BreezeOS-WiFi.b8315658038bd479afdc.png",
+    "static/media/qr-d.png": "/BreezeOS/static/media/qr-d.a60380cad24bc76f9dde.png",
+    "static/media/qr-l.png": "/BreezeOS/static/media/qr-l.791a5e4a35d8e931c86a.png",
     "static/media/favicon.ico": "/BreezeOS/static/media/favicon.d7d92c5cee20556182aa.ico",
     "static/media/Oxygen-Sys-Special.mp3": "/BreezeOS/static/media/Oxygen-Sys-Special.a1b6fcd2784a78d37e48.mp3",
     "static/media/camera_shutter.mp3": "/BreezeOS/static/media/camera_shutter.51584e05de2aa9b91978.mp3",
@@ -36,10 +37,10 @@
     "index.html": "/BreezeOS/index.html",
     "static/media/getFetch.cjs": "/BreezeOS/static/media/getFetch.40f37ddea2378391108f.cjs",
     "main.a45e3135.css.map": "/BreezeOS/static/css/main.a45e3135.css.map",
-    "main.300754e4.js.map": "/BreezeOS/static/js/main.300754e4.js.map"
+    "main.ba8d707f.js.map": "/BreezeOS/static/js/main.ba8d707f.js.map"
   },
   "entrypoints": [
     "static/css/main.a45e3135.css",
-    "static/js/main.300754e4.js"
+    "static/js/main.ba8d707f.js"
   ]
 }
