@@ -126,6 +126,7 @@ export default function Camera() {
     const [interaction, disableInteraction] = useState("capturing");
     const [img, setImg] = useState(null);
     const [audio, setAudio] = useState(false);
+    const imageRef = useRef(null);
     var countdownSound = new Audio(CountdownSound);
     var cameraShutter = new Audio(CameraShutter);
     const videoConstraints = {
@@ -395,49 +396,71 @@ export default function Camera() {
     return (
       <>
         <div
-          className={`ImageInformation ${
+          className={`ImageInformationWrapper ${
             imageInformationMsgbox ? "active" : ""
           }`}
         >
-          <div className="WindowTopBar">
-            <div className="WindowTopBarInteractionContainer">
-              <div
-                className="WindowTopBarInteraction close"
-                onClick={closeMsgBoxDelete}
-              >
-                <i className="fa-solid fa-xmark fa-lg" />
+          <div className="ImageInformation">
+            <div className="WindowTopBar">
+              <p className="WindowTopBarTitle">Image information</p>
+              <div className="WindowTopBarInteractionContainer">
+                <div
+                  className="WindowTopBarInteraction close"
+                  onClick={closeMsgBoxDelete}
+                >
+                  <i className="fa-solid fa-xmark fa-lg" />
+                </div>
               </div>
             </div>
-          </div>
-          <div className="WindowBodyDefault">
-            <div className="WindowBodyContent">
-              <div style={{ display: "flex", flexDirection: "column" }}></div>
+            <div className="WindowBodyDefault">
+              <div className="WindowBodyContent">
+                <p className="ImageTitle">Picture_{Date.now()}.png</p>
+                <p>
+                  Intrinsic size: {imageRef.current?.naturalWidth} ×{" "}
+                  {imageRef.current?.naturalHeight}px
+                </p>
+              </div>
             </div>
           </div>
         </div>
         <div
-          className={`PermanentlyDeleteMedia ${msgboxDelete ? "active" : ""}`}
+          className={`PermanentlyDeleteMediaWrapper ${
+            msgboxDelete ? "active" : ""
+          }`}
         >
-          <div className="WindowTopBar">
-            <p className="WindowTopBarTitle">Delete this image?</p>
-            <div className="WindowTopBarInteractionContainer">
-              <div
-                className="WindowTopBarInteraction close"
-                onClick={closeMsgBoxDelete}
-              >
-                <i className="fa-solid fa-xmark fa-lg" />
+          <div className="PermanentlyDeleteMedia">
+            <div className="WindowTopBar">
+              <p className="WindowTopBarTitle"></p>
+              <div className="WindowTopBarInteractionContainer">
+                <div
+                  className="WindowTopBarInteraction close"
+                  onClick={closeMsgBoxDelete}
+                >
+                  <i className="fa-solid fa-xmark fa-lg" />
+                </div>
               </div>
             </div>
-          </div>
-          <div className="WindowBodyDefault">
-            <p className="WindowBodyContent">This action is irreversible!</p>
-            <div className="WindowBodyButton">
-              <button className="Button" onClick={closeMsgBoxDelete}>
-                No
-              </button>
-              <button className="Button" onClick={deleteImage}>
-                Yes
-              </button>
+            <div className="WindowBodyDefault">
+              <div style={{ display: "flex" }}>
+                <img
+                  className="WindowBodyIcon"
+                  src="https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/master/src/32/status/dialog-question.svg"
+                />
+                <div className="WindowBodyRight">
+                  <p className="WindowBodyTitle">Delete this image?</p>
+                  <p className="WindowBodyContent">
+                    This action is irreversible!
+                  </p>
+                </div>
+              </div>
+              <div className="WindowBodyButton">
+                <button className="Button" onClick={closeMsgBoxDelete}>
+                  No
+                </button>
+                <button className="Button" onClick={deleteImage}>
+                  Yes
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -446,35 +469,29 @@ export default function Camera() {
           className={settingsMenu ? "active" : ""}
           ref={settingsMenuRef}
         >
-          {countdown ? (
-            <ActMenuSelector
-              title="Camera countdown"
-              active
-              onClick={displayCountdown}
-            ></ActMenuSelector>
-          ) : (
-            <ActMenuSelector
-              title="Camera countdown"
-              onClick={displayCountdown}
-            ></ActMenuSelector>
-          )}
-          {audio ? (
-            <ActMenuSelector
-              title="Enable sounds"
-              active
-              onClick={toggleSounds}
-            ></ActMenuSelector>
-          ) : (
-            <ActMenuSelector
-              title="Enable sounds"
-              onClick={toggleSounds}
-            ></ActMenuSelector>
-          )}
+          <ActMenuSelector
+            title="Camera countdown"
+            active={countdown}
+            onClick={displayCountdown}
+          ></ActMenuSelector>
+          <ActMenuSelector
+            title="Enable sounds"
+            active={audio}
+            onClick={toggleSounds}
+          ></ActMenuSelector>
         </ActMenu>
         <TopBar title={t("apps.camera.name")} onDblClick={minimize}>
-          <div className="TabBarWrapper" style={{ width: "100%" }}>
+          <div className="TabBarWrapper">
             <div className="TabBar" style={{ display: "block" }}>
               <div className="TabBarItem" style={{ float: "right" }}>
+                {viewMedia && img != null && (
+                  <div className="TabBarInteraction">
+                    <i
+                      className="fa-regular fa-circle-info"
+                      onClick={() => displayImageInformationMsgbox(true)}
+                    />
+                  </div>
+                )}
                 <div className="TabBarInteraction">
                   <i
                     className="fa-regular fa-gear"
@@ -501,7 +518,7 @@ export default function Camera() {
                 {img != null ? (
                   <>
                     <div className="CameraMediaImg">
-                      <img src={img} alt="screenshot" />
+                      <img src={img} alt="screenshot" ref={imageRef} />
                     </div>
                   </>
                 ) : (

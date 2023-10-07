@@ -7,9 +7,9 @@ $fgcolor: #e2e2e2;
   }
   .Window .TopBar {
     padding: 4px 8px;
+    justify-content: space-between;
     .TopBarInteractionContainer {
       display: flex;
-      width: 100vw;
       justify-content: space-between;
       align-items: center;
     }
@@ -42,200 +42,107 @@ $fgcolor: #e2e2e2;
       height: 90%;
     }
 
-    .PermanentlyDeleteMedia {
+    .PermanentlyDeleteMediaWrapper,
+    .ImageInformationWrapper {
       position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
       display: flex;
-      flex-direction: column;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      border-radius: 5px;
-      overflow: hidden;
-      z-index: 10000;
+      justify-content: center;
+      align-items: center;
       opacity: 0;
       pointer-events: none;
       transition: none;
-      width: 400px;
-      box-shadow: 0px 0 20px #00000089;
 
       &.active {
         opacity: 1;
         pointer-events: auto;
       }
 
-      .WindowTopBar {
-        background: $bgcolor;
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-        padding: 7px 10px;
+      .PermanentlyDeleteMedia,
+      .ImageInformation {
         display: flex;
-        align-items: center;
-        transition: all ease 0.3s;
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
+        flex-direction: column;
+        border-radius: 5px;
+        overflow: hidden;
+        z-index: 10000;
+        width: 400px;
+        box-shadow: 0px 0 20px #00000089;
 
-        .WindowTopBarTitle {
-          color: $fgcolor;
-          font-size: 12px;
-          margin: 0;
-          width: 100%;
-        }
-
-        .WindowTopBarInteractionContainer {
+        .WindowTopBar {
+          background: $bgcolor;
+          backdrop-filter: blur(15px);
+          -webkit-backdrop-filter: blur(15px);
+          padding: 7px 10px;
           display: flex;
+          align-items: center;
+          transition: all ease 0.3s;
+          border-top-left-radius: 5px;
+          border-top-right-radius: 5px;
 
-          .WindowTopBarInteraction {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-left: 7px;
-            border-radius: 9999px;
-            width: 20px;
-            height: 20px;
-            font-size: 11px;
+          .WindowTopBarTitle {
             color: $fgcolor;
+            font-size: 12px;
+            margin: 0;
+            width: 100%;
+          }
 
-            &:hover {
-              background: #3b3b3f;
-            }
+          .WindowTopBarInteractionContainer {
+            display: flex;
 
-            &.close:hover {
-              background: #ff5252;
+            .WindowTopBarInteraction {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              margin-left: 7px;
+              border-radius: 9999px;
+              width: 20px;
+              height: 20px;
+              font-size: 11px;
+              color: $fgcolor;
+
+              &:hover {
+                background: #3b3b3f;
+              }
+
+              &.close:hover {
+                background: #ff5252;
+              }
             }
           }
         }
-      }
 
-      .WindowBodyDefault {
-        background: $bgcolor;
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-        border-bottom-left-radius: 5px;
-        border-bottom-right-radius: 5px;
-        padding: 10px 15px;
-        color: $fgcolor;
-
-        * {
-          margin: 0;
-        }
-
-        .WindowBodyTitle {
-          font-size: 17px;
-          margin-bottom: 10px;
-          font-weight: 700;
-        }
-
-        .WindowBodyContent {
-          font-size: 12px;
-        }
-      }
-
-      .WindowBodyButton {
-        display: flex;
-        flex-direction: row-reverse;
-        margin: 15px 0;
-        margin-bottom: 0;
-
-        .Button {
-          border: none;
-          outline: none;
-          background: #ffffff10;
+        .WindowBodyDefault {
+          background: $bgcolor;
+          backdrop-filter: blur(15px);
+          -webkit-backdrop-filter: blur(15px);
+          border-bottom-left-radius: 5px;
+          border-bottom-right-radius: 5px;
+          padding: 10px 15px;
           color: $fgcolor;
-          font-size: 12px;
-          padding: 7px 20px;
-          border-radius: 5px;
-          margin-left: 5px;
-
-          &:hover {
-            background: #ffffff20;
-          }
         }
       }
     }
 
-    .ImageInformation {
-      position: absolute;
-      display: flex;
-      flex-direction: column;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      border-radius: 5px;
-      overflow: hidden;
-      z-index: 10000;
-      opacity: 0;
-      pointer-events: none;
-      transition: none;
-      width: 300px;
-      box-shadow: 0px 0 20px #00000089;
+    .ImageInformationWrapper {
+      background-color: transparentize($bgcolor, 0.2);
+      transition: all ease 0.2s;
 
-      &.active {
-        opacity: 1;
-        pointer-events: auto;
-      }
-
-      .WindowTopBar {
-        background: $bgcolor;
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-        padding: 7px 10px;
-        display: flex;
-        align-items: center;
-        transition: all ease 0.3s;
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-
-        .WindowTopBarTitle {
-          color: $fgcolor;
-          font-size: 12px;
-          margin: 0;
-          width: 100%;
-        }
-
-        .WindowTopBarInteractionContainer {
-          display: flex;
-          width: 100%;
-
-          .WindowTopBarInteraction {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-left: auto;
-            border-radius: 9999px;
-            width: 20px;
-            height: 20px;
-            font-size: 11px;
-            color: $fgcolor;
-
-            &:hover {
-              background: #3b3b3f;
-            }
-
-            &.close:hover {
-              background: #ff5252;
-            }
-          }
-        }
-      }
-
-      .WindowBodyDefault {
-        background: $bgcolor;
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-        border-bottom-left-radius: 5px;
-        border-bottom-right-radius: 5px;
-        padding: 10px 15px;
-        color: $fgcolor;
-
-        * {
-          margin: 0;
-        }
-
+      .ImageInformation {
         .WindowBodyContent {
           display: flex;
-          justify-content: center;
-          width: 150px;
-          margin: 0 auto;
+          flex-direction: column;
+          align-items: center;
+          line-height: 2;
+          font-size: 14px;
+          padding: 10px 0;
+
+          .ImageTitle {
+            font-weight: 700;
+            font-size: 22px;
+            margin-bottom: 25px;
+          }
         }
       }
     }
@@ -253,7 +160,6 @@ $fgcolor: #e2e2e2;
           display: flex;
           align-items: center;
           font-size: 11px;
-          margin-right: 5px;
 
           * {
             margin: 0;
@@ -266,6 +172,7 @@ $fgcolor: #e2e2e2;
 
           .TabBarInteraction {
             display: flex;
+            margin-right: 5px;
 
             i {
               margin-right: 3px;
@@ -569,7 +476,7 @@ $fgcolor: #e2e2e2;
 
 .lightMode {
   .camera {
-    .PermanentlyDeleteMedia {
+    .PermanentlyDeleteMediaWrapper .PermanentlyDeleteMedia {
       .WindowTopBar {
         background: $fgcolor;
 
@@ -593,16 +500,6 @@ $fgcolor: #e2e2e2;
       .WindowBodyDefault {
         background: $fgcolor;
         color: $bgcolor;
-      }
-
-      .WindowBodyButton {
-        .Button {
-          background: #00000010;
-          color: $bgcolor;
-          &:hover {
-            background: #00000020;
-          }
-        }
       }
     }
 
