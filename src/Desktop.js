@@ -10,7 +10,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { setLocked } from "./reducers/settings";
 
 const Desktop = () => {
+  const fontFamily = useSelector((state) => state.settings.fontFamily);
   const themeLight = useSelector((state) => state.settings.themeLight);
+  const boldText = useSelector((state) => state.settings.boldText);
   const nightShift = useSelector((state) => state.desktop.nightShift);
   const hideCursor = useSelector((state) => state.desktop.hideCursor);
   const blackScr = useSelector((state) => state.desktop.blackScr);
@@ -52,7 +54,7 @@ const Desktop = () => {
       ) : (
         <>
           <div
-            className={`Desktop OptimisticDisplay ${
+            className={`Desktop ${fontFamily} ${boldText && "isBold"} ${
               themeLight && "lightMode"
             } ${nightShift && "nightShift"} ${hideCursor && "hideCursor"} ${
               blackScr && "blackscr"

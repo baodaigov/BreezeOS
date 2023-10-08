@@ -130,7 +130,7 @@ const PanelItemLarge = ({ type }) => {
       return (
         <div
           className={`PanelItemLarge ${settingsReducer.boldText && "focused"}`}
-          onClick={() => dispatch(setBoldText(!settingsReducer.isBold))}
+          onClick={() => dispatch(setBoldText(!settingsReducer.boldText))}
         >
           <i className="fa-solid fa-b" />
           <p className="font-bold">{t("panel.boldText")}</p>

@@ -25,16 +25,12 @@ const PanelType = (props) => {
 
   function connectWifi(e) {
     dispatch(setActive(true));
-    setTimeout(() => {
-      dispatch(insertPasswordFor(e));
-    }, 800);
+    dispatch(insertPasswordFor(e));
   }
 
   function openSettings(action) {
     dispatch(setActive(true));
-    setTimeout(() => {
-      dispatch(action);
-    }, 800);
+    dispatch(action);
   }
 
   function setBrightnessLevel(e) {

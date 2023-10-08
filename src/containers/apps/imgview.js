@@ -7,6 +7,7 @@ import "./assets/imgview.scss";
 import TopBarInteraction from "../../components/utils/window/TopBarInteraction";
 import { useTranslation } from "react-i18next";
 import { openPic } from "../../reducers/imgview";
+import Draggable from "react-draggable";
 
 export default function ImgView() {
   const dispatch = useDispatch();
@@ -28,16 +29,18 @@ export default function ImgView() {
 
   return (
     <div className="ImgViewWindow">
-      <div className={`Window imgview ${isActive && "active"}`}>
-        <TopBar title={`${t("apps.imgview.name")} – ${picLocation}`}>
-          <TopBarInteraction action="close" onClose={close} />
-        </TopBar>
-        <WindowBody>
-          <div className="ImgView">
-            <img src={pic} />
-          </div>
-        </WindowBody>
-      </div>
+      <Draggable handle=".TopBar">
+        <div className={`Window imgview ${isActive && "active"}`}>
+          <TopBar title={`${t("apps.imgview.name")} – ${picLocation}`}>
+            <TopBarInteraction action="close" onClose={close} />
+          </TopBar>
+          <WindowBody>
+            <div className="ImgView">
+              <img src={pic} />
+            </div>
+          </WindowBody>
+        </div>
+      </Draggable>
     </div>
   );
 }

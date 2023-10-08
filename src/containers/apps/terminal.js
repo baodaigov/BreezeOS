@@ -11,6 +11,8 @@ import StartApp from "../../components/startMenu/StartApp";
 import { setHeaderHide } from "../../reducers/header";
 import { useTranslation } from "react-i18next";
 import { setDesktopBodyActive } from "../../reducers/desktopbody";
+import { setStartMenuActive } from "../../reducers/startmenu";
+import Draggable from "react-draggable";
 
 export const TerminalApp = () => {
   const { t } = useTranslation();
@@ -25,39 +27,10 @@ export const TerminalApp = () => {
     }
   });
 
-  useEffect(() => {
-    if (isActive) {
-      document
-        .getElementsByClassName("TerminalApp")[0]
-        .classList.add("clicked");
-      setTimeout(
-        () =>
-          document
-            .getElementsByClassName("terminal")[0]
-            .classList.add("active"),
-        500
-      );
-    } else {
-      document
-        .getElementsByClassName("TerminalApp")[0]
-        .classList.remove("clicked");
-      document.getElementsByClassName("terminal")[0].classList.remove("active");
-    }
-    if (isHide) {
-      document.getElementsByClassName("TerminalApp")[0].classList.add("hide");
-      document.getElementsByClassName("terminal")[0].classList.add("hide");
-    } else {
-      document
-        .getElementsByClassName("TerminalApp")[0]
-        .classList.remove("hide");
-      document.getElementsByClassName("terminal")[0].classList.remove("hide");
-    }
-  }, [isActive, isHide]);
-
   return (
     <DockItem
       id="terminal"
-      className="TerminalApp"
+      className={`TerminalApp ${isActive && "clicked"} ${isHide && "hide"}`}
       title={t("apps.terminal.name")}
       icon={
         icon === "WhiteSur-icon-theme"
@@ -93,9 +66,7 @@ export const TerminalStartApp = () => {
   const icon = useSelector((state) => state.appearance.iconTheme);
 
   const toggle = () => {
-    document
-      .getElementsByClassName("StartMenuWrapper")[0]
-      .classList.remove("active");
+    dispatch(setStartMenuActive(false));
     dispatch(setHeaderHide(false));
     dispatch(setDesktopBodyActive(true));
     if (isHide) {
@@ -121,48 +92,47 @@ export const TerminalStartApp = () => {
 
 export default function Terminal() {
   const dispatch = useDispatch();
-  const TerminalWindow = () => {
-    const { t } = useTranslation();
-    const [min, isMin] = useState(true);
-
-    function minimize() {
-      document
-        .getElementsByClassName("terminal")[0]
-        .classList.toggle("minimize");
-      isMin(!min);
-    }
-
-    return (
-      <>
-        <TopBar title={t("apps.terminal.name")} onDblClick={minimize}>
-          <TopBarInteraction
-            action="hide"
-            onHide={() => dispatch(setHide(true))}
-          />
-          <TopBarInteraction action={min ? "max" : "min"} onMinMax={minimize} />
-          <TopBarInteraction
-            action="close"
-            onClose={() => dispatch(setActive(false))}
-          />
-        </TopBar>
-        <WindowBody>
-          <div className="Terminal">
-            <pre>Welcome to BreezeOS (GNU/Linux 6.2.1 x86_64)</pre>
-            <pre id="input">
-              &#91;localhost@breezeos&#93;$
-              <input type="text" spellCheck="false" />
-            </pre>
-          </div>
-        </WindowBody>
-      </>
-    );
-  };
+  const isActive = useSelector((state) => state.appsTerminal.active);
+  const isHide = useSelector((state) => state.appsTerminal.hide);
+  const { t } = useTranslation();
+  const [min, isMin] = useState(true);
 
   return (
     <div className="terminalWindow">
-      <div className="Window terminal minimize" key={Math.random()}>
-        <TerminalWindow />
-      </div>
+      <Draggable handle=".TopBar">
+        <div
+          className={`Window terminal ${isActive && "active"} ${
+            isHide && "hide"
+          } ${min && "minimize"}`}
+        >
+          <TopBar
+            title={t("apps.terminal.name")}
+            onDblClick={() => isMin(!min)}
+          >
+            <TopBarInteraction
+              action="hide"
+              onHide={() => dispatch(setHide(true))}
+            />
+            <TopBarInteraction
+              action={min ? "max" : "min"}
+              onMinMax={() => isMin(!min)}
+            />
+            <TopBarInteraction
+              action="close"
+              onClose={() => dispatch(setActive(false))}
+            />
+          </TopBar>
+          <WindowBody>
+            <div className="Terminal">
+              <pre>Welcome to BreezeOS (GNU/Linux 6.2.1 x86_64)</pre>
+              <pre id="input">
+                &#91;localhost@breezeos&#93;$
+                <input type="text" spellCheck="false" />
+              </pre>
+            </div>
+          </WindowBody>
+        </div>
+      </Draggable>
     </div>
   );
 }

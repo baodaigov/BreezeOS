@@ -1,4 +1,5 @@
 @import url(https://site-assets.fontawesome.com/releases/v6.4.0/css/all.css);
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
 $fgcolor: #e2e2e2;
 
 @font-face {
@@ -141,6 +142,46 @@ $fgcolor: #e2e2e2;
   src: url(./fonts/RegattiaStencil/RS700.woff2) format("woff2");
 }
 
+@font-face {
+  font-display: swap;
+  font-family: Gilroy;
+  font-style: normal;
+  font-weight: 200;
+  src: url(./fonts/Gilroy/SVN-Gilroy-Light.woff2) format("woff2");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: Gilroy;
+  font-style: normal;
+  font-weight: 300;
+  src: url(./fonts/Gilroy/SVN-Gilroy-Regular.woff2) format("woff2");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: Gilroy;
+  font-style: normal;
+  font-weight: 500;
+  src: url(./fonts/Gilroy/SVN-Gilroy-Medium.woff2) format("woff2");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: Gilroy;
+  font-style: normal;
+  font-weight: 700;
+  src: url(./fonts/Gilroy/SVN-Gilroy-Bold.woff2) format("woff2");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: Gilroy;
+  font-style: normal;
+  font-weight: 800;
+  src: url(./fonts/Gilroy/SVN-Gilroy-XBold.woff2) format("woff2");
+}
+
 .OptimisticDisplay *:not(i) {
   font-family: Optimistic Display, -apple-system, ui-sans-serif, system-ui,
     BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans,
@@ -149,14 +190,11 @@ $fgcolor: #e2e2e2;
 }
 
 .SanFrancisco *:not(i) {
+  letter-spacing: 0.3px;
   font-family: San Francisco, -apple-system, ui-sans-serif, system-ui,
     BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans,
     sans-serif, Noto Color Emoji, Apple Color Emoji, Segoe UI Emoji,
     Segoe UI Symbol;
-
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
 }
 
 *::-webkit-scrollbar {
@@ -192,9 +230,10 @@ input {
   box-sizing: border-box;
   font-weight: 300;
   cursor: default;
-  -webkit-user-select: none; /* Safari */
-  -ms-user-select: none; /* IE 10 and IE 11 */
-  user-select: none; /* Standard syntax */
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  scroll-behavior: smooth;
 }
 
 img {

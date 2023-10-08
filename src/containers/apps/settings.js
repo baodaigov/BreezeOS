@@ -1039,30 +1039,18 @@ export default function Settings() {
                       className={fontsMenu ? "active" : ""}
                       ref={fontsMenuRef}
                     >
-                      {settingsReducer.fontFamily === "OptimisticDisplay" ? (
-                        <ActMenuSelector
-                          title="OptimisticDisplay"
-                          active
-                          onClick={() => changeFont("OptimisticDisplay")}
-                        ></ActMenuSelector>
-                      ) : (
-                        <ActMenuSelector
-                          title="OptimisticDisplay"
-                          onClick={() => changeFont("OptimisticDisplay")}
-                        ></ActMenuSelector>
-                      )}
-                      {settingsReducer.fontFamily === "SanFrancisco" ? (
-                        <ActMenuSelector
-                          title="SanFrancisco"
-                          active
-                          onClick={() => changeFont("SanFrancisco")}
-                        ></ActMenuSelector>
-                      ) : (
-                        <ActMenuSelector
-                          title="SanFrancisco"
-                          onClick={() => changeFont("SanFrancisco")}
-                        ></ActMenuSelector>
-                      )}
+                      <ActMenuSelector
+                        title="OptimisticDisplay"
+                        active={
+                          settingsReducer.fontFamily === "OptimisticDisplay"
+                        }
+                        onClick={() => changeFont("OptimisticDisplay")}
+                      ></ActMenuSelector>
+                      <ActMenuSelector
+                        title="SanFrancisco"
+                        active={settingsReducer.fontFamily === "SanFrancisco"}
+                        onClick={() => changeFont("SanFrancisco")}
+                      ></ActMenuSelector>
                     </ActMenu>
                   </div>
                   <div className="ThemesMenu">
@@ -1755,8 +1743,8 @@ export default function Settings() {
                 <div
                   className="TabBarItem TabBarSettingsName"
                   style={
-                    settings === "Wi-Fi"
-                      ? { justifyContent: "space-between" }
+                    settings === "Wi-Fi" || settings === "Bluetooth"
+                      ? { justifyContent: "space-between", padding: "2px 9px" }
                       : { justifyContent: "center" }
                   }
                 >
@@ -1764,7 +1752,7 @@ export default function Settings() {
                     <>
                       <div
                         style={{
-                          width: "95%",
+                          width: "94%",
                           display: "flex",
                           justifyContent: "center",
                           alignItems: "center",
@@ -1781,7 +1769,7 @@ export default function Settings() {
                     <>
                       <div
                         style={{
-                          width: "95%",
+                          width: "94%",
                           display: "flex",
                           justifyContent: "center",
                           alignItems: "center",

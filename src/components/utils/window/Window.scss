@@ -44,6 +44,7 @@ $fgcolor: #e2e2e2;
     display: flex;
     align-items: center;
     transition: all ease 0.3s;
+    z-index: 1;
 
     .TopBarInteractionContainer {
       display: flex;

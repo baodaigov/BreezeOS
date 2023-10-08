@@ -12,6 +12,8 @@ import StartApp from "../../components/startMenu/StartApp";
 import { setHeaderHide } from "../../reducers/header";
 import { useTranslation } from "react-i18next";
 import { setDesktopBodyActive } from "../../reducers/desktopbody";
+import { setStartMenuActive } from "../../reducers/startmenu";
+import Draggable from "react-draggable";
 
 export const VSCodeApp = () => {
   const { t } = useTranslation();
@@ -20,32 +22,10 @@ export const VSCodeApp = () => {
   const dispatch = useDispatch();
   const icon = useSelector((state) => state.appearance.iconTheme);
 
-  useEffect(() => {
-    if (isActive) {
-      document.getElementsByClassName("VSCodeApp")[0].classList.add("clicked");
-      setTimeout(() => {
-        document.getElementsByClassName("vscode")[0].classList.add("active");
-        dispatch(openUrl());
-      }, 500);
-    } else {
-      document
-        .getElementsByClassName("VSCodeApp")[0]
-        .classList.remove("clicked");
-      document.getElementsByClassName("vscode")[0].classList.remove("active");
-    }
-    if (isHide) {
-      document.getElementsByClassName("VSCodeApp")[0].classList.add("hide");
-      document.getElementsByClassName("vscode")[0].classList.add("hide");
-    } else {
-      document.getElementsByClassName("VSCodeApp")[0].classList.remove("hide");
-      document.getElementsByClassName("vscode")[0].classList.remove("hide");
-    }
-  }, [isActive, isHide]);
-
   return (
     <DockItem
       id="vscode"
-      className="VSCodeApp"
+      className={`VSCodeApp ${isActive && "clicked"} ${isHide && "hide"}`}
       title="Visual Studio Code"
       icon={
         icon === "WhiteSur-icon-theme"
@@ -80,9 +60,7 @@ export const VSCodeStartApp = () => {
   const icon = useSelector((state) => state.appearance.iconTheme);
 
   const toggle = () => {
-    document
-      .getElementsByClassName("StartMenuWrapper")[0]
-      .classList.remove("active");
+    dispatch(setStartMenuActive(false));
     dispatch(setHeaderHide(false));
     dispatch(setDesktopBodyActive(true));
     if (isHide) {
@@ -109,49 +87,53 @@ export const VSCodeStartApp = () => {
 
 export default function VSCode() {
   const dispatch = useDispatch();
-  const VSCodeWindow = () => {
-    const [min, isMin] = useState(false);
-    const url = useSelector((state) => state.vscode.url);
+  const isActive = useSelector((state) => state.appsVscode.active);
+  const isHide = useSelector((state) => state.appsVscode.hide);
+  const [min, isMin] = useState(false);
+  const url = useSelector((state) => state.vscode.url);
 
-    function close() {
-      dispatch(setActive(false));
+  useEffect(() => {
+    if (isActive) {
+      dispatch(openUrl());
+    } else {
       dispatch(closeUrl());
     }
-
-    function minimize() {
-      document.getElementsByClassName("vscode")[0].classList.toggle("minimize");
-      isMin(!min);
-    }
-
-    return (
-      <>
-        <TopBar title="Visual Studio Code" onDblClick={minimize}>
-          <TopBarInteraction
-            action="hide"
-            onHide={() => dispatch(setHide(true))}
-          />
-          <TopBarInteraction action={min ? "max" : "min"} onMinMax={minimize} />
-          <TopBarInteraction action="close" onClose={close} />
-        </TopBar>
-        <WindowBody>
-          <div className="VSCode">
-            <iframe
-              src={url}
-              title="Visual Studio Code"
-              frameBorder="0"
-              allowFullScreen={true}
-            />
-          </div>
-        </WindowBody>
-      </>
-    );
-  };
+  }, [isActive]);
 
   return (
     <div className="VSCodeWindow">
-      <div className="Window vscode" key={Math.random()}>
-        <VSCodeWindow />
-      </div>
+      <Draggable handle=".TopBar">
+        <div
+          className={`Window vscode ${isActive && "active"} ${
+            isHide && "hide"
+          } ${min && "minimize"}`}
+        >
+          <TopBar title="Visual Studio Code" onDblClick={() => isMin(!min)}>
+            <TopBarInteraction
+              action="hide"
+              onHide={() => dispatch(setHide(true))}
+            />
+            <TopBarInteraction
+              action={min ? "max" : "min"}
+              onMinMax={() => isMin(!min)}
+            />
+            <TopBarInteraction
+              action="close"
+              onClose={() => dispatch(setActive(false))}
+            />
+          </TopBar>
+          <WindowBody>
+            <div className="VSCode">
+              <iframe
+                src={url}
+                title="Visual Studio Code"
+                frameBorder="0"
+                allowFullScreen={true}
+              />
+            </div>
+          </WindowBody>
+        </div>
+      </Draggable>
     </div>
   );
 }

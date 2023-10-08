@@ -28,10 +28,8 @@ const Panel = (props) => {
   function connectOtherWifi() {
     dispatch(inactivePanel());
     dispatch(setActive(true));
-    setTimeout(() => {
-      dispatch(setSettings("Wi-Fi"));
-      dispatch(toggleActive(true));
-    }, 800);
+    dispatch(setSettings("Wi-Fi"));
+    dispatch(toggleActive(true));
   }
 
   return (

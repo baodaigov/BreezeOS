@@ -3,6 +3,8 @@ import { useBattery } from "react-use";
 import { useSelector, useDispatch } from "react-redux";
 import { setCharging } from "../../reducers/battery";
 import "./Panel.scss";
+import { inactivePanel } from "../../reducers/panel";
+import { setActive, setSettings } from "../../reducers/apps/settings";
 
 export default function Battery() {
   const batteryChargingStatus = useSelector((state) => state.battery.charging);
@@ -19,7 +21,14 @@ export default function Battery() {
   }
 
   return (
-    <div className="PanelItem font-bold">
+    <div
+      className="PanelItem font-bold"
+      onClick={() => {
+        dispatch(inactivePanel());
+        dispatch(setActive(true));
+        dispatch(setSettings("Battery"));
+      }}
+    >
       {batteryChargingStatus ? (
         <i className="fa-regular fa-battery-bolt" />
       ) : (

@@ -69,20 +69,20 @@ $fgcolor: #e2e2e2;
             background: transparentize($fgcolor, 0.95);
           }
 
-          &.shift {
-            font-size: 16px;
-
+          &.shift,
+          &.rad {
             &.active {
               background: transparentize($fgcolor, 0.9);
               transition: none;
             }
           }
 
+          &.shift {
+            font-size: 17px;
+          }
+
           &.rad {
-            &.active {
-              background: transparentize($fgcolor, 0.9);
-              transition: none;
-            }
+            font-size: 18px;
           }
 
           &.equals {
@@ -130,9 +130,14 @@ $fgcolor: #e2e2e2;
     background: $fgcolor;
     color: $bgcolor;
 
-    .CalculatorSection {
+    .CalculatorWrapper .CalculatorSection {
       .CalculatorButton {
         color: $bgcolor;
+
+        &.shift.active,
+        &.rad.active {
+          background: transparentize($bgcolor, 0.75);
+        }
 
         &:hover {
           background: transparentize($bgcolor, 0.8);
