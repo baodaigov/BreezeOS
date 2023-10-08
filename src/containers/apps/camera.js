@@ -414,7 +414,7 @@ export default function Camera() {
             </div>
             <div className="WindowBodyDefault">
               <div className="WindowBodyContent">
-                <p className="ImageTitle">Picture_{Date.now()}.png</p>
+                <p className="ImageTitle">Picture_{Date.now()}.jpeg</p>
                 <p>
                   Intrinsic size: {imageRef.current?.naturalWidth} ×{" "}
                   {imageRef.current?.naturalHeight}px

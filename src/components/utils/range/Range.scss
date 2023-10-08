@@ -49,7 +49,7 @@ $rtbgcolor: #60a5fa;
     border: 0.5px solid lighten($rbgcolor, 6%);
 
     &::-webkit-slider-thumb {
-      border: 0.5px solid lighten(#202023, 25%);
+      border: 0.5px solid lighten(#202023, 60%);
       background: $fgcolor;
       box-shadow: -210px 0 0 195px $fgcolor;
 
@@ -59,7 +59,7 @@ $rtbgcolor: #60a5fa;
     }
 
     &::-moz-range-thumb {
-      border: 0.5px solid lighten(#202023, 25%);
+      border: 0.5px solid lighten(#202023, 60%);
       background: $fgcolor;
       box-shadow: -210px 0 0 195px $fgcolor;
 
