@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import W1 from "../components/default.jpg";
 
 const initialState = {
+  active: true,
   img: W1,
   allowSwitchWorkspace: false,
 };
@@ -10,6 +11,9 @@ export const wallpaperSlice = createSlice({
   name: "wallpaper",
   initialState,
   reducers: {
+    setWallpaperActive: (state, action) => {
+      state.active = action.payload;
+    },
     changeWallpaper: (state, action) => {
       state.img = action.payload;
     },
@@ -19,7 +23,7 @@ export const wallpaperSlice = createSlice({
   },
 });
 
-export const { changeWallpaper, setAllowSwitchWorkspace } =
+export const { setWallpaperActive, changeWallpaper, setAllowSwitchWorkspace } =
   wallpaperSlice.actions;
 
 export default wallpaperSlice.reducer;

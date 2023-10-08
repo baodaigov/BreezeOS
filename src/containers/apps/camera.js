@@ -14,6 +14,9 @@ import CountdownSound from "../../sounds/mixkit-clock-countdown-bleeps-916_Bq9La
 import CameraShutter from "../../sounds/camera_shutter.mp3";
 import { setHeaderHide } from "../../reducers/header";
 import { useTranslation } from "react-i18next";
+import { setDesktopBodyActive } from "../../reducers/desktopbody";
+import { setStartMenuActive } from "../../reducers/startmenu";
+import Draggable from "react-draggable";
 
 export const CameraApp = () => {
   const { t } = useTranslation();
@@ -28,33 +31,10 @@ export const CameraApp = () => {
     }
   });
 
-  useEffect(() => {
-    if (isActive) {
-      document.getElementsByClassName("CameraApp")[0].classList.add("clicked");
-      setTimeout(
-        () =>
-          document.getElementsByClassName("camera")[0].classList.add("active"),
-        500
-      );
-    } else {
-      document
-        .getElementsByClassName("CameraApp")[0]
-        .classList.remove("clicked");
-      document.getElementsByClassName("camera")[0].classList.remove("active");
-    }
-    if (isHide) {
-      document.getElementsByClassName("CameraApp")[0].classList.add("hide");
-      document.getElementsByClassName("camera")[0].classList.add("hide");
-    } else {
-      document.getElementsByClassName("CameraApp")[0].classList.remove("hide");
-      document.getElementsByClassName("camera")[0].classList.remove("hide");
-    }
-  }, [isActive, isHide]);
-
   return (
     <DockItem
       id="camera"
-      className="CameraApp"
+      className={`CameraApp ${isActive && "clicked"} ${isHide && "hide"}`}
       title={t("apps.camera.name")}
       icon={
         icon === "WhiteSur-icon-theme"
@@ -90,11 +70,9 @@ export const CameraStartApp = () => {
   const icon = useSelector((state) => state.appearance.iconTheme);
 
   const toggle = () => {
-    document
-      .getElementsByClassName("StartMenuWrapper")[0]
-      .classList.remove("active");
+    dispatch(setStartMenuActive(false));
     dispatch(setHeaderHide(false));
-    document.getElementsByClassName("DesktopBody")[0].classList.add("active");
+    dispatch(setDesktopBodyActive(true));
     if (isHide) {
       dispatch(setHide(false));
     } else {
@@ -118,173 +96,152 @@ export const CameraStartApp = () => {
 
 export default function Camera() {
   const dispatch = useDispatch();
+  const isActive = useSelector((state) => state.appsCamera.active);
+  const isHide = useSelector((state) => state.appsCamera.hide);
+  const { t } = useTranslation();
+  const [webcam, setWebcam] = useState(false);
+  const [interaction, disableInteraction] = useState("capturing");
+  const [img, setImg] = useState(null);
+  const [audio, setAudio] = useState(false);
+  const imageRef = useRef(null);
+  var countdownSound = new Audio(CountdownSound);
+  var cameraShutter = new Audio(CameraShutter);
+  const videoConstraints = {
+    facingMode: "user",
+  };
 
-  const CameraWindow = () => {
-    const { t } = useTranslation();
-    const isActive = useSelector((state) => state.appsCamera.active);
-    const [webcam, setWebcam] = useState(false);
-    const [interaction, disableInteraction] = useState("capturing");
-    const [img, setImg] = useState(null);
-    const [audio, setAudio] = useState(false);
-    const imageRef = useRef(null);
-    var countdownSound = new Audio(CountdownSound);
-    var cameraShutter = new Audio(CameraShutter);
-    const videoConstraints = {
-      facingMode: "user",
-    };
+  const [item, swapItem] = useState(false);
 
-    const [item, swapItem] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(null);
 
-    const [timeLeft, setTimeLeft] = useState(null);
+  useEffect(() => {
+    if (audio) {
+      countdownSound.play();
 
-    useEffect(() => {
-      if (audio) {
+      if (timeLeft < 1) {
+        setTimeLeft(null);
+        countdownSound.pause();
+      }
+
+      if (!timeLeft) return;
+
+      const intervalId = setInterval(() => {
         countdownSound.play();
+        setTimeLeft(timeLeft - 1);
+      }, 1000);
 
-        if (timeLeft < 1) {
-          setTimeLeft(null);
-          countdownSound.pause();
-        }
+      return () => clearInterval(intervalId);
+    } else {
+      if (timeLeft < 1) setTimeLeft(null);
 
-        if (!timeLeft) return;
+      if (!timeLeft) return;
 
-        const intervalId = setInterval(() => {
-          countdownSound.play();
-          setTimeLeft(timeLeft - 1);
-        }, 1000);
+      const intervalId = setInterval(() => {
+        setTimeLeft(timeLeft - 1);
+      }, 1000);
 
-        return () => clearInterval(intervalId);
-      } else {
-        if (timeLeft < 1) setTimeLeft(null);
+      return () => clearInterval(intervalId);
+    }
+  }, [timeLeft, audio]);
 
-        if (!timeLeft) return;
+  ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        const intervalId = setInterval(() => {
-          setTimeLeft(timeLeft - 1);
-        }, 1000);
+  const [time, setTime] = useState(0);
+  const [running, setRunning] = useState(false);
+  const [settingsMenu, showSettingsMenu] = useState(false);
+  const [countdown, setCountdown] = useState(false);
+  const webcamRef = useRef(null);
 
-        return () => clearInterval(intervalId);
-      }
-    }, [timeLeft, audio]);
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    const [time, setTime] = useState(0);
-    const [running, setRunning] = useState(false);
-    const [settingsMenu, showSettingsMenu] = useState(false);
-    const [countdown, setCountdown] = useState(false);
-    const webcamRef = useRef(null);
-
-    const capture = useCallback(() => {
-      if (countdown) {
-        if (audio) {
-          disableInteraction("capturing");
-          setTimeLeft(3);
-          setTimeout(() => {
-            document
-              .getElementsByClassName("Desktop")[0]
-              .classList.add("capture");
-            cameraShutter.play();
-            const imageSrc = webcamRef.current.getScreenshot();
-            setImg(imageSrc);
-            disableInteraction("");
-            setTimeout(() => {
-              document
-                .getElementsByClassName("Desktop")[0]
-                .classList.remove("capture");
-            }, 1000);
-          }, 3000);
-        } else {
-          disableInteraction("capturing");
-          setTimeLeft(3);
-          setTimeout(() => {
-            document
-              .getElementsByClassName("Desktop")[0]
-              .classList.add("capture");
-            const imageSrc = webcamRef.current.getScreenshot();
-            setImg(imageSrc);
-            disableInteraction("");
-            setTimeout(() => {
-              document
-                .getElementsByClassName("Desktop")[0]
-                .classList.remove("capture");
-            }, 1000);
-          }, 3000);
-        }
-      } else if (audio) {
-        document.getElementsByClassName("Desktop")[0].classList.add("capture");
-        cameraShutter.play();
-        setTimeout(() => {
-          document
-            .getElementsByClassName("Desktop")[0]
-            .classList.remove("capture");
-        }, 1000);
-        const imageSrc = webcamRef.current.getScreenshot();
-        setImg(imageSrc);
-      } else {
-        document.getElementsByClassName("Desktop")[0].classList.add("capture");
-        setTimeout(() => {
-          document
-            .getElementsByClassName("Desktop")[0]
-            .classList.remove("capture");
-        }, 1000);
-        const imageSrc = webcamRef.current.getScreenshot();
-        setImg(imageSrc);
-      }
-    }, [webcamRef, countdown, audio]);
-
-    useEffect(() => {
-      let interval;
-      if (running === true) {
-        interval = setInterval(() => {
-          setTime((prevTime) => prevTime + 10);
-        }, 10);
-      } else if (running === false) {
-        clearInterval(interval);
-        setTime(0);
-      }
-      return () => clearInterval(interval);
-    }, [running]);
-
-    const [recording, isRecording] = useState(false);
-    const mediaRecorderRef = useRef(null);
-    const [capturing, setCapturing] = useState(false);
-    const [recordedChunks, setRecordedChunks] = useState([]);
-
-    const handleDataAvailable = useCallback(
-      ({ data }) => {
-        if (data.size > 0) {
-          setRecordedChunks((prev) => prev.concat(data));
-        }
-      },
-      [setRecordedChunks]
-    );
-
-    const record = useCallback(() => {
-      if (countdown) {
+  const capture = useCallback(() => {
+    if (countdown) {
+      if (audio) {
         disableInteraction("capturing");
         setTimeLeft(3);
         setTimeout(() => {
-          setCapturing(true);
-          mediaRecorderRef.current = new MediaRecorder(
-            webcamRef.current.stream,
-            {
-              mimeType: "video/webm",
-            }
-          );
-          mediaRecorderRef.current.addEventListener(
-            "dataavailable",
-            handleDataAvailable
-          );
-          mediaRecorderRef.current.start();
           document
-            .getElementsByClassName("CameraRecordTime")[0]
-            .classList.add("active");
-          isRecording(true);
-          setRunning(true);
+            .getElementsByClassName("Desktop")[0]
+            .classList.add("capture");
+          cameraShutter.play();
+          const imageSrc = webcamRef.current.getScreenshot();
+          setImg(imageSrc);
+          disableInteraction("");
+          setTimeout(() => {
+            document
+              .getElementsByClassName("Desktop")[0]
+              .classList.remove("capture");
+          }, 1000);
         }, 3000);
       } else {
         disableInteraction("capturing");
+        setTimeLeft(3);
+        setTimeout(() => {
+          document
+            .getElementsByClassName("Desktop")[0]
+            .classList.add("capture");
+          const imageSrc = webcamRef.current.getScreenshot();
+          setImg(imageSrc);
+          disableInteraction("");
+          setTimeout(() => {
+            document
+              .getElementsByClassName("Desktop")[0]
+              .classList.remove("capture");
+          }, 1000);
+        }, 3000);
+      }
+    } else if (audio) {
+      document.getElementsByClassName("Desktop")[0].classList.add("capture");
+      cameraShutter.play();
+      setTimeout(() => {
+        document
+          .getElementsByClassName("Desktop")[0]
+          .classList.remove("capture");
+      }, 1000);
+      const imageSrc = webcamRef.current.getScreenshot();
+      setImg(imageSrc);
+    } else {
+      document.getElementsByClassName("Desktop")[0].classList.add("capture");
+      setTimeout(() => {
+        document
+          .getElementsByClassName("Desktop")[0]
+          .classList.remove("capture");
+      }, 1000);
+      const imageSrc = webcamRef.current.getScreenshot();
+      setImg(imageSrc);
+    }
+  }, [webcamRef, countdown, audio]);
+
+  useEffect(() => {
+    let interval;
+    if (running === true) {
+      interval = setInterval(() => {
+        setTime((prevTime) => prevTime + 10);
+      }, 10);
+    } else if (running === false) {
+      clearInterval(interval);
+      setTime(0);
+    }
+    return () => clearInterval(interval);
+  }, [running]);
+
+  const [recording, isRecording] = useState(false);
+  const mediaRecorderRef = useRef(null);
+  const [capturing, setCapturing] = useState(false);
+  const [recordedChunks, setRecordedChunks] = useState([]);
+
+  const handleDataAvailable = useCallback(
+    ({ data }) => {
+      if (data.size > 0) {
+        setRecordedChunks((prev) => prev.concat(data));
+      }
+    },
+    [setRecordedChunks]
+  );
+
+  const record = useCallback(() => {
+    if (countdown) {
+      disableInteraction("capturing");
+      setTimeLeft(3);
+      setTimeout(() => {
         setCapturing(true);
         mediaRecorderRef.current = new MediaRecorder(webcamRef.current.stream, {
           mimeType: "video/webm",
@@ -299,336 +256,350 @@ export default function Camera() {
           .classList.add("active");
         isRecording(true);
         setRunning(true);
-      }
-    }, [
-      webcamRef,
-      setCapturing,
-      mediaRecorderRef,
-      handleDataAvailable,
-      countdown,
-    ]);
-
-    const stopRecord = useCallback(() => {
-      mediaRecorderRef.current.stop();
-      setCapturing(false);
-      disableInteraction("");
+      }, 3000);
+    } else {
+      disableInteraction("capturing");
+      setCapturing(true);
+      mediaRecorderRef.current = new MediaRecorder(webcamRef.current.stream, {
+        mimeType: "video/webm",
+      });
+      mediaRecorderRef.current.addEventListener(
+        "dataavailable",
+        handleDataAvailable
+      );
+      mediaRecorderRef.current.start();
       document
         .getElementsByClassName("CameraRecordTime")[0]
-        .classList.remove("active");
-      isRecording(false);
-      setRunning(false);
-      console.log(recordedChunks);
-    }, [mediaRecorderRef, setCapturing]);
-
-    const [viewMedia, setViewMedia] = useState(false);
-
-    function displayCountdown() {
-      showSettingsMenu(!settingsMenu);
-      setCountdown(!countdown);
+        .classList.add("active");
+      isRecording(true);
+      setRunning(true);
     }
+  }, [
+    webcamRef,
+    setCapturing,
+    mediaRecorderRef,
+    handleDataAvailable,
+    countdown,
+  ]);
 
-    function toggleSounds() {
-      showSettingsMenu(!settingsMenu);
-      setAudio(!audio);
-    }
+  const stopRecord = useCallback(() => {
+    mediaRecorderRef.current.stop();
+    setCapturing(false);
+    disableInteraction("");
+    document
+      .getElementsByClassName("CameraRecordTime")[0]
+      .classList.remove("active");
+    isRecording(false);
+    setRunning(false);
+    console.log(recordedChunks);
+  }, [mediaRecorderRef, setCapturing]);
 
-    const [msgboxDelete, displayMsgboxDelete] = useState(false);
-    const [imageInformationMsgbox, displayImageInformationMsgbox] =
-      useState(false);
+  const [viewMedia, setViewMedia] = useState(false);
 
-    function closeMsgBoxDelete() {
-      displayMsgboxDelete(false);
-      displayImageInformationMsgbox(false);
-    }
+  function displayCountdown() {
+    showSettingsMenu(!settingsMenu);
+    setCountdown(!countdown);
+  }
 
-    function deleteImage() {
-      displayMsgboxDelete(false);
-      setImg(null);
-    }
+  function toggleSounds() {
+    showSettingsMenu(!settingsMenu);
+    setAudio(!audio);
+  }
 
-    function useOutsideSettingsMenu(ref) {
-      useEffect(() => {
-        function handleClickOutside(event) {
-          if (ref.current && !ref.current.contains(event.target)) {
-            showSettingsMenu(false);
-          }
-        }
+  const [msgboxDelete, displayMsgboxDelete] = useState(false);
+  const [imageInformationMsgbox, displayImageInformationMsgbox] =
+    useState(false);
 
-        document.addEventListener("mousedown", handleClickOutside);
+  function closeMsgBoxDelete() {
+    displayMsgboxDelete(false);
+    displayImageInformationMsgbox(false);
+  }
 
-        return () => {
-          document.removeEventListener("mousedown", handleClickOutside);
-        };
-      }, [ref]);
-    }
+  function deleteImage() {
+    displayMsgboxDelete(false);
+    setImg(null);
+  }
 
-    const settingsMenuRef = useRef(null);
-    useOutsideSettingsMenu(settingsMenuRef);
-
+  function useOutsideSettingsMenu(ref) {
     useEffect(() => {
-      if (isActive) {
-        setTimeout(() => {
-          setWebcam(true);
-          disableInteraction("");
-        }, 1000);
-      } else {
-        setTimeout(() => {
-          setWebcam(false);
-          disableInteraction("capturing");
-          document
-            .getElementsByClassName("CameraRecordTime")[0]
-            .classList.remove("active");
-          isRecording(false);
-          setRunning(false);
+      function handleClickOutside(event) {
+        if (ref.current && !ref.current.contains(event.target)) {
           showSettingsMenu(false);
-          setViewMedia(false);
-        }, 500);
+        }
       }
-    }, [isActive]);
 
-    const [min, isMin] = useState(false);
+      document.addEventListener("mousedown", handleClickOutside);
 
-    function minimize() {
-      document.getElementsByClassName("camera")[0].classList.toggle("minimize");
-      isMin(!min);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [ref]);
+  }
+
+  const settingsMenuRef = useRef(null);
+  useOutsideSettingsMenu(settingsMenuRef);
+
+  useEffect(() => {
+    if (isActive) {
+      setTimeout(() => {
+        setWebcam(true);
+        disableInteraction("");
+      }, 300);
+    } else {
+      setTimeout(() => {
+        setWebcam(false);
+        disableInteraction("capturing");
+        document
+          .getElementsByClassName("CameraRecordTime")[0]
+          .classList.remove("active");
+        isRecording(false);
+        setRunning(false);
+        showSettingsMenu(false);
+        setViewMedia(false);
+      }, 500);
     }
+  }, [isActive]);
 
-    return (
-      <>
-        <div
-          className={`ImageInformationWrapper ${
-            imageInformationMsgbox ? "active" : ""
-          }`}
-        >
-          <div className="ImageInformation">
-            <div className="WindowTopBar">
-              <p className="WindowTopBarTitle">Image information</p>
-              <div className="WindowTopBarInteractionContainer">
-                <div
-                  className="WindowTopBarInteraction close"
-                  onClick={closeMsgBoxDelete}
-                >
-                  <i className="fa-solid fa-xmark fa-lg" />
-                </div>
-              </div>
-            </div>
-            <div className="WindowBodyDefault">
-              <div className="WindowBodyContent">
-                <p className="ImageTitle">Picture_{Date.now()}.jpeg</p>
-                <p>
-                  Intrinsic size: {imageRef.current?.naturalWidth} ×{" "}
-                  {imageRef.current?.naturalHeight}px
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          className={`PermanentlyDeleteMediaWrapper ${
-            msgboxDelete ? "active" : ""
-          }`}
-        >
-          <div className="PermanentlyDeleteMedia">
-            <div className="WindowTopBar">
-              <p className="WindowTopBarTitle"></p>
-              <div className="WindowTopBarInteractionContainer">
-                <div
-                  className="WindowTopBarInteraction close"
-                  onClick={closeMsgBoxDelete}
-                >
-                  <i className="fa-solid fa-xmark fa-lg" />
-                </div>
-              </div>
-            </div>
-            <div className="WindowBodyDefault">
-              <div style={{ display: "flex" }}>
-                <img
-                  className="WindowBodyIcon"
-                  src="https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/master/src/32/status/dialog-question.svg"
-                />
-                <div className="WindowBodyRight">
-                  <p className="WindowBodyTitle">Delete this image?</p>
-                  <p className="WindowBodyContent">
-                    This action is irreversible!
-                  </p>
-                </div>
-              </div>
-              <div className="WindowBodyButton">
-                <button className="Button" onClick={closeMsgBoxDelete}>
-                  No
-                </button>
-                <button className="Button" onClick={deleteImage}>
-                  Yes
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <ActMenu
-          style={{ zIndex: "1", top: "30px", right: "80px" }}
-          className={settingsMenu ? "active" : ""}
-          ref={settingsMenuRef}
-        >
-          <ActMenuSelector
-            title="Camera countdown"
-            active={countdown}
-            onClick={displayCountdown}
-          ></ActMenuSelector>
-          <ActMenuSelector
-            title="Enable sounds"
-            active={audio}
-            onClick={toggleSounds}
-          ></ActMenuSelector>
-        </ActMenu>
-        <TopBar title={t("apps.camera.name")} onDblClick={minimize}>
-          <div className="TabBarWrapper">
-            <div className="TabBar" style={{ display: "block" }}>
-              <div className="TabBarItem" style={{ float: "right" }}>
-                {viewMedia && img != null && (
-                  <div className="TabBarInteraction">
-                    <i
-                      className="fa-regular fa-circle-info"
-                      onClick={() => displayImageInformationMsgbox(true)}
-                    />
-                  </div>
-                )}
-                <div className="TabBarInteraction">
-                  <i
-                    className="fa-regular fa-gear"
-                    onClick={() => showSettingsMenu(!settingsMenu)}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          <TopBarInteraction
-            action="hide"
-            onHide={() => dispatch(setHide(true))}
-          />
-          <TopBarInteraction action={min ? "max" : "min"} onMinMax={minimize} />
-          <TopBarInteraction
-            action="close"
-            onClose={() => dispatch(setActive(false))}
-          />
-        </TopBar>
-        <WindowBody>
-          <div className={`Camera ${viewMedia ? "blankscr" : ""}`}>
-            {viewMedia ? (
-              <div className="CameraViewMedia">
-                {img != null ? (
-                  <>
-                    <div className="CameraMediaImg">
-                      <img src={img} alt="screenshot" ref={imageRef} />
-                    </div>
-                  </>
-                ) : (
-                  <div className="NoMedia">
-                    <p className="NoMedia">Nothing to show</p>
-                  </div>
-                )}
-                <div className="CameraViewInteraction">
-                  <div
-                    className="GoBackBtn"
-                    onClick={() => setViewMedia(!viewMedia)}
-                  >
-                    <i className="fa-regular fa-arrow-left" />
-                  </div>
-                  {img != null ? (
-                    <div style={{ display: "flex" }}>
-                      <a href={img} download={`Picture_${Date.now()}`}>
-                        <div className="CameraButton">
-                          <p>Save image</p>
-                        </div>
-                      </a>
-                      <div
-                        className="CameraButton"
-                        onClick={() => displayMsgboxDelete(true)}
-                      >
-                        <p>Delete</p>
-                      </div>
-                    </div>
-                  ) : (
-                    ""
-                  )}
-                </div>
-              </div>
-            ) : (
-              ""
-            )}
-            <div className="CameraVideo">
-              <div className="CameraRecordTime">
-                <p>
-                  <span>
-                    {("0" + Math.floor((time / 3600000) % 60)).slice(-2)}:
-                  </span>
-                  <span>
-                    {("0" + Math.floor((time / 60000) % 60)).slice(-2)}:
-                  </span>
-                  <span>
-                    {("0" + Math.floor((time / 1000) % 60)).slice(-2)}
-                  </span>
-                </p>
-              </div>
-              <div className="CameraTimer">
-                <p>{timeLeft}</p>
-              </div>
-              {webcam ? (
-                <Webcam
-                  audio={false}
-                  ref={webcamRef}
-                  screenshotFormat="image/jpeg"
-                  videoConstraints={videoConstraints}
-                  imageSmoothing={true}
-                  mirrored={true}
-                />
-              ) : (
-                <div className="WebcamDisabled">
-                  <i className="fa-regular fa-camera-slash disableWebcam" />
-                </div>
-              )}
-              <div className={`CameraInteraction ${interaction}`}>
-                <div className="CameraAct" onClick={() => swapItem(!item)}>
-                  <i
-                    className={`fa-light ${item ? "fa-camera" : "fa-video"}`}
-                  />
-                </div>
-                {item ? (
-                  <div
-                    className={`CameraCapture ${
-                      recording ? "isRecording" : ""
-                    }`}
-                    onClick={recording ? stopRecord : record}
-                  >
-                    {recording ? (
-                      <i className="fa-solid fa-square" />
-                    ) : (
-                      <i className="fa-light fa-video" />
-                    )}
-                  </div>
-                ) : (
-                  <div className="CameraCapture" onClick={capture}>
-                    <i className="fa-light fa-camera" />
-                  </div>
-                )}
-                <div
-                  className="CameraCapturedImg"
-                  onClick={() => setViewMedia(!viewMedia)}
-                >
-                  {img != null ? <img src={img} alt="screenshot" /> : ""}
-                </div>
-              </div>
-            </div>
-          </div>
-        </WindowBody>
-      </>
-    );
-  };
+  const [min, isMin] = useState(false);
 
   return (
     <div className="CameraWindow">
-      <div className="Window camera" key={Math.random()}>
-        <CameraWindow />
-      </div>
+      <Draggable handle=".TopBar">
+        <div
+          className={`Window camera ${isActive && "active"} ${
+            isHide && "hide"
+          } ${min && "minimize"}`}
+        >
+          <div
+            className={`ImageInformationWrapper ${
+              imageInformationMsgbox ? "active" : ""
+            }`}
+          >
+            <div className="ImageInformation">
+              <div className="WindowTopBar">
+                <p className="WindowTopBarTitle">Image information</p>
+                <div className="WindowTopBarInteractionContainer">
+                  <div
+                    className="WindowTopBarInteraction close"
+                    onClick={closeMsgBoxDelete}
+                  >
+                    <i className="fa-solid fa-xmark fa-lg" />
+                  </div>
+                </div>
+              </div>
+              <div className="WindowBodyDefault">
+                <div className="WindowBodyContent">
+                  <p className="ImageTitle">Picture_{Date.now()}.jpeg</p>
+                  <p>
+                    Intrinsic size: {imageRef.current?.naturalWidth} ×{" "}
+                    {imageRef.current?.naturalHeight}px
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            className={`PermanentlyDeleteMediaWrapper ${
+              msgboxDelete ? "active" : ""
+            }`}
+          >
+            <div className="PermanentlyDeleteMedia">
+              <div className="WindowTopBar">
+                <p className="WindowTopBarTitle"></p>
+                <div className="WindowTopBarInteractionContainer">
+                  <div
+                    className="WindowTopBarInteraction close"
+                    onClick={closeMsgBoxDelete}
+                  >
+                    <i className="fa-solid fa-xmark fa-lg" />
+                  </div>
+                </div>
+              </div>
+              <div className="WindowBodyDefault">
+                <div style={{ display: "flex" }}>
+                  <img
+                    className="WindowBodyIcon"
+                    src="https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/master/src/32/status/dialog-question.svg"
+                  />
+                  <div className="WindowBodyRight">
+                    <p className="WindowBodyTitle">Delete this image?</p>
+                    <p className="WindowBodyContent">
+                      This action is irreversible!
+                    </p>
+                  </div>
+                </div>
+                <div className="WindowBodyButton">
+                  <button className="Button" onClick={closeMsgBoxDelete}>
+                    No
+                  </button>
+                  <button className="Button" onClick={deleteImage}>
+                    Yes
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ActMenu
+            style={{ zIndex: "1", top: "30px", right: "80px" }}
+            className={settingsMenu ? "active" : ""}
+            ref={settingsMenuRef}
+          >
+            <ActMenuSelector
+              title="Camera countdown"
+              active={countdown}
+              onClick={displayCountdown}
+            ></ActMenuSelector>
+            <ActMenuSelector
+              title="Enable sounds"
+              active={audio}
+              onClick={toggleSounds}
+            ></ActMenuSelector>
+          </ActMenu>
+          <TopBar title={t("apps.camera.name")} onDblClick={() => isMin(!min)}>
+            <div className="TabBarWrapper">
+              <div className="TabBar" style={{ display: "block" }}>
+                <div className="TabBarItem" style={{ float: "right" }}>
+                  {viewMedia && img != null && (
+                    <div className="TabBarInteraction">
+                      <i
+                        className="fa-regular fa-circle-info"
+                        onClick={() => displayImageInformationMsgbox(true)}
+                      />
+                    </div>
+                  )}
+                  <div className="TabBarInteraction">
+                    <i
+                      className="fa-regular fa-gear"
+                      onClick={() => showSettingsMenu(!settingsMenu)}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <TopBarInteraction
+              action="hide"
+              onHide={() => dispatch(setHide(true))}
+            />
+            <TopBarInteraction
+              action={min ? "max" : "min"}
+              onMinMax={() => isMin(!min)}
+            />
+            <TopBarInteraction
+              action="close"
+              onClose={() => dispatch(setActive(false))}
+            />
+          </TopBar>
+          <WindowBody>
+            <div className={`Camera ${viewMedia ? "blankscr" : ""}`}>
+              {viewMedia ? (
+                <div className="CameraViewMedia">
+                  {img != null ? (
+                    <>
+                      <div className="CameraMediaImg">
+                        <img src={img} alt="screenshot" ref={imageRef} />
+                      </div>
+                    </>
+                  ) : (
+                    <div className="NoMedia">
+                      <p className="NoMedia">Nothing to show</p>
+                    </div>
+                  )}
+                  <div className="CameraViewInteraction">
+                    <div
+                      className="GoBackBtn"
+                      onClick={() => setViewMedia(!viewMedia)}
+                    >
+                      <i className="fa-regular fa-arrow-left" />
+                    </div>
+                    {img != null ? (
+                      <div style={{ display: "flex" }}>
+                        <a href={img} download={`Picture_${Date.now()}`}>
+                          <div className="CameraButton">
+                            <p>Save image</p>
+                          </div>
+                        </a>
+                        <div
+                          className="CameraButton"
+                          onClick={() => displayMsgboxDelete(true)}
+                        >
+                          <p>Delete</p>
+                        </div>
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                </div>
+              ) : (
+                ""
+              )}
+              <div className="CameraVideo">
+                <div className="CameraRecordTime">
+                  <p>
+                    <span>
+                      {("0" + Math.floor((time / 3600000) % 60)).slice(-2)}:
+                    </span>
+                    <span>
+                      {("0" + Math.floor((time / 60000) % 60)).slice(-2)}:
+                    </span>
+                    <span>
+                      {("0" + Math.floor((time / 1000) % 60)).slice(-2)}
+                    </span>
+                  </p>
+                </div>
+                <div className="CameraTimer">
+                  <p>{timeLeft}</p>
+                </div>
+                {webcam ? (
+                  <Webcam
+                    audio={false}
+                    ref={webcamRef}
+                    screenshotFormat="image/jpeg"
+                    videoConstraints={videoConstraints}
+                    imageSmoothing={true}
+                    mirrored={true}
+                  />
+                ) : (
+                  <div className="WebcamDisabled">
+                    <i className="fa-regular fa-camera-slash disableWebcam" />
+                  </div>
+                )}
+                <div className={`CameraInteraction ${interaction}`}>
+                  <div className="CameraAct" onClick={() => swapItem(!item)}>
+                    <i
+                      className={`fa-light ${item ? "fa-camera" : "fa-video"}`}
+                    />
+                  </div>
+                  {item ? (
+                    <div
+                      className={`CameraCapture ${
+                        recording ? "isRecording" : ""
+                      }`}
+                      onClick={recording ? stopRecord : record}
+                    >
+                      {recording ? (
+                        <i className="fa-solid fa-square" />
+                      ) : (
+                        <i className="fa-light fa-video" />
+                      )}
+                    </div>
+                  ) : (
+                    <div className="CameraCapture" onClick={capture}>
+                      <i className="fa-light fa-camera" />
+                    </div>
+                  )}
+                  <div
+                    className="CameraCapturedImg"
+                    onClick={() => setViewMedia(!viewMedia)}
+                  >
+                    {img != null ? <img src={img} alt="screenshot" /> : ""}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </WindowBody>
+        </div>
+      </Draggable>
     </div>
   );
 }

@@ -35,7 +35,7 @@
     "brightness": "Яркость",
     "darkMode": "Темныйрежим",
     "airplaneMode": "Авиарежим",
-    "nightLight": "Ночной свет",
+    "nightShift": "Ночной свет",
     "boldText": "Жирный текст"
   },
   "apps": {

@@ -9,7 +9,9 @@ import {
   setFontWeight,
   setForegroundColor,
   setOptionsMenuShown,
+  setSplashScreenWrapperHideInfo,
 } from "../../reducers/lock";
+import { setTerminalWindowActive } from "../../reducers/terminalwindow";
 import Avatar from "../Avatar";
 import useCountdown from "../../hooks/useCountdown";
 import { setHeaderActive, setHeaderHide } from "../../reducers/header";
@@ -17,9 +19,18 @@ import { setDockActive, setDockHide } from "../../reducers/dock";
 import { pushItem, clearItem } from "../../reducers/shutdown";
 import LogoD from "../../images/logo-d.svg";
 import ActMenu, { ActMenuSelector } from "../utils/menu/index";
-import { setAllowSwitchWorkspace } from "../../reducers/wallpaper";
+import {
+  setAllowSwitchWorkspace,
+  setWallpaperActive,
+} from "../../reducers/wallpaper";
 import useTime from "../../hooks/useTime";
 import { useTranslation } from "react-i18next";
+import { setDesktopBodyActive } from "../../reducers/desktopbody";
+import {
+  setDesktopBlackScr,
+  setDesktopHideCursor,
+  setDesktopPoweroff,
+} from "../../reducers/desktop";
 
 export default function SplashScreen() {
   const dispatch = useDispatch();
@@ -29,6 +40,12 @@ export default function SplashScreen() {
   const optionsMenuShown = useSelector((state) => state.lock.optionsMenuShown);
   const allowSwitchWorkspace = useSelector(
     (state) => state.wallpaper.allowSwitchWorkspace
+  );
+  const wrapperActive = useSelector(
+    (state) => state.lock.splashScreen.wrapperActive
+  );
+  const wrapperHideInfo = useSelector(
+    (state) => state.lock.splashScreen.wrapperHideInfo
   );
   const { secondsLeft, start } = useCountdown();
   const [curDate, setCurDate] = useState(
@@ -149,11 +166,7 @@ export default function SplashScreen() {
   let batteryPercent = Math.round(batteryState.level * 100);
 
   function sleep() {
-    setTimeout(() => {
-      document
-        .getElementsByClassName("SplashScreenWrapper")[0]
-        .classList.add("hideInfo");
-    }, 50);
+    setTimeout(() => dispatch(setSplashScreenWrapperHideInfo(true)), 50);
 
     setTimeout(() => {
       dispatch(setSleeping(true));
@@ -163,30 +176,20 @@ export default function SplashScreen() {
     document.addEventListener("keypress", (e) => {
       setTimeout(() => {
         dispatch(setSleeping(false));
-        document
-          .getElementsByClassName("SplashScreenWrapper")[0]
-          .classList.remove("hideInfo");
+        dispatch(setSplashScreenWrapperHideInfo(false));
       }, 100);
     });
   }
 
   function shutdown() {
-    setTimeout(() => {
-      document
-        .getElementsByClassName("SplashScreenWrapper")[0]
-        .classList.add("hideInfo");
-    }, 50);
+    setTimeout(() => dispatch(setSplashScreenWrapperHideInfo(true)), 50);
 
     setTimeout(() => {
-      document.getElementsByClassName("Desktop")[0].classList.add("hideCursor");
+      dispatch(setDesktopHideCursor(true));
       dispatch(setOptionsMenuShown(false));
     }, 800);
 
-    setTimeout(() => {
-      document
-        .getElementsByClassName("TerminalWindow")[0]
-        .classList.add("active");
-    }, 2500);
+    setTimeout(() => dispatch(setTerminalWindowActive(true)), 2500);
 
     setTimeout(
       () => dispatch(pushItem(<pre>Stopped Load/Save Random Seed... OK</pre>)),
@@ -222,26 +225,18 @@ export default function SplashScreen() {
 
     setTimeout(() => {
       dispatch(clearItem());
-      document.getElementsByClassName("Desktop")[0].classList.add("poweroff");
-      document
-        .getElementsByClassName("Wallpaper")[0]
-        .classList.remove("active");
+      dispatch(setDesktopPoweroff(true));
+      dispatch(setWallpaperActive(false));
     }, 13200);
   }
 
   function restart() {
     shutdown();
 
-    setTimeout(() => {
-      document
-        .getElementsByClassName("Desktop")[0]
-        .classList.remove("poweroff");
-    }, 16500);
+    setTimeout(() => dispatch(setDesktopPoweroff(false)), 16500);
 
     setTimeout(() => {
-      document
-        .getElementsByClassName("Desktop")[0]
-        .classList.remove("blackscr");
+      dispatch(setDesktopBlackScr(false));
       dispatch(clearItem());
       dispatch(pushItem(<pre>Reached target Startup... OK</pre>));
     }, 19000);
@@ -258,9 +253,7 @@ export default function SplashScreen() {
       dispatch(clearItem());
       dispatch(setHeaderActive(false));
       dispatch(setDockActive(false));
-      document
-        .getElementsByClassName("DesktopBody")[0]
-        .classList.remove("active");
+      dispatch(setDesktopBodyActive(false));
       dispatch(
         pushItem(
           <div className="BootSplash">
@@ -271,21 +264,13 @@ export default function SplashScreen() {
     }, 21500);
 
     setTimeout(() => {
-      document
-        .getElementsByClassName("Desktop")[0]
-        .classList.remove("hideCursor");
+      dispatch(setDesktopHideCursor(false));
       dispatch(clearItem());
       dispatch(pushItem(<pre>Initiating shutdown...</pre>));
-      document
-        .getElementsByClassName("TerminalWindow")[0]
-        .classList.remove("active");
-      document
-        .getElementsByClassName("WallpaperWrapper")[0]
-        .classList.add("active");
+      dispatch(setTerminalWindowActive(false));
+      dispatch(setWallpaperActive(true));
       dispatch(setLocked(true));
-      document
-        .getElementsByClassName("SplashScreenWrapper")[0]
-        .classList.remove("hideInfo");
+      dispatch(setSplashScreenWrapperHideInfo(false));
     }, 36000);
   }
 
@@ -306,7 +291,11 @@ export default function SplashScreen() {
           padding: "30px 60px 40px 60px",
         }}
       >
-        <div className="SplashScreenWrapper active">
+        <div
+          className={`SplashScreenWrapper ${wrapperActive && "active"} ${
+            wrapperHideInfo && "hideInfo"
+          }`}
+        >
           <div className="SplashScreen">
             <div
               className={`SplashScreenInfo ${isEditable && "editable"} ${

@@ -35,7 +35,7 @@
     "brightness": "명도",
     "darkMode": "다크 모드",
     "airplaneMode": "비행기 모드",
-    "nightLight": "야간 조명",
+    "nightShift": "야간 조명",
     "boldText": "굵은 텍스트"
   },
   "apps": {

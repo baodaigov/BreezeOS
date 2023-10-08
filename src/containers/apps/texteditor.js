@@ -11,6 +11,7 @@ import StartApp from "../../components/startMenu/StartApp";
 import Sound1 from "../../sounds/Oxygen-Sys-App-Error-Critical.mp3";
 import { setHeaderHide } from "../../reducers/header";
 import { useTranslation } from "react-i18next";
+import { setDesktopBodyActive } from "../../reducers/desktopbody";
 
 export const TextEditorApp = () => {
   const { t } = useTranslation();
@@ -99,7 +100,7 @@ export const TextEditorStartApp = () => {
       .getElementsByClassName("StartMenuWrapper")[0]
       .classList.remove("active");
     dispatch(setHeaderHide(false));
-    document.getElementsByClassName("DesktopBody")[0].classList.add("active");
+    dispatch(setDesktopBodyActive(true));
     if (isHide) {
       dispatch(setHide(false));
     } else {

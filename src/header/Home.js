@@ -4,25 +4,21 @@ import { setHeaderHide } from "../reducers/header";
 import { setDockHide } from "../reducers/dock";
 import { setAllowSwitchWorkspace } from "../reducers/wallpaper";
 import Hammer from "react-hammerjs";
+import { setDesktopBodyActive } from "../reducers/desktopbody";
+import { setStartMenuActive } from "../reducers/startmenu";
 
 export default function Home() {
   const shellTheme = useSelector((state) => state.shell.theme);
   const dispatch = useDispatch();
 
   function startMenu() {
-    document
-      .getElementsByClassName("DesktopBody")[0]
-      .classList.remove("active");
+    dispatch(setDesktopBodyActive(false));
     dispatch(setHeaderHide(true));
-    document
-      .getElementsByClassName("StartMenuWrapper")[0]
-      .classList.add("active");
+    dispatch(setStartMenuActive(true));
   }
 
   function switchWorkspace() {
-    document
-      .getElementsByClassName("DesktopBody")[0]
-      .classList.remove("active");
+    dispatch(setDesktopBodyActive(false));
     dispatch(setAllowSwitchWorkspace(true));
     dispatch(setHeaderHide(true));
     dispatch(setDockHide(true));

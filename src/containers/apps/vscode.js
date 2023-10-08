@@ -11,6 +11,7 @@ import TopBarInteraction from "../../components/utils/window/TopBarInteraction";
 import StartApp from "../../components/startMenu/StartApp";
 import { setHeaderHide } from "../../reducers/header";
 import { useTranslation } from "react-i18next";
+import { setDesktopBodyActive } from "../../reducers/desktopbody";
 
 export const VSCodeApp = () => {
   const { t } = useTranslation();
@@ -83,7 +84,7 @@ export const VSCodeStartApp = () => {
       .getElementsByClassName("StartMenuWrapper")[0]
       .classList.remove("active");
     dispatch(setHeaderHide(false));
-    document.getElementsByClassName("DesktopBody")[0].classList.add("active");
+    dispatch(setDesktopBodyActive(true));
     if (isHide) {
       dispatch(setHide(false));
     } else {

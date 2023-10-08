@@ -19,21 +19,6 @@ $actcolor: #60a5fa;
   .files {
     width: 100vw;
     height: 100%;
-    transform: scale(0.92);
-    opacity: 0;
-    pointer-events: none;
-    transition: all ease 0.3s;
-
-    &.active {
-      transform: scale(1);
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    &.hide {
-      top: 153%;
-      pointer-events: none;
-    }
 
     .ActMenu .iconSize .ActMenuSelector {
       &:hover {
@@ -150,6 +135,10 @@ $actcolor: #60a5fa;
         padding: 10px 0;
         margin: 7px;
         border-radius: 13px;
+
+        * {
+          transition: all ease 0.3s;
+        }
 
         .DropdownMenu {
           display: flex;

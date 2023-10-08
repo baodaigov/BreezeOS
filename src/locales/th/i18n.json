@@ -35,7 +35,7 @@
     "brightness": "ความสว่าง",
     "darkMode": "โหมดมืด",
     "airplaneMode": "โหมดเครื่องบิน",
-    "nightLight": "แสงกลางคืน",
+    "nightShift": "แสงกลางคืน",
     "boldText": "ข้อความตัวหนา"
   },
   "apps": {

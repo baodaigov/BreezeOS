@@ -10,6 +10,9 @@ import TopBarInteraction from "../../components/utils/window/TopBarInteraction";
 import StartApp from "../../components/startMenu/StartApp";
 import { setHeaderHide } from "../../reducers/header";
 import { useTranslation } from "react-i18next";
+import { setDesktopBodyActive } from "../../reducers/desktopbody";
+import { setStartMenuActive } from "../../reducers/startmenu";
+import Draggable from "react-draggable";
 
 export const ClockApp = () => {
   const { t } = useTranslation();
@@ -24,33 +27,10 @@ export const ClockApp = () => {
     }
   });
 
-  useEffect(() => {
-    if (isActive) {
-      document.getElementsByClassName("ClockApp")[0].classList.add("clicked");
-      setTimeout(
-        () =>
-          document.getElementsByClassName("clock")[0].classList.add("active"),
-        500
-      );
-    } else {
-      document
-        .getElementsByClassName("ClockApp")[0]
-        .classList.remove("clicked");
-      document.getElementsByClassName("clock")[0].classList.remove("active");
-    }
-    if (isHide) {
-      document.getElementsByClassName("ClockApp")[0].classList.add("hide");
-      document.getElementsByClassName("clock")[0].classList.add("hide");
-    } else {
-      document.getElementsByClassName("ClockApp")[0].classList.remove("hide");
-      document.getElementsByClassName("clock")[0].classList.remove("hide");
-    }
-  }, [isActive, isHide]);
-
   return (
     <DockItem
       id="clock"
-      className="ClockApp"
+      className={`ClockApp ${isActive && "clicked"} ${isHide && "hide"}`}
       title={t("apps.clock.name")}
       icon={
         icon === "WhiteSur-icon-theme"
@@ -86,11 +66,9 @@ export const ClockStartApp = () => {
   const icon = useSelector((state) => state.appearance.iconTheme);
 
   const toggle = () => {
-    document
-      .getElementsByClassName("StartMenuWrapper")[0]
-      .classList.remove("active");
+    dispatch(setStartMenuActive(false));
     dispatch(setHeaderHide(false));
-    document.getElementsByClassName("DesktopBody")[0].classList.add("active");
+    dispatch(setDesktopBodyActive(true));
     if (isHide) {
       dispatch(setHide(false));
     } else {
@@ -113,51 +91,69 @@ export const ClockStartApp = () => {
 };
 
 export default function Clock() {
-  const hour12 = useSelector((state) => state.time.hour12);
   const dispatch = useDispatch();
+  const hour12 = useSelector((state) => state.time.hour12);
+  const isActive = useSelector((state) => state.appsClock.active);
+  const isHide = useSelector((state) => state.appsClock.hide);
+  const { t } = useTranslation();
+  const [min, isMin] = useState(false);
+  const [tab, setTab] = useState("worldclock");
+  const [translateX, setTranslateX] = useState("");
+  const [width, setWidth] = useState("103px");
+  const [value, setValue] = useState("1");
 
-  const ClockWindow = () => {
-    const { t } = useTranslation();
-    const [min, isMin] = useState(false);
-    const [tab, setTab] = useState("worldclock");
-    const [translateX, setTranslateX] = useState("");
-    const [width, setWidth] = useState("103px");
-    const [value, setValue] = useState("1");
+  function worldClockTab() {
+    setTranslateX("translate(0)");
+    setWidth("103px");
+    setValue("1");
+    setTab("worldclock");
+  }
 
-    function worldClockTab() {
-      setTranslateX("translate(0)");
-      setWidth("103px");
-      setValue("1");
-      setTab("worldclock");
-    }
+  function alarmTab() {
+    setTranslateX("translate(106px)");
+    setWidth("70px");
+    setValue("2");
+    setTab("alarm");
+  }
 
-    function alarmTab() {
-      setTranslateX("translate(106px)");
-      setWidth("70px");
-      setValue("2");
-      setTab("alarm");
-    }
+  function stopwatchTab() {
+    setTranslateX("translate(180.4px)");
+    setWidth("97px");
+    setValue("3");
+    setTab("stopwatch");
+  }
 
-    function stopwatchTab() {
-      setTranslateX("translate(180.4px)");
-      setWidth("97px");
-      setValue("3");
-      setTab("stopwatch");
-    }
+  function timerTab() {
+    setTranslateX("translate(280px)");
+    setWidth("72px");
+    setValue("4");
+    setTab("timer");
+  }
 
-    function timerTab() {
-      setTranslateX("translate(280px)");
-      setWidth("72px");
-      setValue("4");
-      setTab("timer");
-    }
+  const ClockItem = (props) => {
+    const [curTime, setCurTime] = useState(null);
+    const [curDate, setCurDate] = useState(null);
 
-    const ClockItem = (props) => {
-      const [curTime, setCurTime] = useState(null);
-      const [curDate, setCurDate] = useState(null);
+    useEffect(() => {
+      if (curTime === null && curDate === null) {
+        setCurTime(
+          new Date().toLocaleString("en-US", {
+            timeZone: `${props.timeZone}`,
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: hour12,
+          })
+        );
 
-      useEffect(() => {
-        if (curTime === null && curDate === null) {
+        setCurDate(
+          new Date().toLocaleDateString("en-US", {
+            timeZone: `${props.timeZone}`,
+            dateStyle: "full",
+          })
+        );
+      } else {
+        setInterval(() => {
           setCurTime(
             new Date().toLocaleString("en-US", {
               timeZone: `${props.timeZone}`,
@@ -174,312 +170,294 @@ export default function Clock() {
               dateStyle: "full",
             })
           );
-        } else {
-          setInterval(() => {
-            setCurTime(
-              new Date().toLocaleString("en-US", {
-                timeZone: `${props.timeZone}`,
-                hour: "2-digit",
-                minute: "2-digit",
-                second: "2-digit",
-                hour12: hour12,
-              })
-            );
-
-            setCurDate(
-              new Date().toLocaleDateString("en-US", {
-                timeZone: `${props.timeZone}`,
-                dateStyle: "full",
-              })
-            );
-          }, 1000);
-        }
-      }, [curTime, curDate]);
-
-      return (
-        <div className="ClockItem">
-          <div className="ClockInfo">
-            <p className="ClockTitle">{props.title}</p>
-            <p className="ClockDesc">{curDate}</p>
-          </div>
-          <div>
-            <div className="ClockTime">
-              <p className="font-bold">{curTime}</p>
-            </div>
-          </div>
-        </div>
-      );
-    };
-
-    const [alarm, setAlarm] = useState([]);
-    const [alarmSettings, showAlarmSettings] = useState(false);
-    const [settings, allowSettings] = useState(false);
-
-    function addNewAlarm() {
-      let newAlarm = [...alarm];
-      let newTitle = `Alarm ${alarm.length + 1}`;
-      newAlarm = [...newAlarm, { id: newTitle, time: "07:00 AM" }];
-      setAlarm(newAlarm);
-      showAlarmSettings(false);
-    }
-
-    function removeAlarm(index) {
-      const deleteAlarm = alarm && alarm.filter((element, i) => i !== index);
-      setAlarm(deleteAlarm);
-    }
-
-    var mouseHold;
-
-    function mouseUp() {
-      if (mouseHold) window.clearTimeout(mouseHold);
-      addNewAlarm();
-    }
-
-    function mouseDown() {
-      mouseHold = window.setTimeout(() => showAlarmSettings(true), 800);
-    }
-
-    function editAlarm() {
-      allowSettings(!settings);
-      showAlarmSettings(false);
-    }
-
-    const [time, setTime] = useState(0);
-    const [running, setRunning] = useState(false);
-
-    useEffect(() => {
-      let interval;
-      if (running === true) {
-        interval = setInterval(() => {
-          setTime((prevTime) => prevTime + 10);
-        }, 10);
-      } else if (running === false) {
-        clearInterval(interval);
-        setTime(0);
+        }, 1000);
       }
-      return () => clearInterval(interval);
-    }, [running]);
-
-    function close() {
-      dispatch(setActive(false));
-      setTimeout(() => {
-        setRunning(false);
-      }, 300);
-    }
-
-    function minimize() {
-      document.getElementsByClassName("clock")[0].classList.toggle("minimize");
-      isMin(!min);
-    }
-
-    function switchTab() {
-      switch (tab) {
-        case "worldclock":
-          return (
-            <div className="world-clock">
-              <ClockItem
-                title="Ho Chi Minh City, Vietnam"
-                timeZone="Asia/Ho_Chi_Minh"
-              />
-              <ClockItem
-                title="London, United Kingdom"
-                timeZone="Europe/London"
-              />
-            </div>
-          );
-        case "alarm":
-          return (
-            <div className="alarm">
-              <div className="AlarmClock">
-                {alarm.length != 0 ? (
-                  <div className="AlarmContainer">
-                    {alarm.map((e, index) => (
-                      <div className="AlarmContainerItem">
-                        {settings ? (
-                          <div className="AlarmSettings">
-                            <i className="fa-regular fa-bars reorder" />
-                            <i
-                              className="fa-regular fa-dash delete"
-                              onClick={() => removeAlarm(index)}
-                            />
-                          </div>
-                        ) : (
-                          ""
-                        )}
-                        <div
-                          style={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                            alignItems: "center",
-                            width: "100%",
-                          }}
-                        >
-                          <p className="AlarmContainerTitle">{e.id}</p>
-                          <p className="AlarmContainerTime">{e.time}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="NoAlarm">
-                    <i
-                      className="fa-regular fa-alarm-clock"
-                      style={{ fontSize: "80px", margin: "20px" }}
-                    />
-                    <p style={{ fontWeight: "700", fontSize: "20px" }}>
-                      No Alarm
-                    </p>
-                  </div>
-                )}
-                {alarmSettings ? (
-                  <>
-                    <div
-                      className="AlarmItem showSettings"
-                      onMouseUp={() => showAlarmSettings(false)}
-                    >
-                      <i className="fa-regular fa-xmark" />
-                    </div>
-                    <div
-                      className={`AlarmItem ${
-                        alarm.length === 0 ? "disable" : ""
-                      } edit`}
-                      onMouseUp={editAlarm}
-                    >
-                      <p className="AlarmItemTitle">Edit</p>
-                      <i className="fa-regular fa-pen" />
-                    </div>
-                    <div
-                      className="AlarmItem settings"
-                      onMouseUp={() => showAlarmSettings(false)}
-                    >
-                      <p className="AlarmItemTitle">Settings</p>
-                      <i className="fa-regular fa-gear" />
-                    </div>
-                  </>
-                ) : settings ? (
-                  <div
-                    className="AlarmItem done"
-                    onMouseUp={() => allowSettings(false)}
-                  >
-                    <i className="fa-regular fa-check" />
-                  </div>
-                ) : (
-                  <div
-                    className="AlarmItem"
-                    onMouseDown={mouseDown}
-                    onMouseUp={mouseUp}
-                  >
-                    <i className="fa-regular fa-plus" />
-                  </div>
-                )}
-              </div>
-            </div>
-          );
-        case "stopwatch":
-          return (
-            <div className="stopwatch">
-              <div className="StopwatchTimer">
-                <div style={{ textAlign: "center", width: "90px" }}>
-                  <span className="active">
-                    {("0" + Math.floor((time / 60000) % 60)).slice(-2)}
-                  </span>
-                </div>
-                <span className={running ? "blinking" : ""}>:</span>
-                <div
-                  style={{
-                    textAlign: "center",
-                    width: "180px",
-                    display: "flex",
-                  }}
-                >
-                  <span className="active">
-                    {("0" + Math.floor((time / 1000) % 60)).slice(-2)}
-                  </span>
-                  <div>
-                    .
-                    <span className="StopwatchMs">
-                      {("0" + Math.floor((time / 10) % 100)).slice(-2)}
-                    </span>
-                  </div>
-                </div>
-              </div>
-              {running ? (
-                <div
-                  className="StopwatchButton stop"
-                  onClick={() => setRunning(false)}
-                >
-                  Stop
-                </div>
-              ) : (
-                <div
-                  className="StopwatchButton start"
-                  onClick={() => setRunning(true)}
-                >
-                  Start
-                </div>
-              )}
-            </div>
-          );
-        case "timer":
-          return (
-            <div className="timer">
-              <p>Nothing in this section.</p>
-            </div>
-          );
-      }
-    }
+    }, [curTime, curDate]);
 
     return (
-      <>
-        <TopBar title={t("apps.clock.name")} onDblClick={minimize}>
-          <TopBarInteraction
-            action="hide"
-            onHide={() => dispatch(setHide(true))}
-          />
-          <TopBarInteraction action={min ? "max" : "min"} onMinMax={minimize} />
-          <TopBarInteraction action="close" onClose={close} />
-        </TopBar>
-        <WindowBody>
-          <div className={`Clock ${alarmSettings ? "blackscr" : ""}`}>
-            <div className="ClockItems">{switchTab()}</div>
-            <div className="ClockMenu" value={value}>
-              <div className="ClockMenuInside">
-                <div
-                  className="ClockMenuItem world-clock"
-                  onClick={worldClockTab}
-                >
-                  <i className="fa-regular fa-globe" />
-                  <p>World Clock</p>
-                </div>
-                <div className="ClockMenuItem alarm-clock" onClick={alarmTab}>
-                  <i className="fa-regular fa-alarm-clock" />
-                  <p>Alarm</p>
-                </div>
-                <div className="ClockMenuItem stopwatch" onClick={stopwatchTab}>
-                  <i className="fa-regular fa-stopwatch" />
-                  <p>Stopwatch</p>
-                </div>
-                <div className="ClockMenuItem timer" onClick={timerTab}>
-                  <i className="fa-regular fa-timer" />
-                  <p>Timer</p>
-                </div>
-                <div
-                  className="ClockSlider"
-                  style={{ width: width, transform: translateX }}
-                ></div>
-              </div>
-            </div>
+      <div className="ClockItem">
+        <div className="ClockInfo">
+          <p className="ClockTitle">{props.title}</p>
+          <p className="ClockDesc">{curDate}</p>
+        </div>
+        <div>
+          <div className="ClockTime">
+            <p className="font-bold">{curTime}</p>
           </div>
-        </WindowBody>
-      </>
+        </div>
+      </div>
     );
   };
 
+  const [alarm, setAlarm] = useState([]);
+  const [alarmSettings, showAlarmSettings] = useState(false);
+  const [settings, allowSettings] = useState(false);
+
+  function addNewAlarm() {
+    let newAlarm = [...alarm];
+    let newTitle = `Alarm ${alarm.length + 1}`;
+    newAlarm = [...newAlarm, { id: newTitle, time: "07:00 AM" }];
+    setAlarm(newAlarm);
+    showAlarmSettings(false);
+  }
+
+  function removeAlarm(index) {
+    const deleteAlarm = alarm && alarm.filter((element, i) => i !== index);
+    setAlarm(deleteAlarm);
+  }
+
+  var mouseHold;
+
+  function mouseUp() {
+    if (mouseHold) window.clearTimeout(mouseHold);
+    addNewAlarm();
+  }
+
+  function mouseDown() {
+    mouseHold = window.setTimeout(() => showAlarmSettings(true), 800);
+  }
+
+  function editAlarm() {
+    allowSettings(!settings);
+    showAlarmSettings(false);
+  }
+
+  const [time, setTime] = useState(0);
+  const [running, setRunning] = useState(false);
+
+  useEffect(() => {
+    let interval;
+    if (running === true) {
+      interval = setInterval(() => {
+        setTime((prevTime) => prevTime + 10);
+      }, 10);
+    } else if (running === false) {
+      clearInterval(interval);
+      setTime(0);
+    }
+    return () => clearInterval(interval);
+  }, [running]);
+
+  function close() {
+    dispatch(setActive(false));
+    setTimeout(() => {
+      setRunning(false);
+    }, 300);
+  }
+
+  function switchTab() {
+    switch (tab) {
+      case "worldclock":
+        return (
+          <div className="world-clock">
+            <ClockItem
+              title="Ho Chi Minh City, Vietnam"
+              timeZone="Asia/Ho_Chi_Minh"
+            />
+            <ClockItem
+              title="London, United Kingdom"
+              timeZone="Europe/London"
+            />
+          </div>
+        );
+      case "alarm":
+        return (
+          <div className="alarm">
+            <div className="AlarmClock">
+              {alarm.length != 0 ? (
+                <div className="AlarmContainer">
+                  {alarm.map((e, index) => (
+                    <div className="AlarmContainerItem">
+                      {settings ? (
+                        <div className="AlarmSettings">
+                          <i className="fa-regular fa-bars reorder" />
+                          <i
+                            className="fa-regular fa-dash delete"
+                            onClick={() => removeAlarm(index)}
+                          />
+                        </div>
+                      ) : (
+                        ""
+                      )}
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                          width: "100%",
+                        }}
+                      >
+                        <p className="AlarmContainerTitle">{e.id}</p>
+                        <p className="AlarmContainerTime">{e.time}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="NoAlarm">
+                  <i
+                    className="fa-regular fa-alarm-clock"
+                    style={{ fontSize: "80px", margin: "20px" }}
+                  />
+                  <p style={{ fontWeight: "700", fontSize: "20px" }}>
+                    No Alarm
+                  </p>
+                </div>
+              )}
+              {alarmSettings ? (
+                <>
+                  <div
+                    className="AlarmItem showSettings"
+                    onMouseUp={() => showAlarmSettings(false)}
+                  >
+                    <i className="fa-regular fa-xmark" />
+                  </div>
+                  <div
+                    className={`AlarmItem ${
+                      alarm.length === 0 ? "disable" : ""
+                    } edit`}
+                    onMouseUp={editAlarm}
+                  >
+                    <p className="AlarmItemTitle">Edit</p>
+                    <i className="fa-regular fa-pen" />
+                  </div>
+                  <div
+                    className="AlarmItem settings"
+                    onMouseUp={() => showAlarmSettings(false)}
+                  >
+                    <p className="AlarmItemTitle">Settings</p>
+                    <i className="fa-regular fa-gear" />
+                  </div>
+                </>
+              ) : settings ? (
+                <div
+                  className="AlarmItem done"
+                  onMouseUp={() => allowSettings(false)}
+                >
+                  <i className="fa-regular fa-check" />
+                </div>
+              ) : (
+                <div
+                  className="AlarmItem"
+                  onMouseDown={mouseDown}
+                  onMouseUp={mouseUp}
+                >
+                  <i className="fa-regular fa-plus" />
+                </div>
+              )}
+            </div>
+          </div>
+        );
+      case "stopwatch":
+        return (
+          <div className="stopwatch">
+            <div className="StopwatchTimer">
+              <div style={{ textAlign: "center", width: "90px" }}>
+                <span className="active">
+                  {("0" + Math.floor((time / 60000) % 60)).slice(-2)}
+                </span>
+              </div>
+              <span className={running ? "blinking" : ""}>:</span>
+              <div
+                style={{
+                  textAlign: "center",
+                  width: "180px",
+                  display: "flex",
+                }}
+              >
+                <span className="active">
+                  {("0" + Math.floor((time / 1000) % 60)).slice(-2)}
+                </span>
+                <div>
+                  .
+                  <span className="StopwatchMs">
+                    {("0" + Math.floor((time / 10) % 100)).slice(-2)}
+                  </span>
+                </div>
+              </div>
+            </div>
+            {running ? (
+              <div
+                className="StopwatchButton stop"
+                onClick={() => setRunning(false)}
+              >
+                Stop
+              </div>
+            ) : (
+              <div
+                className="StopwatchButton start"
+                onClick={() => setRunning(true)}
+              >
+                Start
+              </div>
+            )}
+          </div>
+        );
+      case "timer":
+        return (
+          <div className="timer">
+            <p>Nothing in this section.</p>
+          </div>
+        );
+    }
+  }
+
   return (
     <div className="ClockWindow">
-      <div className="Window clock" key={Math.random()}>
-        <ClockWindow />
-      </div>
+      <Draggable handle=".TopBar">
+        <div
+          className={`Window clock ${isActive && "active"} ${
+            isHide && "hide"
+          } ${min && "minimize"}`}
+        >
+          <TopBar title={t("apps.clock.name")} onDblClick={() => isMin(!min)}>
+            <TopBarInteraction
+              action="hide"
+              onHide={() => dispatch(setHide(true))}
+            />
+            <TopBarInteraction
+              action={min ? "max" : "min"}
+              onMinMax={() => isMin(!min)}
+            />
+            <TopBarInteraction action="close" onClose={close} />
+          </TopBar>
+          <WindowBody>
+            <div className={`Clock ${alarmSettings ? "blackscr" : ""}`}>
+              <div className="ClockItems">{switchTab()}</div>
+              <div className="ClockMenu" value={value}>
+                <div className="ClockMenuInside">
+                  <div
+                    className="ClockMenuItem world-clock"
+                    onClick={worldClockTab}
+                  >
+                    <i className="fa-regular fa-globe" />
+                    <p>World Clock</p>
+                  </div>
+                  <div className="ClockMenuItem alarm-clock" onClick={alarmTab}>
+                    <i className="fa-regular fa-alarm-clock" />
+                    <p>Alarm</p>
+                  </div>
+                  <div
+                    className="ClockMenuItem stopwatch"
+                    onClick={stopwatchTab}
+                  >
+                    <i className="fa-regular fa-stopwatch" />
+                    <p>Stopwatch</p>
+                  </div>
+                  <div className="ClockMenuItem timer" onClick={timerTab}>
+                    <i className="fa-regular fa-timer" />
+                    <p>Timer</p>
+                  </div>
+                  <div
+                    className="ClockSlider"
+                    style={{ width: width, transform: translateX }}
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </WindowBody>
+        </div>
+      </Draggable>
     </div>
   );
 }

@@ -11,6 +11,7 @@ import StartApp from "../../components/startMenu/StartApp";
 import SurfaceIcon from "../../icons/surface.svg";
 import { setHeaderHide } from "../../reducers/header";
 import { useTranslation } from "react-i18next";
+import { setDesktopBodyActive } from "../../reducers/desktopbody";
 
 export const SoftwareStoreApp = () => {
   const { t } = useTranslation();
@@ -103,7 +104,7 @@ export const SoftwareStoreStartApp = () => {
       .getElementsByClassName("StartMenuWrapper")[0]
       .classList.remove("active");
     dispatch(setHeaderHide(false));
-    document.getElementsByClassName("DesktopBody")[0].classList.add("active");
+    dispatch(setDesktopBodyActive(true));
     if (isHide) {
       dispatch(setHide(false));
     } else {

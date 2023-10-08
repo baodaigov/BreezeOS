@@ -14,18 +14,19 @@ import { SoftwareStoreStartApp } from "../../containers/apps/softwarestore";
 import { CalendarStartApp } from "../../containers/apps/calendar";
 import { VSCodeStartApp } from "../../containers/apps/vscode";
 import { setHeaderHide } from "../../reducers/header";
+import { setDesktopBodyActive } from "../../reducers/desktopbody";
+import { setStartMenuActive } from "../../reducers/startmenu";
 
 export default function StartMenu() {
+  const isActive = useSelector((state) => state.startmenu.active);
   const icon = useSelector((state) => state.appearance.iconTheme);
   const dispatch = useDispatch();
 
   document.addEventListener("keydown", (e) => {
     if (e.keyCode === 27) {
-      document
-        .getElementsByClassName("StartMenuWrapper")[0]
-        .classList.remove("active");
+      dispatch(setStartMenuActive(false));
       dispatch(setHeaderHide(false));
-      document.getElementsByClassName("DesktopBody")[0].classList.add("active");
+      dispatch(setDesktopBodyActive(true));
     }
   });
 
@@ -68,7 +69,7 @@ export default function StartMenu() {
   }
 
   return (
-    <div className="StartMenuWrapper">
+    <div className={`StartMenuWrapper ${isActive && "active"}`}>
       <div className="StartMenu">
         <div className="SearchMenu">
           <input

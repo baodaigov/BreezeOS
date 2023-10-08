@@ -6,28 +6,19 @@ import {
   toggleBluetooth,
   toggleWifi,
   toggleLightMode,
-  toggleDarkMode,
-  enableBoldText,
-  disableBoldText,
+  setBoldText,
 } from "../../reducers/settings";
 import { switchType } from "../../reducers/panel";
 import "./Panel.scss";
 import { useTranslation } from "react-i18next";
+import { setDesktopNightShift } from "../../reducers/desktop";
 
 const PanelItemLarge = ({ type }) => {
   const { t } = useTranslation();
   const settingsReducer = useSelector((state) => state.settings);
+  const nightShift = useSelector((state) => state.desktop.nightShift);
 
   const dispatch = useDispatch();
-
-  const [isActive, setActive] = useState(true);
-
-  const nightShift = () => {
-    setActive(!isActive);
-    document
-      .getElementsByClassName("Desktop")[0]
-      .classList.toggle("NightShiftEnabled");
-  };
 
   switch (type) {
     case "wifi":
@@ -103,79 +94,47 @@ const PanelItemLarge = ({ type }) => {
       );
     case "dark-mode":
       return (
-        <>
-          {settingsReducer.themeLight ? (
-            <div
-              className="PanelItemLarge"
-              onClick={() => dispatch(toggleDarkMode())}
-            >
-              <i className="fa-solid fa-circle-half-stroke" />
-              <p className="font-bold">{t("panel.darkMode")}</p>
-            </div>
-          ) : (
-            <div
-              className="PanelItemLarge focused"
-              onClick={() => dispatch(toggleLightMode())}
-            >
-              <i className="fa-solid fa-circle-half-stroke" />
-              <p className="font-bold">{t("panel.darkMode")}</p>
-            </div>
-          )}
-        </>
+        <div
+          className={`PanelItemLarge ${
+            !settingsReducer.themeLight && "focused"
+          }`}
+          onClick={() => dispatch(toggleLightMode(!settingsReducer.themeLight))}
+        >
+          <i className="fa-solid fa-circle-half-stroke" />
+          <p className="font-bold">{t("panel.darkMode")}</p>
+        </div>
       );
     case "airplane-mode":
       return (
-        <>
-          {settingsReducer.airplaneMode ? (
-            <div
-              className="PanelItemLarge focused"
-              onClick={() => dispatch(toggleAirplaneModeOff())}
-            >
-              <i className="fa-solid fa-plane" />
-              <p className="font-bold">{t("panel.airplaneMode")}</p>
-            </div>
-          ) : (
-            <div
-              className="PanelItemLarge"
-              onClick={() => dispatch(toggleAirplaneModeOn())}
-            >
-              <i className="fa-solid fa-plane" />
-              <p className="font-bold">{t("panel.airplaneMode")}</p>
-            </div>
-          )}
-        </>
+        <div
+          className={`PanelItemLarge ${
+            settingsReducer.airplaneMode && "focused"
+          }`}
+          onClick={() => dispatch(toggleAirplaneModeOn())}
+        >
+          <i className="fa-solid fa-plane" />
+          <p className="font-bold">{t("panel.airplaneMode")}</p>
+        </div>
       );
-    case "night-light":
+    case "night-shift":
       return (
         <div
-          className={`PanelItemLarge ${isActive ? "" : "focused"}`}
-          onClick={nightShift}
+          className={`PanelItemLarge ${nightShift && "focused"}`}
+          onClick={() => dispatch(setDesktopNightShift(!nightShift))}
         >
           <i className="fa-regular fa-brightness" />
-          <p className="font-bold">{t("panel.nightLight")}</p>
+          <p className="font-bold">{t("panel.nightShift")}</p>
         </div>
       );
     case "bold-text":
       return (
-        <>
-          {settingsReducer.boldText ? (
-            <div
-              className="PanelItemLarge focused"
-              onClick={() => dispatch(disableBoldText())}
-            >
-              <i className="fa-solid fa-b" />
-              <p className="font-bold">{t("panel.boldText")}</p>
-            </div>
-          ) : (
-            <div
-              className="PanelItemLarge"
-              onClick={() => dispatch(enableBoldText())}
-            >
-              <i className="fa-solid fa-b" />
-              <p className="font-bold">{t("panel.boldText")}</p>
-            </div>
-          )}
-        </>
+        <div
+          className={`PanelItemLarge ${settingsReducer.boldText && "focused"}`}
+          onClick={() => dispatch(setBoldText(!settingsReducer.isBold))}
+        >
+          <i className="fa-solid fa-b" />
+          <p className="font-bold">{t("panel.boldText")}</p>
+        </div>
       );
     default:
       return (

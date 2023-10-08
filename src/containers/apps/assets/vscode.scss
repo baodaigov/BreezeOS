@@ -2,28 +2,9 @@ $bgcolor: #202023e5;
 $fgcolor: #e2e2e2;
 
 .VSCodeWindow {
-  * {
-    transition: all ease 0.3s;
-  }
-
   .vscode {
     width: 100vw;
     height: 100%;
-    transform: scale(0.92);
-    opacity: 0;
-    pointer-events: none;
-    transition: all ease 0.3s;
-
-    &.active {
-      transform: scale(1);
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    &.hide {
-      top: 153%;
-      pointer-events: none;
-    }
 
     &.minimize {
       width: 1000px;

@@ -14,6 +14,9 @@ import TopBarInteraction from "../../components/utils/window/TopBarInteraction";
 import StartApp from "../../components/startMenu/StartApp";
 import { setHeaderHide } from "../../reducers/header";
 import { useTranslation } from "react-i18next";
+import { setStartMenuActive } from "../../reducers/startmenu";
+import { setDesktopBodyActive } from "../../reducers/desktopbody";
+import Draggable from "react-draggable";
 
 export const CalculatorApp = () => {
   const { t } = useTranslation();
@@ -31,41 +34,10 @@ export const CalculatorApp = () => {
     }
   });
 
-  useEffect(() => {
-    if (isActive) {
-      document
-        .getElementsByClassName("CalculatorApp")[0]
-        .classList.add("clicked");
-      setTimeout(
-        () =>
-          document
-            .getElementsByClassName("calculator")[0]
-            .classList.add("active"),
-        500
-      );
-    } else {
-      document
-        .getElementsByClassName("CalculatorApp")[0]
-        .classList.remove("clicked");
-      document
-        .getElementsByClassName("calculator")[0]
-        .classList.remove("active");
-    }
-    if (isHide) {
-      document.getElementsByClassName("CalculatorApp")[0].classList.add("hide");
-      document.getElementsByClassName("calculator")[0].classList.add("hide");
-    } else {
-      document
-        .getElementsByClassName("CalculatorApp")[0]
-        .classList.remove("hide");
-      document.getElementsByClassName("calculator")[0].classList.remove("hide");
-    }
-  }, [isActive, isHide]);
-
   return (
     <DockItem
       id="calculator"
-      className="CalculatorApp"
+      className={`CalculatorApp ${isActive && "clicked"} ${isHide && "hide"}`}
       title={t("apps.calculator.name")}
       icon={
         icon === "WhiteSur-icon-theme"
@@ -107,11 +79,9 @@ export const CalculatorStartApp = () => {
   const icon = useSelector((state) => state.appearance.iconTheme);
 
   const toggle = () => {
-    document
-      .getElementsByClassName("StartMenuWrapper")[0]
-      .classList.remove("active");
+    dispatch(setStartMenuActive(false));
     dispatch(setHeaderHide(false));
-    document.getElementsByClassName("DesktopBody")[0].classList.add("active");
+    dispatch(setDesktopBodyActive(true));
     if (isHide) {
       dispatch(setHide(false));
     } else {
@@ -135,617 +105,618 @@ export const CalculatorStartApp = () => {
 
 export default function Calculator() {
   const dispatch = useDispatch();
+  const isActive = useSelector((state) => state.appsCalculator.active);
+  const isHide = useSelector((state) => state.appsCalculator.hide);
+  const { t } = useTranslation();
+  const [keysType, setKeysType] = useState(null);
+  const [isShift, setIsShift] = useState(false);
+  const [isRad, setIsRad] = useState(false);
+  const btnValues = [
+    ["C", "+-", "%", "÷"],
+    [7, 8, 9, "×"],
+    [4, 5, 6, "-"],
+    [1, 2, 3, "+"],
+    [0, ".", "="],
+  ];
 
-  const CalculatorWindow = () => {
-    const { t } = useTranslation();
-    const [keysType, setKeysType] = useState(null);
-    const [isShift, setIsShift] = useState(false);
-    const [isRad, setIsRad] = useState(false);
-    const btnValues = [
-      ["C", "+-", "%", "÷"],
-      [7, 8, 9, "×"],
-      [4, 5, 6, "-"],
-      [1, 2, 3, "+"],
-      [0, ".", "="],
-    ];
+  const advancedBtnValues = [
+    ["(", ")", "MC", "M+", "M-", "MR"],
+    ["Shift", "x²", "x³", "xʸ", "yˣ", "2ˣ"],
+    ["1/x", "√x", "³√x", "ʸ√x", "logₓ", "log₂"],
+    ["x!", "sin⁻¹", "cos⁻¹", "tan⁻¹", "e", "EE"],
+    ["Rad", "sinh⁻¹", "cosh⁻¹", "tanh⁻¹", "π", "Rand"],
+    ["(", ")", "MC", "M+", "M-", "MR"],
+    ["Shift", "x²", "x³", "xʸ", "eˣ", "10ˣ"],
+    ["1/x", "√x", "³√x", "ʸ√x", "ln", "log₁₀"],
+    ["x!", "sin", "cos", "tan", "e", "EE"],
+    ["Rad", "sinh", "cosh", "tanh", "π", "Rand"],
+  ];
 
-    const advancedBtnValues = [
-      ["(", ")", "MC", "M+", "M-", "MR"],
-      ["Shift", "x²", "x³", "xʸ", "yˣ", "2ˣ"],
-      ["1/x", "√x", "³√x", "ʸ√x", "logₓ", "log₂"],
-      ["x!", "sin⁻¹", "cos⁻¹", "tan⁻¹", "e", "EE"],
-      ["Rad", "sinh⁻¹", "cosh⁻¹", "tanh⁻¹", "π", "Rand"],
-      ["(", ")", "MC", "M+", "M-", "MR"],
-      ["Shift", "x²", "x³", "xʸ", "eˣ", "10ˣ"],
-      ["1/x", "√x", "³√x", "ʸ√x", "ln", "log₁₀"],
-      ["x!", "sin", "cos", "tan", "e", "EE"],
-      ["Rad", "sinh", "cosh", "tanh", "π", "Rand"],
-    ];
+  useEffect(() => {
+    const shiftKeys = JSON.parse(JSON.stringify(advancedBtnValues));
 
-    useEffect(() => {
-      const shiftKeys = JSON.parse(JSON.stringify(advancedBtnValues));
+    if (isShift) {
+      setKeysType(shiftKeys.splice(0, 5));
+    } else {
+      setKeysType(shiftKeys.splice(-5, 5));
+    }
+  }, [isShift]);
 
-      if (isShift) {
-        setKeysType(shiftKeys.splice(0, 5));
-      } else {
-        setKeysType(shiftKeys.splice(-5, 5));
+  const toLocaleString = (num) =>
+    String(num).replace(/(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g, "$1");
+
+  const removeSpaces = (num) => num.toString().replace(/\s/g, "");
+
+  let [calc, setCalc] = useState({
+    sign: "",
+    num: 0,
+    res: 0,
+  });
+
+  const numClickHandler = (e) => {
+    e.preventDefault();
+    const value = e.target.innerHTML;
+
+    if (removeSpaces(calc.num).length < 16) {
+      setCalc({
+        ...calc,
+        num:
+          calc.num === 0 && value === "0"
+            ? "0"
+            : removeSpaces(calc.num) % 1 === 0
+            ? toLocaleString(Number(removeSpaces(calc.num + value)))
+            : toLocaleString(calc.num + value),
+        res: !calc.sign ? 0 : calc.res,
+      });
+    }
+  };
+
+  const commaClickHandler = (e) => {
+    e.preventDefault();
+    const value = e.target.innerHTML;
+
+    setCalc({
+      ...calc,
+      num: !calc.num.toString().includes(".") ? calc.num + value : calc.num,
+    });
+  };
+
+  const signClickHandler = (e) => {
+    e.preventDefault();
+    const value = e.target.innerHTML;
+
+    setCalc({
+      ...calc,
+      sign: value,
+      res: !calc.res && calc.num ? calc.num : calc.res,
+      num: 0,
+    });
+  };
+
+  const equalsClickHandler = () => {
+    if (calc.sign && calc.num) {
+      const math = (a, b, sign) =>
+        sign === "+"
+          ? a + b
+          : sign === "-"
+          ? a - b
+          : sign === "×"
+          ? a * b
+          : a / b;
+
+      setCalc({
+        ...calc,
+        res:
+          calc.num === "0" && calc.sign === "÷"
+            ? "Error"
+            : toLocaleString(
+                math(
+                  Number(removeSpaces(calc.res)),
+                  Number(removeSpaces(calc.num)),
+                  calc.sign
+                )
+              ),
+        sign: "",
+        num: 0,
+      });
+
+      dispatch(
+        setRecentResult(
+          calc.num === "0" && calc.sign === "÷"
+            ? "Error"
+            : toLocaleString(
+                math(
+                  Number(removeSpaces(calc.res)),
+                  Number(removeSpaces(calc.num)),
+                  calc.sign
+                )
+              )
+        )
+      );
+    }
+  };
+
+  const invertClickHandler = () => {
+    setCalc({
+      ...calc,
+      num: calc.num ? toLocaleString(removeSpaces(calc.num) * -1) : 0,
+      res: calc.res ? toLocaleString(removeSpaces(calc.res) * -1) : 0,
+      sign: "",
+    });
+  };
+
+  const percentClickHandler = () => {
+    let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
+    let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
+
+    setCalc({
+      ...calc,
+      num: (num /= 100),
+      res: (res /= 100),
+      sign: "",
+    });
+  };
+
+  const powerClickHandler = (value) => {
+    let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
+    let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
+
+    setCalc({
+      ...calc,
+      num: Math.pow(num, value),
+      res: Math.pow(res, value),
+      sign: "",
+    });
+  };
+
+  const equationPowerClickHandler = () => {
+    let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
+    let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
+
+    setCalc({
+      ...calc,
+      num: Math.pow(Math.E, num),
+      res: Math.pow(Math.E, res),
+      sign: "",
+    });
+  };
+
+  const tenPowerClickHandler = () => {
+    let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
+    let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
+
+    setCalc({
+      ...calc,
+      num: Math.pow(10, num),
+      res: Math.pow(10, res),
+      sign: "",
+    });
+  };
+
+  const twoPowerClickHandler = () => {
+    let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
+    let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
+
+    setCalc({
+      ...calc,
+      num: Math.pow(2, num),
+      res: Math.pow(2, res),
+      sign: "",
+    });
+  };
+
+  const fractionClickHandler = () => {
+    let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
+    let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
+
+    setCalc({
+      ...calc,
+      num: 1 / num,
+      res: 1 / res,
+      sign: "",
+    });
+  };
+
+  const squareRootClickHandler = () => {
+    let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
+    let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
+
+    setCalc({
+      ...calc,
+      num: Math.sqrt(num),
+      res: Math.sqrt(res),
+      sign: "",
+    });
+  };
+
+  const cubeRootClickHandler = () => {
+    let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
+    let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
+
+    setCalc({
+      ...calc,
+      num: Math.cbrt(num),
+      res: Math.cbrt(res),
+      sign: "",
+    });
+  };
+
+  const naturalLogarithmClickHandler = () => {
+    let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
+    let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
+
+    setCalc({
+      ...calc,
+      num: Math.log(num),
+      res: Math.log(res),
+      sign: "",
+    });
+  };
+
+  const naturalLogarithmBaseTenClickHandler = () => {
+    let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
+    let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
+
+    setCalc({
+      ...calc,
+      num: Math.log10(num),
+      res: Math.log10(res),
+      sign: "",
+    });
+  };
+
+  const sinClickHandler = () => {
+    let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
+    let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
+
+    setCalc({
+      ...calc,
+      num: isRad ? Math.sin(num) : Math.sin(num * (Math.PI / 180)),
+      res: isRad ? Math.sin(res) : Math.sin(res * (Math.PI / 180)),
+      sign: "",
+    });
+  };
+
+  const cosClickHandler = () => {
+    let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
+    let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
+
+    setCalc({
+      ...calc,
+      num: isRad ? Math.cos(num) : Math.cos(num * (Math.PI / 180)),
+      res: isRad ? Math.cos(res) : Math.cos(res * (Math.PI / 180)),
+      sign: "",
+    });
+  };
+
+  const tanClickHandler = () => {
+    let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
+    let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
+
+    setCalc({
+      ...calc,
+      num: isRad ? Math.tan(num) : Math.tan(num * (Math.PI / 180)),
+      res: isRad ? Math.tan(res) : Math.tan(res * (Math.PI / 180)),
+      sign: "",
+    });
+  };
+
+  const arcsinClickHandler = () => {
+    let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
+    let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
+
+    setCalc({
+      ...calc,
+      num: isRad ? Math.asin(num) : Math.asin(num * (Math.PI / 180)),
+      res: isRad ? Math.asin(res) : Math.asin(res * (Math.PI / 180)),
+      sign: "",
+    });
+  };
+
+  const arccosClickHandler = () => {
+    let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
+    let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
+
+    setCalc({
+      ...calc,
+      num: isRad ? Math.acos(num) : Math.acos(num * (Math.PI / 180)),
+      res: isRad ? Math.acos(res) : Math.acos(res * (Math.PI / 180)),
+      sign: "",
+    });
+  };
+
+  const arctanClickHandler = () => {
+    let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
+    let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
+
+    setCalc({
+      ...calc,
+      num: isRad ? Math.atan(num) : Math.atan(num * (Math.PI / 180)),
+      res: isRad ? Math.atan(res) : Math.atan(res * (Math.PI / 180)),
+      sign: "",
+    });
+  };
+
+  const sinhClickHandler = () => {
+    let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
+    let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
+
+    setCalc({
+      ...calc,
+      num: Math.sinh(num),
+      res: Math.sinh(res),
+      sign: "",
+    });
+  };
+
+  const coshClickHandler = () => {
+    let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
+    let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
+
+    setCalc({
+      ...calc,
+      num: Math.cosh(num),
+      res: Math.cosh(res),
+      sign: "",
+    });
+  };
+
+  const tanhClickHandler = () => {
+    let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
+    let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
+
+    setCalc({
+      ...calc,
+      num: Math.tanh(num),
+      res: Math.tanh(res),
+      sign: "",
+    });
+  };
+
+  const arcsinhClickHandler = () => {
+    let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
+    let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
+
+    setCalc({
+      ...calc,
+      num: Math.asinh(num),
+      res: Math.asinh(res),
+      sign: "",
+    });
+  };
+
+  const arccoshClickHandler = () => {
+    let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
+    let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
+
+    setCalc({
+      ...calc,
+      num: Math.acosh(num),
+      res: Math.acosh(res),
+      sign: "",
+    });
+  };
+
+  const arctanhClickHandler = () => {
+    let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
+    let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
+
+    setCalc({
+      ...calc,
+      num: Math.atanh(num),
+      res: Math.atanh(res),
+      sign: "",
+    });
+  };
+
+  const equationClickHandler = () => {
+    setCalc({
+      ...calc,
+      num: Math.E,
+      res: Math.E,
+      sign: "",
+    });
+  };
+
+  const factorialClickHandler = () => {
+    let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
+    let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
+
+    function factorial(n) {
+      let fact = 1;
+      for (let i = 1; i <= n; i++) {
+        fact *= i;
       }
-    }, [isShift]);
+      return fact;
+    }
 
-    const toLocaleString = (num) =>
-      String(num).replace(/(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g, "$1");
+    setCalc({
+      ...calc,
+      num: factorial(num),
+      res: factorial(res),
+      sign: "",
+    });
+  };
 
-    const removeSpaces = (num) => num.toString().replace(/\s/g, "");
+  const randClickHandler = () => {
+    setCalc({
+      ...calc,
+      num: Math.random(),
+      res: Math.random(),
+      sign: "",
+    });
+  };
 
-    let [calc, setCalc] = useState({
+  const piClickHandler = () => {
+    setCalc({
+      ...calc,
+      num: Math.PI,
+      res: Math.PI,
+      sign: "",
+    });
+  };
+
+  const resetClickHandler = () => {
+    setCalc({
+      ...calc,
       sign: "",
       num: 0,
       res: 0,
     });
-
-    const numClickHandler = (e) => {
-      e.preventDefault();
-      const value = e.target.innerHTML;
-
-      if (removeSpaces(calc.num).length < 16) {
-        setCalc({
-          ...calc,
-          num:
-            calc.num === 0 && value === "0"
-              ? "0"
-              : removeSpaces(calc.num) % 1 === 0
-              ? toLocaleString(Number(removeSpaces(calc.num + value)))
-              : toLocaleString(calc.num + value),
-          res: !calc.sign ? 0 : calc.res,
-        });
-      }
-    };
-
-    const commaClickHandler = (e) => {
-      e.preventDefault();
-      const value = e.target.innerHTML;
-
-      setCalc({
-        ...calc,
-        num: !calc.num.toString().includes(".") ? calc.num + value : calc.num,
-      });
-    };
-
-    const signClickHandler = (e) => {
-      e.preventDefault();
-      const value = e.target.innerHTML;
-
-      setCalc({
-        ...calc,
-        sign: value,
-        res: !calc.res && calc.num ? calc.num : calc.res,
-        num: 0,
-      });
-    };
-
-    const equalsClickHandler = () => {
-      if (calc.sign && calc.num) {
-        const math = (a, b, sign) =>
-          sign === "+"
-            ? a + b
-            : sign === "-"
-            ? a - b
-            : sign === "×"
-            ? a * b
-            : a / b;
-
-        setCalc({
-          ...calc,
-          res:
-            calc.num === "0" && calc.sign === "÷"
-              ? "Error"
-              : toLocaleString(
-                  math(
-                    Number(removeSpaces(calc.res)),
-                    Number(removeSpaces(calc.num)),
-                    calc.sign
-                  )
-                ),
-          sign: "",
-          num: 0,
-        });
-
-        dispatch(
-          setRecentResult(
-            calc.num === "0" && calc.sign === "÷"
-              ? "Error"
-              : toLocaleString(
-                  math(
-                    Number(removeSpaces(calc.res)),
-                    Number(removeSpaces(calc.num)),
-                    calc.sign
-                  )
-                )
-          )
-        );
-      }
-    };
-
-    const invertClickHandler = () => {
-      setCalc({
-        ...calc,
-        num: calc.num ? toLocaleString(removeSpaces(calc.num) * -1) : 0,
-        res: calc.res ? toLocaleString(removeSpaces(calc.res) * -1) : 0,
-        sign: "",
-      });
-    };
-
-    const percentClickHandler = () => {
-      let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
-      let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
-
-      setCalc({
-        ...calc,
-        num: (num /= 100),
-        res: (res /= 100),
-        sign: "",
-      });
-    };
-
-    const powerClickHandler = (value) => {
-      let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
-      let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
-
-      setCalc({
-        ...calc,
-        num: Math.pow(num, value),
-        res: Math.pow(res, value),
-        sign: "",
-      });
-    };
-
-    const equationPowerClickHandler = () => {
-      let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
-      let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
-
-      setCalc({
-        ...calc,
-        num: Math.pow(Math.E, num),
-        res: Math.pow(Math.E, res),
-        sign: "",
-      });
-    };
-
-    const tenPowerClickHandler = () => {
-      let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
-      let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
-
-      setCalc({
-        ...calc,
-        num: Math.pow(10, num),
-        res: Math.pow(10, res),
-        sign: "",
-      });
-    };
-
-    const twoPowerClickHandler = () => {
-      let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
-      let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
-
-      setCalc({
-        ...calc,
-        num: Math.pow(2, num),
-        res: Math.pow(2, res),
-        sign: "",
-      });
-    };
-
-    const fractionClickHandler = () => {
-      let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
-      let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
-
-      setCalc({
-        ...calc,
-        num: 1 / num,
-        res: 1 / res,
-        sign: "",
-      });
-    };
-
-    const squareRootClickHandler = () => {
-      let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
-      let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
-
-      setCalc({
-        ...calc,
-        num: Math.sqrt(num),
-        res: Math.sqrt(res),
-        sign: "",
-      });
-    };
-
-    const cubeRootClickHandler = () => {
-      let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
-      let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
-
-      setCalc({
-        ...calc,
-        num: Math.cbrt(num),
-        res: Math.cbrt(res),
-        sign: "",
-      });
-    };
-
-    const naturalLogarithmClickHandler = () => {
-      let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
-      let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
-
-      setCalc({
-        ...calc,
-        num: Math.log(num),
-        res: Math.log(res),
-        sign: "",
-      });
-    };
-
-    const naturalLogarithmBaseTenClickHandler = () => {
-      let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
-      let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
-
-      setCalc({
-        ...calc,
-        num: Math.log10(num),
-        res: Math.log10(res),
-        sign: "",
-      });
-    };
-
-    const sinClickHandler = () => {
-      let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
-      let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
-
-      setCalc({
-        ...calc,
-        num: isRad ? Math.sin(num) : Math.sin(num * (Math.PI / 180)),
-        res: isRad ? Math.sin(res) : Math.sin(res * (Math.PI / 180)),
-        sign: "",
-      });
-    };
-
-    const cosClickHandler = () => {
-      let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
-      let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
-
-      setCalc({
-        ...calc,
-        num: isRad ? Math.cos(num) : Math.cos(num * (Math.PI / 180)),
-        res: isRad ? Math.cos(res) : Math.cos(res * (Math.PI / 180)),
-        sign: "",
-      });
-    };
-
-    const tanClickHandler = () => {
-      let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
-      let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
-
-      setCalc({
-        ...calc,
-        num: isRad ? Math.tan(num) : Math.tan(num * (Math.PI / 180)),
-        res: isRad ? Math.tan(res) : Math.tan(res * (Math.PI / 180)),
-        sign: "",
-      });
-    };
-
-    const arcsinClickHandler = () => {
-      let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
-      let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
-
-      setCalc({
-        ...calc,
-        num: isRad ? Math.asin(num) : Math.asin(num * (Math.PI / 180)),
-        res: isRad ? Math.asin(res) : Math.asin(res * (Math.PI / 180)),
-        sign: "",
-      });
-    };
-
-    const arccosClickHandler = () => {
-      let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
-      let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
-
-      setCalc({
-        ...calc,
-        num: isRad ? Math.acos(num) : Math.acos(num * (Math.PI / 180)),
-        res: isRad ? Math.acos(res) : Math.acos(res * (Math.PI / 180)),
-        sign: "",
-      });
-    };
-
-    const arctanClickHandler = () => {
-      let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
-      let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
-
-      setCalc({
-        ...calc,
-        num: isRad ? Math.atan(num) : Math.atan(num * (Math.PI / 180)),
-        res: isRad ? Math.atan(res) : Math.atan(res * (Math.PI / 180)),
-        sign: "",
-      });
-    };
-
-    const sinhClickHandler = () => {
-      let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
-      let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
-
-      setCalc({
-        ...calc,
-        num: Math.sinh(num),
-        res: Math.sinh(res),
-        sign: "",
-      });
-    };
-
-    const coshClickHandler = () => {
-      let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
-      let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
-
-      setCalc({
-        ...calc,
-        num: Math.cosh(num),
-        res: Math.cosh(res),
-        sign: "",
-      });
-    };
-
-    const tanhClickHandler = () => {
-      let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
-      let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
-
-      setCalc({
-        ...calc,
-        num: Math.tanh(num),
-        res: Math.tanh(res),
-        sign: "",
-      });
-    };
-
-    const arcsinhClickHandler = () => {
-      let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
-      let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
-
-      setCalc({
-        ...calc,
-        num: Math.asinh(num),
-        res: Math.asinh(res),
-        sign: "",
-      });
-    };
-
-    const arccoshClickHandler = () => {
-      let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
-      let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
-
-      setCalc({
-        ...calc,
-        num: Math.acosh(num),
-        res: Math.acosh(res),
-        sign: "",
-      });
-    };
-
-    const arctanhClickHandler = () => {
-      let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
-      let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
-
-      setCalc({
-        ...calc,
-        num: Math.atanh(num),
-        res: Math.atanh(res),
-        sign: "",
-      });
-    };
-
-    const equationClickHandler = () => {
-      setCalc({
-        ...calc,
-        num: Math.E,
-        res: Math.E,
-        sign: "",
-      });
-    };
-
-    const factorialClickHandler = () => {
-      let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
-      let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
-
-      function factorial(n) {
-        let fact = 1;
-        for (let i = 1; i <= n; i++) {
-          fact *= i;
-        }
-        return fact;
-      }
-
-      setCalc({
-        ...calc,
-        num: factorial(num),
-        res: factorial(res),
-        sign: "",
-      });
-    };
-
-    const randClickHandler = () => {
-      setCalc({
-        ...calc,
-        num: Math.random(),
-        res: Math.random(),
-        sign: "",
-      });
-    };
-
-    const piClickHandler = () => {
-      setCalc({
-        ...calc,
-        num: Math.PI,
-        res: Math.PI,
-        sign: "",
-      });
-    };
-
-    const resetClickHandler = () => {
-      setCalc({
-        ...calc,
-        sign: "",
-        num: 0,
-        res: 0,
-      });
-    };
-
-    function minimize() {
-      document
-        .getElementsByClassName("calculator")[0]
-        .classList.toggle("minimize");
-      isMin(!min);
-    }
-
-    const [min, isMin] = useState(true);
-
-    function close() {
-      dispatch(setActive(false));
-      resetClickHandler();
-    }
-
-    return (
-      <>
-        <TopBar title={t("apps.calculator.name")} onDblClick={minimize}>
-          <TopBarInteraction
-            action="hide"
-            onHide={() => dispatch(setHide(true))}
-          />
-          <TopBarInteraction action={min ? "max" : "min"} onMinMax={minimize} />
-          <TopBarInteraction action="close" onClose={close} />
-        </TopBar>
-        <WindowBody>
-          <div className="Calculator">
-            <div className="CalculatorScreen">
-              <p>{calc.num ? calc.num : calc.res}</p>
-            </div>
-            <div className="CalculatorWrapper">
-              <div className={`CalculatorAdvanced ${!min && "expand"}`}>
-                <div className="CalculatorSection" style={{ paddingRight: 0 }}>
-                  {keysType?.flat().map((btn, i) => {
-                    return (
-                      <div
-                        key={i}
-                        className={`CalculatorButton ${
-                          btn === "Shift" && `shift ${isShift && "active"}`
-                        } ${btn === "Rad" && `rad ${isRad && "active"}`}`}
-                        onClick={
-                          btn === "Shift"
-                            ? () => setIsShift(!isShift)
-                            : btn === "√x"
-                            ? squareRootClickHandler
-                            : btn === "³√x"
-                            ? cubeRootClickHandler
-                            : btn === "x²"
-                            ? () => powerClickHandler(2)
-                            : btn === "x³"
-                            ? () => powerClickHandler(3)
-                            : btn === "eˣ"
-                            ? equationPowerClickHandler
-                            : btn === "10ˣ"
-                            ? tenPowerClickHandler
-                            : btn === "2ˣ"
-                            ? twoPowerClickHandler
-                            : btn === "1/x"
-                            ? fractionClickHandler
-                            : btn === "ln"
-                            ? naturalLogarithmClickHandler
-                            : btn === "log₁₀"
-                            ? naturalLogarithmBaseTenClickHandler
-                            : btn === "sin"
-                            ? sinClickHandler
-                            : btn === "cos"
-                            ? cosClickHandler
-                            : btn === "tan"
-                            ? tanClickHandler
-                            : btn === "sinh"
-                            ? sinhClickHandler
-                            : btn === "cosh"
-                            ? coshClickHandler
-                            : btn === "tanh"
-                            ? tanhClickHandler
-                            : btn === "sin⁻¹"
-                            ? arcsinClickHandler
-                            : btn === "cos⁻¹"
-                            ? arccosClickHandler
-                            : btn === "tan⁻¹"
-                            ? arctanClickHandler
-                            : btn === "sinh⁻¹"
-                            ? arcsinhClickHandler
-                            : btn === "cosh⁻¹"
-                            ? arccoshClickHandler
-                            : btn === "tanh⁻¹"
-                            ? arctanhClickHandler
-                            : btn === "e"
-                            ? equationClickHandler
-                            : btn === "x!"
-                            ? factorialClickHandler
-                            : btn === "Rand"
-                            ? randClickHandler
-                            : btn === "π"
-                            ? piClickHandler
-                            : btn === "Rad"
-                            ? () => setIsRad(!isRad)
-                            : null
-                        }
-                      >
-                        {btn}
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-              <div className="CalculatorBasic">
-                <div className="CalculatorSection">
-                  {btnValues.flat().map((btn, i) => {
-                    return (
-                      <div
-                        key={i}
-                        className={`CalculatorButton ${
-                          btn === "=" && "equals"
-                        }`}
-                        onClick={
-                          btn === "C"
-                            ? resetClickHandler
-                            : btn === "+-"
-                            ? invertClickHandler
-                            : btn === "%"
-                            ? percentClickHandler
-                            : btn === "="
-                            ? equalsClickHandler
-                            : btn === "÷" ||
-                              btn === "×" ||
-                              btn === "-" ||
-                              btn === "+"
-                            ? signClickHandler
-                            : btn === "."
-                            ? commaClickHandler
-                            : numClickHandler
-                        }
-                      >
-                        {btn}
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-          </div>
-        </WindowBody>
-      </>
-    );
   };
+
+  const [min, isMin] = useState(true);
+
+  function close() {
+    dispatch(setActive(false));
+    resetClickHandler();
+  }
 
   return (
     <div className="CalculatorWindow">
-      <div className="Window calculator minimize" key={Math.random()}>
-        <CalculatorWindow />
-      </div>
+      <Draggable handle=".TopBar">
+        <div
+          className={`Window calculator ${isActive && "active"} ${
+            isHide && "hide"
+          } ${min && "minimize"}`}
+        >
+          <TopBar
+            title={t("apps.calculator.name")}
+            onDblClick={() => isMin(!min)}
+          >
+            <TopBarInteraction
+              action="hide"
+              onHide={() => dispatch(setHide(true))}
+            />
+            <TopBarInteraction
+              action={min ? "max" : "min"}
+              onMinMax={() => isMin(!min)}
+            />
+            <TopBarInteraction action="close" onClose={close} />
+          </TopBar>
+          <WindowBody>
+            <div className="Calculator">
+              <div className="CalculatorScreen">
+                <p>{calc.num ? calc.num : calc.res}</p>
+              </div>
+              <div className="CalculatorWrapper">
+                <div className={`CalculatorAdvanced ${!min && "expand"}`}>
+                  <div
+                    className="CalculatorSection"
+                    style={{ paddingRight: 0 }}
+                  >
+                    {keysType?.flat().map((btn, i) => {
+                      return (
+                        <div
+                          key={i}
+                          className={`CalculatorButton ${
+                            btn === "Shift" && `shift ${isShift && "active"}`
+                          } ${btn === "Rad" && `rad ${isRad && "active"}`}`}
+                          onClick={
+                            btn === "Shift"
+                              ? () => setIsShift(!isShift)
+                              : btn === "√x"
+                              ? squareRootClickHandler
+                              : btn === "³√x"
+                              ? cubeRootClickHandler
+                              : btn === "x²"
+                              ? () => powerClickHandler(2)
+                              : btn === "x³"
+                              ? () => powerClickHandler(3)
+                              : btn === "eˣ"
+                              ? equationPowerClickHandler
+                              : btn === "10ˣ"
+                              ? tenPowerClickHandler
+                              : btn === "2ˣ"
+                              ? twoPowerClickHandler
+                              : btn === "1/x"
+                              ? fractionClickHandler
+                              : btn === "ln"
+                              ? naturalLogarithmClickHandler
+                              : btn === "log₁₀"
+                              ? naturalLogarithmBaseTenClickHandler
+                              : btn === "sin"
+                              ? sinClickHandler
+                              : btn === "cos"
+                              ? cosClickHandler
+                              : btn === "tan"
+                              ? tanClickHandler
+                              : btn === "sinh"
+                              ? sinhClickHandler
+                              : btn === "cosh"
+                              ? coshClickHandler
+                              : btn === "tanh"
+                              ? tanhClickHandler
+                              : btn === "sin⁻¹"
+                              ? arcsinClickHandler
+                              : btn === "cos⁻¹"
+                              ? arccosClickHandler
+                              : btn === "tan⁻¹"
+                              ? arctanClickHandler
+                              : btn === "sinh⁻¹"
+                              ? arcsinhClickHandler
+                              : btn === "cosh⁻¹"
+                              ? arccoshClickHandler
+                              : btn === "tanh⁻¹"
+                              ? arctanhClickHandler
+                              : btn === "e"
+                              ? equationClickHandler
+                              : btn === "x!"
+                              ? factorialClickHandler
+                              : btn === "Rand"
+                              ? randClickHandler
+                              : btn === "π"
+                              ? piClickHandler
+                              : btn === "Rad"
+                              ? () => setIsRad(!isRad)
+                              : null
+                          }
+                        >
+                          {btn}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+                <div className="CalculatorBasic">
+                  <div className="CalculatorSection">
+                    {btnValues.flat().map((btn, i) => {
+                      return (
+                        <div
+                          key={i}
+                          className={`CalculatorButton ${
+                            btn === "=" && "equals"
+                          }`}
+                          onClick={
+                            btn === "C"
+                              ? resetClickHandler
+                              : btn === "+-"
+                              ? invertClickHandler
+                              : btn === "%"
+                              ? percentClickHandler
+                              : btn === "="
+                              ? equalsClickHandler
+                              : btn === "÷" ||
+                                btn === "×" ||
+                                btn === "-" ||
+                                btn === "+"
+                              ? signClickHandler
+                              : btn === "."
+                              ? commaClickHandler
+                              : numClickHandler
+                          }
+                        >
+                          {btn}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </WindowBody>
+        </div>
+      </Draggable>
     </div>
   );
 }

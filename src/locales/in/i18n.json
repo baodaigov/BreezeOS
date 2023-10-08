@@ -35,7 +35,7 @@
     "brightness": "Kecerahan",
     "darkMode": "Mode Gelap",
     "airplaneMode": "Mode pesawat",
-    "nightLight": "Cahaya malam",
+    "nightShift": "Cahaya malam",
     "boldText": "Teks tebal"
   },
   "apps": {

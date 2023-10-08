@@ -23,21 +23,6 @@ $actcolor: #60a5fa;
   .settings {
     width: 100vw;
     height: 100%;
-    transform: scale(0.92);
-    opacity: 0;
-    pointer-events: none;
-    transition: all ease 0.3s;
-
-    &.active {
-      transform: scale(1);
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    &.hide {
-      top: 153%;
-      pointer-events: none;
-    }
 
     .BlackScr {
       position: absolute;
@@ -1968,7 +1953,7 @@ $actcolor: #60a5fa;
 
     .SettingsContainer .SettingsContainerInside {
       .MenuSection {
-        background: transparentize($bgcolor, 0.85)!important;
+        background: transparentize($bgcolor, 0.85) !important;
       }
 
       .WiFi {

@@ -1,27 +1,20 @@
 import { useDispatch, useSelector } from "react-redux";
 import "./Wallpaper.scss";
-import { useEffect } from "react";
 import { setAllowSwitchWorkspace } from "../reducers/wallpaper";
 import { setDockHide } from "../reducers/dock";
 import { setHeaderHide } from "../reducers/header";
+import { setDesktopBodyActive } from "../reducers/desktopbody";
 
 export default function Wallpaper() {
   const dispatch = useDispatch();
+  const isActive = useSelector((state) => state.wallpaper.active);
   const wallpaperImg = useSelector((state) => state.wallpaper.img);
   const allowSwitchWorkspace = useSelector(
     (state) => state.wallpaper.allowSwitchWorkspace
   );
 
-  useEffect(
-    () =>
-      document
-        .getElementsByClassName("WallpaperWrapper")[0]
-        .classList.add("active"),
-    []
-  );
-
   function selectWorkspace() {
-    document.getElementsByClassName("DesktopBody")[0].classList.add("active");
+    dispatch(setDesktopBodyActive(true));
     dispatch(setAllowSwitchWorkspace(false));
     dispatch(setHeaderHide(false));
     dispatch(setDockHide(false));
@@ -33,7 +26,7 @@ export default function Wallpaper() {
 
   return (
     <div
-      className="WallpaperWrapper"
+      className={`WallpaperWrapper ${isActive && "active"}`}
       style={{ backgroundImage: `url(${wallpaperImg})` }}
     >
       <div className="WallpaperWrapperBackground">

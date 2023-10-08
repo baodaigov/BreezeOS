@@ -47,29 +47,10 @@ $fgcolor: #e2e2e2;
         transition: all ease 0.3s;
       }
 
-      &.clicked {
-        img {
-          position: relative;
-          animation: focused ease 1s;
-        }
-
-        @keyframes focused {
-          0% {
-            bottom: 0;
-          }
-          50% {
-            bottom: 10px;
-          }
-          100% {
-            bottom: 0;
-          }
-        }
-
-        &::after {
-          width: 20px;
-          background: #4000ff;
-          transition: all ease 0.3s;
-        }
+      &.clicked::after {
+        width: 20px;
+        background: #4000ff;
+        transition: all ease 0.3s;
       }
 
       &.hide {
@@ -271,28 +252,9 @@ $fgcolor: #e2e2e2;
           transition: none;
         }
 
-        &.clicked {
-          img {
-            position: relative;
-            animation: focused ease 1s;
-          }
-
-          @keyframes focused {
-            0% {
-              bottom: 0;
-            }
-            50% {
-              bottom: 10px;
-            }
-            100% {
-              bottom: 0;
-            }
-          }
-
-          &::after {
-            width: 3px;
-            background: #d9d9d9;
-          }
+        &.clicked::after {
+          width: 3px;
+          background: #d9d9d9;
         }
 
         &.hide {

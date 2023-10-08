@@ -3,18 +3,22 @@ import thunk from "redux-thunk";
 import appearanceReducer from "./reducers/appearance";
 import batteryReducer from "./reducers/battery";
 import headerReducer from "./reducers/header";
+import desktopReducer from "./reducers/desktop";
+import desktopBodyReducer from "./reducers/desktopbody";
 import dockReducer from "./reducers/dock";
 import panelReducer from "./reducers/panel";
 import shutdownReducer from "./reducers/shutdown";
 import settingsReducer from "./reducers/settings";
-import wpReducer from "./reducers/wifipassword";
-import nwReducer from "./reducers/newwifi";
+import startMenuReducer from "./reducers/startmenu";
+import wifiPasswordReducer from "./reducers/wifipassword";
+import newWifiReducer from "./reducers/newwifi";
 import wallpaperReducer from "./reducers/wallpaper";
 import imgViewReducer from "./reducers/imgview";
 import shellReducer from "./reducers/shell";
 import widgetReducer from "./reducers/widget";
 import surfaceReducer from "./reducers/surface";
 import timeReducer from "./reducers/time";
+import terminalWindowReducer from "./reducers/terminalwindow";
 import vscodeReducer from "./reducers/vscode";
 import lockReducer from "./reducers/lock";
 // apps
@@ -34,18 +38,22 @@ const reducers = {
   appearance: appearanceReducer,
   battery: batteryReducer,
   header: headerReducer,
+  desktop: desktopReducer,
+  desktopbody: desktopBodyReducer,
   dock: dockReducer,
   panel: panelReducer,
   shutdown: shutdownReducer,
   settings: settingsReducer,
-  wifipassword: wpReducer,
-  newwifi: nwReducer,
+  startmenu: startMenuReducer,
+  wifipassword: wifiPasswordReducer,
+  newwifi: newWifiReducer,
   wallpaper: wallpaperReducer,
   imgview: imgViewReducer,
   shell: shellReducer,
   widget: widgetReducer,
   surface: surfaceReducer,
   time: timeReducer,
+  terminalwindow: terminalWindowReducer,
   vscode: vscodeReducer,
   lock: lockReducer,
 

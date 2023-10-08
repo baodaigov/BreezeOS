@@ -4,9 +4,16 @@ import "./LockScreen.scss";
 import SplashScreen from "./SplashScreen";
 import { setHeaderActive } from "../../reducers/header";
 import { setDockActive } from "../../reducers/dock";
+import { setDesktopBodyActive } from "../../reducers/desktopbody";
+import {
+  setLockScreenActive,
+  setLockScreenWrapperActive,
+} from "../../reducers/lock";
 
 export default function LockScreen() {
   const dispatch = useDispatch();
+  const isActive = useSelector((state) => state.lock.active);
+  const wrapperIsActive = useSelector((state) => state.lock.wrapperActive);
   const wallpaperImg = useSelector((state) => state.wallpaper.img);
   const isLocked = useSelector((state) => state.settings.isLocked);
 
@@ -15,41 +22,25 @@ export default function LockScreen() {
       setTimeout(() => {
         dispatch(setHeaderActive(false));
         dispatch(setDockActive(false));
-        document
-          .getElementsByClassName("DesktopBody")[0]
-          .classList.remove("active");
+        dispatch(setDesktopBodyActive(false));
       }, 200);
-
-      setTimeout(() => {
-        document
-          .getElementsByClassName("LockScreen")[0]
-          .classList.add("active");
-      }, 400);
-
-      setTimeout(() => {
-        document
-          .getElementsByClassName("LockScreenWrapper")[0]
-          .classList.add("active");
-      }, 500);
+      setTimeout(() => dispatch(setLockScreenActive(true)), 400);
+      setTimeout(() => dispatch(setLockScreenWrapperActive(true)), 500);
     } else {
-      document
-        .getElementsByClassName("LockScreen")[0]
-        .classList.remove("active");
-      document
-        .getElementsByClassName("LockScreenWrapper")[0]
-        .classList.remove("active");
+      dispatch(setLockScreenActive(false));
+      dispatch(setLockScreenWrapperActive(false));
       dispatch(setHeaderActive(true));
       dispatch(setDockActive(true));
-      document.getElementsByClassName("DesktopBody")[0].classList.add("active");
+      dispatch(setDesktopBodyActive(true));
     }
   }, [isLocked]);
 
   return (
     <div
-      className="LockScreen"
+      className={`LockScreen ${isActive && "active"}`}
       style={{ backgroundImage: `url(${wallpaperImg})` }}
     >
-      <div className="LockScreenWrapper">
+      <div className={`LockScreenWrapper ${wrapperIsActive && "active"}`}>
         <SplashScreen />
       </div>
     </div>

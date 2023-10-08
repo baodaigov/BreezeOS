@@ -11,6 +11,7 @@ import PanelBottom from "./PanelBottom";
 import Toggle from "../utils/toggle/Toggle";
 
 const Panel = (props) => {
+  const isActive = useSelector((state) => state.panel.active);
   const panelType = useSelector((state) => state.panel.type);
   const settings = useSelector((state) => state.settings);
   const shellTheme = useSelector((state) => state.shell.theme);
@@ -35,7 +36,9 @@ const Panel = (props) => {
 
   return (
     <div
-      className={`Panel ${shellTheme === "WhiteSur" ? "whitesur" : ""}`}
+      className={`Panel ${isActive && "active"} ${
+        shellTheme === "WhiteSur" ? "whitesur" : ""
+      }`}
       style={props.style}
     >
       <div style={{ position: "relative" }}>

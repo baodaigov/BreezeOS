@@ -35,7 +35,7 @@
     "brightness": "Brillo",
     "darkMode": "Modo oscuro",
     "airplaneMode": "Modo avión",
-    "nightLight": "Luz de noche",
+    "nightShift": "Luz de noche",
     "boldText": "Texto en negrita"
   },
   "apps": {

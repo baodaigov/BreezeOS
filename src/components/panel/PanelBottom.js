@@ -38,7 +38,7 @@ export default function PanelBottom() {
         />
       </PanelRangeContainer>
       <PanelContainer>
-        <PanelItemLarge type="night-light" />
+        <PanelItemLarge type="night-shift" />
         <PanelItemLarge type="wifi" />
       </PanelContainer>
       <PanelContainer>

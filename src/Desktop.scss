@@ -274,7 +274,7 @@ img {
     transition: all 2s ease;
   }
 
-  &.NightShiftEnabled::before {
+  &.nightShift::before {
     opacity: 0.8;
   }
 

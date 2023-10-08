@@ -6,10 +6,15 @@ import StartMenu from "./components/startMenu/StartMenu";
 import Header from "./components/Header";
 import Dock from "./components/Dock";
 import DesktopBody from "./DesktopBody";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setLocked } from "./reducers/settings";
 
 const Desktop = () => {
+  const themeLight = useSelector((state) => state.settings.themeLight);
+  const nightShift = useSelector((state) => state.desktop.nightShift);
+  const hideCursor = useSelector((state) => state.desktop.hideCursor);
+  const blackScr = useSelector((state) => state.desktop.blackScr);
+  const poweroff = useSelector((state) => state.desktop.poweroff);
   const dispatch = useDispatch();
 
   document.addEventListener("keydown", (e) => {
@@ -46,7 +51,14 @@ const Desktop = () => {
         </div>
       ) : (
         <>
-          <div className="Desktop OptimisticDisplay" onContextMenu={(e) => e.preventDefault()}>
+          <div
+            className={`Desktop OptimisticDisplay ${
+              themeLight && "lightMode"
+            } ${nightShift && "nightShift"} ${hideCursor && "hideCursor"} ${
+              blackScr && "blackscr"
+            } ${poweroff && "poweroff"}`}
+            onContextMenu={(e) => e.preventDefault()}
+          >
             <TerminalWindow />
             <LockScreen />
             <StartMenu />

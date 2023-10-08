@@ -35,7 +35,7 @@
     "brightness": "Luminosité",
     "darkMode": "Mode sombre",
     "airplaneMode": "Mode avion",
-    "nightLight": "Veilleuse",
+    "nightShift": "Veilleuse",
     "boldText": "Texte en gras"
   },
   "apps": {

@@ -12,6 +12,9 @@ import dayjs from "dayjs";
 import range from "lodash-es/range";
 import { setHeaderHide } from "../../reducers/header";
 import { useTranslation } from "react-i18next";
+import { setDesktopBodyActive } from "../../reducers/desktopbody";
+import { setStartMenuActive } from "../../reducers/startmenu";
+import Draggable from "react-draggable";
 
 export const CalendarApp = () => {
   const { t } = useTranslation();
@@ -26,39 +29,10 @@ export const CalendarApp = () => {
     }
   });
 
-  useEffect(() => {
-    if (isActive) {
-      document
-        .getElementsByClassName("CalendarApp")[0]
-        .classList.add("clicked");
-      setTimeout(
-        () =>
-          document
-            .getElementsByClassName("calendar")[0]
-            .classList.add("active"),
-        500
-      );
-    } else {
-      document
-        .getElementsByClassName("CalendarApp")[0]
-        .classList.remove("clicked");
-      document.getElementsByClassName("calendar")[0].classList.remove("active");
-    }
-    if (isHide) {
-      document.getElementsByClassName("CalendarApp")[0].classList.add("hide");
-      document.getElementsByClassName("calendar")[0].classList.add("hide");
-    } else {
-      document
-        .getElementsByClassName("CalendarApp")[0]
-        .classList.remove("hide");
-      document.getElementsByClassName("calendar")[0].classList.remove("hide");
-    }
-  }, [isActive, isHide]);
-
   return (
     <DockItem
       id="calendar"
-      className="CalendarApp"
+      className={`CalendarApp ${isActive && "clicked"} ${isHide && "hide"}`}
       title={t("apps.calendar.name")}
       icon={
         icon === "WhiteSur-icon-theme"
@@ -94,11 +68,9 @@ export const CalendarStartApp = () => {
   const icon = useSelector((state) => state.appearance.iconTheme);
 
   const toggle = () => {
-    document
-      .getElementsByClassName("StartMenuWrapper")[0]
-      .classList.remove("active");
+    dispatch(setStartMenuActive(false));
     dispatch(setHeaderHide(false));
-    document.getElementsByClassName("DesktopBody")[0].classList.add("active");
+    dispatch(setDesktopBodyActive(true));
     if (isHide) {
       dispatch(setHide(false));
     } else {
@@ -122,145 +94,147 @@ export const CalendarStartApp = () => {
 
 export default function Calendar() {
   const dispatch = useDispatch();
+  const isActive = useSelector((state) => state.appsCalendar.active);
+  const isHide = useSelector((state) => state.appsCalendar.hide);
+  const { t } = useTranslation();
+  const [min, isMin] = useState(false);
+  const shellTheme = useSelector((state) => state.shell.theme);
 
-  const CalendarWindow = () => {
-    const { t } = useTranslation();
-    const [min, isMin] = useState(false);
-    const shellTheme = useSelector((state) => state.shell.theme);
+  const weekDays = [
+    t("apps.calendar.weekDays.sunday"),
+    t("apps.calendar.weekDays.monday"),
+    t("apps.calendar.weekDays.tuesday"),
+    t("apps.calendar.weekDays.wednesday"),
+    t("apps.calendar.weekDays.thursday"),
+    t("apps.calendar.weekDays.friday"),
+    t("apps.calendar.weekDays.saturday"),
+  ];
+  const todayObj = dayjs();
 
-    const weekDays = [
-      t("apps.calendar.weekDays.sunday"),
-      t("apps.calendar.weekDays.monday"),
-      t("apps.calendar.weekDays.tuesday"),
-      t("apps.calendar.weekDays.wednesday"),
-      t("apps.calendar.weekDays.thursday"),
-      t("apps.calendar.weekDays.friday"),
-      t("apps.calendar.weekDays.saturday"),
-    ];
-    const todayObj = dayjs();
+  const [dayObj, setDayObj] = useState(dayjs());
 
-    const [dayObj, setDayObj] = useState(dayjs());
+  const thisYear = dayObj.year();
+  const thisMonth = dayObj.month(); // (January as 0, December as 11)
+  const daysInMonth = dayObj.daysInMonth();
 
-    const thisYear = dayObj.year();
-    const thisMonth = dayObj.month(); // (January as 0, December as 11)
-    const daysInMonth = dayObj.daysInMonth();
+  const dayObjOf1 = dayjs(`${thisYear}-${thisMonth + 1}-1`);
+  const weekDayOf1 = dayObjOf1.day(); // (Sunday as 0, Saturday as 6)
 
-    const dayObjOf1 = dayjs(`${thisYear}-${thisMonth + 1}-1`);
-    const weekDayOf1 = dayObjOf1.day(); // (Sunday as 0, Saturday as 6)
+  const dayObjOfLast = dayjs(`${thisYear}-${thisMonth + 1}-${daysInMonth}`);
+  const weekDayOfLast = dayObjOfLast.day();
 
-    const dayObjOfLast = dayjs(`${thisYear}-${thisMonth + 1}-${daysInMonth}`);
-    const weekDayOfLast = dayObjOfLast.day();
-
-    function minimize() {
-      document
-        .getElementsByClassName("calendar")[0]
-        .classList.toggle("minimize");
-      isMin(!min);
-    }
-
-    return (
-      <>
-        <TopBar title={t("apps.calendar.name")} onDblClick={minimize}>
-          <div className="TabBarWrapper">
-            <div className="TabBar">
-              <div className="TabBarItem">
-                <div
-                  className="TabBarInteraction"
-                  style={{ marginRight: "7px " }}
-                >
-                  <i
-                    className="fa-regular fa-chevron-left"
-                    onClick={() => setDayObj(dayObj.subtract(1, "month"))}
-                  />
-                </div>
-                <p>{dayObj.format("MMM DD, YYYY")}</p>
-                <div
-                  className="TabBarInteraction"
-                  style={{ marginLeft: "7px " }}
-                >
-                  <i
-                    className="fa-regular fa-chevron-right"
-                    onClick={() => setDayObj(dayObj.add(1, "month"))}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="TopBarInteractionWrapper" style={{ display: "flex" }}>
-            <TopBarInteraction
-              action="hide"
-              onHide={() => dispatch(setHide(true))}
-            />
-            <TopBarInteraction
-              action={min ? "max" : "min"}
-              onMinMax={minimize}
-            />
-            <TopBarInteraction
-              action="close"
-              onClose={() => dispatch(setActive(false))}
-            />
-          </div>
-        </TopBar>
-        <WindowBody>
-          <div
-            className={`Calendar ${
-              shellTheme === "WhiteSur" ? "whitesur" : ""
-            }`}
-          >
-            <div className="CalendarHeader">
-              {weekDays.map((d) => (
-                <div className="WeekCell">
-                  <p key={d} style={{ float: "right" }}>
-                    {d}
-                  </p>
-                </div>
-              ))}
-            </div>
-            <div className="CalendarDate">
-              {range(weekDayOf1).map((i) => (
-                <div className="CalendarDateCell">
-                  <p className="fade" key={i}>
-                    {dayObjOf1.subtract(weekDayOf1 - i, "day").date()}
-                  </p>
-                </div>
-              ))}
-
-              {range(daysInMonth).map((i) => (
-                <div className="CalendarDateCell">
-                  <p
-                    className={
-                      i + 1 === todayObj.date() &&
-                      thisMonth === todayObj.month() &&
-                      thisYear === todayObj.year()
-                        ? " today"
-                        : ""
-                    }
-                    key={i}
-                  >
-                    {i + 1}
-                  </p>
-                </div>
-              ))}
-
-              {range(6 - weekDayOfLast).map((i) => (
-                <div className="CalendarDateCell">
-                  <p className="fade" key={i}>
-                    {dayObjOfLast.add(i + 1, "day").date()}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </WindowBody>
-      </>
-    );
-  };
+  function minimize() {
+    isMin(!min);
+  }
 
   return (
     <div className="CalendarWindow">
-      <div className="Window calendar" key={Math.random()}>
-        <CalendarWindow />
-      </div>
+      <Draggable handle=".TopBar">
+        <div
+          className={`Window calendar ${isActive && "active"} ${
+            isHide && "hide"
+          } ${min && "minimize"}`}
+        >
+          <TopBar
+            title={t("apps.calendar.name")}
+            onDblClick={() => isMin(!min)}
+          >
+            <div className="TabBarWrapper">
+              <div className="TabBar">
+                <div className="TabBarItem">
+                  <div
+                    className="TabBarInteraction"
+                    style={{ marginRight: "7px " }}
+                  >
+                    <i
+                      className="fa-regular fa-chevron-left"
+                      onClick={() => setDayObj(dayObj.subtract(1, "month"))}
+                    />
+                  </div>
+                  <p>{dayObj.format("MMM DD, YYYY")}</p>
+                  <div
+                    className="TabBarInteraction"
+                    style={{ marginLeft: "7px " }}
+                  >
+                    <i
+                      className="fa-regular fa-chevron-right"
+                      onClick={() => setDayObj(dayObj.add(1, "month"))}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="TopBarInteractionWrapper"
+              style={{ display: "flex" }}
+            >
+              <TopBarInteraction
+                action="hide"
+                onHide={() => dispatch(setHide(true))}
+              />
+              <TopBarInteraction
+                action={min ? "max" : "min"}
+                onMinMax={() => isMin(!min)}
+              />
+              <TopBarInteraction
+                action="close"
+                onClose={() => dispatch(setActive(false))}
+              />
+            </div>
+          </TopBar>
+          <WindowBody>
+            <div
+              className={`Calendar ${
+                shellTheme === "WhiteSur" ? "whitesur" : ""
+              }`}
+            >
+              <div className="CalendarHeader">
+                {weekDays.map((d) => (
+                  <div className="WeekCell">
+                    <p key={d} style={{ float: "right" }}>
+                      {d}
+                    </p>
+                  </div>
+                ))}
+              </div>
+              <div className="CalendarDate">
+                {range(weekDayOf1).map((i) => (
+                  <div className="CalendarDateCell">
+                    <p className="fade" key={i}>
+                      {dayObjOf1.subtract(weekDayOf1 - i, "day").date()}
+                    </p>
+                  </div>
+                ))}
+
+                {range(daysInMonth).map((i) => (
+                  <div className="CalendarDateCell">
+                    <p
+                      className={
+                        i + 1 === todayObj.date() &&
+                        thisMonth === todayObj.month() &&
+                        thisYear === todayObj.year()
+                          ? " today"
+                          : ""
+                      }
+                      key={i}
+                    >
+                      {i + 1}
+                    </p>
+                  </div>
+                ))}
+
+                {range(6 - weekDayOfLast).map((i) => (
+                  <div className="CalendarDateCell">
+                    <p className="fade" key={i}>
+                      {dayObjOfLast.add(i + 1, "day").date()}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </WindowBody>
+        </div>
+      </Draggable>
     </div>
   );
 }

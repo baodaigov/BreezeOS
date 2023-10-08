@@ -124,23 +124,11 @@ export const settingsSlice = createSlice({
     toggleBluetooth: (state) => {
       state.bluetooth = !state.bluetooth;
     },
-    toggleLightMode: (state) => {
-      state.themeLight = true;
-      document.getElementsByClassName("Desktop")[0].classList.add("lightMode");
+    toggleLightMode: (state, action) => {
+      state.themeLight = action.payload;
     },
-    toggleDarkMode: (state) => {
-      state.themeLight = false;
-      document
-        .getElementsByClassName("Desktop")[0]
-        .classList.remove("lightMode");
-    },
-    enableBoldText: (state) => {
-      state.boldText = true;
-      document.getElementsByClassName("Desktop")[0].classList.add("isBold");
-    },
-    disableBoldText: (state) => {
-      state.boldText = false;
-      document.getElementsByClassName("Desktop")[0].classList.remove("isBold");
+    setBoldText: (state, action) => {
+      state.boldText = action.payload;
     },
     setFontFamily: (state, action) => {
       state.fontFamily = action.payload;
@@ -162,9 +150,7 @@ export const {
   toggleNotifications,
   toggleBluetooth,
   toggleLightMode,
-  toggleDarkMode,
-  enableBoldText,
-  disableBoldText,
+  setBoldText,
   setFontFamily,
 } = settingsSlice.actions;
 
