@@ -17,8 +17,7 @@ import {
 import { switchIcons } from "../../reducers/appearance";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  toggleAirplaneModeOff,
-  toggleAirplaneModeOn,
+  toggleAirplaneMode,
   toggleLightMode,
   toggleWifi,
   toggleNotifications,
@@ -628,10 +627,10 @@ export default function Settings() {
                     <p className="font-bold">Airplane Mode</p>
                     <Toggle
                       active={settingsReducer.airplaneMode}
-                      onToggle={
-                        settingsReducer.airplaneMode
-                          ? () => dispatch(toggleAirplaneModeOff())
-                          : () => dispatch(toggleAirplaneModeOn())
+                      onToggle={() =>
+                        dispatch(
+                          toggleAirplaneMode(!settingsReducer.airplaneMode)
+                        )
                       }
                     />
                   </div>

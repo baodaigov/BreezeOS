@@ -4,19 +4,18 @@ import TopBar from "../../components/utils/window/TopBar";
 import WindowBodyDefault from "../../components/utils/window/WindowBodyDefault";
 import WindowBodyButton from "../../components/utils/window/WindowBodyButton";
 import TopBarInteraction from "../../components/utils/window/TopBarInteraction";
-import "./assets/index.scss";
 import Draggable from "react-draggable";
 import { useDispatch } from "react-redux";
 import { setActive } from "../../reducers/apps/settings";
 
 export default function MissingPermissionCamera() {
-  const dispatch = useDispatch();
   const [isActive, setIsActive] = useState(false);
+  const dispatch = useDispatch();
 
   return (
     <Draggable handle=".TopBar">
       <div
-        className={`Window MissingPermissionCamera ${isActive && "active"}`}
+        className={`Window ${isActive && "active"}`}
         style={{ width: "450px" }}
         key={Math.random()}
       >

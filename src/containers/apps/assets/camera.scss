@@ -24,7 +24,6 @@ $fgcolor: #e2e2e2;
       height: 90%;
     }
 
-    .PermanentlyDeleteMediaWrapper,
     .ImageInformationWrapper {
       position: absolute;
       width: 100%;
@@ -42,7 +41,6 @@ $fgcolor: #e2e2e2;
         pointer-events: auto;
       }
 
-      .PermanentlyDeleteMedia,
       .ImageInformation {
         display: flex;
         flex-direction: column;

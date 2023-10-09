@@ -17,6 +17,8 @@ import { useTranslation } from "react-i18next";
 import { setDesktopBodyActive } from "../../reducers/desktopbody";
 import { setStartMenuActive } from "../../reducers/startmenu";
 import Draggable from "react-draggable";
+import WindowBodyDefault from "../../components/utils/window/WindowBodyDefault";
+import WindowBodyButton from "../../components/utils/window/WindowBodyButton";
 
 export const CameraApp = () => {
   const { t } = useTranslation();
@@ -313,11 +315,13 @@ export default function Camera() {
   function closeMsgBoxDelete() {
     displayMsgboxDelete(false);
     displayImageInformationMsgbox(false);
+    setIsUntouchable(false);
   }
 
   function deleteImage() {
     displayMsgboxDelete(false);
     setImg(null);
+    setIsUntouchable(false);
   }
 
   function useOutsideSettingsMenu(ref) {
@@ -360,15 +364,47 @@ export default function Camera() {
     }
   }, [isActive]);
 
+  const PermanentlyDeleteMedia = () => {
+    return (
+      <Draggable handle=".TopBar">
+        <div
+          className={`Window ${msgboxDelete && "active"}`}
+          style={{ width: "420px", zIndex: 2 }}
+          key={Math.random()}
+        >
+          <TopBar>
+            <TopBarInteraction action="close" onClose={closeMsgBoxDelete} />
+          </TopBar>
+          <WindowBodyDefault
+            type="question"
+            title="Delete this image?"
+            content="This action is irreversible!"
+          >
+            <WindowBodyButton>
+              <button className="Button" onClick={closeMsgBoxDelete}>
+                No
+              </button>
+              <button className="Button" onClick={deleteImage}>
+                Yes
+              </button>
+            </WindowBodyButton>
+          </WindowBodyDefault>
+        </div>
+      </Draggable>
+    );
+  };
+
   const [min, isMin] = useState(false);
+  const [isUntouchable, setIsUntouchable] = useState(false);
 
   return (
     <div className="CameraWindow">
+      <PermanentlyDeleteMedia />
       <Draggable handle=".TopBar">
         <div
           className={`Window camera ${isActive && "active"} ${
             isHide && "hide"
-          } ${min && "minimize"}`}
+          } ${min && "minimize"} ${isUntouchable && "untouchable"}`}
         >
           <div
             className={`ImageInformationWrapper ${
@@ -394,47 +430,6 @@ export default function Camera() {
                     Intrinsic size: {imageRef.current?.naturalWidth} ×{" "}
                     {imageRef.current?.naturalHeight}px
                   </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            className={`PermanentlyDeleteMediaWrapper ${
-              msgboxDelete ? "active" : ""
-            }`}
-          >
-            <div className="PermanentlyDeleteMedia">
-              <div className="WindowTopBar">
-                <p className="WindowTopBarTitle"></p>
-                <div className="WindowTopBarInteractionContainer">
-                  <div
-                    className="WindowTopBarInteraction close"
-                    onClick={closeMsgBoxDelete}
-                  >
-                    <i className="fa-solid fa-xmark fa-lg" />
-                  </div>
-                </div>
-              </div>
-              <div className="WindowBodyDefault">
-                <div style={{ display: "flex" }}>
-                  <img
-                    className="WindowBodyIcon"
-                    src="https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/master/src/32/status/dialog-question.svg"
-                  />
-                  <div className="WindowBodyRight">
-                    <p className="WindowBodyTitle">Delete this image?</p>
-                    <p className="WindowBodyContent">
-                      This action is irreversible!
-                    </p>
-                  </div>
-                </div>
-                <div className="WindowBodyButton">
-                  <button className="Button" onClick={closeMsgBoxDelete}>
-                    No
-                  </button>
-                  <button className="Button" onClick={deleteImage}>
-                    Yes
-                  </button>
                 </div>
               </div>
             </div>
@@ -520,7 +515,10 @@ export default function Camera() {
                         </a>
                         <div
                           className="CameraButton"
-                          onClick={() => displayMsgboxDelete(true)}
+                          onClick={() => {
+                            displayMsgboxDelete(true);
+                            setIsUntouchable(true);
+                          }}
                         >
                           <p>Delete</p>
                         </div>

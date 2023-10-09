@@ -5,7 +5,6 @@ import TopBar from "../../components/utils/window/TopBar";
 import WindowBodyDefault from "../../components/utils/window/WindowBodyDefault";
 import WindowBodyButton from "../../components/utils/window/WindowBodyButton";
 import TopBarInteraction from "../../components/utils/window/TopBarInteraction";
-import "./assets/index.scss";
 import Draggable from "react-draggable";
 
 export default function UnsuitableBrowser() {
@@ -26,7 +25,7 @@ export default function UnsuitableBrowser() {
   return (
     <Draggable handle=".TopBar">
       <div
-        className={`Window UnsuitableBrowser ${isActive && "active"}`}
+        className={`Window ${isActive && "active"}`}
         style={{ width: "550px" }}
         key={Math.random()}
       >

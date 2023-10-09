@@ -87,14 +87,14 @@ export const settingsSlice = createSlice({
     setDeviceName: (state, action) => {
       state.deviceName = action.payload;
     },
-    toggleAirplaneModeOff: (state) => {
-      state.airplaneMode = false;
-      state.wifi = true;
-    },
-    toggleAirplaneModeOn: (state) => {
-      state.airplaneMode = true;
-      state.wifi = false;
-      state.bluetooth = false;
+    toggleAirplaneMode: (state, action) => {
+      state.airplaneMode = action.payload;
+      if (action.payload) {
+        state.wifi = false;
+        state.bluetooth = false;
+      } else {
+        state.wifi = true;
+      }
     },
     toggleWifi: (state) => {
       state.wifi = !state.wifi;
@@ -140,8 +140,7 @@ export const {
   setName,
   setPassword,
   setDeviceName,
-  toggleAirplaneModeOff,
-  toggleAirplaneModeOn,
+  toggleAirplaneMode,
   toggleWifi,
   setLocked,
   setSleeping,

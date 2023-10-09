@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  toggleAirplaneModeOff,
-  toggleAirplaneModeOn,
   toggleBluetooth,
   toggleWifi,
   toggleLightMode,
   setBoldText,
+  toggleAirplaneMode,
 } from "../../reducers/settings";
 import { switchType } from "../../reducers/panel";
 import "./Panel.scss";
@@ -110,7 +109,7 @@ const PanelItemLarge = ({ type }) => {
           className={`PanelItemLarge ${
             settingsReducer.airplaneMode && "focused"
           }`}
-          onClick={() => dispatch(toggleAirplaneModeOn())}
+          onClick={() => dispatch(toggleAirplaneMode(!settingsReducer.airplaneMode))}
         >
           <i className="fa-solid fa-plane" />
           <p className="font-bold">{t("panel.airplaneMode")}</p>

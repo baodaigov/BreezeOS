@@ -4,6 +4,8 @@ import { setActive, setHide } from "../../reducers/apps/texteditor";
 import "../../components/utils/window/Window.scss";
 import TopBar from "../../components/utils/window/TopBar";
 import WindowBody from "../../components/utils/window/WindowBody";
+import WindowBodyDefault from "../../components/utils/window/WindowBodyDefault";
+import WindowBodyButton from "../../components/utils/window/WindowBodyButton";
 import DockItem from "../../components/DockItem";
 import "./assets/texteditor.scss";
 import TopBarInteraction from "../../components/utils/window/TopBarInteraction";
@@ -95,6 +97,7 @@ export default function TextEditor() {
   const textAreaRef = useRef(null);
   const isActive = useSelector((state) => state.appsTextEditor.active);
   const isHide = useSelector((state) => state.appsTextEditor.hide);
+  const [isUntouchable, setIsUntouchable] = useState(false);
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const [changes, saveChanges] = useState(true);
@@ -109,13 +112,16 @@ export default function TextEditor() {
       textAreaRef.current.blur();
     }
   }, [isActive]);
+
   function saveChangesAndExit() {
+    setIsUntouchable(false);
     saveChanges(true);
     displayMsgBoxChanges(false);
     dispatch(setActive(false));
   }
 
   function dontSaveChangesAndExit() {
+    setIsUntouchable(false);
     saveChanges(false);
     displayMsgBoxChanges(false);
     dispatch(setActive(false));
@@ -123,6 +129,7 @@ export default function TextEditor() {
 
   function saveChangesBeforeExit() {
     displayMsgBoxChanges(true);
+    setIsUntouchable(true);
     sound1.play();
   }
 
@@ -137,58 +144,68 @@ export default function TextEditor() {
     });
   }, []);
 
+  const SaveChanges = () => {
+    return (
+      <Draggable handle=".TopBar">
+        <div
+          className={`Window ${msgboxChanges && "active"}`}
+          style={{ width: "420px", zIndex: 2 }}
+          key={Math.random()}
+        >
+          <TopBar>
+            <TopBarInteraction
+              action="close"
+              onClose={() => {
+                displayMsgBoxChanges(false);
+                setIsUntouchable(false);
+              }}
+            />
+          </TopBar>
+          <WindowBodyDefault
+            type="question"
+            title="Save changes for Untitled-1.txt and exit?"
+          >
+            <WindowBodyButton>
+              <button
+                className="Button"
+                key={Math.random()}
+                onClick={() => {
+                  displayMsgBoxChanges(false);
+                  setIsUntouchable(false);
+                }}
+              >
+                Cancel
+              </button>
+              <button
+                className="Button"
+                key={Math.random()}
+                onClick={dontSaveChangesAndExit}
+              >
+                No
+              </button>
+              <button
+                className="Button"
+                key={Math.random()}
+                onClick={saveChangesAndExit}
+              >
+                Yes
+              </button>
+            </WindowBodyButton>
+          </WindowBodyDefault>
+        </div>
+      </Draggable>
+    );
+  };
+
   return (
     <div className="TextEditorWindow">
+      <SaveChanges />
       <Draggable handle=".TopBar">
         <div
           className={`Window texteditor ${isActive && "active"} ${
             isHide && "hide"
-          } ${min && "minimize"}`}
+          } ${min && "minimize"} ${isUntouchable && "untouchable"}`}
         >
-          <div
-            className={`SaveChangesWrapper ${msgboxChanges ? "active" : ""}`}
-          >
-            <div className="SaveChanges">
-              <div className="WindowTopBar">
-                <p className="WindowTopBarTitle">Save & Exit</p>
-                <div className="WindowTopBarInteractionContainer">
-                  <div
-                    className="WindowTopBarInteraction close"
-                    onClick={() => displayMsgBoxChanges(false)}
-                  >
-                    <i className="fa-solid fa-xmark fa-lg" />
-                  </div>
-                </div>
-              </div>
-              <div className="WindowBodyDefault">
-                <div style={{ display: "flex" }}>
-                  <img
-                    className="WindowBodyIcon"
-                    src="https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/master/src/32/status/dialog-question.svg"
-                  />
-                  <div className="WindowBodyRight">
-                    <p className="WindowBodyTitle">
-                      Save changes to Untitled-1.txt and exit?
-                    </p>
-                  </div>
-                </div>
-                <div className="WindowBodyButton">
-                  <button
-                    className="Button"
-                    onClick={() => displayMsgBoxChanges(false)}
-                  >
-                    Cancel
-                  </button>
-                  <button className="Button" onClick={dontSaveChangesAndExit}>
-                    No
-                  </button>
-                  <button className="Button" onClick={saveChangesAndExit}>
-                    Yes
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
           <TopBar
             title={`${changes ? "" : "*"}Untitled-1.txt – ${t(
               "apps.textEditor.name"

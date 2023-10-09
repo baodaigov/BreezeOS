@@ -17,7 +17,7 @@ $fgcolor: #e2e2e2;
   scale: 0.92;
   opacity: 0;
   pointer-events: none;
-  transition: scale ease 0.3s, opacity ease 0.3s, width ease 0.3s,
+  transition: top ease 0.3s, scale ease 0.3s, opacity ease 0.3s, width ease 0.3s,
     height ease 0.3s;
 
   * {
@@ -32,8 +32,16 @@ $fgcolor: #e2e2e2;
   }
 
   &.hide {
-    top: 153%;
+    top: 30%;
+    scale: 0.9;
+    opacity: 0 !important;
     pointer-events: none;
+  }
+
+  &.untouchable {
+    * {
+      pointer-events: none;
+    }
   }
 
   .TopBar {
