@@ -205,7 +205,7 @@ export default function Clock() {
   }
 
   function removeAlarm(index: number) {
-    const deleteAlarm = alarm && alarm.filter((element, i) => i !== index);
+    const deleteAlarm = alarm && alarm.filter((_element, i) => i !== index);
     setAlarm(deleteAlarm);
   }
 
