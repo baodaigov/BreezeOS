@@ -227,19 +227,19 @@ $fgcolor: #e2e2e2;
             }
           }
 
-          &[value="1"] {
+          &[data-value="1"] {
             .SoftwareNavItem.explorer {
               background: transparentize($fgcolor, 0.85);
             }
           }
 
-          &[value="2"] {
+          &[data-value="2"] {
             .SoftwareNavItem.installed {
               background: transparentize($fgcolor, 0.85);
             }
           }
 
-          &[value="3"] {
+          &[data-value="3"] {
             .SoftwareNavItem.updates {
               background: transparentize($fgcolor, 0.85);
             }
@@ -562,19 +562,19 @@ $fgcolor: #e2e2e2;
         background: transparentize($bgcolor, 0.82);
 
         .SoftwareNav {
-          &[value="1"] {
+          &[data-value="1"] {
             .SoftwareNavItem.explorer {
               background: transparentize($bgcolor, 0.75);
             }
           }
 
-          &[value="2"] {
+          &[data-value="2"] {
             .SoftwareNavItem.installed {
               background: transparentize($bgcolor, 0.75);
             }
           }
 
-          &[value="3"] {
+          &[data-value="3"] {
             .SoftwareNavItem.updates {
               background: transparentize($bgcolor, 0.75);
             }

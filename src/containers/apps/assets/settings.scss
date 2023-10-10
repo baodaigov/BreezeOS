@@ -1148,14 +1148,14 @@ $actcolor: #60a5fa;
                   }
                 }
 
-                &[value="1"] {
+                &[data-value="1"] {
                   .ImageContainer.dark {
                     transition: border ease 0.3s;
                     border: 3px solid #60a5fa;
                   }
                 }
 
-                &[value="2"] {
+                &[data-value="2"] {
                   .ImageContainer.light {
                     transition: border ease 0.3s;
                     border: 3px solid #60a5fa;
@@ -1178,37 +1178,37 @@ $actcolor: #60a5fa;
                   }
                 }
 
-                &[value="1"] {
+                &[data-value="1"] {
                   .WImageContainer.w1 {
                     border: 3px solid #60a5fa;
                   }
                 }
 
-                &[value="2"] {
+                &[data-value="2"] {
                   .WImageContainer.w2 {
                     border: 3px solid #60a5fa;
                   }
                 }
 
-                &[value="3"] {
+                &[data-value="3"] {
                   .WImageContainer.w3 {
                     border: 3px solid #60a5fa;
                   }
                 }
 
-                &[value="4"] {
+                &[data-value="4"] {
                   .WImageContainer.w4 {
                     border: 3px solid #60a5fa;
                   }
                 }
 
-                &[value="5"] {
+                &[data-value="5"] {
                   .WImageContainer.w5 {
                     border: 3px solid #60a5fa;
                   }
                 }
 
-                &[value="6"] {
+                &[data-value="6"] {
                   .WImageContainer.w6 {
                     border: 3px solid #60a5fa;
                   }

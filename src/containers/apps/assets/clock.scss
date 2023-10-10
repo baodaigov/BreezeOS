@@ -444,25 +444,25 @@ $fgcolor: #e2e2e2;
         }
       }
 
-      &[value="1"] {
+      &[data-value="1"] {
         .ClockMenuItem.world-clock {
           color: #60a5fa;
         }
       }
 
-      &[value="2"] {
+      &[data-value="2"] {
         .ClockMenuItem.alarm-clock {
           color: #60a5fa;
         }
       }
 
-      &[value="3"] {
+      &[data-value="3"] {
         .ClockMenuItem.stopwatch {
           color: #60a5fa;
         }
       }
 
-      &[value="4"] {
+      &[data-value="4"] {
         .ClockMenuItem.timer {
           color: #60a5fa;
         }
