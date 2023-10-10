@@ -209,17 +209,6 @@ export default function Clock() {
     setAlarm(deleteAlarm);
   }
 
-  // var mouseHold;
-
-  // function mouseUp() {
-  //   if (mouseHold) window.clearTimeout(mouseHold);
-  //   addNewAlarm();
-  // }
-
-  // function mouseDown() {
-  //   mouseHold = window.setTimeout(() => showAlarmSettings(true), 800);
-  // }
-
   function editAlarm() {
     allowSettings(!settings);
     showAlarmSettings(false);
