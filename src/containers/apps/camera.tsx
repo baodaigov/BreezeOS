@@ -246,7 +246,7 @@ export default function Camera() {
       setTimeLeft(3);
       setTimeout(() => {
         setCapturing(true);
-        mediaRecorderRef.current = new MediaRecorder(webcamRef.current?.stream, {
+        mediaRecorderRef.current = new MediaRecorder(webcamRef.current?.stream!, {
           mimeType: "video/webm",
         });
         mediaRecorderRef.current.addEventListener(
@@ -262,7 +262,7 @@ export default function Camera() {
     } else {
       disableInteraction("capturing");
       setCapturing(true);
-      mediaRecorderRef.current = new MediaRecorder(webcamRef.current?.stream, {
+      mediaRecorderRef.current = new MediaRecorder(webcamRef.current?.stream!, {
         mimeType: "video/webm",
       });
       mediaRecorderRef.current.addEventListener(

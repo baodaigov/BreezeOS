@@ -1,4 +1,3 @@
-import Wallpaper from "./components/Wallpaper";
 import "./Desktop.scss";
 import Window from "./components/utils/window/Window";
 import WindowDefault from "./components/utils/window/WindowDefault";

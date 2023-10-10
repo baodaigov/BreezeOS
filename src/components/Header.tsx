@@ -28,8 +28,10 @@ export default function Header() {
   const shellTheme = useAppSelector((state) => state.shell.theme);
   const [wifiPanelActive, setWifiPanelActive] = useState<boolean>(false);
   const [batteryPanelActive, setBatteryPanelActive] = useState<boolean>(false);
-  const [bluetoothPanelActive, setBluetoothPanelActive] = useState<boolean>(false);
-  const [brightnessPanelActive, setBrightnessPanelActive] = useState<boolean>(false);
+  const [bluetoothPanelActive, setBluetoothPanelActive] =
+    useState<boolean>(false);
+  const [brightnessPanelActive, setBrightnessPanelActive] =
+    useState<boolean>(false);
   const [volumePanelActive, setVolumePanelActive] = useState<boolean>(false);
   const [curDate, setCurDate] = useState(
     new Date().toLocaleString("en-US", {
