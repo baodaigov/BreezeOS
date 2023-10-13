@@ -8,8 +8,13 @@ import Dock from "./components/Dock";
 import DesktopBody from "./DesktopBody";
 import { setLocked } from "./store/reducers/settings";
 import { useAppDispatch, useAppSelector } from "./store/hooks";
+import { useRef } from "react";
+import { useScreenshot } from "@breezeos-dev/use-react-screenshot";
+import { openPic } from "./store/reducers/imgview";
 
 const Desktop = () => {
+  const [image, takeScreenshot] = useScreenshot();
+  const desktopRef = useRef<HTMLDivElement>(null);
   const fontFamily = useAppSelector((state) => state.settings.fontFamily);
   const themeLight = useAppSelector((state) => state.settings.themeLight);
   const boldText = useAppSelector((state) => state.settings.boldText);
@@ -23,6 +28,13 @@ const Desktop = () => {
     if (e.ctrlKey && e.keyCode === 76) {
       e.preventDefault();
       dispatch(setLocked(true));
+    }
+    if (e.ctrlKey && e.shiftKey && e.keyCode === 80) {
+      e.preventDefault();
+      takeScreenshot(desktopRef.current!, {
+        useCORS: true,
+      });
+      dispatch(openPic(image));
     }
   });
 
@@ -60,6 +72,7 @@ const Desktop = () => {
               blackScr && "blackscr"
             } ${poweroff && "poweroff"}`}
             onContextMenu={(e) => e.preventDefault()}
+            ref={desktopRef}
           >
             <TerminalWindow />
             <LockScreen />

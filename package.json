@@ -12,6 +12,7 @@
     "deploy": "npm run build && gh-pages -d dist"
   },
   "dependencies": {
+    "@breezeos-dev/use-react-screenshot": "^2.0.0",
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -20,6 +21,8 @@
     "@types/react-hammerjs": "^1.0.4",
     "caniuse-lite": "^1.0.30001538",
     "dayjs": "^1.11.7",
+    "file-saver": "^2.0.5",
+    "html2canvas": "^1.4.1",
     "i18next-http-backend": "^2.2.2",
     "lodash-es": "^4.17.21",
     "os-browserify": "^0.3.0",

@@ -31,7 +31,11 @@ export default function ImgView() {
     <div className="ImgViewWindow">
       <Draggable handle=".TopBar">
         <div className={`Window imgview ${isActive && "active"}`}>
-          <TopBar title={`${t("apps.imgview.name")} – ${picLocation}`}>
+          <TopBar
+            title={`${t("apps.imgview.name")}${
+              picLocation && ` – ${picLocation}`
+            }`}
+          >
             <TopBarInteraction action="close" onClose={close} />
           </TopBar>
           <WindowBody>
