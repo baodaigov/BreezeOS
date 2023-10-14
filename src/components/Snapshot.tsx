@@ -14,7 +14,9 @@ export default function Snapshot() {
   function captureScreenshot() {
     takeScreenshot(document.getElementById("Desktop") as HTMLDivElement);
     setIsCaptured(true);
-    setTimeout(() => setIsCaptured(false), 2000);
+    setTimeout(() => {
+      setIsCaptured(false);
+    }, 2000);
   }
 
   function disableSnapshotIntroduction() {

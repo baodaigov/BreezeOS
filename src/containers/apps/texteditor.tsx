@@ -144,8 +144,8 @@ export default function TextEditor() {
     });
   }, []);
 
-  const SaveChanges = () => {
-    return (
+  return (
+    <div className="TextEditorWindow">
       <Draggable handle=".TopBar">
         <div
           className={`Window ${msgboxChanges && "active"}`}
@@ -194,12 +194,6 @@ export default function TextEditor() {
           </WindowBodyDefault>
         </div>
       </Draggable>
-    );
-  };
-
-  return (
-    <div className="TextEditorWindow">
-      <SaveChanges />
       <Draggable handle=".TopBar">
         <div
           className={`Window texteditor ${isActive && "active"} ${

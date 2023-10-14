@@ -11,11 +11,11 @@ export default function useTime() {
     is12Hour && hour > 12 ? addZero(hour - 12) : addZero(hour)
   }`;
   const fullMin = addZero(min);
-  const fullSec = `${secEnabled ? addZero(sec) : ""}`;
-  const amPm = `${is12Hour ? (hour >= 12 ? "PM" : "AM") : ""}`;
-  const timeFormat = `${fullHour}:${fullMin}${
-    secEnabled ? `:` : ""
-  }${fullSec} ${amPm}`;
+  const fullSec = addZero(sec);
+  const amPm = `${hour >= 12 ? "PM" : "AM"}`;
+  const timeFormat = `${fullHour}:${fullMin}${secEnabled ? `:` : ""}${
+    secEnabled ? fullSec : ""
+  } ${is12Hour ? amPm : ""}`;
 
   function addZero(i: any) {
     if (i < 10) {
