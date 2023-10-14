@@ -80,17 +80,17 @@ const Clock = () => {
             active={clock.style === "latte"}
           />
           <ActMenuSelector
-            title="Latte"
+            title="Nautilus"
             onClick={() => changeStyle("nautilus")}
             active={clock.style === "nautilus"}
           />
           <ActMenuSelector
-            title="Latte"
+            title="Classic"
             onClick={() => changeStyle("classic")}
             active={clock.style === "classic"}
           />
           <ActMenuSelector
-            title="Latte"
+            title="Dark Classic"
             onClick={() => changeStyle("darkclassic")}
             active={clock.style === "darkclassic"}
           />

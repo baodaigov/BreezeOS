@@ -343,6 +343,10 @@ img {
   height: 100vh;
   position: absolute;
   z-index: 1000000000000;
+
+  a:hover {
+    text-decoration: underline;
+  }
 }
 
 #brightness {

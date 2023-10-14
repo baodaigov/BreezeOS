@@ -5,7 +5,7 @@ import WindowBody from "@/components/utils/window/WindowBody";
 import "./assets/imgview.scss";
 import TopBarInteraction from "@/components/utils/window/TopBarInteraction";
 import { useTranslation } from "react-i18next";
-import { openPic } from "@/store/reducers/imgview";
+import { openPic, setLocation } from "@/store/reducers/imgview";
 import Draggable from "react-draggable";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
@@ -24,7 +24,10 @@ export default function ImgView() {
 
   function close() {
     setIsActive(false);
-    setTimeout(() => dispatch(openPic("")), 300);
+    setTimeout(() => {
+      dispatch(openPic(""));
+      dispatch(setLocation(""));
+    }, 300);
   }
 
   return (

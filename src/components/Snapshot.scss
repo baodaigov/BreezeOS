@@ -1,0 +1,109 @@
+$bgcolor: #202023e5;
+$fgcolor: #e2e2e2;
+
+.Snapshot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 4;
+  pointer-events: none;
+
+  .SnapshotIntroduction {
+    background: $bgcolor;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    height: 100%;
+    color: $fgcolor;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 80px;
+
+    * {
+      margin: 15px 0;
+    }
+
+    .Head {
+      font-weight: 700;
+      font-size: 35px;
+    }
+
+    .Desc {
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .Button {
+      border-radius: 999px;
+      outline: none;
+      padding: 12px 24px;
+      background: #0061df;
+      font-size: 14px;
+      font-weight: 700;
+      transition: all ease 0.3s;
+      color: $fgcolor;
+
+      &:active {
+        transition: none;
+        background: darken(#0061df, 10%);
+      }
+    }
+  }
+
+  .SnapshotImageWrapper {
+    transition: all ease 0.3s;
+    opacity: 0;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+    background-color: #000000b0;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .SnapshotImage {
+      width: 100%;
+      height: 100%;
+      transition: all ease 0.3s;
+    }
+  }
+
+  &.captured {
+    animation: captureBlink 0.1s;
+    pointer-events: auto;
+
+    @keyframes captureBlink {
+      0% {
+        background-color: #fff;
+      }
+
+      100% {
+        background-color: transparent;
+      }
+    }
+
+    .SnapshotImageWrapper {
+      opacity: 1;
+      pointer-events: auto;
+
+      .SnapshotImage {
+        width: 65%;
+        height: 65%;
+        outline: 5px solid #fff;
+      }
+    }
+  }
+}
+
+.lightMode .Snapshot .SnapshotIntroduction {
+  background: $fgcolor;
+  color: $bgcolor;
+}
