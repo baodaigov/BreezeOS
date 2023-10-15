@@ -134,9 +134,8 @@ export default function TextEditor() {
   }
 
   useEffect(() => {
+    textAreaRef.current?.addEventListener("input", () => saveChanges(false));
     textAreaRef.current?.addEventListener("keydown", (e) => {
-      saveChanges(false);
-
       if ((e.ctrlKey && e.keyCode === 115) || (e.ctrlKey && e.keyCode === 83)) {
         e.preventDefault();
         saveChanges(true);

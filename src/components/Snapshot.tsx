@@ -25,7 +25,7 @@ export default function Snapshot() {
         setSaveOptionsDisplayed(true);
       } else {
         if (localStorage.getItem("snapshotSaveOption") === "yes") {
-          setTimeout(saveImage, 500);
+          setTimeout(saveImage, 2500);
         } else {
           dontSaveImage();
         }
@@ -103,7 +103,7 @@ export default function Snapshot() {
         />
         <div className={`SaveOptions ${saveOptionsDisplayed && "active"}`}>
           <p style={{ fontSize: "14px" }}>
-            Save this image as "image.jpg" in your main device?
+            Save this image as "image.jpg" to your main device?
           </p>
           <div className="ButtonContainer">
             <div
@@ -141,7 +141,7 @@ export default function Snapshot() {
                 setNeverDisplaySaveOptions(!neverDisplaySaveOptions)
               }
             />
-            <p className="Text">Never display this again</p>
+            <p className="Text">Never ask this again</p>
           </div>
         </div>
       </div>
