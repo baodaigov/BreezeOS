@@ -200,7 +200,13 @@ export default function Clock() {
   const [settings, allowSettings] = useState<boolean>(false);
 
   function addNewAlarm() {
-    setAlarm([...alarm, { id: `Alarm ${alarm.length}`, time: "07:00 AM" }]);
+    setAlarm([
+      ...alarm,
+      {
+        id: `Alarm ${alarm.length + 1}`,
+        time: `${new Date().getHours()}:${new Date().getMinutes()}`,
+      },
+    ]);
     showAlarmSettings(false);
   }
 
