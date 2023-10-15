@@ -85,9 +85,9 @@ export default function Snapshot() {
                 <br />
                 <br />
                 Sometimes you will get lag experience when capturing screenshot,
-                or getting a blank screenshot as this is still in development.
-                The community will keep improving this application to give a
-                fulfilling experience.
+                or get a blank screenshot instead as this is still in
+                development. The community will keep improving this
+                application to give a fulfilling experience.
               </p>
               <div className="Button" onClick={disableSnapshotIntroduction}>
                 Continue
