@@ -5,6 +5,7 @@ import { useAppSelector } from "@/store/hooks";
 export default function TerminalWindow() {
   const array = useAppSelector((state) => state.shutdown.elem);
   const terminalWindowRef = useRef<HTMLDivElement>(null);
+  const isActive = useAppSelector((state) => state.terminalwindow.active);
 
   useEffect(() => {
     const current = terminalWindowRef.current;
@@ -12,7 +13,10 @@ export default function TerminalWindow() {
   }, []);
 
   return (
-    <div className="TerminalWindow" ref={terminalWindowRef}>
+    <div
+      className={`TerminalWindow ${isActive && "active"}`}
+      ref={terminalWindowRef}
+    >
       {array}
     </div>
   );

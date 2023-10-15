@@ -1,4 +1,5 @@
 $fgcolor: #e2e2e2;
+$bgcolor: darken($fgcolor, 85%);
 
 .LockScreen {
   width: 100%;
@@ -86,25 +87,6 @@ $fgcolor: #e2e2e2;
           font-size: 14px;
           display: flex;
           justify-content: center;
-
-          .SplashScreenItem {
-            margin-left: 20px;
-            display: flex;
-            align-items: center;
-
-            &:first-child {
-              margin-left: 0;
-            }
-
-            &:last-child:after {
-              content: "";
-              display: none;
-            }
-
-            .SplashScreenIcon {
-              margin-right: 7px;
-            }
-          }
         }
 
         .SignInWrapper {
@@ -281,6 +263,16 @@ $fgcolor: #e2e2e2;
       }
     }
 
+    .SplashScreenItem {
+      margin: 0 10px;
+      display: flex;
+      align-items: center;
+
+      .SplashScreenIcon {
+        margin-right: 7px;
+      }
+    }
+
     .OptionsButton {
       position: absolute;
       bottom: 0;
@@ -306,7 +298,7 @@ $fgcolor: #e2e2e2;
       padding: 10px;
       position: absolute;
       display: flex;
-      bottom: -375px;
+      bottom: -435px;
       justify-content: center;
       transition: all ease 0.5s;
 
@@ -314,29 +306,28 @@ $fgcolor: #e2e2e2;
         bottom: 0;
       }
 
+      .InteractionButton {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        width: 32px;
+        height: 32px;
+        border-radius: 999px;
+
+        &:active {
+          background-color: transparentize($fgcolor, 0.92);
+        }
+      }
+
       .EditMenu {
         width: 510px;
-        background-color: darken($fgcolor, 85%);
+        background-color: $bgcolor;
         color: $fgcolor;
         padding: 18px 25px 30px 25px;
-        border-radius: 15px;
-
-        .CloseButton {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          font-size: 20px;
-          width: 32px;
-          height: 32px;
-          border-radius: 999px;
-
-          &:active {
-            background-color: transparentize($fgcolor, 0.92);
-          }
-        }
 
         .EditMenuItem {
-          padding: 0 5px;
+          padding: 0 8px;
           display: flex;
           align-items: center;
           justify-content: space-between;
@@ -357,6 +348,24 @@ $fgcolor: #e2e2e2;
             width: 220px;
             align-items: center;
             border-radius: 7px;
+          }
+
+          .EditMenuChevron {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+            border-radius: 999px;
+            width: 30px;
+            height: 30px;
+            transition: all ease 0.3s;
+          }
+
+          &:active {
+            .EditMenuChevron {
+              transition: none;
+              background-color: transparentize($fgcolor, 0.9);
+            }
           }
 
           .FontWeightBlock {
@@ -389,6 +398,40 @@ $fgcolor: #e2e2e2;
           }
         }
       }
+
+      .WidgetsWrapper {
+        position: absolute;
+        left: 100%;
+        display: flex;
+        flex-direction: column;
+        background-color: $bgcolor;
+        color: $fgcolor;
+        width: 100%;
+        height: 100%;
+        transition: all ease 0.5s;
+        padding: 18px 25px 30px 25px;
+
+        &.active {
+          left: 0;
+          transition: all ease 0.4s;
+        }
+      }
+
+      .WidgetsWrapper {
+        .WidgetsContainer {
+          padding: 0 8px;
+          display: flex;
+
+          .Widgets {
+            flex: 1;
+            border-radius: 10px;
+            padding: 8px 6px;
+            background-color: transparentize($fgcolor, 0.95);
+            margin: 0 4px;
+            font-size: 13px;
+          }
+        }
+      }
     }
   }
 }
@@ -397,17 +440,23 @@ $fgcolor: #e2e2e2;
   .LockScreen .LockScreenWrapper .EditMenuWrapper {
     .EditMenu {
       background-color: lighten($fgcolor, 10%);
-      color: darken($fgcolor, 85%);
+      color: $bgcolor;
 
-      .CloseButton {
+      .InteractionButton {
         &:active {
-          background-color: transparentize(darken($fgcolor, 85%), 0.92);
+          background-color: transparentize($bgcolor, 0.92);
         }
       }
 
       .EditMenuItem {
         .EditMenuItemSection {
-          background: transparentize(darken($fgcolor, 85%), 0.95);
+          background: transparentize($bgcolor, 0.95);
+        }
+
+        &:active {
+          .EditMenuChevron {
+            background-color: transparentize($bgcolor, 0.9);
+          }
         }
       }
     }

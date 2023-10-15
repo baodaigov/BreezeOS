@@ -18,7 +18,8 @@
         "name": "Font size",
         "medium": "Medium",
         "large": "Large"
-      }
+      },
+      "widgets": "Widgets"
     }
   },
   "header": {

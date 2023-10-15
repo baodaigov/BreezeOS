@@ -2,30 +2,32 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface StateType {
   active: boolean;
+  splashScreen: {
+    wrapperActive: boolean;
+    wrapperHideInfo: boolean;
+  };
   wrapperActive: boolean;
   fontFamily: string;
   fontSize: string;
   fontWeight: number;
   foregroundColor: string;
+  widgets: string[];
   optionsMenuShown: boolean;
-  splashScreen: {
-    wrapperActive: boolean;
-    wrapperHideInfo: boolean;
-  };
 }
 
 const initialState: StateType = {
   active: false,
+  splashScreen: {
+    wrapperActive: true,
+    wrapperHideInfo: false,
+  },
   wrapperActive: false,
   fontFamily: "OptimisticDisplay",
   fontSize: "medium",
   fontWeight: 700,
   foregroundColor: "#e2e2e2",
+  widgets: ["date", "battery"],
   optionsMenuShown: false,
-  splashScreen: {
-    wrapperActive: true,
-    wrapperHideInfo: false,
-  },
 };
 
 export const lockSlice = createSlice({
@@ -37,6 +39,12 @@ export const lockSlice = createSlice({
     },
     setLockScreenWrapperActive: (state, action: PayloadAction<boolean>) => {
       state.wrapperActive = action.payload;
+    },
+    setSplashScreenWrapperActive: (state, action: PayloadAction<boolean>) => {
+      state.splashScreen.wrapperActive = action.payload;
+    },
+    setSplashScreenWrapperHideInfo: (state, action: PayloadAction<boolean>) => {
+      state.splashScreen.wrapperHideInfo = action.payload;
     },
     setFontFamily: (state, action: PayloadAction<string>) => {
       state.fontFamily = action.payload;
@@ -50,14 +58,11 @@ export const lockSlice = createSlice({
     setForegroundColor: (state, action: PayloadAction<string>) => {
       state.foregroundColor = action.payload;
     },
+    setWidgets: (state, action: PayloadAction<string>) => {
+      state.widgets = [...state.widgets, action.payload];
+    },
     setOptionsMenuShown: (state, action: PayloadAction<boolean>) => {
       state.optionsMenuShown = action.payload;
-    },
-    setSplashScreenWrapperActive: (state, action: PayloadAction<boolean>) => {
-      state.splashScreen.wrapperActive = action.payload;
-    },
-    setSplashScreenWrapperHideInfo: (state, action: PayloadAction<boolean>) => {
-      state.splashScreen.wrapperHideInfo = action.payload;
     },
   },
 });

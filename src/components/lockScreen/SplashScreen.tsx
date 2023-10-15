@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useBattery } from "react-use";
 import "./LockScreen.scss";
 import { setLocked, setSleeping } from "@/store/reducers/settings";
 import {
@@ -31,6 +30,7 @@ import {
   setDesktopPoweroff,
 } from "@/store/reducers/desktop";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import SplashScreenItem from "./SplashScreenItem";
 
 export default function SplashScreen() {
   const dispatch = useAppDispatch();
@@ -49,19 +49,16 @@ export default function SplashScreen() {
   const wrapperHideInfo = useAppSelector(
     (state) => state.lock.splashScreen.wrapperHideInfo
   );
+  const widgets = useAppSelector((state) => state.lock.widgets);
   const { secondsLeft, start } = useCountdown();
-  const [curDate, setCurDate] = useState(
-    new Date().toLocaleString("en-US", {
-      dateStyle: "medium",
-    })
-  );
   const [passwordShown, setPasswordShown] = useState<boolean>(false);
   const [passwordValue, setPasswordValue] = useState<string>("");
   const [invalidCount, setInvalidCount] = useState<number>(0);
   const invalidLimit = 7;
-  const [isEditable, setEditable] = useState<boolean>(false);
+  const [isEditable, setEditable] = useState<boolean>(true);
   const [fontFamilyMenu, showFontFamilyMenu] = useState<boolean>(false);
   const [fontSizeMenu, showFontSizeMenu] = useState<boolean>(false);
+  const [widgetsMenuShown, setWidgetsMenuShown] = useState<boolean>(false);
   const { timeFormat } = useTime();
   const inputFieldRef = useRef<HTMLInputElement>(null);
 
@@ -111,16 +108,6 @@ export default function SplashScreen() {
   const fontSizeMenuRef = useRef(null);
   useOutsideFontSizeMenu(fontSizeMenuRef);
 
-  useEffect(() => {
-    setInterval(() => {
-      setCurDate(
-        new Date().toLocaleString("en-US", {
-          dateStyle: "medium",
-        })
-      );
-    }, 1000);
-  }, []);
-
   document.addEventListener("keydown", (e) => {
     if (e.keyCode === 27) dispatch(setOptionsMenuShown(false));
   });
@@ -160,12 +147,6 @@ export default function SplashScreen() {
       if (invalidCount === invalidLimit - 1) start(60);
     }
   }
-
-  const batteryIcon = { icon: "fa-regular fa-battery-full" };
-
-  const batteryState = useBattery();
-
-  let batteryPercent = Math.round(batteryState.level * 100);
 
   function sleep() {
     setTimeout(() => dispatch(setSplashScreenWrapperHideInfo(true)), 50);
@@ -321,13 +302,9 @@ export default function SplashScreen() {
                 {timeFormat}
               </p>
               <div className="SplashScreenWidgets">
-                <div className="SplashScreenItem">
-                  <p className="SplashScreenDare">{curDate}</p>
-                </div>
-                <div className="SplashScreenItem">
-                  <i className={`${batteryIcon.icon} SplashScreenIcon`} />
-                  {isNaN(batteryPercent) ? "-" : batteryPercent + "%"}
-                </div>
+                {widgets.map((i) => (
+                  <SplashScreenItem type={i} />
+                ))}
               </div>
             </div>
             <div className="SignInWrapper">
@@ -487,172 +464,218 @@ export default function SplashScreen() {
         </div>
       </div>
       <div className={`EditMenuWrapper ${isEditable && "active"}`}>
-        <div className="EditMenu">
-          <div
-            style={{
-              marginBottom: "15px",
-              display: "flex",
-              flexDirection: "row-reverse",
-            }}
-          >
-            <div className="CloseButton" onClick={() => setEditable(false)}>
-              <i className="fa-regular fa-xmark" />
+        <div
+          style={{
+            position: "relative",
+            borderRadius: "15px",
+            overflow: "hidden",
+          }}
+        >
+          <div className={`WidgetsWrapper ${widgetsMenuShown && "active"}`}>
+            <div
+              style={{
+                marginBottom: "15px",
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
+              <div
+                className="InteractionButton"
+                onClick={() => setWidgetsMenuShown(false)}
+              >
+                <i className="fa-regular fa-chevron-left" />
+              </div>
+              <div className="InteractionButton">
+                <i className="fa-regular fa-plus" />
+              </div>
+            </div>
+            <div className="WidgetsContainer">
+              {widgets.map((i) => (
+                <div className="Widgets">
+                  <SplashScreenItem type={i} />
+                </div>
+              ))}
             </div>
           </div>
-          <div className="EditMenuItem" style={{ margin: 0 }}>
-            <p className="EditMenuItemName">
-              {t("lockScreen.editMenu.fontFamily")}
-            </p>
+          <div className="EditMenu">
             <div
-              className="EditMenuItemSection"
-              onClick={() => showFontFamilyMenu(true)}
-            >
-              <p style={{ marginRight: "7px" }}>{lock.fontFamily}</p>
-              <i className="fa-regular fa-chevron-down" />
-            </div>
-            <ActMenu
               style={{
-                zIndex: "1",
-                width: "220px",
-                transform: "translate(230px, 17px)",
+                marginBottom: "15px",
+                display: "flex",
+                flexDirection: "row-reverse",
               }}
-              className={fontFamilyMenu ? "active" : ""}
-              ref={fontFamilyMenuRef}
             >
-              <ActMenuSelector
-                title="OptimisticDisplay"
-                onClick={() => {
-                  dispatch(setFontFamily("OptimisticDisplay"));
-                  showFontFamilyMenu(false);
+              <div
+                className="InteractionButton"
+                onClick={() => setEditable(false)}
+              >
+                <i className="fa-regular fa-xmark" />
+              </div>
+            </div>
+            <div className="EditMenuItem" style={{ margin: 0 }}>
+              <p className="EditMenuItemName">
+                {t("lockScreen.editMenu.fontFamily")}
+              </p>
+              <div
+                className="EditMenuItemSection"
+                onClick={() => showFontFamilyMenu(true)}
+              >
+                <p style={{ marginRight: "7px" }}>{lock.fontFamily}</p>
+                <i className="fa-regular fa-chevron-down" />
+              </div>
+              <ActMenu
+                style={{
+                  zIndex: "1",
+                  width: "220px",
+                  transform: "translate(224px, 17px)",
                 }}
-                active={lock.fontFamily === "OptimisticDisplay"}
-              />
-              <ActMenuSelector
-                title="SanFrancisco"
-                onClick={() => {
-                  dispatch(setFontFamily("SanFrancisco"));
-                  showFontFamilyMenu(false);
+                className={fontFamilyMenu ? "active" : ""}
+                ref={fontFamilyMenuRef}
+              >
+                <ActMenuSelector
+                  title="OptimisticDisplay"
+                  onClick={() => {
+                    dispatch(setFontFamily("OptimisticDisplay"));
+                    showFontFamilyMenu(false);
+                  }}
+                  active={lock.fontFamily === "OptimisticDisplay"}
+                />
+                <ActMenuSelector
+                  title="SanFrancisco"
+                  onClick={() => {
+                    dispatch(setFontFamily("SanFrancisco"));
+                    showFontFamilyMenu(false);
+                  }}
+                  active={lock.fontFamily === "SanFrancisco"}
+                />
+              </ActMenu>
+            </div>
+            <div className="EditMenuItem">
+              <p className="EditMenuItemName">
+                {t("lockScreen.editMenu.fontSize.name")}
+              </p>
+              <div
+                className="EditMenuItemSection"
+                onClick={() => showFontSizeMenu(true)}
+              >
+                <p style={{ marginRight: "7px" }}>{lock.fontSize}</p>
+                <i className="fa-regular fa-chevron-down" />
+              </div>
+              <ActMenu
+                style={{
+                  zIndex: "1",
+                  width: "220px",
+                  transform: "translate(224px, 17px)",
                 }}
-                active={lock.fontFamily === "SanFrancisco"}
-              />
-            </ActMenu>
-          </div>
-          <div className="EditMenuItem">
-            <p className="EditMenuItemName">
-              {t("lockScreen.editMenu.fontSize.name")}
-            </p>
-            <div
-              className="EditMenuItemSection"
-              onClick={() => showFontSizeMenu(true)}
-            >
-              <p style={{ marginRight: "7px" }}>{lock.fontSize}</p>
-              <i className="fa-regular fa-chevron-down" />
+                className={fontSizeMenu ? "active" : ""}
+                ref={fontSizeMenuRef}
+              >
+                <ActMenuSelector
+                  title={t("lockScreen.editMenu.fontSize.medium")}
+                  onClick={() => {
+                    dispatch(setFontSize("medium"));
+                    showFontSizeMenu(false);
+                  }}
+                  active={lock.fontSize === "medium"}
+                />
+                <ActMenuSelector
+                  title={t("lockScreen.editMenu.fontSize.large")}
+                  onClick={() => {
+                    dispatch(setFontSize("large"));
+                    showFontSizeMenu(false);
+                  }}
+                  active={lock.fontSize === "large"}
+                />
+              </ActMenu>
             </div>
-            <ActMenu
-              style={{
-                zIndex: "1",
-                width: "220px",
-                transform: "translate(230px, 17px)",
-              }}
-              className={fontSizeMenu ? "active" : ""}
-              ref={fontSizeMenuRef}
+            <div
+              className="EditMenuItem"
+              onClick={() => setWidgetsMenuShown(true)}
             >
-              <ActMenuSelector
-                title={t("lockScreen.editMenu.fontSize.medium")}
-                onClick={() => {
-                  dispatch(setFontSize("medium"));
-                  showFontSizeMenu(false);
+              <p className="EditMenuItemName">
+                {t("lockScreen.editMenu.widgets")}
+              </p>
+              <i className="fa-regular fa-chevron-right EditMenuChevron" />
+            </div>
+            <div className="EditMenuItem" style={{ padding: "0 30px" }}>
+              <div
+                className={`FontWeightBlock ${
+                  lock.fontWeight === 200 && "active"
+                } ${lock.fontFamily}`}
+                style={{
+                  color: lock.foregroundColor,
                 }}
-                active={lock.fontSize === "medium"}
-              />
-              <ActMenuSelector
-                title={t("lockScreen.editMenu.fontSize.large")}
-                onClick={() => {
-                  dispatch(setFontSize("large"));
-                  showFontSizeMenu(false);
+                onClick={() => dispatch(setFontWeight(200))}
+              >
+                <p className="font-light">12</p>
+              </div>
+              <div
+                className={`FontWeightBlock ${
+                  lock.fontWeight === 500 && "active"
+                } ${lock.fontFamily}`}
+                style={{
+                  color: lock.foregroundColor,
                 }}
-                active={lock.fontSize === "large"}
-              />
-            </ActMenu>
-          </div>
-          <div className="EditMenuItem" style={{ padding: "0 30px" }}>
-            <div
-              className={`FontWeightBlock ${
-                lock.fontWeight === 200 && "active"
-              } ${lock.fontFamily}`}
-              style={{
-                color: lock.foregroundColor,
-              }}
-              onClick={() => dispatch(setFontWeight(200))}
-            >
-              <p className="font-light">12</p>
+                onClick={() => dispatch(setFontWeight(500))}
+              >
+                <p className="font-medium">12</p>
+              </div>
+              <div
+                className={`FontWeightBlock ${
+                  lock.fontWeight === 700 && "active"
+                } ${lock.fontFamily}`}
+                style={{
+                  color: lock.foregroundColor,
+                }}
+                onClick={() => dispatch(setFontWeight(700))}
+              >
+                <p className="font-bold">12</p>
+              </div>
             </div>
-            <div
-              className={`FontWeightBlock ${
-                lock.fontWeight === 500 && "active"
-              } ${lock.fontFamily}`}
-              style={{
-                color: lock.foregroundColor,
-              }}
-              onClick={() => dispatch(setFontWeight(500))}
-            >
-              <p className="font-medium">12</p>
+            <div className="EditMenuItem" style={{ padding: "0 50px" }}>
+              <div
+                className={`ColorBlock ${
+                  lock.foregroundColor === "#e2e2e2" && "active"
+                }`}
+                style={{ backgroundColor: "#e2e2e2" }}
+                onClick={() => dispatch(setForegroundColor("#e2e2e2"))}
+              ></div>
+              <div
+                className={`ColorBlock ${
+                  lock.foregroundColor === "#fef08a" && "active"
+                }`}
+                style={{ backgroundColor: "#fef08a" }}
+                onClick={() => dispatch(setForegroundColor("#fef08a"))}
+              ></div>
+              <div
+                className={`ColorBlock ${
+                  lock.foregroundColor === "#7dd3fc" && "active"
+                }`}
+                style={{ backgroundColor: "#7dd3fc" }}
+                onClick={() => dispatch(setForegroundColor("#7dd3fc"))}
+              ></div>
+              <div
+                className={`ColorBlock ${
+                  lock.foregroundColor === "#f0abfc" && "active"
+                }`}
+                style={{ backgroundColor: "#f0abfc" }}
+                onClick={() => dispatch(setForegroundColor("#f0abfc"))}
+              ></div>
+              <div
+                className={`ColorBlock ${
+                  lock.foregroundColor === "#86efac" && "active"
+                }`}
+                style={{ backgroundColor: "#86efac" }}
+                onClick={() => dispatch(setForegroundColor("#86efac"))}
+              ></div>
+              <div
+                className={`ColorBlock ${
+                  lock.foregroundColor === "#f87171" && "active"
+                }`}
+                style={{ backgroundColor: "#f87171" }}
+                onClick={() => dispatch(setForegroundColor("#f87171"))}
+              ></div>
             </div>
-            <div
-              className={`FontWeightBlock ${
-                lock.fontWeight === 700 && "active"
-              } ${lock.fontFamily}`}
-              style={{
-                color: lock.foregroundColor,
-              }}
-              onClick={() => dispatch(setFontWeight(700))}
-            >
-              <p className="font-bold">12</p>
-            </div>
-          </div>
-          <div className="EditMenuItem" style={{ padding: "0 50px" }}>
-            <div
-              className={`ColorBlock ${
-                lock.foregroundColor === "#e2e2e2" && "active"
-              }`}
-              style={{ backgroundColor: "#e2e2e2" }}
-              onClick={() => dispatch(setForegroundColor("#e2e2e2"))}
-            ></div>
-            <div
-              className={`ColorBlock ${
-                lock.foregroundColor === "#fef08a" && "active"
-              }`}
-              style={{ backgroundColor: "#fef08a" }}
-              onClick={() => dispatch(setForegroundColor("#fef08a"))}
-            ></div>
-            <div
-              className={`ColorBlock ${
-                lock.foregroundColor === "#7dd3fc" && "active"
-              }`}
-              style={{ backgroundColor: "#7dd3fc" }}
-              onClick={() => dispatch(setForegroundColor("#7dd3fc"))}
-            ></div>
-            <div
-              className={`ColorBlock ${
-                lock.foregroundColor === "#f0abfc" && "active"
-              }`}
-              style={{ backgroundColor: "#f0abfc" }}
-              onClick={() => dispatch(setForegroundColor("#f0abfc"))}
-            ></div>
-            <div
-              className={`ColorBlock ${
-                lock.foregroundColor === "#86efac" && "active"
-              }`}
-              style={{ backgroundColor: "#86efac" }}
-              onClick={() => dispatch(setForegroundColor("#86efac"))}
-            ></div>
-            <div
-              className={`ColorBlock ${
-                lock.foregroundColor === "#f87171" && "active"
-              }`}
-              style={{ backgroundColor: "#f87171" }}
-              onClick={() => dispatch(setForegroundColor("#f87171"))}
-            ></div>
           </div>
         </div>
       </div>

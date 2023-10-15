@@ -221,7 +221,7 @@ $fgcolor: #fff;
     width: 100% !important;
     margin: 0;
     border-radius: 0;
-    padding: 3px 15px;
+    padding: 0 15px;
 
     .default {
       .Header-left {
@@ -247,7 +247,7 @@ $fgcolor: #fff;
       .Header-right {
         .Header-item {
           border-radius: 4px;
-          padding: 6px 11px;
+          padding: 7px 11px;
           transition: all ease 0.25s;
 
           &.active {
@@ -266,6 +266,7 @@ $fgcolor: #fff;
         }
 
         .DateNTime {
+          transition: none;
           font-size: 12px;
         }
       }
