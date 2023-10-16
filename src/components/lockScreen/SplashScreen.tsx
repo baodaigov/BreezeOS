@@ -8,6 +8,7 @@ import {
   setForegroundColor,
   setOptionsMenuShown,
   setSplashScreenWrapperHideInfo,
+  setWidgets,
 } from "@/store/reducers/lock";
 import { setTerminalWindowActive } from "@/store/reducers/terminalwindow";
 import Avatar from "../Avatar";
@@ -265,6 +266,11 @@ export default function SplashScreen() {
     dispatch(setOptionsMenuShown(false));
   }
 
+  function removeWidget(index: number) {
+    const deleteAlarm = widgets?.filter((_element, i) => i !== index);
+    dispatch(setWidgets(deleteAlarm));
+  }
+
   return (
     <>
       <div
@@ -490,8 +496,14 @@ export default function SplashScreen() {
               </div>
             </div>
             <div className="WidgetsContainer">
-              {widgets.map((i) => (
-                <div className="Widgets">
+              {widgets.map((i, index) => (
+                <div className={`Widgets ${i === "date" && "default"}`}>
+                  <div
+                    className="CloseButton"
+                    onClick={() => removeWidget(index)}
+                  >
+                    <i className="fa-regular fa-xmark" />
+                  </div>
                   <SplashScreenItem type={i} />
                 </div>
               ))}

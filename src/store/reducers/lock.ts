@@ -58,8 +58,8 @@ export const lockSlice = createSlice({
     setForegroundColor: (state, action: PayloadAction<string>) => {
       state.foregroundColor = action.payload;
     },
-    setWidgets: (state, action: PayloadAction<string>) => {
-      state.widgets = [...state.widgets, action.payload];
+    setWidgets: (state, action: PayloadAction<string[]>) => {
+      state.widgets = action.payload;
     },
     setOptionsMenuShown: (state, action: PayloadAction<boolean>) => {
       state.optionsMenuShown = action.payload;
@@ -74,6 +74,7 @@ export const {
   setFontSize,
   setFontWeight,
   setForegroundColor,
+  setWidgets,
   setOptionsMenuShown,
   setSplashScreenWrapperActive,
   setSplashScreenWrapperHideInfo,
