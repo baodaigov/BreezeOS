@@ -421,8 +421,43 @@ $bgcolor: darken($fgcolor, 85%);
 
       .WidgetsWrapper {
         .WidgetsContainer {
+          position: relative;
           padding: 0 8px;
-          display: flex;
+          height: 460px;
+
+          .AddWidget {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: $bgcolor;
+            color: $fgcolor;
+            display: flex;
+            flex-direction: column;
+            z-index: 1;
+            opacity: 0;
+            pointer-events: none;
+            transition: all ease 0.2s;
+
+            &.active {
+              opacity: 1;
+              pointer-events: auto;
+            }
+
+            .Text {
+              font-size: 30px;
+              font-weight: 700;
+              margin-bottom: 20px;
+            }
+
+            .Widgets {
+              transition: all ease 0.3s;
+              &:active {
+                transition: none;
+                scale: 0.98;
+                background-color: transparentize($fgcolor, 0.9);
+              }
+            }
+          }
 
           .Widgets {
             position: relative;

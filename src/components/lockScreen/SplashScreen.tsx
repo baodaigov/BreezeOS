@@ -60,6 +60,7 @@ export default function SplashScreen() {
   const [fontFamilyMenu, showFontFamilyMenu] = useState<boolean>(false);
   const [fontSizeMenu, showFontSizeMenu] = useState<boolean>(false);
   const [widgetsMenuShown, setWidgetsMenuShown] = useState<boolean>(false);
+  const [addWidgetMenu, setAddWidgetMenu] = useState<boolean>(false);
   const { timeFormat } = useTime();
   const inputFieldRef = useRef<HTMLInputElement>(null);
 
@@ -267,8 +268,8 @@ export default function SplashScreen() {
   }
 
   function removeWidget(index: number) {
-    const deleteAlarm = widgets?.filter((_element, i) => i !== index);
-    dispatch(setWidgets(deleteAlarm));
+    const deleteWidget = widgets?.filter((_element, i) => i !== index);
+    dispatch(setWidgets(deleteWidget));
   }
 
   return (
@@ -491,22 +492,49 @@ export default function SplashScreen() {
               >
                 <i className="fa-regular fa-chevron-left" />
               </div>
-              <div className="InteractionButton">
-                <i className="fa-regular fa-plus" />
+              <div
+                className="InteractionButton"
+                onClick={() => setAddWidgetMenu(!addWidgetMenu)}
+              >
+                <i
+                  className="fa-regular fa-plus"
+                  style={{
+                    transition: "all ease 0.2s",
+                    rotate: addWidgetMenu ? "45deg" : "none",
+                  }}
+                />
               </div>
             </div>
             <div className="WidgetsContainer">
-              {widgets.map((i, index) => (
-                <div className={`Widgets ${i === "date" && "default"}`}>
+              <div className={`AddWidget ${addWidgetMenu && "active"}`}>
+                <p className="Text">Add Widget</p>
+                <div style={{ display: "flex" }}>
                   <div
-                    className="CloseButton"
-                    onClick={() => removeWidget(index)}
+                    className="Widgets"
+                    style={{
+                      display: widgets.includes("battery") ? "none" : "block",
+                    }}
+                    onClick={() =>
+                      dispatch(setWidgets([...widgets, "battery"]))
+                    }
                   >
-                    <i className="fa-regular fa-xmark" />
+                    <SplashScreenItem type="battery" />
                   </div>
-                  <SplashScreenItem type={i} />
                 </div>
-              ))}
+              </div>
+              <div style={{ display: "flex" }}>
+                {widgets.map((i, index) => (
+                  <div className={`Widgets ${i === "date" && "default"}`}>
+                    <div
+                      className="CloseButton"
+                      onClick={() => removeWidget(index)}
+                    >
+                      <i className="fa-regular fa-xmark" />
+                    </div>
+                    <SplashScreenItem type={i} />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
           <div className="EditMenu">
