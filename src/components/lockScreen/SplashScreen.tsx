@@ -56,7 +56,7 @@ export default function SplashScreen() {
   const [passwordValue, setPasswordValue] = useState<string>("");
   const [invalidCount, setInvalidCount] = useState<number>(0);
   const invalidLimit = 7;
-  const [isEditable, setEditable] = useState<boolean>(true);
+  const [isEditable, setEditable] = useState<boolean>(false);
   const [fontFamilyMenu, showFontFamilyMenu] = useState<boolean>(false);
   const [fontSizeMenu, showFontSizeMenu] = useState<boolean>(false);
   const [widgetsMenuShown, setWidgetsMenuShown] = useState<boolean>(false);
