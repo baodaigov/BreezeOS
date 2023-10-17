@@ -224,7 +224,7 @@
       background: #171717;
       outline: 4px solid #facc15;
       width: 330px;
-      height: 140px;
+      height: 135px;
 
       .Hour,
       .Min,
@@ -240,13 +240,17 @@
 
         span {
           font-family: JetBrains Mono;
+          font-weight: 100;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          text-rendering: optimizeLegibility;
         }
 
         .TimeSeparator {
           width: 1px;
           height: 60px;
           background-color: #facc1520;
-          margin: 0 20px;
+          margin: 0 18px;
         }
 
         .TimeSec {
