@@ -2,9 +2,6 @@ $bgcolor: #202023e5;
 $fgcolor: #e2e2e2;
 
 .CalculatorWindow {
-  * {
-    transition: all ease 0.3s;
-  }
   .Window .TopBar {
     .TopBarInteractionContainer {
       display: flex;

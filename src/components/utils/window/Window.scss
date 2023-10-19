@@ -67,6 +67,7 @@ $fgcolor: #e2e2e2;
         height: 20px;
         font-size: 11px;
         color: $fgcolor;
+        transition: all ease 0.3s;
 
         &:first-child {
           margin-left: 0;
@@ -105,6 +106,7 @@ $fgcolor: #e2e2e2;
           color: $bgcolor;
           font-size: 8px;
           margin-left: 8px;
+          transition: none;
 
           i {
             display: none;
