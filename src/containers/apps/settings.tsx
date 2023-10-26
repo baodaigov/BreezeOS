@@ -70,6 +70,7 @@ import { setStartMenuActive } from "@/store/reducers/startmenu";
 import Draggable from "react-draggable";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import Hammer from "react-hammerjs";
+import { useBattery } from "react-use";
 
 export const SettingsApp = () => {
   const { t } = useTranslation();
@@ -155,6 +156,8 @@ export default function Settings() {
   const isActive = useAppSelector((state) => state.appsSettings.active);
   const isHide = useAppSelector((state) => state.appsSettings.hide);
   const [t, i18n] = useTranslation();
+  const batteryState = useBattery();
+  let batteryPercent = Math.round(batteryState.level * 100);
   const settingsReducer = useAppSelector((state) => state.settings);
   const isHour12 = useAppSelector((state) => state.time.hour12);
   const isSecondsEnabled = useAppSelector((state) => state.time.seconds);
@@ -1239,6 +1242,45 @@ export default function Settings() {
         return (
           <div className="SettingsSectionBlock Battery">
             <div className="SettingsSectionFixedWidth">
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  marginBottom: "40px",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    marginBottom: "15px",
+                  }}
+                >
+                  <p className="font-bold" style={{ fontSize: "14px" }}>
+                    Battery level
+                  </p>
+                  <p style={{ fontSize: "14px" }}>
+                    {batteryState.dischargingTime} seconds
+                  </p>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  <div className="BatteryLevelContainer">
+                    <div
+                      className={`BatteryLevel ${
+                        batteryPercent < 10 && "lowbattery"
+                      }`}
+                      style={{ width: `${batteryPercent}%` }}
+                    />
+                  </div>
+                  <p style={{ fontSize: "14px" }}>{batteryPercent}%</p>
+                </div>
+              </div>
               <div
                 style={{
                   display: "flex",
