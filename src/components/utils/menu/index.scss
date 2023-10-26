@@ -6,7 +6,7 @@ $fgcolor: #e2e2e2;
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
   padding: 5px;
-  border-radius: 7px;
+  border-radius: 8px;
   position: absolute;
   box-shadow: 0px 0 20px #0000004e;
   transition: all ease 0.15s;
@@ -20,7 +20,7 @@ $fgcolor: #e2e2e2;
 
   .ActMenuSelector {
     padding: 5px 8px;
-    border-radius: 7px;
+    border-radius: 6px;
     background: transparent;
     color: $fgcolor;
     font-size: 13px;

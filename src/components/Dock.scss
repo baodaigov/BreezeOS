@@ -23,11 +23,13 @@ $fgcolor: #e2e2e2;
 
   .DockItemContainer {
     .DockItem {
-      margin-right: 11px;
+      margin-right: 10px;
       display: flex;
       justify-content: center;
 
       img {
+        width: 37px;
+        height: 37px;
         transition: all ease 0.2s;
 
         &:active {
@@ -264,6 +266,17 @@ $fgcolor: #e2e2e2;
           }
         }
       }
+    }
+  }
+}
+
+.animdisabled {
+  .Dock .DockItemContainer .DockItem img {
+    transition: none;
+    &:active {
+      width: 37px;
+      height: 37px;
+      filter: brightness(60%);
     }
   }
 }

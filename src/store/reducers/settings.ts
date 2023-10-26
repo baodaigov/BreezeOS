@@ -24,6 +24,9 @@ interface StateType {
   bluetooth: boolean;
   themeLight: boolean;
   boldText: boolean;
+  batterySaver: boolean;
+  animationsReduced: boolean;
+  colorInverted: boolean;
   fontFamily: string;
 }
 
@@ -98,6 +101,9 @@ const initialState: StateType = {
   bluetooth: false,
   themeLight: false,
   boldText: false,
+  batterySaver: false,
+  animationsReduced: false,
+  colorInverted: false,
   fontFamily: "OptimisticDisplay",
 };
 
@@ -157,6 +163,15 @@ export const settingsSlice = createSlice({
     setBoldText: (state, action: PayloadAction<boolean>) => {
       state.boldText = action.payload;
     },
+    setBatterySaver: (state, action: PayloadAction<boolean>) => {
+      state.batterySaver = action.payload;
+    },
+    setAnimationsReduced: (state, action: PayloadAction<boolean>) => {
+      state.animationsReduced = action.payload;
+    },
+    setColorInverted: (state, action: PayloadAction<boolean>) => {
+      state.colorInverted = action.payload;
+    },
     setFontFamily: (state, action: PayloadAction<string>) => {
       state.fontFamily = action.payload;
     },
@@ -177,6 +192,9 @@ export const {
   toggleBluetooth,
   toggleLightMode,
   setBoldText,
+  setBatterySaver,
+  setAnimationsReduced,
+  setColorInverted,
   setFontFamily,
 } = settingsSlice.actions;
 

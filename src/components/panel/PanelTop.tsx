@@ -6,7 +6,15 @@ export default function PanelTop() {
   return (
     <div className="PanelTop">
       <Battery />
-      <PanelItem type="shutdownMenu" />
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        <PanelItem type="batterySaver" />
+        <PanelItem type="shutdownMenu" />
+      </div>
     </div>
   );
 }

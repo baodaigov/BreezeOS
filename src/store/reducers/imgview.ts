@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface StateType {
   location: string;
-  pic: string | undefined;
+  pic?: string;
 }
 
 const initialState: StateType = {
@@ -17,7 +17,7 @@ const imgViewSlice = createSlice({
     setLocation: (state, action: PayloadAction<string>) => {
       state.location = action.payload;
     },
-    openPic: (state, action: PayloadAction<string | undefined>) => {
+    openPic: (state, action: PayloadAction<string>) => {
       state.pic = action.payload;
     },
   },

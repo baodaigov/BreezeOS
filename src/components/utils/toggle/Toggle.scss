@@ -23,8 +23,6 @@
   }
 
   &.active {
-    background: #2563eb;
-
     .ToggleThumb {
       transform: translateX(100%);
     }
@@ -45,9 +43,21 @@
 .lightMode {
   .Toggle {
     background: transparentize(#09090b, 0.93);
+  }
+}
 
-    &.active {
-      background: #2563eb;
+.animdisabled {
+  .Toggle {
+    &:active {
+      .ToggleThumb {
+        width: 20px;
+      }
+    }
+
+    &.active:active {
+      .ToggleThumb {
+        transform: translateX(100%);
+      }
     }
   }
 }

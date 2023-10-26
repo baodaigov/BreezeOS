@@ -1021,65 +1021,72 @@ $actcolor: #60a5fa;
             border-radius: 7px;
           }
 
-          .WiFiWrapper {
-            .WiFi {
+          .SettingsSectionBlock {
+            display: flex;
+            justify-content: center;
+            margin: 0 auto;
+            height: 100%;
+
+            .SettingsSectionFixedWidth {
               display: flex;
-              justify-content: center;
-              margin: 0 auto;
+              flex-direction: column;
+              width: 649.516px;
               height: 100%;
+            }
+          }
 
-              .StatusWifiFalse {
-                height: 100%;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                text-align: center;
+          .WiFi {
+            .StatusWifiFalse {
+              height: 100%;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              text-align: center;
 
-                i {
-                  font-size: 70px;
-                  margin-bottom: 40px;
-                  color: transparentize($fgcolor, 0.8);
-                }
-
-                .Title {
-                  font-size: 40px;
-                  margin-bottom: 10px;
-                }
-
-                .Description {
-                  color: transparentize($fgcolor, 0.8);
-                }
+              i {
+                font-size: 70px;
+                margin-bottom: 40px;
+                color: transparentize($fgcolor, 0.8);
               }
 
-              .VisibleNetworks {
+              .Title {
+                font-size: 40px;
+                margin-bottom: 10px;
+              }
+
+              .Description {
+                color: transparentize($fgcolor, 0.8);
+              }
+            }
+
+            .VisibleNetworks {
+              display: flex;
+              flex-direction: column;
+              height: 100%;
+
+              .VisibleNetworksItem {
+                width: 100%;
+                padding: 15px 25px;
                 display: flex;
-                flex-direction: column;
-                height: 100%;
+                justify-content: space-between;
+                border-radius: 999px;
+                margin-bottom: 7px;
 
-                .VisibleNetworksItem {
-                  width: 100%;
-                  padding: 15px 25px;
-                  display: flex;
-                  justify-content: space-between;
-                  border-radius: 999px;
-                  margin-bottom: 7px;
+                &:hover {
+                  background: transparentize($fgcolor, 0.95);
+                }
 
-                  &:hover {
-                    background: transparentize($fgcolor, 0.95);
-                  }
+                .VisibleNetworksIcon {
+                  i {
+                    margin-right: 13px;
 
-                  .VisibleNetworksIcon {
-                    i {
-                      margin-right: 13px;
+                    &:last-child {
+                      margin: 0;
+                    }
 
-                      &:last-child {
-                        margin: 0;
-                      }
-
-                      &.fa-duotone {
-                        --fa-secondary-color: #e2e2e296;
-                      }
+                    &.fa-duotone {
+                      --fa-secondary-color: #e2e2e296;
                     }
                   }
                 }
@@ -1087,292 +1094,200 @@ $actcolor: #60a5fa;
             }
           }
 
-          .BluetoothWrapper {
-            height: 100%;
-            .Bluetooth {
-              display: flex;
-              justify-content: center;
-              margin: 0 auto;
-              height: 100%;
+          .Bluetooth {
+            .BluetoothDevices {
+              .Description {
+                color: transparentize($fgcolor, 0.8);
+              }
+            }
 
-              .BluetoothDevices {
-                .Description {
-                  color: transparentize($fgcolor, 0.8);
-                }
+            .StatusBluetoothFalse {
+              height: 100%;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              text-align: center;
+
+              i {
+                font-size: 70px;
+                margin-bottom: 40px;
+                color: transparentize($fgcolor, 0.8);
               }
 
-              .StatusBluetoothFalse {
-                height: 100%;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                text-align: center;
+              .Title {
+                font-size: 40px;
+                margin-bottom: 10px;
+              }
 
-                i {
-                  font-size: 70px;
-                  margin-bottom: 40px;
-                  color: transparentize($fgcolor, 0.8);
-                }
-
-                .Title {
-                  font-size: 40px;
-                  margin-bottom: 10px;
-                }
-
-                .Description {
-                  color: transparentize($fgcolor, 0.8);
-                }
+              .Description {
+                color: transparentize($fgcolor, 0.8);
               }
             }
           }
 
-          .AppearanceWrapper {
-            .Appearance {
+          .Appearance {
+            .WindowColors {
               display: flex;
-              justify-content: center;
-              margin: 0 auto;
-              margin-bottom: 30px;
-              max-width: 70%;
-              .WindowColors {
-                display: flex;
-                flex-direction: column;
+              flex-direction: column;
 
-                .ImageContainer {
-                  border: 3px solid transparent;
-                  border-radius: 10px;
-                  img {
-                    border-radius: 8px;
-                    width: auto;
-                    height: 200px;
-                  }
-                }
-
-                &[data-value="1"] {
-                  .ImageContainer.dark {
-                    transition: border ease 0.3s;
-                    border: 3px solid #60a5fa;
-                  }
-                }
-
-                &[data-value="2"] {
-                  .ImageContainer.light {
-                    transition: border ease 0.3s;
-                    border: 3px solid #60a5fa;
-                  }
+              .ImageContainer {
+                border: 3px solid transparent;
+                border-radius: 10px;
+                img {
+                  border-radius: 8px;
+                  width: auto;
+                  height: 200px;
                 }
               }
 
-              .Wallpapers {
+              &[data-value="1"] {
+                .ImageContainer.dark {
+                  transition: border ease 0.3s;
+                  border: 3px solid #60a5fa;
+                }
+              }
+
+              &[data-value="2"] {
+                .ImageContainer.light {
+                  transition: border ease 0.3s;
+                  border: 3px solid #60a5fa;
+                }
+              }
+            }
+
+            .Wallpapers {
+              display: flex;
+              flex-direction: column;
+
+              .WImageContainer {
+                transition: border ease 0.3s;
+                border: 3px solid transparent;
+                border-radius: 10px;
+                img {
+                  border-radius: 8px;
+                  width: auto;
+                  height: 118px;
+                }
+              }
+
+              &[data-value="1"] {
+                .WImageContainer.w1 {
+                  border: 3px solid #60a5fa;
+                }
+              }
+
+              &[data-value="2"] {
+                .WImageContainer.w2 {
+                  border: 3px solid #60a5fa;
+                }
+              }
+
+              &[data-value="3"] {
+                .WImageContainer.w3 {
+                  border: 3px solid #60a5fa;
+                }
+              }
+
+              &[data-value="4"] {
+                .WImageContainer.w4 {
+                  border: 3px solid #60a5fa;
+                }
+              }
+
+              &[data-value="5"] {
+                .WImageContainer.w5 {
+                  border: 3px solid #60a5fa;
+                }
+              }
+
+              &[data-value="6"] {
+                .WImageContainer.w6 {
+                  border: 3px solid #60a5fa;
+                }
+              }
+
+              .AddWallpaper {
+                border-radius: 15px;
+                border: 4px dashed transparentize($fgcolor, 0.95);
+                color: transparentize($fgcolor, 0.85);
+                background: transparentize($fgcolor, 0.95);
+                width: 649.52px;
+                height: 189px;
+                font-size: 20px;
                 display: flex;
                 flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+              }
 
-                .WImageContainer {
-                  transition: border ease 0.3s;
-                  border: 3px solid transparent;
-                  border-radius: 10px;
-                  img {
-                    border-radius: 8px;
-                    width: auto;
-                    height: 118px;
-                  }
-                }
+              .WallpaperBg {
+                width: 649.52px;
+                height: 189px;
+                position: relative;
 
-                &[data-value="1"] {
-                  .WImageContainer.w1 {
-                    border: 3px solid #60a5fa;
-                  }
-                }
-
-                &[data-value="2"] {
-                  .WImageContainer.w2 {
-                    border: 3px solid #60a5fa;
-                  }
-                }
-
-                &[data-value="3"] {
-                  .WImageContainer.w3 {
-                    border: 3px solid #60a5fa;
-                  }
-                }
-
-                &[data-value="4"] {
-                  .WImageContainer.w4 {
-                    border: 3px solid #60a5fa;
-                  }
-                }
-
-                &[data-value="5"] {
-                  .WImageContainer.w5 {
-                    border: 3px solid #60a5fa;
-                  }
-                }
-
-                &[data-value="6"] {
-                  .WImageContainer.w6 {
-                    border: 3px solid #60a5fa;
-                  }
-                }
-
-                .AddWallpaper {
-                  border-radius: 15px;
-                  border: 4px dashed transparentize($fgcolor, 0.95);
-                  color: transparentize($fgcolor, 0.85);
-                  background: transparentize($fgcolor, 0.95);
-                  width: 649.52px;
-                  height: 189px;
-                  font-size: 20px;
+                .CloseButton {
+                  border: none;
+                  outline: none;
+                  appearance: none;
+                  position: absolute;
+                  top: -10px;
+                  right: -10px;
+                  background: $fgcolor;
+                  color: $bgcolor;
                   display: flex;
-                  flex-direction: column;
                   justify-content: center;
                   align-items: center;
-                  width: 100%;
+                  width: 27px;
+                  height: 27px;
+                  font-size: 14px;
+                  border-radius: 999px;
+                  transition: all ease 0.3s;
+
+                  &:active {
+                    background: darken($fgcolor, 15%);
+                    transition: none;
+                  }
                 }
 
-                .WallpaperBg {
-                  width: 649.52px;
-                  height: 189px;
-                  position: relative;
+                .WallpaperImageWrapper {
+                  width: 100%;
+                  height: 100%;
+                  overflow: hidden;
+                  border-radius: 15px;
 
-                  .CloseButton {
-                    border: none;
-                    outline: none;
-                    appearance: none;
-                    position: absolute;
-                    top: -10px;
-                    right: -10px;
-                    background: $fgcolor;
-                    color: $bgcolor;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    width: 27px;
-                    height: 27px;
-                    font-size: 14px;
-                    border-radius: 999px;
-                    transition: all ease 0.3s;
-
-                    &:active {
-                      background: darken($fgcolor, 15%);
-                      transition: none;
-                    }
-                  }
-
-                  .WallpaperImageWrapper {
+                  .WallpaperImage {
                     width: 100%;
                     height: 100%;
-                    overflow: hidden;
-                    border-radius: 15px;
-
-                    .WallpaperImage {
-                      width: 100%;
-                      height: 100%;
-                      background-position: center;
-                      background-size: cover;
-                    }
+                    background-position: center;
+                    background-size: cover;
                   }
-                }
-
-                .AddWallpaperInput {
-                  position: absolute;
-                  top: 0;
-                  left: 0;
-                  bottom: 0;
-                  right: 0;
-                  width: 100%;
-                  opacity: 0;
-                  border-radius: 15px;
                 }
               }
 
-              .HeaderAppearance {
-                display: flex;
-                flex-direction: column;
-              }
-
-              .Themes {
-                display: flex;
-                flex-direction: column;
-
-                .ThemesMenu {
-                  display: flex;
-                  justify-content: space-between;
-                  margin-bottom: 10px;
-
-                  &:last-child {
-                    margin: 0;
-                  }
-                }
+              .AddWallpaperInput {
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                width: 100%;
+                opacity: 0;
+                border-radius: 15px;
               }
             }
-          }
 
-          .WidgetsWrapper {
-            .Widgets {
+            .HeaderAppearance {
               display: flex;
-              justify-content: center;
-              margin: 0 auto;
-              margin-bottom: 30px;
-              max-width: 70%;
-
-              .CurrentWidgets {
-                display: flex;
-                flex-direction: column;
-
-                .WidgetsButton {
-                  height: 20px;
-                  width: 20px;
-                  display: flex;
-                  justify-content: center;
-                  align-items: center;
-                  transition: all ease 0.3s;
-                  border-radius: 999px;
-                  &:hover {
-                    background: transparentize($fgcolor, 0.8);
-                  }
-                }
-
-                .WidgetsContainer {
-                  display: flex;
-
-                  & > * {
-                    margin-right: 20px;
-                  }
-
-                  .ClockWidget {
-                    position: relative;
-                    top: 0;
-                    right: 0;
-                    bottom: 0;
-                    left: 0;
-                  }
-                }
-              }
+              flex-direction: column;
             }
-          }
 
-          .NotificationsWrapper {
-            .Notifications {
+            .Themes {
               display: flex;
-              justify-content: center;
-              margin: 0 auto;
-              height: 100%;
-            }
-          }
+              flex-direction: column;
 
-          .DisplaysWrapper {
-            .Displays {
-              display: flex;
-              justify-content: center;
-              margin: 0 auto;
-              margin-bottom: 30px;
-              max-width: 70%;
-              .BuiltInDisplay {
-                display: flex;
-                flex-direction: column;
-              }
-
-              .BiDMenu {
+              .ThemesMenu {
                 display: flex;
                 justify-content: space-between;
                 margin-bottom: 10px;
@@ -1384,162 +1299,223 @@ $actcolor: #60a5fa;
             }
           }
 
-          .UsersWrapper {
-            margin: 10px 0;
-            .Users {
+          .Widgets {
+            display: flex;
+            justify-content: center;
+            margin: 0 auto;
+            margin-bottom: 30px;
+            max-width: 70%;
+
+            .CurrentWidgets {
               display: flex;
-              justify-content: center;
+              flex-direction: column;
 
-              .UserCard {
+              .WidgetsButton {
+                height: 20px;
+                width: 20px;
                 display: flex;
+                justify-content: center;
                 align-items: center;
-                justify-content: space-between;
-                margin-bottom: 40px;
-
-                .UserInfo {
-                  display: flex;
-                  align-items: center;
-
-                  .UserName {
-                    margin-bottom: 5px;
-                    font-size: 30px;
-                    font-weight: 700;
-                  }
-
-                  .UserRole {
-                    text-transform: capitalize;
-                    font-size: 13px;
-                    color: transparentize($fgcolor, 0.8);
-                  }
-                }
-              }
-
-              .UserItem {
-                width: 100%;
-                padding: 17px 25px;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
+                transition: all ease 0.3s;
                 border-radius: 999px;
-                margin-bottom: 7px;
-
-                .UserIcon {
-                  margin-right: 10px;
-                }
-
                 &:hover {
-                  background: transparentize($fgcolor, 0.95);
+                  background: transparentize($fgcolor, 0.8);
                 }
               }
-            }
-          }
 
-          .RegionNLanguageWrapper {
-            .RegionNLanguage {
-              display: flex;
-              justify-content: center;
-              margin: 0 auto;
-              height: 100%;
-            }
-          }
-
-          .DateNTimeWrapper {
-            .DateNTime {
-              display: flex;
-              justify-content: center;
-              margin: 0 auto;
-              height: 100%;
-            }
-          }
-
-          .AboutWrapper {
-            .About {
-              display: flex;
-              justify-content: center;
-              margin: 0 auto;
-              width: 70%;
-
-              .AboutLogo {
-                margin: 0 auto;
-              }
-
-              .AboutMenu {
-                width: 600px;
+              .WidgetsContainer {
                 display: flex;
-                justify-content: space-between;
+
+                & > * {
+                  margin-right: 20px;
+                }
+
+                .ClockWidget {
+                  position: relative;
+                  top: 0;
+                  right: 0;
+                  bottom: 0;
+                  left: 0;
+                }
+              }
+            }
+          }
+
+          .Notifications {
+            display: flex;
+            justify-content: center;
+            margin: 0 auto;
+            height: 100%;
+          }
+
+          .Displays {
+            display: flex;
+            justify-content: center;
+            margin: 0 auto;
+            margin-bottom: 30px;
+            max-width: 70%;
+            .BuiltInDisplay {
+              display: flex;
+              flex-direction: column;
+            }
+
+            .BiDMenu {
+              display: flex;
+              justify-content: space-between;
+              margin-bottom: 10px;
+
+              &:last-child {
+                margin: 0;
+              }
+            }
+          }
+          .Users {
+            display: flex;
+            justify-content: center;
+
+            .UserCard {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              margin-bottom: 40px;
+
+              .UserInfo {
+                display: flex;
                 align-items: center;
-                padding: 15px 25px;
-                background: transparentize($fgcolor, 0.93);
-                border-bottom: 0.5px solid darken($fgcolor, 73%);
+
+                .UserName {
+                  margin-bottom: 5px;
+                  font-size: 30px;
+                  font-weight: 700;
+                }
+
+                .UserRole {
+                  text-transform: capitalize;
+                  font-size: 13px;
+                  color: transparentize($fgcolor, 0.8);
+                }
+              }
+            }
+
+            .UserItem {
+              width: 100%;
+              padding: 17px 25px;
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              border-radius: 999px;
+              margin-bottom: 7px;
+
+              .UserIcon {
+                margin-right: 10px;
+              }
+
+              &:hover {
+                background: transparentize($fgcolor, 0.95);
+              }
+            }
+          }
+
+          .RegionNLanguage {
+            display: flex;
+            justify-content: center;
+            margin: 0 auto;
+            height: 100%;
+          }
+
+          .DateNTime {
+            display: flex;
+            justify-content: center;
+            margin: 0 auto;
+            height: 100%;
+          }
+
+          .About {
+            display: flex;
+            justify-content: center;
+            margin: 0 auto;
+            width: 70%;
+
+            .AboutLogo {
+              margin: 0 auto;
+            }
+
+            .AboutMenu {
+              width: 600px;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              padding: 15px 25px;
+              background: transparentize($fgcolor, 0.93);
+              border-bottom: 0.5px solid darken($fgcolor, 73%);
+
+              &:hover {
+                background: transparentize($fgcolor, 0.9);
+              }
+
+              &:first-child {
+                border-top-left-radius: 7px;
+                border-top-right-radius: 7px;
+              }
+
+              &:last-child {
+                border: 0;
+                border-bottom-left-radius: 7px;
+                border-bottom-right-radius: 7px;
+              }
+
+              &.EditName {
+                padding: 0 15px;
+                display: flex;
+                height: 0;
+                transition: all ease 0.3s;
+                border: 0 !important;
 
                 &:hover {
-                  background: transparentize($fgcolor, 0.9);
+                  background: transparentize($fgcolor, 0.93);
                 }
 
-                &:first-child {
-                  border-top-left-radius: 7px;
-                  border-top-right-radius: 7px;
-                }
-
-                &:last-child {
-                  border: 0;
-                  border-bottom-left-radius: 7px;
-                  border-bottom-right-radius: 7px;
-                }
-
-                &.EditName {
-                  padding: 0 15px;
-                  display: flex;
-                  height: 0;
+                * {
                   transition: all ease 0.3s;
-                  border: 0 !important;
+                }
 
-                  &:hover {
-                    background: transparentize($fgcolor, 0.93);
-                  }
+                .EditNameInput {
+                  appearance: none;
+                  border: none;
+                  outline: none;
+                  background: transparentize($fgcolor, 0.9);
+                  color: inherit;
+                  width: 100%;
+                  height: 0;
+                  padding: 0;
+                  font-size: 11px;
+                }
 
-                  * {
-                    transition: all ease 0.3s;
-                  }
+                &.active {
+                  padding: 8px 15px;
+                  height: 44.5px;
 
                   .EditNameInput {
-                    appearance: none;
-                    border: none;
-                    outline: none;
-                    background: transparentize($fgcolor, 0.9);
-                    color: inherit;
-                    width: 100%;
-                    height: 0;
-                    padding: 0;
-                    font-size: 11px;
-                  }
+                    padding: 7px 15px;
+                    height: 28px;
+                    border-radius: 5px;
 
-                  &.active {
-                    padding: 8px 15px;
-                    height: 44.5px;
-
-                    .EditNameInput {
-                      padding: 7px 15px;
-                      height: 28px;
-                      border-radius: 5px;
-
-                      &:focus {
-                        border-bottom: 1px solid $actcolor;
-                      }
+                    &:focus {
+                      border-bottom: 1px solid $actcolor;
                     }
                   }
                 }
+              }
 
-                .BlurText {
-                  color: transparentize($fgcolor, 0.8);
-                }
+              .BlurText {
+                color: transparentize($fgcolor, 0.8);
+              }
 
-                i {
-                  transition: all ease 0.3s;
+              i {
+                transition: all ease 0.3s;
 
-                  &.rotated {
-                    transform: rotate(90deg);
-                  }
+                &.rotated {
+                  transform: rotate(90deg);
                 }
               }
             }
@@ -1607,16 +1583,14 @@ $actcolor: #60a5fa;
 
         .SettingsContainer {
           .SettingsContainerInside {
-            .WiFiWrapper {
-              .WiFi {
-                .VisibleNetworks {
-                  .VisibleNetworksItem {
-                    border-radius: 5px;
-                    padding: 8px 20px;
+            .WiFi {
+              .VisibleNetworks {
+                .VisibleNetworksItem {
+                  border-radius: 5px;
+                  padding: 8px 20px;
 
-                    &:hover {
-                      background: #007bff;
-                    }
+                  &:hover {
+                    background: #007bff;
                   }
                 }
               }
@@ -2027,7 +2001,7 @@ $actcolor: #60a5fa;
         }
       }
 
-      .AppearanceWrapper .Appearance {
+      .Appearance {
         .Wallpapers {
           .AddWallpaper {
             background: transparentize($bgcolor, 0.85) !important;
@@ -2037,29 +2011,27 @@ $actcolor: #60a5fa;
         }
       }
 
-      .AboutWrapper {
-        .About {
-          .AboutMenu {
-            background: transparentize($bgcolor, 0.83) !important;
-            border-bottom: 0.5px solid darken($fgcolor, 10%) !important;
+      .About {
+        .AboutMenu {
+          background: transparentize($bgcolor, 0.83) !important;
+          border-bottom: 0.5px solid darken($fgcolor, 10%) !important;
 
-            &.EditName {
+          &.EditName {
+            .EditNameInput {
+              background: transparentize($bgcolor, 0.85) !important;
+            }
+
+            &.active {
               .EditNameInput {
-                background: transparentize($bgcolor, 0.85) !important;
-              }
-
-              &.active {
-                .EditNameInput {
-                  &:focus {
-                    border-bottom: 1px solid $actcolor;
-                  }
+                &:focus {
+                  border-bottom: 1px solid $actcolor;
                 }
               }
             }
+          }
 
-            .BlurText {
-              color: transparentize($bgcolor, 0.67) !important;
-            }
+          .BlurText {
+            color: transparentize($bgcolor, 0.67) !important;
           }
         }
       }
@@ -2110,17 +2082,15 @@ $actcolor: #60a5fa;
 
         .SettingsContainer {
           .SettingsContainerInside {
-            .WiFiWrapper {
-              .WiFi {
-                .VisibleNetworks {
-                  .VisibleNetworksItem {
-                    border-radius: 5px;
-                    padding: 8px 20px;
+            .WiFi {
+              .VisibleNetworks {
+                .VisibleNetworksItem {
+                  border-radius: 5px;
+                  padding: 8px 20px;
 
-                    &:hover {
-                      background: #007bff !important;
-                      color: $fgcolor;
-                    }
+                  &:hover {
+                    background: #007bff !important;
+                    color: $fgcolor;
                   }
                 }
               }

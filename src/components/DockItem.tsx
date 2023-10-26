@@ -93,8 +93,6 @@ export default function DockItem({
         >
           <img
             src={icon}
-            width={37}
-            height={37}
             onContextMenu={() => setDisplayContextMenu(!contextMenuDisplayed)}
           />
         </Hammer>

@@ -28,6 +28,9 @@ import {
   setDeviceName,
   setFontFamily,
   setName,
+  setAnimationsReduced,
+  setColorInverted,
+  setBatterySaver,
 } from "@/store/reducers/settings";
 import { toggle12Hour, setSeconds } from "@/store/reducers/time";
 import { changeWallpaper } from "@/store/reducers/wallpaper";
@@ -602,19 +605,9 @@ export default function Settings() {
       case "Wi-Fi":
         return (
           <>
-            <div
-              className="WiFiWrapper"
-              style={{ height: !settingsReducer.wifi ? "100%" : "" }}
-            >
-              <div className="WiFi">
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    width: "649.516px",
-                    height: "100%",
-                  }}
-                >
+            <div style={{ height: !settingsReducer.wifi ? "100%" : "" }}>
+              <div className="SettingsSectionBlock WiFi">
+                <div className="SettingsSectionFixedWidth">
                   <div
                     style={{
                       display: "flex",
@@ -622,7 +615,9 @@ export default function Settings() {
                       marginBottom: "40px",
                     }}
                   >
-                    <p className="font-bold">Airplane Mode</p>
+                    <p className="font-bold" style={{ fontSize: "14px" }}>
+                      Airplane Mode
+                    </p>
                     <Toggle
                       active={settingsReducer.airplaneMode}
                       onToggle={() =>
@@ -634,7 +629,10 @@ export default function Settings() {
                   </div>
                   {settingsReducer.wifi ? (
                     <>
-                      <p className="font-bold" style={{ marginBottom: "30px" }}>
+                      <p
+                        className="font-bold"
+                        style={{ marginBottom: "30px", fontSize: "14px" }}
+                      >
                         Visible Networks
                       </p>
                       <div className="VisibleNetworks">
@@ -737,78 +735,81 @@ export default function Settings() {
       case "Bluetooth":
         return (
           <>
-            <div className="BluetoothWrapper">
-              <div className="Bluetooth">
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    width: "649.516px",
-                    height: "100%",
-                  }}
-                >
-                  {settingsReducer.bluetooth ? (
-                    <div className="BluetoothDevices">
-                      <p className="Description">
-                        Now discoverable as "{settingsReducer.deviceName}".
-                      </p>
-                      <div style={{ marginTop: "30px" }}>
-                        <p
-                          className="font-bold"
-                          style={{ marginBottom: "30px" }}
-                        >
-                          Other Devices
-                        </p>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="StatusBluetoothFalse">
-                      <i className="fa-solid fa-bluetooth" />
-                      <p className="Title font-bold">
-                        Bluetooth Has Turned Off
-                      </p>
-                      <p className="Description">
-                        To get access to Bluetooth devices, please turn on the
-                        Bluetooth.
+            <div className="SettingsSectionBlock Bluetooth">
+              <div className="SettingsSectionFixedWidth">
+                {settingsReducer.bluetooth ? (
+                  <div className="BluetoothDevices">
+                    <p className="Description">
+                      Now discoverable as "{settingsReducer.deviceName}".
+                    </p>
+                    <div style={{ marginTop: "30px" }}>
+                      <p
+                        className="font-bold"
+                        style={{ marginBottom: "30px", fontSize: "14px" }}
+                      >
+                        Other Devices
                       </p>
                     </div>
-                  )}
-                </div>
+                  </div>
+                ) : (
+                  <div className="StatusBluetoothFalse">
+                    <i className="fa-solid fa-bluetooth" />
+                    <p className="Title font-bold">Bluetooth Has Turned Off</p>
+                    <p className="Description">
+                      To get access to Bluetooth devices, please turn on the
+                      Bluetooth.
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
           </>
         );
       case "Appearance":
         return (
-          <div className="AppearanceWrapper">
-            <div className="Appearance">
-              <div
-                className="WindowColors"
-                data-value={settingsReducer.themeLight ? "2" : "1"}
-              >
-                <p className="font-bold" style={{ marginBottom: "30px" }}>
-                  Window colors
-                </p>
-                <div style={{ display: "flex", justifyContent: "center" }}>
-                  <div
-                    className="ImageContainer dark"
-                    style={{ marginRight: "20px" }}
-                    onClick={() => dispatch(toggleLightMode(false))}
+          <>
+            <div
+              className="SettingsSectionBlock Appearance"
+              style={{ height: "fit-content", marginBottom: "30px" }}
+            >
+              <div className="SettingsSectionFixedWidth">
+                <div
+                  className="WindowColors"
+                  data-value={settingsReducer.themeLight ? "2" : "1"}
+                >
+                  <p
+                    className="font-bold"
+                    style={{ marginBottom: "30px", fontSize: "14px" }}
                   >
-                    <img src={Image1} />
-                  </div>
-                  <div
-                    className="ImageContainer light"
-                    onClick={() => dispatch(toggleLightMode(true))}
-                  >
-                    <img src={Image2} />
+                    Window colors
+                  </p>
+                  <div style={{ display: "flex", justifyContent: "center" }}>
+                    <div
+                      className="ImageContainer dark"
+                      style={{ marginRight: "20px" }}
+                      onClick={() => dispatch(toggleLightMode(false))}
+                    >
+                      <img src={Image1} />
+                    </div>
+                    <div
+                      className="ImageContainer light"
+                      onClick={() => dispatch(toggleLightMode(true))}
+                    >
+                      <img src={Image2} />
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="Appearance">
+            <div
+              className="SettingsSectionBlock Appearance"
+              style={{ height: "fit-content", marginBottom: "30px" }}
+            >
               <div className="Wallpapers" data-value={wallpaperValue}>
-                <p className="font-bold" style={{ marginBottom: "30px" }}>
+                <p
+                  className="font-bold"
+                  style={{ marginBottom: "30px", fontSize: "14px" }}
+                >
                   Wallpapers
                 </p>
                 <div
@@ -891,7 +892,9 @@ export default function Settings() {
                             className="fa-regular fa-plus"
                             style={{ fontSize: "35px", marginBottom: "20px" }}
                           />
-                          <p className="font-bold">Add wallpaper</p>
+                          <p className="font-bold" style={{ fontSize: "14px" }}>
+                            Add wallpaper
+                          </p>
                         </div>
                         <input
                           className="AddWallpaperInput"
@@ -905,9 +908,15 @@ export default function Settings() {
                 </div>
               </div>
             </div>
-            <div className="Appearance">
+            <div
+              className="SettingsSectionBlock Appearance"
+              style={{ height: "fit-content", marginBottom: "30px" }}
+            >
               <div className="HeaderAppearance">
-                <p className="font-bold" style={{ marginBottom: "30px" }}>
+                <p
+                  className="font-bold"
+                  style={{ marginBottom: "30px", fontSize: "14px" }}
+                >
                   Header
                 </p>
                 <div style={{ width: "649.516px" }}>
@@ -932,9 +941,15 @@ export default function Settings() {
                 </div>
               </div>
             </div>
-            <div className="Appearance">
+            <div
+              className="SettingsSectionBlock Appearance"
+              style={{ height: "fit-content", marginBottom: "30px" }}
+            >
               <div className="Themes">
-                <p className="font-bold" style={{ marginBottom: "30px" }}>
+                <p
+                  className="font-bold"
+                  style={{ marginBottom: "30px", fontSize: "14px" }}
+                >
                   Appearances
                 </p>
                 <div style={{ width: "649.516px" }}>
@@ -1137,12 +1152,12 @@ export default function Settings() {
                 </div>
               </div>
             </div>
-          </div>
+          </>
         );
       case "Widgets":
         return (
-          <div className="WidgetsWrapper">
-            <div className="Widgets">
+          <>
+            <div className="SettingsSectionBlock Widgets">
               <div className="CurrentWidgets">
                 <div
                   style={{
@@ -1151,10 +1166,15 @@ export default function Settings() {
                     marginBottom: "30px",
                   }}
                 >
-                  <p className="font-bold">Current widgets</p>
+                  <p className="font-bold" style={{ fontSize: "14px" }}>
+                    Current widgets
+                  </p>
                   <i className="fa-regular fa-plus WidgetsButton" />
                 </div>
-                <div style={{ width: "649.516px", display: "flex" }}>
+                <div
+                  className="SettingsSectionFixedWidth"
+                  style={{ flexDirection: "row", height: "fit-content" }}
+                >
                   <div className="WidgetsContainer">
                     <div
                       className={`ClockWidget ${
@@ -1189,13 +1209,13 @@ export default function Settings() {
                 </div>
               </div>
             </div>
-          </div>
+          </>
         );
       case "Notifications":
         return (
-          <div className="NotificationsWrapper">
-            <div className="Notifications">
-              <div style={{ width: "649.516px" }}>
+          <>
+            <div className="SettingsSectionBlock Notifications">
+              <div className="SettingsSectionFixedWidth">
                 <div
                   style={{
                     display: "flex",
@@ -1203,7 +1223,9 @@ export default function Settings() {
                     marginBottom: "40px",
                   }}
                 >
-                  <p className="font-bold">Do Not Disturb</p>
+                  <p className="font-bold" style={{ fontSize: "14px" }}>
+                    Do Not Disturb
+                  </p>
                   <Toggle
                     active={settingsReducer.notifications}
                     onToggle={toggleDoNotDisturb}
@@ -1211,23 +1233,45 @@ export default function Settings() {
                 </div>
               </div>
             </div>
+          </>
+        );
+      case "Battery":
+        return (
+          <div className="SettingsSectionBlock Battery">
+            <div className="SettingsSectionFixedWidth">
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  marginBottom: "40px",
+                }}
+              >
+                <p className="font-bold" style={{ fontSize: "14px" }}>
+                  Battery saver
+                </p>
+                <Toggle
+                  active={settingsReducer.batterySaver}
+                  onToggle={() =>
+                    dispatch(setBatterySaver(!settingsReducer.batterySaver))
+                  }
+                />
+              </div>
+            </div>
           </div>
         );
       case "Displays":
         return (
-          <div className="DisplaysWrapper">
-            <div className="Displays">
+          <>
+            <div className="SettingsSectionBlock Displays">
               <div className="BuiltInDisplay">
-                <p className="font-bold" style={{ marginBottom: "30px" }}>
+                <p
+                  className="font-bold"
+                  style={{ marginBottom: "30px", fontSize: "14px" }}
+                >
                   Built-in display
                 </p>
-                <div
-                  style={{
-                    width: "649.516px",
-                    display: "flex",
-                    flexDirection: "column",
-                  }}
-                >
+                <div className="SettingsSectionFixedWidth">
                   <div className="BiDMenu">
                     <div style={{ display: "flex", alignItems: "center" }}>
                       <i
@@ -1322,13 +1366,13 @@ export default function Settings() {
                 </div>
               </div>
             </div>
-          </div>
+          </>
         );
       case "Region & Language":
         return (
-          <div className="RegionNLanguageWrapper">
-            <div className="RegionNLanguage">
-              <div style={{ width: "649.516px" }}>
+          <>
+            <div className="SettingsSectionBlock RegionNLanguage">
+              <div className="SettingsSectionFixedWidth">
                 <div
                   style={{
                     display: "flex",
@@ -1336,7 +1380,9 @@ export default function Settings() {
                     marginBottom: "40px",
                   }}
                 >
-                  <p className="font-bold">Language</p>
+                  <p className="font-bold" style={{ fontSize: "14px" }}>
+                    Language
+                  </p>
                   <div
                     className="MenuSection"
                     onClick={() => showLanguageMenu(true)}
@@ -1427,19 +1473,13 @@ export default function Settings() {
                 </div>
               </div>
             </div>
-          </div>
+          </>
         );
       case "Users":
         return (
-          <div className="UsersWrapper">
-            <div className="Users">
-              <div
-                style={{
-                  width: "649.516px",
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-              >
+          <div style={{ margin: "10px 0" }}>
+            <div className="SettingsSectionBlock Users">
+              <div className="SettingsSectionFixedWidth">
                 <div className="UserCard">
                   <div className="UserInfo">
                     <Avatar size={2} />
@@ -1473,140 +1513,185 @@ export default function Settings() {
             </div>
           </div>
         );
+      case "Accessibility":
+        return (
+          <div className="SettingsSectionBlock Accessibility">
+            <div className="SettingsSectionFixedWidth">
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  marginBottom: "40px",
+                }}
+              >
+                <p className="font-bold" style={{ fontSize: "14px" }}>
+                  Reduce animations
+                </p>
+                <Toggle
+                  active={settingsReducer.animationsReduced}
+                  onToggle={() =>
+                    dispatch(
+                      setAnimationsReduced(!settingsReducer.animationsReduced)
+                    )
+                  }
+                />
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  marginBottom: "40px",
+                }}
+              >
+                <p className="font-bold" style={{ fontSize: "14px" }}>
+                  Invert color
+                </p>
+                <Toggle
+                  active={settingsReducer.colorInverted}
+                  onToggle={() =>
+                    dispatch(setColorInverted(!settingsReducer.colorInverted))
+                  }
+                />
+              </div>
+            </div>
+          </div>
+        );
       case "Date & Time":
         return (
-          <div className="DateNTimeWrapper">
-            <div className="DateNTime">
-              <div style={{ width: "649.516px" }}>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    marginBottom: "40px",
-                  }}
-                >
-                  <p className="font-bold">24-hour time</p>
-                  <Toggle
-                    active={!isHour12}
-                    onToggle={() => dispatch(toggle12Hour(!isHour12))}
-                  />
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    marginBottom: "40px",
-                  }}
-                >
-                  <p className="font-bold">Display seconds</p>
-                  <Toggle
-                    active={isSecondsEnabled}
-                    onToggle={() => dispatch(setSeconds(!isSecondsEnabled))}
-                  />
-                </div>
+          <div className="SettingsSectionBlock DateNTime">
+            <div className="SettingsSectionFixedWidth">
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  marginBottom: "40px",
+                }}
+              >
+                <p className="font-bold" style={{ fontSize: "14px" }}>
+                  24-hour time
+                </p>
+                <Toggle
+                  active={!isHour12}
+                  onToggle={() => dispatch(toggle12Hour(!isHour12))}
+                />
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  marginBottom: "40px",
+                }}
+              >
+                <p className="font-bold" style={{ fontSize: "14px" }}>
+                  Display seconds
+                </p>
+                <Toggle
+                  active={isSecondsEnabled}
+                  onToggle={() => dispatch(setSeconds(!isSecondsEnabled))}
+                />
               </div>
             </div>
           </div>
         );
       case "About":
         return (
-          <div className="AboutWrapper">
-            <div className="About">
+          <div className="SettingsSectionBlock About">
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+              }}
+            >
+              {settingsReducer.themeLight ? (
+                <img
+                  src={LogoL}
+                  width={"331.133"}
+                  height={140}
+                  className="AboutLogo"
+                />
+              ) : (
+                <img
+                  src={LogoD}
+                  width={"331.133"}
+                  height={140}
+                  className="AboutLogo"
+                />
+              )}
               <div
                 style={{
                   display: "flex",
                   flexDirection: "column",
-                  justifyContent: "center",
+                  marginTop: "10px",
                 }}
               >
-                {settingsReducer.themeLight ? (
-                  <img
-                    src={LogoL}
-                    width={"331.133"}
-                    height={140}
-                    className="AboutLogo"
-                  />
-                ) : (
-                  <img
-                    src={LogoD}
-                    width={"331.133"}
-                    height={140}
-                    className="AboutLogo"
-                  />
-                )}
                 <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    marginTop: "10px",
-                  }}
+                  className="AboutMenu"
+                  onClick={() => allowEditDeviceName(!editDeviceName)}
                 >
-                  <div
-                    className="AboutMenu"
-                    onClick={() => allowEditDeviceName(!editDeviceName)}
-                  >
-                    <p>Device Name</p>
-                    <div style={{ display: "flex", alignItems: "center" }}>
-                      <p className="BlurText" style={{ marginRight: "15px" }}>
-                        {settingsReducer.deviceName}
-                      </p>
-                      <i
-                        className={`fa-regular fa-chevron-right ${
-                          editDeviceName ? "rotated" : ""
-                        }`}
-                      />
-                    </div>
-                  </div>
-                  <div
-                    className={`AboutMenu EditName ${
-                      editDeviceName ? "active" : ""
-                    }`}
-                  >
-                    <input
-                      className="EditNameInput"
-                      type="text"
-                      placeholder={settingsReducer.deviceName}
-                      onKeyUp={submitDeviceName}
+                  <p>Device Name</p>
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <p className="BlurText" style={{ marginRight: "15px" }}>
+                      {settingsReducer.deviceName}
+                    </p>
+                    <i
+                      className={`fa-regular fa-chevron-right ${
+                        editDeviceName ? "rotated" : ""
+                      }`}
                     />
                   </div>
-                  <div className="AboutMenu">
-                    <p>System Name</p>
-                    <p className="BlurText">BreezeOS</p>
-                  </div>
-                  <div className="AboutMenu">
-                    <p>System Version</p>
-                    <p className="BlurText">2.0.0</p>
-                  </div>
-                  <div className="AboutMenu">
-                    <p>Shell</p>
-                    <p className="BlurText">{shellTheme}</p>
-                  </div>
-                  <div className="AboutMenu">
-                    <p>Kernel</p>
-                    <p className="BlurText">GNU/Linux 6.2.1 x86_64</p>
-                  </div>
-                  <div className="AboutMenu">
-                    <p>Memory</p>
-                    <p className="BlurText">
-                      {navigator.hardwareConcurrency} GB
-                    </p>
-                  </div>
-                  <div className="AboutMenu">
-                    <p>Processor</p>
-                    <p className="BlurText">
-                      Intel&reg; Core&trade; i3-6100 CPU @ 3.70GHz &times; 4
-                    </p>
-                  </div>
-                  <div className="AboutMenu">
-                    <p>Graphics</p>
-                    <p className="BlurText">
-                      Mesa Intel&reg; HD Graphics 530 &#40;SKL GT2&#41;
-                    </p>
-                  </div>
-                  <div className="AboutMenu">
-                    <p>Disk Capacity</p>
-                    <p className="BlurText">128.0 GB</p>
-                  </div>
+                </div>
+                <div
+                  className={`AboutMenu EditName ${
+                    editDeviceName ? "active" : ""
+                  }`}
+                >
+                  <input
+                    className="EditNameInput"
+                    type="text"
+                    placeholder={settingsReducer.deviceName}
+                    onKeyUp={submitDeviceName}
+                  />
+                </div>
+                <div className="AboutMenu">
+                  <p>System Name</p>
+                  <p className="BlurText">BreezeOS</p>
+                </div>
+                <div className="AboutMenu">
+                  <p>System Version</p>
+                  <p className="BlurText">2.0.0</p>
+                </div>
+                <div className="AboutMenu">
+                  <p>Shell</p>
+                  <p className="BlurText">{shellTheme}</p>
+                </div>
+                <div className="AboutMenu">
+                  <p>Kernel</p>
+                  <p className="BlurText">GNU/Linux 6.2.1 x86_64</p>
+                </div>
+                <div className="AboutMenu">
+                  <p>Memory</p>
+                  <p className="BlurText">{navigator.hardwareConcurrency} GB</p>
+                </div>
+                <div className="AboutMenu">
+                  <p>Processor</p>
+                  <p className="BlurText">
+                    Intel&reg; Core&trade; i3-6100 CPU @ 3.70GHz &times; 4
+                  </p>
+                </div>
+                <div className="AboutMenu">
+                  <p>Graphics</p>
+                  <p className="BlurText">
+                    Mesa Intel&reg; HD Graphics 530 &#40;SKL GT2&#41;
+                  </p>
+                </div>
+                <div className="AboutMenu">
+                  <p>Disk Capacity</p>
+                  <p className="BlurText">128.0 GB</p>
                 </div>
               </div>
             </div>

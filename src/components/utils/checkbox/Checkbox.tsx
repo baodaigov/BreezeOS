@@ -16,7 +16,7 @@ export default function Checkbox({
   return (
     <div
       className={`Checkbox ${active && "active"} ${disabled && "disabled"}`}
-      style={{ scale: size }}
+      style={{ transform: `scale(${size})` }}
       onClick={onToggle}
     >
       <i className="fa-regular fa-check" />

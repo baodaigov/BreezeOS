@@ -1,9 +1,9 @@
-import { setHeaderHide } from "../store/reducers/header";
-import { setDockHide } from "../store/reducers/dock";
-import { setAllowSwitchWorkspace } from "../store/reducers/wallpaper";
+import { setHeaderHide } from "../../store/reducers/header";
+import { setDockHide } from "../../store/reducers/dock";
+import { setAllowSwitchWorkspace } from "../../store/reducers/wallpaper";
 import Hammer from "react-hammerjs";
-import { setDesktopBodyActive } from "../store/reducers/desktopbody";
-import { setStartMenuActive } from "../store/reducers/startmenu";
+import { setDesktopBodyActive } from "../../store/reducers/desktopbody";
+import { setStartMenuActive } from "../../store/reducers/startmenu";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
 export default function Home() {

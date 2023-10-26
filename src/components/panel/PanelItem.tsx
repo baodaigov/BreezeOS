@@ -1,15 +1,23 @@
 import { inactivePanel } from "../../store/reducers/panel";
 import "./Panel.scss";
-import { setLocked } from "../../store/reducers/settings";
+import { setBatterySaver, setLocked } from "../../store/reducers/settings";
 import { setOptionsMenuShown } from "../../store/reducers/lock";
-import { useAppDispatch } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
 interface PanelItemProps {
-  type: string;
-  title?: string;
+  type?: string;
+  active?: boolean;
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
+  children?: React.ReactNode;
 }
 
-export default function PanelItem({ type, title }: PanelItemProps) {
+export default function PanelItem({
+  type,
+  active,
+  onClick,
+  children,
+}: PanelItemProps) {
+  const settings = useAppSelector((state) => state.settings);
   const dispatch = useAppDispatch();
 
   function showShutdownMenu() {
@@ -19,22 +27,30 @@ export default function PanelItem({ type, title }: PanelItemProps) {
   }
 
   switch (type) {
-    case "default":
-      return <div className="PanelItem font-bold">{title}</div>;
-
     case "shutdownMenu":
       return (
         <div
           className="PanelItem PanelItemInteraction"
           onClick={showShutdownMenu}
         >
-          <i className="fa-solid fa-power-off" style={{ marginRight: "0" }} />
+          <i className="fa-regular fa-power-off" style={{ marginRight: "0" }} />
+        </div>
+      );
+    case "batterySaver":
+      return (
+        <div
+          className={`PanelItem PanelItemInteraction ${
+            settings.batterySaver && "active"
+          }`}
+          onClick={() => dispatch(setBatterySaver(!settings.batterySaver))}
+        >
+          <i className="fa-regular fa-leaf" style={{ marginRight: "0" }} />
         </div>
       );
     default:
       return (
-        <div className="PanelItem font-bold">
-          Please define a specific type.
+        <div className={`PanelItem ${active && "active"}`} onClick={onClick}>
+          {children}
         </div>
       );
   }

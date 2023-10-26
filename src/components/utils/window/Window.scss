@@ -298,3 +298,16 @@ $fgcolor: #e2e2e2;
     }
   }
 }
+
+.animdisabled {
+  .Window {
+    scale: 1;
+    transition: opacity ease 0.3s;
+
+    &.hide {
+      top: 0;
+      opacity: 0 !important;
+      pointer-events: none;
+    }
+  }
+}

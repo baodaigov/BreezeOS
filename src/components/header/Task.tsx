@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react";
-import { activePanel, inactivePanel } from "../store/reducers/panel";
-import Panel from "../components/panel/Panel";
-import "../Desktop.scss";
-import "../components/Header.scss";
+import { activePanel, inactivePanel } from "../../store/reducers/panel";
+import Panel from "../panel/Panel";
+import "@/Desktop.scss";
+import "../Header.scss";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
 interface TaskProps extends React.HTMLAttributes<HTMLDivElement> {}

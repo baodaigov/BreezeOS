@@ -4,6 +4,7 @@ import "./Panel.scss";
 import { inactivePanel } from "../../store/reducers/panel";
 import { setActive, setSettings } from "../../store/reducers/apps/settings";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import PanelItem from "./PanelItem";
 
 export default function Battery() {
   const batteryChargingStatus = useAppSelector(
@@ -22,8 +23,7 @@ export default function Battery() {
   }
 
   return (
-    <div
-      className="PanelItem font-bold"
+    <PanelItem
       onClick={() => {
         dispatch(inactivePanel());
         dispatch(setActive(true));
@@ -38,6 +38,6 @@ export default function Battery() {
       <p className="PanelBatteryLevel">
         {isNaN(batteryPercent) ? "-" : batteryPercent + "%"}
       </p>
-    </div>
+    </PanelItem>
   );
 }

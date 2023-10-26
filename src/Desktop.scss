@@ -265,6 +265,7 @@ img {
 }
 
 .Desktop {
+  position: relative;
   overflow: hidden;
   width: 100%;
   height: 100vh;
@@ -272,6 +273,7 @@ img {
   &.hideCursor * {
     cursor: none !important;
   }
+
   &.blackscr {
     background: #000 !important;
     cursor: none !important;
@@ -279,8 +281,19 @@ img {
       display: none;
     }
   }
+
   &.isBold * {
     font-weight: 700;
+  }
+
+  &.animdisabled {
+    * {
+      transition-property: opacity !important;
+    }
+  }
+
+  &.inverted {
+    filter: invert(1);
   }
 
   .DesktopBody {

@@ -1,12 +1,12 @@
 import { useEffect, useState, useRef } from "react";
 import { activePanel, inactivePanel } from "@/store/reducers/panel";
 import { setHeaderType, setWidth } from "@/store/reducers/header";
-import Task from "@/header/Task";
-import Home from "@/header/Home";
+import Task from "@/components/header/Task";
+import Home from "@/components/header/Home";
 import Panel from "./panel/Panel";
 import { useBattery } from "react-use";
 import { setActive, setSettings } from "@/store/reducers/apps/settings";
-import AppMenu from "@/header/AppMenu";
+import AppMenu from "@/components/header/AppMenu";
 import PanelType from "./panel/PanelType";
 import useTime from "@/hooks/useTime";
 import { useTranslation } from "react-i18next";

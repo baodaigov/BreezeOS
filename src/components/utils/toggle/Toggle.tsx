@@ -4,6 +4,7 @@ import "./Toggle.scss";
 interface ToggleProps {
   active: boolean;
   size?: number;
+  color?: string;
   disabled?: boolean;
   onToggle: HammerListener;
 }
@@ -11,6 +12,7 @@ interface ToggleProps {
 export default function Toggle({
   active,
   size = 1,
+  color = "#2563eb",
   disabled,
   onToggle,
 }: ToggleProps) {
@@ -18,7 +20,7 @@ export default function Toggle({
     <Hammer onTap={onToggle} onPressUp={onToggle} onSwipeLeft={onToggle}>
       <div
         className={`Toggle ${active && "active"} ${disabled && "disabled"}`}
-        style={{ scale: size }}
+        style={{ transform: `scale(${size})`, backgroundColor: color }}
       >
         <div className="ToggleThumb"></div>
       </div>
@@ -27,7 +29,7 @@ export default function Toggle({
     <Hammer onTap={onToggle} onPressUp={onToggle} onSwipeRight={onToggle}>
       <div
         className={`Toggle ${active && "active"} ${disabled && "disabled"}`}
-        style={{ scale: size }}
+        style={{ transform: `scale(${size})` }}
       >
         <div className="ToggleThumb"></div>
       </div>
