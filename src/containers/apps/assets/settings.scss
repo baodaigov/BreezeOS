@@ -995,14 +995,13 @@ $actcolor: #60a5fa;
 
       .SettingsContainer {
         position: relative;
-        width: 100%;
-        height: 100%;
+        min-height: 100%;
 
         .SettingsContainerInside {
           position: absolute;
           width: 100%;
           height: 100%;
-          overflow-y: auto;
+          overflow: auto;
           padding: 20px;
           font-size: 13px;
 

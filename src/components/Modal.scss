@@ -1,0 +1,38 @@
+.ModalWrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: 70px 30px;
+  z-index: 10;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column-reverse;
+
+  .ModalContainer {
+    margin: 0 auto;
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #2020238e;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: 0px 0 15px #00000028;
+    opacity: 0;
+    scale: 0.92;
+    border-radius: 10px;
+    padding: 20px 32px;
+    color: #e2e2e2;
+    font-size: 18px;
+    transition: all ease 0.3s;
+
+    &.active {
+      opacity: 1;
+      scale: 1;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+}

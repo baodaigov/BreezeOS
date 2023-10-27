@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./Clock.scss";
 import Draggable from "react-draggable";
 import ActMenu, { ActMenuSelector } from "@/components/utils/menu";

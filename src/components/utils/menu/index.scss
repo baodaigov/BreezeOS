@@ -70,13 +70,13 @@ $fgcolor: #e2e2e2;
 
 .lightMode {
   .ActMenu {
-    background: transparentize($fgcolor, 0.5);
+    background: transparentize($fgcolor, 0.15);
 
     .ActMenuSelector {
       color: $bgcolor;
 
       &:hover {
-        background: #00000012;
+        background: #00000018;
       }
     }
 

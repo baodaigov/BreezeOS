@@ -71,6 +71,9 @@ import Draggable from "react-draggable";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import Hammer from "react-hammerjs";
 import { useBattery } from "react-use";
+import { setKernel } from "@/store/reducers/system";
+import { arch, platform, type, version } from "@tauri-apps/api/os";
+import { getVersion } from "@tauri-apps/api/app";
 
 export const SettingsApp = () => {
   const { t } = useTranslation();
@@ -153,11 +156,13 @@ export const SettingsStartApp = () => {
 };
 
 export default function Settings() {
+  const dispatch = useAppDispatch();
   const isActive = useAppSelector((state) => state.appsSettings.active);
   const isHide = useAppSelector((state) => state.appsSettings.hide);
   const [t, i18n] = useTranslation();
   const batteryState = useBattery();
   let batteryPercent = Math.round(batteryState.level * 100);
+  const system = useAppSelector((state) => state.system);
   const settingsReducer = useAppSelector((state) => state.settings);
   const isHour12 = useAppSelector((state) => state.time.hour12);
   const isSecondsEnabled = useAppSelector((state) => state.time.seconds);
@@ -167,12 +172,45 @@ export default function Settings() {
   const header = useAppSelector((state) => state.header);
   const widget = useAppSelector((state) => state.widget);
   const [wallpaperValue, setValueWallpaper] = useState("1");
-  const dispatch = useAppDispatch();
+  const [systemVersion, setSystemVersion] = useState<string>("");
+  const [systemPlatform, setSystemPlatform] = useState<string>("BreezeOS");
+
+  const getSystemVersion = async () => {
+    try {
+      const version = await getVersion();
+      setSystemVersion(`${version}`);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const getSystemPlatform = async () => {
+    try {
+      const platformName = await platform();
+      setSystemPlatform(`${platformName}`);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const getKernelInfo = async () => {
+    try {
+      const kernelType = await type();
+      const kernelVer = await version();
+      const archName = await arch();
+      dispatch(setKernel(`${kernelType} ${kernelVer} ${archName}`));
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   useEffect(() => {
     if (shellTheme === "WhiteSur") {
       dispatch(setProMode(false));
     }
+    getSystemVersion();
+    getSystemPlatform();
+    getKernelInfo();
   }, [shellTheme]);
 
   const navItems = [
@@ -1700,20 +1738,29 @@ export default function Settings() {
                   />
                 </div>
                 <div className="AboutMenu">
-                  <p>System Name</p>
-                  <p className="BlurText">BreezeOS</p>
+                  <p>Platform</p>
+                  <p
+                    className="BlurText"
+                    style={{
+                      textTransform: "capitalize",
+                    }}
+                  >
+                    {systemPlatform}
+                  </p>
                 </div>
-                <div className="AboutMenu">
-                  <p>System Version</p>
-                  <p className="BlurText">2.0.0</p>
-                </div>
+                {systemVersion && (
+                  <div className="AboutMenu">
+                    <p>Version</p>
+                    <p className="BlurText">{systemVersion}</p>
+                  </div>
+                )}
                 <div className="AboutMenu">
                   <p>Shell</p>
                   <p className="BlurText">{shellTheme}</p>
                 </div>
                 <div className="AboutMenu">
                   <p>Kernel</p>
-                  <p className="BlurText">GNU/Linux 6.2.1 x86_64</p>
+                  <p className="BlurText">{system.kernel}</p>
                 </div>
                 <div className="AboutMenu">
                   <p>Memory</p>
@@ -2238,8 +2285,12 @@ export default function Settings() {
                     </div>
                   </div>
                 </div>
-                <div className="SettingsContainer">
-                  <div className="SettingsContainerInside">{switchTab()}</div>
+                <div
+                  style={{ overflow: "auto", width: "100%", height: "100%" }}
+                >
+                  <div className="SettingsContainer">
+                    <div className="SettingsContainerInside">{switchTab()}</div>
+                  </div>
                 </div>
               </div>
             </div>

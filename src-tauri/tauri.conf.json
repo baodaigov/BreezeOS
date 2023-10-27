@@ -12,7 +12,16 @@
   },
   "tauri": {
     "allowlist": {
-      "all": false
+      "os": {
+        "all": true
+      },
+      "globalShortcut": {
+        "all": true
+      },
+      "window": {
+        "all": false,
+        "close": true
+      }
     },
     "bundle": {
       "active": true,
@@ -58,7 +67,7 @@
         "fullscreen": true,
         "height": 600,
         "resizable": true,
-        "title": "BreezeOS Mobile",
+        "title": "BreezeOS Desktop",
         "width": 800
       }
     ]

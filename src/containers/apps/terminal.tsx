@@ -15,10 +15,10 @@ import Draggable from "react-draggable";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
 export const TerminalApp = () => {
+  const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const isActive = useAppSelector((state) => state.appsTerminal.active);
   const isHide = useAppSelector((state) => state.appsTerminal.hide);
-  const dispatch = useAppDispatch();
   const icon = useAppSelector((state) => state.appearance.iconTheme);
 
   document.addEventListener("keydown", (e) => {
@@ -96,6 +96,7 @@ export default function Terminal() {
   const isHide = useAppSelector((state) => state.appsTerminal.hide);
   const { t } = useTranslation();
   const [min, isMin] = useState<boolean>(true);
+  const system = useAppSelector((state) => state.system);
 
   return (
     <div className="terminalWindow">
@@ -124,7 +125,7 @@ export default function Terminal() {
           </TopBar>
           <WindowBody>
             <div className="Terminal">
-              <pre>Welcome to BreezeOS (GNU/Linux 6.2.1 x86_64)</pre>
+              <pre>Welcome to BreezeOS ({system.kernel})</pre>
               <pre id="input">
                 &#91;localhost@breezeos&#93;$
                 <input type="text" spellCheck="false" />

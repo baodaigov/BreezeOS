@@ -9,9 +9,10 @@ import DesktopBody from "./DesktopBody";
 import { setLocked } from "./store/reducers/settings";
 import { useAppDispatch, useAppSelector } from "./store/hooks";
 import Snapshot from "./components/Snapshot";
-import ActMenu, { ActMenuSelector } from "./components/utils/menu";
-import { useEffect, useRef, useState } from "react";
-import { setActive, setSettings } from "./store/reducers/apps/settings";
+import Modal from "./components/Modal";
+import { useEffect } from "react";
+import { register, unregister } from "@tauri-apps/api/globalShortcut";
+import { setModalContent } from "@/store/reducers/modal";
 
 const Desktop = () => {
   const dispatch = useAppDispatch();
@@ -26,35 +27,21 @@ const Desktop = () => {
   const hideCursor = useAppSelector((state) => state.desktop.hideCursor);
   const blackScr = useAppSelector((state) => state.desktop.blackScr);
   const poweroff = useAppSelector((state) => state.desktop.poweroff);
-  const [contextMenuDisplayed, setContextMenuDisplayed] =
-    useState<boolean>(false);
-  const [contextMenuPos, setContextMenuPos] = useState({
-    x: 0,
-    y: 0,
-  });
 
-  function useOutsideContextMenu(ref: React.MutableRefObject<any>) {
-    useEffect(() => {
-      /**
-       * Alert if clicked on outside of element
-       */
-      function handleClickOutside(event: any) {
-        if (ref.current && !ref.current.contains(event.target)) {
-          setContextMenuDisplayed(false);
-        }
-      }
-      // Bind the event listener
-      document.addEventListener("mousedown", handleClickOutside);
-
-      return () => {
-        // Unbind the event listener on clean up
-        document.removeEventListener("mousedown", handleClickOutside);
-      };
-    }, [ref]);
+  async function quitThruShortcut() {
+    try {
+      await register("CommandOrControl+Q", () => {
+        dispatch(setModalContent("Double-press ⌘Q to quit simulator"));
+        unregister("CommandOrControl+Q");
+      });
+    } catch (e) {
+      console.error(e);
+    }
   }
 
-  const contextMenuRef = useRef(null);
-  useOutsideContextMenu(contextMenuRef);
+  useEffect(() => {
+    quitThruShortcut();
+  });
 
   document.addEventListener("keydown", (e) => {
     if (e.ctrlKey && e.keyCode === 76) {
@@ -77,15 +64,6 @@ const Desktop = () => {
         check = true;
     })(navigator.userAgent || navigator.vendor || window.opera);
     return check;
-  }
-
-  function displayContextMenu(e: React.MouseEvent<HTMLDivElement>) {
-    e.preventDefault();
-    setContextMenuDisplayed(true);
-    setContextMenuPos({
-      x: e.clientX,
-      y: e.clientY,
-    });
   }
 
   return (
@@ -113,41 +91,14 @@ const Desktop = () => {
             } ${animationsReduced && "animdisabled"} ${
               colorInverted && "inverted"
             } ${poweroff && "poweroff"}`}
-            onContextMenu={displayContextMenu}
+            onContextMenu={(e) => e.preventDefault()}
             id="Desktop"
           >
-            <ActMenu
-              style={{
-                position: "absolute",
-                zIndex: "1",
-                width: "200px",
-                top: contextMenuPos.y,
-                left: contextMenuPos.x,
-                transition: "opacity ease .1s",
-              }}
-              className={contextMenuDisplayed ? "active" : ""}
-              ref={contextMenuRef}
-            >
-              <ActMenuSelector
-                title="Change wallpaper"
-                onClick={() => {
-                  setContextMenuDisplayed(false);
-                  dispatch(setActive(true));
-                  dispatch(setSettings("Appearance"));
-                }}
-              />
-              <ActMenuSelector
-                title="Settings..."
-                onClick={() => {
-                  setContextMenuDisplayed(false);
-                  dispatch(setActive(true));
-                }}
-              />
-            </ActMenu>
             <TerminalWindow />
             <Snapshot />
             <LockScreen />
             <StartMenu />
+            <Modal />
             <Header />
             <Wallpaper />
             <DesktopBody />

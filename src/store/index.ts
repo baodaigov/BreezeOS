@@ -1,6 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
-
 import appearanceReducer from "./reducers/appearance";
 import batteryReducer from "./reducers/battery";
 import headerReducer from "./reducers/header";
@@ -8,7 +7,9 @@ import desktopReducer from "./reducers/desktop";
 import desktopBodyReducer from "./reducers/desktopbody";
 import dockReducer from "./reducers/dock";
 import panelReducer from "./reducers/panel";
+import modalReducer from "./reducers/modal";
 import shutdownReducer from "./reducers/shutdown";
+import systemReducer from "./reducers/system";
 import settingsReducer from "./reducers/settings";
 import startMenuReducer from "./reducers/startmenu";
 import wifiPasswordReducer from "./reducers/wifipassword";
@@ -43,7 +44,9 @@ const reducers = {
   desktopbody: desktopBodyReducer,
   dock: dockReducer,
   panel: panelReducer,
+  modal: modalReducer,
   shutdown: shutdownReducer,
+  system: systemReducer,
   settings: settingsReducer,
   startmenu: startMenuReducer,
   wifipassword: wifiPasswordReducer,

@@ -19,7 +19,7 @@ export default function Toggle({
   return active ? (
     <Hammer onTap={onToggle} onPressUp={onToggle} onSwipeLeft={onToggle}>
       <div
-        className={`Toggle ${active && "active"} ${disabled && "disabled"}`}
+        className={`Toggle active ${disabled && "disabled"}`}
         style={{ transform: `scale(${size})`, backgroundColor: color }}
       >
         <div className="ToggleThumb"></div>
@@ -28,7 +28,7 @@ export default function Toggle({
   ) : (
     <Hammer onTap={onToggle} onPressUp={onToggle} onSwipeRight={onToggle}>
       <div
-        className={`Toggle ${active && "active"} ${disabled && "disabled"}`}
+        className={`Toggle ${disabled && "disabled"}`}
         style={{ transform: `scale(${size})` }}
       >
         <div className="ToggleThumb"></div>

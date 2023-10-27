@@ -32,6 +32,7 @@ import {
 } from "@/store/reducers/desktop";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import SplashScreenItem from "./SplashScreenItem";
+import { appWindow } from "@tauri-apps/api/window";
 
 export default function SplashScreen() {
   const dispatch = useAppDispatch();
@@ -167,7 +168,12 @@ export default function SplashScreen() {
   }
 
   function shutdown() {
-    setTimeout(() => dispatch(setSplashScreenWrapperHideInfo(true)), 50);
+    setTimeout(() => {
+      dispatch(setSplashScreenWrapperHideInfo(true));
+      dispatch(setHeaderActive(false));
+      dispatch(setDockActive(false));
+      dispatch(setDesktopBodyActive(false));
+    }, 50);
 
     setTimeout(() => {
       dispatch(setDesktopHideCursor(true));
@@ -215,6 +221,7 @@ export default function SplashScreen() {
       dispatch(clearItem());
       dispatch(setDesktopPoweroff(true));
       dispatch(setWallpaperActive(false));
+      appWindow.close();
     }, 13200);
   }
 
