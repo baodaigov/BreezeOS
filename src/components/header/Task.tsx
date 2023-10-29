@@ -2,7 +2,6 @@ import { useEffect, useRef } from "react";
 import {
   activePanel,
   inactivePanel,
-  setPanelType,
 } from "../../store/reducers/panel";
 import Panel from "../panel/Panel";
 import "@/Desktop.scss";
