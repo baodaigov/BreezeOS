@@ -3,7 +3,7 @@ import { setActive, setHide } from "../../store/reducers/apps/clock";
 import "../../components/utils/window/Window.scss";
 import TopBar from "../../components/utils/window/TopBar";
 import WindowBody from "../../components/utils/window/WindowBody";
-import DockItem from "../../components/DockItem";
+import DockItem from "../../components/dock/DockItem";
 import "./assets/clock.scss";
 import TopBarInteraction from "../../components/utils/window/TopBarInteraction";
 import StartApp from "../../components/startMenu/StartApp";

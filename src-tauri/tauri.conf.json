@@ -4,14 +4,18 @@
     "beforeBuildCommand": "npm run build",
     "beforeDevCommand": "npm start",
     "devPath": "http://localhost:5173",
-    "distDir": "../dist"
+    "distDir": "../dist",
+    "withGlobalTauri": true
   },
   "package": {
-    "productName": "BreezeOSDesktop",
-    "version": "0.1.0"
+    "productName": "BreezeOS Desktop",
+    "version": "2.0.0"
   },
   "tauri": {
     "allowlist": {
+      "app": {
+        "all": true
+      },
       "os": {
         "all": true
       },
@@ -21,6 +25,22 @@
       "window": {
         "all": false,
         "close": true
+      },
+      "fs": {
+        "all": true,
+        "readFile": true,
+        "writeFile": true,
+        "readDir": true,
+        "copyFile": true,
+        "createDir": true,
+        "removeDir": true,
+        "removeFile": true,
+        "renameFile": true,
+        "exists": true,
+        "scope": ["$PICTURE/*"]
+      },
+      "path": {
+        "all": true
       }
     },
     "bundle": {
@@ -38,7 +58,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "gov.baodai.breezeos-mobile",
+      "identifier": "io.breezeos.desktop",
       "longDescription": "",
       "macOS": {
         "entitlements": null,

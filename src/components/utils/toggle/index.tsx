@@ -1,5 +1,5 @@
 import Hammer from "react-hammerjs";
-import "./Toggle.scss";
+import "./index.scss";
 
 interface ToggleProps {
   active: boolean;

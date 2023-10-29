@@ -1,18 +1,15 @@
 import { useEffect, useState } from "react";
-import { useBattery } from "react-use";
 import "../../components/utils/window/Window.scss";
 import TopBar from "../../components/utils/window/TopBar";
 import WindowBodyDefault from "../../components/utils/window/WindowBodyDefault";
 import WindowBodyButton from "../../components/utils/window/WindowBodyButton";
 import TopBarInteraction from "../../components/utils/window/TopBarInteraction";
 import Draggable from "react-draggable";
+import { useAppSelector } from "@/store/hooks";
 
 export default function UnsuitableBrowser() {
   const [isActive, setIsActive] = useState<boolean>(false);
-
-  const batteryState = useBattery();
-
-  let batteryPercent = Math.round(batteryState.level * 100);
+  const batteryPercent = useAppSelector((state) => state.system.battery.level);
 
   useEffect(() => {
     if (isNaN(batteryPercent)) {

@@ -1,7 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
 import appearanceReducer from "./reducers/appearance";
-import batteryReducer from "./reducers/battery";
 import headerReducer from "./reducers/header";
 import desktopReducer from "./reducers/desktop";
 import desktopBodyReducer from "./reducers/desktopbody";
@@ -38,7 +37,6 @@ import appsVscodeReducer from "./reducers/apps/vscode.js";
 
 const reducers = {
   appearance: appearanceReducer,
-  battery: batteryReducer,
   header: headerReducer,
   desktop: desktopReducer,
   desktopbody: desktopBodyReducer,

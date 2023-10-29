@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./StartMenu.scss";
 import StartApp from "./StartApp";
 import { TerminalStartApp } from "../../containers/apps/terminal";
@@ -16,19 +16,34 @@ import { setHeaderHide } from "../../store/reducers/header";
 import { setDesktopBodyActive } from "../../store/reducers/desktopbody";
 import { setStartMenuActive } from "../../store/reducers/startmenu";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { register } from "@tauri-apps/api/globalShortcut";
 
 export default function StartMenu() {
   const isActive = useAppSelector((state) => state.startmenu.active);
   const icon = useAppSelector((state) => state.appearance.iconTheme);
   const dispatch = useAppDispatch();
 
-  document.addEventListener("keydown", (e) => {
-    if (e.keyCode === 27) {
-      dispatch(setStartMenuActive(false));
-      dispatch(setHeaderHide(false));
-      dispatch(setDesktopBodyActive(true));
+  async function hideStartMenuThruShortcut() {
+    if (window.__TAURI_METADATA__) {
+      await register("Esc", () => {
+        dispatch(setStartMenuActive(false));
+        dispatch(setHeaderHide(false));
+        dispatch(setDesktopBodyActive(true));
+      });
+    } else {
+      document.addEventListener("keydown", (e) => {
+        if (e.keyCode === 27) {
+          dispatch(setStartMenuActive(false));
+          dispatch(setHeaderHide(false));
+          dispatch(setDesktopBodyActive(true));
+        }
+      });
     }
-  });
+  }
+
+  useEffect(() => {
+    hideStartMenuThruShortcut();
+  }, []);
 
   const items = [
     {

@@ -4,7 +4,7 @@ import { setLocation, openPic } from "@/store/reducers/imgview";
 import "@/components/utils/window/Window.scss";
 import TopBar from "@/components/utils/window/TopBar";
 import WindowBody from "@/components/utils/window/WindowBody";
-import DockItem from "@/components/DockItem";
+import DockItem from "@/components/dock/DockItem";
 import "./assets/files.scss";
 import TopBarInteraction from "@/components/utils/window/TopBarInteraction";
 import StartApp from "@/components/startMenu/StartApp";
@@ -143,6 +143,7 @@ export default function Files() {
   const [iconSize, setIconSize] = useState<number>(70);
   const [settingsMenu, showSettingsMenu] = useState<boolean>(false);
   const icon = useAppSelector((state) => state.appearance.iconTheme);
+  const system = useAppSelector((state) => state.system);
   const items = [
     [
       {
@@ -3621,7 +3622,9 @@ export default function Files() {
                   <p>BreezeOS</p>
                 </div>
                 <div style={{ display: "flex", alignItems: "center" }}>
-                  <p style={{ margin: "0 20px" }}>80.3 GB / 128 GB left</p>
+                  <p style={{ margin: "0 20px" }}>
+                    {system.disks.used} GB / {system.disks.total} GB left
+                  </p>
                   <p style={{ margin: "0 20px" }}>/</p>
                 </div>
               </div>

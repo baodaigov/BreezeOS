@@ -37,7 +37,7 @@ import { changeWallpaper } from "@/store/reducers/wallpaper";
 import "@/components/utils/window/Window.scss";
 import TopBar from "@/components/utils/window/TopBar";
 import WindowBody from "@/components/utils/window/WindowBody";
-import DockItem from "@/components/DockItem";
+import DockItem from "@/components/dock/DockItem";
 import "./assets/settings.scss";
 import "@/components/utils/widget/Clock.scss";
 import TopBarInteraction from "@/components/utils/window/TopBarInteraction";
@@ -63,7 +63,7 @@ import {
   setWidth,
 } from "@/store/reducers/header";
 import Avatar from "@/components/Avatar";
-import Toggle from "@/components/utils/toggle/Toggle";
+import Toggle from "@/components/utils/toggle";
 import { useTranslation } from "react-i18next";
 import { setDesktopBodyActive } from "@/store/reducers/desktopbody";
 import { setStartMenuActive } from "@/store/reducers/startmenu";
@@ -71,9 +71,6 @@ import Draggable from "react-draggable";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import Hammer from "react-hammerjs";
 import { useBattery } from "react-use";
-import { setKernel } from "@/store/reducers/system";
-import { arch, platform, type, version } from "@tauri-apps/api/os";
-import { getVersion } from "@tauri-apps/api/app";
 
 export const SettingsApp = () => {
   const { t } = useTranslation();
@@ -161,7 +158,7 @@ export default function Settings() {
   const isHide = useAppSelector((state) => state.appsSettings.hide);
   const [t, i18n] = useTranslation();
   const batteryState = useBattery();
-  let batteryPercent = Math.round(batteryState.level * 100);
+  const batteryPercent = useAppSelector((state) => state.system.battery.level);
   const system = useAppSelector((state) => state.system);
   const settingsReducer = useAppSelector((state) => state.settings);
   const isHour12 = useAppSelector((state) => state.time.hour12);
@@ -172,45 +169,11 @@ export default function Settings() {
   const header = useAppSelector((state) => state.header);
   const widget = useAppSelector((state) => state.widget);
   const [wallpaperValue, setValueWallpaper] = useState("1");
-  const [systemVersion, setSystemVersion] = useState<string>("");
-  const [systemPlatform, setSystemPlatform] = useState<string>("BreezeOS");
-
-  const getSystemVersion = async () => {
-    try {
-      const version = await getVersion();
-      setSystemVersion(`${version}`);
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
-  const getSystemPlatform = async () => {
-    try {
-      const platformName = await platform();
-      setSystemPlatform(`${platformName}`);
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
-  const getKernelInfo = async () => {
-    try {
-      const kernelType = await type();
-      const kernelVer = await version();
-      const archName = await arch();
-      dispatch(setKernel(`${kernelType} ${kernelVer} ${archName}`));
-    } catch (e) {
-      console.error(e);
-    }
-  };
 
   useEffect(() => {
     if (shellTheme === "WhiteSur") {
       dispatch(setProMode(false));
     }
-    getSystemVersion();
-    getSystemPlatform();
-    getKernelInfo();
   }, [shellTheme]);
 
   const navItems = [
@@ -1562,8 +1525,8 @@ export default function Settings() {
               <div className="SettingsSectionFixedWidth">
                 <div className="UserCard">
                   <div className="UserInfo">
-                    <Avatar size={2} />
-                    <div style={{ marginLeft: "15px" }}>
+                    <Avatar size={1.7} />
+                    <div style={{ marginLeft: "30px" }}>
                       <p className="UserName">{settingsReducer.user.name}</p>
                       <p className="UserRole">{settingsReducer.user.role}</p>
                     </div>
@@ -1684,7 +1647,6 @@ export default function Settings() {
               style={{
                 display: "flex",
                 flexDirection: "column",
-                justifyContent: "center",
               }}
             >
               {settingsReducer.themeLight ? (
@@ -1738,6 +1700,10 @@ export default function Settings() {
                   />
                 </div>
                 <div className="AboutMenu">
+                  <p>Hostname</p>
+                  <p className="BlurText">{system.hostname}</p>
+                </div>
+                <div className="AboutMenu">
                   <p>Platform</p>
                   <p
                     className="BlurText"
@@ -1745,13 +1711,13 @@ export default function Settings() {
                       textTransform: "capitalize",
                     }}
                   >
-                    {systemPlatform}
+                    {system.platform}
                   </p>
                 </div>
-                {systemVersion && (
+                {system.version && (
                   <div className="AboutMenu">
                     <p>Version</p>
-                    <p className="BlurText">{systemVersion}</p>
+                    <p className="BlurText">{system.version}</p>
                   </div>
                 )}
                 <div className="AboutMenu">
@@ -1764,23 +1730,19 @@ export default function Settings() {
                 </div>
                 <div className="AboutMenu">
                   <p>Memory</p>
-                  <p className="BlurText">{navigator.hardwareConcurrency} GB</p>
+                  <p className="BlurText">{system.memory.total} GB</p>
                 </div>
                 <div className="AboutMenu">
                   <p>Processor</p>
-                  <p className="BlurText">
-                    Intel&reg; Core&trade; i3-6100 CPU @ 3.70GHz &times; 4
-                  </p>
+                  <p className="BlurText">{system.processor}</p>
                 </div>
                 <div className="AboutMenu">
                   <p>Graphics</p>
-                  <p className="BlurText">
-                    Mesa Intel&reg; HD Graphics 530 &#40;SKL GT2&#41;
-                  </p>
+                  <p className="BlurText">{system.graphics}</p>
                 </div>
                 <div className="AboutMenu">
                   <p>Disk Capacity</p>
-                  <p className="BlurText">128.0 GB</p>
+                  <p className="BlurText">{system.disks.total} GB</p>
                 </div>
               </div>
             </div>
@@ -1804,7 +1766,7 @@ export default function Settings() {
     }, 4000);
     setTimeout(() => setWrongPasswordAni(false), 4550);
   }
-
+  
   document.addEventListener("keydown", (e) => {
     if (e.keyCode === 27) {
       dispatch(cancelPassword());

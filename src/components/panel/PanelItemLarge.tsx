@@ -5,7 +5,7 @@ import {
   setBoldText,
   toggleAirplaneMode,
 } from "@/store/reducers/settings";
-import { switchType } from "@/store/reducers/panel";
+import { setPanelType } from "@/store/reducers/panel";
 import "./Panel.scss";
 import { useTranslation } from "react-i18next";
 import { setDesktopNightShift } from "@/store/reducers/desktop";
@@ -59,7 +59,7 @@ const PanelItemLarge = ({ type }: PanelItemLargeProps) => {
           </div>
           <div
             className="PanelItemNext"
-            onClick={() => dispatch(switchType("wifi"))}
+            onClick={() => dispatch(setPanelType("wifi"))}
           >
             <i className="fa-regular fa-chevron-right" />
           </div>
@@ -87,7 +87,7 @@ const PanelItemLarge = ({ type }: PanelItemLargeProps) => {
           </div>
           <div
             className="PanelItemNext"
-            onClick={() => dispatch(switchType("bluetooth"))}
+            onClick={() => dispatch(setPanelType("bluetooth"))}
           >
             <i className="fa-regular fa-chevron-right" />
           </div>
@@ -137,12 +137,6 @@ const PanelItemLarge = ({ type }: PanelItemLargeProps) => {
         >
           <i className="fa-solid fa-b" />
           <p className="font-bold">{t("panel.boldText")}</p>
-        </div>
-      );
-    default:
-      return (
-        <div className="PanelItemLarge font-bold">
-          Please define a specific type.
         </div>
       );
   }

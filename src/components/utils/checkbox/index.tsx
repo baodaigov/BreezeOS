@@ -1,4 +1,4 @@
-import "./Checkbox.scss";
+import "./index.scss";
 
 interface CheckboxProps {
   active: boolean;

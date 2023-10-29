@@ -1,75 +1,81 @@
 $bgcolor: #202023e5;
 $fgcolor: #e2e2e2;
 
-.ActMenu {
-  background: $bgcolor;
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  padding: 5px;
-  border-radius: 8px;
+.ActMenuWrapper {
   position: absolute;
-  box-shadow: 0px 0 20px #0000004e;
-  transition: all ease 0.15s;
-  opacity: 0;
   pointer-events: none;
 
-  &.active {
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  .ActMenuSelector {
-    padding: 5px 8px;
-    border-radius: 6px;
-    background: transparent;
-    color: $fgcolor;
-    font-size: 13px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    * {
-      margin: 0;
-    }
-
-    & > i {
-      margin-left: 7px;
-      opacity: 0;
-
-      &.active {
-        opacity: 1;
-      }
-    }
-
-    &:hover {
-      background: #ffffff12;
-    }
-  }
-
-  &.whitesur {
-    background: transparentize($bgcolor, 0.5);
-    padding: 3px;
-    border-radius: 3px;
+  .ActMenu {
+    background: $bgcolor;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    padding: 5px;
+    border-radius: 8px;
+    box-shadow: 0px 0 15px #0000002e;
+    scale: 0.92;
+    opacity: 0;
+    pointer-events: none;
     transition: all ease 0.25s;
 
     &.active {
-      transition: none;
+      scale: 1;
+      opacity: 1;
+      pointer-events: auto;
     }
 
     .ActMenuSelector {
       padding: 5px 8px;
-      border-radius: 3px;
+      border-radius: 6px;
+      background: transparent;
+      color: $fgcolor;
+      font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      * {
+        margin: 0;
+      }
+
+      & > i {
+        margin-left: 7px;
+        opacity: 0;
+
+        &.active {
+          opacity: 1;
+        }
+      }
 
       &:hover {
-        background: #007bff;
-        color: $fgcolor;
+        background: #ffffff12;
+      }
+    }
+
+    &.whitesur {
+      background: transparentize($bgcolor, 0.5);
+      padding: 3px;
+      border-radius: 3px;
+      transition: all ease 0.25s;
+
+      &.active {
+        transition: none;
+      }
+
+      .ActMenuSelector {
+        padding: 5px 8px;
+        border-radius: 3px;
+
+        &:hover {
+          background: #007bff;
+          color: $fgcolor;
+        }
       }
     }
   }
 }
 
 .lightMode {
-  .ActMenu {
+  .ActMenuWrapper .ActMenu {
     background: transparentize($fgcolor, 0.15);
 
     .ActMenuSelector {
@@ -89,5 +95,11 @@ $fgcolor: #e2e2e2;
         }
       }
     }
+  }
+}
+
+.animdisabled {
+  .ActMenuWrapper .ActMenu {
+    transition: none;
   }
 }

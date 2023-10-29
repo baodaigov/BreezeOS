@@ -1,4 +1,4 @@
-import "./Range.scss";
+import "./index.scss";
 import { useAppSelector } from "@/store/hooks";
 
 interface RangeSliderProps

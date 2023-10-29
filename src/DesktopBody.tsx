@@ -28,11 +28,11 @@ const DesktopBody = () => {
   //         setContextMenuDisplayed(false);
   //       }
   //     }
-  //     // Bind the event listener
+  //
   //     document.addEventListener("mousedown", handleClickOutside);
 
   //     return () => {
-  //       // Unbind the event listener on clean up
+  //
   //       document.removeEventListener("mousedown", handleClickOutside);
   //     };
   //   }, [ref]);
@@ -50,9 +50,7 @@ const DesktopBody = () => {
   // }
 
   return (
-    <div
-      className={`DesktopBody ${isActive && "active"}`}
-    >
+    <div className={`DesktopBody ${isActive && "active"}`}>
       {/* <ActMenu
         style={{
           position: "absolute",

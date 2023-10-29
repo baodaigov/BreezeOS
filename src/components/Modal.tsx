@@ -1,3 +1,5 @@
+// for tauri only
+
 import { useAppSelector, useAppDispatch } from "@/store/hooks";
 import { setModalContent } from "@/store/reducers/modal";
 import { useEffect, useState } from "react";

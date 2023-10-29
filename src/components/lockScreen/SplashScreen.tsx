@@ -56,12 +56,13 @@ export default function SplashScreen() {
   const [passwordShown, setPasswordShown] = useState<boolean>(false);
   const [passwordValue, setPasswordValue] = useState<string>("");
   const [invalidCount, setInvalidCount] = useState<number>(0);
-  const invalidLimit = 7;
+  const invalidLimit = 8;
   const [isEditable, setEditable] = useState<boolean>(false);
   const [fontFamilyMenu, showFontFamilyMenu] = useState<boolean>(false);
   const [fontSizeMenu, showFontSizeMenu] = useState<boolean>(false);
   const [widgetsMenuShown, setWidgetsMenuShown] = useState<boolean>(false);
   const [addWidgetMenu, setAddWidgetMenu] = useState<boolean>(false);
+  const [isShutdown, setIsShutdown] = useState<boolean>(false);
   const { timeFormat } = useTime();
   const inputFieldRef = useRef<HTMLInputElement>(null);
 
@@ -75,11 +76,10 @@ export default function SplashScreen() {
           showFontFamilyMenu(false);
         }
       }
-      // Bind the event listener
+
       document.addEventListener("mousedown", handleClickOutside);
 
       return () => {
-        // Unbind the event listener on clean up
         document.removeEventListener("mousedown", handleClickOutside);
       };
     }, [ref]);
@@ -98,11 +98,10 @@ export default function SplashScreen() {
           showFontSizeMenu(false);
         }
       }
-      // Bind the event listener
+
       document.addEventListener("mousedown", handleClickOutside);
 
       return () => {
-        // Unbind the event listener on clean up
         document.removeEventListener("mousedown", handleClickOutside);
       };
     }, [ref]);
@@ -110,7 +109,7 @@ export default function SplashScreen() {
 
   const fontSizeMenuRef = useRef(null);
   useOutsideFontSizeMenu(fontSizeMenuRef);
-
+  
   document.addEventListener("keydown", (e) => {
     if (e.keyCode === 27) dispatch(setOptionsMenuShown(false));
   });
@@ -221,7 +220,6 @@ export default function SplashScreen() {
       dispatch(clearItem());
       dispatch(setDesktopPoweroff(true));
       dispatch(setWallpaperActive(false));
-      appWindow.close();
     }, 13200);
   }
 
@@ -266,6 +264,7 @@ export default function SplashScreen() {
       dispatch(setWallpaperActive(true));
       dispatch(setLocked(true));
       dispatch(setSplashScreenWrapperHideInfo(false));
+      setIsShutdown(false);
     }, 36000);
   }
 
@@ -278,6 +277,13 @@ export default function SplashScreen() {
     const deleteWidget = widgets?.filter((_element, i) => i !== index);
     dispatch(setWidgets(deleteWidget));
   }
+
+  useEffect(() => {
+    if (isShutdown) {
+      shutdown();
+      setTimeout(() => appWindow.close(), 13200);
+    }
+  }, [isShutdown]);
 
   return (
     <>
@@ -441,7 +447,7 @@ export default function SplashScreen() {
                       </div>
                       <div
                         className="PowerMenuInteractionWrapper"
-                        onClick={shutdown}
+                        onClick={() => setIsShutdown(true)}
                       >
                         <div className="PowerMenuInteraction">
                           <i className="fa-light fa-power-off" />

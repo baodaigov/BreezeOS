@@ -26,7 +26,8 @@ export default function DockItem({
   icon,
   onClick,
 }: DockItemProps) {
-  const [contextMenuDisplayed, setDisplayContextMenu] = useState<boolean>(false);
+  const [contextMenuDisplayed, setDisplayContextMenu] =
+    useState<boolean>(false);
 
   function useOutsideMenu(ref: React.MutableRefObject<any>) {
     useEffect(() => {
@@ -38,10 +39,9 @@ export default function DockItem({
           setDisplayContextMenu(false);
         }
       }
-      // Bind the event listener
+
       document.addEventListener("mousedown", handleClickOutside);
       return () => {
-        // Unbind the event listener on clean up
         document.removeEventListener("mousedown", handleClickOutside);
       };
     }, [ref]);

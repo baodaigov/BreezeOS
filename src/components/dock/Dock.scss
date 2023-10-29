@@ -23,18 +23,18 @@ $fgcolor: #e2e2e2;
 
   .DockItemContainer {
     .DockItem {
-      margin-right: 10px;
+      padding: 0 5px;
       display: flex;
       justify-content: center;
 
       img {
         width: 37px;
         height: 37px;
-        transition: all ease 0.2s;
+        scale: 1;
+        transition: all ease 0.25s;
 
         &:active {
-          width: 28px;
-          height: 28px;
+          scale: 0.8;
         }
       }
 
@@ -55,12 +55,10 @@ $fgcolor: #e2e2e2;
         transition: all ease 0.3s;
       }
 
-      &.hide {
-        &::after {
-          width: 8px;
-          background: #4a4a4a;
-          transition: all ease 0.3s;
-        }
+      &.hide::after {
+        width: 8px;
+        background: #4a4a4a;
+        transition: all ease 0.3s;
       }
 
       .ContextMenu {
@@ -271,12 +269,35 @@ $fgcolor: #e2e2e2;
 }
 
 .animdisabled {
-  .Dock .DockItemContainer .DockItem img {
-    transition: none;
-    &:active {
-      width: 37px;
-      height: 37px;
-      filter: brightness(60%);
+  .Dock .DockItemContainer .DockItem {
+    * {
+      transition: none;
+    }
+
+    img {
+      &:active {
+        scale: 1;
+        filter: brightness(60%);
+      }
+    }
+
+    &::after {
+      scale: 0.5;
+      width: 20px;
+      transition: scale ease 0.3s;
+    }
+
+    &.clicked::after {
+      scale: 1;
+      width: 20px;
+      background: #4000ff;
+      transition: scale ease 0.3s;
+    }
+
+    &.hide::after {
+      width: 8px;
+      background: #4a4a4a;
+      transition: scale ease 0.3s;
     }
   }
 }

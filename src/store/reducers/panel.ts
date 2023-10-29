@@ -22,12 +22,12 @@ const panelSlice = createSlice({
       state.active = false;
       state.type = "";
     },
-    switchType: (state, action: PayloadAction<string>) => {
+    setPanelType: (state, action: PayloadAction<string>) => {
       state.type = action.payload;
     },
   },
 });
 
-export const { activePanel, inactivePanel, switchType } = panelSlice.actions;
+export const { activePanel, inactivePanel, setPanelType } = panelSlice.actions;
 
 export default panelSlice.reducer;

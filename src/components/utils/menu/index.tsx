@@ -25,18 +25,19 @@ export const ActMenuSelector: React.FC<ActMenuSelectorProps> = ({
 interface ActMenuProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 const ActMenu = forwardRef<HTMLDivElement, ActMenuProps>(
-  ({ className, children, ...props }, ref) => {
+  ({ className, children, style, ...props }, ref) => {
     const shellTheme = useAppSelector((state) => state.shell.theme);
 
     return (
-      <div
-        className={`ActMenu ${className} ${
-          shellTheme === "WhiteSur" ? "whitesur" : ""
-        }`}
-        ref={ref}
-        {...props}
-      >
-        {children}
+      <div className="ActMenuWrapper" style={style} {...props}>
+        <div
+          className={`ActMenu ${className} ${
+            shellTheme === "WhiteSur" ? "whitesur" : ""
+          }`}
+          ref={ref}
+        >
+          {children}
+        </div>
       </div>
     );
   }

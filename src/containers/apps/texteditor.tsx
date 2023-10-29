@@ -5,7 +5,7 @@ import TopBar from "../../components/utils/window/TopBar";
 import WindowBody from "../../components/utils/window/WindowBody";
 import WindowBodyDefault from "../../components/utils/window/WindowBodyDefault";
 import WindowBodyButton from "../../components/utils/window/WindowBodyButton";
-import DockItem from "../../components/DockItem";
+import DockItem from "../../components/dock/DockItem";
 import "./assets/texteditor.scss";
 import TopBarInteraction from "../../components/utils/window/TopBarInteraction";
 import StartApp from "../../components/startMenu/StartApp";

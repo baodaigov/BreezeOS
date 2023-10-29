@@ -19,18 +19,20 @@
       font-family: Cascadia Code;
       color: #fff;
       font-size: 14px;
+
+      &::selection {
+        background-color: #fff;
+        color: #000;
+      }
     }
 
-    pre {
-      display: -webkit-box;
+    #input {
+      display: flex;
+      align-items: center;
 
-      &#input input {
-        appearance: none;
-        -webkit-appearance: none;
-        border: none;
-        outline: none;
-        background: transparent;
+      .line {
         margin-left: 5px;
+        caret-color: #fff;
         width: 100%;
       }
     }

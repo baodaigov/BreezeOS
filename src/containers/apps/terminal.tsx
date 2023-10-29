@@ -3,7 +3,7 @@ import { setActive, setHide } from "../../store/reducers/apps/terminal";
 import "../../components/utils/window/Window.scss";
 import TopBar from "../../components/utils/window/TopBar";
 import WindowBody from "../../components/utils/window/WindowBody";
-import DockItem from "../../components/DockItem";
+import DockItem from "../../components/dock/DockItem";
 import "./assets/terminal.scss";
 import TopBarInteraction from "../../components/utils/window/TopBarInteraction";
 import StartApp from "../../components/startMenu/StartApp";
@@ -126,10 +126,10 @@ export default function Terminal() {
           <WindowBody>
             <div className="Terminal">
               <pre>Welcome to BreezeOS ({system.kernel})</pre>
-              <pre id="input">
-                &#91;localhost@breezeos&#93;$
-                <input type="text" spellCheck="false" />
-              </pre>
+              <div id="input">
+                <pre>&#91;localhost@breezeos&#93;$</pre>
+                <input className="line" spellCheck={false} />
+              </div>
             </div>
           </WindowBody>
         </div>

@@ -4,7 +4,6 @@ import { setHeaderType, setWidth } from "@/store/reducers/header";
 import Task from "@/components/header/Task";
 import Home from "@/components/header/Home";
 import Panel from "./panel/Panel";
-import { useBattery } from "react-use";
 import { setActive, setSettings } from "@/store/reducers/apps/settings";
 import AppMenu from "@/components/header/AppMenu";
 import PanelType from "./panel/PanelType";
@@ -20,10 +19,9 @@ export default function Header() {
   const headerType = useAppSelector((state) => state.header.type);
   const headerWidth = useAppSelector((state) => state.header.width);
   const panelActive = useAppSelector((state) => state.panel.active);
-  const panelType = useAppSelector((state) => state.panel.type);
   const settingsReducer = useAppSelector((state) => state.settings);
   const batteryChargingStatus = useAppSelector(
-    (state) => state.battery.charging
+    (state) => state.system.battery.charging
   );
   const shellTheme = useAppSelector((state) => state.shell.theme);
   const [wifiPanelActive, setWifiPanelActive] = useState<boolean>(false);
@@ -40,6 +38,10 @@ export default function Header() {
   );
   const { timeFormat } = useTime();
   const { t } = useTranslation();
+  const batteryPercent = useAppSelector((state) => state.system.battery.level);
+  const batteryIsCharging = useAppSelector(
+    (state) => state.system.battery.charging
+  );
 
   useEffect(() => {
     setInterval(() => {
@@ -61,10 +63,9 @@ export default function Header() {
           dispatch(inactivePanel());
         }
       }
-      // Bind the event listener
+
       document.addEventListener("mousedown", handleClickOutside);
       return () => {
-        // Unbind the event listener on clean up
         document.removeEventListener("mousedown", handleClickOutside);
       };
     }, [ref]);
@@ -83,10 +84,9 @@ export default function Header() {
           setWifiPanelActive(false);
         }
       }
-      // Bind the event listener
+
       document.addEventListener("mousedown", handleClickOutside);
       return () => {
-        // Unbind the event listener on clean up
         document.removeEventListener("mousedown", handleClickOutside);
       };
     }, [ref]);
@@ -105,10 +105,9 @@ export default function Header() {
           setBatteryPanelActive(false);
         }
       }
-      // Bind the event listener
+
       document.addEventListener("mousedown", handleClickOutside);
       return () => {
-        // Unbind the event listener on clean up
         document.removeEventListener("mousedown", handleClickOutside);
       };
     }, [ref]);
@@ -127,10 +126,9 @@ export default function Header() {
           setBluetoothPanelActive(false);
         }
       }
-      // Bind the event listener
+
       document.addEventListener("mousedown", handleClickOutside);
       return () => {
-        // Unbind the event listener on clean up
         document.removeEventListener("mousedown", handleClickOutside);
       };
     }, [ref]);
@@ -149,10 +147,9 @@ export default function Header() {
           setBrightnessPanelActive(false);
         }
       }
-      // Bind the event listener
+
       document.addEventListener("mousedown", handleClickOutside);
       return () => {
-        // Unbind the event listener on clean up
         document.removeEventListener("mousedown", handleClickOutside);
       };
     }, [ref]);
@@ -171,10 +168,9 @@ export default function Header() {
           setVolumePanelActive(false);
         }
       }
-      // Bind the event listener
+
       document.addEventListener("mousedown", handleClickOutside);
       return () => {
-        // Unbind the event listener on clean up
         document.removeEventListener("mousedown", handleClickOutside);
       };
     }, [ref]);
@@ -182,10 +178,6 @@ export default function Header() {
 
   const volumePanelRef = useRef(null);
   useOutsideVolumePanel(volumePanelRef);
-
-  const batteryState = useBattery();
-
-  let batteryPercent = Math.round(batteryState.level * 100);
 
   useEffect(() => {
     if (headerProMode === true) {
@@ -302,7 +294,7 @@ export default function Header() {
               >
                 <p
                   className={`BatteryStatusLevel font-bold ${
-                    batteryState.charging ? "in-charge" : ""
+                    batteryIsCharging ? "in-charge" : ""
                   }`}
                 >
                   {isNaN(batteryPercent) ? "-" : batteryPercent + "%"}
@@ -331,18 +323,7 @@ export default function Header() {
                 ref={panelRef}
               >
                 <i className="fa-regular fa-chevron-down" />
-                <Panel
-                  style={{
-                    height:
-                      panelType === "default"
-                        ? "340px"
-                        : panelType === "wifi"
-                        ? "545px"
-                        : panelType === "bluetooth"
-                        ? "545px"
-                        : "340px",
-                  }}
-                />
+                <Panel />
               </div>
               <div
                 className={`Header-item ${

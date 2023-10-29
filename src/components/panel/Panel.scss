@@ -25,23 +25,11 @@ $fbgcolor: #60a5fa;
   }
 
   .PanelTypeContainer {
-    position: absolute;
-    display: flex;
-    transition: transform ease 0.2s;
-    width: 0;
-
     .defaultPanel {
       display: flex;
       flex-direction: column;
-      opacity: 0;
-      pointer-events: none;
       transition: all ease 0.2s;
       height: fit-content;
-
-      &.active {
-        opacity: 1;
-        pointer-events: auto;
-      }
 
       .PanelItem {
         background: transparent;
@@ -52,14 +40,6 @@ $fbgcolor: #60a5fa;
         display: flex;
         justify-content: center;
         align-items: center;
-
-        &.active {
-          background: lighten($bgcolor, 5%);
-
-          &:hover {
-            background: lighten($bgcolor, 10%);
-          }
-        }
 
         &:hover {
           background: lighten($bgcolor, 5%);
@@ -73,6 +53,14 @@ $fbgcolor: #60a5fa;
         .PanelBatteryLevel {
           margin: 0;
           padding: 0;
+        }
+
+        &.active {
+          background: transparentize($fgcolor, 0.93);
+
+          &:hover {
+            background: transparentize($fgcolor, 0.88);
+          }
         }
       }
 
@@ -192,6 +180,25 @@ $fbgcolor: #60a5fa;
       }
     }
 
+    .PanelName {
+      font-size: 16px;
+      margin-left: 5px;
+    }
+
+    .BackButton {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 999px;
+      font-size: 14px;
+
+      &:hover {
+        background-color: transparentize($fgcolor, 0.92);
+      }
+    }
+
     .wifiPanel {
       display: flex;
       flex-direction: column;
@@ -223,11 +230,6 @@ $fbgcolor: #60a5fa;
           margin: 0 5px;
           margin-left: 0 !important;
         }
-      }
-
-      .PanelName {
-        font-size: 16px;
-        margin-left: 5px;
       }
 
       .WifiStatusFalse {
@@ -315,14 +317,18 @@ $fbgcolor: #60a5fa;
           }
         }
 
-        .ActMenu {
-          background: transparent;
-          backdrop-filter: blur(0);
-          -webkit-backdrop-filter: blur(0);
-          box-shadow: none;
+        .ActMenuWrapper {
+          position: relative;
+          .ActMenu {
+            background: transparent;
+            backdrop-filter: blur(0);
+            -webkit-backdrop-filter: blur(0);
+            box-shadow: none;
+            transition: none;
 
-          .ActMenuSelector {
-            font-size: 12px;
+            .ActMenuSelector {
+              font-size: 12px;
+            }
           }
         }
       }
@@ -359,11 +365,6 @@ $fbgcolor: #60a5fa;
           margin: 0 5px;
           margin-left: 0 !important;
         }
-      }
-
-      .PanelName {
-        font-size: 16px;
-        margin-left: 5px;
       }
 
       .Description {

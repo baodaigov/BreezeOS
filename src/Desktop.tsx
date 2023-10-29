@@ -4,7 +4,7 @@ import TerminalWindow from "./components/utils/window/TerminalDesktop";
 import LockScreen from "./components/lockScreen/LockScreen";
 import StartMenu from "./components/startMenu/StartMenu";
 import Header from "./components/Header";
-import Dock from "./components/Dock";
+import Dock from "./components/dock/Dock";
 import DesktopBody from "./DesktopBody";
 import { setLocked } from "./store/reducers/settings";
 import { useAppDispatch, useAppSelector } from "./store/hooks";
@@ -13,6 +13,32 @@ import Modal from "./components/Modal";
 import { useEffect } from "react";
 import { register, unregister } from "@tauri-apps/api/globalShortcut";
 import { setModalContent } from "@/store/reducers/modal";
+import {
+  setBatteryCharging,
+  setBatteryLevel,
+  setHostname,
+  setKernel,
+  setPlatform,
+  setProcessor,
+  setTotalMemory,
+  setTotalSpace,
+  setUsedMemory,
+  setUsedSpace,
+  setVersion,
+} from "@/store/reducers/system";
+import { arch, platform, type } from "@tauri-apps/api/os";
+import { getVersion } from "@tauri-apps/api/app";
+import {
+  AllSystemInfo,
+  CpuInfo,
+  MemoryInfo,
+  StaticInfo,
+  allSysInfo,
+  cpuInfo,
+  memoryInfo,
+  staticInfo,
+} from "tauri-plugin-system-info-api";
+import { useBattery } from "react-use";
 
 const Desktop = () => {
   const dispatch = useAppDispatch();
@@ -27,6 +53,21 @@ const Desktop = () => {
   const hideCursor = useAppSelector((state) => state.desktop.hideCursor);
   const blackScr = useAppSelector((state) => state.desktop.blackScr);
   const poweroff = useAppSelector((state) => state.desktop.poweroff);
+  const batteryState = useBattery();
+  const batteryLevel = batteryState.level * 100;
+
+  async function lockThruShortcut() {
+    if (window.__TAURI_METADATA__) {
+      await register("CommandOrControl+L", () => dispatch(setLocked(true)));
+    } else {
+      document.addEventListener("keydown", (e) => {
+        if (e.ctrlKey && e.keyCode === 76) {
+          e.preventDefault();
+          dispatch(setLocked(true));
+        }
+      });
+    }
+  }
 
   async function quitThruShortcut() {
     try {
@@ -39,16 +80,102 @@ const Desktop = () => {
     }
   }
 
+  async function getHostname() {
+    try {
+      const hostname = StaticInfo.parse(await staticInfo()).hostname;
+      dispatch(setHostname(hostname));
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  async function getKernel() {
+    try {
+      const kernelType = await type();
+      const kernelVer = StaticInfo.parse(await staticInfo()).kernel_version;
+      const archName = await arch();
+      dispatch(setKernel(`${kernelType} ${kernelVer} ${archName}`));
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  async function getSystemVersion() {
+    try {
+      const version = await getVersion();
+      dispatch(setVersion(`${version}`));
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  async function getPlatform() {
+    try {
+      const platformName = await platform();
+      dispatch(setPlatform(`${platformName}`));
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  async function getProcessor() {
+    try {
+      const processor = await CpuInfo.parse(await cpuInfo());
+      dispatch(
+        setProcessor(
+          `${processor.cpus.map((i: CpuInfo) => i.brand)[0]} × ${
+            processor.cpu_count
+          }`
+        )
+      );
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async function getMemory() {
+    try {
+      const memory = MemoryInfo.parse(await memoryInfo());
+      dispatch(setTotalMemory(memory.total_memory / Math.pow(1024, 3)));
+      dispatch(setUsedMemory(memory.used_memory / Math.pow(1024, 3)));
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async function getDisks() {
+    try {
+      const disk = await AllSystemInfo.parse(await allSysInfo()).disks[0];
+      dispatch(setTotalSpace((disk.total_space / Math.pow(1024, 3)).toFixed()));
+      dispatch(setUsedSpace((disk.available_space / Math.pow(1024, 3)).toFixed()));
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  if (isNaN(batteryLevel)) {
+    dispatch(setBatteryLevel(NaN));
+  } else {
+    dispatch(setBatteryLevel(batteryLevel));
+  }
+
+  if (batteryState.charging) {
+    dispatch(setBatteryCharging(true));
+  } else {
+    dispatch(setBatteryCharging(false));
+  }
+
   useEffect(() => {
     quitThruShortcut();
-  });
-
-  document.addEventListener("keydown", (e) => {
-    if (e.ctrlKey && e.keyCode === 76) {
-      e.preventDefault();
-      dispatch(setLocked(true));
-    }
-  });
+    lockThruShortcut();
+    getHostname();
+    getKernel();
+    getSystemVersion();
+    getPlatform();
+    getMemory();
+    getProcessor();
+    getDisks();
+  }, []);
 
   function isMobile() {
     var check = false;

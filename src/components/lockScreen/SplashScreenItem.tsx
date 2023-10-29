@@ -1,11 +1,12 @@
+import { useAppSelector } from "@/store/hooks";
 import { useEffect, useState } from "react";
-import { useBattery } from "react-use";
 
 interface SplashScreenItemProps {
   type?: string;
 }
 
 export default function SplashScreenItem({ type }: SplashScreenItemProps) {
+  const batteryPercent = useAppSelector((state) => state.system.battery.level);
   const [curDate, setCurDate] = useState(
     new Date().toLocaleString("en-US", {
       dateStyle: "medium",
@@ -21,10 +22,6 @@ export default function SplashScreenItem({ type }: SplashScreenItemProps) {
       );
     }, 1000);
   }, []);
-
-  const batteryState = useBattery();
-
-  let batteryPercent = Math.round(batteryState.level * 100);
 
   switch (type) {
     case "date":

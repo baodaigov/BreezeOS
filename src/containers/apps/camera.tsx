@@ -3,7 +3,7 @@ import { setActive, setHide } from "../../store/reducers/apps/camera";
 import "../../components/utils/window/Window.scss";
 import TopBar from "../../components/utils/window/TopBar";
 import WindowBody from "../../components/utils/window/WindowBody";
-import DockItem from "../../components/DockItem";
+import DockItem from "../../components/dock/DockItem";
 import "./assets/camera.scss";
 import TopBarInteraction from "../../components/utils/window/TopBarInteraction";
 import StartApp from "../../components/startMenu/StartApp";
@@ -226,7 +226,7 @@ export default function Camera() {
     }
     return () => clearInterval(interval);
   }, [running]);
-  
+
   const mediaRecorderRef = useRef<any>(null);
   const [capturing, setCapturing] = useState<boolean>(false);
   const [recordedChunks, setRecordedChunks] = useState([]);
@@ -246,9 +246,12 @@ export default function Camera() {
       setTimeLeft(3);
       setTimeout(() => {
         setCapturing(true);
-        mediaRecorderRef.current = new MediaRecorder(webcamRef.current?.stream!, {
-          mimeType: "video/webm",
-        });
+        mediaRecorderRef.current = new MediaRecorder(
+          webcamRef.current?.stream!,
+          {
+            mimeType: "video/webm",
+          }
+        );
         mediaRecorderRef.current.addEventListener(
           "dataavailable",
           handleDataAvailable

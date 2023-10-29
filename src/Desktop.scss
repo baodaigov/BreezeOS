@@ -222,6 +222,11 @@ a {
 
 *[contenteditable],
 input {
+  background: transparent;
+  resize: none;
+  border: none;
+  outline: none;
+  appearance: none;
   user-select: text;
   -webkit-user-select: text;
 }
