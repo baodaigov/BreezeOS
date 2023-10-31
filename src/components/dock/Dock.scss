@@ -299,5 +299,9 @@ $fgcolor: #e2e2e2;
       background: #4a4a4a;
       transition: scale ease 0.3s;
     }
+
+    .DockItemTitle {
+      transition: none;
+    }
   }
 }

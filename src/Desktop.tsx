@@ -55,6 +55,7 @@ const Desktop = () => {
   const poweroff = useAppSelector((state) => state.desktop.poweroff);
   const batteryState = useBattery();
   const batteryLevel = batteryState.level * 100;
+  const system = useAppSelector((state) => state.system);
 
   async function lockThruShortcut() {
     if (window.__TAURI_METADATA__) {
@@ -147,7 +148,9 @@ const Desktop = () => {
     try {
       const disk = await AllSystemInfo.parse(await allSysInfo()).disks[0];
       dispatch(setTotalSpace((disk.total_space / Math.pow(1024, 3)).toFixed()));
-      dispatch(setUsedSpace((disk.available_space / Math.pow(1024, 3)).toFixed()));
+      dispatch(
+        setUsedSpace((disk.available_space / Math.pow(1024, 3)).toFixed())
+      );
     } catch (e) {
       console.log(e);
     }
@@ -197,7 +200,7 @@ const Desktop = () => {
     <>
       {isMobile() ? (
         <div className="error OptimisticDisplay">
-          <p style={{ marginTop: 0, marginBottom: "30px" }}>
+          <p>
             Sorry, in order to use the operating system, please switch to the
             desktop.
           </p>
@@ -206,6 +209,13 @@ const Desktop = () => {
             <a href="https://bit.ly/breezeos-mobile">
               https://bit.ly/breezeos-mobile
             </a>
+          </p>
+        </div>
+      ) : system.memory.total <= 2.5 ? (
+        <div className="error OptimisticDisplay">
+          <p>
+            BreezeOS cannot be used because your system does not meet the
+            requirements.
           </p>
         </div>
       ) : (

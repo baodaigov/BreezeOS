@@ -109,7 +109,7 @@ export default function SplashScreen() {
 
   const fontSizeMenuRef = useRef(null);
   useOutsideFontSizeMenu(fontSizeMenuRef);
-  
+
   document.addEventListener("keydown", (e) => {
     if (e.keyCode === 27) dispatch(setOptionsMenuShown(false));
   });
@@ -304,23 +304,23 @@ export default function SplashScreen() {
         >
           <div className="SplashScreen">
             <div
-              className={`SplashScreenInfo ${isEditable && "editable"} ${
-                lock.fontFamily
-              }`}
+              className={`SplashScreenInfo ${isEditable && "editable"}`}
               style={{
                 color: lock.foregroundColor,
               }}
               onDoubleClick={optionsMenuShown ? setEditableTrue : undefined}
             >
-              <p
-                className="SplashScreenTime"
-                style={{
-                  fontWeight: lock.fontWeight,
-                  fontSize: lock.fontSize === "large" ? "99px" : "90px",
-                }}
-              >
-                {timeFormat}
-              </p>
+              <div className={lock.fontFamily}>
+                <p
+                  className="SplashScreenTime"
+                  style={{
+                    fontWeight: lock.fontWeight,
+                    fontSize: lock.fontSize === "large" ? "99px" : "90px",
+                  }}
+                >
+                  {timeFormat}
+                </p>
+              </div>
               <div className="SplashScreenWidgets">
                 {widgets.map((i) => (
                   <SplashScreenItem type={i} />
@@ -585,22 +585,16 @@ export default function SplashScreen() {
                 className={fontFamilyMenu ? "active" : ""}
                 ref={fontFamilyMenuRef}
               >
-                <ActMenuSelector
-                  title="OptimisticDisplay"
-                  onClick={() => {
-                    dispatch(setFontFamily("OptimisticDisplay"));
-                    showFontFamilyMenu(false);
-                  }}
-                  active={lock.fontFamily === "OptimisticDisplay"}
-                />
-                <ActMenuSelector
-                  title="SanFrancisco"
-                  onClick={() => {
-                    dispatch(setFontFamily("SanFrancisco"));
-                    showFontFamilyMenu(false);
-                  }}
-                  active={lock.fontFamily === "SanFrancisco"}
-                />
+                {lock.style.map((i) => (
+                  <ActMenuSelector
+                    title={i.family}
+                    onClick={() => {
+                      dispatch(setFontFamily(i.family));
+                      showFontFamilyMenu(false);
+                    }}
+                    active={lock.fontFamily === i.family}
+                  />
+                ))}
               </ActMenu>
             </div>
             <div className="EditMenuItem">
@@ -650,41 +644,60 @@ export default function SplashScreen() {
               </p>
               <i className="fa-regular fa-chevron-right EditMenuChevron" />
             </div>
-            <div className="EditMenuItem" style={{ padding: "0 30px" }}>
-              <div
-                className={`FontWeightBlock ${
-                  lock.fontWeight === 200 && "active"
-                } ${lock.fontFamily}`}
-                style={{
-                  color: lock.foregroundColor,
-                }}
-                onClick={() => dispatch(setFontWeight(200))}
-              >
-                <p className="font-light">12</p>
-              </div>
-              <div
-                className={`FontWeightBlock ${
-                  lock.fontWeight === 500 && "active"
-                } ${lock.fontFamily}`}
-                style={{
-                  color: lock.foregroundColor,
-                }}
-                onClick={() => dispatch(setFontWeight(500))}
-              >
-                <p className="font-medium">12</p>
-              </div>
-              <div
-                className={`FontWeightBlock ${
-                  lock.fontWeight === 700 && "active"
-                } ${lock.fontFamily}`}
-                style={{
-                  color: lock.foregroundColor,
-                }}
-                onClick={() => dispatch(setFontWeight(700))}
-              >
-                <p className="font-bold">12</p>
-              </div>
-            </div>
+            {lock.style.map(
+              (i) =>
+                lock.fontFamily === i.family && (
+                  <div
+                    className="EditMenuItem"
+                    style={{
+                      justifyContent: "space-around",
+                      padding: "0 30px",
+                    }}
+                  >
+                    {i.weight.light && (
+                      <div
+                        className={`FontWeightBlock ${
+                          lock.fontWeight === i.weight.light && "active"
+                        } ${i.family}`}
+                        style={{
+                          color: lock.foregroundColor,
+                        }}
+                        onClick={() => dispatch(setFontWeight(i.weight.light!))}
+                      >
+                        <p style={{ fontWeight: i.weight.light }}>12</p>
+                      </div>
+                    )}
+                    {i.weight.medium && (
+                      <div
+                        className={`FontWeightBlock ${
+                          lock.fontWeight === i.weight.medium && "active"
+                        } ${i.family}`}
+                        style={{
+                          color: lock.foregroundColor,
+                        }}
+                        onClick={() =>
+                          dispatch(setFontWeight(i.weight.medium!))
+                        }
+                      >
+                        <p style={{ fontWeight: i.weight.medium }}>12</p>
+                      </div>
+                    )}
+                    {i.weight.bold && (
+                      <div
+                        className={`FontWeightBlock ${
+                          lock.fontWeight === i.weight.bold && "active"
+                        } ${i.family}`}
+                        style={{
+                          color: lock.foregroundColor,
+                        }}
+                        onClick={() => dispatch(setFontWeight(i.weight.bold!))}
+                      >
+                        <p style={{ fontWeight: i.weight.bold }}>12</p>
+                      </div>
+                    )}
+                  </div>
+                )
+            )}
             <div className="EditMenuItem" style={{ padding: "0 50px" }}>
               <div
                 className={`ColorBlock ${

@@ -27,8 +27,8 @@ const initialState: StateType = {
   version: "",
   platform: "BreezeOS",
   memory: {
-    total: 8,
-    used: 4,
+    total: navigator.hardwareConcurrency,
+    used: navigator.hardwareConcurrency / 2,
   },
   processor: "Intel® Core™ i3-6100 CPU @ 3.70GHz × 4",
   graphics: "Mesa Intel® HD Graphics 530 (SKL GT2)",

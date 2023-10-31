@@ -53,6 +53,8 @@ import W3 from "@/components/52496.jpg";
 import W4 from "@/components/52791.jpg";
 import W5 from "@/components/52532.jpg";
 import W6 from "@/components/52544.jpg";
+import W7 from "@/components/breezeos-1.jpg";
+import W8 from "@/components/breezeos-2.jpg";
 import QRD from "./assets/qr-d.png";
 import QRL from "./assets/qr-l.png";
 import { changeShell } from "@/store/reducers/shell";
@@ -168,7 +170,7 @@ export default function Settings() {
   const settings = useAppSelector((state) => state.appsSettings.settings);
   const header = useAppSelector((state) => state.header);
   const widget = useAppSelector((state) => state.widget);
-  const [wallpaperValue, setValueWallpaper] = useState("1");
+  const wallpaper = useAppSelector((state) => state.wallpaper.img);
 
   useEffect(() => {
     if (shellTheme === "WhiteSur") {
@@ -548,11 +550,6 @@ export default function Settings() {
     }
   }
 
-  function switchWallpaper(i: string, j: string) {
-    dispatch(changeWallpaper(i));
-    setValueWallpaper(j);
-  }
-
   const [shareWifi, setShareWifi] = useState<boolean>(false);
   const [usersTab, setUsersTab] = useState<string>("");
   const [wallpaperInput, setWallpaperInput] = useState<string | null>(null);
@@ -578,7 +575,6 @@ export default function Settings() {
     if (e.target.files && e.target.files[0]) {
       setWallpaperInput(URL.createObjectURL(e.target.files[0]));
       dispatch(changeWallpaper(URL.createObjectURL(e.target.files[0])));
-      setValueWallpaper("0");
     }
   }
 
@@ -809,7 +805,7 @@ export default function Settings() {
               className="SettingsSectionBlock Appearance"
               style={{ height: "fit-content", marginBottom: "30px" }}
             >
-              <div className="Wallpapers" data-value={wallpaperValue}>
+              <div className="Wallpapers">
                 <p
                   className="font-bold"
                   style={{ marginBottom: "30px", fontSize: "14px" }}
@@ -825,46 +821,10 @@ export default function Settings() {
                   }}
                 >
                   <div
-                    className="WImageContainer w1"
-                    onClick={() => switchWallpaper(W1, "1")}
-                  >
-                    <img src={W1} />
-                  </div>
-                  <div
-                    className="WImageContainer w2"
-                    onClick={() => switchWallpaper(W2, "2")}
-                  >
-                    <img src={W2} />
-                  </div>
-                  <div
-                    className="WImageContainer w3"
-                    onClick={() => switchWallpaper(W3, "3")}
-                  >
-                    <img src={W3} />
-                  </div>
-                  <div
-                    className="WImageContainer w4"
-                    onClick={() => switchWallpaper(W4, "4")}
-                  >
-                    <img src={W4} />
-                  </div>
-                  <div
-                    className="WImageContainer w5"
-                    onClick={() => switchWallpaper(W5, "5")}
-                  >
-                    <img src={W5} />
-                  </div>
-                  <div
-                    className="WImageContainer w6"
-                    onClick={() => switchWallpaper(W6, "6")}
-                  >
-                    <img src={W6} />
-                  </div>
-                  <div
                     style={{
                       position: "relative",
                       width: "100%",
-                      marginTop: "5px",
+                      marginBottom: "5px",
                     }}
                   >
                     {wallpaperInput ? (
@@ -908,6 +868,70 @@ export default function Settings() {
                         />
                       </>
                     )}
+                  </div>
+                  <div
+                    className={`WImageContainer ${
+                      wallpaper === W1 && "active"
+                    }`}
+                    onClick={() => dispatch(changeWallpaper(W1))}
+                  >
+                    <img src={W1} />
+                  </div>
+                  <div
+                    className={`WImageContainer ${
+                      wallpaper === W2 && "active"
+                    }`}
+                    onClick={() => dispatch(changeWallpaper(W2))}
+                  >
+                    <img src={W2} />
+                  </div>
+                  <div
+                    className={`WImageContainer ${
+                      wallpaper === W3 && "active"
+                    }`}
+                    onClick={() => dispatch(changeWallpaper(W3))}
+                  >
+                    <img src={W3} />
+                  </div>
+                  <div
+                    className={`WImageContainer ${
+                      wallpaper === W4 && "active"
+                    }`}
+                    onClick={() => dispatch(changeWallpaper(W4))}
+                  >
+                    <img src={W4} />
+                  </div>
+                  <div
+                    className={`WImageContainer ${
+                      wallpaper === W5 && "active"
+                    }`}
+                    onClick={() => dispatch(changeWallpaper(W5))}
+                  >
+                    <img src={W5} />
+                  </div>
+                  <div
+                    className={`WImageContainer ${
+                      wallpaper === W6 && "active"
+                    }`}
+                    onClick={() => dispatch(changeWallpaper(W6))}
+                  >
+                    <img src={W6} />
+                  </div>
+                  <div
+                    className={`WImageContainer ${
+                      wallpaper === W7 && "active"
+                    }`}
+                    onClick={() => dispatch(changeWallpaper(W7))}
+                  >
+                    <img src={W7} />
+                  </div>
+                  <div
+                    className={`WImageContainer ${
+                      wallpaper === W8 && "active"
+                    }`}
+                    onClick={() => dispatch(changeWallpaper(W8))}
+                  >
+                    <img src={W8} />
                   </div>
                 </div>
               </div>
@@ -1766,7 +1790,7 @@ export default function Settings() {
     }, 4000);
     setTimeout(() => setWrongPasswordAni(false), 4550);
   }
-  
+
   document.addEventListener("keydown", (e) => {
     if (e.keyCode === 27) {
       dispatch(cancelPassword());

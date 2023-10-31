@@ -1168,40 +1168,8 @@ $actcolor: #60a5fa;
                   width: auto;
                   height: 118px;
                 }
-              }
 
-              &[data-value="1"] {
-                .WImageContainer.w1 {
-                  border: 3px solid #60a5fa;
-                }
-              }
-
-              &[data-value="2"] {
-                .WImageContainer.w2 {
-                  border: 3px solid #60a5fa;
-                }
-              }
-
-              &[data-value="3"] {
-                .WImageContainer.w3 {
-                  border: 3px solid #60a5fa;
-                }
-              }
-
-              &[data-value="4"] {
-                .WImageContainer.w4 {
-                  border: 3px solid #60a5fa;
-                }
-              }
-
-              &[data-value="5"] {
-                .WImageContainer.w5 {
-                  border: 3px solid #60a5fa;
-                }
-              }
-
-              &[data-value="6"] {
-                .WImageContainer.w6 {
+                &.active {
                   border: 3px solid #60a5fa;
                 }
               }

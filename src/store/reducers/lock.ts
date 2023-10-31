@@ -11,6 +11,14 @@ interface StateType {
   fontSize: string;
   fontWeight: number;
   foregroundColor: string;
+  style: {
+    family: string;
+    weight: {
+      light?: number;
+      medium?: number;
+      bold?: number;
+    };
+  }[];
   widgets: string[];
   optionsMenuShown: boolean;
 }
@@ -26,6 +34,31 @@ const initialState: StateType = {
   fontSize: "medium",
   fontWeight: 700,
   foregroundColor: "#e2e2e2",
+  style: [
+    {
+      family: "OptimisticDisplay",
+      weight: {
+        light: 200,
+        medium: 500,
+        bold: 700,
+      },
+    },
+    {
+      family: "SanFrancisco",
+      weight: {
+        light: 200,
+        medium: 500,
+        bold: 700,
+      },
+    },
+    {
+      family: "TiemposFine",
+      weight: {
+        medium: 500,
+        bold: 700,
+      },
+    },
+  ],
   widgets: ["date", "battery"],
   optionsMenuShown: false,
 };

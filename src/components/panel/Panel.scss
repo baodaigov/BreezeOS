@@ -93,13 +93,13 @@ $fbgcolor: #60a5fa;
             display: flex;
             align-items: center;
             width: 157px;
-            height: 42px;
+            height: 44px;
             transition: all ease 0.1s;
 
             .PanelItemNext {
               position: absolute;
               transform: translateX(125.5px);
-              height: 41.5px;
+              height: 43.7px;
               padding: 12px 11px;
               background: lighten($bgcolor, 10%);
               border-top-right-radius: 999px;

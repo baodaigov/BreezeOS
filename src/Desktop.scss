@@ -1,6 +1,6 @@
+$fgcolor: #e2e2e2;
 @import url(https://site-assets.fontawesome.com/releases/v6.4.0/css/all.css);
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
-$fgcolor: #e2e2e2;
 
 @font-face {
   font-display: swap;
@@ -144,42 +144,42 @@ $fgcolor: #e2e2e2;
 
 @font-face {
   font-display: swap;
-  font-family: Gilroy;
+  font-family: Tiempos Fine;
   font-style: normal;
   font-weight: 200;
-  src: url(./fonts/Gilroy/SVN-Gilroy-Light.woff2) format("woff2");
+  src: url(./fonts/TiemposFine/test-tiempos-fine-light.woff2) format("woff2");
 }
 
 @font-face {
   font-display: swap;
-  font-family: Gilroy;
+  font-family: Tiempos Fine;
   font-style: normal;
   font-weight: 300;
-  src: url(./fonts/Gilroy/SVN-Gilroy-Regular.woff2) format("woff2");
+  src: url(./fonts/TiemposFine/test-tiempos-fine-regular.woff2) format("woff2");
 }
 
 @font-face {
   font-display: swap;
-  font-family: Gilroy;
+  font-family: Tiempos Fine;
   font-style: normal;
   font-weight: 500;
-  src: url(./fonts/Gilroy/SVN-Gilroy-Medium.woff2) format("woff2");
+  src: url(./fonts/TiemposFine/test-tiempos-fine-medium.woff2) format("woff2");
 }
 
 @font-face {
   font-display: swap;
-  font-family: Gilroy;
+  font-family: Tiempos Fine;
   font-style: normal;
   font-weight: 700;
-  src: url(./fonts/Gilroy/SVN-Gilroy-Bold.woff2) format("woff2");
+  src: url(./fonts/TiemposFine/test-tiempos-fine-bold.woff2) format("woff2");
 }
 
 @font-face {
   font-display: swap;
-  font-family: Gilroy;
+  font-family: Tiempos Fine;
   font-style: normal;
   font-weight: 800;
-  src: url(./fonts/Gilroy/SVN-Gilroy-XBold.woff2) format("woff2");
+  src: url(./fonts/TiemposFine/test-tiempos-fine-black.woff2) format("woff2");
 }
 
 .OptimisticDisplay *:not(i) {
@@ -190,8 +190,16 @@ $fgcolor: #e2e2e2;
 }
 
 .SanFrancisco *:not(i) {
-  letter-spacing: 0.3px;
+  letter-spacing: 0.4px;
   font-family: San Francisco, -apple-system, ui-sans-serif, system-ui,
+    BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans,
+    sans-serif, Noto Color Emoji, Apple Color Emoji, Segoe UI Emoji,
+    Segoe UI Symbol;
+}
+
+.TiemposFine *:not(i) {
+  letter-spacing: 1px;
+  font-family: Tiempos Fine, -apple-system, ui-sans-serif, system-ui,
     BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans,
     sans-serif, Noto Color Emoji, Apple Color Emoji, Segoe UI Emoji,
     Segoe UI Symbol;
@@ -362,6 +370,14 @@ img {
   height: 100vh;
   position: absolute;
   z-index: 1000000000000;
+
+  p {
+    margin: 15px 0;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
 
   a:hover {
     text-decoration: underline;
