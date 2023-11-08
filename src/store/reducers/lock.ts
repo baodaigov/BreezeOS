@@ -7,6 +7,8 @@ interface StateType {
     wrapperHideInfo: boolean;
   };
   wrapperActive: boolean;
+  isEditable: boolean;
+  type: string;
   fontFamily: string;
   fontSize: string;
   fontWeight: number;
@@ -30,6 +32,8 @@ const initialState: StateType = {
     wrapperHideInfo: false,
   },
   wrapperActive: false,
+  isEditable: false,
+  type: "default",
   fontFamily: "OptimisticDisplay",
   fontSize: "medium",
   fontWeight: 700,
@@ -79,6 +83,12 @@ export const lockSlice = createSlice({
     setSplashScreenWrapperHideInfo: (state, action: PayloadAction<boolean>) => {
       state.splashScreen.wrapperHideInfo = action.payload;
     },
+    setEditable: (state, action: PayloadAction<boolean>) => {
+      state.isEditable = action.payload;
+    },
+    setLockScreenType: (state, action: PayloadAction<string>) => {
+      state.type = action.payload;
+    },
     setFontFamily: (state, action: PayloadAction<string>) => {
       state.fontFamily = action.payload;
     },
@@ -103,6 +113,8 @@ export const lockSlice = createSlice({
 export const {
   setLockScreenActive,
   setLockScreenWrapperActive,
+  setLockScreenType,
+  setEditable,
   setFontFamily,
   setFontSize,
   setFontWeight,

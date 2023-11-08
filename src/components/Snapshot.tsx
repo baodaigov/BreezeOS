@@ -79,21 +79,6 @@ export default function Snapshot() {
   }
 
   function captureScreenshotKeydown() {
-    // if (process.type === "renderer") {
-    //   await register("CommandOrControl+Shift+P", () => {
-    //     if (!localStorage.getItem("snapshotIntroDisabled")) {
-    //       setIntroductionShown(true);
-    //     } else captureScreenshot();
-    //   });
-    // } else {
-    //   document.addEventListener("keydown", (e) => {
-    //     if (e.ctrlKey && e.shiftKey && e.keyCode === 80) {
-    //       if (!localStorage.getItem("snapshotIntroDisabled")) {
-    //         setIntroductionShown(true);
-    //       } else captureScreenshot();
-    //     }
-    //   });
-    // }
     document.addEventListener("keydown", (e) => {
       if (e.ctrlKey && e.shiftKey && e.keyCode === 80) {
         if (!localStorage.getItem("snapshotIntroDisabled")) {

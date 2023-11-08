@@ -14,6 +14,7 @@ import {
   setBatteryLevel,
 } from "@/store/reducers/system";
 import { useBattery } from "react-use";
+import { setLocked } from "./store/reducers/settings";
 
 const Desktop = () => {
   const dispatch = useAppDispatch();
@@ -31,6 +32,13 @@ const Desktop = () => {
   const batteryState = useBattery();
   const batteryLevel = batteryState.level * 100;
   const system = useAppSelector((state) => state.system);
+
+  document.addEventListener("keydown", (e) => {
+    if (e.ctrlKey && e.keyCode === 76) {
+      e.preventDefault();
+      dispatch(setLocked(true));
+    }
+  });
 
   if (isNaN(batteryLevel)) {
     dispatch(setBatteryLevel(NaN));

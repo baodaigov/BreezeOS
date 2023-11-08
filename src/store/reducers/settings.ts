@@ -114,6 +114,9 @@ export const settingsSlice = createSlice({
     setName: (state, action: PayloadAction<string>) => {
       state.user.name = action.payload;
     },
+    setUserImage: (state, action: PayloadAction<string>) => {
+      state.user.image = action.payload;
+    },
     setPassword: (state, action: PayloadAction<string>) => {
       state.user.password = action.payload;
     },
@@ -129,8 +132,8 @@ export const settingsSlice = createSlice({
         state.wifi = true;
       }
     },
-    toggleWifi: (state) => {
-      state.wifi = !state.wifi;
+    toggleWifi: (state, action) => {
+      state.wifi = action.payload;
     },
     setLocked: (state, action: PayloadAction<boolean>) => {
       state.isLocked = action.payload;
@@ -154,8 +157,8 @@ export const settingsSlice = createSlice({
     toggleNotifications: (state, action: PayloadAction<boolean>) => {
       state.notifications = action.payload;
     },
-    toggleBluetooth: (state) => {
-      state.bluetooth = !state.bluetooth;
+    toggleBluetooth: (state, action) => {
+      state.bluetooth = action.payload;
     },
     toggleLightMode: (state, action: PayloadAction<boolean>) => {
       state.themeLight = action.payload;
@@ -180,6 +183,7 @@ export const settingsSlice = createSlice({
 
 export const {
   setName,
+  setUserImage,
   setPassword,
   setDeviceName,
   toggleAirplaneMode,

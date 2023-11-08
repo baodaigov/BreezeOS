@@ -2,10 +2,12 @@ import React, { useEffect, useRef, useState } from "react";
 import "./LockScreen.scss";
 import { setLocked, setSleeping } from "@/store/reducers/settings";
 import {
+  setEditable,
   setFontFamily,
   setFontSize,
   setFontWeight,
   setForegroundColor,
+  setLockScreenType,
   setOptionsMenuShown,
   setSplashScreenWrapperHideInfo,
   setWidgets,
@@ -51,14 +53,15 @@ export default function SplashScreen() {
     (state) => state.lock.splashScreen.wrapperHideInfo
   );
   const widgets = useAppSelector((state) => state.lock.widgets);
+  const isEditable = useAppSelector((state) => state.lock.isEditable);
   const { secondsLeft, start } = useCountdown();
   const [passwordShown, setPasswordShown] = useState<boolean>(false);
   const [passwordValue, setPasswordValue] = useState<string>("");
   const [invalidCount, setInvalidCount] = useState<number>(0);
   const invalidLimit = 8;
-  const [isEditable, setEditable] = useState<boolean>(false);
   const [fontFamilyMenu, showFontFamilyMenu] = useState<boolean>(false);
   const [fontSizeMenu, showFontSizeMenu] = useState<boolean>(false);
+  const [typeMenu, showTypeMenu] = useState<boolean>(false);
   const [widgetsMenuShown, setWidgetsMenuShown] = useState<boolean>(false);
   const [addWidgetMenu, setAddWidgetMenu] = useState<boolean>(false);
   const [isShutdown, setIsShutdown] = useState<boolean>(false);
@@ -108,6 +111,28 @@ export default function SplashScreen() {
 
   const fontSizeMenuRef = useRef(null);
   useOutsideFontSizeMenu(fontSizeMenuRef);
+
+  function useOutsideTypeMenu(ref: React.MutableRefObject<any>) {
+    useEffect(() => {
+      /**
+       * Alert if clicked on outside of element
+       */
+      function handleClickOutside(event: any) {
+        if (ref.current && !ref.current.contains(event.target)) {
+          showTypeMenu(false);
+        }
+      }
+
+      document.addEventListener("mousedown", handleClickOutside);
+
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [ref]);
+  }
+
+  const typeMenuRef = useRef(null);
+  useOutsideTypeMenu(typeMenuRef);
 
   document.addEventListener("keydown", (e) => {
     if (e.keyCode === 27) dispatch(setOptionsMenuShown(false));
@@ -268,7 +293,7 @@ export default function SplashScreen() {
   }
 
   function setEditableTrue() {
-    setEditable(true);
+    dispatch(setEditable(true));
     dispatch(setOptionsMenuShown(false));
   }
 
@@ -313,7 +338,7 @@ export default function SplashScreen() {
                   className="SplashScreenTime"
                   style={{
                     fontWeight: lock.fontWeight,
-                    fontSize: lock.fontSize === "large" ? "99px" : "90px",
+                    fontSize: lock.fontSize === "large" ? "108px" : "97px",
                   }}
                 >
                   {timeFormat}
@@ -521,7 +546,7 @@ export default function SplashScreen() {
                 <p className="Text">Add Widget</p>
                 <div style={{ display: "flex" }}>
                   <div
-                    className="Widgets"
+                    className="Button"
                     style={{
                       display: widgets.includes("battery") ? "none" : "block",
                     }}
@@ -558,7 +583,7 @@ export default function SplashScreen() {
             >
               <div
                 className="InteractionButton"
-                onClick={() => setEditable(false)}
+                onClick={() => dispatch(setEditable(false))}
               >
                 <i className="fa-regular fa-xmark" />
               </div>
@@ -630,6 +655,44 @@ export default function SplashScreen() {
                     showFontSizeMenu(false);
                   }}
                   active={lock.fontSize === "large"}
+                />
+              </ActMenu>
+            </div>
+            <div className="EditMenuItem">
+              <p className="EditMenuItemName">Type</p>
+              <div
+                className="EditMenuItemSection"
+                onClick={() => showTypeMenu(true)}
+              >
+                <p style={{ marginRight: "7px", textTransform: "capitalize" }}>
+                  {lock.type}
+                </p>
+                <i className="fa-regular fa-chevron-down" />
+              </div>
+              <ActMenu
+                style={{
+                  zIndex: "1",
+                  width: "220px",
+                  transform: "translate(224px, 17px)",
+                }}
+                className={typeMenu ? "active" : ""}
+                ref={typeMenuRef}
+              >
+                <ActMenuSelector
+                  title="Default"
+                  onClick={() => {
+                    dispatch(setLockScreenType("default"));
+                    showTypeMenu(false);
+                  }}
+                  active={lock.type === "default"}
+                />
+                <ActMenuSelector
+                  title="Transparent"
+                  onClick={() => {
+                    dispatch(setLockScreenType("transparent"));
+                    showTypeMenu(false);
+                  }}
+                  active={lock.type === "transparent"}
                 />
               </ActMenu>
             </div>

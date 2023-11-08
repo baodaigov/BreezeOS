@@ -35,7 +35,7 @@ const PanelItemLarge = ({ type }: PanelItemLargeProps) => {
               padding: "12px 17px",
               width: "126px",
             }}
-            onClick={() => dispatch(toggleWifi())}
+            onClick={() => dispatch(toggleWifi(!settingsReducer.wifi))}
           >
             <i
               className={`fa-solid ${
@@ -80,7 +80,9 @@ const PanelItemLarge = ({ type }: PanelItemLargeProps) => {
               padding: "12px 17px",
               width: "126px",
             }}
-            onClick={() => dispatch(toggleBluetooth())}
+            onClick={() =>
+              dispatch(toggleBluetooth(!settingsReducer.bluetooth))
+            }
           >
             <i className="fa-solid fa-bluetooth" />
             <p className="font-bold">Bluetooth</p>

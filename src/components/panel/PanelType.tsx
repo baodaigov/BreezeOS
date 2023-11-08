@@ -94,7 +94,7 @@ export default function PanelType({
                 <PanelTitle name="Wi-Fi" />
                 <Toggle
                   active={settings.wifi}
-                  onToggle={() => dispatch(toggleWifi())}
+                  onToggle={() => dispatch(toggleWifi(!settings.wifi))}
                 />
               </div>
               {settings.wifi ? (
@@ -228,7 +228,9 @@ export default function PanelType({
                 <PanelTitle name="Bluetooth" />
                 <Toggle
                   active={settings.bluetooth}
-                  onToggle={() => dispatch(toggleBluetooth())}
+                  onToggle={() =>
+                    dispatch(toggleBluetooth(!settings.bluetooth))
+                  }
                 />
               </div>
               {settings.bluetooth ? (

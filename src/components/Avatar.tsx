@@ -1,27 +1,41 @@
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import "./Avatar.scss";
+import { setUserImage } from "@/store/reducers/settings";
 
 interface AvatarProps {
   size?: number;
-  image?: string;
+  editable?: boolean;
 }
 
-export default function Avatar({ size = 1, image }: AvatarProps) {
-  return image ? (
+export default function Avatar({ size = 1, editable }: AvatarProps) {
+  const dispatch = useAppDispatch();
+  const image = useAppSelector((state) => state.settings.user.image);
+
+  function addImage(e: React.ChangeEvent<HTMLInputElement>) {
+    if (e.target.files && e.target.files[0]) {
+      dispatch(setUserImage(URL.createObjectURL(e.target.files[0])));
+    }
+  }
+
+  return (
     <div
-      className="SignInImage"
+      className={`SignInImage ${!image && "undefined"}`}
       style={{
         transform: `scale(${size})`,
-        backgroundImage: image,
-      }}
-    />
-  ) : (
-    <div
-      className="SignInImage undefined"
-      style={{
-        transform: `scale(${size})`,
+        backgroundImage: image ? `url(${image})` : "none",
       }}
     >
-      <i className="fa-solid fa-user" />
+      {!image && <i className="fa-solid fa-user" />}
+      {editable && (
+        <div className="editable">
+          <i className="fa-regular fa-pen" />
+          <input
+            type="file"
+            accept=".png,jpg,.jpeg,.heic,.heif"
+            onChange={addImage}
+          />
+        </div>
+      )}
     </div>
   );
 }

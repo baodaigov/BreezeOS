@@ -1549,7 +1549,7 @@ export default function Settings() {
               <div className="SettingsSectionFixedWidth">
                 <div className="UserCard">
                   <div className="UserInfo">
-                    <Avatar size={1.7} />
+                    <Avatar size={1.7} editable />
                     <div style={{ marginLeft: "30px" }}>
                       <p className="UserName">{settingsReducer.user.name}</p>
                       <p className="UserRole">{settingsReducer.user.role}</p>
@@ -1922,7 +1922,9 @@ export default function Settings() {
                       </div>
                       <Toggle
                         active={settingsReducer.wifi}
-                        onToggle={() => dispatch(toggleWifi())}
+                        onToggle={() =>
+                          dispatch(toggleWifi(!settingsReducer.wifi))
+                        }
                       />
                     </>
                   ) : settings === "Bluetooth" ? (
@@ -1939,7 +1941,9 @@ export default function Settings() {
                       </div>
                       <Toggle
                         active={settingsReducer.bluetooth}
-                        onToggle={() => dispatch(toggleBluetooth())}
+                        onToggle={() =>
+                          dispatch(toggleBluetooth(!settingsReducer.bluetooth))
+                        }
                       />
                     </>
                   ) : (

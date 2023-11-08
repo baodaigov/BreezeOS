@@ -14,6 +14,7 @@ export default function LockScreen() {
   const dispatch = useAppDispatch();
   const isActive = useAppSelector((state) => state.lock.active);
   const wrapperIsActive = useAppSelector((state) => state.lock.wrapperActive);
+  const type = useAppSelector((state) => state.lock.type);
   const wallpaperImg = useAppSelector((state) => state.wallpaper.img);
   const isLocked = useAppSelector((state) => state.settings.isLocked);
 
@@ -37,7 +38,7 @@ export default function LockScreen() {
 
   return (
     <div
-      className={`LockScreen ${isActive && "active"}`}
+      className={`LockScreen ${type} ${isActive && "active"}`}
       style={{ backgroundImage: `url(${wallpaperImg})` }}
     >
       <div className={`LockScreenWrapper ${wrapperIsActive && "active"}`}>
