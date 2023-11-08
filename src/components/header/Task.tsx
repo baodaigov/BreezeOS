@@ -1,8 +1,5 @@
 import { useEffect, useRef } from "react";
-import {
-  activePanel,
-  inactivePanel,
-} from "../../store/reducers/panel";
+import { activePanel, inactivePanel } from "../../store/reducers/panel";
 import Panel from "../panel/Panel";
 import "@/Desktop.scss";
 import "../Header.scss";

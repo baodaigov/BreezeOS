@@ -1,4 +1,4 @@
-// for tauri only
+// for desktop application only
 
 import { useAppSelector, useAppDispatch } from "@/store/hooks";
 import { setModalContent } from "@/store/reducers/modal";

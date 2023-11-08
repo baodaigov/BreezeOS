@@ -32,7 +32,6 @@ import {
 } from "@/store/reducers/desktop";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import SplashScreenItem from "./SplashScreenItem";
-import { appWindow } from "@tauri-apps/api/window";
 
 export default function SplashScreen() {
   const dispatch = useAppDispatch();
@@ -281,7 +280,6 @@ export default function SplashScreen() {
   useEffect(() => {
     if (isShutdown) {
       shutdown();
-      setTimeout(() => appWindow.close(), 13200);
     }
   }, [isShutdown]);
 

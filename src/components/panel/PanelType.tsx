@@ -304,30 +304,5 @@ export default function PanelType({
           </div>
         </div>
       );
-    case "clipboard":
-      return (
-        <div
-          className={`Panel ${shellTheme === "WhiteSur" ? "whitesur" : ""} ${
-            onActive ? "active" : ""
-          }`}
-          {...props}
-        >
-          <div className="PanelTypeContainer">
-            <div className={`bluetoothPanel ${onActive ? "active" : ""}`}>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  width: "330px",
-                  padding: "0 5px",
-                }}
-              >
-                <PanelTitle name="Clipboard" />
-              </div>
-            </div>
-          </div>
-        </div>
-      );
   }
 }

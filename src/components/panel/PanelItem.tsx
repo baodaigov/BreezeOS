@@ -1,4 +1,4 @@
-import { inactivePanel, setPanelType } from "../../store/reducers/panel";
+import { inactivePanel } from "../../store/reducers/panel";
 import "./Panel.scss";
 import { setBatterySaver, setLocked } from "../../store/reducers/settings";
 import { setOptionsMenuShown } from "../../store/reducers/lock";
@@ -46,20 +46,6 @@ export default function PanelItem({
         >
           <i className="fa-regular fa-leaf" style={{ marginRight: "0" }} />
         </div>
-      );
-    case "clipboard":
-      return (
-        window.__TAURI_METADATA__ && (
-          <div
-            className="PanelItem PanelItemInteraction"
-            onClick={() => dispatch(setPanelType("clipboard"))}
-          >
-            <i
-              className="fa-regular fa-clipboard"
-              style={{ marginRight: "0" }}
-            />
-          </div>
-        )
       );
     default:
       return (

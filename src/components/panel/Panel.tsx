@@ -59,7 +59,6 @@ const Panel = ({ ...props }: PanelProps) => {
                   alignItems: "center",
                 }}
               >
-                <PanelItem type="clipboard" />
                 <PanelItem type="batterySaver" />
                 <PanelItem type="shutdownMenu" />
               </div>
@@ -107,11 +106,6 @@ const Panel = ({ ...props }: PanelProps) => {
       <PanelType
         type="bluetooth"
         onActive={type === "bluetooth"}
-        canSwitchBack
-      />
-      <PanelType
-        type="clipboard"
-        onActive={type === "clipboard"}
         canSwitchBack
       />
     </>

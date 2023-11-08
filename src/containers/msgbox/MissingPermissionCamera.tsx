@@ -5,12 +5,12 @@ import WindowBodyDefault from "../../components/utils/window/WindowBodyDefault";
 import WindowBodyButton from "../../components/utils/window/WindowBodyButton";
 import TopBarInteraction from "../../components/utils/window/TopBarInteraction";
 import Draggable from "react-draggable";
-import { useDispatch } from "react-redux";
 import { setActive } from "../../store/reducers/apps/settings";
+import { useAppDispatch } from "@/store/hooks";
 
 export default function MissingPermissionCamera() {
   const [isActive, setIsActive] = useState<boolean>(false);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return (
     <Draggable handle=".TopBar">

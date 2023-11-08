@@ -3,14 +3,14 @@ import Window from "./components/utils/window/Window";
 import WindowDefault from "./components/utils/window/WindowDefault";
 import Widget from "./components/Widget";
 import { useAppSelector } from "./store/hooks";
-// import { useDispatch } from "react-redux";
+// import { useAppDispatch } from "@/store/hooks";
 // import ActMenu, { ActMenuSelector } from "./components/utils/menu";
 // import { useEffect, useRef, useState } from "react";
 // import { setActive, setSettings } from "./store/reducers/apps/settings";
 
 const DesktopBody = () => {
   const isActive = useAppSelector((state) => state.desktopbody.active);
-  // const dispatch = useDispatch();
+  // const dispatch = useAppDispatch();
   // const [contextMenuDisplayed, setContextMenuDisplayed] =
   //   useState<boolean>(false);
   // const [contextMenuPos, setContextMenuPos] = useState({
