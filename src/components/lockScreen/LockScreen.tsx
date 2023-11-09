@@ -25,8 +25,10 @@ export default function LockScreen() {
         dispatch(setDockActive(false));
         dispatch(setDesktopBodyActive(false));
       }, 200);
-      setTimeout(() => dispatch(setLockScreenActive(true)), 400);
-      setTimeout(() => dispatch(setLockScreenWrapperActive(true)), 500);
+      setTimeout(() => {
+        dispatch(setLockScreenActive(true));
+        dispatch(setLockScreenWrapperActive(true));
+      }, 250);
     } else {
       dispatch(setLockScreenActive(false));
       dispatch(setLockScreenWrapperActive(false));

@@ -338,7 +338,7 @@ export default function SplashScreen() {
                   className="SplashScreenTime"
                   style={{
                     fontWeight: lock.fontWeight,
-                    fontSize: lock.fontSize === "large" ? "108px" : "97px",
+                    fontSize: lock.fontSize === "large" ? "106px" : "96px",
                   }}
                 >
                   {timeFormat}
