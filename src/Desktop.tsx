@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import Wallpaper from "./components/Wallpaper";
 import "./Desktop.scss";
 import TerminalWindow from "./components/utils/window/TerminalDesktop";
@@ -9,12 +11,16 @@ import DesktopBody from "./DesktopBody";
 import { useAppDispatch, useAppSelector } from "./store/hooks";
 import Snapshot from "./components/Snapshot";
 import Modal from "./components/Modal";
-import {
-  setBatteryCharging,
-  setBatteryLevel,
-} from "@/store/reducers/system";
+import { setBatteryCharging, setBatteryLevel } from "@/store/reducers/system";
 import { useBattery } from "react-use";
 import { setLocked } from "./store/reducers/settings";
+import { useEffect } from "react";
+import axios from "axios";
+import {
+  initializeData,
+  setLocation,
+  setTemperature,
+} from "./store/reducers/weather";
 
 const Desktop = () => {
   const dispatch = useAppDispatch();
@@ -32,6 +38,7 @@ const Desktop = () => {
   const batteryState = useBattery();
   const batteryLevel = batteryState.level * 100;
   const system = useAppSelector((state) => state.system);
+  const weather = useAppSelector((state) => state.weather);
 
   document.addEventListener("keydown", (e) => {
     if (e.ctrlKey && e.keyCode === 76) {
@@ -40,11 +47,7 @@ const Desktop = () => {
     }
   });
 
-  if (isNaN(batteryLevel)) {
-    dispatch(setBatteryLevel(NaN));
-  } else {
-    dispatch(setBatteryLevel(batteryLevel));
-  }
+  dispatch(setBatteryLevel(batteryLevel ? batteryLevel.toLocaleString() : "-"));
 
   if (batteryState.charging) {
     dispatch(setBatteryCharging(true));
@@ -67,6 +70,17 @@ const Desktop = () => {
     })(navigator.userAgent || navigator.vendor || window.opera);
     return check;
   }
+
+  function getWeatherData() {
+    navigator.geolocation.getCurrentPosition((pos) => {
+      const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${pos.coords.latitude},${pos.coords.longitude}?unitGroup=metric&key=JQQKA7B32A5DBBNY28V9RC423&contentType=json`;
+      axios(url).then((response) => dispatch(initializeData(response.data)));
+    });
+  }
+
+  useEffect(() => {
+    getWeatherData();
+  }, []);
 
   return (
     <>

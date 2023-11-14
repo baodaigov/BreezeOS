@@ -50,7 +50,7 @@ const Panel = ({ ...props }: PanelProps) => {
                   <i className="fa-regular fa-battery-full" />
                 )}
                 <p className="PanelBatteryLevel">
-                  {isNaN(batteryPercent) ? "-" : batteryPercent + "%"}
+                  {batteryPercent ? `${batteryPercent}%` : "-"}
                 </p>
               </PanelItem>
               <div

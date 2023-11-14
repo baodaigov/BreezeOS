@@ -16,7 +16,7 @@ interface StateType {
     used: string;
   };
   battery: {
-    level: number;
+    level: string;
     charging: boolean;
   };
 }
@@ -37,7 +37,7 @@ const initialState: StateType = {
     used: "80.3",
   },
   battery: {
-    level: 0,
+    level: "",
     charging: false,
   },
 };
@@ -76,7 +76,7 @@ const systemSlice = createSlice({
     setUsedSpace: (state, action: PayloadAction<string>) => {
       state.disks.used = action.payload;
     },
-    setBatteryLevel: (state, action: PayloadAction<number>) => {
+    setBatteryLevel: (state, action: PayloadAction<string>) => {
       state.battery.level = action.payload;
     },
     setBatteryCharging: (state, action: PayloadAction<boolean>) => {

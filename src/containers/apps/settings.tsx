@@ -73,6 +73,8 @@ import Draggable from "react-draggable";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import Hammer from "react-hammerjs";
 import { useBattery } from "react-use";
+import Checkbox from "@/components/utils/checkbox";
+import { setTemperature } from "@/store/reducers/weather";
 
 export const SettingsApp = () => {
   const { t } = useTranslation();
@@ -161,6 +163,9 @@ export default function Settings() {
   const [t, i18n] = useTranslation();
   const batteryState = useBattery();
   const batteryPercent = useAppSelector((state) => state.system.battery.level);
+  const batteryIsCharging = useAppSelector(
+    (state) => state.system.battery.charging
+  );
   const system = useAppSelector((state) => state.system);
   const settingsReducer = useAppSelector((state) => state.settings);
   const isHour12 = useAppSelector((state) => state.time.hour12);
@@ -171,6 +176,7 @@ export default function Settings() {
   const header = useAppSelector((state) => state.header);
   const widget = useAppSelector((state) => state.widget);
   const wallpaper = useAppSelector((state) => state.wallpaper.img);
+  const weather = useAppSelector((state) => state.weather);
 
   useEffect(() => {
     if (shellTheme === "WhiteSur") {
@@ -1286,7 +1292,30 @@ export default function Settings() {
                     Battery level
                   </p>
                   <p style={{ fontSize: "14px" }}>
-                    {batteryState.dischargingTime} seconds
+                    {batteryIsCharging ? (
+                      <>
+                        {(batteryState.chargingTime / 3600).toFixed(0)}{" "}
+                        {(batteryState.chargingTime / 3600).toFixed(0) === "1"
+                          ? "hour"
+                          : "hours"}{" "}
+                        {(batteryState.chargingTime / 600).toFixed(0)}{" "}
+                        {(batteryState.chargingTime / 600).toFixed(0) === "1"
+                          ? "minute"
+                          : "minutes"}
+                      </>
+                    ) : (
+                      <>
+                        {(batteryState.dischargingTime / 3600).toFixed(0)}{" "}
+                        {(batteryState.dischargingTime / 3600).toFixed(0) ===
+                        "1"
+                          ? "hour"
+                          : "hours"}{" "}
+                        {(batteryState.dischargingTime / 600).toFixed(0)}{" "}
+                        {(batteryState.dischargingTime / 600).toFixed(0) === "1"
+                          ? "minute"
+                          : "minutes"}
+                      </>
+                    )}
                   </p>
                 </div>
                 <div
@@ -1298,7 +1327,7 @@ export default function Settings() {
                   <div className="BatteryLevelContainer">
                     <div
                       className={`BatteryLevel ${
-                        batteryPercent < 10 && "lowbattery"
+                        batteryPercent < "10" && "lowbattery"
                       }`}
                       style={{ width: `${batteryPercent}%` }}
                     />
@@ -1549,7 +1578,7 @@ export default function Settings() {
               <div className="SettingsSectionFixedWidth">
                 <div className="UserCard">
                   <div className="UserInfo">
-                    <Avatar size={1.7} editable />
+                    <Avatar size={1.7} />
                     <div style={{ marginLeft: "30px" }}>
                       <p className="UserName">{settingsReducer.user.name}</p>
                       <p className="UserRole">{settingsReducer.user.role}</p>
@@ -1660,6 +1689,48 @@ export default function Settings() {
                   active={isSecondsEnabled}
                   onToggle={() => dispatch(setSeconds(!isSecondsEnabled))}
                 />
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  marginBottom: "40px",
+                }}
+              >
+                <p className="font-bold" style={{ fontSize: "14px" }}>
+                  Temperature
+                </p>
+                <div style={{ display: "flex" }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      marginLeft: "20px",
+                    }}
+                  >
+                    <Checkbox
+                      active={weather.temperature === "celsius"}
+                      onToggle={() => dispatch(setTemperature("celsius"))}
+                      size={0.9}
+                    />
+                    <p style={{ marginLeft: "8px" }}>Celsius</p>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      marginLeft: "20px",
+                    }}
+                  >
+                    <Checkbox
+                      active={weather.temperature === "fahrenheit"}
+                      onToggle={() => dispatch(setTemperature("fahrenheit"))}
+                      size={0.9}
+                    />
+                    <p style={{ marginLeft: "8px" }}>Fahrenheit</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1816,7 +1887,7 @@ export default function Settings() {
       case "general":
         return (
           <>
-            <Avatar size={2} />
+            <Avatar size={2} editable />
             <div className="UserInfo">
               <input
                 placeholder={settingsReducer.user.name}
@@ -2120,8 +2191,8 @@ export default function Settings() {
                           <ActMenu
                             style={{
                               zIndex: "1",
-                              width: "388px",
-                              top: "27px",
+                              width: "382px",
+                              top: "0",
                               right: "0",
                             }}
                             className={securityMenu ? "active" : ""}

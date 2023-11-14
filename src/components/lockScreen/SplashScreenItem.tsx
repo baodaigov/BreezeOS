@@ -1,5 +1,9 @@
+// @ts-nocheck
+
 import { useAppSelector } from "@/store/hooks";
 import { useEffect, useState } from "react";
+import Temperature from "../Temperature";
+import TemperatureIcon from "../TemperatureIcon";
 
 interface SplashScreenItemProps {
   type?: string;
@@ -7,6 +11,7 @@ interface SplashScreenItemProps {
 
 export default function SplashScreenItem({ type }: SplashScreenItemProps) {
   const batteryPercent = useAppSelector((state) => state.system.battery.level);
+  const temp = useAppSelector((state) => state.weather.data);
   const [curDate, setCurDate] = useState(
     new Date().toLocaleString("en-US", {
       dateStyle: "medium",
@@ -34,7 +39,17 @@ export default function SplashScreenItem({ type }: SplashScreenItemProps) {
       return (
         <div className="SplashScreenItem">
           <i className="fa-regular fa-battery-full SplashScreenIcon" />
-          <p>{isNaN(batteryPercent) ? "-" : batteryPercent + "%"}</p>
+          <p>{batteryPercent ? `${batteryPercent}%` : "-"}</p>
+        </div>
+      );
+    case "temp":
+      return (
+        <div className="SplashScreenItem">
+          <TemperatureIcon
+            icon={temp.days && temp.days[0].icon}
+            className="SplashScreenIcon"
+          />
+          <Temperature value={temp.days && temp.days[0].temp} enableSymbol />
         </div>
       );
   }

@@ -510,7 +510,7 @@ export default function SplashScreen() {
         <div
           style={{
             position: "relative",
-            borderRadius: "15px",
+            borderRadius: "18px",
             overflow: "hidden",
           }}
         >
@@ -556,11 +556,22 @@ export default function SplashScreen() {
                   >
                     <SplashScreenItem type="battery" />
                   </div>
+                  <div
+                    className="Button"
+                    style={{
+                      display: widgets.includes("temp") ? "none" : "block",
+                    }}
+                    onClick={() =>
+                      dispatch(setWidgets([...widgets, "temp"]))
+                    }
+                  >
+                    <SplashScreenItem type="temp" />
+                  </div>
                 </div>
               </div>
               <div style={{ display: "flex" }}>
                 {widgets.map((i, index) => (
-                  <div className={`Widgets ${i === "date" && "default"}`}>
+                  <div className={`Button ${i === "date" && "default"}`}>
                     <div
                       className="CloseButton"
                       onClick={() => removeWidget(index)}
@@ -790,10 +801,10 @@ export default function SplashScreen() {
               ></div>
               <div
                 className={`ColorBlock ${
-                  lock.foregroundColor === "#86efac" && "active"
+                  lock.foregroundColor === "#65ea95" && "active"
                 }`}
-                style={{ backgroundColor: "#86efac" }}
-                onClick={() => dispatch(setForegroundColor("#86efac"))}
+                style={{ backgroundColor: "#65ea95" }}
+                onClick={() => dispatch(setForegroundColor("#65ea95"))}
               ></div>
               <div
                 className={`ColorBlock ${

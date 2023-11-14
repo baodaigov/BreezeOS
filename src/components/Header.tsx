@@ -196,7 +196,7 @@ export default function Header() {
         }, 2500);
       }
 
-      if (batteryPercent <= 10) {
+      if (batteryPercent <= "10") {
         dispatch(setHeaderType(""));
         dispatch(setWidth(580));
         setTimeout(() => {
@@ -248,21 +248,21 @@ export default function Header() {
         </div>
         <div className="BatteryLevel">
           <p className="BatteryLevelText font-bold">
-            {isNaN(batteryPercent) ? "-" : batteryPercent + "%"}
+            {batteryPercent ? `${batteryPercent}%` : "-"}
           </p>
         </div>
       </div>
       <div className={`charging ${headerType === "charging" ? "active" : ""}`}>
         <div className="ChargingText">
           <p className="font-bold">
-            {batteryPercent === 100
+            {batteryPercent === "100"
               ? t("header.fullyCharged")
               : t("header.charging")}
           </p>
         </div>
         <div className="BatteryLevel">
           <p className="BatteryLevelText font-bold">
-            {isNaN(batteryPercent) ? "-" : batteryPercent + "%"}
+            {batteryPercent ? `${batteryPercent}%` : "-"}
           </p>
         </div>
       </div>
@@ -289,7 +289,7 @@ export default function Header() {
             <Task>
               <div
                 className={`BatteryStatus ${
-                  batteryPercent <= 10 ? "low-battery" : ""
+                  batteryPercent <= "10" ? "low-battery" : ""
                 }`}
               >
                 <p
@@ -297,7 +297,7 @@ export default function Header() {
                     batteryIsCharging ? "in-charge" : ""
                   }`}
                 >
-                  {isNaN(batteryPercent) ? "-" : batteryPercent + "%"}
+                  {batteryPercent ? `${batteryPercent}%` : "-"}
                 </p>
               </div>
               {settingsReducer.airplaneMode ? (
@@ -350,7 +350,7 @@ export default function Header() {
               >
                 {batteryChargingStatus ? (
                   <i className="fa-regular fa-battery-bolt" />
-                ) : batteryPercent <= 10 ? (
+                ) : batteryPercent <= "10" ? (
                   <i
                     className="fa-regular fa-battery-exclamation"
                     style={{ color: "#bd3a35" }}

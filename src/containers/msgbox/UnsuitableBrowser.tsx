@@ -12,7 +12,7 @@ export default function UnsuitableBrowser() {
   const batteryPercent = useAppSelector((state) => state.system.battery.level);
 
   useEffect(() => {
-    if (isNaN(batteryPercent)) {
+    if (!batteryPercent) {
       setIsActive(true);
     } else {
       setIsActive(false);
