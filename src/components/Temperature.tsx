@@ -1,5 +1,3 @@
-
-
 import { useAppSelector } from "@/store/hooks";
 
 interface TemperatureProps extends React.HTMLAttributes<HTMLParagraphElement> {
@@ -16,9 +14,11 @@ export default function Temperature({
 
   return (
     <p {...props}>
-      {weather.temperature === "celsius"
-        ? value
-        : (value * 1.8 + 32).toFixed(1)}
+      {value
+        ? weather.temperature === "celsius"
+          ? value
+          : (value * 1.8 + 32).toFixed(1)
+        : "--"}
       &deg;
       {enableSymbol && weather.temperature === "fahrenheit" ? "F" : "C"}
     </p>
