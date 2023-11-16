@@ -8,7 +8,11 @@ export default function useTime() {
   const [min, setMin] = useState<number>(new Date().getMinutes());
   const [sec, setSec] = useState<number>(new Date().getSeconds());
   const fullHour = `${
-    is12Hour && hour > 12 ? addZero(hour - 12) : addZero(hour)
+    is12Hour && hour > 12
+      ? addZero(hour - 12)
+      : hour === 0
+      ? "12"
+      : addZero(hour)
   }`;
   const fullMin = addZero(min);
   const fullSec = addZero(sec);
