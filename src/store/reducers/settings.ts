@@ -99,7 +99,7 @@ const initialState: StateType = {
   brightness: 100,
   notifications: true,
   bluetooth: false,
-  themeLight: false,
+  themeLight: true,
   boldText: false,
   batterySaver: false,
   animationsReduced: false,

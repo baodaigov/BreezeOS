@@ -323,6 +323,10 @@ img {
       opacity: 1;
       pointer-events: auto;
     }
+
+    &.hide {
+      display: none;
+    }
   }
 
   &::before {

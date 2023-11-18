@@ -2,7 +2,7 @@ import "./Wallpaper.scss";
 import { setAllowSwitchWorkspace } from "../store/reducers/wallpaper";
 import { setDockHide } from "../store/reducers/dock";
 import { setHeaderHide } from "../store/reducers/header";
-import { setDesktopBodyActive } from "../store/reducers/desktopbody";
+import { setDesktopBodyHide } from "../store/reducers/desktopbody";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
 export default function Wallpaper() {
@@ -14,7 +14,7 @@ export default function Wallpaper() {
   );
 
   function selectWorkspace() {
-    dispatch(setDesktopBodyActive(true));
+    dispatch(setDesktopBodyHide(false));
     dispatch(setAllowSwitchWorkspace(false));
     dispatch(setHeaderHide(false));
     dispatch(setDockHide(false));
