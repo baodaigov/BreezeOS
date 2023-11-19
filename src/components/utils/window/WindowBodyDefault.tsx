@@ -62,8 +62,15 @@ export default function WindowBodyDefault({
       <div style={{ display: "flex" }}>
         {switchIcon()}
         <div className="WindowBodyRight">
-          <p className="WindowBodyTitle">{title}</p>
-          {content && <p className="WindowBodyContent">{content}</p>}
+          {title && <p className="WindowBodyTitle">{title}</p>}
+          {content && (
+            <p
+              className="WindowBodyContent"
+              style={{ marginTop: title ? "8px" : 0 }}
+            >
+              {content}
+            </p>
+          )}
         </div>
       </div>
       {children}

@@ -198,13 +198,12 @@ $fgcolor: #e2e2e2;
       justify-content: center;
 
       .WindowBodyTitle {
-        font-size: 17px;
+        font-size: 18px;
         font-weight: 700;
       }
 
       .WindowBodyContent {
-        font-size: 12px;
-        margin-top: 10px;
+        font-size: 12.5px;
       }
     }
 
@@ -228,7 +227,7 @@ $fgcolor: #e2e2e2;
       outline: none;
       background: #ffffff10;
       color: $fgcolor;
-      font-size: 12px;
+      font-size: 12.5px;
       padding: 7px 18px;
       border-radius: 5px;
       margin-left: 6px;
