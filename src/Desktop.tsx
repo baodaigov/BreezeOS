@@ -16,11 +16,7 @@ import { useBattery } from "react-use";
 import { setLocked } from "./store/reducers/settings";
 import { useEffect } from "react";
 import axios from "axios";
-import {
-  initializeData,
-  setLocation,
-  setTemperature,
-} from "./store/reducers/weather";
+import { initializeData } from "./store/reducers/weather";
 
 const Desktop = () => {
   const dispatch = useAppDispatch();
@@ -95,13 +91,6 @@ const Desktop = () => {
             <a href="https://bit.ly/breezeos-mobile">
               https://bit.ly/breezeos-mobile
             </a>
-          </p>
-        </div>
-      ) : system.memory.total <= 2.5 ? (
-        <div className="error OptimisticDisplay">
-          <p>
-            BreezeOS cannot be used because your system does not meet the
-            requirements.
           </p>
         </div>
       ) : (

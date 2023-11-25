@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./LockScreen.scss";
-import { setLocked, setSleeping } from "@/store/reducers/settings";
+import { setLocked } from "@/store/reducers/settings";
 import {
   setEditable,
   setFontFamily,
@@ -9,31 +9,20 @@ import {
   setForegroundColor,
   setLockScreenType,
   setOptionsMenuShown,
-  setSplashScreenWrapperHideInfo,
   setWidgets,
 } from "@/store/reducers/lock";
-import { setTerminalWindowActive } from "@/store/reducers/terminalwindow";
 import Avatar from "../Avatar";
 import useCountdown from "@/hooks/useCountdown";
-import { setHeaderActive, setHeaderHide } from "@/store/reducers/header";
-import { setDockActive, setDockHide } from "@/store/reducers/dock";
-import { pushItem, clearItem } from "@/store/reducers/shutdown";
-import LogoD from "@/images/logo-d.svg";
+import { setHeaderHide } from "@/store/reducers/header";
+import { setDockHide } from "@/store/reducers/dock";
 import ActMenu, { ActMenuSelector } from "../utils/menu/index";
-import {
-  setAllowSwitchWorkspace,
-  setWallpaperActive,
-} from "@/store/reducers/wallpaper";
+import { setAllowSwitchWorkspace } from "@/store/reducers/wallpaper";
 import useTime from "@/hooks/useTime";
 import { useTranslation } from "react-i18next";
-import { setDesktopBodyActive } from "@/store/reducers/desktopbody";
-import {
-  setDesktopBlackScr,
-  setDesktopHideCursor,
-  setDesktopPoweroff,
-} from "@/store/reducers/desktop";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import SplashScreenItem from "./SplashScreenItem";
+import useProcess from "@/hooks/useProcess";
+import CryptoJS from "crypto-js";
 
 export default function SplashScreen() {
   const dispatch = useAppDispatch();
@@ -64,9 +53,9 @@ export default function SplashScreen() {
   const [typeMenu, showTypeMenu] = useState<boolean>(false);
   const [widgetsMenuShown, setWidgetsMenuShown] = useState<boolean>(false);
   const [addWidgetMenu, setAddWidgetMenu] = useState<boolean>(false);
-  const [isShutdown, setIsShutdown] = useState<boolean>(false);
   const { timeFormat } = useTime();
   const inputFieldRef = useRef<HTMLInputElement>(null);
+  const { sleep, shutdown, restart } = useProcess();
 
   function useOutsideFontFamilyMenu(ref: React.MutableRefObject<any>) {
     useEffect(() => {
@@ -165,131 +154,16 @@ export default function SplashScreen() {
 
   function action(e: React.KeyboardEvent<HTMLInputElement>) {
     if (e.key === "Enter") {
-      if (passwordValue !== settings.user.password) {
+      if (
+        CryptoJS.MD5(passwordValue).toString(CryptoJS.enc.Hex) !==
+        settings.user.password
+      ) {
         wrongPassword();
       } else {
         login();
       }
       if (invalidCount === invalidLimit - 1) start(60);
     }
-  }
-
-  function sleep() {
-    setTimeout(() => dispatch(setSplashScreenWrapperHideInfo(true)), 50);
-
-    setTimeout(() => {
-      dispatch(setSleeping(true));
-      dispatch(setOptionsMenuShown(false));
-    }, 300);
-
-    document.addEventListener("keypress", () => {
-      setTimeout(() => {
-        dispatch(setSleeping(false));
-        dispatch(setSplashScreenWrapperHideInfo(false));
-      }, 100);
-    });
-  }
-
-  function shutdown() {
-    setTimeout(() => {
-      dispatch(setSplashScreenWrapperHideInfo(true));
-      dispatch(setHeaderActive(false));
-      dispatch(setDockActive(false));
-      dispatch(setDesktopBodyActive(false));
-    }, 50);
-
-    setTimeout(() => {
-      dispatch(setDesktopHideCursor(true));
-      dispatch(setOptionsMenuShown(false));
-    }, 800);
-
-    setTimeout(() => {
-      dispatch(setTerminalWindowActive(true));
-      dispatch(pushItem(<pre>Initiating shutdown...</pre>));
-    }, 2500);
-
-    setTimeout(
-      () => dispatch(pushItem(<pre>Stopped Load/Save Random Seed... OK</pre>)),
-      3000
-    );
-
-    setTimeout(() => {
-      dispatch(pushItem(<pre>Stopped Session 1 of localhost... OK</pre>));
-      dispatch(pushItem(<pre>Removed slice system-getty.slice... OK</pre>));
-      dispatch(pushItem(<pre>Stopped Login Service... OK</pre>));
-    }, 3500);
-
-    setTimeout(() => {
-      dispatch(pushItem(<pre>Stopped Initializes Pacman keyring... OK</pre>));
-      dispatch(pushItem(<pre>Stopping Breeze Desktop Environment...</pre>));
-    }, 3600);
-
-    setTimeout(() => {
-      dispatch(pushItem(<pre>Starting Plymouth Service...</pre>));
-    }, 4000);
-
-    setTimeout(() => {
-      dispatch(clearItem());
-      dispatch(setLocked(false));
-      dispatch(
-        pushItem(
-          <div className="BootSplash">
-            <img src={LogoD} width={431} height={240} />
-          </div>
-        )
-      );
-    }, 4800);
-
-    setTimeout(() => {
-      dispatch(clearItem());
-      dispatch(setDesktopPoweroff(true));
-      dispatch(setWallpaperActive(false));
-    }, 13200);
-  }
-
-  function restart() {
-    shutdown();
-
-    setTimeout(() => dispatch(setDesktopPoweroff(false)), 16500);
-
-    setTimeout(() => {
-      dispatch(setDesktopBlackScr(false));
-      dispatch(clearItem());
-      dispatch(pushItem(<pre>Reached target Startup... OK</pre>));
-    }, 19000);
-
-    setTimeout(() => {
-      dispatch(pushItem(<pre>Started Startup... OK</pre>));
-    }, 19700);
-
-    setTimeout(() => {
-      dispatch(pushItem(<pre>Starting Plymouth Service...</pre>));
-    }, 20200);
-
-    setTimeout(() => {
-      dispatch(clearItem());
-      dispatch(setHeaderActive(false));
-      dispatch(setDockActive(false));
-      dispatch(setDesktopBodyActive(false));
-      dispatch(
-        pushItem(
-          <div className="BootSplash">
-            <img src={LogoD} width={431} height={240} />
-          </div>
-        )
-      );
-    }, 21500);
-
-    setTimeout(() => {
-      dispatch(setDesktopHideCursor(false));
-      dispatch(clearItem());
-      dispatch(pushItem(<pre>Initiating shutdown...</pre>));
-      dispatch(setTerminalWindowActive(false));
-      dispatch(setWallpaperActive(true));
-      dispatch(setLocked(true));
-      dispatch(setSplashScreenWrapperHideInfo(false));
-      setIsShutdown(false);
-    }, 36000);
   }
 
   function setEditableTrue() {
@@ -301,12 +175,6 @@ export default function SplashScreen() {
     const deleteWidget = widgets?.filter((_element, i) => i !== index);
     dispatch(setWidgets(deleteWidget));
   }
-
-  useEffect(() => {
-    if (isShutdown) {
-      shutdown();
-    }
-  }, [isShutdown]);
 
   return (
     <>
@@ -353,7 +221,7 @@ export default function SplashScreen() {
             <div className="SignInWrapper">
               <div style={{ marginBottom: "30px" }}>
                 <div className={`SignInInfo ${optionsMenuShown && "expand"}`}>
-                  <Avatar />
+                  <Avatar theme="light" />
                   <p className="SignInName">{settings.user.name}</p>
                 </div>
               </div>
@@ -470,7 +338,7 @@ export default function SplashScreen() {
                       </div>
                       <div
                         className="PowerMenuInteractionWrapper"
-                        onClick={() => setIsShutdown(true)}
+                        onClick={shutdown}
                       >
                         <div className="PowerMenuInteraction">
                           <i className="fa-light fa-power-off" />
@@ -561,9 +429,7 @@ export default function SplashScreen() {
                     style={{
                       display: widgets.includes("temp") ? "none" : "block",
                     }}
-                    onClick={() =>
-                      dispatch(setWidgets([...widgets, "temp"]))
-                    }
+                    onClick={() => dispatch(setWidgets([...widgets, "temp"]))}
                   >
                     <SplashScreenItem type="temp" />
                   </div>

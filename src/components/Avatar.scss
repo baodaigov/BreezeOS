@@ -1,3 +1,4 @@
+$bgcolor: #202023;
 $fgcolor: #e2e2e2;
 
 .SignInImage {
@@ -28,7 +29,7 @@ $fgcolor: #e2e2e2;
     justify-content: center;
     align-items: center;
     opacity: 0;
-    transition: none
+    transition: none;
   }
 
   .editable {
@@ -41,6 +42,13 @@ $fgcolor: #e2e2e2;
 
     &:hover {
       opacity: 1;
+    }
+  }
+
+  &.darkTheme {
+    &.undefined {
+      background: transparentize($bgcolor, 0.77);
+      color: transparentize($bgcolor, 0.68);
     }
   }
 }

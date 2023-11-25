@@ -54,8 +54,7 @@
       "internetUnabledReload": "Ricarica",
       "startupTitle": "Cerca con Bing o inserisci l'indirizzo, oppure lascia vuoto per essere reindirizzato al sito ufficiale di BreezeOS.",
       "settings": {
-        "privateMode": "Modalità privata",
-        "searchEngine": "Motore di ricerca"
+        "privateMode": "Modalità privata"
       }
     },
     "calendar": {

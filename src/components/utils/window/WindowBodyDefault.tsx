@@ -3,7 +3,7 @@ import "./Window.scss";
 import React from "react";
 
 interface WindowBodyDefaultProps extends React.HTMLAttributes<HTMLDivElement> {
-  type?: string;
+  type?: 'critical' | 'exclamation' | 'question' | 'information';
   icon?: string;
   title?: string;
   content?: string;

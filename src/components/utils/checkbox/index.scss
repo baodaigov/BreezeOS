@@ -30,7 +30,13 @@
   }
 
   &.disabled {
-    opacity: 0.5;
+    opacity: 0.4;
     pointer-events: none;
+  }
+
+  &.darkTheme {
+    .Checkbox {
+      background: transparentize(#202023, 0.94);
+    }
   }
 }

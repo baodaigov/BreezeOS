@@ -54,8 +54,7 @@
       "internetUnabledReload": "Перезагрузить",
       "startupTitle": "Выполните поиск с помощью Bing или введите адрес или оставьте поле пустым, чтобы перейти на официальный сайт BreezeOS.",
       "settings": {
-        "privateMode": "Частный режим",
-        "searchEngine": "Поисковая система"
+        "privateMode": "Частный режим"
       }
     },
     "calendar": {

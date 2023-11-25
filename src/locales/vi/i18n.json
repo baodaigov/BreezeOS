@@ -54,8 +54,7 @@
       "internetUnabledReload": "Tải lại",
       "startupTitle": "Tìm kiếm bằng Bing hoặc nhập địa chỉ hoặc để trống để chuyển hướng đến trang web chính thức của BreezeOS.",
       "settings": {
-        "privateMode": "Chế độ riêng tư",
-        "searchEngine": "Công cụ tìm kiếm"
+        "privateMode": "Chế độ riêng tư"
       }
     },
     "calendar": {

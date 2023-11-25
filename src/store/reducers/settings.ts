@@ -33,8 +33,8 @@ interface StateType {
 const initialState: StateType = {
   user: {
     name: "user",
-    role: "superuser",
-    password: "123456",
+    role: "user",
+    password: "e10adc3949ba59abbe56e057f20f883e",
     image: null,
   },
   deviceName: "breezeos",

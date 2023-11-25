@@ -54,8 +54,7 @@
       "internetUnabledReload": "โหลดซ้ำ",
       "startupTitle": "ค้นหาด้วย Bing หรือป้อนที่อยู่ หรือเว้นว่างไว้เพื่อเปลี่ยนเส้นทางไปยังเว็บไซต์อย่างเป็นทางการของ BreezeOS",
       "settings": {
-        "privateMode": "โหมดส่วนตัว",
-        "searchEngine": "เครื่องมือค้นหา"
+        "privateMode": "โหมดส่วนตัว"
       }
     },
     "calendar": {

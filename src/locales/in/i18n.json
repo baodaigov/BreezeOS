@@ -54,8 +54,7 @@
       "internetUnabledReload": "Muat ulang",
       "startupTitle": "Cari dengan Bing atau masukkan alamat, atau biarkan kosong untuk dialihkan ke situs web resmi BreezeOS.",
       "settings": {
-        "privateMode": "Mode pribadi",
-        "searchEngine": "Mesin pencari"
+        "privateMode": "Mode pribadi"
       }
     },
     "calendar": {

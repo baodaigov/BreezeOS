@@ -54,8 +54,7 @@
       "internetUnabledReload": "リロード",
       "startupTitle": "Bing で検索するか、アドレスを入力するか、空白のままにすると、BreezeOS 公式 Web サイトにリダイレクトされます。",
       "settings": {
-        "privateMode": "プライベートモード",
-        "searchEngine": "検索エンジン"
+        "privateMode": "プライベートモード"
       }
     },
     "calendar": {

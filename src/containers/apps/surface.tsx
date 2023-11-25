@@ -18,7 +18,6 @@ import { setHeaderHide } from "../../store/reducers/header";
 import SurfaceIcon from "../../icons/surface.svg";
 import SurfacePrivateIcon from "../../icons/surface-private.svg";
 import Toggle from "../../components/utils/toggle";
-import ActMenu, { ActMenuSelector } from "../../components/utils/menu/index";
 import { useTranslation } from "react-i18next";
 import Draggable from "react-draggable";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
@@ -119,7 +118,6 @@ export default function Surface() {
   const [hist, setHist] = useState(["", ""]);
   const [settingsOpened, setSettingsOpened] = useState(false);
   const [supportOpened, setSupportOpened] = useState(false);
-  const [searchEngineMenu, showSearchEngineMenu] = useState(false);
   isActive && setTimeout(() => setSplashScreen(false), 5000);
   const iFrameRefCurrent = iFrameRef.current;
 
@@ -155,25 +153,6 @@ export default function Surface() {
       dispatch(openUrl(qry));
     }
   };
-
-  function useOutsideSearchEngineMenu(ref: React.MutableRefObject<any>) {
-    useEffect(() => {
-      function handleClickOutside(event: any) {
-        if (ref.current && !ref.current.contains(event.target)) {
-          showSearchEngineMenu(false);
-        }
-      }
-
-      document.addEventListener("mousedown", handleClickOutside);
-
-      return () => {
-        document.removeEventListener("mousedown", handleClickOutside);
-      };
-    }, [ref]);
-  }
-
-  const searchEngineMenuRef = useRef(null);
-  useOutsideSearchEngineMenu(searchEngineMenuRef);
 
   const [min, isMin] = useState(false);
 
@@ -318,53 +297,6 @@ export default function Surface() {
                           active={isPrivate}
                           onToggle={() => dispatch(setPrivate(!isPrivate))}
                         />
-                      </div>
-                      <div className="SettingsItem">
-                        <p className="SettingsName">
-                          {t("apps.surface.settings.searchEngine")}
-                        </p>
-                        <div
-                          className="SettingsMenuSection"
-                          onClick={() => showSearchEngineMenu(true)}
-                        >
-                          <p style={{ marginRight: "7px" }}>Bing</p>
-                          <i className="fa-regular fa-chevron-down" />
-                        </div>
-                        <ActMenu
-                          style={{
-                            zIndex: "1",
-                            width: "200px",
-                            transform: "translate(340px, 44px)",
-                          }}
-                          className={searchEngineMenu ? "active" : ""}
-                          ref={searchEngineMenuRef}
-                        >
-                          <ActMenuSelector
-                            title="Bing"
-                            onClick={() => {
-                              showSearchEngineMenu(false);
-                            }}
-                            active
-                          />
-                          <ActMenuSelector
-                            title="Google"
-                            onClick={() => {
-                              showSearchEngineMenu(false);
-                            }}
-                          />
-                          <ActMenuSelector
-                            title="DuckDuckGo"
-                            onClick={() => {
-                              showSearchEngineMenu(false);
-                            }}
-                          />
-                          <ActMenuSelector
-                            title="Yahoo Search"
-                            onClick={() => {
-                              showSearchEngineMenu(false);
-                            }}
-                          />
-                        </ActMenu>
                       </div>
                     </div>
                   </div>

@@ -1020,6 +1020,33 @@ $actcolor: #60a5fa;
             border-radius: 7px;
           }
 
+          .ItemSelection {
+            width: 100%;
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            border-radius: 999px;
+            margin-bottom: 7px;
+
+            &:hover {
+              background: transparentize($fgcolor, 0.95);
+            }
+
+            .ItemSelectionIcon {
+              i {
+                margin-right: 13px;
+
+                &:last-child {
+                  margin: 0;
+                }
+
+                &.fa-duotone {
+                  --fa-secondary-color: #e2e2e296;
+                }
+              }
+            }
+          }
+
           .SettingsSectionBlock {
             display: flex;
             justify-content: center;
@@ -1063,33 +1090,6 @@ $actcolor: #60a5fa;
               display: flex;
               flex-direction: column;
               height: 100%;
-
-              .VisibleNetworksItem {
-                width: 100%;
-                padding: 15px 25px;
-                display: flex;
-                justify-content: space-between;
-                border-radius: 999px;
-                margin-bottom: 7px;
-
-                &:hover {
-                  background: transparentize($fgcolor, 0.95);
-                }
-
-                .VisibleNetworksIcon {
-                  i {
-                    margin-right: 13px;
-
-                    &:last-child {
-                      margin: 0;
-                    }
-
-                    &.fa-duotone {
-                      --fa-secondary-color: #e2e2e296;
-                    }
-                  }
-                }
-              }
             }
           }
 
@@ -1421,12 +1421,7 @@ $actcolor: #60a5fa;
               justify-content: space-between;
               align-items: center;
               padding: 15px 25px;
-              background: transparentize($fgcolor, 0.93);
-              border-bottom: 0.5px solid darken($fgcolor, 73%);
-
-              &:hover {
-                background: transparentize($fgcolor, 0.9);
-              }
+              background: transparent;
 
               &:first-child {
                 border-top-left-radius: 7px;
@@ -1445,10 +1440,6 @@ $actcolor: #60a5fa;
                 height: 0;
                 transition: all ease 0.3s;
                 border: 0 !important;
-
-                &:hover {
-                  background: transparentize($fgcolor, 0.93);
-                }
 
                 * {
                   transition: all ease 0.3s;
@@ -1479,18 +1470,6 @@ $actcolor: #60a5fa;
                       border-bottom: 1px solid $actcolor;
                     }
                   }
-                }
-              }
-
-              .BlurText {
-                color: transparentize($fgcolor, 0.8);
-              }
-
-              i {
-                transition: all ease 0.3s;
-
-                &.rotated {
-                  transform: rotate(90deg);
                 }
               }
             }
@@ -1557,18 +1536,12 @@ $actcolor: #60a5fa;
         }
 
         .SettingsContainer {
-          .SettingsContainerInside {
-            .WiFi {
-              .VisibleNetworks {
-                .VisibleNetworksItem {
-                  border-radius: 5px;
-                  padding: 8px 20px;
+          .ItemSelection {
+            border-radius: 5px;
+            padding: 8px 20px;
 
-                  &:hover {
-                    background: #007bff;
-                  }
-                }
-              }
+            &:hover {
+              background: #007bff;
             }
           }
         }
@@ -1900,94 +1873,91 @@ $actcolor: #60a5fa;
       }
     }
 
-    .SettingsContainer .SettingsContainerInside {
-      .MenuSection {
-        background: transparentize($bgcolor, 0.85) !important;
-      }
-
-      .WiFi {
-        .StatusWifiFalse {
-          height: 100%;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          text-align: center;
-
-          i {
-            font-size: 70px;
-            margin-bottom: 40px;
-            color: transparentize($bgcolor, 0.7) !important;
-          }
-
-          .Title {
-            font-size: 40px;
-            margin-bottom: 10px;
-          }
-
-          .Description {
-            color: transparentize($bgcolor, 0.7) !important;
-          }
+    .SettingsContainer {
+      .ItemSelection {
+        &:hover {
+          background: transparentize($bgcolor, 0.82) !important;
         }
 
-        .VisibleNetworks {
-          .VisibleNetworksItem {
-            &:hover {
-              background: transparentize($bgcolor, 0.82) !important;
+        .ItemSelectionIcon {
+          i.fa-duotone {
+            --fa-secondary-color: #20202396 !important;
+          }
+        }
+      }
+      .SettingsContainerInside {
+        .MenuSection {
+          background: transparentize($bgcolor, 0.85) !important;
+        }
+
+        .WiFi {
+          .StatusWifiFalse {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+
+            i {
+              font-size: 70px;
+              margin-bottom: 40px;
+              color: transparentize($bgcolor, 0.7) !important;
             }
 
-            .VisibleNetworksIcon {
-              i.fa-duotone {
-                --fa-secondary-color: #20202396 !important;
-              }
+            .Title {
+              font-size: 40px;
+              margin-bottom: 10px;
+            }
+
+            .Description {
+              color: transparentize($bgcolor, 0.7) !important;
             }
           }
         }
-      }
 
-      .Bluetooth {
-        .StatusBluetoothFalse {
-          height: 100%;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          text-align: center;
+        .Bluetooth {
+          .StatusBluetoothFalse {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
 
-          i {
-            font-size: 70px;
-            margin-bottom: 40px;
-            color: transparentize($bgcolor, 0.7) !important;
+            i {
+              font-size: 70px;
+              margin-bottom: 40px;
+              color: transparentize($bgcolor, 0.7) !important;
+            }
+
+            .Title {
+              font-size: 40px;
+              margin-bottom: 10px;
+            }
+
+            .Description {
+              color: transparentize($bgcolor, 0.7) !important;
+            }
           }
-
-          .Title {
-            font-size: 40px;
-            margin-bottom: 10px;
-          }
-
-          .Description {
-            color: transparentize($bgcolor, 0.7) !important;
-          }
-        }
-        .BluetoothDevices {
-          .Description {
-            color: transparentize($bgcolor, 0.7) !important;
-          }
-        }
-      }
-
-      .Appearance {
-        .Wallpapers {
-          .AddWallpaper {
-            background: transparentize($bgcolor, 0.85) !important;
-            border: 4px dashed transparentize($bgcolor, 0.8) !important;
-            color: transparentize($bgcolor, 0.75) !important;
+          .BluetoothDevices {
+            .Description {
+              color: transparentize($bgcolor, 0.7) !important;
+            }
           }
         }
-      }
 
-      .About {
-        .AboutMenu {
+        .Appearance {
+          .Wallpapers {
+            .AddWallpaper {
+              background: transparentize($bgcolor, 0.85) !important;
+              border: 4px dashed transparentize($bgcolor, 0.8) !important;
+              color: transparentize($bgcolor, 0.75) !important;
+            }
+          }
+        }
+
+        .About .AboutMenu {
           background: transparentize($bgcolor, 0.83) !important;
           border-bottom: 0.5px solid darken($fgcolor, 10%) !important;
 
@@ -2003,10 +1973,6 @@ $actcolor: #60a5fa;
                 }
               }
             }
-          }
-
-          .BlurText {
-            color: transparentize($bgcolor, 0.67) !important;
           }
         }
       }
@@ -2056,19 +2022,13 @@ $actcolor: #60a5fa;
         }
 
         .SettingsContainer {
-          .SettingsContainerInside {
-            .WiFi {
-              .VisibleNetworks {
-                .VisibleNetworksItem {
-                  border-radius: 5px;
-                  padding: 8px 20px;
+          .ItemSelection {
+            border-radius: 5px;
+            padding: 8px 20px;
 
-                  &:hover {
-                    background: #007bff !important;
-                    color: $fgcolor;
-                  }
-                }
-              }
+            &:hover {
+              background: #007bff !important;
+              color: $fgcolor;
             }
           }
         }

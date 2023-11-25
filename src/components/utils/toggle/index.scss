@@ -38,10 +38,8 @@
     opacity: 0.5;
     pointer-events: none;
   }
-}
 
-.lightMode {
-  .Toggle {
+  &.darkTheme {
     background: transparentize(#09090b, 0.93);
   }
 }

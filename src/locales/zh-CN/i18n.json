@@ -54,8 +54,7 @@
       "internetUnabledReload": "重新加载",
       "startupTitle": "使用 Bing 搜索或输入地址，或留空以重定向至 BreezeOS 官方网站。",
       "settings": {
-        "privateMode": "私人模式",
-        "searchEngine": "搜索引擎"
+        "privateMode": "私人模式"
       }
     },
     "calendar": {

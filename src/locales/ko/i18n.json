@@ -54,8 +54,7 @@
       "internetUnabledReload": "다시 로드",
       "startupTitle": "Bing으로 검색하거나 주소를 입력하거나, BreezeOS 공식 웹사이트로 리디렉션되도록 비워 두세요.",
       "settings": {
-        "privateMode": "비공개 모드",
-        "searchEngine": "검색 엔진"
+        "privateMode": "비공개 모드"
       }
     },
     "calendar": {

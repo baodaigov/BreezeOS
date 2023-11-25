@@ -4,3 +4,5 @@ export interface Apps {
 }
 
 export type Temperature = "celsius" | "fahrenheit";
+
+export type Theme = "light" | "dark" | "system";

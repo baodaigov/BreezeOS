@@ -655,9 +655,9 @@ export default function Settings() {
                                   },
                                 }}
                               >
-                                <div className="VisibleNetworksItem">
+                                <div className="ItemSelection">
                                   <p>{i.name}</p>
-                                  <div className="VisibleNetworksIcon">
+                                  <div className="ItemSelectionIcon">
                                     {i.connected ? (
                                       <i className="fa-solid fa-check" />
                                     ) : (
@@ -683,13 +683,13 @@ export default function Settings() {
                             ) : (
                               <>
                                 <div
-                                  className="VisibleNetworksItem"
+                                  className="ItemSelection"
                                   onClick={() =>
                                     dispatch(insertPasswordFor(i.name))
                                   }
                                 >
                                   <p>{i.name}</p>
-                                  <div className="VisibleNetworksIcon">
+                                  <div className="ItemSelectionIcon">
                                     {i.connected ? (
                                       <i className="fa-solid fa-check" />
                                     ) : (
@@ -716,7 +716,7 @@ export default function Settings() {
                           </>
                         ))}
                         <div
-                          className="VisibleNetworksItem"
+                          className="ItemSelection"
                           onClick={() => dispatch(toggleActive(true))}
                         >
                           <p>Other...</p>
@@ -1767,12 +1767,12 @@ export default function Settings() {
                 }}
               >
                 <div
-                  className="AboutMenu"
+                  className="ItemSelection"
                   onClick={() => allowEditDeviceName(!editDeviceName)}
                 >
                   <p>Device Name</p>
                   <div style={{ display: "flex", alignItems: "center" }}>
-                    <p className="BlurText" style={{ marginRight: "15px" }}>
+                    <p style={{ marginRight: "15px", opacity: ".25" }}>
                       {settingsReducer.deviceName}
                     </p>
                     <i
@@ -1794,50 +1794,50 @@ export default function Settings() {
                     onKeyUp={submitDeviceName}
                   />
                 </div>
-                <div className="AboutMenu">
+                <div className="ItemSelection">
                   <p>Hostname</p>
-                  <p className="BlurText">{system.hostname}</p>
+                  <p style={{ opacity: ".25" }}>{system.hostname}</p>
                 </div>
-                <div className="AboutMenu">
+                <div className="ItemSelection">
                   <p>Platform</p>
                   <p
-                    className="BlurText"
                     style={{
                       textTransform: "capitalize",
+                      opacity: ".25",
                     }}
                   >
                     {system.platform}
                   </p>
                 </div>
                 {system.version && (
-                  <div className="AboutMenu">
+                  <div className="ItemSelection">
                     <p>Version</p>
-                    <p className="BlurText">{system.version}</p>
+                    <p style={{ opacity: ".25" }}>{system.version}</p>
                   </div>
                 )}
-                <div className="AboutMenu">
+                <div className="ItemSelection">
                   <p>Shell</p>
-                  <p className="BlurText">{shellTheme}</p>
+                  <p style={{ opacity: ".25" }}>{shellTheme}</p>
                 </div>
-                <div className="AboutMenu">
+                <div className="ItemSelection">
                   <p>Kernel</p>
-                  <p className="BlurText">{system.kernel}</p>
+                  <p style={{ opacity: ".25" }}>{system.kernel}</p>
                 </div>
-                <div className="AboutMenu">
+                <div className="ItemSelection">
                   <p>Memory</p>
-                  <p className="BlurText">{system.memory.total} GB</p>
+                  <p style={{ opacity: ".25" }}>{system.memory.total} GB</p>
                 </div>
-                <div className="AboutMenu">
+                <div className="ItemSelection">
                   <p>Processor</p>
-                  <p className="BlurText">{system.processor}</p>
+                  <p style={{ opacity: ".25" }}>{system.processor}</p>
                 </div>
-                <div className="AboutMenu">
+                <div className="ItemSelection">
                   <p>Graphics</p>
-                  <p className="BlurText">{system.graphics}</p>
+                  <p style={{ opacity: ".25" }}>{system.graphics}</p>
                 </div>
-                <div className="AboutMenu">
+                <div className="ItemSelection">
                   <p>Disk Capacity</p>
-                  <p className="BlurText">{system.disks.total} GB</p>
+                  <p style={{ opacity: ".25" }}>{system.disks.total} GB</p>
                 </div>
               </div>
             </div>
