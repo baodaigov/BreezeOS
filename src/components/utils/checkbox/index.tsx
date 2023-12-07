@@ -21,27 +21,19 @@ export default function Checkbox({
 }: CheckboxProps) {
   const lightMode = useAppSelector((state) => state.settings.themeLight);
 
-  return active ? (
+  return (
     <div
-      className={`Checkbox active ${disabled && 'disabled'} ${
+      className={`Checkbox ${active && "active"} ${disabled && 'disabled'} ${
         theme === 'dark'
           ? 'darkTheme'
           : theme === 'system' && lightMode
           ? 'darkTheme'
           : ''
       }`}
-      style={{ transform: `scale(${size})`, backgroundColor: color }}
+      style={{ transform: `scale(${size})`, backgroundColor: active ? color : "" }}
       onClick={onToggle}
     >
       <i className="fa-regular fa-check" />
     </div>
-  ) : (
-    <div
-      className={`Checkbox ${disabled && 'disabled'}`}
-      style={{ transform: `scale(${size})` }}
-      onClick={onToggle}
-    >
-      <i className="fa-regular fa-check" />
-    </div>
-  );
+  )
 }

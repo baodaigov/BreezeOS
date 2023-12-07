@@ -1,13 +1,12 @@
 $fgcolor: #e2e2e2;
-@import url(https://site-assets.fontawesome.com/releases/v6.4.0/css/all.css);
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
+@import url(./fa.scss);
 
 @font-face {
   font-display: swap;
   font-family: Optimistic Display;
   font-style: normal;
   font-weight: 200;
-  src: url(https://static.xx.fbcdn.net/rsrc.php/yu/r/UwoTM2u9U6b.woff2)
+  src: url(../../assets/fonts/main/UwoTM2u9U6b.woff2)
     format("woff2");
 }
 
@@ -16,7 +15,7 @@ $fgcolor: #e2e2e2;
   font-family: Optimistic Display;
   font-style: normal;
   font-weight: 300;
-  src: url(https://static.xx.fbcdn.net/rsrc.php/yJ/r/gJ8wmjmQhMa.woff2)
+  src: url(../../assets/fonts/main/gJ8wmjmQhMa.woff2)
     format("woff2");
 }
 
@@ -25,7 +24,7 @@ $fgcolor: #e2e2e2;
   font-family: Optimistic Display;
   font-style: normal;
   font-weight: 500;
-  src: url(https://static.xx.fbcdn.net/rsrc.php/yL/r/jfwoHaS3i0K.woff2)
+  src: url(../../assets/fonts/main/jfwoHaS3i0K.woff2)
     format("woff2");
 }
 
@@ -34,7 +33,7 @@ $fgcolor: #e2e2e2;
   font-family: Optimistic Display;
   font-style: normal;
   font-weight: 700;
-  src: url(https://static.xx.fbcdn.net/rsrc.php/yU/r/WXBYOaYZuYu.woff2)
+  src: url(../../assets/fonts/main/WXBYOaYZuYu.woff2)
     format("woff2");
 }
 
@@ -43,7 +42,7 @@ $fgcolor: #e2e2e2;
   font-family: Optimistic Display;
   font-style: normal;
   font-weight: 800;
-  src: url(https://static.xx.fbcdn.net/rsrc.php/yR/r/0wcuDYQ2laN.woff2)
+  src: url(../../assets/fonts/main/0wcuDYQ2laN.woff2)
     format("woff2");
 }
 
