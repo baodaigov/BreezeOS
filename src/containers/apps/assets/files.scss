@@ -211,6 +211,7 @@ $actcolor: #60a5fa;
           grid-column-gap: 1em;
 
           .FilesItem {
+            position: relative;
             display: flex;
             flex-direction: column;
             padding: 10px;
@@ -219,7 +220,6 @@ $actcolor: #60a5fa;
             margin-bottom: auto;
             margin-right: 7px;
             height: auto;
-            border-radius: 10px;
             line-height: 1.4;
             text-align: center;
 
@@ -227,15 +227,67 @@ $actcolor: #60a5fa;
               display: block;
             }
 
-            &:hover {
-              background: transparentize($fgcolor, 0.93);
+            .ActMenuWrapper {
+              .ActMenu {
+                text-align: left;
+                opacity: 0;
+                scale: 0.5;
+                transform: translateY(-140px);
+                transition: all ease 0.3s;
+
+                &.active {
+                  opacity: 1;
+                  scale: 1;
+                  animation: displayActMenu 0.4s;
+                  transform: translateY(0);
+                }
+              }
+
+              @keyframes displayActMenu {
+                0% {
+                  scale: 0.5;
+                  transform: translateY(-140px);
+                }
+                50% {
+                  transform: translateY(7px);
+                  scale: 1.06;
+                }
+                100% {
+                  transform: translateY(0);
+                  scale: 1;
+                }
+              }
             }
 
-            .FilesName {
-              font-size: 13px;
-              color: $fgcolor;
-              margin: 0;
-              margin-top: 15px;
+            .FilesIconContainer {
+              padding: 11px 10px;
+              border-radius: 9px;
+            }
+
+            .FilesNameContainer {
+              border-radius: 4px;
+              padding: 2px 6px;
+              margin-top: 3.5px;
+
+              .FilesName {
+                text-align: center;
+                font-size: 13.5px;
+                margin: 0;
+              }
+            }
+
+            &.active {
+              .FilesIconContainer {
+                background-color: transparentize($fgcolor, 0.9);
+              }
+
+              .FilesNameContainer {
+                background-color: #2563eb;
+
+                .FilesName {
+                  color: $fgcolor;
+                }
+              }
             }
           }
         }
@@ -397,14 +449,8 @@ $actcolor: #60a5fa;
       .NoFiles {
         color: transparentize($bgcolor, 0.73) !important;
       }
-      .FilesSection2 .FilesItem {
-        &:hover {
-          background: transparentize($bgcolor, 0.8) !important;
-        }
-
-        .FilesName {
-          color: $bgcolor !important;
-        }
+      .FilesSection2 .FilesItem.active .FilesIconContainer {
+        background-color: transparentize($bgcolor, 0.83) !important;
       }
       .OtherLocations {
         .HeaderBar {

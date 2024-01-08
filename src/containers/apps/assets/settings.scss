@@ -1294,15 +1294,13 @@ $actcolor: #60a5fa;
                 display: flex;
 
                 & > * {
-                  margin-right: 20px;
-                }
-
-                .ClockWidget {
                   position: relative;
                   top: 0;
                   right: 0;
                   bottom: 0;
                   left: 0;
+                  margin-right: 20px;
+                  pointer-events: none;
                 }
               }
             }

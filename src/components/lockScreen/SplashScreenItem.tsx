@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import { useAppSelector } from "@/store/hooks";
 import { useEffect, useState } from "react";
 import Temperature from "../Temperature";

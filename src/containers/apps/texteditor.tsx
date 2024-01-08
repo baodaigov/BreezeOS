@@ -1,21 +1,19 @@
 import { useEffect, useRef, useState } from "react";
-import { setActive, setHide } from "../../store/reducers/apps/texteditor";
-import "../../components/utils/window/Window.scss";
-import TopBar from "../../components/utils/window/TopBar";
-import WindowBody from "../../components/utils/window/WindowBody";
-import WindowBodyDefault from "../../components/utils/window/WindowBodyDefault";
-import WindowBodyButton from "../../components/utils/window/WindowBodyButton";
-import DockItem from "../../components/dock/DockItem";
+import { setActive, setHide } from "@/store/reducers/apps/texteditor";
+import "@/components/utils/window/Window.scss";
+import TopBar from "@/components/utils/window/TopBar";
+import WindowBody from "@/components/utils/window/WindowBody";
+import DockItem from "@/components/dock/DockItem";
 import "./assets/texteditor.scss";
-import TopBarInteraction from "../../components/utils/window/TopBarInteraction";
-import StartApp from "../../components/startMenu/StartApp";
-import Sound1 from "../../sounds/Oxygen-Sys-App-Error-Critical.mp3";
-import { setHeaderHide } from "../../store/reducers/header";
+import TopBarInteraction from "@/components/utils/window/TopBarInteraction";
+import StartApp from "@/components/startMenu/StartApp";
+import { setHeaderHide } from "@/store/reducers/header";
 import { useTranslation } from "react-i18next";
-import { setDesktopBodyActive } from "../../store/reducers/desktopbody";
-import { setStartMenuActive } from "../../store/reducers/startmenu";
+import { setDesktopBodyActive } from "@/store/reducers/desktopbody";
+import { setStartMenuActive } from "@/store/reducers/startmenu";
 import Draggable from "react-draggable";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { setBlocks } from '@/store/reducers/msgbox';
 
 export const TextEditorApp = () => {
   const { t } = useTranslation();
@@ -102,8 +100,7 @@ export default function TextEditor() {
   const { t } = useTranslation();
   const [changes, saveChanges] = useState<boolean>(true);
   const [min, isMin] = useState<boolean>(false);
-  const [msgboxChanges, displayMsgBoxChanges] = useState<boolean>(false);
-  const sound1 = new Audio(Sound1);
+  const blocks = useAppSelector((state) => state.msgbox.blocks);
 
   useEffect(() => {
     if (isActive) {
@@ -116,21 +113,39 @@ export default function TextEditor() {
   function saveChangesAndExit() {
     setIsUntouchable(false);
     saveChanges(true);
-    displayMsgBoxChanges(false);
     dispatch(setActive(false));
   }
 
   function dontSaveChangesAndExit() {
     setIsUntouchable(false);
     saveChanges(false);
-    displayMsgBoxChanges(false);
     dispatch(setActive(false));
   }
 
   function saveChangesBeforeExit() {
-    displayMsgBoxChanges(true);
-    setIsUntouchable(true);
-    sound1.play();
+    dispatch(
+      setBlocks([
+        ...blocks,
+        {
+          type: 'question',
+          title: "Save changes for Untited-1.txt and exit?",
+          buttons: [
+            {
+              label: 'Yes',
+              action: saveChangesAndExit,
+            },
+            {
+              label: 'No',
+              action: dontSaveChangesAndExit,
+            },
+            {
+              label: 'Cancel'
+            },
+          ],
+          width: "450px"
+        },
+      ]),
+    );
   }
 
   useEffect(() => {
@@ -145,54 +160,6 @@ export default function TextEditor() {
 
   return (
     <div className="TextEditorWindow">
-      <Draggable handle=".TopBar">
-        <div
-          className={`Window ${msgboxChanges && "active"}`}
-          style={{ width: "420px", zIndex: 2 }}
-          key={Math.random()}
-        >
-          <TopBar>
-            <TopBarInteraction
-              action="close"
-              onClose={() => {
-                displayMsgBoxChanges(false);
-                setIsUntouchable(false);
-              }}
-            />
-          </TopBar>
-          <WindowBodyDefault
-            type="question"
-            title="Save changes for Untitled-1.txt and exit?"
-          >
-            <WindowBodyButton>
-              <button
-                className="Button"
-                key={Math.random()}
-                onClick={() => {
-                  displayMsgBoxChanges(false);
-                  setIsUntouchable(false);
-                }}
-              >
-                Cancel
-              </button>
-              <button
-                className="Button"
-                key={Math.random()}
-                onClick={dontSaveChangesAndExit}
-              >
-                No
-              </button>
-              <button
-                className="Button"
-                key={Math.random()}
-                onClick={saveChangesAndExit}
-              >
-                Yes
-              </button>
-            </WindowBodyButton>
-          </WindowBodyDefault>
-        </div>
-      </Draggable>
       <Draggable handle=".TopBar">
         <div
           className={`Window texteditor ${isActive && "active"} ${

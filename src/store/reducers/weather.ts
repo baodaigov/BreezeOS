@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { Temperature } from "../../../types";
 
 interface StateType {
-  data: object;
+  data: any;
   location: string;
   temperature: Temperature;
 }

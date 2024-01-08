@@ -43,7 +43,7 @@ export default function Wallpaper() {
         >
           <div className="AddWorkspace">
             <div className="AddWorkspaceButton">
-              <i className="fa-regular fa-plus" />
+              <i className="fa-light fa-plus" />
             </div>
           </div>
         </div>

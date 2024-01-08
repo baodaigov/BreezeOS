@@ -206,11 +206,9 @@ export default function PanelType({
                   style={{ width: "332px" }}
                 >
                   <ActMenuSelector
-                    title="Battery Preferences"
-                    onClick={() => {
-                      openSettings(setSettings("Battery"));
-                      dispatch(inactivePanel());
-                    }}
+                    title="Battery Preferences..."
+                    onClose={() => dispatch(inactivePanel())}
+                    onClick={() => openSettings(setSettings('Battery'))}
                   />
                 </ActMenu>
               </div>

@@ -85,6 +85,8 @@ $fbgcolor: #60a5fa;
           display: flex;
 
           .PanelItemLarge {
+            position: relative;
+            overflow: hidden;
             background: lighten($bgcolor, 5%);
             padding: 12px 17px;
             margin-right: 10px;
@@ -98,12 +100,10 @@ $fbgcolor: #60a5fa;
 
             .PanelItemNext {
               position: absolute;
-              transform: translateX(125.5px);
+              right: 0;
               height: 43.7px;
-              padding: 12px 11px;
+              padding: 12px;
               background: lighten($bgcolor, 10%);
-              border-top-right-radius: 999px;
-              border-bottom-right-radius: 999px;
               display: flex;
               justify-content: center;
               align-items: center;

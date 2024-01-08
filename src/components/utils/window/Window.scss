@@ -13,6 +13,7 @@ $fgcolor: #e2e2e2;
   border-radius: 7px;
   box-shadow: 0px 0 15px 0 transparentize($bgcolor, 0.2);
   overflow: hidden;
+  height: fit-content;
   z-index: 1;
   scale: 0.92;
   opacity: 0;
@@ -52,7 +53,6 @@ $fgcolor: #e2e2e2;
     display: flex;
     align-items: center;
     transition: all ease 0.3s;
-    z-index: 1;
 
     .TopBarInteractionContainer {
       display: flex;
@@ -218,9 +218,7 @@ $fgcolor: #e2e2e2;
 
   .WindowBodyButton {
     display: flex;
-    flex-direction: row-reverse;
-    margin: 15px 0;
-    margin-bottom: 0;
+    float: right;
 
     .Button {
       border: none;
@@ -236,17 +234,6 @@ $fgcolor: #e2e2e2;
         background: #ffffff20;
       }
     }
-  }
-}
-
-.WindowDefaultContainer {
-  .Window {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    margin: auto;
   }
 }
 

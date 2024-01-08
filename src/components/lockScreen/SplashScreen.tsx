@@ -487,11 +487,9 @@ export default function SplashScreen() {
               >
                 {lock.style.map((i) => (
                   <ActMenuSelector
+                    onClose={() => showFontFamilyMenu(false)}
                     title={i.family}
-                    onClick={() => {
-                      dispatch(setFontFamily(i.family));
-                      showFontFamilyMenu(false);
-                    }}
+                    onClick={() => dispatch(setFontFamily(i.family))}
                     active={lock.fontFamily === i.family}
                   />
                 ))}
@@ -518,20 +516,16 @@ export default function SplashScreen() {
                 ref={fontSizeMenuRef}
               >
                 <ActMenuSelector
-                  title={t("lockScreen.editMenu.fontSize.medium")}
-                  onClick={() => {
-                    dispatch(setFontSize("medium"));
-                    showFontSizeMenu(false);
-                  }}
-                  active={lock.fontSize === "medium"}
+                  onClose={() => showFontSizeMenu(false)}
+                  title={t('lockScreen.editMenu.fontSize.medium')}
+                  onClick={() => dispatch(setFontSize('medium'))}
+                  active={lock.fontSize === 'medium'}
                 />
                 <ActMenuSelector
-                  title={t("lockScreen.editMenu.fontSize.large")}
-                  onClick={() => {
-                    dispatch(setFontSize("large"));
-                    showFontSizeMenu(false);
-                  }}
-                  active={lock.fontSize === "large"}
+                  onClose={() => showFontSizeMenu(false)}
+                  title={t('lockScreen.editMenu.fontSize.large')}
+                  onClick={() => dispatch(setFontSize('large'))}
+                  active={lock.fontSize === 'large'}
                 />
               </ActMenu>
             </div>
@@ -556,20 +550,16 @@ export default function SplashScreen() {
                 ref={typeMenuRef}
               >
                 <ActMenuSelector
+                  onClose={() => showTypeMenu(false)}
                   title="Default"
-                  onClick={() => {
-                    dispatch(setLockScreenType("default"));
-                    showTypeMenu(false);
-                  }}
-                  active={lock.type === "default"}
+                  onClick={() => dispatch(setLockScreenType('default'))}
+                  active={lock.type === 'default'}
                 />
                 <ActMenuSelector
+                  onClose={() => showTypeMenu(false)}
                   title="Transparent"
-                  onClick={() => {
-                    dispatch(setLockScreenType("transparent"));
-                    showTypeMenu(false);
-                  }}
-                  active={lock.type === "transparent"}
+                  onClick={() => dispatch(setLockScreenType('transparent'))}
+                  active={lock.type === 'transparent'}
                 />
               </ActMenu>
             </div>

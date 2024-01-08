@@ -1,38 +1,23 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 interface StateType {
-  clock: {
-    active: boolean;
-    style: string;
-    seconds: boolean;
-  };
+  widgets: string[];
 }
 
 const initialState: StateType = {
-  clock: {
-    active: true,
-    style: "default",
-    seconds: false,
-  },
+  widgets: ['clock'],
 };
 
 const widgetSlice = createSlice({
-  name: "widget",
+  name: 'widget',
   initialState,
   reducers: {
-    removeClock: (state) => {
-      state.clock.active = false;
-    },
-    changeClockStyle: (state, action: PayloadAction<string>) => {
-      state.clock.style = action.payload;
-    },
-    displaySeconds: (state, action: PayloadAction<boolean>) => {
-      state.clock.seconds = action.payload;
+    setWidgets: (state, action: PayloadAction<string[]>) => {
+      state.widgets = action.payload;
     },
   },
 });
 
-export const { removeClock, changeClockStyle, displaySeconds } =
-  widgetSlice.actions;
+export const { setWidgets } = widgetSlice.actions;
 
 export default widgetSlice.reducer;

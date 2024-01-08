@@ -31,6 +31,7 @@ import {
   setAnimationsReduced,
   setColorInverted,
   setBatterySaver,
+  setTransparencyReduced,
 } from "@/store/reducers/settings";
 import { toggle12Hour, setSeconds } from "@/store/reducers/time";
 import { changeWallpaper } from "@/store/reducers/wallpaper";
@@ -39,7 +40,6 @@ import TopBar from "@/components/utils/window/TopBar";
 import WindowBody from "@/components/utils/window/WindowBody";
 import DockItem from "@/components/dock/DockItem";
 import "./assets/settings.scss";
-import "@/components/utils/widget/Clock.scss";
 import TopBarInteraction from "@/components/utils/window/TopBarInteraction";
 import StartApp from "@/components/startMenu/StartApp";
 import ActMenu, { ActMenuSelector } from "@/components/utils/menu/index";
@@ -75,6 +75,7 @@ import Hammer from "react-hammerjs";
 import { useBattery } from "react-use";
 import Checkbox from "@/components/utils/checkbox";
 import { setTemperature } from "@/store/reducers/weather";
+import WidgetType from '@/components/WidgetType';
 
 export const SettingsApp = () => {
   const { t } = useTranslation();
@@ -562,21 +563,6 @@ export default function Settings() {
 
   const appearanceReducer = useAppSelector((state) => state.appearance);
 
-  function changeIcons(e: string) {
-    dispatch(switchIcons(e));
-    showIconsMenu(false);
-  }
-
-  function switchShell(e: string) {
-    dispatch(changeShell(e));
-    showShellMenu(false);
-  }
-
-  function changeFont(e: string) {
-    dispatch(setFontFamily(e));
-    showFontsMenu(false);
-  }
-
   function addImage(e: React.ChangeEvent<HTMLInputElement>) {
     if (e.target.files && e.target.files[0]) {
       setWallpaperInput(URL.createObjectURL(e.target.files[0]));
@@ -598,12 +584,6 @@ export default function Settings() {
     setTimeout(() => {
       dispatch(setHeaderType("default"));
     }, 2500);
-  }
-
-  function switchLanguage(i: string) {
-    i18n.changeLanguage(i);
-    console.log(i18n.language);
-    showLanguageMenu(false);
   }
 
   function switchTab() {
@@ -1011,7 +991,11 @@ export default function Settings() {
                       className={cursorMenu ? "active" : ""}
                       ref={cursorMenuRef}
                     >
-                      <ActMenuSelector title="Default" active />
+                      <ActMenuSelector
+                        onClose={() => showCursorMenu(false)}
+                        title="Default"
+                        active
+                      />
                     </ActMenu>
                   </div>
                   <div className="ThemesMenu">
@@ -1040,30 +1024,22 @@ export default function Settings() {
                       className={iconsMenu ? "active" : ""}
                       ref={iconsMenuRef}
                     >
-                      {appearanceReducer.iconTheme === "Default" ? (
-                        <ActMenuSelector
-                          title="Default"
-                          active
-                          onClick={() => changeIcons("Default")}
-                        />
-                      ) : (
-                        <ActMenuSelector
-                          title="Default"
-                          onClick={() => changeIcons("Default")}
-                        />
-                      )}
-                      {appearanceReducer.iconTheme === "WhiteSur-icon-theme" ? (
-                        <ActMenuSelector
-                          title="WhiteSur-icon-theme"
-                          active
-                          onClick={() => changeIcons("WhiteSur-icon-theme")}
-                        />
-                      ) : (
-                        <ActMenuSelector
-                          title="WhiteSur-icon-theme"
-                          onClick={() => changeIcons("WhiteSur-icon-theme")}
-                        />
-                      )}
+                      <ActMenuSelector
+                        onClose={() => showIconsMenu(false)}
+                        title="Default"
+                        active={appearanceReducer.iconTheme === 'Default'}
+                        onClick={() => dispatch(switchIcons('Default'))}
+                      />
+                      <ActMenuSelector
+                        onClose={() => showIconsMenu(false)}
+                        title="WhiteSur-icon-theme"
+                        active={
+                          appearanceReducer.iconTheme === 'WhiteSur-icon-theme'
+                        }
+                        onClick={() =>
+                          dispatch(switchIcons('WhiteSur-icon-theme'))
+                        }
+                      />
                     </ActMenu>
                   </div>
                   <div className="ThemesMenu">
@@ -1093,16 +1069,20 @@ export default function Settings() {
                       ref={fontsMenuRef}
                     >
                       <ActMenuSelector
+                        onClose={() => showFontsMenu(false)}
                         title="OptimisticDisplay"
                         active={
-                          settingsReducer.fontFamily === "OptimisticDisplay"
+                          settingsReducer.fontFamily === 'OptimisticDisplay'
                         }
-                        onClick={() => changeFont("OptimisticDisplay")}
+                        onClick={() =>
+                          dispatch(setFontFamily('OptimisticDisplay'))
+                        }
                       />
                       <ActMenuSelector
+                        onClose={() => showFontsMenu(false)}
                         title="SanFrancisco"
-                        active={settingsReducer.fontFamily === "SanFrancisco"}
-                        onClick={() => changeFont("SanFrancisco")}
+                        active={settingsReducer.fontFamily === 'SanFrancisco'}
+                        onClick={() => dispatch(setFontFamily('SanFrancisco'))}
                       />
                     </ActMenu>
                   </div>
@@ -1130,30 +1110,18 @@ export default function Settings() {
                       className={shellMenu ? "active" : ""}
                       ref={shellMenuRef}
                     >
-                      {shellTheme === "Breeze" ? (
-                        <ActMenuSelector
-                          title="Breeze"
-                          active
-                          onClick={() => switchShell("Breeze")}
-                        />
-                      ) : (
-                        <ActMenuSelector
-                          title="Breeze"
-                          onClick={() => switchShell("Breeze")}
-                        />
-                      )}
-                      {shellTheme === "WhiteSur" ? (
-                        <ActMenuSelector
-                          title="WhiteSur (beta)"
-                          active
-                          onClick={() => switchShell("WhiteSur")}
-                        />
-                      ) : (
-                        <ActMenuSelector
-                          title="WhiteSur (beta)"
-                          onClick={() => switchShell("WhiteSur")}
-                        />
-                      )}
+                      <ActMenuSelector
+                        onClose={() => showShellMenu(false)}
+                        title="Breeze"
+                        active={shellTheme === 'Breeze'}
+                        onClick={() => dispatch(changeShell('Breeze'))}
+                      />
+                      <ActMenuSelector
+                        onClose={() => showShellMenu(false)}
+                        title="WhiteSur (beta)"
+                        active={shellTheme === 'WhiteSur'}
+                        onClick={() => dispatch(changeShell('WhiteSur'))}
+                      />
                     </ActMenu>
                   </div>
                   <div className="ThemesMenu">
@@ -1180,7 +1148,11 @@ export default function Settings() {
                       className={soundMenu ? "active" : ""}
                       ref={soundMenuRef}
                     >
-                      <ActMenuSelector title="Oxygen" active />
+                      <ActMenuSelector
+                        title="Oxygen"
+                        onClose={() => showSoundMenu(false)}
+                        active
+                      />
                     </ActMenu>
                   </div>
                 </div>
@@ -1210,35 +1182,9 @@ export default function Settings() {
                   style={{ flexDirection: "row", height: "fit-content" }}
                 >
                   <div className="WidgetsContainer">
-                    <div
-                      className={`ClockWidget ${
-                        widget.clock.active ? "active" : ""
-                      } ${widget.clock.style}`}
-                    >
-                      <div className="ClockWidgetContainer">
-                        <div
-                          className="Hour"
-                          style={{
-                            transform: `rotateZ(300deg)`,
-                          }}
-                        />
-                        <div
-                          className="Min"
-                          style={{
-                            transform: `rotateZ(60deg)`,
-                          }}
-                        />
-                        <div className="Time">
-                          <span>10</span>
-                          <span className="TimeSeparator"></span>
-                          <span>10</span>
-                        </div>
-                        <span className="Number twelve"></span>
-                        <span className="Number three"></span>
-                        <span className="Number six"></span>
-                        <span className="Number nine active"></span>
-                      </div>
-                    </div>
+                    {widget.widgets.map((i) => (
+                      <WidgetType type={i} />
+                    ))}
                   </div>
                 </div>
               </div>
@@ -1392,8 +1338,15 @@ export default function Settings() {
                       className={orientationMenu ? "active" : ""}
                       ref={orientationMenuRef}
                     >
-                      <ActMenuSelector title="Landscape" active />
-                      <ActMenuSelector title="Portrait" />
+                      <ActMenuSelector
+                        onClose={() => showOrientationMenu(false)}
+                        title="Landscape"
+                        active
+                      />
+                      <ActMenuSelector
+                        onClose={() => showOrientationMenu(false)}
+                        title="Portrait"
+                      />
                     </ActMenu>
                   </div>
                   <div className="BiDMenu">
@@ -1424,6 +1377,7 @@ export default function Settings() {
                       ref={resolutionMenuRef}
                     >
                       <ActMenuSelector
+                        onClose={() => showResolutionMenu(false)}
                         title={`${window.screen.width} \u00D7 ${window.screen.height} (16:9)`}
                         active
                       />
@@ -1453,10 +1407,23 @@ export default function Settings() {
                       className={refreshRateMenu ? "active" : ""}
                       ref={refreshRateMenuRef}
                     >
-                      <ActMenuSelector title="60.00 Hz" active />
-                      <ActMenuSelector title="50.00 Hz" />
-                      <ActMenuSelector title="40.00 Hz" />
-                      <ActMenuSelector title="30.00 Hz" />
+                      <ActMenuSelector
+                        onClose={() => showRefreshRateMenu(false)}
+                        title="60.00 Hz"
+                        active
+                      />
+                      <ActMenuSelector
+                        onClose={() => showRefreshRateMenu(false)}
+                        title="50.00 Hz"
+                      />
+                      <ActMenuSelector
+                        onClose={() => showRefreshRateMenu(false)}
+                        title="40.00 Hz"
+                      />
+                      <ActMenuSelector
+                        onClose={() => showRefreshRateMenu(false)}
+                        title="30.00 Hz"
+                      />
                     </ActMenu>
                   </div>
                 </div>
@@ -1496,74 +1463,88 @@ export default function Settings() {
                     ref={languageMenuRef}
                   >
                     <ActMenuSelector
+                      onClose={() => showLanguageMenu(false)}
                       title="Deutsch"
-                      onClick={() => switchLanguage("Deutsch")}
-                      active={i18n.language === "Deutsch"}
+                      onClick={() => i18n.changeLanguage('Deutsch')}
+                      active={i18n.language === 'Deutsch'}
                     />
                     <ActMenuSelector
+                      onClose={() => showLanguageMenu(false)}
                       title="English (US)"
-                      onClick={() => switchLanguage("English (US)")}
-                      active={i18n.language === "English (US)"}
+                      onClick={() => i18n.changeLanguage('English (US)')}
+                      active={i18n.language === 'English (US)'}
                     />
                     <ActMenuSelector
+                      onClose={() => showLanguageMenu(false)}
                       title="Español"
-                      onClick={() => switchLanguage("Español")}
-                      active={i18n.language === "Español"}
+                      onClick={() => i18n.changeLanguage('Español')}
+                      active={i18n.language === 'Español'}
                     />
                     <ActMenuSelector
+                      onClose={() => showLanguageMenu(false)}
                       title="Français"
-                      onClick={() => switchLanguage("Français")}
-                      active={i18n.language === "Français"}
+                      onClick={() => i18n.changeLanguage('Français')}
+                      active={i18n.language === 'Français'}
                     />
                     <ActMenuSelector
+                      onClose={() => showLanguageMenu(false)}
                       title="Bahasa Indonesia"
-                      onClick={() => switchLanguage("Bahasa Indonesia")}
-                      active={i18n.language === "Bahasa Indonesia"}
+                      onClick={() => i18n.changeLanguage('Bahasa Indonesia')}
+                      active={i18n.language === 'Bahasa Indonesia'}
                     />
                     <ActMenuSelector
+                      onClose={() => showLanguageMenu(false)}
                       title="Italiano"
-                      onClick={() => switchLanguage("Italiano")}
-                      active={i18n.language === "Italiano"}
+                      onClick={() => i18n.changeLanguage('Italiano')}
+                      active={i18n.language === 'Italiano'}
                     />
                     <ActMenuSelector
+                      onClose={() => showLanguageMenu(false)}
                       title="日本語"
-                      onClick={() => switchLanguage("日本語")}
-                      active={i18n.language === "日本語"}
+                      onClick={() => i18n.changeLanguage('日本語')}
+                      active={i18n.language === '日本語'}
                     />
                     <ActMenuSelector
+                      onClose={() => showLanguageMenu(false)}
                       title="한국어"
-                      onClick={() => switchLanguage("한국어")}
-                      active={i18n.language === "한국어"}
+                      onClick={() => i18n.changeLanguage('한국어')}
+                      active={i18n.language === '한국어'}
                     />
                     <ActMenuSelector
+                      onClose={() => showLanguageMenu(false)}
                       title="Русский"
-                      onClick={() => switchLanguage("Русский")}
-                      active={i18n.language === "Русский"}
+                      onClick={() => i18n.changeLanguage('Русский')}
+                      active={i18n.language === 'Русский'}
                     />
                     <ActMenuSelector
+                      onClose={() => showLanguageMenu(false)}
                       title="แบบไทย"
-                      onClick={() => switchLanguage("แบบไทย")}
-                      active={i18n.language === "แบบไทย"}
+                      onClick={() => i18n.changeLanguage('แบบไทย')}
+                      active={i18n.language === 'แบบไทย'}
                     />
                     <ActMenuSelector
+                      onClose={() => showLanguageMenu(false)}
                       title="Український"
-                      onClick={() => switchLanguage("Український")}
-                      active={i18n.language === "Український"}
+                      onClick={() => i18n.changeLanguage('Український')}
+                      active={i18n.language === 'Український'}
                     />
                     <ActMenuSelector
+                      onClose={() => showLanguageMenu(false)}
                       title="Tiếng Việt"
-                      onClick={() => switchLanguage("Tiếng Việt")}
-                      active={i18n.language === "Tiếng Việt"}
+                      onClick={() => i18n.changeLanguage('Tiếng Việt')}
+                      active={i18n.language === 'Tiếng Việt'}
                     />
                     <ActMenuSelector
+                      onClose={() => showLanguageMenu(false)}
                       title="中文 (简体)"
-                      onClick={() => switchLanguage("中文 (简体)")}
-                      active={i18n.language === "中文 (简体)"}
+                      onClick={() => i18n.changeLanguage('中文 (简体)')}
+                      active={i18n.language === '中文 (简体)'}
                     />
                     <ActMenuSelector
+                      onClose={() => showLanguageMenu(false)}
                       title="中文 (繁體)"
-                      onClick={() => switchLanguage("中文 (繁體)")}
-                      active={i18n.language === "中文 (繁體)"}
+                      onClick={() => i18n.changeLanguage('中文 (繁體)')}
+                      active={i18n.language === '中文 (繁體)'}
                     />
                   </ActMenu>
                 </div>
@@ -1648,6 +1629,26 @@ export default function Settings() {
                   active={settingsReducer.colorInverted}
                   onToggle={() =>
                     dispatch(setColorInverted(!settingsReducer.colorInverted))
+                  }
+                />
+              </div>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  marginBottom: '40px',
+                }}
+              >
+                <p className="font-bold" style={{ fontSize: '14px' }}>
+                  Reduce transparency
+                </p>
+                <Toggle
+                  active={settingsReducer.transparencyReduced}
+                  onToggle={() =>
+                    dispatch(
+                      setTransparencyReduced(!settingsReducer.transparencyReduced),
+                    )
                   }
                 />
               </div>
@@ -1868,15 +1869,10 @@ export default function Settings() {
     }
   });
 
-  const cancel = () => {
+  function cancel(){
     dispatch(setInactive());
     dispatch(cancelPassword());
   };
-
-  function switchSecurity(e: string) {
-    showSecurityMenu(false);
-    dispatch(setSecurity(e));
-  }
 
   const wp = useAppSelector((state) => state.wifipassword);
 
@@ -2199,39 +2195,52 @@ export default function Settings() {
                             ref={securityMenuRef}
                           >
                             <ActMenuSelector
+                              onClose={() => showSecurityMenu(false)}
                               title="None"
-                              active={nw.security === "None"}
-                              onClick={() => switchSecurity("None")}
+                              active={nw.security === 'None'}
+                              onClick={() => dispatch(setSecurity('None'))}
                             />
                             <ActMenuSelector
+                              onClose={() => showSecurityMenu(false)}
                               title="WEP"
-                              active={nw.security === "WEP"}
-                              onClick={() => switchSecurity("WEP")}
+                              active={nw.security === 'WEP'}
+                              onClick={() => dispatch(setSecurity('WEP'))}
                             />
                             <ActMenuSelector
+                              onClose={() => showSecurityMenu(false)}
                               title="WPA"
-                              active={nw.security === "WPA"}
-                              onClick={() => switchSecurity("WPA")}
+                              active={nw.security === 'WPA'}
+                              onClick={() => dispatch(setSecurity('WPA'))}
                             />
                             <ActMenuSelector
+                              onClose={() => showSecurityMenu(false)}
                               title="WPA2"
-                              active={nw.security === "WPA2"}
-                              onClick={() => switchSecurity("WPA2")}
+                              active={nw.security === 'WPA2'}
+                              onClick={() => dispatch(setSecurity('WPA2'))}
                             />
                             <ActMenuSelector
+                              onClose={() => showSecurityMenu(false)}
                               title="WPA Enterprise"
-                              active={nw.security === "WPA Enterprise"}
-                              onClick={() => switchSecurity("WPA Enterprise")}
+                              active={nw.security === 'WPA Enterprise'}
+                              onClick={() =>
+                                dispatch(setSecurity('WPA Enterprise'))
+                              }
                             />
                             <ActMenuSelector
+                              onClose={() => showSecurityMenu(false)}
                               title="WPA2 Enterprise"
-                              active={nw.security === "WPA2 Enterprise"}
-                              onClick={() => switchSecurity("WPA2 Enterprise")}
+                              active={nw.security === 'WPA2 Enterprise'}
+                              onClick={() =>
+                                dispatch(setSecurity('WPA2 Enterprise'))
+                              }
                             />
                             <ActMenuSelector
+                              onClose={() => showSecurityMenu(false)}
                               title="WPA3 Enterprise"
-                              active={nw.security === "WPA3 Enterprise"}
-                              onClick={() => switchSecurity("WPA3 Enterprise")}
+                              active={nw.security === 'WPA3 Enterprise'}
+                              onClick={() =>
+                                dispatch(setSecurity('WPA3 Enterprise'))
+                              }
                             />
                           </ActMenu>
                         </div>

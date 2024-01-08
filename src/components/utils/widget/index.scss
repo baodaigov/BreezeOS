@@ -1,0 +1,245 @@
+.ClockWidget {
+  width: 182px;
+  height: 182px;
+  pointer-events: auto;
+
+  .CloseButtonContainer {
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    opacity: 0;
+    z-index: 1;
+    border-radius: 999px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    .CloseButton {
+      width: 32px;
+      height: 32px;
+      background: #f7f7f7;
+      font-size: 16px;
+      display: flex;
+      border-radius: 999px;
+      justify-content: center;
+      align-items: center;
+      transition: all ease 0.3s;
+
+      &:active {
+        background: darken(#f7f7f7, 12%);
+        width: 30px;
+        height: 30px;
+        font-size: 15px;
+        transition: none;
+      }
+
+      i {
+        color: #202023;
+      }
+    }
+  }
+
+  .ClockWidgetContainer {
+    position: relative;
+    border-radius: 999px;
+    overflow: hidden;
+    width: 182px;
+    height: 182px;
+    transition: all ease 0.3s;
+
+    .Hour,
+    .Min,
+    .Sec {
+      position: absolute;
+      border-radius: 999px;
+      opacity: 1;
+      transition: all ease 0.3s;
+      transform-origin: bottom;
+      z-index: 1;
+    }
+
+    .Hour {
+      height: 70px;
+      width: 12px;
+      top: 21px;
+      left: 85px;
+    }
+
+    .Min {
+      height: 78px;
+      width: 6px;
+      top: 13px;
+      left: 88px;
+    }
+
+    .Sec {
+      &.active {
+        display: block;
+      }
+      display: none;
+      height: 85px;
+      width: 6px;
+      top: 7px;
+      left: 88px;
+    }
+
+    .HandlerContainer {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .Handler {
+        z-index: 1;
+        transition: all ease 0.3s;
+        border-radius: 999px;
+        width: 14px;
+        height: 14px;
+      }
+    }
+
+    .ClockImg {
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: all ease 0.3s;
+    }
+
+    .Time {
+      position: absolute;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: opacity ease 0.3s;
+    }
+
+    .Number {
+      font-weight: 800;
+      text-align: center;
+      letter-spacing: -3px;
+      position: absolute;
+      font-size: 105px;
+      letter-spacing: -14px;
+      transition: all ease 0.3s;
+
+      &.twelve {
+        top: -45px;
+        left: 33px;
+
+        &::before {
+          content: '12';
+        }
+      }
+
+      &.three {
+        right: -8px;
+        top: 34px;
+
+        &::before {
+          content: '3';
+        }
+      }
+
+      &.six {
+        bottom: -50px;
+        left: 61px;
+
+        &::before {
+          content: '6';
+        }
+      }
+
+      &.nine {
+        left: -10px;
+        top: 34px;
+
+        &::before {
+          content: '9';
+        }
+      }
+    }
+  }
+
+  &.default {
+    .ClockWidgetContainer {
+      background-color: #bfdbfe;
+
+      .Hour,
+      .Min {
+        background-color: #09090b;
+      }
+
+      .Sec {
+        background-color: #dcf7ff;
+      }
+
+      .Handler {
+        background-color: #dcf7ff;
+      }
+
+      .Number {
+        color: darken(#93c5fd, 10%);
+      }
+    }
+  }
+
+  &.simple {
+    .ClockWidgetContainer {
+      background-color: #060610;
+
+      .Hour,
+      .Min,
+      .Sec,
+      .Handler {
+        scale: 0.85;
+      }
+
+      .Hour,
+      .Min,
+      .Sec {
+        width: 5px;
+        background-color: #fff;
+      }
+
+      .Hour {
+        left: 89px;
+      }
+
+      .Min {
+        left: 89px;
+      }
+
+      .Sec {
+        height: 83px;
+        left: 88.8px;
+        background-color: #ef4444;
+      }
+
+      .Handler {
+        width: 8px;
+        height: 8px;
+        outline: 2px solid #fff;
+        background-color: #060610;
+      }
+
+      .Number {
+        opacity: 0;
+      }
+
+      .ClockImg {
+        opacity: 1;
+      }
+    }
+  }
+}

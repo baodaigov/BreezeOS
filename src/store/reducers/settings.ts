@@ -28,6 +28,7 @@ interface StateType {
   animationsReduced: boolean;
   colorInverted: boolean;
   fontFamily: string;
+  transparencyReduced: boolean;
 }
 
 const initialState: StateType = {
@@ -105,6 +106,7 @@ const initialState: StateType = {
   animationsReduced: false,
   colorInverted: false,
   fontFamily: "OptimisticDisplay",
+  transparencyReduced: false,
 };
 
 export const settingsSlice = createSlice({
@@ -178,6 +180,9 @@ export const settingsSlice = createSlice({
     setFontFamily: (state, action: PayloadAction<string>) => {
       state.fontFamily = action.payload;
     },
+    setTransparencyReduced: (state, action: PayloadAction<boolean>) => {
+      state.transparencyReduced = action.payload;
+    },
   },
 });
 
@@ -200,6 +205,7 @@ export const {
   setAnimationsReduced,
   setColorInverted,
   setFontFamily,
+  setTransparencyReduced,
 } = settingsSlice.actions;
 
 export default settingsSlice.reducer;

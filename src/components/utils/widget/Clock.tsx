@@ -1,14 +1,9 @@
-import React, { useEffect, useState, useRef } from "react";
-import "./Clock.scss";
-import Draggable from "react-draggable";
-import ActMenu, { ActMenuSelector } from "@/components/utils/menu";
-import {
-  removeClock,
-  displaySeconds,
-  changeClockStyle,
-} from "@/store/reducers/widget";
-import useTime from "@/hooks/useTime";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import React, { useEffect, useState, useRef } from 'react';
+import './index.scss';
+import Draggable from 'react-draggable';
+import ActMenu, { ActMenuSelector } from '../menu';
+import useTime from '@/hooks/useTime';
+import img from '@/images/clock-pattern.svg';
 
 const Clock = () => {
   const { fullHour, hour, fullMin, min, fullSec, sec } = useTime();
@@ -16,8 +11,8 @@ const Clock = () => {
   const minDeg = min * 6;
   const secDeg = sec * 6;
   const [contextMenuEnabled, setContextMenuEnabled] = useState<boolean>(false);
-  const dispatch = useAppDispatch();
-  const clock = useAppSelector((state) => state.widget.clock);
+  const [secondsDisplayed, setSecondsDisplay] = useState<boolean>(false);
+  const [style, setStyle] = useState<string>('default');
 
   function useOutsideMenu(ref: React.MutableRefObject<any>) {
     useEffect(() => {
@@ -30,10 +25,10 @@ const Clock = () => {
         }
       }
 
-      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener('mousedown', handleClickOutside);
 
       return () => {
-        document.removeEventListener("mousedown", handleClickOutside);
+        document.removeEventListener('mousedown', handleClickOutside);
       };
     }, [ref]);
   }
@@ -41,72 +36,49 @@ const Clock = () => {
   const contextMenuRef = useRef(null);
   useOutsideMenu(contextMenuRef);
 
-  function displayseconds() {
-    setContextMenuEnabled(false);
-    dispatch(displaySeconds(!clock.seconds));
-  }
-
-  function changeStyle(style: string) {
-    setContextMenuEnabled(false);
-    dispatch(changeClockStyle(style));
-  }
-
   return (
     <Draggable handle=".ClockWidgetContainer">
       <div
-        className={`ClockWidget ${clock.active ? "active" : ""} ${clock.style}`}
+        className={`ClockWidget ${style}`}
         onContextMenu={() => setContextMenuEnabled(true)}
       >
         <ActMenu
           style={{
-            position: "absolute",
-            zIndex: "10001",
-            top: "100px",
-            right: "100px",
-            width: "200px",
+            position: 'absolute',
+            zIndex: '10001',
+            top: '100px',
+            right: '100px',
+            width: '200px',
           }}
-          className={contextMenuEnabled ? "active" : ""}
+          className={contextMenuEnabled ? 'active' : ''}
           ref={contextMenuRef}
         >
           <ActMenuSelector
+            onClose={() => setContextMenuEnabled(false)}
             title="Default"
-            onClick={() => changeStyle("default")}
-            active={clock.style === "default"}
+            onClick={() => setStyle('default')}
+            active={style === 'default'}
           />
           <ActMenuSelector
-            title="Latte"
-            onClick={() => changeStyle("latte")}
-            active={clock.style === "latte"}
+            onClose={() => setContextMenuEnabled(false)}
+            title="Simple"
+            onClick={() => setStyle('simple')}
+            active={style === 'simple'}
           />
           <ActMenuSelector
-            title="Nautilus"
-            onClick={() => changeStyle("nautilus")}
-            active={clock.style === "nautilus"}
-          />
-          <ActMenuSelector
-            title="Classic"
-            onClick={() => changeStyle("classic")}
-            active={clock.style === "classic"}
-          />
-          <ActMenuSelector
-            title="Dark Classic"
-            onClick={() => changeStyle("darkclassic")}
-            active={clock.style === "darkclassic"}
-          />
-          <ActMenuSelector
+            onClose={() => setContextMenuEnabled(false)}
             title="Display seconds"
-            onClick={displayseconds}
-            active={clock.seconds}
+            onClick={() => setSecondsDisplay(!secondsDisplayed)}
+            active={secondsDisplayed}
           />
         </ActMenu>
-        <div className="CloseButtonContainer">
+        {/* <div className="CloseButtonContainer">
           <div
             className="CloseButton"
-            onClick={() => setTimeout(() => dispatch(removeClock()), 150)}
           >
             <i className="fa-regular fa-xmark" />
           </div>
-        </div>
+        </div> */}
         <div className="ClockWidgetContainer">
           <div
             className="Hour"
@@ -121,25 +93,25 @@ const Clock = () => {
             }}
           />
           <div
-            className={`Sec ${clock.seconds ? "active" : ""}`}
+            className={`Sec ${secondsDisplayed ? 'active' : ''}`}
             style={{
               transform: `rotateZ(${secDeg}deg)`,
             }}
           />
+          <div className="HandlerContainer">
+            <div className="Handler" />
+          </div>
+          <img className="ClockImg" src={img} />
           <div className="Time">
             <span>{fullHour}</span>
             <span className="TimeSeparator"></span>
             <span>{fullMin}</span>
-            {clock.seconds && <span className="TimeSec">{fullSec}</span>}
+            {secondsDisplayed && <span className="TimeSec">{fullSec}</span>}
           </div>
-          <span
-            className={`Number twelve ${hourDeg === 360 && "active"}`}
-          ></span>
-          <span
-            className={`Number three ${hourDeg === 450 && "active"}`}
-          ></span>
-          <span className={`Number six ${hourDeg === 540 && "active"}`}></span>
-          <span className={`Number nine ${hourDeg === 630 && "active"}`}></span>
+          <span className="Number twelve" />
+          <span className="Number three" />
+          <span className="Number six" />
+          <span className="Number nine" />
         </div>
       </div>
     </Draggable>

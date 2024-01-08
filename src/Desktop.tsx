@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import Wallpaper from "./components/Wallpaper";
 import "./Desktop.scss";
 import TerminalWindow from "./components/utils/window/TerminalDesktop";
@@ -17,6 +15,7 @@ import { setLocked } from "./store/reducers/settings";
 import { useEffect } from "react";
 import axios from "axios";
 import { initializeData } from "./store/reducers/weather";
+import MsgBoxContainer from '@/components/utils/msgbox/container';
 
 const Desktop = () => {
   const dispatch = useAppDispatch();
@@ -33,8 +32,9 @@ const Desktop = () => {
   const poweroff = useAppSelector((state) => state.desktop.poweroff);
   const batteryState = useBattery();
   const batteryLevel = batteryState.level * 100;
-  const system = useAppSelector((state) => state.system);
-  const weather = useAppSelector((state) => state.weather);
+  const transparencyReduced = useAppSelector(
+    (state) => state.settings.transparencyReduced,
+  );
 
   document.addEventListener("keydown", (e) => {
     if (e.ctrlKey && e.keyCode === 76) {
@@ -42,14 +42,6 @@ const Desktop = () => {
       dispatch(setLocked(true));
     }
   });
-
-  dispatch(setBatteryLevel(batteryLevel ? batteryLevel.toLocaleString() : "-"));
-
-  if (batteryState.charging) {
-    dispatch(setBatteryCharging(true));
-  } else {
-    dispatch(setBatteryCharging(false));
-  }
 
   function isMobile() {
     var check = false;
@@ -76,7 +68,38 @@ const Desktop = () => {
 
   useEffect(() => {
     getWeatherData();
-  }, []);
+
+    dispatch(
+      setBatteryLevel(batteryLevel ? batteryLevel.toLocaleString() : '-'),
+    );
+
+    if (batteryState.charging) {
+      dispatch(setBatteryCharging(true));
+    } else {
+      dispatch(setBatteryCharging(false));
+    }
+
+    // if (!batteryLevel) {
+    //   dispatch(
+    //     setBlocks([
+    //       ...blocks,
+    //       {
+    //         type: 'exclamation',
+    //         title: 'Unsuitable web browser',
+    //         content:
+    //           'For full experiences, we recommend you to switch to a different browser platform.',
+    //         buttons: [
+    //           {
+    //             label: 'OK',
+    //             closeAction: true,
+    //           },
+    //         ],
+    //         width: '550px',
+    //       },
+    //     ]),
+    //   );
+    // }
+  }, [batteryState, batteryLevel]);
 
   return (
     <>
@@ -102,11 +125,14 @@ const Desktop = () => {
               blackScr && "blackscr"
             } ${animationsReduced && "animdisabled"} ${
               colorInverted && "inverted"
-            } ${poweroff && "poweroff"}`}
+            } ${poweroff && "poweroff"} ${
+              transparencyReduced && 'transdisabled'
+            }`}
             onContextMenu={(e) => e.preventDefault()}
             id="Desktop"
           >
             <TerminalWindow />
+            <MsgBoxContainer />
             <Snapshot />
             <LockScreen />
             <StartMenu />
