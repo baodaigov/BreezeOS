@@ -34,7 +34,7 @@ export default function FilesItem({
   const [contextMenuDisplayed, setContextMenuDisplayed] =
     useState<boolean>(false);
 
-  function useOutsideFilesItem(ref: React.MutableRefObject<any>) {
+  function useOutsideFilesItem(ref: React.RefObject<HTMLElement>) {
     useEffect(() => {
       function handleClickOutside(event: any) {
         if (ref.current && !ref.current.contains(event.target)) {
@@ -53,7 +53,7 @@ export default function FilesItem({
   const filesItemRef = useRef(null);
   useOutsideFilesItem(filesItemRef);
 
-  function useOutsideContextMenu(ref: React.MutableRefObject<any>) {
+  function useOutsideContextMenu(ref: React.RefObject<HTMLElement>) {
     useEffect(() => {
       function handleClickOutside(event: any) {
         if (ref.current && !ref.current.contains(event.target)) {

@@ -91,6 +91,10 @@ $fgcolor: #e2e2e2;
   .ActMenuWrapper .ActMenu {
     background: transparentize($fgcolor, 0.15);
 
+    .ActMenuSeparator {
+      background-color: transparentize($bgcolor, 0.76);
+    }
+
     .ActMenuSelector {
       color: $bgcolor;
 

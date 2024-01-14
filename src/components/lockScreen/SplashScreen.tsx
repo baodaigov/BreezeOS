@@ -57,7 +57,7 @@ export default function SplashScreen() {
   const inputFieldRef = useRef<HTMLInputElement>(null);
   const { sleep, shutdown, restart } = useProcess();
 
-  function useOutsideFontFamilyMenu(ref: React.MutableRefObject<any>) {
+  function useOutsideFontFamilyMenu(ref: React.RefObject<HTMLElement>) {
     useEffect(() => {
       /**
        * Alert if clicked on outside of element
@@ -79,7 +79,7 @@ export default function SplashScreen() {
   const fontFamilyMenuRef = useRef(null);
   useOutsideFontFamilyMenu(fontFamilyMenuRef);
 
-  function useOutsideFontSizeMenu(ref: React.MutableRefObject<any>) {
+  function useOutsideFontSizeMenu(ref: React.RefObject<HTMLElement>) {
     useEffect(() => {
       /**
        * Alert if clicked on outside of element
@@ -101,7 +101,7 @@ export default function SplashScreen() {
   const fontSizeMenuRef = useRef(null);
   useOutsideFontSizeMenu(fontSizeMenuRef);
 
-  function useOutsideTypeMenu(ref: React.MutableRefObject<any>) {
+  function useOutsideTypeMenu(ref: React.RefObject<HTMLElement>) {
     useEffect(() => {
       /**
        * Alert if clicked on outside of element

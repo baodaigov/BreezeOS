@@ -14,7 +14,7 @@ const Clock = () => {
   const [secondsDisplayed, setSecondsDisplay] = useState<boolean>(false);
   const [style, setStyle] = useState<string>('default');
 
-  function useOutsideMenu(ref: React.MutableRefObject<any>) {
+  function useOutsideMenu(ref: React.RefObject<HTMLElement>) {
     useEffect(() => {
       /**
        * Alert if clicked on outside of element

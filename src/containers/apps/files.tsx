@@ -226,7 +226,7 @@ export default function Files() {
     ],
   ];
 
-  function useOutsideSettingsMenu(ref: React.MutableRefObject<any>) {
+  function useOutsideSettingsMenu(ref: React.RefObject<HTMLElement>) {
     useEffect(() => {
       function handleClickOutside(event: any) {
         if (ref.current && !ref.current.contains(event.target)) {

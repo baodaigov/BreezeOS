@@ -21,6 +21,7 @@ import Toggle from "../../components/utils/toggle";
 import { useTranslation } from "react-i18next";
 import Draggable from "react-draggable";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import ActMenu, { ActMenuSelector, ActMenuSeparator } from "@/components/utils/menu";
 
 export const SurfaceApp = () => {
   const { t } = useTranslation();
@@ -120,6 +121,7 @@ export default function Surface() {
   const [supportOpened, setSupportOpened] = useState(false);
   isActive && setTimeout(() => setSplashScreen(false), 5000);
   const iFrameRefCurrent = iFrameRef.current;
+  const [menuOpened, setMenuOpened] = useState<boolean>(false);
 
   useEffect(() => {
     if (!isActive) {
@@ -154,6 +156,25 @@ export default function Surface() {
     }
   };
 
+  function useOutsideMenu(ref: React.RefObject<HTMLElement>) {
+    useEffect(() => {
+      function handleClickOutside(event: any) {
+        if (ref.current && !ref.current.contains(event.target)) {
+          setMenuOpened(false);
+        }
+      }
+
+      document.addEventListener('mousedown', handleClickOutside);
+
+      return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+      };
+    }, [ref]);
+  }
+
+  const menuRef = useRef(null);
+  useOutsideMenu(menuRef);
+
   const [min, isMin] = useState(false);
 
   function close() {
@@ -169,6 +190,24 @@ export default function Surface() {
             isHide && "hide"
           } ${min && "minimize"}`}
         >
+          <ActMenu
+            style={{ zIndex: '1', top: '30px', right: '300px', width: '200px' }}
+            className={menuOpened ? 'active' : ''}
+            ref={menuRef}
+          >
+            <ActMenuSelector
+              icon="fa-regular fa-clock-rotate-left"
+              title="History"
+              onClose={() => setMenuOpened(false)}
+            />
+            <ActMenuSeparator />
+            <ActMenuSelector
+              icon="fa-regular fa-gear"
+              title="Settings"
+              onClick={() => setSettingsOpened(true)}
+              onClose={() => setMenuOpened(false)}
+            />
+          </ActMenu>
           <TopBar title="Surface" onDblClick={() => isMin(!min)}>
             <div className="TabBarWrapper">
               <div className="TabBar">
@@ -229,10 +268,10 @@ export default function Surface() {
               <div className="TabBarItem TabSettingsItem">
                 <div className="TabBarInteraction">
                   <i
-                    className={`fa-regular fa-gear ${
-                      settingsOpened && "active"
+                    className={`fa-regular fa-ellipsis ${
+                      menuOpened && 'active'
                     }`}
-                    onMouseDown={() => setSettingsOpened(!settingsOpened)}
+                    onClick={() => setMenuOpened(!menuOpened)}
                   />
                 </div>
                 <div className="TabBarInteraction">

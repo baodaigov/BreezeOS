@@ -53,7 +53,7 @@ export default function Header() {
     }, 1000);
   }, []);
 
-  function useOutsidePanel(ref: React.MutableRefObject<any>) {
+  function useOutsidePanel(ref: React.RefObject<HTMLElement>) {
     useEffect(() => {
       /**
        * Alert if clicked on outside of element
@@ -74,7 +74,7 @@ export default function Header() {
   const panelRef = useRef(null);
   useOutsidePanel(panelRef);
 
-  function useOutsideWifiPanel(ref: React.MutableRefObject<any>) {
+  function useOutsideWifiPanel(ref: React.RefObject<HTMLElement>) {
     useEffect(() => {
       /**
        * Alert if clicked on outside of element
@@ -95,7 +95,7 @@ export default function Header() {
   const wifiPanelRef = useRef(null);
   useOutsideWifiPanel(wifiPanelRef);
 
-  function useOutsideBatteryPanel(ref: React.MutableRefObject<any>) {
+  function useOutsideBatteryPanel(ref: React.RefObject<HTMLElement>) {
     useEffect(() => {
       /**
        * Alert if clicked on outside of element
@@ -116,7 +116,7 @@ export default function Header() {
   const batteryPanelRef = useRef(null);
   useOutsideBatteryPanel(batteryPanelRef);
 
-  function useOutsideBluetoothPanel(ref: React.MutableRefObject<any>) {
+  function useOutsideBluetoothPanel(ref: React.RefObject<HTMLElement>) {
     useEffect(() => {
       /**
        * Alert if clicked on outside of element
@@ -137,7 +137,7 @@ export default function Header() {
   const bluetoothPanelRef = useRef(null);
   useOutsideBluetoothPanel(bluetoothPanelRef);
 
-  function useOutsideBrightnessPanel(ref: React.MutableRefObject<any>) {
+  function useOutsideBrightnessPanel(ref: React.RefObject<HTMLElement>) {
     useEffect(() => {
       /**
        * Alert if clicked on outside of element
@@ -158,7 +158,7 @@ export default function Header() {
   const brightnessPanelRef = useRef(null);
   useOutsideBrightnessPanel(brightnessPanelRef);
 
-  function useOutsideVolumePanel(ref: React.MutableRefObject<any>) {
+  function useOutsideVolumePanel(ref: React.RefObject<HTMLElement>) {
     useEffect(() => {
       /**
        * Alert if clicked on outside of element

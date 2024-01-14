@@ -11,7 +11,7 @@ const Task = ({ children }: TaskProps) => {
   const panelActive = useAppSelector((state) => state.panel.active);
   const dispatch = useAppDispatch();
 
-  function useOutsidePanel(ref: React.MutableRefObject<any>) {
+  function useOutsidePanel(ref: React.RefObject<HTMLElement>) {
     useEffect(() => {
       function handleClickOutside(event: any) {
         if (ref.current && !ref.current.contains(event.target)) {

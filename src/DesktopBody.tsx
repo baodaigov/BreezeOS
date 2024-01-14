@@ -20,7 +20,7 @@ const DesktopBody = () => {
     y: 0,
   });
 
-  function useOutsideContextMenu(ref: React.MutableRefObject<any>) {
+  function useOutsideContextMenu(ref: React.RefObject<HTMLElement>) {
     useEffect(() => {
       /**
        * Alert if clicked on outside of element

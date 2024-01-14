@@ -29,7 +29,7 @@ export default function DockItem({
   const [contextMenuDisplayed, setDisplayContextMenu] =
     useState<boolean>(false);
 
-  function useOutsideMenu(ref: React.MutableRefObject<any>) {
+  function useOutsideMenu(ref: React.RefObject<HTMLElement>) {
     useEffect(() => {
       /**
        * Alert if clicked on outside of element

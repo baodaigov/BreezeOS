@@ -339,6 +339,12 @@ img {
     &.hide {
       display: none;
     }
+
+    .ContextMenu {
+      transform: translateY(0);
+      scale: 1;
+      transition: all ease .15s;
+    }
   }
 
   &::before {

@@ -355,7 +355,7 @@ export default function Settings() {
   const [securityMenu, showSecurityMenu] = useState<boolean>(false);
   const [editDeviceName, allowEditDeviceName] = useState<boolean>(false);
 
-  function useOutsideCursorMenu(ref: React.MutableRefObject<any>) {
+  function useOutsideCursorMenu(ref: React.RefObject<HTMLElement>) {
     useEffect(() => {
       function handleClickOutside(event: any) {
         if (ref.current && !ref.current.contains(event.target)) {
@@ -373,7 +373,7 @@ export default function Settings() {
   const cursorMenuRef = useRef(null);
   useOutsideCursorMenu(cursorMenuRef);
 
-  function useOutsideIconsMenu(ref: React.MutableRefObject<any>) {
+  function useOutsideIconsMenu(ref: React.RefObject<HTMLElement>) {
     useEffect(() => {
       function handleClickOutside(event: any) {
         if (ref.current && !ref.current.contains(event.target)) {
@@ -391,7 +391,7 @@ export default function Settings() {
   const iconsMenuRef = useRef(null);
   useOutsideIconsMenu(iconsMenuRef);
 
-  function useOutsideShellMenu(ref: React.MutableRefObject<any>) {
+  function useOutsideShellMenu(ref: React.RefObject<HTMLElement>) {
     useEffect(() => {
       function handleClickOutside(event: any) {
         if (ref.current && !ref.current.contains(event.target)) {
@@ -409,7 +409,7 @@ export default function Settings() {
   const shellMenuRef = useRef(null);
   useOutsideShellMenu(shellMenuRef);
 
-  function useOutsideSoundMenu(ref: React.MutableRefObject<any>) {
+  function useOutsideSoundMenu(ref: React.RefObject<HTMLElement>) {
     useEffect(() => {
       function handleClickOutside(event: any) {
         if (ref.current && !ref.current.contains(event.target)) {
@@ -427,7 +427,7 @@ export default function Settings() {
   const soundMenuRef = useRef(null);
   useOutsideSoundMenu(soundMenuRef);
 
-  function useOutsideFontsMenu(ref: React.MutableRefObject<any>) {
+  function useOutsideFontsMenu(ref: React.RefObject<HTMLElement>) {
     useEffect(() => {
       function handleClickOutside(event: any) {
         if (ref.current && !ref.current.contains(event.target)) {
@@ -446,7 +446,7 @@ export default function Settings() {
   const fontsMenuRef = useRef(null);
   useOutsideFontsMenu(fontsMenuRef);
 
-  function useOutsideOrientationMenu(ref: React.MutableRefObject<any>) {
+  function useOutsideOrientationMenu(ref: React.RefObject<HTMLElement>) {
     useEffect(() => {
       function handleClickOutside(event: any) {
         if (ref.current && !ref.current.contains(event.target)) {
@@ -465,7 +465,7 @@ export default function Settings() {
   const orientationMenuRef = useRef(null);
   useOutsideOrientationMenu(orientationMenuRef);
 
-  function useOutsideResolutionMenu(ref: React.MutableRefObject<any>) {
+  function useOutsideResolutionMenu(ref: React.RefObject<HTMLElement>) {
     useEffect(() => {
       function handleClickOutside(event: any) {
         if (ref.current && !ref.current.contains(event.target)) {
@@ -484,7 +484,7 @@ export default function Settings() {
   const resolutionMenuRef = useRef(null);
   useOutsideResolutionMenu(resolutionMenuRef);
 
-  function useOutsideRRMenu(ref: React.MutableRefObject<any>) {
+  function useOutsideRRMenu(ref: React.RefObject<HTMLElement>) {
     useEffect(() => {
       function handleClickOutside(event: any) {
         if (ref.current && !ref.current.contains(event.target)) {
@@ -503,7 +503,7 @@ export default function Settings() {
   const refreshRateMenuRef = useRef(null);
   useOutsideRRMenu(refreshRateMenuRef);
 
-  function useOutsideLanguageMenu(ref: React.MutableRefObject<any>) {
+  function useOutsideLanguageMenu(ref: React.RefObject<HTMLElement>) {
     useEffect(() => {
       function handleClickOutside(event: any) {
         if (ref.current && !ref.current.contains(event.target)) {
@@ -522,7 +522,7 @@ export default function Settings() {
   const languageMenuRef = useRef(null);
   useOutsideLanguageMenu(languageMenuRef);
 
-  function useOutsideSecurityMenu(ref: React.MutableRefObject<any>) {
+  function useOutsideSecurityMenu(ref: React.RefObject<HTMLElement>) {
     useEffect(() => {
       function handleClickOutside(event: any) {
         if (ref.current && !ref.current.contains(event.target)) {
