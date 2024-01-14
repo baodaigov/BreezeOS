@@ -281,7 +281,7 @@ export default function SplashScreen() {
                                 passwordValue.length === 0 && "disabled"
                               }`}
                               onClick={
-                                passwordValue !== settings.user.password
+                                CryptoJS.MD5(passwordValue).toString(CryptoJS.enc.Hex) !== settings.user.password
                                   ? wrongPassword
                                   : login
                               }
