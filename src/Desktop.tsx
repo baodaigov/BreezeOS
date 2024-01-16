@@ -8,7 +8,6 @@ import Dock from "./components/dock/Dock";
 import DesktopBody from "./DesktopBody";
 import { useAppDispatch, useAppSelector } from "./store/hooks";
 import Snapshot from "./components/Snapshot";
-import Modal from "./components/Modal";
 import { setBatteryCharging, setBatteryLevel } from "@/store/reducers/system";
 import { useBattery } from "react-use";
 import { setLocked } from "./store/reducers/settings";
@@ -136,7 +135,6 @@ const Desktop = () => {
             <Snapshot />
             <LockScreen />
             <StartMenu />
-            <Modal />
             <Header />
             <Wallpaper />
             <DesktopBody />

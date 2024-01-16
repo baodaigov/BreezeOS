@@ -1,0 +1,63 @@
+$bgcolor: #202023e5;
+$fgcolor: #e2e2e2;
+
+.Welcome {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 25px 50px;
+  background-color: $bgcolor;
+  width: 560px;
+  height: fit-content;
+  border-radius: 10px;
+  color: $fgcolor;
+  line-height: 1.5;
+  opacity: 0;
+  pointer-events: none;
+  scale: 0.92;
+  transition: all ease 0.3s;
+
+  &.active {
+    opacity: 1;
+    pointer-events: auto;
+    scale: 1;
+  }
+
+  .Button {
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 999px;
+    background-color: $fgcolor;
+    color: $bgcolor;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 10px 20px;
+    margin: 0 4px;
+
+    &.install {
+      background-color: #0061df!important;
+      color: $fgcolor!important;
+    }
+  }
+}
+
+.lightMode {
+  .Welcome {
+    background-color: $fgcolor;
+    color: $bgcolor;
+
+    .Button {
+      background-color: $bgcolor;
+      color: $fgcolor;
+    }
+  }
+}

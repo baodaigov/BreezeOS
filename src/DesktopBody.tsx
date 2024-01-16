@@ -8,6 +8,7 @@ import { setActive, setSettings } from "./store/reducers/apps/settings";
 import ActMenu, {
   ActMenuSelector,
 } from '@/components/utils/menu';
+import Welcome from "./components/Welcome";
 
 const DesktopBody = () => {
   const isActive = useAppSelector((state) => state.desktopbody.active);
@@ -83,6 +84,7 @@ const DesktopBody = () => {
           />
         </ActMenu>
       </div>
+      <Welcome />
       <Widget />
       <Window />
     </div>

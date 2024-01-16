@@ -6,7 +6,6 @@ import desktopReducer from "./reducers/desktop";
 import desktopBodyReducer from "./reducers/desktopbody";
 import dockReducer from "./reducers/dock";
 import panelReducer from "./reducers/panel";
-import modalReducer from "./reducers/modal";
 import msgboxReducer from './reducers/msgbox';
 import shutdownReducer from "./reducers/shutdown";
 import systemReducer from "./reducers/system";
@@ -44,7 +43,6 @@ const reducers = {
   desktopbody: desktopBodyReducer,
   dock: dockReducer,
   panel: panelReducer,
-  modal: modalReducer,
   msgbox: msgboxReducer,
   shutdown: shutdownReducer,
   system: systemReducer,
