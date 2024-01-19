@@ -30,9 +30,12 @@ const msgboxSlice = createSlice({
     setBlocks: (state, action: PayloadAction<MsgBox>) => {
       state.blocks = action.payload;
     },
+    clearBlocks: (state) => {
+      state.blocks = [];
+    },
   },
 });
 
-export const { setBlocks } = msgboxSlice.actions;
+export const { setBlocks, clearBlocks } = msgboxSlice.actions;
 
 export default msgboxSlice.reducer;
