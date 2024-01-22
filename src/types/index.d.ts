@@ -2,6 +2,6 @@ export {};
 
 declare global {
   interface Window {
-    opera: any;
+    [key: string]: any;
   }
 }

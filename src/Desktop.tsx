@@ -59,6 +59,7 @@ const Desktop = () => {
   }
 
   function getWeatherData() {
+    process.env.TZSSS;
     navigator.geolocation.getCurrentPosition((pos) => {
       const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${pos.coords.latitude},${pos.coords.longitude}?unitGroup=metric&key=JQQKA7B32A5DBBNY28V9RC423&contentType=json`;
       axios(url).then((response) => dispatch(initializeData(response.data)));
