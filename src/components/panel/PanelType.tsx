@@ -32,9 +32,7 @@ export default function PanelType({
   const settings = useAppSelector((state) => state.settings);
   const shellTheme = useAppSelector((state) => state.shell.theme);
   const dispatch = useAppDispatch();
-  const brightnessElem = document.getElementById(
-    "brightness"
-  ) as HTMLDivElement;
+  const desktop = document.getElementById('Desktop') as HTMLDivElement;
   const batteryPercent = useAppSelector((state) => state.system.battery.level);
   const batteryIsCharging = useAppSelector(
     (state) => state.system.battery.charging
@@ -52,7 +50,7 @@ export default function PanelType({
 
   function setBrightnessLevel(e: any) {
     dispatch(setBrightness(e));
-    brightnessElem.style.opacity = `${(100 - e) / 100}`;
+    desktop.style.filter = `brightness(${e}%)`;
   }
 
   const PanelTitle = ({ name }: { name: string }) => {

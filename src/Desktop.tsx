@@ -116,32 +116,29 @@ const Desktop = () => {
           </p>
         </div>
       ) : (
-        <>
-          <div
-            className={`Desktop ${fontFamily} ${boldText && "isBold"} ${
-              themeLight && "lightMode"
-            } ${nightShift && "nightShift"} ${hideCursor && "hideCursor"} ${
-              blackScr && "blackscr"
-            } ${animationsReduced && "animdisabled"} ${
-              colorInverted && "inverted"
-            } ${poweroff && "poweroff"} ${
-              transparencyReduced && 'transdisabled'
-            }`}
-            onContextMenu={(e) => e.preventDefault()}
-            id="Desktop"
-          >
-            <TerminalWindow />
-            <MsgBoxContainer />
-            <Snapshot />
-            <LockScreen />
-            <StartMenu />
-            <Header />
-            <Wallpaper />
-            <DesktopBody />
-            <Dock />
-          </div>
-          <div id="brightness"></div>
-        </>
+        <div
+          className={`Desktop ${fontFamily} ${boldText && "isBold"} ${
+            themeLight && "lightMode"
+          } ${nightShift && "nightShift"} ${hideCursor && "hideCursor"} ${
+            blackScr && "blackscr"
+          } ${animationsReduced && "animdisabled"} ${
+            colorInverted && "inverted"
+          } ${poweroff && "poweroff"} ${
+            transparencyReduced && 'transdisabled'
+          }`}
+          onContextMenu={(e) => e.preventDefault()}
+          id="Desktop"
+        >
+          <TerminalWindow />
+          <MsgBoxContainer />
+          <Snapshot />
+          <LockScreen />
+          <StartMenu />
+          <Header />
+          <Wallpaper />
+          <DesktopBody />
+          <Dock />
+        </div>
       )}
     </>
   );

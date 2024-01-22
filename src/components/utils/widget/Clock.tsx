@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import './index.scss';
+import './Clock.scss';
 import Draggable from 'react-draggable';
 import ActMenu, { ActMenuSelector } from '../menu';
 import useTime from '@/hooks/useTime';

@@ -1,20 +1,20 @@
 import i18n from "i18next";
 import Backend from "i18next-http-backend";
 import { initReactI18next } from "react-i18next";
-import i18n_enUS from "../locales/en-US/i18n.json";
-import i18n_vi from "../locales/vi/i18n.json";
-import i18n_zhCN from "../locales/zh-CN/i18n.json";
-import i18n_zhTW from "../locales/zh-TW/i18n.json";
-import i18n_ko from "../locales/ko/i18n.json";
-import i18n_ru from "../locales/ru/i18n.json";
-import i18n_uk from "../locales/uk/i18n.json";
-import i18n_ja from "../locales/ja/i18n.json";
-import i18n_th from "../locales/th/i18n.json";
-import i18n_de from "../locales/de/i18n.json";
-import i18n_es from "../locales/es/i18n.json";
-import i18n_in from "../locales/in/i18n.json";
-import i18n_it from "../locales/it/i18n.json";
-import i18n_fr from "../locales/fr/i18n.json";
+import i18n_enUS from "../locales/en-US.json";
+import i18n_vi from "../locales/vi.json";
+import i18n_zhCN from "../locales/zh-CN.json";
+import i18n_zhTW from "../locales/zh-TW.json";
+import i18n_ko from "../locales/ko.json";
+import i18n_ru from "../locales/ru.json";
+import i18n_uk from "../locales/uk.json";
+import i18n_ja from "../locales/ja.json";
+import i18n_th from "../locales/th.json";
+import i18n_de from "../locales/de.json";
+import i18n_es from "../locales/es.json";
+import i18n_in from "../locales/in.json";
+import i18n_it from "../locales/it.json";
+import i18n_fr from "../locales/fr.json";
 
 const resources = {
   "English (US)": {

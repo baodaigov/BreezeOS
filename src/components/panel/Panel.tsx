@@ -19,9 +19,7 @@ const Panel = ({ ...props }: PanelProps) => {
   const type = useAppSelector((state) => state.panel.type);
   const settings = useAppSelector((state) => state.settings);
   const shellTheme = useAppSelector((state) => state.shell.theme);
-  const brightnessElem = document.getElementById(
-    "brightness"
-  ) as HTMLDivElement;
+  const desktop = document.getElementById("Desktop") as HTMLDivElement;
   const batteryPercent = useAppSelector((state) => state.system.battery.level);
   const batteryIsCharging = useAppSelector(
     (state) => state.system.battery.charging
@@ -29,7 +27,7 @@ const Panel = ({ ...props }: PanelProps) => {
 
   function setBrightnessLevel(e: any) {
     dispatch(setBrightness(e));
-    brightnessElem.style.opacity = `${(100 - e) / 100}`;
+    desktop.style.filter = `brightness(${e}%)`;
   }
 
   return (

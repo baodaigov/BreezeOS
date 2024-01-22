@@ -30,16 +30,14 @@ const Task = ({ children }: TaskProps) => {
   useOutsidePanel(panelRef);
 
   return (
-    <>
-      <div
-        className={`Task Header-item ${panelActive ? "active" : ""}`}
-        onMouseDown={() => (panelActive ? undefined : dispatch(activePanel()))}
-        ref={panelRef}
-      >
-        {children}
-        <Panel />
-      </div>
-    </>
+    <div
+      className={`Task Header-item ${panelActive ? "active" : ""}`}
+      onMouseDown={() => (!panelActive && dispatch(activePanel()))}
+      ref={panelRef}
+    >
+      {children}
+      <Panel />
+    </div>
   );
 };
 
