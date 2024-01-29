@@ -16,7 +16,7 @@ import axios from "axios";
 import { initializeData } from "./store/reducers/weather";
 import MsgBoxContainer from "@/components/utils/msgbox/container";
 import { useTranslation } from "react-i18next";
-import { openApp, setApps, setMenu } from "./store/reducers/apps";
+import { setApps, setMenu } from "./store/reducers/apps";
 import { setDirectory } from "./store/reducers/files";
 import { appsTemplate, favoriteAppsTemplate } from "./components/utils/apps";
 import { setDockFavorites } from "./store/reducers/dock";
@@ -135,7 +135,7 @@ const Desktop = () => {
             action: () => navigator.clipboard.writeText(`${recentResult}`),
           },
         ],
-      }),
+      })
     );
 
     if (batteryState.charging) {
@@ -149,10 +149,7 @@ const Desktop = () => {
         ? `https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/${i.icon}.svg`
         : i.icon,
       id: i.id,
-      action: () =>
-        !i.externalLink
-          ? dispatch(openApp(i.id))
-          : window.open(i.externalLink, "_blank"),
+      externalLink: i.externalLink,
     }));
 
     dispatch(setApps(appsArray));
@@ -214,9 +211,7 @@ const Desktop = () => {
             colorInverted && "inverted"
           } ${poweroff && "poweroff"} ${
             transparencyReduced && "transdisabled"
-          } ${
-            fullscreen && "fullscreen"
-          }`}
+          } ${fullscreen && "fullscreen"}`}
           onContextMenu={(e) => e.preventDefault()}
           id="Desktop"
         >

@@ -20,7 +20,7 @@ export default function Toggle({
   disabled,
   onToggle,
 }: ToggleProps) {
-  const lightMode = useAppSelector((state) => state.settings.themeLight);
+  const lightMode = useAppSelector((state) => state.appearance.themeLight);
 
   return active ? (
     <Hammer onTap={onToggle} onPressUp={onToggle} onSwipeLeft={onToggle}>

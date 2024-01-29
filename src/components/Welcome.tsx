@@ -10,7 +10,7 @@ export default function Welcome() {
     localStorage.getItem("welcomeDisabled") ? false : true
   );
   const [dialogDisabled, setDialogDisabled] = useState<boolean>(false);
-  const lightMode = useAppSelector((state) => state.settings.themeLight);
+  const lightMode = useAppSelector((state) => state.appearance.themeLight);
 
   return (
     <div className={`Welcome ${isActive && "active"}`}>

@@ -15,7 +15,7 @@ export default function Avatar({
   theme = "system",
 }: AvatarProps) {
   const dispatch = useAppDispatch();
-  const lightMode = useAppSelector((state) => state.settings.themeLight);
+  const lightMode = useAppSelector((state) => state.appearance.themeLight);
   const image = useAppSelector((state) => state.settings.user.image);
 
   function addImage(e: React.ChangeEvent<HTMLInputElement>) {

@@ -6,6 +6,7 @@ import { setDesktopBodyActive } from "../../store/reducers/desktopbody";
 import { setStartMenuActive } from "../../store/reducers/startmenu";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { useTranslation } from "react-i18next";
+import { openApp } from "@/store/reducers/apps";
 
 export default function StartMenu() {
   const isActive = useAppSelector((state) => state.startmenu.active);
@@ -60,7 +61,11 @@ export default function StartMenu() {
             <StartApp
               name={t(`apps.${i.id}.name`)}
               icon={i.icon}
-              onClick={i.action}
+              onClick={() =>
+                !i.externalLink
+                  ? dispatch(openApp(i.id))
+                  : window.open(i.externalLink, "_blank")
+              }
             />
           ))}
         </div>

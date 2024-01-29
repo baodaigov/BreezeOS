@@ -1,6 +1,6 @@
-import { useAppSelector } from '@/store/hooks';
-import { Theme } from 'types';
-import './index.scss';
+import { useAppSelector } from "@/store/hooks";
+import { Theme } from "types";
+import "./index.scss";
 
 interface CheckboxProps {
   active: boolean;
@@ -14,26 +14,29 @@ interface CheckboxProps {
 export default function Checkbox({
   active,
   size = 1,
-  color = '#2563eb',
-  theme = 'system',
+  color = "#2563eb",
+  theme = "system",
   disabled,
   onToggle,
 }: CheckboxProps) {
-  const lightMode = useAppSelector((state) => state.settings.themeLight);
+  const lightMode = useAppSelector((state) => state.appearance.themeLight);
 
   return (
     <div
-      className={`Checkbox ${active && "active"} ${disabled && 'disabled'} ${
-        theme === 'dark'
-          ? 'darkTheme'
-          : theme === 'system' && lightMode
-          ? 'darkTheme'
-          : ''
+      className={`Checkbox ${active && "active"} ${disabled && "disabled"} ${
+        theme === "dark"
+          ? "darkTheme"
+          : theme === "system" && lightMode
+          ? "darkTheme"
+          : ""
       }`}
-      style={{ transform: `scale(${size})`, backgroundColor: active ? color : "" }}
+      style={{
+        transform: `scale(${size})`,
+        backgroundColor: active ? color : "",
+      }}
       onClick={onToggle}
     >
       <i className="fa-regular fa-check" />
     </div>
-  )
+  );
 }
