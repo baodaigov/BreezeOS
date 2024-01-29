@@ -1,24 +1,26 @@
-import { useDispatch } from 'react-redux';
 import {
   setOptionsMenuShown,
   setSplashScreenWrapperHideInfo,
-} from '../store/reducers/lock';
-import { setLocked, setSleeping } from '../store/reducers/settings';
-import { setHeaderActive } from '../store/reducers/header';
-import { setDockActive } from '../store/reducers/dock';
-import { setDesktopBodyActive } from '../store/reducers/desktopbody';
+} from '@/store/reducers/lock';
+import { setLocked, setSleeping } from '@/store/reducers/settings';
+import { setHeaderActive } from '@/store/reducers/header';
+import { setDockActive } from '@/store/reducers/dock';
+import { setDesktopBodyActive } from '@/store/reducers/desktopbody';
 import {
   setDesktopBlackScr,
   setDesktopHideCursor,
   setDesktopPoweroff,
-} from '../store/reducers/desktop';
-import { setTerminalWindowActive } from '../store/reducers/terminalwindow';
-import { clearItem, pushItem } from '../store/reducers/shutdown';
+} from '@/store/reducers/desktop';
+import { setTerminalWindowActive } from '@/store/reducers/terminalwindow';
+import { clearItem, pushItem } from '@/store/reducers/shutdown';
 import LogoD from '@/images/logo-d.svg';
-import { setWallpaperActive } from '../store/reducers/wallpaper';
+import { setWallpaperActive } from '@/store/reducers/wallpaper';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { quitApp } from '@/store/reducers/apps';
 
 export default function useProcess() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+  const appIsActive = useAppSelector(state => state.apps.appIsActive);
 
   function sleep() {
     setTimeout(() => dispatch(setSplashScreenWrapperHideInfo(true)), 50);
@@ -36,12 +38,15 @@ export default function useProcess() {
     });
   }
 
-  function shutdown() {
+  function hibernate() {
     setTimeout(() => {
       dispatch(setSplashScreenWrapperHideInfo(true));
       dispatch(setHeaderActive(false));
       dispatch(setDockActive(false));
       dispatch(setDesktopBodyActive(false));
+      for (const id in appIsActive) {
+        dispatch(quitApp(id));
+      }
     }, 50);
 
     setTimeout(() => {
@@ -93,8 +98,12 @@ export default function useProcess() {
     }, 13200);
   }
 
+  function shutdown() {
+    hibernate();
+  }
+
   function restart() {
-    shutdown();
+    hibernate();
 
     setTimeout(() => dispatch(setDesktopPoweroff(false)), 16500);
 

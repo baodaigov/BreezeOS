@@ -4,11 +4,10 @@ import Widget from "./components/Widget";
 import { useAppSelector } from "./store/hooks";
 import { useAppDispatch } from "@/store/hooks";
 import { useEffect, useRef, useState } from "react";
-import { setActive, setSettings } from "./store/reducers/apps/settings";
-import ActMenu, {
-  ActMenuSelector,
-} from '@/components/utils/menu';
+import ActMenu, { ActMenuSelector } from "@/components/utils/menu";
 import Welcome from "./components/Welcome";
+import { openApp } from "./store/reducers/apps";
+import { setSettings } from "./store/reducers/settings";
 
 const DesktopBody = () => {
   const isActive = useAppSelector((state) => state.desktopbody.active);
@@ -66,21 +65,21 @@ const DesktopBody = () => {
             left: contextMenuPos.x,
             transition: "opacity ease .1s",
           }}
-          className={`ContextMenu ${contextMenuDisplayed ? 'active' : ''}`}
+          className={`ContextMenu ${contextMenuDisplayed ? "active" : ""}`}
           ref={contextMenuRef}
         >
           <ActMenuSelector
             title="Change wallpaper"
             onClose={() => setContextMenuDisplayed(false)}
             onClick={() => {
-              dispatch(setActive(true));
-              dispatch(setSettings('Appearance'));
+              dispatch(openApp("settings"));
+              dispatch(setSettings("Appearance"));
             }}
           />
           <ActMenuSelector
             title="Settings..."
             onClose={() => setContextMenuDisplayed(false)}
-            onClick={() => dispatch(setActive(true))}
+            onClick={() => dispatch(openApp("settings"))}
           />
         </ActMenu>
       </div>

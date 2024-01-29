@@ -1,31 +1,18 @@
 import { useEffect, useRef, useState } from "react";
 import Hammer from "react-hammerjs";
 import "./Dock.scss";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { hideApp, openApp, quitApp, showApp } from "@/store/reducers/apps";
 
 interface DockItemProps {
-  className?: string;
-  id?: string;
-  redirectTo?: string;
-  menu?: {
-    label: string;
-    description?: string;
-    disabled?: boolean;
-    action?: React.MouseEventHandler<HTMLDivElement>;
-  }[][];
+  id: string;
   title: string;
   icon: string;
   onClick?: HammerListener;
 }
 
-export default function DockItem({
-  className,
-  id,
-  redirectTo,
-  menu,
-  title,
-  icon,
-  onClick,
-}: DockItemProps) {
+export default function DockItem({ id, title, icon, onClick }: DockItemProps) {
+  const dispatch = useAppDispatch();
   const [contextMenuDisplayed, setDisplayContextMenu] =
     useState<boolean>(false);
 
@@ -50,34 +37,72 @@ export default function DockItem({
   const menuRef = useRef(null);
   useOutsideMenu(menuRef);
 
+  const menu = useAppSelector((state) => state.apps.menu);
+  const appIsActive = useAppSelector((state) => state.apps.appIsActive);
+  const activeStatus = appIsActive[id]?.status === "active";
+  const hideStatus = appIsActive[id]?.status === "hide";
+
   return (
     <div className="DockItemContainer">
       <div
-        className={`DockItem ${className}`}
-        id={id}
-        key={id}
-        onClick={() => (redirectTo ? (window.location.href = redirectTo) : "")}
+        className={`DockItem ${
+          appIsActive[id] && (activeStatus ? "active" : "inactive")
+        }`}
       >
         <div
           className={`ContextMenu ${contextMenuDisplayed && "active"}`}
           ref={menuRef}
         >
-          {menu?.map((i) => (
-            <div className="ContextMenuItemContainer">
-              {i.map((j) => (
+          <div className="ContextMenuItemContainer">
+            {menu[id]?.map((i) => (
+              <div
+                className={`ContextMenuItem ${i.description && "expand"} ${
+                  i.disabled && "disabled"
+                }`}
+                onMouseUp={() => setDisplayContextMenu(false)}
+                onClick={i.action}
+              >
+                <p>{i.label}</p>
+                <p className="Description">{i.description}</p>
+              </div>
+            ))}
+            {appIsActive[id] ? (
+              <>
+                {hideStatus || !activeStatus ? (
+                  <div
+                    className="ContextMenuItem"
+                    onMouseUp={() => setDisplayContextMenu(false)}
+                    onClick={() => dispatch(showApp(id))}
+                  >
+                    <p>Show</p>
+                  </div>
+                ) : (
+                  <div
+                    className="ContextMenuItem"
+                    onMouseUp={() => setDisplayContextMenu(false)}
+                    onClick={() => dispatch(hideApp(id))}
+                  >
+                    <p>Hide</p>
+                  </div>
+                )}
                 <div
-                  className={`ContextMenuItem ${j.description && "expand"} ${
-                    j.disabled && "disabled"
-                  }`}
+                  className="ContextMenuItem"
                   onMouseUp={() => setDisplayContextMenu(false)}
-                  onClick={j.action}
+                  onClick={() => dispatch(quitApp(id))}
                 >
-                  <p>{j.label}</p>
-                  <p className="Description">{j.description}</p>
+                  <p>Quit</p>
                 </div>
-              ))}
-            </div>
-          ))}
+              </>
+            ) : (
+              <div
+                className="ContextMenuItem"
+                onMouseUp={() => setDisplayContextMenu(false)}
+                onClick={() => dispatch(openApp(id))}
+              >
+                <p>Open</p>
+              </div>
+            )}
+          </div>
         </div>
         {!contextMenuDisplayed && <p className="DockItemTitle">{title}</p>}
         <Hammer

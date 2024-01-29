@@ -88,10 +88,10 @@
     "terminal": {
       "name": "T.bị đầu cuối"
     },
-    "textEditor": {
+    "texteditor": {
       "name": "S.thảo văn bản"
     },
-    "softwareStore": {
+    "softwarestore": {
       "name": "C.hàng ứng dụng"
     },
     "imgview": {

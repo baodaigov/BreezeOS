@@ -1,9 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import {
-  setActive,
-  setHide,
-  setSettings,
-} from "@/store/reducers/apps/settings";
+import { setSettings } from "@/store/reducers/settings";
 import {
   insertPasswordFor,
   cancelPassword,
@@ -18,10 +14,9 @@ import {
   setWifiName,
   setInactive,
 } from "@/store/reducers/newwifi";
-import { switchIcons } from "@/store/reducers/appearance";
+import { toggleLightMode } from "@/store/reducers/appearance";
 import {
   toggleAirplaneMode,
-  toggleLightMode,
   toggleWifi,
   toggleNotifications,
   toggleBluetooth,
@@ -38,10 +33,8 @@ import { changeWallpaper } from "@/store/reducers/wallpaper";
 import "@/components/utils/window/Window.scss";
 import TopBar from "@/components/utils/window/TopBar";
 import WindowBody from "@/components/utils/window/WindowBody";
-import DockItem from "@/components/dock/DockItem";
 import "./assets/settings.scss";
 import TopBarInteraction from "@/components/utils/window/TopBarInteraction";
-import StartApp from "@/components/startMenu/StartApp";
 import ActMenu, { ActMenuSelector } from "@/components/utils/menu/index";
 import Image1 from "./assets/dark.png";
 import Image2 from "./assets/light.png";
@@ -58,109 +51,31 @@ import W8 from "@/components/breezeos-2.jpg";
 import QRD from "./assets/qr-d.png";
 import QRL from "./assets/qr-l.png";
 import { changeShell } from "@/store/reducers/shell";
-import {
-  setHeaderHide,
-  setHeaderType,
-  setProMode,
-  setWidth,
-} from "@/store/reducers/header";
+import { setHeaderType, setProMode, setWidth } from "@/store/reducers/header";
 import Avatar from "@/components/Avatar";
 import Toggle from "@/components/utils/toggle";
 import { useTranslation } from "react-i18next";
-import { setDesktopBodyActive } from "@/store/reducers/desktopbody";
-import { setStartMenuActive } from "@/store/reducers/startmenu";
 import Draggable from "react-draggable";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import Hammer from "react-hammerjs";
 import { useBattery } from "react-use";
 import Checkbox from "@/components/utils/checkbox";
 import { setTemperature } from "@/store/reducers/weather";
-import WidgetType from '@/components/WidgetType';
+import WidgetType from "@/components/WidgetType";
+import {
+  hideApp,
+  maximizeApp,
+  minimizeApp,
+  quitApp,
+} from "@/store/reducers/apps";
+import { setBlocks } from "@/store/reducers/msgbox";
 
-export const SettingsApp = () => {
-  const { t } = useTranslation();
-  const isActive = useAppSelector((state) => state.appsSettings.active);
-  const isHide = useAppSelector((state) => state.appsSettings.hide);
+export default function Settings({ id }: { id: string }) {
   const dispatch = useAppDispatch();
-  const icon = useAppSelector((state) => state.appearance.iconTheme);
-
-  document.addEventListener("keydown", (e) => {
-    if (e.ctrlKey && e.keyCode === 51) {
-      dispatch(setActive(true));
-    }
-  });
-
-  return (
-    <>
-      <DockItem
-        id="settings"
-        className={`SettingsApp ${isActive && "clicked"} ${isHide && "hide"}`}
-        title={t("apps.settings.name")}
-        icon={
-          icon === "WhiteSur-icon-theme"
-            ? "https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/original/applications-system.svg"
-            : "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/applications-system.svg"
-        }
-        menu={[
-          [
-            {
-              label: isHide ? t("apps.unhide") : t("apps.hide"),
-              disabled: isActive ? false : true,
-              action: () =>
-                isHide ? dispatch(setHide(false)) : dispatch(setHide(true)),
-            },
-            {
-              label: isActive ? t("apps.quit") : t("apps.open"),
-              action: () =>
-                isActive
-                  ? dispatch(setActive(false))
-                  : dispatch(setActive(true)),
-            },
-          ],
-        ]}
-        onClick={() =>
-          isHide ? dispatch(setHide(false)) : dispatch(setActive(true))
-        }
-      />
-    </>
-  );
-};
-
-export const SettingsStartApp = () => {
-  const { t } = useTranslation();
-  const isHide = useAppSelector((state) => state.appsSettings.hide);
-  const dispatch = useAppDispatch();
-  const icon = useAppSelector((state) => state.appearance.iconTheme);
-
-  const toggle = () => {
-    dispatch(setStartMenuActive(false));
-    dispatch(setHeaderHide(false));
-    dispatch(setDesktopBodyActive(true));
-    if (isHide) {
-      dispatch(setHide(false));
-    } else {
-      dispatch(setActive(true));
-    }
-  };
-
-  return (
-    <StartApp
-      key="settings"
-      icon={
-        icon === "WhiteSur-icon-theme"
-          ? "https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/original/applications-system.svg"
-          : "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/applications-system.svg"
-      }
-      name={t("apps.settings.name")}
-      onClick={toggle}
-    />
-  );
-};
-
-export default function Settings() {
-  const dispatch = useAppDispatch();
-  const isActive = useAppSelector((state) => state.appsSettings.active);
-  const isHide = useAppSelector((state) => state.appsSettings.hide);
+  const appIsActive = useAppSelector((state) => state.apps.appIsActive);
+  const isActive = appIsActive[id].status === "active";
+  const isHide = appIsActive[id].status === "hide";
+  const isMinimized = appIsActive[id].minimized;
   const [t, i18n] = useTranslation();
   const batteryState = useBattery();
   const batteryPercent = useAppSelector((state) => state.system.battery.level);
@@ -173,7 +88,7 @@ export default function Settings() {
   const isSecondsEnabled = useAppSelector((state) => state.time.seconds);
   const shellTheme = useAppSelector((state) => state.shell.theme);
   const wifis = useAppSelector((state) => state.settings.wifiList);
-  const settings = useAppSelector((state) => state.appsSettings.settings);
+  const settings = useAppSelector((state) => state.settings.settings);
   const header = useAppSelector((state) => state.header);
   const widget = useAppSelector((state) => state.widget);
   const wallpaper = useAppSelector((state) => state.wallpaper.img);
@@ -190,19 +105,16 @@ export default function Settings() {
       {
         name: "Wi-Fi",
         icon: "fa-regular fa-wifi",
-        active: settings === "Wi-Fi",
         onClick: () => dispatch(setSettings("Wi-Fi")),
       },
       {
         name: "Bluetooth",
         icon: "fa-regular fa-bluetooth",
-        active: settings === "Bluetooth",
         onClick: () => dispatch(setSettings("Bluetooth")),
       },
       {
         name: "Network",
         icon: "fa-regular fa-globe",
-        active: settings === "Network",
         onClick: () => dispatch(setSettings("Network")),
       },
     ],
@@ -210,25 +122,21 @@ export default function Settings() {
       {
         name: "Appearance",
         icon: "fa-regular fa-paintbrush",
-        active: settings === "Appearance",
         onClick: () => dispatch(setSettings("Appearance")),
       },
       {
         name: "Widgets",
         icon: "fa-regular fa-shapes",
-        active: settings === "Widgets",
         onClick: () => dispatch(setSettings("Widgets")),
       },
       {
         name: "Notifications",
         icon: "fa-regular fa-bell",
-        active: settings === "Notifications",
         onClick: () => dispatch(setSettings("Notifications")),
       },
       {
         name: "Search",
         icon: "fa-regular fa-magnifying-glass",
-        active: settings === "Search",
         onClick: () => dispatch(setSettings("Search")),
       },
     ],
@@ -236,31 +144,26 @@ export default function Settings() {
       {
         name: "Apps",
         icon: "fa-regular fa-grid-2",
-        active: settings === "Apps",
         onClick: () => dispatch(setSettings("Apps")),
       },
       {
         name: "Privacy",
         icon: "fa-regular fa-lock",
-        active: settings === "Privacy",
         onClick: () => dispatch(setSettings("Privacy")),
       },
       {
         name: "Security",
         icon: "fa-solid fa-shield-halved",
-        active: settings === "Security",
         onClick: () => dispatch(setSettings("Security")),
       },
       {
         name: "Online Accounts",
         icon: "fa-regular fa-at",
-        active: settings === "Online Accounts",
         onClick: () => dispatch(setSettings("Online Accounts")),
       },
       {
         name: "Share",
         icon: "fa-regular fa-share-nodes",
-        active: settings === "Share",
         onClick: () => dispatch(setSettings("Share")),
       },
     ],
@@ -268,43 +171,36 @@ export default function Settings() {
       {
         name: "Updates",
         icon: "fa-regular fa-rotate",
-        active: settings === "Updates",
         onClick: () => dispatch(setSettings("Updates")),
       },
       {
         name: "Sound",
         icon: "fa-regular fa-volume",
-        active: settings === "Sound",
         onClick: () => dispatch(setSettings("Sound")),
       },
       {
         name: "Battery",
         icon: "fa-regular fa-battery-full",
-        active: settings === "Battery",
         onClick: () => dispatch(setSettings("Battery")),
       },
       {
         name: "Displays",
         icon: "fa-regular fa-desktop",
-        active: settings === "Displays",
         onClick: () => dispatch(setSettings("Displays")),
       },
       {
         name: "Mouse & Touchpad",
         icon: "fa-regular fa-computer-mouse",
-        active: settings === "Mouse & Touchpad",
         onClick: () => dispatch(setSettings("Mouse & Touchpad")),
       },
       {
         name: "Keyboard",
         icon: "fa-regular fa-keyboard",
-        active: settings === "Keyboard",
         onClick: () => dispatch(setSettings("Keyboard")),
       },
       {
         name: "Printer",
         icon: "fa-regular fa-print",
-        active: settings === "Printer",
         onClick: () => dispatch(setSettings("Printer")),
       },
     ],
@@ -312,31 +208,26 @@ export default function Settings() {
       {
         name: "Users",
         icon: "fa-regular fa-user",
-        active: settings === "Users",
         onClick: () => dispatch(setSettings("Users")),
       },
       {
         name: "Region & Language",
         icon: "fa-regular fa-language",
-        active: settings === "Region & Language",
         onClick: () => dispatch(setSettings("Region & Language")),
       },
       {
         name: "Accessibility",
         icon: "fa-regular fa-universal-access",
-        active: settings === "Accessibility",
         onClick: () => dispatch(setSettings("Accessibility")),
       },
       {
         name: "Date & Time",
         icon: "fa-regular fa-clock",
-        active: settings === "Date & Time",
         onClick: () => dispatch(setSettings("Date & Time")),
       },
       {
         name: "About",
         icon: "fa-regular fa-circle-info",
-        active: settings === "About",
         onClick: () => dispatch(setSettings("About")),
       },
     ],
@@ -561,8 +452,6 @@ export default function Settings() {
   const [usersTab, setUsersTab] = useState<string>("");
   const [wallpaperInput, setWallpaperInput] = useState<string | null>(null);
 
-  const appearanceReducer = useAppSelector((state) => state.appearance);
-
   function addImage(e: React.ChangeEvent<HTMLInputElement>) {
     if (e.target.files && e.target.files[0]) {
       setWallpaperInput(URL.createObjectURL(e.target.files[0]));
@@ -585,6 +474,28 @@ export default function Settings() {
       dispatch(setHeaderType("default"));
     }, 2500);
   }
+
+  const themeLight = useAppSelector((state) => state.appearance.themeLight);
+  const blocks = useAppSelector((state) => state.msgbox.blocks);
+
+  useEffect(() => {
+    if (maximumExceeded) {
+      dispatch(
+        setBlocks([
+          ...blocks,
+          {
+            topBarTitle: "Error!",
+            content: "Maximum characters exceeded.",
+            buttons: [
+              {
+                label: "OK",
+              },
+            ],
+          },
+        ])
+      );
+    }
+  }, [maximumExceeded]);
 
   function switchTab() {
     switch (settings) {
@@ -759,10 +670,7 @@ export default function Settings() {
               style={{ height: "fit-content", marginBottom: "30px" }}
             >
               <div className="SettingsSectionFixedWidth">
-                <div
-                  className="WindowColors"
-                  data-value={settingsReducer.themeLight ? "2" : "1"}
-                >
+                <div className="WindowColors">
                   <p
                     className="font-bold"
                     style={{ marginBottom: "30px", fontSize: "14px" }}
@@ -771,14 +679,14 @@ export default function Settings() {
                   </p>
                   <div style={{ display: "flex", justifyContent: "center" }}>
                     <div
-                      className="ImageContainer dark"
+                      className={`ImageContainer ${!themeLight && "active"}`}
                       style={{ marginRight: "20px" }}
                       onClick={() => dispatch(toggleLightMode(false))}
                     >
                       <img src={Image1} />
                     </div>
                     <div
-                      className="ImageContainer light"
+                      className={`ImageContainer ${themeLight && "active"}`}
                       onClick={() => dispatch(toggleLightMode(true))}
                     >
                       <img src={Image2} />
@@ -1010,9 +918,7 @@ export default function Settings() {
                       className="MenuSection"
                       onClick={() => showIconsMenu(true)}
                     >
-                      <p style={{ marginRight: "7px" }}>
-                        {appearanceReducer.iconTheme}
-                      </p>
+                      <p style={{ marginRight: "7px" }}>Default</p>
                       <i className="fa-regular fa-chevron-down" />
                     </div>
                     <ActMenu
@@ -1027,18 +933,7 @@ export default function Settings() {
                       <ActMenuSelector
                         onClose={() => showIconsMenu(false)}
                         title="Default"
-                        active={appearanceReducer.iconTheme === 'Default'}
-                        onClick={() => dispatch(switchIcons('Default'))}
-                      />
-                      <ActMenuSelector
-                        onClose={() => showIconsMenu(false)}
-                        title="WhiteSur-icon-theme"
-                        active={
-                          appearanceReducer.iconTheme === 'WhiteSur-icon-theme'
-                        }
-                        onClick={() =>
-                          dispatch(switchIcons('WhiteSur-icon-theme'))
-                        }
+                        active
                       />
                     </ActMenu>
                   </div>
@@ -1072,17 +967,17 @@ export default function Settings() {
                         onClose={() => showFontsMenu(false)}
                         title="OptimisticDisplay"
                         active={
-                          settingsReducer.fontFamily === 'OptimisticDisplay'
+                          settingsReducer.fontFamily === "OptimisticDisplay"
                         }
                         onClick={() =>
-                          dispatch(setFontFamily('OptimisticDisplay'))
+                          dispatch(setFontFamily("OptimisticDisplay"))
                         }
                       />
                       <ActMenuSelector
                         onClose={() => showFontsMenu(false)}
                         title="SanFrancisco"
-                        active={settingsReducer.fontFamily === 'SanFrancisco'}
-                        onClick={() => dispatch(setFontFamily('SanFrancisco'))}
+                        active={settingsReducer.fontFamily === "SanFrancisco"}
+                        onClick={() => dispatch(setFontFamily("SanFrancisco"))}
                       />
                     </ActMenu>
                   </div>
@@ -1113,14 +1008,14 @@ export default function Settings() {
                       <ActMenuSelector
                         onClose={() => showShellMenu(false)}
                         title="Breeze"
-                        active={shellTheme === 'Breeze'}
-                        onClick={() => dispatch(changeShell('Breeze'))}
+                        active={shellTheme === "Breeze"}
+                        onClick={() => dispatch(changeShell("Breeze"))}
                       />
                       <ActMenuSelector
                         onClose={() => showShellMenu(false)}
                         title="WhiteSur (beta)"
-                        active={shellTheme === 'WhiteSur'}
-                        onClick={() => dispatch(changeShell('WhiteSur'))}
+                        active={shellTheme === "WhiteSur"}
+                        onClick={() => dispatch(changeShell("WhiteSur"))}
                       />
                     </ActMenu>
                   </div>
@@ -1465,86 +1360,86 @@ export default function Settings() {
                     <ActMenuSelector
                       onClose={() => showLanguageMenu(false)}
                       title="Deutsch"
-                      onClick={() => i18n.changeLanguage('Deutsch')}
-                      active={i18n.language === 'Deutsch'}
+                      onClick={() => i18n.changeLanguage("Deutsch")}
+                      active={i18n.language === "Deutsch"}
                     />
                     <ActMenuSelector
                       onClose={() => showLanguageMenu(false)}
                       title="English (US)"
-                      onClick={() => i18n.changeLanguage('English (US)')}
-                      active={i18n.language === 'English (US)'}
+                      onClick={() => i18n.changeLanguage("English (US)")}
+                      active={i18n.language === "English (US)"}
                     />
                     <ActMenuSelector
                       onClose={() => showLanguageMenu(false)}
                       title="Español"
-                      onClick={() => i18n.changeLanguage('Español')}
-                      active={i18n.language === 'Español'}
+                      onClick={() => i18n.changeLanguage("Español")}
+                      active={i18n.language === "Español"}
                     />
                     <ActMenuSelector
                       onClose={() => showLanguageMenu(false)}
                       title="Français"
-                      onClick={() => i18n.changeLanguage('Français')}
-                      active={i18n.language === 'Français'}
+                      onClick={() => i18n.changeLanguage("Français")}
+                      active={i18n.language === "Français"}
                     />
                     <ActMenuSelector
                       onClose={() => showLanguageMenu(false)}
                       title="Bahasa Indonesia"
-                      onClick={() => i18n.changeLanguage('Bahasa Indonesia')}
-                      active={i18n.language === 'Bahasa Indonesia'}
+                      onClick={() => i18n.changeLanguage("Bahasa Indonesia")}
+                      active={i18n.language === "Bahasa Indonesia"}
                     />
                     <ActMenuSelector
                       onClose={() => showLanguageMenu(false)}
                       title="Italiano"
-                      onClick={() => i18n.changeLanguage('Italiano')}
-                      active={i18n.language === 'Italiano'}
+                      onClick={() => i18n.changeLanguage("Italiano")}
+                      active={i18n.language === "Italiano"}
                     />
                     <ActMenuSelector
                       onClose={() => showLanguageMenu(false)}
                       title="日本語"
-                      onClick={() => i18n.changeLanguage('日本語')}
-                      active={i18n.language === '日本語'}
+                      onClick={() => i18n.changeLanguage("日本語")}
+                      active={i18n.language === "日本語"}
                     />
                     <ActMenuSelector
                       onClose={() => showLanguageMenu(false)}
                       title="한국어"
-                      onClick={() => i18n.changeLanguage('한국어')}
-                      active={i18n.language === '한국어'}
+                      onClick={() => i18n.changeLanguage("한국어")}
+                      active={i18n.language === "한국어"}
                     />
                     <ActMenuSelector
                       onClose={() => showLanguageMenu(false)}
                       title="Русский"
-                      onClick={() => i18n.changeLanguage('Русский')}
-                      active={i18n.language === 'Русский'}
+                      onClick={() => i18n.changeLanguage("Русский")}
+                      active={i18n.language === "Русский"}
                     />
                     <ActMenuSelector
                       onClose={() => showLanguageMenu(false)}
                       title="แบบไทย"
-                      onClick={() => i18n.changeLanguage('แบบไทย')}
-                      active={i18n.language === 'แบบไทย'}
+                      onClick={() => i18n.changeLanguage("แบบไทย")}
+                      active={i18n.language === "แบบไทย"}
                     />
                     <ActMenuSelector
                       onClose={() => showLanguageMenu(false)}
                       title="Український"
-                      onClick={() => i18n.changeLanguage('Український')}
-                      active={i18n.language === 'Український'}
+                      onClick={() => i18n.changeLanguage("Український")}
+                      active={i18n.language === "Український"}
                     />
                     <ActMenuSelector
                       onClose={() => showLanguageMenu(false)}
                       title="Tiếng Việt"
-                      onClick={() => i18n.changeLanguage('Tiếng Việt')}
-                      active={i18n.language === 'Tiếng Việt'}
+                      onClick={() => i18n.changeLanguage("Tiếng Việt")}
+                      active={i18n.language === "Tiếng Việt"}
                     />
                     <ActMenuSelector
                       onClose={() => showLanguageMenu(false)}
                       title="中文 (简体)"
-                      onClick={() => i18n.changeLanguage('中文 (简体)')}
-                      active={i18n.language === '中文 (简体)'}
+                      onClick={() => i18n.changeLanguage("中文 (简体)")}
+                      active={i18n.language === "中文 (简体)"}
                     />
                     <ActMenuSelector
                       onClose={() => showLanguageMenu(false)}
                       title="中文 (繁體)"
-                      onClick={() => i18n.changeLanguage('中文 (繁體)')}
-                      active={i18n.language === '中文 (繁體)'}
+                      onClick={() => i18n.changeLanguage("中文 (繁體)")}
+                      active={i18n.language === "中文 (繁體)"}
                     />
                   </ActMenu>
                 </div>
@@ -1634,20 +1529,22 @@ export default function Settings() {
               </div>
               <div
                 style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  marginBottom: '40px',
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  marginBottom: "40px",
                 }}
               >
-                <p className="font-bold" style={{ fontSize: '14px' }}>
+                <p className="font-bold" style={{ fontSize: "14px" }}>
                   Reduce transparency
                 </p>
                 <Toggle
                   active={settingsReducer.transparencyReduced}
                   onToggle={() =>
                     dispatch(
-                      setTransparencyReduced(!settingsReducer.transparencyReduced),
+                      setTransparencyReduced(
+                        !settingsReducer.transparencyReduced
+                      )
                     )
                   }
                 />
@@ -1745,7 +1642,7 @@ export default function Settings() {
                 flexDirection: "column",
               }}
             >
-              {settingsReducer.themeLight ? (
+              {themeLight ? (
                 <img
                   src={LogoL}
                   width={"331.133"}
@@ -1849,7 +1746,6 @@ export default function Settings() {
     }
   }
 
-  const [min, isMin] = useState<boolean>(false);
   const [wrongPasswordAni, setWrongPasswordAni] = useState<boolean>(false);
 
   function submitPassword() {
@@ -1869,10 +1765,10 @@ export default function Settings() {
     }
   });
 
-  function cancel(){
+  function cancel() {
     dispatch(setInactive());
     dispatch(cancelPassword());
-  };
+  }
 
   const wp = useAppSelector((state) => state.wifipassword);
 
@@ -1910,43 +1806,19 @@ export default function Settings() {
 
   return (
     <div className="SettingsWindow">
-      <Draggable handle=".TopBar">
+      <Draggable handle="#TopBar">
         <div
           className={`Window settings ${isActive && "active"} ${
             isHide && "hide"
-          } ${min && "minimize"}`}
+          } ${isMinimized && "minimize"}`}
         >
-          {maximumExceeded ? (
-            <div className="MaximumExceededBox">
-              <div className="WindowTopBar">
-                <p className="WindowTopBarTitle">Error!</p>
-                <div className="WindowTopBarInteractionContainer">
-                  <div
-                    className="WindowTopBarInteraction close"
-                    onClick={() => displayMaximumExceeded(false)}
-                  >
-                    <i className="fa-solid fa-xmark fa-lg" />
-                  </div>
-                </div>
-              </div>
-              <div className="WindowBodyDefault">
-                <p className="WindowBodyContent">Maximum characters exceeded</p>
-                <div className="WindowBodyButton">
-                  <button
-                    className="Button"
-                    onClick={() => displayMaximumExceeded(false)}
-                  >
-                    OK
-                  </button>
-                </div>
-              </div>
-            </div>
-          ) : (
-            ""
-          )}
           <TopBar
-            title={t("apps.settings.name")}
-            onDblClick={() => isMin(!min)}
+            title={t(`apps.${id}.name`)}
+            onDblClick={() =>
+              isMinimized
+                ? dispatch(maximizeApp(id))
+                : dispatch(minimizeApp(id))
+            }
           >
             <div className="TabBarWrapper" style={{ width: "100%" }}>
               <div
@@ -1956,7 +1828,7 @@ export default function Settings() {
                 <div
                   className="TabBarItem"
                   style={{
-                    width: min ? "120px" : "80px",
+                    width: isMinimized ? "120px" : "80px",
                     paddingLeft: 0,
                     paddingRight: 0,
                     flexDirection: "row-reverse",
@@ -2025,15 +1897,19 @@ export default function Settings() {
             >
               <TopBarInteraction
                 action="hide"
-                onHide={() => dispatch(setHide(true))}
+                onHide={() => dispatch(hideApp(id))}
               />
               <TopBarInteraction
-                action={min ? "max" : "min"}
-                onMinMax={() => isMin(!min)}
+                action={isMinimized ? "max" : "min"}
+                onMinMax={() =>
+                  isMinimized
+                    ? dispatch(maximizeApp(id))
+                    : dispatch(minimizeApp(id))
+                }
               />
               <TopBarInteraction
                 action="close"
-                onClose={() => dispatch(setActive(false))}
+                onClose={() => dispatch(quitApp(id))}
               />
             </div>
           </TopBar>
@@ -2060,7 +1936,7 @@ export default function Settings() {
                     <p style={{ marginBottom: "30px" }} className="font-bold">
                       BreezeOS
                     </p>
-                    {settingsReducer.themeLight ? (
+                    {themeLight ? (
                       <img width="auto" height={300} src={QRL} />
                     ) : (
                       <img width="auto" height={300} src={QRD} />
@@ -2197,49 +2073,49 @@ export default function Settings() {
                             <ActMenuSelector
                               onClose={() => showSecurityMenu(false)}
                               title="None"
-                              active={nw.security === 'None'}
-                              onClick={() => dispatch(setSecurity('None'))}
+                              active={nw.security === "None"}
+                              onClick={() => dispatch(setSecurity("None"))}
                             />
                             <ActMenuSelector
                               onClose={() => showSecurityMenu(false)}
                               title="WEP"
-                              active={nw.security === 'WEP'}
-                              onClick={() => dispatch(setSecurity('WEP'))}
+                              active={nw.security === "WEP"}
+                              onClick={() => dispatch(setSecurity("WEP"))}
                             />
                             <ActMenuSelector
                               onClose={() => showSecurityMenu(false)}
                               title="WPA"
-                              active={nw.security === 'WPA'}
-                              onClick={() => dispatch(setSecurity('WPA'))}
+                              active={nw.security === "WPA"}
+                              onClick={() => dispatch(setSecurity("WPA"))}
                             />
                             <ActMenuSelector
                               onClose={() => showSecurityMenu(false)}
                               title="WPA2"
-                              active={nw.security === 'WPA2'}
-                              onClick={() => dispatch(setSecurity('WPA2'))}
+                              active={nw.security === "WPA2"}
+                              onClick={() => dispatch(setSecurity("WPA2"))}
                             />
                             <ActMenuSelector
                               onClose={() => showSecurityMenu(false)}
                               title="WPA Enterprise"
-                              active={nw.security === 'WPA Enterprise'}
+                              active={nw.security === "WPA Enterprise"}
                               onClick={() =>
-                                dispatch(setSecurity('WPA Enterprise'))
+                                dispatch(setSecurity("WPA Enterprise"))
                               }
                             />
                             <ActMenuSelector
                               onClose={() => showSecurityMenu(false)}
                               title="WPA2 Enterprise"
-                              active={nw.security === 'WPA2 Enterprise'}
+                              active={nw.security === "WPA2 Enterprise"}
                               onClick={() =>
-                                dispatch(setSecurity('WPA2 Enterprise'))
+                                dispatch(setSecurity("WPA2 Enterprise"))
                               }
                             />
                             <ActMenuSelector
                               onClose={() => showSecurityMenu(false)}
                               title="WPA3 Enterprise"
-                              active={nw.security === 'WPA3 Enterprise'}
+                              active={nw.security === "WPA3 Enterprise"}
                               onClick={() =>
-                                dispatch(setSecurity('WPA3 Enterprise'))
+                                dispatch(setSecurity("WPA3 Enterprise"))
                               }
                             />
                           </ActMenu>
@@ -2343,7 +2219,9 @@ export default function Settings() {
                         <div className="NavPanel">
                           {e.map((i) => (
                             <div
-                              className={`DropdownMenu ${i.active && "active"}`}
+                              className={`DropdownMenu ${
+                                settings === i.name && "active"
+                              }`}
                               onMouseDown={i.onClick}
                             >
                               <i className={i.icon} />

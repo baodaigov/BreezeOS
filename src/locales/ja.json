@@ -79,10 +79,10 @@
     "terminal": {
       "name": "ターミナル"
     },
-    "textEditor": {
+    "texteditor": {
       "name": "テキストエディタ"
     },
-    "softwareStore": {
+    "softwarestore": {
       "name": "ソフトウェア"
     },
     "imgview": {

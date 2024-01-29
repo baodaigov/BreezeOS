@@ -1,25 +1,34 @@
 $bgcolor: #202023e5;
 $fgcolor: #e2e2e2;
 
-.Dock {
+.DockContainer {
   position: absolute;
   bottom: -100px;
   z-index: 3;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 11px 0;
+  pointer-events: none;
   transition: all ease 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
   &.active {
     bottom: 0;
+    pointer-events: auto;
   }
 
   &.hide {
     opacity: 0;
     pointer-events: none;
   }
+}
+
+.Dock {
+  margin: 11px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all ease 0.3s;
 
   .DockItemContainer {
     .DockItem {
@@ -42,20 +51,20 @@ $fgcolor: #e2e2e2;
         content: "";
         display: block;
         position: absolute;
-        top: 40px;
+        top: 52px;
         border-radius: 9999px;
         width: 0;
         height: 3px;
         transition: all ease 0.3s;
       }
 
-      &.clicked::after {
+      &.active::after {
         width: 20px;
         background: #4000ff;
         transition: all ease 0.3s;
       }
 
-      &.hide::after {
+      &.inactive::after {
         width: 8px;
         background: #4a4a4a;
         transition: all ease 0.3s;
@@ -63,7 +72,7 @@ $fgcolor: #e2e2e2;
 
       .ContextMenu {
         position: absolute;
-        bottom: 45px;
+        bottom: 58px;
         transform: translateX(105px);
         font-size: 12px;
         backdrop-filter: blur(15px);
@@ -135,7 +144,7 @@ $fgcolor: #e2e2e2;
       .DockItemTitle {
         color: $fgcolor;
         position: absolute;
-        top: -46px;
+        top: -24px;
         font-size: 11.5px;
         background: #20202383;
         backdrop-filter: blur(15px);
@@ -146,6 +155,7 @@ $fgcolor: #e2e2e2;
         text-align: center;
         pointer-events: none;
         transition: all 0.15s;
+        margin: 0;
       }
 
       &:hover {

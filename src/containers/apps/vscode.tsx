@@ -1,95 +1,29 @@
-import { useState, useEffect } from "react";
-import { openUrl, closeUrl } from "../../store/reducers/vscode";
-import { setActive, setHide } from "../../store/reducers/apps/vscode";
-import "../../components/utils/window/Window.scss";
-import TopBar from "../../components/utils/window/TopBar";
-import WindowBody from "../../components/utils/window/WindowBody";
-import DockItem from "../../components/dock/DockItem";
+import { useEffect } from "react";
+import { openUrl, closeUrl } from "@/store/reducers/vscode";
+import "@/components/utils/window/Window.scss";
+import TopBar from "@/components/utils/window/TopBar";
+import WindowBody from "@/components/utils/window/WindowBody";
 import "./assets/vscode.scss";
-import TopBarInteraction from "../../components/utils/window/TopBarInteraction";
-import StartApp from "../../components/startMenu/StartApp";
-import { setHeaderHide } from "../../store/reducers/header";
-import { useTranslation } from "react-i18next";
-import { setDesktopBodyActive } from "../../store/reducers/desktopbody";
-import { setStartMenuActive } from "../../store/reducers/startmenu";
+import TopBarInteraction from "@/components/utils/window/TopBarInteraction";
 import Draggable from "react-draggable";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { useTranslation } from "react-i18next";
+import {
+  closeApp,
+  hideApp,
+  maximizeApp,
+  minimizeApp,
+} from "@/store/reducers/apps";
 
-export const VSCodeApp = () => {
+export default function VSCode({ id }: { id: string }) {
+  const dispatch = useAppDispatch();
+  const appIsActive = useAppSelector((state) => state.apps.appIsActive);
+  const fullscreen = useAppSelector((state) => state.apps.fullscreen);
+  const isActive = appIsActive[id].status === "active";
+  const isHide = appIsActive[id].status === "hide";
+  const isMinimized = appIsActive[id].minimized;
+  const isFullScreen = fullscreen === id;
   const { t } = useTranslation();
-  const isActive = useAppSelector((state) => state.appsVscode.active);
-  const isHide = useAppSelector((state) => state.appsVscode.hide);
-  const dispatch = useAppDispatch();
-  const icon = useAppSelector((state) => state.appearance.iconTheme);
-
-  return (
-    <DockItem
-      id="vscode"
-      className={`VSCodeApp ${isActive && "clicked"} ${isHide && "hide"}`}
-      title="Visual Studio Code"
-      icon={
-        icon === "WhiteSur-icon-theme"
-          ? "https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/visual-studio-code.svg"
-          : "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/visual-studio-code.svg"
-      }
-      menu={[
-        [
-          {
-            label: isHide ? t("apps.unhide") : t("apps.hide"),
-            disabled: isActive ? false : true,
-            action: () =>
-              isHide ? dispatch(setHide(false)) : dispatch(setHide(true)),
-          },
-          {
-            label: isActive ? t("apps.quit") : t("apps.open"),
-            action: () =>
-              isActive ? dispatch(setActive(false)) : dispatch(setActive(true)),
-          },
-        ],
-      ]}
-      onClick={() =>
-        isHide ? dispatch(setHide(false)) : dispatch(setActive(true))
-      }
-    />
-  );
-};
-
-export const VSCodeStartApp = () => {
-  const isHide = useAppSelector((state) => state.appsVscode.hide);
-  const dispatch = useAppDispatch();
-  const icon = useAppSelector((state) => state.appearance.iconTheme);
-
-  const toggle = () => {
-    dispatch(setStartMenuActive(false));
-    dispatch(setHeaderHide(false));
-    dispatch(setDesktopBodyActive(true));
-    if (isHide) {
-      dispatch(setHide(false));
-    } else {
-      dispatch(setActive(true));
-      setTimeout(() => dispatch(openUrl()), 500);
-    }
-  };
-
-  return (
-    <StartApp
-      key="vscode"
-      icon={
-        icon === "WhiteSur-icon-theme"
-          ? "https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/visual-studio-code.svg"
-          : "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/visual-studio-code.svg"
-      }
-      name="Visual Studio Code"
-      onClick={toggle}
-    />
-  );
-};
-
-export default function VSCode() {
-  const dispatch = useAppDispatch();
-  const isActive = useAppSelector((state) => state.appsVscode.active);
-  const isHide = useAppSelector((state) => state.appsVscode.hide);
-  const [min, isMin] = useState<boolean>(false);
   const url = useAppSelector((state) => state.vscode.url);
 
   useEffect(() => {
@@ -102,32 +36,42 @@ export default function VSCode() {
 
   return (
     <div className="VSCodeWindow">
-      <Draggable handle=".TopBar">
+      <Draggable handle="#TopBar">
         <div
           className={`Window vscode ${isActive && "active"} ${
             isHide && "hide"
-          } ${min && "minimize"}`}
+          } ${isMinimized && "minimize"} ${isFullScreen && "fullscreen"}`}
         >
-          <TopBar title="Visual Studio Code" onDblClick={() => isMin(!min)}>
+          <TopBar
+            title={t(`apps.${id}.name`)}
+            onDblClick={() =>
+              isMinimized
+                ? dispatch(maximizeApp(id))
+                : dispatch(minimizeApp(id))
+            }
+          >
             <TopBarInteraction
               action="hide"
-              onHide={() => dispatch(setHide(true))}
+              onHide={() => dispatch(hideApp(id))}
             />
             <TopBarInteraction
-              action={min ? "max" : "min"}
-              onMinMax={() => isMin(!min)}
+              action={isMinimized ? "max" : "min"}
+              onMinMax={() =>
+                isMinimized
+                  ? dispatch(maximizeApp(id))
+                  : dispatch(minimizeApp(id))
+              }
             />
             <TopBarInteraction
               action="close"
-              onClose={() => dispatch(setActive(false))}
+              onClose={() => dispatch(closeApp(id))}
             />
           </TopBar>
           <WindowBody>
             <div className="VSCode">
-              <iframe
+              <webview
                 src={url}
                 title="Visual Studio Code"
-                frameBorder="0"
                 allowFullScreen={true}
               />
             </div>

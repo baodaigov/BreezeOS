@@ -1138,17 +1138,7 @@ $actcolor: #60a5fa;
                   width: auto;
                   height: 200px;
                 }
-              }
-
-              &[data-value="1"] {
-                .ImageContainer.dark {
-                  transition: border ease 0.3s;
-                  border: 3px solid #60a5fa;
-                }
-              }
-
-              &[data-value="2"] {
-                .ImageContainer.light {
+                &.active {
                   transition: border ease 0.3s;
                   border: 3px solid #60a5fa;
                 }
@@ -1883,6 +1873,7 @@ $actcolor: #60a5fa;
           }
         }
       }
+
       .SettingsContainerInside {
         .MenuSection {
           background: transparentize($bgcolor, 0.85) !important;
@@ -1956,9 +1947,6 @@ $actcolor: #60a5fa;
         }
 
         .About .AboutMenu {
-          background: transparentize($bgcolor, 0.83) !important;
-          border-bottom: 0.5px solid darken($fgcolor, 10%) !important;
-
           &.EditName {
             .EditNameInput {
               background: transparentize($bgcolor, 0.85) !important;

@@ -1,157 +1,39 @@
 import React, { useState, useEffect, useRef } from "react";
-import {
-  setActive,
-  setDirectory,
-  setHide,
-  setIconSize,
-} from "@/store/reducers/apps/files";
+import { setDirectory, setIconSize } from "@/store/reducers/files";
 import "@/components/utils/window/Window.scss";
 import TopBar from "@/components/utils/window/TopBar";
 import WindowBody from "@/components/utils/window/WindowBody";
-import DockItem from "@/components/dock/DockItem";
 import "./assets/files.scss";
 import TopBarInteraction from "@/components/utils/window/TopBarInteraction";
-import StartApp from "@/components/startMenu/StartApp";
 import ActMenu, { ActMenuSelector } from "@/components/utils/menu/index";
 import Image1 from "./assets/Screenshot from 2022-09-10 20-41-45.png";
 import Image3 from "./assets/dark.png";
 import Image4 from "./assets/light.png";
-import { setHeaderHide } from "@/store/reducers/header";
 import { useTranslation } from "react-i18next";
-import { setDesktopBodyActive } from "@/store/reducers/desktopbody";
-import { setStartMenuActive } from "@/store/reducers/startmenu";
 import Draggable from "react-draggable";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import FilesItem from "./assets/FilesItem";
+import {
+  closeApp,
+  enterFullScreen,
+  hideApp,
+  maximizeApp,
+  minimizeApp,
+} from "@/store/reducers/apps";
 
-export const FilesApp = () => {
-  const { t } = useTranslation();
-  const isActive = useAppSelector((state) => state.appsFiles.active);
-  const isHide = useAppSelector((state) => state.appsFiles.hide);
+export default function Files({ id }: { id: string }) {
   const dispatch = useAppDispatch();
-  const icon = useAppSelector((state) => state.appearance.iconTheme);
-
-  document.addEventListener("keydown", (e) => {
-    if (e.ctrlKey && e.keyCode === 54) {
-      dispatch(setActive(true));
-    }
-  });
-
-  return (
-    <DockItem
-      id="files"
-      className={`FilesApp ${isActive && "clicked"} ${isHide && "hide"}`}
-      title={t("apps.files.name")}
-      icon={
-        icon === "WhiteSur-icon-theme"
-          ? "https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/original/file-manager.svg"
-          : "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg"
-      }
-      menu={[
-        [
-          {
-            label: "Recent",
-            action: () => setDirectory("Recent"),
-          },
-          {
-            label: "Favorites",
-            action: () => setDirectory("Favorites"),
-          },
-          {
-            label: "Home",
-            action: () => setDirectory("/home"),
-          },
-          {
-            label: "Desktop",
-            action: () => setDirectory("/home/Desktop"),
-          },
-          {
-            label: "Documents",
-            action: () => setDirectory("/home/Documents"),
-          },
-          {
-            label: "Downloads",
-            action: () => setDirectory("/home/Downloads"),
-          },
-          {
-            label: "Music",
-            action: () => setDirectory("/home/Music"),
-          },
-          {
-            label: "Pictures",
-            action: () => setDirectory("/home/Pictures"),
-          },
-          {
-            label: "Videos",
-            action: () => setDirectory("/home/Videos"),
-          },
-          {
-            label: "Trash",
-            action: () => setDirectory("/.Bin"),
-          },
-        ],
-        [
-          {
-            label: isHide ? t("apps.unhide") : t("apps.hide"),
-            disabled: isActive ? false : true,
-            action: () =>
-              isHide ? dispatch(setHide(false)) : dispatch(setHide(true)),
-          },
-          {
-            label: isActive ? t("apps.quit") : t("apps.open"),
-            action: () =>
-              isActive ? dispatch(setActive(false)) : dispatch(setActive(true)),
-          },
-        ],
-      ]}
-      onClick={() =>
-        isHide ? dispatch(setHide(false)) : dispatch(setActive(true))
-      }
-    />
-  );
-};
-
-export const FilesStartApp = () => {
-  const { t } = useTranslation();
-  const isHide = useAppSelector((state) => state.appsFiles.hide);
-  const dispatch = useAppDispatch();
-  const icon = useAppSelector((state) => state.appearance.iconTheme);
-
-  const toggle = () => {
-    dispatch(setStartMenuActive(false));
-    dispatch(setHeaderHide(false));
-    dispatch(setDesktopBodyActive(true));
-    if (isHide) {
-      dispatch(setHide(false));
-    } else {
-      dispatch(setActive(true));
-    }
-  };
-
-  return (
-    <StartApp
-      key="files"
-      icon={
-        icon === "WhiteSur-icon-theme"
-          ? "https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/original/file-manager.svg"
-          : "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/default-folder.svg"
-      }
-      name={t("apps.files.name")}
-      onClick={toggle}
-    />
-  );
-};
-
-export default function Files() {
-  const dispatch = useAppDispatch();
-  const isActive = useAppSelector((state) => state.appsFiles.active);
-  const isHide = useAppSelector((state) => state.appsFiles.hide);
+  const appIsActive = useAppSelector((state) => state.apps.appIsActive);
+  const fullscreen = useAppSelector((state) => state.apps.fullscreen);
+  const isActive = appIsActive[id].status === "active";
+  const isHide = appIsActive[id].status === "hide";
+  const isMinimized = appIsActive[id].minimized;
+  const isFullScreen = fullscreen === id;
   const { t } = useTranslation();
   const shellTheme = useAppSelector((state) => state.shell.theme);
-  const iconSize = useAppSelector((state) => state.appsFiles.iconSize);
-  const directory = useAppSelector((state) => state.appsFiles.directory);
+  const iconSize = useAppSelector((state) => state.files.iconSize);
+  const directory = useAppSelector((state) => state.files.directory);
   const [settingsMenu, showSettingsMenu] = useState<boolean>(false);
-  const icon = useAppSelector((state) => state.appearance.iconTheme);
   const system = useAppSelector((state) => state.system);
   const items = [
     [
@@ -212,8 +94,8 @@ export default function Files() {
       {
         icon: "trash",
         title: "Trash",
-        active: directory === "/.Bin",
-        onClick: () => dispatch(setDirectory("/.Bin")),
+        active: directory === "Trash",
+        onClick: () => dispatch(setDirectory("Trash")),
       },
     ],
     [
@@ -245,10 +127,8 @@ export default function Files() {
   const settingsMenuRef = useRef(null);
   useOutsideSettingsMenu(settingsMenuRef);
 
-  const [min, isMin] = useState(false);
-
   function close() {
-    dispatch(setActive(false));
+    dispatch(closeApp(id));
     setTimeout(() => setDirectory(`/home`), 300);
   }
 
@@ -342,24 +222,6 @@ export default function Files() {
               name="double-click this.mp4"
               location="/home/Downloads/double-click this.mp4"
             />
-            {/* <div
-              className="FilesItem"
-              onDoubleClick={() =>
-                (window.location.href = "https://youtu.be/y5jrmCE2-bg")
-              }
-            >
-              <img
-                className="FilesIcon"
-                src={
-                  icon === "WhiteSur-icon-theme"
-                    ? "https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/mimes/scalable/video-x-generic.svg"
-                    : "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/mimetypes/video-x-generic.svg"
-                }
-                width={iconSize}
-                height={iconSize}
-              />
-              <p className="FilesName">double-click this.mp4</p>
-            </div> */}
           </div>
         );
       case `/home/Downloads/code-stable-x64-1675893708`:
@@ -458,9 +320,7 @@ export default function Files() {
                   <img
                     className="FilesIcon"
                     src={
-                      icon === "WhiteSur-icon-theme"
-                        ? "https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/devices/scalable/drive-harddisk.svg"
-                        : "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/devices/drive-harddisk.svg"
+                      "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/devices/drive-harddisk.svg"
                     }
                     width={30}
                     height={30}
@@ -483,9 +343,7 @@ export default function Files() {
                   <img
                     className="FilesIcon"
                     src={
-                      icon === "WhiteSur-icon-theme"
-                        ? "https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/devices/scalable/drive-harddisk.svg"
-                        : "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/devices/drive-harddisk.svg"
+                      "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/devices/drive-harddisk.svg"
                     }
                     width={30}
                     height={30}
@@ -507,9 +365,7 @@ export default function Files() {
                   <img
                     className="FilesIcon"
                     src={
-                      icon === "WhiteSur-icon-theme"
-                        ? "https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/devices/scalable/network_fs.svg"
-                        : "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/network-workgroup.svg"
+                      "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/places/network-workgroup.svg"
                     }
                     width={30}
                     height={30}
@@ -554,11 +410,11 @@ export default function Files() {
 
   return (
     <div className="FilesWindow">
-      <Draggable handle=".TopBar">
+      <Draggable handle="#TopBar">
         <div
           className={`Window files ${isActive && "active"} ${
             isHide && "hide"
-          } ${min && "minimize"}`}
+          } ${isMinimized && "minimize"} ${isFullScreen && "fullscreen"}`}
         >
           <ActMenu
             style={{ zIndex: "1", top: "30px", right: "100px" }}
@@ -572,19 +428,26 @@ export default function Files() {
                     className={`fa-regular fa-plus ActMenuInteraction ${
                       iconSize === 145 ? "disabled" : ""
                     }`}
-                    onClick={() => setIconSize(iconSize + 25)}
+                    onClick={() => dispatch(setIconSize(iconSize + 25))}
                   />
                   <i
                     className={`fa-regular fa-minus ActMenuInteraction ${
                       iconSize === 20 ? "disabled" : ""
                     }`}
-                    onClick={() => setIconSize(iconSize - 25)}
+                    onClick={() => dispatch(setIconSize(iconSize - 25))}
                   />
                 </div>
               </ActMenuSelector>
             </div>
           </ActMenu>
-          <TopBar title={t("apps.files.name")} onDblClick={() => isMin(!min)}>
+          <TopBar
+            title={t(`apps.${id}.name`)}
+            onDblClick={() =>
+              isMinimized
+                ? dispatch(maximizeApp(id))
+                : dispatch(minimizeApp(id))
+            }
+          >
             <div className="TabBarWrapper" style={{ width: "100%" }}>
               <div
                 className="TabBar"
@@ -607,21 +470,21 @@ export default function Files() {
                     >
                       <i
                         className={`fa-regular ${
-                          directory === 'Recent'
-                            ? 'fa-clock-rotate-left'
-                            : directory === 'Favorites'
-                            ? 'fa-star'
-                            : directory === '/home'
-                            ? 'fa-house'
-                            : directory === 'Trash'
-                            ? 'fa-trash'
-                            : directory === '500MB Partition'
-                            ? 'fa-hard-drive'
-                            : directory === 'Other Locations'
-                            ? 'fa-plus'
-                            : 'fa-folder'
+                          directory === "Recent"
+                            ? "fa-clock-rotate-left"
+                            : directory === "Favorites"
+                            ? "fa-star"
+                            : directory === "/home"
+                            ? "fa-house"
+                            : directory === "Trash"
+                            ? "fa-trash"
+                            : directory === "500MB Partition"
+                            ? "fa-hard-drive"
+                            : directory === "Other Locations"
+                            ? "fa-plus"
+                            : "fa-folder"
                         }`}
-                        style={{ marginRight: '5px' }}
+                        style={{ marginRight: "5px" }}
                       />
                       <p>{directory}</p>
                     </div>
@@ -662,11 +525,16 @@ export default function Files() {
             >
               <TopBarInteraction
                 action="hide"
-                onHide={() => dispatch(setHide(true))}
+                onHide={() => dispatch(hideApp(id))}
               />
               <TopBarInteraction
-                action={min ? "max" : "min"}
-                onMinMax={() => isMin(!min)}
+                action={isMinimized ? "max" : "min"}
+                onMinMax={() =>
+                  isMinimized
+                    ? dispatch(maximizeApp(id))
+                    : dispatch(minimizeApp(id))
+                }
+                onPress={() => dispatch(enterFullScreen(id))}
               />
               <TopBarInteraction action="close" onClose={close} />
             </div>
@@ -675,6 +543,86 @@ export default function Files() {
             <div
               className={`Files ${shellTheme === "WhiteSur" ? "whitesur" : ""}`}
             >
+              {isFullScreen && (
+                <div className="TopBar">
+                  <div className="TopBarInteractionContainer">
+                    <div className="TabBarWrapper" style={{ width: "100%" }}>
+                      <div
+                        className="TabBar"
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <div className="TabBarItem" style={{ paddingLeft: 0 }}>
+                          <div className="TabBarInteraction">
+                            <i className="fa-regular fa-chevron-left" />
+                            <i className="fa-regular fa-chevron-right" />
+                          </div>
+                        </div>
+                        <div style={{ display: "flex" }}>
+                          <div className="TabBarItem TabBarFileSystem">
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                              }}
+                            >
+                              <i
+                                className={`fa-regular ${
+                                  directory === "Recent"
+                                    ? "fa-clock-rotate-left"
+                                    : directory === "Favorites"
+                                    ? "fa-star"
+                                    : directory === "/home"
+                                    ? "fa-house"
+                                    : directory === "Trash"
+                                    ? "fa-trash"
+                                    : directory === "500MB Partition"
+                                    ? "fa-hard-drive"
+                                    : directory === "Other Locations"
+                                    ? "fa-plus"
+                                    : "fa-folder"
+                                }`}
+                                style={{ marginRight: "5px" }}
+                              />
+                              <p>{directory}</p>
+                            </div>
+                            <div className="TabBarInteraction">
+                              <i className="fa-regular fa-ellipsis-vertical" />
+                            </div>
+                          </div>
+                          <div className="TabBarItem">
+                            <div className="TabBarInteraction">
+                              <i className="fa-regular fa-magnifying-glass" />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="TabBarItem" style={{ margin: "0" }}>
+                          <div
+                            className="TabBarInteraction"
+                            style={{ marginRight: "20px" }}
+                          >
+                            <i className="fa-regular fa-grid-2" />
+                            <div className="TabSeparator"></div>
+                            <i
+                              className="fa-regular fa-chevron-down"
+                              style={{ marginLeft: "3px" }}
+                            />
+                          </div>
+                          <div
+                            className="TabBarInteraction"
+                            onClick={() => showSettingsMenu(!settingsMenu)}
+                          >
+                            <i className="fa-regular fa-bars" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
               <div className="FilesSection">
                 <div className="NavPanel">
                   {items.map((e) => (

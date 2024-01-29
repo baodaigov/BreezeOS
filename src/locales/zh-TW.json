@@ -79,10 +79,10 @@
     "terminal": {
       "name": "終端"
     },
-    "textEditor": {
+    "texteditor": {
       "name": "文字編輯器"
     },
-    "softwareStore": {
+    "softwarestore": {
       "name": "軟體商店"
     },
     "imgview": {

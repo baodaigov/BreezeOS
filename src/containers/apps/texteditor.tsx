@@ -1,105 +1,33 @@
 import { useEffect, useRef, useState } from "react";
-import { setActive, setHide } from "@/store/reducers/apps/texteditor";
 import "@/components/utils/window/Window.scss";
 import TopBar from "@/components/utils/window/TopBar";
 import WindowBody from "@/components/utils/window/WindowBody";
-import DockItem from "@/components/dock/DockItem";
 import "./assets/texteditor.scss";
 import TopBarInteraction from "@/components/utils/window/TopBarInteraction";
-import StartApp from "@/components/startMenu/StartApp";
-import { setHeaderHide } from "@/store/reducers/header";
 import { useTranslation } from "react-i18next";
-import { setDesktopBodyActive } from "@/store/reducers/desktopbody";
-import { setStartMenuActive } from "@/store/reducers/startmenu";
 import Draggable from "react-draggable";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { setBlocks } from '@/store/reducers/msgbox';
+import { setBlocks } from "@/store/reducers/msgbox";
+import {
+  closeApp,
+  enterFullScreen,
+  hideApp,
+  maximizeApp,
+  minimizeApp,
+} from "@/store/reducers/apps";
 
-export const TextEditorApp = () => {
-  const { t } = useTranslation();
-  const isActive = useAppSelector((state) => state.appsTextEditor.active);
-  const isHide = useAppSelector((state) => state.appsTextEditor.hide);
-  const dispatch = useAppDispatch();
-  const icon = useAppSelector((state) => state.appearance.iconTheme);
-
-  document.addEventListener("keydown", (e) => {
-    if (e.ctrlKey && e.keyCode === 56) {
-      dispatch(setActive(true));
-    }
-  });
-
-  return (
-    <DockItem
-      id="texteditor"
-      className={`TextEditorApp ${isActive && "clicked"} ${isHide && "hide"}`}
-      title={t("apps.textEditor.name")}
-      icon={
-        icon === "WhiteSur-icon-theme"
-          ? "https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/text-editor.svg"
-          : "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/accessories-text-editor.svg"
-      }
-      menu={[
-        [
-          {
-            label: isHide ? t("apps.unhide") : t("apps.hide"),
-            disabled: isActive ? false : true,
-            action: () =>
-              isHide ? dispatch(setHide(false)) : dispatch(setHide(true)),
-          },
-          {
-            label: isActive ? t("apps.quit") : t("apps.open"),
-            action: () =>
-              isActive ? dispatch(setActive(false)) : dispatch(setActive(true)),
-          },
-        ],
-      ]}
-      onClick={() =>
-        isHide ? dispatch(setHide(false)) : dispatch(setActive(true))
-      }
-    />
-  );
-};
-
-export const TextEditorStartApp = () => {
-  const { t } = useTranslation();
-  const isHide = useAppSelector((state) => state.appsTextEditor.hide);
-  const dispatch = useAppDispatch();
-  const icon = useAppSelector((state) => state.appearance.iconTheme);
-
-  const toggle = () => {
-    dispatch(setStartMenuActive(false));
-    dispatch(setHeaderHide(false));
-    dispatch(setDesktopBodyActive(true));
-    if (isHide) {
-      dispatch(setHide(false));
-    } else {
-      dispatch(setActive(true));
-    }
-  };
-
-  return (
-    <StartApp
-      key="texteditor"
-      icon={
-        icon === "WhiteSur-icon-theme"
-          ? "https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/text-editor.svg"
-          : "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/accessories-text-editor.svg"
-      }
-      name={t("apps.textEditor.name")}
-      onClick={toggle}
-    />
-  );
-};
-
-export default function TextEditor() {
+export default function TextEditor({ id }: { id: string }) {
+  const appIsActive = useAppSelector((state) => state.apps.appIsActive);
+  const fullscreen = useAppSelector((state) => state.apps.fullscreen);
+  const isActive = appIsActive[id].status === "active";
+  const isHide = appIsActive[id].status === "hide";
+  const isMinimized = appIsActive[id].minimized;
+  const isFullScreen = fullscreen === id;
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
-  const isActive = useAppSelector((state) => state.appsTextEditor.active);
-  const isHide = useAppSelector((state) => state.appsTextEditor.hide);
   const [isUntouchable, setIsUntouchable] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const [changes, saveChanges] = useState<boolean>(true);
-  const [min, isMin] = useState<boolean>(false);
   const blocks = useAppSelector((state) => state.msgbox.blocks);
 
   useEffect(() => {
@@ -113,13 +41,13 @@ export default function TextEditor() {
   function saveChangesAndExit() {
     setIsUntouchable(false);
     saveChanges(true);
-    dispatch(setActive(false));
+    dispatch(closeApp(id));
   }
 
   function dontSaveChangesAndExit() {
     setIsUntouchable(false);
     saveChanges(false);
-    dispatch(setActive(false));
+    dispatch(closeApp(id));
   }
 
   function saveChangesBeforeExit() {
@@ -127,24 +55,24 @@ export default function TextEditor() {
       setBlocks([
         ...blocks,
         {
-          type: 'question',
+          type: "question",
           title: "Save changes for Untited-1.txt and exit?",
           buttons: [
             {
-              label: 'Yes',
+              label: "Yes",
               action: saveChangesAndExit,
             },
             {
-              label: 'No',
+              label: "No",
               action: dontSaveChangesAndExit,
             },
             {
-              label: 'Cancel'
+              label: "Cancel",
             },
           ],
-          width: "450px"
+          width: "450px",
         },
-      ]),
+      ])
     );
   }
 
@@ -160,17 +88,23 @@ export default function TextEditor() {
 
   return (
     <div className="TextEditorWindow">
-      <Draggable handle=".TopBar">
+      <Draggable handle="#TopBar">
         <div
           className={`Window texteditor ${isActive && "active"} ${
             isHide && "hide"
-          } ${min && "minimize"} ${isUntouchable && "untouchable"}`}
+          } ${isMinimized && "minimize"} ${isFullScreen && "fullscreen"} ${
+            isUntouchable && "untouchable"
+          }`}
         >
           <TopBar
-            title={`${changes ? "" : "*"}Untitled-1.txt – ${t(
-              "apps.textEditor.name"
+            title={`${changes ? "" : "*"}${location && `${location} – `}${t(
+              `apps.${id}.name`
             )}`}
-            onDblClick={() => isMin(!min)}
+            onDblClick={() =>
+              isMinimized
+                ? dispatch(maximizeApp(id))
+                : dispatch(minimizeApp(id))
+            }
           >
             <div className="TabBarWrapper">
               <div
@@ -200,17 +134,22 @@ export default function TextEditor() {
             >
               <TopBarInteraction
                 action="hide"
-                onHide={() => dispatch(setHide(true))}
+                onHide={() => dispatch(hideApp(id))}
               />
               <TopBarInteraction
-                action={min ? "max" : "min"}
-                onMinMax={() => isMin(!min)}
+                action={isMinimized ? "max" : "min"}
+                onMinMax={() =>
+                  isMinimized
+                    ? dispatch(maximizeApp(id))
+                    : dispatch(minimizeApp(id))
+                }
+                onPress={() => dispatch(enterFullScreen(id))}
               />
               <TopBarInteraction
                 action="close"
                 onClose={
                   changes === true
-                    ? () => dispatch(setActive(false))
+                    ? () => dispatch(closeApp(id))
                     : saveChangesBeforeExit
                 }
               />
@@ -218,6 +157,34 @@ export default function TextEditor() {
           </TopBar>
           <WindowBody>
             <div className="TextEditor">
+              {isFullScreen && (
+                <div className="TopBar">
+                  <div className="TopBarInteractionContainer">
+                    <div className="TabBarWrapper">
+                      <div
+                        className="TabBar"
+                        style={{
+                          display: "flex",
+                          flexDirection: "row-reverse",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <div className="TabBarItem">
+                          <div className="TabBarInteraction">
+                            <i className="fa-regular fa-gear" />
+                          </div>
+                          <div
+                            className="TabBarInteraction"
+                            style={{ marginLeft: "8px" }}
+                          >
+                            <i className="fa-regular fa-magnifying-glass" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
               <textarea
                 className="TextArea"
                 spellCheck={false}

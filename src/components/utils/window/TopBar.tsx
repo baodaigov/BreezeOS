@@ -17,10 +17,10 @@ export default function TopBar({
 
   return (
     <div
-      className={`TopBar ${shellTheme === "WhiteSur" ? "whitesur" : ""}`}
-      onDoubleClick={onDblClick}
+      className={`TopBar ${shellTheme === "WhiteSur" && "whitesur"}`}
       {...props}
     >
+      <div id="TopBar" onDoubleClick={onDblClick} />
       <p className="TopBarTitle">{title}</p>
       <div className="TopBarInteractionContainer">{children}</div>
     </div>

@@ -1,55 +1,126 @@
 import "./Dock.scss";
 import DockItem from "./DockItem";
-import { TerminalApp } from "@/containers/apps/terminal";
-import { SurfaceApp } from "@/containers/apps/surface";
-import { ClockApp } from "@/containers/apps/clock";
-import { SettingsApp } from "@/containers/apps/settings";
-import { CameraApp } from "@/containers/apps/camera";
-import { FilesApp } from "@/containers/apps/files";
-import { CalculatorApp } from "@/containers/apps/calculator";
-import { TextEditorApp } from "@/containers/apps/texteditor";
-import { SoftwareStoreApp } from "@/containers/apps/softwarestore";
-import { CalendarApp } from "@/containers/apps/calendar";
-import { VSCodeApp } from "@/containers/apps/vscode";
-import { useAppSelector } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { useTranslation } from "react-i18next";
+import { hideApp, openApp, showApp } from "@/store/reducers/apps";
+import { useEffect, useState } from "react";
 
-const Dock = () => {
-  const icon = useAppSelector((state) => state.appearance.iconTheme);
+export default function Dock(){
+  const dispatch = useAppDispatch();
+  const { t } = useTranslation();
   const shellTheme = useAppSelector((state) => state.shell.theme);
   const dockActive = useAppSelector((state) => state.dock.active);
   const dockHide = useAppSelector((state) => state.dock.hide);
+  const favorites = useAppSelector((state) => state.dock.favorites);
+  const appIsActive = useAppSelector((state) => state.apps.appIsActive);
+  const fullscreen = useAppSelector((state) => state.apps.fullscreen);
+  const [floating, setFloating] = useState<boolean>(false);
 
-  return (
-    <div style={{ display: "flex", justifyContent: "center" }}>
+  useEffect(() => {
+    if (fullscreen) {
+      setFloating(false);
+    } else {
+      setFloating(true);
+    }
+  }, [fullscreen]);
+
+  let enterMouse: number;
+
+  function mouseLeave() {
+    if (enterMouse) window.clearTimeout(enterMouse);
+    setFloating(false);
+  }
+
+  function mouseEnter() {
+    enterMouse = window.setTimeout(() => setFloating(true), 500);
+  }
+
+  return fullscreen ? (
+    <div
+      className="DockContainer"
+      style={{
+        bottom: floating ? "0" : "-48px",
+        pointerEvents: "auto",
+      }}
+      onMouseEnter={mouseEnter}
+      onMouseLeave={mouseLeave}
+    >
       <div
-        className={`Dock ${shellTheme === "WhiteSur" ? "whitesur" : ""} ${
-          dockActive && "active"
-        } ${dockHide && "hide"}`}
+        className={`Dock ${shellTheme === "WhiteSur" ? "whitesur" : ""}`}
+        style={{
+          pointerEvents: floating ? "auto" : "none",
+        }}
       >
-        <SurfaceApp />
-        <CalendarApp />
-        <SettingsApp />
-        <ClockApp />
-        <CameraApp />
-        <FilesApp />
-        <CalculatorApp />
-        <TextEditorApp />
-        <TerminalApp />
-        <SoftwareStoreApp />
-        <DockItem
-          id="github"
-          title="GitHub"
-          icon={
-            icon === "WhiteSur-icon-theme"
-              ? "https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/src/apps/scalable/github-desktop.svg"
-              : "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/github-desktop.svg"
-          }
-          redirectTo="https://github.com/baodaigov/BreezeOS"
-        />
-        <VSCodeApp />
+        {favorites.map((i) =>
+          appIsActive[i.id] ? (
+            appIsActive[i.id].status === "active" ? (
+              <DockItem
+                title={t(`apps.${i.id}.name`)}
+                icon={i.icon}
+                id={i.id}
+                onClick={() => dispatch(hideApp(i.id))}
+              />
+            ) : (
+              <DockItem
+                title={t(`apps.${i.id}.name`)}
+                icon={i.icon}
+                id={i.id}
+                onClick={() => dispatch(showApp(i.id))}
+              />
+            )
+          ) : (
+            <DockItem
+              title={t(`apps.${i.id}.name`)}
+              icon={i.icon}
+              id={i.id}
+              onClick={() =>
+                !i.externalLink
+                  ? dispatch(openApp(i.id))
+                  : window.open(i.externalLink, "_blank")
+              }
+            />
+          ),
+        )}
+      </div>
+    </div>
+  ) : (
+    <div
+      className={`DockContainer ${dockActive && "active"} ${
+        dockHide && "hide"
+      }`}
+    >
+      <div className={`Dock ${shellTheme === "WhiteSur" ? "whitesur" : ""}`}>
+        {favorites.map((i) =>
+          appIsActive[i.id] ? (
+            appIsActive[i.id].status === "active" ? (
+              <DockItem
+                title={t(`apps.${i.id}.name`)}
+                icon={i.icon}
+                id={i.id}
+                onClick={() => dispatch(hideApp(i.id))}
+              />
+            ) : (
+              <DockItem
+                title={t(`apps.${i.id}.name`)}
+                icon={i.icon}
+                id={i.id}
+                onClick={() => dispatch(showApp(i.id))}
+              />
+            )
+          ) : (
+            <DockItem
+              title={t(`apps.${i.id}.name`)}
+              icon={i.icon}
+              id={i.id}
+              onClick={() =>
+                !i.externalLink
+                  ? dispatch(openApp(i.id))
+                  : window.open(i.externalLink, "_blank")
+              }
+            />
+          ),
+        )}
       </div>
     </div>
   );
 };
-
-export default Dock;

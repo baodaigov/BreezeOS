@@ -79,10 +79,10 @@
     "terminal": {
       "name": "터미널"
     },
-    "textEditor": {
+    "texteditor": {
       "name": "텍스트 편집기"
     },
-    "softwareStore": {
+    "softwarestore": {
       "name": "소프트웨어 상점"
     },
     "imgview": {

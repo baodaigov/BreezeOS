@@ -1,112 +1,26 @@
 import { useState, useEffect } from "react";
-import {
-  setActive,
-  setHide,
-  setRecentResult,
-} from "../../store/reducers/apps/calculator";
-import "../../components/utils/window/Window.scss";
-import TopBar from "../../components/utils/window/TopBar";
-import WindowBody from "../../components/utils/window/WindowBody";
-import DockItem from "../../components/dock/DockItem";
+import { setRecentResult } from "@/store/reducers/calculator";
+import "@/components/utils/window/Window.scss";
+import TopBar from "@/components/utils/window/TopBar";
+import WindowBody from "@/components/utils/window/WindowBody";
 import "./assets/calculator.scss";
-import TopBarInteraction from "../../components/utils/window/TopBarInteraction";
-import StartApp from "../../components/startMenu/StartApp";
-import { setHeaderHide } from "../../store/reducers/header";
+import TopBarInteraction from "@/components/utils/window/TopBarInteraction";
 import { useTranslation } from "react-i18next";
-import { setStartMenuActive } from "../../store/reducers/startmenu";
-import { setDesktopBodyActive } from "../../store/reducers/desktopbody";
 import Draggable from "react-draggable";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import {
+  hideApp,
+  maximizeApp,
+  minimizeApp,
+  quitApp,
+} from "@/store/reducers/apps";
 
-export const CalculatorApp = () => {
-  const { t } = useTranslation();
-  const isActive = useAppSelector((state) => state.appsCalculator.active);
-  const isHide = useAppSelector((state) => state.appsCalculator.hide);
-  const recentResult = useAppSelector(
-    (state) => state.appsCalculator.recentResult
-  );
-  const icon = useAppSelector((state) => state.appearance.iconTheme);
+export default function Calculator({ id }: { id: string }) {
   const dispatch = useAppDispatch();
-
-  document.addEventListener("keydown", (e) => {
-    if (e.ctrlKey && e.keyCode === 55) {
-      dispatch(setActive(true));
-    }
-  });
-
-  return (
-    <DockItem
-      id="calculator"
-      className={`CalculatorApp ${isActive && "clicked"} ${isHide && "hide"}`}
-      title={t("apps.calculator.name")}
-      icon={
-        icon === "WhiteSur-icon-theme"
-          ? "https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/original/calc.svg"
-          : "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/accessories-calculator.svg"
-      }
-      menu={[
-        [
-          {
-            label: t("apps.calculator.recentResult"),
-            description: `${recentResult}`,
-            disabled: !recentResult,
-            action: () => navigator.clipboard.writeText(`${recentResult}`),
-          },
-          {
-            label: isHide ? t("apps.unhide") : t("apps.hide"),
-            disabled: isActive ? false : true,
-            action: () =>
-              isHide ? dispatch(setHide(false)) : dispatch(setHide(true)),
-          },
-          {
-            label: isActive ? t("apps.quit") : t("apps.open"),
-            action: () =>
-              isActive ? dispatch(setActive(false)) : dispatch(setActive(true)),
-          },
-        ],
-      ]}
-      onClick={() =>
-        isHide ? dispatch(setHide(false)) : dispatch(setActive(true))
-      }
-    />
-  );
-};
-
-export const CalculatorStartApp = () => {
-  const { t } = useTranslation();
-  const isHide = useAppSelector((state) => state.appsCalculator.hide);
-  const dispatch = useAppDispatch();
-  const icon = useAppSelector((state) => state.appearance.iconTheme);
-
-  const toggle = () => {
-    dispatch(setStartMenuActive(false));
-    dispatch(setHeaderHide(false));
-    dispatch(setDesktopBodyActive(true));
-    if (isHide) {
-      dispatch(setHide(false));
-    } else {
-      dispatch(setActive(true));
-    }
-  };
-
-  return (
-    <StartApp
-      key="calculator"
-      icon={
-        icon === "WhiteSur-icon-theme"
-          ? "https://raw.githubusercontent.com/vinceliuice/WhiteSur-icon-theme/54ffa0a42474d3f0f866a581e061a27e65c6b7d7/original/calc.svg"
-          : "https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/apps/accessories-calculator.svg"
-      }
-      name={t("apps.calculator.name")}
-      onClick={toggle}
-    />
-  );
-};
-
-export default function Calculator() {
-  const dispatch = useAppDispatch();
-  const isActive = useAppSelector((state) => state.appsCalculator.active);
-  const isHide = useAppSelector((state) => state.appsCalculator.hide);
+  const appIsActive = useAppSelector((state) => state.apps.appIsActive);
+  const isActive = appIsActive[id].status === "active";
+  const isHide = appIsActive[id].status === "hide";
+  const isMinimized = appIsActive[id].minimized;
   const { t } = useTranslation();
   const [keysType, setKeysType] = useState<string[][] | null>(null);
   const [isShift, setIsShift] = useState<boolean>(false);
@@ -159,7 +73,7 @@ export default function Calculator() {
 
   const numClickHandler = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent> &
-      React.ChangeEvent<HTMLDivElement>
+      React.ChangeEvent<HTMLDivElement>,
   ) => {
     e.preventDefault();
     const value = e.target.innerHTML;
@@ -180,7 +94,7 @@ export default function Calculator() {
 
   const commaClickHandler = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent> &
-      React.ChangeEvent<HTMLDivElement>
+      React.ChangeEvent<HTMLDivElement>,
   ) => {
     e.preventDefault();
     const value = e.target.innerHTML;
@@ -193,7 +107,7 @@ export default function Calculator() {
 
   const signClickHandler = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent> &
-      React.ChangeEvent<HTMLDivElement>
+      React.ChangeEvent<HTMLDivElement>,
   ) => {
     e.preventDefault();
     const value = e.target.innerHTML;
@@ -226,8 +140,8 @@ export default function Calculator() {
                 math(
                   Number(removeSpaces(calc.res)),
                   Number(removeSpaces(calc.num)),
-                  calc.sign
-                )
+                  calc.sign,
+                ),
               ),
         sign: "",
         num: 0,
@@ -241,10 +155,10 @@ export default function Calculator() {
                 math(
                   Number(removeSpaces(calc.res)),
                   Number(removeSpaces(calc.num)),
-                  calc.sign
-                )
-              )
-        )
+                  calc.sign,
+                ),
+              ),
+        ),
       );
     }
   };
@@ -578,34 +492,38 @@ export default function Calculator() {
     });
   };
 
-  const [min, isMin] = useState(true);
-
-  function close() {
-    dispatch(setActive(false));
-    resetClickHandler();
-  }
-
   return (
     <div className="CalculatorWindow">
-      <Draggable handle=".TopBar">
+      <Draggable handle="#TopBar">
         <div
           className={`Window calculator ${isActive && "active"} ${
             isHide && "hide"
-          } ${min && "minimize"}`}
+          } ${isMinimized && "minimize"}`}
         >
           <TopBar
-            title={t("apps.calculator.name")}
-            onDblClick={() => isMin(!min)}
+            title={t(`apps.${id}.name`)}
+            onDblClick={() =>
+              isMinimized
+                ? dispatch(maximizeApp(id))
+                : dispatch(minimizeApp(id))
+            }
           >
             <TopBarInteraction
               action="hide"
-              onHide={() => dispatch(setHide(true))}
+              onHide={() => dispatch(hideApp(id))}
             />
             <TopBarInteraction
-              action={min ? "max" : "min"}
-              onMinMax={() => isMin(!min)}
+              action={isMinimized ? "max" : "min"}
+              onMinMax={() =>
+                isMinimized
+                  ? dispatch(maximizeApp(id))
+                  : dispatch(minimizeApp(id))
+              }
             />
-            <TopBarInteraction action="close" onClose={close} />
+            <TopBarInteraction
+              action="close"
+              onClose={() => dispatch(quitApp(id))}
+            />
           </TopBar>
           <WindowBody>
             <div className="Calculator">
@@ -613,7 +531,9 @@ export default function Calculator() {
                 <p>{calc.num ? calc.num : calc.res}</p>
               </div>
               <div className="CalculatorWrapper">
-                <div className={`CalculatorAdvanced ${!min && "expand"}`}>
+                <div
+                  className={`CalculatorAdvanced ${!isMinimized && "expand"}`}
+                >
                   <div
                     className="CalculatorSection"
                     style={{ paddingRight: 0 }}

@@ -14,12 +14,17 @@ import { setLocked } from "./store/reducers/settings";
 import { useEffect } from "react";
 import axios from "axios";
 import { initializeData } from "./store/reducers/weather";
-import MsgBoxContainer from '@/components/utils/msgbox/container';
+import MsgBoxContainer from "@/components/utils/msgbox/container";
+import { useTranslation } from "react-i18next";
+import { openApp, setApps, setMenu } from "./store/reducers/apps";
+import { setDirectory } from "./store/reducers/files";
+import { appsTemplate, favoriteAppsTemplate } from "./components/utils/apps";
+import { setDockFavorites } from "./store/reducers/dock";
 
 const Desktop = () => {
   const dispatch = useAppDispatch();
   const fontFamily = useAppSelector((state) => state.settings.fontFamily);
-  const themeLight = useAppSelector((state) => state.settings.themeLight);
+  const themeLight = useAppSelector((state) => state.appearance.themeLight);
   const boldText = useAppSelector((state) => state.settings.boldText);
   const animationsReduced = useAppSelector(
     (state) => state.settings.animationsReduced
@@ -32,8 +37,9 @@ const Desktop = () => {
   const batteryState = useBattery();
   const batteryLevel = batteryState.level * 100;
   const transparencyReduced = useAppSelector(
-    (state) => state.settings.transparencyReduced,
+    (state) => state.settings.transparencyReduced
   );
+  const { t } = useTranslation();
 
   document.addEventListener("keydown", (e) => {
     if (e.ctrlKey && e.keyCode === 76) {
@@ -59,18 +65,77 @@ const Desktop = () => {
   }
 
   function getWeatherData() {
-    process.env.TZSSS;
     navigator.geolocation.getCurrentPosition((pos) => {
       const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${pos.coords.latitude},${pos.coords.longitude}?unitGroup=metric&key=JQQKA7B32A5DBBNY28V9RC423&contentType=json`;
       axios(url).then((response) => dispatch(initializeData(response.data)));
     });
   }
 
+  const recentResult = useAppSelector((state) => state.calculator.recentResult);
+  const menu = useAppSelector((state) => state.apps.menu);
+  const fullscreen = useAppSelector((state) => state.apps.fullscreen);
+
   useEffect(() => {
     getWeatherData();
 
     dispatch(
-      setBatteryLevel(batteryLevel ? batteryLevel.toLocaleString() : '-'),
+      setBatteryLevel(batteryLevel ? batteryLevel.toLocaleString() : "-")
+    );
+
+    dispatch(
+      setMenu({
+        ...menu,
+        files: [
+          {
+            label: "Recent",
+            action: () => dispatch(setDirectory("Recent")),
+          },
+          {
+            label: "Favorites",
+            action: () => dispatch(setDirectory("Favorites")),
+          },
+          {
+            label: "Home",
+            action: () => dispatch(setDirectory("/home")),
+          },
+          {
+            label: "Desktop",
+            action: () => dispatch(setDirectory("/home/Desktop")),
+          },
+          {
+            label: "Documents",
+            action: () => dispatch(setDirectory("/home/Documents")),
+          },
+          {
+            label: "Downloads",
+            action: () => dispatch(setDirectory("/home/Downloads")),
+          },
+          {
+            label: "Music",
+            action: () => dispatch(setDirectory("/home/Music")),
+          },
+          {
+            label: "Pictures",
+            action: () => dispatch(setDirectory("/home/Pictures")),
+          },
+          {
+            label: "Videos",
+            action: () => dispatch(setDirectory("/home/Videos")),
+          },
+          {
+            label: "Trash",
+            action: () => dispatch(setDirectory("/.Bin")),
+          },
+        ],
+        calculator: [
+          {
+            label: t("apps.calculator.recentResult"),
+            description: recentResult!,
+            disabled: !recentResult,
+            action: () => navigator.clipboard.writeText(`${recentResult}`),
+          },
+        ],
+      }),
     );
 
     if (batteryState.charging) {
@@ -78,6 +143,29 @@ const Desktop = () => {
     } else {
       dispatch(setBatteryCharging(false));
     }
+
+    const appsArray = appsTemplate.map((i) => ({
+      icon: !i.overrideIcon
+        ? `https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/${i.icon}.svg`
+        : i.icon,
+      id: i.id,
+      action: () =>
+        !i.externalLink
+          ? dispatch(openApp(i.id))
+          : window.open(i.externalLink, "_blank"),
+    }));
+
+    dispatch(setApps(appsArray));
+
+    const favoritesArray = favoriteAppsTemplate.map((i) => ({
+      icon: !i.overrideIcon
+        ? `https://raw.githubusercontent.com/yeyushengfan258/Citrus-icon-theme/7fac80833a94baf4d4a9132ea9475c2b819b5827/src/scalable/${i.icon}.svg`
+        : i.icon,
+      id: i.id,
+      externalLink: i.externalLink,
+    }));
+
+    dispatch(setDockFavorites(favoritesArray));
 
     // if (!batteryLevel) {
     //   dispatch(
@@ -125,7 +213,9 @@ const Desktop = () => {
           } ${animationsReduced && "animdisabled"} ${
             colorInverted && "inverted"
           } ${poweroff && "poweroff"} ${
-            transparencyReduced && 'transdisabled'
+            transparencyReduced && "transdisabled"
+          } ${
+            fullscreen && "fullscreen"
           }`}
           onContextMenu={(e) => e.preventDefault()}
           id="Desktop"

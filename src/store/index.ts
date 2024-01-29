@@ -1,12 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
+import appsReducer from "./reducers/apps";
 import appearanceReducer from "./reducers/appearance";
+import calculatorReducer from "./reducers/calculator";
 import headerReducer from "./reducers/header";
 import desktopReducer from "./reducers/desktop";
 import desktopBodyReducer from "./reducers/desktopbody";
 import dockReducer from "./reducers/dock";
+import filesReducer from "./reducers/files";
 import panelReducer from "./reducers/panel";
-import msgboxReducer from './reducers/msgbox';
+import msgboxReducer from "./reducers/msgbox";
 import shutdownReducer from "./reducers/shutdown";
 import systemReducer from "./reducers/system";
 import settingsReducer from "./reducers/settings";
@@ -21,27 +24,19 @@ import widgetReducer from "./reducers/widget";
 import surfaceReducer from "./reducers/surface";
 import timeReducer from "./reducers/time";
 import terminalWindowReducer from "./reducers/terminalwindow";
+import textEditorReducer from "./reducers/texteditor";
 import vscodeReducer from "./reducers/vscode";
 import lockReducer from "./reducers/lock";
-// apps
-import appsSettingsReducer from "./reducers/apps/settings";
-import appsClockReducer from "./reducers/apps/clock";
-import appsSurfaceReducer from "./reducers/apps/surface";
-import appsCalendarReducer from "./reducers/apps/calendar";
-import appsCameraReducer from "./reducers/apps/camera";
-import appsFilesReducer from "./reducers/apps/files";
-import appsCalculatorReducer from "./reducers/apps/calculator";
-import appsTextEditorReducer from "./reducers/apps/texteditor";
-import appsTerminalReducer from "./reducers/apps/terminal";
-import appsSoftwareStoreReducer from "./reducers/apps/softwarestore";
-import appsVscodeReducer from "./reducers/apps/vscode";
 
 const reducers = {
+  apps: appsReducer,
   appearance: appearanceReducer,
+  calculator: calculatorReducer,
   header: headerReducer,
   desktop: desktopReducer,
   desktopbody: desktopBodyReducer,
   dock: dockReducer,
+  files: filesReducer,
   panel: panelReducer,
   msgbox: msgboxReducer,
   shutdown: shutdownReducer,
@@ -58,21 +53,9 @@ const reducers = {
   surface: surfaceReducer,
   time: timeReducer,
   terminalwindow: terminalWindowReducer,
+  texteditor: textEditorReducer,
   vscode: vscodeReducer,
   lock: lockReducer,
-
-  // apps
-  appsSettings: appsSettingsReducer,
-  appsClock: appsClockReducer,
-  appsSurface: appsSurfaceReducer,
-  appsCalendar: appsCalendarReducer,
-  appsCamera: appsCameraReducer,
-  appsFiles: appsFilesReducer,
-  appsCalculator: appsCalculatorReducer,
-  appsTextEditor: appsTextEditorReducer,
-  appsTerminal: appsTerminalReducer,
-  appsSoftwareStore: appsSoftwareStoreReducer,
-  appsVscode: appsVscodeReducer,
 };
 
 const store = configureStore({

@@ -1,23 +1,23 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface StateType {
-  iconTheme: string;
+  themeLight: boolean;
 }
 
 const initialState: StateType = {
-  iconTheme: "Default",
+  themeLight: false,
 };
 
 export const appearanceSlice = createSlice({
   name: "appearance",
   initialState,
   reducers: {
-    switchIcons: (state, action: PayloadAction<string>) => {
-      state.iconTheme = action.payload;
+    toggleLightMode: (state, action: PayloadAction<boolean>) => {
+      state.themeLight = action.payload;
     },
   },
 });
 
-export const { switchIcons } = appearanceSlice.actions;
+export const { toggleLightMode } = appearanceSlice.actions;
 
 export default appearanceSlice.reducer;

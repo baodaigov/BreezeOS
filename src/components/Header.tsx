@@ -4,12 +4,13 @@ import { setHeaderType, setWidth } from "@/store/reducers/header";
 import Task from "@/components/header/Task";
 import Home from "@/components/header/Home";
 import Panel from "./panel/Panel";
-import { setActive, setSettings } from "@/store/reducers/apps/settings";
 import AppMenu from "@/components/header/AppMenu";
 import PanelType from "./panel/PanelType";
 import useTime from "@/hooks/useTime";
 import { useTranslation } from "react-i18next";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { openApp } from "@/store/reducers/apps";
+import { setSettings } from "@/store/reducers/settings";
 
 export default function Header() {
   const dispatch = useAppDispatch();
@@ -42,6 +43,7 @@ export default function Header() {
   const batteryIsCharging = useAppSelector(
     (state) => state.system.battery.charging
   );
+  const fullscreen = useAppSelector((state) => state.apps.fullscreen);
 
   useEffect(() => {
     setInterval(() => {
@@ -216,7 +218,7 @@ export default function Header() {
   return (
     <div
       className={`Header ${shellTheme === "WhiteSur" ? "whitesur" : ""} ${
-        headerActive ? "active" : ""
+        headerActive && !fullscreen && "active"
       } ${headerHide ? "hide" : ""}`}
       style={{ width: `${headerWidth}px` }}
     >
@@ -273,7 +275,7 @@ export default function Header() {
             <div
               className="Time Header-item"
               onClick={() => {
-                dispatch(setActive(true));
+                dispatch(openApp("settings"));
                 dispatch(setSettings("Date & Time"));
               }}
             >
@@ -416,7 +418,7 @@ export default function Header() {
               </div>
               <div
                 className="Header-item DateNTime"
-                onClick={() => dispatch(setActive(true))}
+                onClick={() => dispatch(openApp("settings"))}
               >
                 <span style={{ marginRight: "10px" }}>{curDate}</span>
                 <span>{timeFormat}</span>

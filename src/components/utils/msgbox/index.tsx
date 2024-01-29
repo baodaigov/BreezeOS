@@ -1,11 +1,11 @@
-import '@/components/utils/window/Window.scss';
-import Draggable from 'react-draggable';
-import TopBar from '../window/TopBar';
-import TopBarInteraction from '../window/TopBarInteraction';
-import WindowBodyDefault from '../window/WindowBodyDefault';
-import WindowBodyButton from '../window/WindowBodyButton';
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { setBlocks } from '@/store/reducers/msgbox';
+import "@/components/utils/window/Window.scss";
+import Draggable from "react-draggable";
+import TopBar from "../window/TopBar";
+import TopBarInteraction from "../window/TopBarInteraction";
+import WindowBodyDefault from "../window/WindowBodyDefault";
+import WindowBodyButton from "../window/WindowBodyButton";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { setBlocks } from "@/store/reducers/msgbox";
 
 export default function MsgBox() {
   const dispatch = useAppDispatch();
@@ -17,7 +17,7 @@ export default function MsgBox() {
   }
 
   return blocks.map((i, index) => (
-    <Draggable handle=".TopBar">
+    <Draggable handle="#TopBar">
       <div
         className="Window active"
         style={{
@@ -42,9 +42,7 @@ export default function MsgBox() {
             {i.buttons.map((j) => (
               <div
                 className="Button"
-                onClick={() =>
-                  removeBlock(index)
-                }
+                onClick={() => removeBlock(index)}
                 onMouseUp={j.action}
               >
                 {j.label}

@@ -79,10 +79,10 @@
     "terminal": {
       "name": "Термінал"
     },
-    "textEditor": {
+    "texteditor": {
       "name": "Текстовий редактор"
     },
-    "softwareStore": {
+    "softwarestore": {
       "name": "Магазин програмного забезпечення"
     },
     "imgview": {

@@ -45,6 +45,7 @@
     "hide": "Hide",
     "unhide": "Unhide",
     "surface": {
+      "name": "Surface",
       "newTab": "New Tab",
       "newPrivateTab": "New Private Tab",
       "turnPrivateOff": "Turn off private mode",
@@ -89,11 +90,23 @@
     "terminal": {
       "name": "Terminal"
     },
-    "textEditor": {
+    "texteditor": {
       "name": "Text Editor"
     },
-    "softwareStore": {
+    "softwarestore": {
       "name": "Software Store"
+    },
+    "github": {
+      "name": "GitHub"
+    },
+    "vscode": {
+      "name": "Visual Studio Code"
+    },
+    "thunderbird": {
+      "name": "Thunderbird"
+    },
+    "vim": {
+      "name": "Vim"
     },
     "imgview": {
       "name": "Image Viewer"

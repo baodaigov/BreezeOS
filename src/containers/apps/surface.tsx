@@ -1,131 +1,53 @@
 import React, { useState, useEffect, useRef } from "react";
-import {
-  setActive,
-  setHide,
-  setPrivate,
-} from "../../store/reducers/apps/surface";
-import { openUrl, closeUrl } from "../../store/reducers/surface";
-import { setStartMenuActive } from "../../store/reducers/startmenu";
-import { setDesktopBodyActive } from "../../store/reducers/desktopbody";
-import "../../components/utils/window/Window.scss";
-import TopBar from "../../components/utils/window/TopBar";
-import WindowBody from "../../components/utils/window/WindowBody";
-import DockItem from "../../components/dock/DockItem";
+import { setPrivate } from "@/store/reducers/surface";
+import "@/components/utils/window/Window.scss";
+import TopBar from "@/components/utils/window/TopBar";
+import WindowBody from "@/components/utils/window/WindowBody";
 import "./assets/surface.scss";
-import TopBarInteraction from "../../components/utils/window/TopBarInteraction";
-import StartApp from "../../components/startMenu/StartApp";
-import { setHeaderHide } from "../../store/reducers/header";
-import SurfaceIcon from "../../icons/surface.svg";
-import SurfacePrivateIcon from "../../icons/surface-private.svg";
-import Toggle from "../../components/utils/toggle";
+import TopBarInteraction from "@/components/utils/window/TopBarInteraction";
+import SurfaceIcon from "@/icons/surface.svg";
+import SurfacePrivateIcon from "@/icons/surface-private.svg";
+import Toggle from "@/components/utils/toggle";
+import ActMenu, {
+  ActMenuSelector,
+  ActMenuSeparator,
+} from "@/components/utils/menu/index";
 import { useTranslation } from "react-i18next";
 import Draggable from "react-draggable";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import ActMenu, { ActMenuSelector, ActMenuSeparator } from "@/components/utils/menu";
+import {
+  closeApp,
+  enterFullScreen,
+  hideApp,
+  maximizeApp,
+  minimizeApp,
+} from "@/store/reducers/apps";
 
-export const SurfaceApp = () => {
+export default function Surface({ id }: { id: string }) {
+  const appIsActive = useAppSelector((state) => state.apps.appIsActive);
+  const fullscreen = useAppSelector((state) => state.apps.fullscreen);
+  const isActive = appIsActive[id].status === "active";
+  const isHide = appIsActive[id].status === "hide";
+  const isMinimized = appIsActive[id].minimized;
+  const isFullScreen = fullscreen === id;
+  const isPrivate = useAppSelector((state) => state.surface.private);
   const { t } = useTranslation();
-  const isActive = useAppSelector((state) => state.appsSurface.active);
-  const isHide = useAppSelector((state) => state.appsSurface.hide);
-  const isPrivate = useAppSelector((state) => state.appsSurface.private);
-  const dispatch = useAppDispatch();
-
-  document.addEventListener("keydown", (e) => {
-    if (e.ctrlKey && e.keyCode === 49) {
-      dispatch(setActive(true));
-    }
-  });
-
-  return (
-    <DockItem
-      id="surface"
-      className={`SurfaceApp ${isActive && "clicked"} ${isHide && "hide"}`}
-      title="Surface"
-      icon={SurfaceIcon}
-      menu={[
-        [
-          {
-            label: t("apps.surface.newTab"),
-            action: () => dispatch(setActive(true)),
-          },
-          {
-            label: isPrivate
-              ? t("apps.surface.turnPrivateOff")
-              : t("apps.surface.turnPrivateOn"),
-            disabled: isActive ? false : true,
-            action: () =>
-              isPrivate
-                ? dispatch(setPrivate(false))
-                : dispatch(setPrivate(true)),
-          },
-        ],
-        [
-          {
-            label: isHide ? t("apps.unhide") : t("apps.hide"),
-            disabled: isActive ? false : true,
-            action: () =>
-              isHide ? dispatch(setHide(false)) : dispatch(setHide(true)),
-          },
-          {
-            label: isActive ? t("apps.quit") : t("apps.open"),
-            action: () =>
-              isActive ? dispatch(setActive(false)) : dispatch(setActive(true)),
-          },
-        ],
-      ]}
-      onClick={() =>
-        isHide ? dispatch(setHide(false)) : dispatch(setActive(true))
-      }
-    />
-  );
-};
-
-export const SurfaceStartApp = () => {
-  const isHide = useAppSelector((state) => state.appsSurface.hide);
-  const dispatch = useAppDispatch();
-
-  function toggle() {
-    dispatch(setStartMenuActive(false));
-    dispatch(setHeaderHide(false));
-    dispatch(setDesktopBodyActive(true));
-    if (isHide) {
-      dispatch(setHide(false));
-    } else {
-      dispatch(setActive(true));
-    }
-  }
-
-  return (
-    <StartApp
-      key="surface"
-      icon={SurfaceIcon}
-      name="Surface"
-      onClick={toggle}
-    />
-  );
-};
-
-export default function Surface() {
-  const isActive = useAppSelector((state) => state.appsSurface.active);
-  const isHide = useAppSelector((state) => state.appsSurface.hide);
-  const isPrivate = useAppSelector((state) => state.appsSurface.private);
-  const { t } = useTranslation();
-  const iFrameRef = useRef<HTMLIFrameElement>(null);
-  const url = useAppSelector((state) => state.surface.url);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const [url, setUrl] = useState<string>("");
   const wifi = useAppSelector((state) => state.settings.wifi);
   const dispatch = useAppDispatch();
   const [splashScreen, setSplashScreen] = useState(true);
   const [searchValue, setSearchValue] = useState("");
-  const [hist, setHist] = useState(["", ""]);
+  const [histDir, setHistDir] = useState(["", ""]);
   const [settingsOpened, setSettingsOpened] = useState(false);
   const [supportOpened, setSupportOpened] = useState(false);
   isActive && setTimeout(() => setSplashScreen(false), 5000);
-  const iFrameRefCurrent = iFrameRef.current;
   const [menuOpened, setMenuOpened] = useState<boolean>(false);
+  const iFrameRefCurrent = iframeRef.current;
 
   useEffect(() => {
     if (!isActive) {
-      dispatch(closeUrl());
+      setUrl("");
     }
   }, [isActive]);
 
@@ -151,8 +73,8 @@ export default function Surface() {
       }
 
       setSearchValue(qry);
-      setHist([hist[0], qry]);
-      dispatch(openUrl(qry));
+      setHistDir([histDir[0], qry]);
+      setUrl(qry);
     }
   };
 
@@ -164,10 +86,10 @@ export default function Surface() {
         }
       }
 
-      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener("mousedown", handleClickOutside);
 
       return () => {
-        document.removeEventListener('mousedown', handleClickOutside);
+        document.removeEventListener("mousedown", handleClickOutside);
       };
     }, [ref]);
   }
@@ -175,24 +97,22 @@ export default function Surface() {
   const menuRef = useRef(null);
   useOutsideMenu(menuRef);
 
-  const [min, isMin] = useState(false);
-
   function close() {
-    dispatch(setActive(false));
-    setTimeout(() => dispatch(closeUrl()), 300);
+    dispatch(closeApp(id));
+    setUrl("");
   }
 
   return (
     <div className="SurfaceWindow">
-      <Draggable handle=".TopBar">
+      <Draggable handle="#TopBar">
         <div
           className={`Window surface ${isActive && "active"} ${
             isHide && "hide"
-          } ${min && "minimize"}`}
+          } ${isMinimized && "minimize"} ${isFullScreen && "fullscreen"}`}
         >
           <ActMenu
-            style={{ zIndex: '1', top: '30px', right: '300px', width: '200px' }}
-            className={menuOpened ? 'active' : ''}
+            style={{ zIndex: "1", top: "30px", right: "300px", width: "200px" }}
+            className={menuOpened ? "active" : ""}
             ref={menuRef}
           >
             <ActMenuSelector
@@ -208,20 +128,19 @@ export default function Surface() {
               onClose={() => setMenuOpened(false)}
             />
           </ActMenu>
-          <TopBar title="Surface" onDblClick={() => isMin(!min)}>
+          <TopBar
+            title={t(`apps.${id}.name`)}
+            onDblClick={() =>
+              isMinimized
+                ? dispatch(maximizeApp(id))
+                : dispatch(minimizeApp(id))
+            }
+          >
             <div className="TabBarWrapper">
               <div className="TabBar">
-                <div
-                  className="TabBarItem TabSearchItem"
-                  style={{ justifyContent: "space-between" }}
-                >
-                  <p>
-                    {isPrivate
-                      ? t("apps.surface.newPrivateTab")
-                      : t("apps.surface.newTab")}
-                  </p>
-                  <div className="CloseButton" onClick={close}>
-                    <i className="fa-regular fa-xmark" />
+                <div className="TabBarItem">
+                  <div className="TabBarInteraction">
+                    <i className="fa-regular fa-rectangle-history" />
                   </div>
                 </div>
               </div>
@@ -229,16 +148,16 @@ export default function Surface() {
             <div className="TabBar">
               <div
                 className="TabBarItem TabSearchItem"
-                style={{ width: min ? "610px" : "700px" }}
+                style={{ width: isMinimized ? "610px" : "700px" }}
               >
                 <div className="TabBarInteraction">
                   <i
                     className="fa-regular fa-chevron-left"
-                    onClick={() => dispatch(openUrl(hist[0]))}
+                    onClick={() => setUrl(histDir[0])}
                   />
                   <i
                     className="fa-regular fa-chevron-right"
-                    onClick={() => dispatch(openUrl(hist[1]))}
+                    onClick={() => setUrl(histDir[1])}
                   />
                   {url === "" || !wifi ? (
                     <i className="fa-regular fa-rotate-right" />
@@ -269,7 +188,7 @@ export default function Surface() {
                 <div className="TabBarInteraction">
                   <i
                     className={`fa-regular fa-ellipsis ${
-                      menuOpened && 'active'
+                      menuOpened && "active"
                     }`}
                     onClick={() => setMenuOpened(!menuOpened)}
                   />
@@ -290,17 +209,103 @@ export default function Surface() {
             >
               <TopBarInteraction
                 action="hide"
-                onHide={() => dispatch(setHide(true))}
+                onHide={() => dispatch(hideApp(id))}
               />
               <TopBarInteraction
-                action={min ? "max" : "min"}
-                onMinMax={() => isMin(!min)}
+                action={isMinimized ? "max" : "min"}
+                onMinMax={() =>
+                  isMinimized
+                    ? dispatch(maximizeApp(id))
+                    : dispatch(minimizeApp(id))
+                }
+                onPress={() => dispatch(enterFullScreen(id))}
               />
               <TopBarInteraction action="close" onClose={close} />
             </div>
           </TopBar>
           <WindowBody>
             <div className="Surface">
+              {isFullScreen && (
+                <div className="TopBar">
+                  <div className="TopBarInteractionContainer">
+                    <div className="TabBarWrapper" style={{ marginLeft: "0" }}>
+                      <div className="TabBar">
+                        <div className="TabBarItem">
+                          <div className="TabBarInteraction">
+                            <i className="fa-regular fa-rectangle-history" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="TabBar" style={{ width: "100%" }}>
+                      <div
+                        style={{
+                          width: "100%",
+                          display: "flex",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <div
+                          className="TabBarItem TabSearchItem"
+                          style={{ width: isMinimized ? "610px" : "700px" }}
+                        >
+                          <div className="TabBarInteraction">
+                            <i
+                              className="fa-regular fa-chevron-left"
+                              onClick={() => setUrl(histDir[0])}
+                            />
+                            <i
+                              className="fa-regular fa-chevron-right"
+                              onClick={() => setUrl(histDir[1])}
+                            />
+                            <i
+                              className="fa-regular fa-rotate-right"
+                              onClick={() =>
+                                iFrameRefCurrent &&
+                                (iFrameRefCurrent.src = iFrameRefCurrent.src)
+                              }
+                            />
+                          </div>
+                          <input
+                            className={`TabSearch ${
+                              splashScreen && "disabled"
+                            }`}
+                            type="text"
+                            spellCheck="false"
+                            autoComplete="0"
+                            placeholder={t("apps.surface.searchPlaceholder")}
+                            onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
+                              setSearchValue(e.target.value)
+                            }
+                            value={searchValue}
+                            onKeyDown={action}
+                          />
+                        </div>
+                        <div className="TabBarItem TabSettingsItem">
+                          <div className="TabBarInteraction">
+                            <i
+                              className={`fa-regular fa-ellipsis ${
+                                menuOpened && "active"
+                              }`}
+                              onClick={() => setMenuOpened(!menuOpened)}
+                            />
+                          </div>
+                          <div className="TabBarInteraction">
+                            <i
+                              className={`fa-regular fa-circle-question ${
+                                supportOpened && "active"
+                              }`}
+                              onMouseDown={() =>
+                                setSupportOpened(!supportOpened)
+                              }
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
               <div className="SurfaceContentContainer">
                 <div className={`Settings ${settingsOpened && "active"}`}>
                   <div
@@ -409,7 +414,7 @@ export default function Surface() {
                   <>
                     {wifi ? (
                       <iframe
-                        ref={iFrameRef}
+                        ref={iframeRef}
                         className="iFrame"
                         src={url}
                         title={t("apps.surface.newTab")}

@@ -1,10 +1,10 @@
 import {
   toggleBluetooth,
   toggleWifi,
-  toggleLightMode,
   setBoldText,
   toggleAirplaneMode,
 } from "@/store/reducers/settings";
+import { toggleLightMode } from "@/store/reducers/appearance";
 import { setPanelType } from "@/store/reducers/panel";
 import "./Panel.scss";
 import { useTranslation } from "react-i18next";
@@ -15,10 +15,11 @@ interface PanelItemLargeProps {
   type: string;
 }
 
-const PanelItemLarge = ({ type }: PanelItemLargeProps) => {
+export default function PanelItemLarge({ type }: PanelItemLargeProps) {
   const { t } = useTranslation();
   const settingsReducer = useAppSelector((state) => state.settings);
   const nightShift = useAppSelector((state) => state.desktop.nightShift);
+  const themeLight = useAppSelector((state) => state.appearance.themeLight);
   const dispatch = useAppDispatch();
 
   switch (type) {
@@ -98,10 +99,8 @@ const PanelItemLarge = ({ type }: PanelItemLargeProps) => {
     case "dark-mode":
       return (
         <div
-          className={`PanelItemLarge ${
-            !settingsReducer.themeLight && "focused"
-          }`}
-          onClick={() => dispatch(toggleLightMode(!settingsReducer.themeLight))}
+          className={`PanelItemLarge ${!themeLight && "focused"}`}
+          onClick={() => dispatch(toggleLightMode(!themeLight))}
         >
           <i className="fa-solid fa-circle-half-stroke" />
           <p className="font-bold">{t("panel.darkMode")}</p>
@@ -142,6 +141,4 @@ const PanelItemLarge = ({ type }: PanelItemLargeProps) => {
         </div>
       );
   }
-};
-
-export default PanelItemLarge;
+}

@@ -1,20 +1,21 @@
 import ActMenu, { ActMenuSelector } from "../utils/menu/index";
-import { setActive, setSettings } from "../../store/reducers/apps/settings";
-import { insertPasswordFor } from "../../store/reducers/wifipassword";
+import { setSettings } from "@/store/reducers/settings";
+import { insertPasswordFor } from "@/store/reducers/wifipassword";
 import {
   setVolume,
   setBrightness,
   toggleBluetooth,
   toggleWifi,
-} from "../../store/reducers/settings";
-import { toggleActive } from "../../store/reducers/newwifi";
+} from "@/store/reducers/settings";
+import { toggleActive } from "@/store/reducers/newwifi";
 import PanelRangeContainer from "./PanelRangeContainer";
 import RangeSlider from "../utils/range";
-import VolumeAdjustSound from "../../sounds/Oxygen-Sys-Special.mp3";
+import VolumeAdjustSound from "@/sounds/Oxygen-Sys-Special.mp3";
 import "./Panel.scss";
 import Toggle from "../utils/toggle";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { inactivePanel, setPanelType } from "@/store/reducers/panel";
+import { openApp } from "@/store/reducers/apps";
 
 interface PanelTypeProps extends React.HTMLAttributes<HTMLDivElement> {
   type: string;
@@ -32,19 +33,19 @@ export default function PanelType({
   const settings = useAppSelector((state) => state.settings);
   const shellTheme = useAppSelector((state) => state.shell.theme);
   const dispatch = useAppDispatch();
-  const desktop = document.getElementById('Desktop') as HTMLDivElement;
+  const desktop = document.getElementById("Desktop") as HTMLDivElement;
   const batteryPercent = useAppSelector((state) => state.system.battery.level);
   const batteryIsCharging = useAppSelector(
     (state) => state.system.battery.charging
   );
 
   function connectWifi(e: string) {
-    dispatch(setActive(true));
+    dispatch(openApp("settings"));
     dispatch(insertPasswordFor(e));
   }
 
   function openSettings(action: any) {
-    dispatch(setActive(true));
+    dispatch(openApp("settings"));
     dispatch(action);
   }
 
@@ -206,7 +207,7 @@ export default function PanelType({
                   <ActMenuSelector
                     title="Battery Preferences..."
                     onClose={() => dispatch(inactivePanel())}
-                    onClick={() => openSettings(setSettings('Battery'))}
+                    onClick={() => openSettings(setSettings("Battery"))}
                   />
                 </ActMenu>
               </div>
@@ -309,6 +310,31 @@ export default function PanelType({
                     }
                   />
                 </PanelRangeContainer>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    case "clipboard":
+      return (
+        <div
+          className={`Panel ${shellTheme === "WhiteSur" ? "whitesur" : ""} ${
+            onActive ? "active" : ""
+          }`}
+          {...props}
+        >
+          <div className="PanelTypeContainer">
+            <div className={`bluetoothPanel ${onActive ? "active" : ""}`}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  width: "330px",
+                  padding: "0 5px",
+                }}
+              >
+                <PanelTitle name="Clipboard" />
               </div>
             </div>
           </div>
