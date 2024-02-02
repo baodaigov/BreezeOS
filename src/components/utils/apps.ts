@@ -45,7 +45,7 @@ export const appsTemplate = [
   {
     id: "github",
     icon: "apps/github-desktop",
-    externalLink: "https://github.com/breezeos/breezeos-native",
+    externalLink: "https://github.com/baodaigov/BreezeOS",
   },
   {
     id: "vscode",
