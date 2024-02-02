@@ -69,7 +69,7 @@ export default function VSCode({ id }: { id: string }) {
           </TopBar>
           <WindowBody>
             <div className="VSCode">
-              <webview
+              <iframe
                 src={url}
                 title="Visual Studio Code"
                 allowFullScreen={true}
