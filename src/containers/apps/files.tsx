@@ -448,11 +448,18 @@ export default function Files({ id }: { id: string }) {
                 : dispatch(minimizeApp(id))
             }
           >
-            <div className="TabBarWrapper" style={{ width: "100%" }}>
-              <div
-                className="TabBar"
-                style={{ display: "flex", justifyContent: "space-between" }}
-              >
+          <div
+            className="TabBarWrapper"
+            style={{ width: "100%", pointerEvents: "none" }}
+          >
+            <div
+              className="TabBar"
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                pointerEvents: "none",
+              }}
+            >
                 <div className="TabBarItem" style={{ paddingLeft: 0 }}>
                   <div className="TabBarInteraction">
                     <i className="fa-regular fa-chevron-left" />

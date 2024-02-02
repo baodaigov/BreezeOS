@@ -34,7 +34,7 @@ export default function Toggle({
         }`}
         style={{ transform: `scale(${size})`, backgroundColor: color }}
       >
-        <div className="ToggleThumb"></div>
+        <div className="ToggleThumb" />
       </div>
     </Hammer>
   ) : (
@@ -49,7 +49,7 @@ export default function Toggle({
         }`}
         style={{ transform: `scale(${size})` }}
       >
-        <div className="ToggleThumb"></div>
+        <div className="ToggleThumb" />
       </div>
     </Hammer>
   );

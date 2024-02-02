@@ -67,9 +67,9 @@ export default function Calendar({ id }: { id: string }) {
                 : dispatch(minimizeApp(id))
             }
           >
-            <div className="TabBarWrapper">
-              <div className="TabBar">
-                <div className="TabBarItem">
+            <div className="TabBarWrapper" style={{ pointerEvents: "none" }}>
+              <div className="TabBar" style={{ pointerEvents: "none" }}>
+                <div className="TabBarItem" style={{ pointerEvents: "none" }}>
                   <div
                     className="TabBarInteraction"
                     style={{ marginRight: "7px " }}
@@ -79,7 +79,9 @@ export default function Calendar({ id }: { id: string }) {
                       onClick={() => setDayObj(dayObj.subtract(1, "month"))}
                     />
                   </div>
-                  <p>{dayObj.format("MMM DD, YYYY")}</p>
+                  <p style={{ pointerEvents: "none" }}>
+                    {dayObj.format("MMM DD, YYYY")}
+                  </p>
                   <div
                     className="TabBarInteraction"
                     style={{ marginLeft: "7px " }}

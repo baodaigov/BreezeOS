@@ -14,10 +14,11 @@ $fgcolor: #e2e2e2;
 
         .TabBar {
           display: flex;
+          transition: all ease 0.2s;
 
           .TabBarItem {
             padding: 4px 9px;
-            color: #fff;
+            color: $fgcolor;
             display: flex;
             align-items: center;
             font-size: 11px;
@@ -121,18 +122,37 @@ $fgcolor: #e2e2e2;
                 border: none;
                 outline: none;
                 background: transparent;
-                color: #fff;
+                color: $fgcolor;
                 width: 100%;
                 font-size: 12px;
 
                 &::placeholder {
-                  color: #ffffff36;
+                  color: $fgcolorfff36;
                 }
 
                 &.disabled {
                   opacity: 0.3;
                   pointer-events: none;
                 }
+              }
+            }
+
+            &.SwitchTab {
+              background-color: #ffffff0c;
+              border-radius: 999px;
+              margin-left: 6px;
+
+              .TabBarInteraction i:hover {
+                background-color: transparent;
+              }
+
+              &.active {
+                background-color: #ffffff2a;
+              }
+
+              &.private {
+                background-color: #09090b !important;
+                color: $fgcolor;
               }
             }
 
@@ -177,6 +197,31 @@ $fgcolor: #e2e2e2;
 
     .TabBarWrapper {
       margin: 0 4px;
+
+      &.Tabs {
+        animation: open ease 0.2s;
+        opacity: 0.2;
+        transition: none;
+
+        &:hover {
+          opacity: 0.4;
+        }
+
+        &.active {
+          opacity: 1;
+        }
+
+        @keyframes open {
+          0% {
+            transform: translateX(-20px);
+            opacity: 0;
+          }
+          100% {
+            transform: translateX(-0px);
+            opacity: 1;
+          }
+        }
+      }
     }
 
     &.minimize {
@@ -201,7 +246,7 @@ $fgcolor: #e2e2e2;
 
     .SurfaceContentContainer {
       position: relative;
-      border-radius: 6px;
+      border-radius: 7px;
       overflow: hidden;
 
       .Settings,
@@ -409,15 +454,18 @@ $fgcolor: #e2e2e2;
       }
 
       .iFrame {
+        position: absolute;
         width: 100%;
         height: 100%;
         border: none;
-        background-color: #fff;
+        background-color: $fgcolor;
         transition: none;
+        opacity: 0;
+        pointer-events: none;
 
-        &.hide {
-          opacity: 0;
-          pointer-events: none;
+        &.active {
+          opacity: 1;
+          pointer-events: auto;
         }
       }
     }
@@ -427,7 +475,6 @@ $fgcolor: #e2e2e2;
 .lightMode {
   .SurfaceWindow {
     .Window .TopBar .TopBarInteractionContainer .TabBar .TabBarItem {
-      background: #0000000a;
       color: #000;
 
       &:hover {
@@ -450,8 +497,35 @@ $fgcolor: #e2e2e2;
         }
       }
 
-      &.TabSearchItem.loading::after {
-        background-color: $bgcolor;
+      &.TabSearchItem {
+        background: #0000000b;
+        &.loading::after {
+          background-color: $bgcolor;
+        }
+      }
+
+      &.TabSettingsItem .TabBarInteraction i {
+        &:hover {
+          background-color: transparent;
+        }
+
+        &.active {
+          background: #00000016;
+        }
+      }
+
+      &.SwitchTab {
+        background-color: #0000000c;
+        border-radius: 999px;
+        margin-left: 6px;
+
+        .TabBarInteraction i:hover {
+          background-color: transparent;
+        }
+
+        &.active {
+          background-color: #0000001e;
+        }
       }
     }
     .Surface {

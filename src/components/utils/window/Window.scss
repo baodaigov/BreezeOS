@@ -66,7 +66,7 @@ $fgcolor: #e2e2e2;
 
     .WindowBody .TopBar {
       background-color: transparent;
-      backdrop-filter: blur(0);
+      backdrop-filter: none;
       height: auto;
       padding: 5px 8px !important;
       pointer-events: auto;

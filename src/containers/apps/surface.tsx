@@ -33,21 +33,39 @@ export default function Surface({ id }: { id: string }) {
   const isPrivate = useAppSelector((state) => state.surface.private);
   const { t } = useTranslation();
   const iframeRef = useRef<HTMLIFrameElement>(null);
-  const [url, setUrl] = useState<string>("");
   const wifi = useAppSelector((state) => state.settings.wifi);
   const dispatch = useAppDispatch();
   const [splashScreen, setSplashScreen] = useState(true);
-  const [searchValue, setSearchValue] = useState("");
   const [histDir, setHistDir] = useState(["", ""]);
   const [settingsOpened, setSettingsOpened] = useState(false);
   const [supportOpened, setSupportOpened] = useState(false);
   isActive && setTimeout(() => setSplashScreen(false), 5000);
+  const [tabsOpened, setTabsOpened] = useState<boolean>(false);
   const [menuOpened, setMenuOpened] = useState<boolean>(false);
   const iFrameRefCurrent = iframeRef.current;
 
+  type Tabs = {
+    url: string;
+    urlSearch: string;
+    title?: string;
+    favicon?: string;
+  }[];
+
+  const [tabs, setTabs] = useState<Tabs>([]);
+  const [privateTabs, setPrivateTabs] = useState<Tabs>([]);
+
+  const [tabIndex, setTabIndex] = useState<number>(0);
+  const [privateTabIndex, setPrivateTabIndex] = useState<number>(0);
+
   useEffect(() => {
-    if (!isActive) {
-      setUrl("");
+    if (isActive && tabs.length === 0) {
+      setTabs([
+        ...tabs,
+        {
+          url: "",
+          urlSearch: "",
+        },
+      ]);
     }
   }, [isActive]);
 
@@ -60,7 +78,7 @@ export default function Surface({ id }: { id: string }) {
 
   const action = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      var qry = searchValue;
+      var qry = tabs[tabIndex]?.urlSearch;
 
       if (isValidURL(qry)) {
         if (!qry.startsWith("http")) {
@@ -72,9 +90,18 @@ export default function Surface({ id }: { id: string }) {
         qry = "https://www.bing.com/search?q=" + encodeURIComponent(qry);
       }
 
-      setSearchValue(qry);
+      setTabs(
+        tabs.map((e, i) =>
+          i === tabIndex
+            ? {
+                ...e,
+                url: qry,
+                urlSearch: qry,
+              }
+            : e
+        )
+      );
       setHistDir([histDir[0], qry]);
-      setUrl(qry);
     }
   };
 
@@ -99,7 +126,7 @@ export default function Surface({ id }: { id: string }) {
 
   function close() {
     dispatch(closeApp(id));
-    setUrl("");
+    setTabs([]);
   }
 
   return (
@@ -138,14 +165,195 @@ export default function Surface({ id }: { id: string }) {
           >
             <div className="TabBarWrapper">
               <div className="TabBar">
-                <div className="TabBarItem">
+                <div
+                  className={`TabBarItem SwitchTab ${isPrivate && "private"} ${
+                    tabsOpened && "active"
+                  }`}
+                  onMouseDown={() => setTabsOpened(!tabsOpened)}
+                >
                   <div className="TabBarInteraction">
-                    <i className="fa-regular fa-rectangle-history" />
+                    {isPrivate ? (
+                      <p style={{ margin: "0 1px" }}>Private</p>
+                    ) : (
+                      <i className="fa-regular fa-rectangle-history" />
+                    )}
+                  </div>
+                  {tabsOpened ? (
+                    <div className="TabBarInteraction">
+                      <i className="fa-regular fa-xmark" />
+                    </div>
+                  ) : (
+                    <div className="TabBarInteraction">
+                      <i className="fa-regular fa-chevron-right" />
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+            <div
+              style={{
+                position: "relative",
+                width: "100%",
+                display: "flex",
+                alignItems: "center",
+                pointerEvents: "none",
+              }}
+            >
+              <div
+                style={{
+                  position: "absolute",
+                  left: tabsOpened ? "0" : "-20px",
+                  opacity: !tabsOpened ? "0" : "1",
+                  scale: !tabsOpened ? "0.9" : "1",
+                  visibility: !tabsOpened ? "hidden" : "visible",
+                  transition: "all ease 0.2s",
+                  margin: "0",
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                {!isPrivate
+                  ? tabs.map((i, index) => (
+                      <div
+                        className={`TabBarWrapper Tabs ${
+                          tabIndex === index && "active"
+                        }`}
+                        style={{ width: "200px" }}
+                        onClick={() => {
+                          setTabIndex(index);
+                          setTabsOpened(false);
+                        }}
+                      >
+                        <div className="TabBar" style={{ height: "28px" }}>
+                          <div
+                            className="TabBarItem TabSearchItem"
+                            style={{
+                              justifyContent: "space-between",
+                              width: "100%",
+                              margin: "0",
+                            }}
+                          >
+                            <div
+                              style={{ display: "flex", alignItems: "center" }}
+                            >
+                              {i.favicon ? (
+                                <img src={i.favicon} width={16} height={16} />
+                              ) : (
+                                <i className="fa-regular fa-rectangle-history" />
+                              )}
+                              <p style={{ marginLeft: "7px" }}>
+                                {i.title ? i.title : "New Tab"}
+                              </p>
+                            </div>
+                            <div
+                              className="CloseButton"
+                              onClick={() =>
+                                setTabs(tabs.filter((_e, i) => i !== index))
+                              }
+                            >
+                              <i className="fa-regular fa-xmark" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))
+                  : privateTabs.map((i, index) => (
+                      <div
+                        className={`TabBarWrapper Tabs ${
+                          privateTabIndex === index && "active"
+                        }`}
+                        style={{ width: "200px" }}
+                        onClick={() => {
+                          setPrivateTabIndex(index);
+                          setTabsOpened(false);
+                        }}
+                      >
+                        <div className="TabBar" style={{ height: "28px" }}>
+                          <div
+                            className="TabBarItem TabSearchItem"
+                            style={{
+                              justifyContent: "space-between",
+                              width: "100%",
+                              margin: "0",
+                            }}
+                          >
+                            <div
+                              style={{ display: "flex", alignItems: "center" }}
+                            >
+                              {i.favicon ? (
+                                <img src={i.favicon} width={16} height={16} />
+                              ) : (
+                                <i className="fa-regular fa-rectangle-history" />
+                              )}
+                              <p style={{ marginLeft: "7px" }}>
+                                {i.title ? i.title : "New Tab"}
+                              </p>
+                            </div>
+                            <div
+                              className="CloseButton"
+                              onClick={() =>
+                                setPrivateTabs(
+                                  privateTabs.filter((_e, i) => i !== index)
+                                )
+                              }
+                            >
+                              <i className="fa-regular fa-xmark" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+              </div>
+              <div className="TabBar">
+                <div
+                  className="TabBarItem"
+                  style={{ margin: 0, padding: "4px" }}
+                >
+                  <div className="TabBarInteraction">
+                    <i
+                      className={`fa-regular fa-plus ${menuOpened && "active"}`}
+                      onClick={() => {
+                        if (isPrivate) {
+                          setPrivateTabs([
+                            ...privateTabs,
+                            {
+                              url: "",
+                              urlSearch: "",
+                            },
+                          ]);
+                          setPrivateTabIndex(privateTabIndex + 1);
+                          setTabsOpened(false);
+                        } else {
+                          setTabs([
+                            ...tabs,
+                            {
+                              url: "",
+                              urlSearch: "",
+                            },
+                          ]);
+                          setTabIndex(tabIndex + 1);
+                          setTabsOpened(false);
+                        }
+                      }}
+                    />
                   </div>
                 </div>
               </div>
             </div>
-            <div className="TabBar">
+            <div
+              className="TabBar"
+              style={{
+                position: "absolute",
+                justifyContent: "center",
+                width: "100%",
+                left: tabsOpened ? "40px" : "0",
+                opacity: tabsOpened ? "0" : "1",
+                scale: tabsOpened ? "0.9" : "1",
+                visibility: tabsOpened ? "hidden" : "visible",
+                transition: "all ease 0.2s",
+                pointerEvents: "none",
+              }}
+            >
               <div
                 className="TabBarItem TabSearchItem"
                 style={{ width: isMinimized ? "610px" : "700px" }}
@@ -153,23 +361,35 @@ export default function Surface({ id }: { id: string }) {
                 <div className="TabBarInteraction">
                   <i
                     className="fa-regular fa-chevron-left"
-                    onClick={() => setUrl(histDir[0])}
+                    onClick={() =>
+                      setTabs([
+                        ...tabs,
+                        {
+                          url: histDir[0],
+                          urlSearch: histDir[0],
+                        },
+                      ])
+                    }
                   />
                   <i
                     className="fa-regular fa-chevron-right"
-                    onClick={() => setUrl(histDir[1])}
+                    onClick={() =>
+                      setTabs([
+                        ...tabs,
+                        {
+                          url: histDir[1],
+                          urlSearch: histDir[1],
+                        },
+                      ])
+                    }
                   />
-                  {url === "" || !wifi ? (
-                    <i className="fa-regular fa-rotate-right" />
-                  ) : (
-                    <i
-                      className="fa-regular fa-rotate-right"
-                      onClick={() =>
-                        iFrameRefCurrent &&
-                        (iFrameRefCurrent.src = iFrameRefCurrent.src)
-                      }
-                    />
-                  )}
+                  <i
+                    className="fa-regular fa-rotate-right"
+                    onClick={() =>
+                      iFrameRefCurrent &&
+                      (iFrameRefCurrent.src = iFrameRefCurrent.src)
+                    }
+                  />
                 </div>
                 <input
                   className={`TabSearch ${splashScreen && "disabled"}`}
@@ -177,10 +397,19 @@ export default function Surface({ id }: { id: string }) {
                   spellCheck="false"
                   autoComplete="0"
                   placeholder={t("apps.surface.searchPlaceholder")}
-                  onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    setSearchValue(e.target.value)
+                  onInput={(event: React.ChangeEvent<HTMLInputElement>) =>
+                    setTabs(
+                      tabs.map((e, i) =>
+                        i === tabIndex
+                          ? {
+                              ...e,
+                              urlSearch: event.target.value,
+                            }
+                          : e
+                      )
+                    )
                   }
-                  value={searchValue}
+                  value={tabs[tabIndex]?.urlSearch}
                   onKeyDown={action}
                 />
               </div>
@@ -228,78 +457,300 @@ export default function Surface({ id }: { id: string }) {
               {isFullScreen && (
                 <div className="TopBar">
                   <div className="TopBarInteractionContainer">
-                    <div className="TabBarWrapper" style={{ marginLeft: "0" }}>
+                    <div className="TabBarWrapper">
                       <div className="TabBar">
-                        <div className="TabBarItem">
+                        <div
+                          className={`TabBarItem SwitchTab ${
+                            isPrivate && "private"
+                          } ${tabsOpened && "active"}`}
+                          onMouseDown={() => setTabsOpened(!tabsOpened)}
+                        >
                           <div className="TabBarInteraction">
-                            <i className="fa-regular fa-rectangle-history" />
+                            {isPrivate ? (
+                              <p style={{ margin: "0 1px" }}>Private</p>
+                            ) : (
+                              <i className="fa-regular fa-rectangle-history" />
+                            )}
+                          </div>
+                          {tabsOpened ? (
+                            <div className="TabBarInteraction">
+                              <i className="fa-regular fa-xmark" />
+                            </div>
+                          ) : (
+                            <div className="TabBarInteraction">
+                              <i className="fa-regular fa-chevron-right" />
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      style={{
+                        position: "relative",
+                        width: "100%",
+                        display: "flex",
+                        alignItems: "center",
+                        pointerEvents: "none",
+                      }}
+                    >
+                      <div
+                        style={{
+                          position: "absolute",
+                          left: tabsOpened ? "0" : "-20px",
+                          opacity: !tabsOpened ? "0" : "1",
+                          scale: !tabsOpened ? "0.9" : "1",
+                          visibility: !tabsOpened ? "hidden" : "visible",
+                          transition: "all ease 0.2s",
+                          margin: "0",
+                          display: "flex",
+                          alignItems: "center",
+                        }}
+                      >
+                        {!isPrivate
+                          ? tabs.map((i, index) => (
+                              <div
+                                className={`TabBarWrapper Tabs ${
+                                  tabIndex === index && "active"
+                                }`}
+                                style={{ width: "200px" }}
+                                onClick={() => {
+                                  setTabIndex(index);
+                                  setTabsOpened(false);
+                                }}
+                              >
+                                <div
+                                  className="TabBar"
+                                  style={{ height: "28px" }}
+                                >
+                                  <div
+                                    className="TabBarItem TabSearchItem"
+                                    style={{
+                                      justifyContent: "space-between",
+                                      width: "100%",
+                                      margin: "0",
+                                    }}
+                                  >
+                                    <div
+                                      style={{
+                                        display: "flex",
+                                        alignItems: "center",
+                                      }}
+                                    >
+                                      {i.favicon ? (
+                                        <img
+                                          src={i.favicon}
+                                          width={16}
+                                          height={16}
+                                        />
+                                      ) : (
+                                        <i className="fa-regular fa-rectangle-history" />
+                                      )}
+                                      <p style={{ marginLeft: "7px" }}>
+                                        {i.title ? i.title : "New Tab"}
+                                      </p>
+                                    </div>
+                                    <div
+                                      className="CloseButton"
+                                      onClick={() =>
+                                        setTabs(
+                                          tabs.filter((_e, i) => i !== index)
+                                        )
+                                      }
+                                    >
+                                      <i className="fa-regular fa-xmark" />
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            ))
+                          : privateTabs.map((i, index) => (
+                              <div
+                                className={`TabBarWrapper Tabs ${
+                                  privateTabIndex === index && "active"
+                                }`}
+                                style={{ width: "200px" }}
+                                onClick={() => {
+                                  setPrivateTabIndex(index);
+                                  setTabsOpened(false);
+                                }}
+                              >
+                                <div
+                                  className="TabBar"
+                                  style={{ height: "28px" }}
+                                >
+                                  <div
+                                    className="TabBarItem TabSearchItem"
+                                    style={{
+                                      justifyContent: "space-between",
+                                      width: "100%",
+                                      margin: "0",
+                                    }}
+                                  >
+                                    <div
+                                      style={{
+                                        display: "flex",
+                                        alignItems: "center",
+                                      }}
+                                    >
+                                      {i.favicon ? (
+                                        <img
+                                          src={i.favicon}
+                                          width={16}
+                                          height={16}
+                                        />
+                                      ) : (
+                                        <i className="fa-regular fa-rectangle-history" />
+                                      )}
+                                      <p style={{ marginLeft: "7px" }}>
+                                        {i.title ? i.title : "New Tab"}
+                                      </p>
+                                    </div>
+                                    <div
+                                      className="CloseButton"
+                                      onClick={() =>
+                                        setPrivateTabs(
+                                          privateTabs.filter(
+                                            (_e, i) => i !== index
+                                          )
+                                        )
+                                      }
+                                    >
+                                      <i className="fa-regular fa-xmark" />
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            ))}
+                      </div>
+                      <div className="TabBar">
+                        <div
+                          className="TabBarItem"
+                          style={{ margin: 0, padding: "4px" }}
+                        >
+                          <div className="TabBarInteraction">
+                            <i
+                              className={`fa-regular fa-plus ${
+                                menuOpened && "active"
+                              }`}
+                              onClick={() => {
+                                if (isPrivate) {
+                                  setPrivateTabs([
+                                    ...privateTabs,
+                                    {
+                                      url: "",
+                                      urlSearch: "",
+                                    },
+                                  ]);
+                                  setPrivateTabIndex(privateTabIndex + 1);
+                                  setTabsOpened(false);
+                                } else {
+                                  setTabs([
+                                    ...tabs,
+                                    {
+                                      url: "",
+                                      urlSearch: "",
+                                    },
+                                  ]);
+                                  setTabIndex(tabIndex + 1);
+                                  setTabsOpened(false);
+                                }
+                              }}
+                            />
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div className="TabBar" style={{ width: "100%" }}>
+                    <div
+                      className="TabBar"
+                      style={{
+                        position: "absolute",
+                        justifyContent: "center",
+                        width: "100%",
+                        left: tabsOpened ? "40px" : "0",
+                        opacity: tabsOpened ? "0" : "1",
+                        scale: tabsOpened ? "0.9" : "1",
+                        visibility: tabsOpened ? "hidden" : "visible",
+                        transition: "all ease 0.2s",
+                        pointerEvents: "none",
+                      }}
+                    >
                       <div
-                        style={{
-                          width: "100%",
-                          display: "flex",
-                          justifyContent: "center",
-                        }}
+                        className="TabBarItem TabSearchItem"
+                        style={{ width: isMinimized ? "610px" : "700px" }}
                       >
-                        <div
-                          className="TabBarItem TabSearchItem"
-                          style={{ width: isMinimized ? "610px" : "700px" }}
-                        >
-                          <div className="TabBarInteraction">
-                            <i
-                              className="fa-regular fa-chevron-left"
-                              onClick={() => setUrl(histDir[0])}
-                            />
-                            <i
-                              className="fa-regular fa-chevron-right"
-                              onClick={() => setUrl(histDir[1])}
-                            />
-                            <i
-                              className="fa-regular fa-rotate-right"
-                              onClick={() =>
-                                iFrameRefCurrent &&
-                                (iFrameRefCurrent.src = iFrameRefCurrent.src)
-                              }
-                            />
-                          </div>
-                          <input
-                            className={`TabSearch ${
-                              splashScreen && "disabled"
-                            }`}
-                            type="text"
-                            spellCheck="false"
-                            autoComplete="0"
-                            placeholder={t("apps.surface.searchPlaceholder")}
-                            onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
-                              setSearchValue(e.target.value)
+                        <div className="TabBarInteraction">
+                          <i
+                            className="fa-regular fa-chevron-left"
+                            onClick={() =>
+                              setTabs([
+                                ...tabs,
+                                {
+                                  url: histDir[0],
+                                  urlSearch: histDir[0],
+                                },
+                              ])
                             }
-                            value={searchValue}
-                            onKeyDown={action}
+                          />
+                          <i
+                            className="fa-regular fa-chevron-right"
+                            onClick={() =>
+                              setTabs([
+                                ...tabs,
+                                {
+                                  url: histDir[1],
+                                  urlSearch: histDir[1],
+                                },
+                              ])
+                            }
+                          />
+                          <i
+                            className="fa-regular fa-rotate-right"
+                            onClick={() =>
+                              iFrameRefCurrent &&
+                              (iFrameRefCurrent.src = iFrameRefCurrent.src)
+                            }
                           />
                         </div>
-                        <div className="TabBarItem TabSettingsItem">
-                          <div className="TabBarInteraction">
-                            <i
-                              className={`fa-regular fa-ellipsis ${
-                                menuOpened && "active"
-                              }`}
-                              onClick={() => setMenuOpened(!menuOpened)}
-                            />
-                          </div>
-                          <div className="TabBarInteraction">
-                            <i
-                              className={`fa-regular fa-circle-question ${
-                                supportOpened && "active"
-                              }`}
-                              onMouseDown={() =>
-                                setSupportOpened(!supportOpened)
-                              }
-                            />
-                          </div>
+                        <input
+                          className={`TabSearch ${splashScreen && "disabled"}`}
+                          type="text"
+                          spellCheck="false"
+                          autoComplete="0"
+                          placeholder={t("apps.surface.searchPlaceholder")}
+                          onInput={(
+                            event: React.ChangeEvent<HTMLInputElement>
+                          ) =>
+                            setTabs(
+                              tabs.map((e, i) =>
+                                i === tabIndex
+                                  ? {
+                                      ...e,
+                                      urlSearch: event.target.value,
+                                    }
+                                  : e
+                              )
+                            )
+                          }
+                          value={tabs[tabIndex]?.urlSearch}
+                          onKeyDown={action}
+                        />
+                      </div>
+                      <div className="TabBarItem TabSettingsItem">
+                        <div className="TabBarInteraction">
+                          <i
+                            className={`fa-regular fa-ellipsis ${
+                              menuOpened && "active"
+                            }`}
+                            onClick={() => setMenuOpened(!menuOpened)}
+                          />
+                        </div>
+                        <div className="TabBarInteraction">
+                          <i
+                            className={`fa-regular fa-circle-question ${
+                              supportOpened && "active"
+                            }`}
+                            onMouseDown={() => setSupportOpened(!supportOpened)}
+                          />
                         </div>
                       </div>
                     </div>
@@ -366,10 +817,6 @@ export default function Surface({ id }: { id: string }) {
                       </div>
                     </div>
                   </div>
-                  {/* <iframe
-                  className="SupportFrame"
-                  src="https://breezeos.github.io"
-                /> */}
                   <div
                     style={{
                       width: "100%",
@@ -382,61 +829,97 @@ export default function Surface({ id }: { id: string }) {
                     <p>iFrame is not available for this dialog.</p>
                   </div>
                 </div>
-                {url === "" ? (
-                  <>
-                    <div
-                      className={`SplashScreen ${isPrivate && "private"} ${
-                        !splashScreen && "disabled"
-                      }`}
-                    >
-                      {isPrivate ? (
-                        <img
-                          className="SplashScreenIcon"
-                          src={SurfacePrivateIcon}
-                        />
-                      ) : (
-                        <img className="SplashScreenIcon" src={SurfaceIcon} />
-                      )}
-                    </div>
-                    <div className="MainScreen">
-                      <div className="Main">
-                        <div className="NonCollapsibleSection">
-                          <div className="SearchWrapper">
-                            <p className="Text">
-                              {t("apps.surface.startupTitle")}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    {wifi ? (
+                {wifi ? (
+                  <div
+                    style={{
+                      position: "relative",
+                      width: "100%",
+                      height: "100%",
+                    }}
+                  >
+                    {isPrivate ? (
                       <iframe
                         ref={iframeRef}
-                        className="iFrame"
-                        src={url}
-                        title={t("apps.surface.newTab")}
+                        className={`iFrame ${
+                          privateTabs[privateTabIndex]?.url && "active"
+                        }`}
+                        src={privateTabs[privateTabIndex]?.url}
+                        title={privateTabs[privateTabIndex]?.title}
                         allowFullScreen={true}
                       />
                     ) : (
-                      <div className="CantBeReached">
-                        <p className="CantBeReachedText">
-                          {t("apps.surface.internetUnabled")}
-                        </p>
-                        <div className="Description">
-                          <p>{t("apps.surface.internetUnabledDesc")}</p>
-                          <div className="ButtonContainer">
-                            <button className="Button">
-                              {t("apps.surface.internetUnabledReload")}
-                            </button>
+                      <iframe
+                        ref={iframeRef}
+                        className={`iFrame ${tabs[tabIndex]?.url && "active"}`}
+                        src={tabs[tabIndex]?.url}
+                        title={tabs[tabIndex]?.title}
+                        allowFullScreen={true}
+                      />
+                    )}
+                  </div>
+                ) : (
+                  <div className="CantBeReached">
+                    <p className="CantBeReachedText">
+                      {t("apps.surface.internetUnabled")}
+                    </p>
+                    <div className="Description">
+                      <p>{t("apps.surface.internetUnabledDesc")}</p>
+                      <div className="ButtonContainer">
+                        <button className="Button">
+                          {t("apps.surface.internetUnabledReload")}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                {isPrivate
+                  ? !privateTabs[privateTabIndex]?.url && (
+                      <>
+                        <div
+                          className={`SplashScreen private ${
+                            !splashScreen && "disabled"
+                          }`}
+                        >
+                          <img
+                            className="SplashScreenIcon"
+                            src={SurfacePrivateIcon}
+                          />
+                        </div>
+                        <div className="MainScreen">
+                          <div className="Main">
+                            <div className="NonCollapsibleSection">
+                              <div className="SearchWrapper">
+                                <p className="Text">
+                                  {t("apps.surface.startupTitle")}
+                                </p>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                      </div>
+                      </>
+                    )
+                  : !tabs[tabIndex]?.url && (
+                      <>
+                        <div
+                          className={`SplashScreen ${
+                            !splashScreen && "disabled"
+                          }`}
+                        >
+                          <img className="SplashScreenIcon" src={SurfaceIcon} />
+                        </div>
+                        <div className="MainScreen">
+                          <div className="Main">
+                            <div className="NonCollapsibleSection">
+                              <div className="SearchWrapper">
+                                <p className="Text">
+                                  {t("apps.surface.startupTitle")}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </>
                     )}
-                  </>
-                )}
               </div>
             </div>
           </WindowBody>

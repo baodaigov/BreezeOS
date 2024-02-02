@@ -188,7 +188,7 @@ const Desktop = () => {
 
   return (
     <>
-      {isMobile() ? (
+      {isMobile() && process.env.NODE_ENV !== "development" ? (
         <div className="error OptimisticDisplay">
           <p>
             Sorry, in order to use the operating system, please switch to the

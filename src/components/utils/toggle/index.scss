@@ -6,7 +6,7 @@
   border-radius: 999px;
   padding: 2px;
   background: transparentize(#f4f4f5, 0.9);
-  transition: all ease 0.3s;
+  transition: all ease 0.3s !important;
 
   .ToggleThumb {
     width: 20px;
