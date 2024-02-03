@@ -61,11 +61,14 @@ export default function StartMenu() {
             <StartApp
               name={t(`apps.${i.id}.name`)}
               icon={i.icon}
-              onClick={() =>
+              onClick={() => {
                 !i.externalLink
                   ? dispatch(openApp(i.id))
-                  : window.open(i.externalLink, "_blank")
-              }
+                  : window.open(i.externalLink, "_blank");
+                dispatch(setStartMenuActive(false));
+                dispatch(setHeaderHide(false));
+                dispatch(setDesktopBodyActive(true));
+              }}
             />
           ))}
         </div>
